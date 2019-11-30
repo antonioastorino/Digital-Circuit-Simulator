@@ -7,29 +7,45 @@
 //
 
 #include "DCSSRLatch.hpp"
+#include <iostream>
 
 DCSSRLatch::DCSSRLatch() : DCSComponent(2, 2, false) {
 	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0, "Q");
 	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1, "!Q");
 }
 
-void DCSSRLatch::setIn(bool* inVec) {
-	// Update component input
-	DCSComponent::setIn(inVec);
-	// Update internal components' input
-	nor0.setIn(inVec[0], 0);
-	nor1.setIn(inVec[1], 1);
+void DCSSRLatch::connect(DCSComponent* to,
+						   int outPinNum,
+						   int inPinNum,
+						   std::string probeName) {
+	
+	DCSComponent* leftComponent;
+	DCSComponent* rightComponent = to->internalComponetAtInput(inPinNum);
+	
+	if (outPinNum == 0) leftComponent = &nor0;
+	else if (outPinNum == 1) leftComponent = &nor1;
+	else exit(-1);
+	
+	wireVector.push_back(DCSWire(leftComponent,
+								 0,
+								 rightComponent,
+								 inPinNum,
+								 probeName));
 }
 
-void DCSSRLatch::setIn(bool inVal, int inPinNum) {
-	// Update component input
-	in[inPinNum] = inVal;
-	// Update internal components' input
-	if (inPinNum == 0) nor0.setIn(inVal, 0);
-	else if (inPinNum == 1) nor1.setIn(inVal, 1);
-};
+DCSComponent* DCSSRLatch::internalComponetAtInput(int &inPinNum) {
+	if (inPinNum == 0) {
+		return &nor0;
+	}
+	else if (inPinNum == 1) {
+		return &nor1;
+	}
+	else {
+		exit(-1);
+	}
+}
 
 void DCSSRLatch::updateOut() {
-	out[0] = nor0.getOutVal(0); // Q
-	out[1] = nor1.getOutVal(0); // !Q
+	
 }
+

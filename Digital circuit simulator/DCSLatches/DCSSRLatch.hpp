@@ -27,8 +27,11 @@ private:
 	DCSNor nor1 = DCSNor();
 public:
 	DCSSRLatch();
-	void setIn(bool inVal, int inPinNum);
-	void setIn(bool* inVec);
+	void connect(DCSComponent* to,
+				 int outPinNum,
+				 int inPinNum,
+				 std::string probeName = "") override;
+	DCSComponent* internalComponetAtInput(int &inPinNumber) override;
 	void updateOut() override;
 };
 

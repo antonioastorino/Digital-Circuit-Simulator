@@ -12,6 +12,7 @@
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};
 int DCSEngine::clockPeriod = 10;
+int DCSEngine::stepNumber = 0;
 
 void DCSEngine::addComponent(DCSComponent* component) {
 	componentVector.push_back(component);
@@ -41,12 +42,16 @@ void DCSEngine::run(int steps) {
 	// update output values of initial layer (input vector)
 	DCSEngine::printProbes();
 	for (int i = 0; i < steps; i++) {
+		stepNumber = i;
+		
 		for (auto component: componentVector) {
 			component->updateOut();
 		}
+		// Update input of components connected to other components
 		for (auto component: componentVector) {
 			component->propagateValue();
 		}
+
 		DCSEngine::printLogicLevels();
 	}
 }
@@ -77,6 +82,7 @@ void DCSEngine::printLogicLevels() {
 }
 
 int DCSEngine::getClockPeriod() { return clockPeriod; };
+int DCSEngine::getStepNumber() { return stepNumber; }
 
 void DCSEngine::setClockPeriod(int numberOfTimeDelays) {
 	clockPeriod = numberOfTimeDelays;

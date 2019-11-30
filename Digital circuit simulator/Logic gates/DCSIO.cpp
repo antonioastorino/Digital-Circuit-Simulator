@@ -9,11 +9,22 @@
 #include "DCSIO.hpp"
 #include "DCSEngine.hpp"
 
-DCSIO::DCSIO(bool initValue) : DCSComponent(1, 1) {
+DCSIO::DCSIO(bool initValue) :
+DCSComponent(1, 1),
+signal({0}) {
 	in[0] = initValue;
 	DCSEngine::addInput(this);
 }
 
+DCSIO::DCSIO(binary_signal signal) :
+DCSComponent(1, 1),
+signal(signal) {
+	initialized = true; // no need to initialized
+	hasSignal = true;
+	DCSEngine::addInput(this);
+}
+
 void DCSIO::updateOut() {
-	out[0] = in[0];
+	if (hasSignal) out[0] = signal.getVal(DCSEngine::getStepNumber());
+	else out[0] = in[0];
 }

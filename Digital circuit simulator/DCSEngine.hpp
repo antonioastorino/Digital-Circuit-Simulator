@@ -19,6 +19,7 @@ private:
 	static std::vector<DCSComponent*> componentVector;
 	static std::vector<DCSComponent*> inputVector;
 	static int clockPeriod;
+	static int stepNumber;
 	static void printProbes();
 	static void printLogicLevels();
 public:
@@ -27,6 +28,7 @@ public:
 	static void run(int steps=10);
 	static void initialize(std::vector<DCSComponent*> cVec = componentVector);
 	static int getClockPeriod();
+	static int getStepNumber();
 	static void setClockPeriod(int numberOfTimeDelays);
 };
 

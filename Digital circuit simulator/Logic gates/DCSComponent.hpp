@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 class DCSComponent {
 protected:
@@ -34,11 +35,14 @@ protected:
 		outPinNum(outPinNum),
 		to(to),
 		inPinNum(inPinNum),
-		probeName(probeName) {}
+		probeName(probeName) {
+			std::cout << from << " out " << outPinNum << " --> " << to << " in " << inPinNum << "\n";
+		}
 		
 		int getOutPinNum() { return outPinNum; }
 	};
 
+	
 	
 	~DCSComponent();
 	DCSComponent() = delete;
@@ -47,9 +51,10 @@ protected:
 	int fanIn, fanOut;
 	bool *in;
 	bool *out;
-	std::vector<DCSComponent*> connectedComponentVector = {};
-
+	
+	
 public:
+	virtual DCSComponent* internalComponetAtInput(int &inPinNumber);
 	bool initialized = false;
 	bool stable = false;
 	std::vector<DCSWire> wireVector = {};
@@ -63,12 +68,11 @@ public:
 	virtual void updateOut() = 0;
 	void propagateValue();
 
-	void connect(DCSComponent* to,
-				 int outPinNum,
-				 int inPinNum,
-				 std::string probeName = "");
+	virtual void connect(DCSComponent* to,
+						 int outPinNum,
+						 int inPinNum,
+						 std::string probeName = "");
 	
-	std::vector<DCSComponent*> getConnectedComponentVector();
 };
 
 #endif /* DCSComponent_hpp */

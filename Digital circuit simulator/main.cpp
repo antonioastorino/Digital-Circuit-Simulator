@@ -12,7 +12,6 @@
 #include "DCSEngine.hpp"
 #include "DCSIO.hpp"
 #include "DCSNor.hpp"
-#include "DCSArbitrarySignal.hpp"
 #include "DCSSRLatch.hpp"
 
 int main(int argc, const char * argv[]) {
@@ -27,28 +26,31 @@ int main(int argc, const char * argv[]) {
 	not3.connect(&not1, 0, 0, "N3");
 */
 
-	DCSIO I1 = DCSIO(0);
-	DCSIO I2 = DCSIO(0);
 	
-	DCSSRLatch SR1 = DCSSRLatch();
 	
-	SR1.setIn(1, 0);
-	SR1.setIn(0, 1);
+//	SR.setIn(1, 0);
+//	SR.setIn(0, 1);
 
 	
-	binary_signal s = {3, 3};
-	binary_signal r = {0, 3, 3};
-	DCSArbitrarySignal signalS = DCSArbitrarySignal(s);
-	DCSArbitrarySignal signalR = DCSArbitrarySignal(r);
-	for (uint32_t i = 0; i < 6; i++) {
-		std::cout << signalS.getVal(i);
-	}
-	std::cout << "\n";
-	for (uint32_t i = 0; i < 6; i++) {
-		std::cout << signalR.getVal(i);
-	}
-	std::cout << "\n";
+	binary_signal r = {4, 4, 4, 4};
+	binary_signal s = {0, 4, 4, 4, 4};
+	
+	DCSIO I0 = DCSIO(r);
+	DCSIO I1 = DCSIO(s);
+	DCSSRLatch SR = DCSSRLatch();
+
+	I0.connect(&SR, 0, 0, "I0");
+	I1.connect(&SR, 0, 1, "I1");
+
+//	for (uint32_t i = 0; i < 6; i++) {
+//		std::cout << signalS.getVal(i);
+//	}
+//	std::cout << "\n";
+//	for (uint32_t i = 0; i < 6; i++) {
+//		std::cout << signalR.getVal(i);
+//	}
+
 	DCSEngine::initialize();
-	DCSEngine::run(6);
+	DCSEngine::run(16);
 	return 0;
 }

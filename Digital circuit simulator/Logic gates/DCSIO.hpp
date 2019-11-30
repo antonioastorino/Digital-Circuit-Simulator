@@ -14,11 +14,16 @@
 #define DCSIO_hpp
 
 #include "DCSComponent.hpp"
+#include "DCSArbitrarySignal.hpp"
 
 
 class DCSIO: public DCSComponent {
+private:
+	bool hasSignal = false;
+	DCSArbitrarySignal signal;
 public:
 	DCSIO(bool initValue);
+	DCSIO(binary_signal signal);
 	void updateOut() override;
 };
 

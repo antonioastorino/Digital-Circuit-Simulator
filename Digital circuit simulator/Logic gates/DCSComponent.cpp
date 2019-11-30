@@ -46,21 +46,24 @@ void DCSComponent::connect(DCSComponent* to,
 						   int outPinNum,
 						   int inPinNum,
 						   std::string probeName) {
-	connectedComponentVector.push_back(to);
+
+	DCSComponent * rightComponent = to->internalComponetAtInput(inPinNum);
+	
 	wireVector.push_back(DCSWire(this,
 								 outPinNum,
-								 to,
+								 rightComponent,
 								 inPinNum,
 								 probeName));
 }
 
-std::vector<DCSComponent*> DCSComponent::getConnectedComponentVector() {
-	return connectedComponentVector;
+DCSComponent* DCSComponent::internalComponetAtInput(int &inPinNumber) {
+	return this;
 }
 
 void DCSComponent::propagateValue() {
 	// assing the output value of a given pin to the connected input pin
 	for (auto wire: wireVector) {
-		wire.to->setIn(out[wire.outPinNum], in[wire.inPinNum]);
+//		std::cout << this << " value " << out[wire.outPinNum] << " to " << wire.to << " pin " << wire.inPinNum << "\n";
+		wire.to->setIn(out[wire.outPinNum], wire.inPinNum);
 	}
 }
