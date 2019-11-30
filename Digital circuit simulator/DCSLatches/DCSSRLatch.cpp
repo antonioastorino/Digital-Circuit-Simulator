@@ -10,7 +10,7 @@
 #include <iostream>
 
 DCSSRLatch::DCSSRLatch() : DCSComponent(2, 2, false) {
-	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0, "Q");
+	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0, " Q");
 	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1, "!Q");
 }
 

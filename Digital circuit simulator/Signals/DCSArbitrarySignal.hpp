@@ -18,6 +18,7 @@ private:
 	bool currVal = 0;
 	uint32_t leveNumber = 0;
 	uint32_t counter = 0;
+	size_t totalDuration = 0;
 	std::vector<uint32_t> flipBitAtSteps = {}; // stores the time at wich the level needs to change
 	std::vector<uint32_t> levelDurationVector ={}; // stores the duration of each level
 

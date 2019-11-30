@@ -14,9 +14,22 @@
 #include "DCSNor.hpp"
 #include "DCSSRLatch.hpp"
 
-int main(int argc, const char * argv[]) {
-// 3 not in circle
-/*
+void latchTest() {
+	binary_signal r = {0, 1, 11};
+	binary_signal s = {7, 1, 3};
+	
+	DCSIO I0 = DCSIO(r);
+	DCSIO I1 = DCSIO(s);
+	DCSSRLatch SR = DCSSRLatch();
+
+	I0.connect(&SR, 0, 0, "R");
+	I1.connect(&SR, 0, 1, "S");
+	
+	DCSEngine::initialize();
+	DCSEngine::run(11);
+}
+
+void notCascadeTest() {
 	DCSNot not1 = DCSNot();
 	DCSNot not2 = DCSNot();
 	DCSNot not3 = DCSNot();
@@ -24,33 +37,16 @@ int main(int argc, const char * argv[]) {
 	not1.connect(&not2, 0, 0, "N1");
 	not2.connect(&not3, 0, 0, "N2");
 	not3.connect(&not1, 0, 0, "N3");
-*/
-
 	
-	
-//	SR.setIn(1, 0);
-//	SR.setIn(0, 1);
-
-	
-	binary_signal r = {4, 4, 4, 4};
-	binary_signal s = {0, 4, 4, 4, 4};
-	
-	DCSIO I0 = DCSIO(r);
-	DCSIO I1 = DCSIO(s);
-	DCSSRLatch SR = DCSSRLatch();
-
-	I0.connect(&SR, 0, 0, "I0");
-	I1.connect(&SR, 0, 1, "I1");
-
-//	for (uint32_t i = 0; i < 6; i++) {
-//		std::cout << signalS.getVal(i);
-//	}
-//	std::cout << "\n";
-//	for (uint32_t i = 0; i < 6; i++) {
-//		std::cout << signalR.getVal(i);
-//	}
-
 	DCSEngine::initialize();
-	DCSEngine::run(16);
+	DCSEngine::run(11);
+}
+
+
+int main(int argc, const char * argv[]) {
+
+	
+//	latchTest();
+	notCascadeTest();
 	return 0;
 }
