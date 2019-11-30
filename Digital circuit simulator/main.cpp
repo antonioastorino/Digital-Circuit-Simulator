@@ -13,6 +13,7 @@
 #include "DCSIO.hpp"
 #include "DCSNor.hpp"
 #include "DCSArbitrarySignal.hpp"
+#include "DCSSRLatch.hpp"
 
 int main(int argc, const char * argv[]) {
 // 3 not in circle
@@ -25,17 +26,14 @@ int main(int argc, const char * argv[]) {
 	not2.connect(&not3, 0, 0, "N2");
 	not3.connect(&not1, 0, 0, "N3");
 */
-	DCSNor nor1 = DCSNor();
-	DCSNor nor2 = DCSNor();
-	
+
 	DCSIO I1 = DCSIO(0);
 	DCSIO I2 = DCSIO(0);
-
-	nor1.connect(&nor2, /*out*/ 0, /*in*/ 0, "Q");
-	nor2.connect(&nor1, /*out*/ 0, /*in*/ 1, "!Q");
 	
-	nor2.setIn(1, 0);
-	nor1.setIn(0, 1);
+	DCSSRLatch SR1 = DCSSRLatch();
+	
+	SR1.setIn(1, 0);
+	SR1.setIn(0, 1);
 
 	
 	binary_signal s = {3, 3};

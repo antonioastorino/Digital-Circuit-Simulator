@@ -9,10 +9,10 @@
 #include "DCSComponent.hpp"
 #include "DCSEngine.hpp"
 
-DCSComponent::DCSComponent(int fanIn, int fanOut): fanIn(fanIn), fanOut(fanOut) {
+DCSComponent::DCSComponent(int fanIn, int fanOut, bool add): fanIn(fanIn), fanOut(fanOut) {
 	in = new bool[fanIn];
 	out = new bool[fanOut];
-	DCSEngine::addComponent(this);
+	if (add) DCSEngine::addComponent(this);
 }
 
 DCSComponent::~DCSComponent() {
@@ -31,11 +31,11 @@ bool DCSComponent::getOutVal(int outPinNum) {
 }
 
 // set entire input array
-void DCSComponent::setIn(bool* inVal) {
+void DCSComponent::setIn(bool* inVec) {
 	for (int i = 0; i < fanIn; i++) {
-		in[i] = inVal[i];
+		in[i] = inVec[i];
 	}
-};
+}
 
 // get entire input array
 bool* DCSComponent::getOutVal() {
@@ -61,6 +61,6 @@ std::vector<DCSComponent*> DCSComponent::getConnectedComponentVector() {
 void DCSComponent::propagateValue() {
 	// assing the output value of a given pin to the connected input pin
 	for (auto wire: wireVector) {
-		wire.to->in[wire.inPinNum] = out[wire.outPinNum];
+		wire.to->setIn(out[wire.outPinNum], in[wire.inPinNum]);
 	}
 }

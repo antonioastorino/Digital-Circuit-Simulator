@@ -42,20 +42,19 @@ protected:
 	
 	~DCSComponent();
 	DCSComponent() = delete;
-	DCSComponent(int fanIn, int fanOut);
+	// Initialize with add=false if the component is not an elementary block
+	DCSComponent(int fanIn, int fanOut, bool add=true);
 	int fanIn, fanOut;
 	bool *in;
 	bool *out;
 	std::vector<DCSComponent*> connectedComponentVector = {};
-
-
 
 public:
 	bool initialized = false;
 	bool stable = false;
 	std::vector<DCSWire> wireVector = {};
 	void setIn(bool inVal, int inPinNum);
-	void setIn(bool* inVal);
+	void setIn(bool* inVec);
 
 	bool getOutVal(int outPinNum);
 	bool* getOutVal();
