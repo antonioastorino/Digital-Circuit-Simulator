@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */; };
+		A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0CC238D9F9000655FC7 /* DCSNor.cpp */; };
+		A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */; };
+		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
+		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
+		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
+		A94824602380459800803F30 /* DCSNot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245E2380459800803F30 /* DCSNot.cpp */; };
+		A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BDED8423805EC600650496 /* DCSEngine.cpp */; };
+		A9DE8AEC2388718C0076C6A9 /* DCSIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9DE8AEA2388718C0076C6A9 /* DCSIO.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A948244C237F49F500803F30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSArbitrarySignal.cpp; sourceTree = "<group>"; };
+		A915F0CA238AF4E400655FC7 /* DCSArbitrarySignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSArbitrarySignal.hpp; sourceTree = "<group>"; };
+		A915F0CC238D9F9000655FC7 /* DCSNor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNor.cpp; sourceTree = "<group>"; };
+		A915F0CD238D9F9000655FC7 /* DCSNor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNor.hpp; sourceTree = "<group>"; };
+		A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSSRLatch.cpp; sourceTree = "<group>"; };
+		A915F0D123926B3100655FC7 /* DCSSRLatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSSRLatch.hpp; sourceTree = "<group>"; };
+		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
+		A9482459237F4A2C00803F30 /* DCSAnd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSAnd.hpp; sourceTree = "<group>"; };
+		A948245B237F5E1B00803F30 /* DCSComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSComponent.cpp; sourceTree = "<group>"; };
+		A948245C237F5E1B00803F30 /* DCSComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSComponent.hpp; sourceTree = "<group>"; };
+		A948245E2380459800803F30 /* DCSNot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNot.cpp; sourceTree = "<group>"; };
+		A948245F2380459800803F30 /* DCSNot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNot.hpp; sourceTree = "<group>"; };
+		A9BDED8423805EC600650496 /* DCSEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSEngine.cpp; sourceTree = "<group>"; };
+		A9BDED8523805EC600650496 /* DCSEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSEngine.hpp; sourceTree = "<group>"; };
+		A9DE8AEA2388718C0076C6A9 /* DCSIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSIO.cpp; sourceTree = "<group>"; };
+		A9DE8AEB2388718C0076C6A9 /* DCSIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSIO.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A948244B237F49F500803F30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A915F0CF23926ACB00655FC7 /* DCSLatches */ = {
+			isa = PBXGroup;
+			children = (
+				A915F0D123926B3100655FC7 /* DCSSRLatch.hpp */,
+				A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */,
+			);
+			path = DCSLatches;
+			sourceTree = "<group>";
+		};
+		A9302E372383452200F5DEA9 /* Signals */ = {
+			isa = PBXGroup;
+			children = (
+				A915F0CA238AF4E400655FC7 /* DCSArbitrarySignal.hpp */,
+				A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */,
+			);
+			path = Signals;
+			sourceTree = "<group>";
+		};
+		A9482445237F49F500803F30 = {
+			isa = PBXGroup;
+			children = (
+				A9482450237F49F500803F30 /* Digital circuit simulator */,
+				A948244F237F49F500803F30 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A948244F237F49F500803F30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A948244E237F49F500803F30 /* Digital circuit simulator */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9482450237F49F500803F30 /* Digital circuit simulator */ = {
+			isa = PBXGroup;
+			children = (
+				A9BDED8523805EC600650496 /* DCSEngine.hpp */,
+				A9BDED8423805EC600650496 /* DCSEngine.cpp */,
+				A9302E372383452200F5DEA9 /* Signals */,
+				A9482461238045BD00803F30 /* Logic gates */,
+				A915F0CF23926ACB00655FC7 /* DCSLatches */,
+				A9482451237F49F500803F30 /* main.cpp */,
+			);
+			path = "Digital circuit simulator";
+			sourceTree = "<group>";
+		};
+		A9482461238045BD00803F30 /* Logic gates */ = {
+			isa = PBXGroup;
+			children = (
+				A948245C237F5E1B00803F30 /* DCSComponent.hpp */,
+				A948245B237F5E1B00803F30 /* DCSComponent.cpp */,
+				A9DE8AEB2388718C0076C6A9 /* DCSIO.hpp */,
+				A9DE8AEA2388718C0076C6A9 /* DCSIO.cpp */,
+				A9482459237F4A2C00803F30 /* DCSAnd.hpp */,
+				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
+				A948245F2380459800803F30 /* DCSNot.hpp */,
+				A948245E2380459800803F30 /* DCSNot.cpp */,
+				A915F0CD238D9F9000655FC7 /* DCSNor.hpp */,
+				A915F0CC238D9F9000655FC7 /* DCSNor.cpp */,
+			);
+			path = "Logic gates";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A948244D237F49F500803F30 /* Digital circuit simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9482455237F49F500803F30 /* Build configuration list for PBXNativeTarget "Digital circuit simulator" */;
+			buildPhases = (
+				A948244A237F49F500803F30 /* Sources */,
+				A948244B237F49F500803F30 /* Frameworks */,
+				A948244C237F49F500803F30 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Digital circuit simulator";
+			productName = "Digital circuit simulator";
+			productReference = A948244E237F49F500803F30 /* Digital circuit simulator */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9482446237F49F500803F30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Antonio Astorino";
+				TargetAttributes = {
+					A948244D237F49F500803F30 = {
+						CreatedOnToolsVersion = 11.2;
+					};
+				};
+			};
+			buildConfigurationList = A9482449237F49F500803F30 /* Build configuration list for PBXProject "Digital circuit simulator" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A9482445237F49F500803F30;
+			productRefGroup = A948244F237F49F500803F30 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A948244D237F49F500803F30 /* Digital circuit simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A948244A237F49F500803F30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DE8AEC2388718C0076C6A9 /* DCSIO.cpp in Sources */,
+				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
+				A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */,
+				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
+				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
+				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
+				A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */,
+				A94824602380459800803F30 /* DCSNot.cpp in Sources */,
+				A9482452237F49F500803F30 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A9482453237F49F500803F30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A9482454237F49F500803F30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A9482456237F49F500803F30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D3WYL439Q5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A9482457237F49F500803F30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D3WYL439Q5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9482449237F49F500803F30 /* Build configuration list for PBXProject "Digital circuit simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9482453237F49F500803F30 /* Debug */,
+				A9482454237F49F500803F30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9482455237F49F500803F30 /* Build configuration list for PBXNativeTarget "Digital circuit simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9482456237F49F500803F30 /* Debug */,
+				A9482457237F49F500803F30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9482446237F49F500803F30 /* Project object */;
+}
