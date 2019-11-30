@@ -33,6 +33,7 @@ public:
 				 std::string probeName = "") override;
 	DCSComponent* internalComponetAtInput(int &inPinNumber) override;
 	void updateOut() override;
+	int getTimeDelay() override { return 2; };
 };
 
 

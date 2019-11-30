@@ -25,6 +25,7 @@ public:
 	DCSIO(bool initValue);
 	DCSIO(binary_signal signal);
 	void updateOut() override;
+	int getTimeDelay() override { return 1; };
 };
 
 

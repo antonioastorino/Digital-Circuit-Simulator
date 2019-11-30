@@ -15,6 +15,7 @@ class DCSAnd: public DCSComponent {
 public:
 	DCSAnd();
 	void updateOut() override;
+	int getTimeDelay() override { return 1; };
 };
 
 #endif /* DCSAnd_hpp */

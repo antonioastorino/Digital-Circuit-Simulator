@@ -15,6 +15,7 @@ class DCSNot: public DCSComponent {
 public:
 	DCSNot();
 	void updateOut() override;
+	int getTimeDelay() override { return 1; };
 };
 
 #endif /* DCSNot_hpp */

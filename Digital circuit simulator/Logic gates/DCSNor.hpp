@@ -15,5 +15,6 @@ class DCSNor: public DCSComponent {
 public:
 	DCSNor();
 	void updateOut() override;
+	int getTimeDelay() override { return 1; };
 };
 #endif /* DCSNor_hpp */

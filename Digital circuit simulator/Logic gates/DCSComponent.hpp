@@ -14,8 +14,8 @@
 #include <iostream>
 
 class DCSComponent {
+private:
 protected:
-	
 	struct DCSWire {
 	public:
 		// Drived component
@@ -63,8 +63,8 @@ public:
 
 	bool getOutVal(int outPinNum);
 	bool* getOutVal();
-
 	
+	virtual int getTimeDelay() = 0; // Return the latency between input and output
 	virtual void updateOut() = 0;
 	void propagateValue();
 
