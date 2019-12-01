@@ -17,6 +17,7 @@
 		A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BDED8423805EC600650496 /* DCSEngine.cpp */; };
 		A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D18C23930890008CAF81 /* DCSDLatch.cpp */; };
 		A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D18F2393CE79008CAF81 /* DCSWire.cpp */; };
+		A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D19223944B72008CAF81 /* DCSOutput.cpp */; };
 		A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		A9C2D18D23930890008CAF81 /* DCSDLatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDLatch.hpp; sourceTree = "<group>"; };
 		A9C2D18F2393CE79008CAF81 /* DCSWire.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DCSWire.cpp; path = "Digital circuit simulator/DCSWire.cpp"; sourceTree = SOURCE_ROOT; };
 		A9C2D1902393CE79008CAF81 /* DCSWire.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = DCSWire.hpp; path = "Digital circuit simulator/DCSWire.hpp"; sourceTree = SOURCE_ROOT; };
+		A9C2D19223944B72008CAF81 /* DCSOutput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSOutput.cpp; sourceTree = "<group>"; };
+		A9C2D19323944B72008CAF81 /* DCSOutput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSOutput.hpp; sourceTree = "<group>"; };
 		A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSInput.cpp; sourceTree = "<group>"; };
 		A9DE8AEB2388718C0076C6A9 /* DCSInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSInput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +129,8 @@
 				A948245B237F5E1B00803F30 /* DCSComponent.cpp */,
 				A9DE8AEB2388718C0076C6A9 /* DCSInput.hpp */,
 				A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */,
+				A9C2D19323944B72008CAF81 /* DCSOutput.hpp */,
+				A9C2D19223944B72008CAF81 /* DCSOutput.cpp */,
 				A9482459237F4A2C00803F30 /* DCSAnd.hpp */,
 				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
 				A948245F2380459800803F30 /* DCSNot.hpp */,
@@ -198,6 +203,7 @@
 				A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */,
 				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
+				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
 				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
 				A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */,

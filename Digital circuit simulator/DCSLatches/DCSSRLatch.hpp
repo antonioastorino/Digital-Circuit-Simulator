@@ -9,12 +9,12 @@
  SR latch whose input pin 0 resets and 1 sets
  
  Schematic
- in[0] of the SR -----> in[0] of nor0
- in[1] of the SR -----> in[1] of nor1
- out[0] of nor0  -----> in[0] of nor1
- out[0] of nor1  -----> in[1] of nor0
- out[0] of nor0  -----> out[0] of SR
- out[0] of nor1  -----> out[1] of SR
+ in[0] (reset) of SR -----> in[0] of nor0
+ in[1] (set) of SR   -----> in[1] of nor1
+ out[0] of nor0      -----> in[0] of nor1
+ out[0] of nor1      -----> in[1] of nor0
+ out[0] of nor0      -----> out[0] of SR (Q)
+ out[0] of nor1      -----> out[1] of SR (!Q)
 */
 #ifndef DCSSRLatch_hpp
 #define DCSSRLatch_hpp

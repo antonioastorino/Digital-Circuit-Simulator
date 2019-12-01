@@ -22,6 +22,9 @@ allInReached((1 << fanIn) - 1) {
 DCSComponent::~DCSComponent() {
 	delete [] in;
 	delete [] out;
+	for (auto wire: wireVector) {
+		delete wire;
+	}
 }
 
 // set single input
@@ -68,14 +71,14 @@ void DCSComponent::connect(DCSComponent* to,
 	if (addToTheRight) leftComponent->rightComponentVector.push_back(rightComponent);
 	
 	
-	DCSWire wire = DCSWire(leftComponent,
+	DCSWire* wire = new DCSWire(leftComponent,
 						   outPinNum,
 						   rightComponent,
 						   inPinNum,
 						   probeName);
 	
 	wireVector.push_back(wire);
-	DCSEngine::addWire(&(wireVector[wireVector.size() - 1]));
+	DCSEngine::addWire(wire);
 }
 
 DCSComponent* DCSComponent::getRightComponent(int &inPinNum) {
@@ -88,7 +91,7 @@ DCSComponent* DCSComponent::getLeftComponent(int outPinNum) {
 
 void DCSComponent::propagateValues() {
 	for (auto wire: wireVector) {
-		wire.propagateValue();
+		wire->propagateValue();
 	}
 }
 

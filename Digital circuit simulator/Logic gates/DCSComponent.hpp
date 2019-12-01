@@ -28,11 +28,12 @@ protected:
 	// Binary number in which each digit is set = 1 when the corresponding input is updated for the first time.
 	uint64_t reachableIn;
 	uint64_t allInReached;
-	std::vector<DCSWire> wireVector = {};
+	std::vector<DCSWire*> wireVector = {};
 	DCSComponent *parent = nullptr;
 	
 	
 public:
+	// stores the components to which the output of this component is connected. It is used to propagate signals in series during initialization
 	std::vector<DCSComponent*> rightComponentVector = {};
 	bool initialized = false;
 	bool stable = false;
