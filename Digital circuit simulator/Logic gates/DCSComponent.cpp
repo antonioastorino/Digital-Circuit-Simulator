@@ -9,7 +9,11 @@
 #include "DCSComponent.hpp"
 #include "DCSEngine.hpp"
 
-DCSComponent::DCSComponent(int fanIn, int fanOut, bool add): fanIn(fanIn), fanOut(fanOut) {
+DCSComponent::DCSComponent(int fanIn, int fanOut, bool add):
+fanIn(fanIn),
+fanOut(fanOut),
+reachableIn(0),
+allInReached((1 << fanIn) - 1) {
 	in = new bool[fanIn];
 	out = new bool[fanOut];
 	if (add) DCSEngine::addComponent(this);
@@ -22,11 +26,13 @@ DCSComponent::~DCSComponent() {
 
 // set single input
 void DCSComponent::setIn(bool inVal, int inPinNum) {
+	reachableIn |= 1 << inPinNum;
 	in[inPinNum] = inVal;
-};
+}
 
 // get single output
 bool DCSComponent::getOutVal(int outPinNum) {
+	if (reachableIn == allInReached) initialized = true;
 	return out[outPinNum];
 }
 
@@ -35,10 +41,12 @@ void DCSComponent::setIn(bool* inVec) {
 	for (int i = 0; i < fanIn; i++) {
 		in[i] = inVec[i];
 	}
+	initialized = true;
 }
 
 // get entire input array
-bool* DCSComponent::getOutVal() {
+bool* DCSComponent::getOutVec() {
+	if (reachableIn == allInReached) initialized = true;
 	return out;
 }
 
@@ -47,23 +55,47 @@ void DCSComponent::connect(DCSComponent* to,
 						   int inPinNum,
 						   std::string probeName) {
 
-	DCSComponent * rightComponent = to->internalComponetAtInput(inPinNum);
+	DCSComponent* leftComponent = getLeftComponent(outPinNum);
+	DCSComponent* rightComponent = to->getRightComponent(inPinNum);
 	
-	wireVector.push_back(DCSWire(this,
-								 outPinNum,
-								 rightComponent,
-								 inPinNum,
-								 probeName));
+	bool addToTheRight = true;
+	for (auto component: leftComponent->rightComponentVector) {
+		if (rightComponent == component) {
+			addToTheRight = false;
+			break;
+		}
+	}
+	if (addToTheRight) leftComponent->rightComponentVector.push_back(rightComponent);
+	
+	
+	DCSWire wire = DCSWire(leftComponent,
+						   outPinNum,
+						   rightComponent,
+						   inPinNum,
+						   probeName);
+	
+	wireVector.push_back(wire);
+	DCSEngine::addWire(&(wireVector[wireVector.size() - 1]));
 }
 
-DCSComponent* DCSComponent::internalComponetAtInput(int &inPinNumber) {
+DCSComponent* DCSComponent::getRightComponent(int &inPinNum) {
 	return this;
 }
 
-void DCSComponent::propagateValue() {
-	// assing the output value of a given pin to the connected input pin
+DCSComponent* DCSComponent::getLeftComponent(int outPinNum) {
+	return this;
+}
+
+void DCSComponent::propagateValues() {
 	for (auto wire: wireVector) {
-//		std::cout << this << " value " << out[wire.outPinNum] << " to " << wire.to << " pin " << wire.inPinNum << "\n";
-		wire.to->setIn(out[wire.outPinNum], wire.inPinNum);
+		wire.propagateValue();
 	}
+}
+
+void DCSComponent::setParent(DCSComponent* parent) {
+	this->parent = parent;
+}
+
+void DCSComponent::updateParentOut() {
+	if (parent != nullptr) parent->updateOut();
 }

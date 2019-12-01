@@ -27,11 +27,9 @@ private:
 	DCSNor nor1 = DCSNor();
 public:
 	DCSSRLatch();
-	void connect(DCSComponent* to,
-				 int outPinNum,
-				 int inPinNum,
-				 std::string probeName = "") override;
-	DCSComponent* internalComponetAtInput(int &inPinNumber) override;
+
+	DCSComponent* getLeftComponent(int outPinNum) override;
+	DCSComponent* getRightComponent(int &inPinNum) override;
 	void updateOut() override;
 	int getTimeDelay() override { return 2; };
 };

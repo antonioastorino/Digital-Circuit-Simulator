@@ -16,6 +16,7 @@ typedef std::vector<uint32_t> binary_signal;
 class DCSArbitrarySignal {
 private:
 	bool currVal = 0;
+	bool initVal;
 	uint32_t leveNumber = 0;
 	uint32_t counter = 0;
 	size_t totalDuration = 0;

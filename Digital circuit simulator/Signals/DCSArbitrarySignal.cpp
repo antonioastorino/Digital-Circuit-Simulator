@@ -11,6 +11,9 @@
 #include <iostream>
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint32_t> levelDurationVector, bool synch) {
+	if(levelDurationVector[0]) initVal = 0;
+	else initVal = 1;
+	
 	flipBitAtSteps.push_back(levelDurationVector[0]); // the first variation occurs when the first level ends
 	
 	totalDuration = levelDurationVector[0];
@@ -24,7 +27,7 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint32_t> levelDurationVector
 
 bool DCSArbitrarySignal::getVal(uint32_t step) {
 	if (step != counter) {
-		std::cout << "Error: trying to access the value in non sequencial order\n";
+		std::cout << "Error: trying to access the value in non sequential order\n";
 		exit(-1);
 	}
 	if (counter == totalDuration) {

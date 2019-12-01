@@ -12,38 +12,12 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "DCSWire.hpp"
 
 class DCSComponent {
 private:
+	
 protected:
-	struct DCSWire {
-	public:
-		// Drived component
-		DCSComponent* to;
-		// output pin number of the output component
-		int outPinNum;
-		// input pin number of the driven component
-		int inPinNum;
-		std::string probeName;
-		DCSWire() = delete;
-		DCSWire(DCSComponent* from,
-				int outPinNum,
-				DCSComponent* to,
-				int inPinNum,
-				std::string probeName = "")
-		:
-		outPinNum(outPinNum),
-		to(to),
-		inPinNum(inPinNum),
-		probeName(probeName) {
-			std::cout << from << " out " << outPinNum << " --> " << to << " in " << inPinNum << "\n";
-		}
-		
-		int getOutPinNum() { return outPinNum; }
-	};
-
-	
-	
 	~DCSComponent();
 	DCSComponent() = delete;
 	// Initialize with add=false if the component is not an elementary block
@@ -51,27 +25,37 @@ protected:
 	int fanIn, fanOut;
 	bool *in;
 	bool *out;
+	// Binary number in which each digit is set = 1 when the corresponding input is updated for the first time.
+	uint64_t reachableIn;
+	uint64_t allInReached;
+	std::vector<DCSWire> wireVector = {};
+	DCSComponent *parent = nullptr;
 	
 	
 public:
-	virtual DCSComponent* internalComponetAtInput(int &inPinNumber);
+	std::vector<DCSComponent*> rightComponentVector = {};
 	bool initialized = false;
 	bool stable = false;
-	std::vector<DCSWire> wireVector = {};
 	void setIn(bool inVal, int inPinNum);
 	void setIn(bool* inVec);
 
 	bool getOutVal(int outPinNum);
-	bool* getOutVal();
+	bool* getOutVec();
 	
 	virtual int getTimeDelay() = 0; // Return the latency between input and output
 	virtual void updateOut() = 0;
-	void propagateValue();
 
 	virtual void connect(DCSComponent* to,
 						 int outPinNum,
 						 int inPinNum,
 						 std::string probeName = "");
+	
+	virtual DCSComponent* getLeftComponent(int outPinNum);
+	virtual DCSComponent* getRightComponent(int &inPinNum);
+	
+	void propagateValues();
+	void setParent(DCSComponent* parent);
+	void updateParentOut();
 	
 };
 
