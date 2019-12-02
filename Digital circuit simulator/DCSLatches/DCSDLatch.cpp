@@ -8,8 +8,33 @@
 
 #include "DCSDLatch.hpp"
 
-//DCSDLatch::DCSDLatch() : DCSComponent(1, 2, false) {
-//	not0.connect(&and0, 0, 0, "!IN");
-//	and0.connect(&srLatch0, 0, 0);
-//	and1.connect(&srLatch0, 0, 1);
-//}
+DCSDLatch::DCSDLatch() : DCSComponent(1, 2, false) {
+	D.connect(&and1, 0, 1);
+	D.connect(&not0, 0, 0);
+	EN.connect(&and0, 0, 1);
+	EN.connect(&and1, 0, 0);
+	not0.connect(&and0, 0, 0);
+	and0.connect(&srLatch0, 0, 0);
+	and1.connect(&srLatch0, 0, 1);
+	not0.setParent(this);
+	and0.setParent(this);
+	and1.setParent(this);
+	srLatch0.setParent(this);
+}
+
+DCSComponent* DCSDLatch::getLeftComponent(int outPinNum) {
+	return srLatch0.getLeftComponent(outPinNum);
+}
+
+DCSComponent* DCSDLatch::getRightComponent(int &inPinNum) {
+	if (inPinNum == 0) return &D;
+	else if (inPinNum == 1) {
+		inPinNum = 0; // pin 1 in D latch is EN pin 0
+		return &EN;
+	}
+	else exit(-1);
+}
+
+void DCSDLatch::updateOut() {
+	out = srLatch0.getOutVal(0) + (srLatch0.getOutVal(1) << 1);
+}

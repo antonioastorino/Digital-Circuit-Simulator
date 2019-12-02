@@ -23,8 +23,8 @@ protected:
 	// Initialize with add=false if the component is not an elementary block
 	DCSComponent(int fanIn, int fanOut, bool add=true);
 	int fanIn, fanOut;
-	bool *in;
-	bool *out;
+	uint64_t in = 0;
+	uint64_t out = 0;
 	// Binary number in which each digit is set = 1 when the corresponding input is updated for the first time.
 	uint64_t reachableIn;
 	uint64_t allInReached;
@@ -37,11 +37,11 @@ public:
 	std::vector<DCSComponent*> rightComponentVector = {};
 	bool initialized = false;
 	bool stable = false;
-	void setIn(bool inVal, int inPinNum);
-	void setIn(bool* inVec);
+	virtual void setIn(bool inVal, int inPinNum);
+	virtual void setIn(uint64_t inVec);
 
 	bool getOutVal(int outPinNum);
-	bool* getOutVec();
+	uint64_t getOutVec();
 	
 	virtual int getTimeDelay() = 0; // Return the latency between input and output
 	virtual void updateOut() = 0;

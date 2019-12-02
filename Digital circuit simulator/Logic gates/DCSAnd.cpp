@@ -13,5 +13,5 @@ DCSAnd::DCSAnd(): DCSComponent(2, 1) {
 };
 
 void DCSAnd::updateOut(){
-	out[0] = in[0] && in[1];
+	out = (in & (in >> 1)) & 1;
 }

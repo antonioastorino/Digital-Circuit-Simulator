@@ -14,8 +14,9 @@
 #include "DCSNor.hpp"
 #include "DCSSRLatch.hpp"
 #include "DCSOutput.hpp"
+#include "DCSDLatch.hpp"
 
-void latchTest() {
+void srLatchTest() {
 	binary_signal r = {4, 3, 3};
 	binary_signal s = {1, 3, 3, 3};
 	
@@ -62,11 +63,26 @@ void sequentialNetwork() {
 	DCSEngine::run();
 }
 
+void dLatchTest() {
+	binary_signal d = {2,8,10};
+	binary_signal en = {4,6,4,4,2};
+	
+	DCSDLatch dLatch = DCSDLatch();
+	DCSInput I0 = DCSInput(d);
+	DCSInput I1 = DCSInput(en);
+	I0.connect(&dLatch, 0, 0, " D");
+	I1.connect(&dLatch, 0, 1, "EN");
+
+	
+	DCSEngine::initialize();
+	DCSEngine::run(30);
+}
 
 int main(int argc, const char * argv[]) {
 
-	latchTest();
+//	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
+	dLatchTest();
 	return 0;
 }

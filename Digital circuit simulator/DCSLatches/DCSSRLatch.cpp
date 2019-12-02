@@ -30,9 +30,8 @@ DCSComponent* DCSSRLatch::getRightComponent(int &inPinNum) {
 }
 
 void DCSSRLatch::updateOut() {
-	out[0] = nor0.getOutVal(0);
-	out[1] = nor1.getOutVal(0);
-	if (out[0] && out[1])
+	out = nor0.getOutVal(0) + (nor1.getOutVal(0) << 1);
+	if (out & (out >> 1) & 1)
 		throw "Illegal state";
 }
 

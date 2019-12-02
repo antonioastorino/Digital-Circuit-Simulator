@@ -25,6 +25,6 @@ constValue(0) {
 }
 
 void DCSInput::updateOut() {
-	if (hasSignal) out[0] = signal.getVal(DCSEngine::getStepNumber());
-	else out[0] = constValue;
+	if (hasSignal) out = signal.getVal(DCSEngine::getStepNumber());
+	else out = constValue;
 }

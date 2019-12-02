@@ -14,14 +14,10 @@ fanIn(fanIn),
 fanOut(fanOut),
 reachableIn(0),
 allInReached((1 << fanIn) - 1) {
-	in = new bool[fanIn];
-	out = new bool[fanOut];
 	if (add) DCSEngine::addComponent(this);
 }
 
 DCSComponent::~DCSComponent() {
-	delete [] in;
-	delete [] out;
 	for (auto wire: wireVector) {
 		delete wire;
 	}
@@ -30,25 +26,25 @@ DCSComponent::~DCSComponent() {
 // set single input
 void DCSComponent::setIn(bool inVal, int inPinNum) {
 	reachableIn |= 1 << inPinNum;
-	in[inPinNum] = inVal;
+	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
+	in |= (inVal << inPinNum); // set the same bit to inVal
 }
 
 // get single output
 bool DCSComponent::getOutVal(int outPinNum) {
 	if (reachableIn == allInReached) initialized = true;
-	return out[outPinNum];
+	return (out >> outPinNum) & 1;
 }
 
 // set entire input array
-void DCSComponent::setIn(bool* inVec) {
-	for (int i = 0; i < fanIn; i++) {
-		in[i] = inVec[i];
-	}
+void DCSComponent::setIn(uint64_t inVec) {
+	in = inVec;
+	reachableIn = allInReached;
 	initialized = true;
 }
 
 // get entire input array
-bool* DCSComponent::getOutVec() {
+uint64_t DCSComponent::getOutVec() {
 	if (reachableIn == allInReached) initialized = true;
 	return out;
 }
