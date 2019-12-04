@@ -13,4 +13,5 @@ DCSNot::DCSNot() : DCSComponent(1, 1) {
 }
 void DCSNot::updateOut() {
 	out = !in;
+	updateParentOut();
 }

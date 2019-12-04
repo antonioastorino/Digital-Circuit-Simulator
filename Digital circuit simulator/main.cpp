@@ -70,12 +70,18 @@ void dLatchTest() {
 	DCSDLatch dLatch = DCSDLatch();
 	DCSInput I0 = DCSInput(d);
 	DCSInput I1 = DCSInput(en);
+	DCSOutput O0 = DCSOutput();
+	DCSOutput O1 = DCSOutput();
+	
 	I0.connect(&dLatch, 0, 0, " D");
 	I1.connect(&dLatch, 0, 1, "EN");
+	dLatch.connect(&O0, 0, 0, "O0");
+	dLatch.connect(&O1, 1, 0, "O1");
 
 	
 	DCSEngine::initialize();
 	DCSEngine::run(30);
+	
 }
 
 int main(int argc, const char * argv[]) {

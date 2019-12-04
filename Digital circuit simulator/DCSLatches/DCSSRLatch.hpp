@@ -28,8 +28,8 @@ private:
 public:
 	DCSSRLatch();
 
-	DCSComponent* getLeftComponent(int outPinNum) override;
-	DCSComponent* getRightComponent(int &inPinNum) override;
+//	DCSComponent* getOutComponent(int &outPinNum) override;
+	DCSComponent* getInComponent(int &inPinNum) override;
 	void updateOut() override;
 	int getTimeDelay() override { return 2; };
 };

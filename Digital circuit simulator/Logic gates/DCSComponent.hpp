@@ -36,7 +36,6 @@ public:
 	// stores the components to which the output of this component is connected. It is used to propagate signals in series during initialization
 	std::vector<DCSComponent*> rightComponentVector = {};
 	bool initialized = false;
-	bool stable = false;
 	virtual void setIn(bool inVal, int inPinNum);
 	virtual void setIn(uint64_t inVec);
 
@@ -51,10 +50,11 @@ public:
 						 int inPinNum,
 						 std::string probeName = "");
 	
-	virtual DCSComponent* getLeftComponent(int outPinNum);
-	virtual DCSComponent* getRightComponent(int &inPinNum);
+	virtual DCSComponent* getOutComponent(int &outPinNum);
+	virtual DCSComponent* getInComponent(int &inPinNum);
 	
 	void propagateValues();
+// A parent is a component whose output is shared with this component. Every time the output of this component is updated, also the parent's output will
 	void setParent(DCSComponent* parent);
 	void updateParentOut();
 	

@@ -18,6 +18,7 @@ void DCSShortCiruit::updateOut() {
 }
 
 void DCSShortCiruit::setIn(bool inVal, int inPinNum) {
+//	DCSComponent::setIn(inVal, inPinNum);
 	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
 	in |= (inVal << inPinNum); // set the same bit to inVal
 	out = in;

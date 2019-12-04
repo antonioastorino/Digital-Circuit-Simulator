@@ -16,17 +16,17 @@ DCSDLatch::DCSDLatch() : DCSComponent(1, 2, false) {
 	not0.connect(&and0, 0, 0);
 	and0.connect(&srLatch0, 0, 0);
 	and1.connect(&srLatch0, 0, 1);
-	not0.setParent(this);
-	and0.setParent(this);
-	and1.setParent(this);
+//	not0.setParent(this);
+//	and0.setParent(this);
+//	and1.setParent(this);
 	srLatch0.setParent(this);
 }
 
-DCSComponent* DCSDLatch::getLeftComponent(int outPinNum) {
-	return srLatch0.getLeftComponent(outPinNum);
+DCSComponent* DCSDLatch::getOutComponent(int &outPinNum) {
+	return srLatch0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDLatch::getRightComponent(int &inPinNum) {
+DCSComponent* DCSDLatch::getInComponent(int &inPinNum) {
 	if (inPinNum == 0) return &D;
 	else if (inPinNum == 1) {
 		inPinNum = 0; // pin 1 in D latch is EN pin 0
@@ -37,4 +37,5 @@ DCSComponent* DCSDLatch::getRightComponent(int &inPinNum) {
 
 void DCSDLatch::updateOut() {
 	out = srLatch0.getOutVal(0) + (srLatch0.getOutVal(1) << 1);
+	updateParentOut();
 }

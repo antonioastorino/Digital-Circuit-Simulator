@@ -17,13 +17,9 @@ DCSSRLatch::DCSSRLatch() : DCSComponent(2, 2, false) {
 	nor1.setParent(this);
 }
 
-DCSComponent* DCSSRLatch::getLeftComponent(int outPinNum) {
-	if (outPinNum == 0) return &nor0;
-	else if (outPinNum == 1) return &nor1;
-	else exit(-1);
-}
 
-DCSComponent* DCSSRLatch::getRightComponent(int &inPinNum) {
+
+DCSComponent* DCSSRLatch::getInComponent(int &inPinNum) {
 	if (inPinNum == 0) return &nor0;
 	else if (inPinNum == 1) return &nor1;
 	else exit(-1);
@@ -31,7 +27,8 @@ DCSComponent* DCSSRLatch::getRightComponent(int &inPinNum) {
 
 void DCSSRLatch::updateOut() {
 	out = nor0.getOutVal(0) + (nor1.getOutVal(0) << 1);
-	if (out & (out >> 1) & 1)
-		throw "Illegal state";
+	updateParentOut();
+//	if (out & (out >> 1) & 1)
+//		throw "Illegal state";
 }
 

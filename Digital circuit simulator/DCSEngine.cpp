@@ -59,7 +59,6 @@ void DCSEngine::run(int steps) {
 		
 		for (auto component: componentVector) {
 			component->updateOut();
-			component->updateParentOut();
 		}
 
 		propagateValues();

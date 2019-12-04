@@ -54,8 +54,8 @@ void DCSComponent::connect(DCSComponent* to,
 						   int inPinNum,
 						   std::string probeName) {
 
-	DCSComponent* leftComponent = getLeftComponent(outPinNum);
-	DCSComponent* rightComponent = to->getRightComponent(inPinNum);
+	DCSComponent* leftComponent = getOutComponent(outPinNum);
+	DCSComponent* rightComponent = to->getInComponent(inPinNum);
 	
 	bool addToTheRight = true;
 	for (auto component: leftComponent->rightComponentVector) {
@@ -77,11 +77,11 @@ void DCSComponent::connect(DCSComponent* to,
 	DCSEngine::addWire(wire);
 }
 
-DCSComponent* DCSComponent::getRightComponent(int &inPinNum) {
+DCSComponent* DCSComponent::getInComponent(int &inPinNum) {
 	return this;
 }
 
-DCSComponent* DCSComponent::getLeftComponent(int outPinNum) {
+DCSComponent* DCSComponent::getOutComponent(int &outPinNum) {
 	return this;
 }
 

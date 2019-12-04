@@ -16,4 +16,5 @@ DCSNor::DCSNor(): DCSComponent(2, 1) {
 void DCSNor::updateOut(){
 //	std::cout << in[0] << in[1] << std::endl;
 	out = !((in | (in >> 1)) & 1);
+	updateParentOut();
 }
