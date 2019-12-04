@@ -17,15 +17,19 @@
 #include "DCSDLatch.hpp"
 
 void srLatchTest() {
-	binary_signal r = {4, 3, 3};
-	binary_signal s = {1, 3, 3, 3};
+	binary_signal r = {3, 2, 10};
+	binary_signal s = {7, 2, 6};
 	
 	DCSSRLatch SR = DCSSRLatch();
-	DCSInput I0 = DCSInput(1);
-	DCSInput I1 = DCSInput(1);
+	DCSInput I0 = DCSInput(r);
+	DCSInput I1 = DCSInput(s);
+	DCSOutput O0 = DCSOutput();
+	DCSOutput O1 = DCSOutput();
+	
 	I0.connect(&SR, 0, 0, "R");
 	I1.connect(&SR, 0, 1, "S");
-
+	SR.connect(&O0, 0, 0, " Q");
+	SR.connect(&O1, 1, 0, "!Q");
 	
 	DCSEngine::initialize();
 	DCSEngine::run(11);
@@ -64,8 +68,8 @@ void sequentialNetwork() {
 }
 
 void dLatchTest() {
-	binary_signal d = {2,8,10};
-	binary_signal en = {4,6,4,4,2};
+	binary_signal d = {4,5,10};
+	binary_signal en = {4,2,4,2,4};
 	
 	DCSDLatch dLatch = DCSDLatch();
 	DCSInput I0 = DCSInput(d);
@@ -73,12 +77,11 @@ void dLatchTest() {
 	DCSOutput O0 = DCSOutput();
 	DCSOutput O1 = DCSOutput();
 	
-	I0.connect(&dLatch, 0, 0, " D");
+	I0.connect(&dLatch, 0, 0, "DATA");
 	I1.connect(&dLatch, 0, 1, "EN");
-	dLatch.connect(&O0, 0, 0, "O0");
-	dLatch.connect(&O1, 1, 0, "O1");
+	dLatch.connect(&O0, 0, 0, " Q");
+	dLatch.connect(&O1, 1, 0, "!Q");
 
-	
 	DCSEngine::initialize();
 	DCSEngine::run(30);
 	
@@ -86,9 +89,9 @@ void dLatchTest() {
 
 int main(int argc, const char * argv[]) {
 
-//	srLatchTest();
+	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
-	dLatchTest();
+//	dLatchTest();
 	return 0;
 }

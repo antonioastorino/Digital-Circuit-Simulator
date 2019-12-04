@@ -77,7 +77,7 @@ void DCSEngine::propagateValues() {
 void DCSEngine::printProbes() {
 	for (auto wire: wireVector) {
 		if (wire->getProbeName().length() > 0) {
-			std::cout << wire->getProbeName() << " ";
+			std::cout << "  " << wire->getProbeName() << " ";
 		}
 	}
 	std::cout << std::endl;
@@ -86,10 +86,14 @@ void DCSEngine::printProbes() {
 void DCSEngine::printLogicLevels() {
 		for (auto wire: wireVector) {
 			if (wire->getProbeName().length() > 0) {
-				for (int i = 0; i < wire->getProbeName().length()-1; i++) {
+				for (int i = 0; i < wire->getProbeName().length(); i++) {
 					std::cout << ' ';
 				}
-				std::cout << wire->getOutVal() << " ";
+				bool currVal = wire->getOutVal();
+				if (currVal)
+					std::cout << " | ";
+				else std::cout << "|  ";
+
 			}
 		}
 	std::cout << std::endl;

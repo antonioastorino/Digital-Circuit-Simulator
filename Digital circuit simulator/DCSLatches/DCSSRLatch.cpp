@@ -11,8 +11,8 @@
 #include <iostream>
 
 DCSSRLatch::DCSSRLatch() : DCSComponent(2, 2, false) {
-	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0, " Q");
-	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1, "!Q");
+	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0);
+	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1);
 	nor0.setParent(this);
 	nor1.setParent(this);
 }
@@ -28,7 +28,7 @@ DCSComponent* DCSSRLatch::getInComponent(int &inPinNum) {
 void DCSSRLatch::updateOut() {
 	out = nor0.getOutVal(0) + (nor1.getOutVal(0) << 1);
 	updateParentOut();
-//	if (out & (out >> 1) & 1)
-//		throw "Illegal state";
+	if (out & (out >> 1) & 1)
+		throw "Illegal state";
 }
 
