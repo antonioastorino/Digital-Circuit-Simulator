@@ -16,9 +16,6 @@ DCSDLatch::DCSDLatch() : DCSComponent(1, 2, false) {
 	not0.connect(&and0, 0, 0);
 	and0.connect(&srLatch0, 0, 0);
 	and1.connect(&srLatch0, 0, 1);
-//	not0.setParent(this);
-//	and0.setParent(this);
-//	and1.setParent(this);
 	srLatch0.setParent(this);
 }
 

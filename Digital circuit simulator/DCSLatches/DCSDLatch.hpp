@@ -12,7 +12,7 @@
 #include "DCSSRLatch.hpp"
 #include "DCSNot.hpp"
 #include "DCSAnd.hpp"
-#include "DCSShortCircuit.hpp"
+#include "DCSNode.hpp"
 
 class DCSDLatch: public DCSComponent {
 private:

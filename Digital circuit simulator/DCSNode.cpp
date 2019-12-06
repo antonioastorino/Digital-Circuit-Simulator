@@ -1,5 +1,5 @@
 //
-//  DCSShortCircuit.cpp
+//  DCSNode.cpp
 //  Digital circuit simulator
 //
 //  Created by Antonio Astorino on 01/12/2019.
@@ -21,7 +21,7 @@
  
  */
 
-#include "DCSShortCircuit.hpp"
+#include "DCSNode.hpp"
 
 DCSShortCiruit::DCSShortCiruit() :
 DCSComponent(1,1,false) {

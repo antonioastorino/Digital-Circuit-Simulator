@@ -1,13 +1,13 @@
 //
-//  DCSShortCircuit.hpp
+//  DCSNode.hpp
 //  Digital circuit simulator
 //
 //  Created by Antonio Astorino on 01/12/2019.
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#ifndef DCSShortCircuit_hpp
-#define DCSShortCircuit_hpp
+#ifndef DCSNode_hpp
+#define DCSNode_hpp
 
 #include "DCSComponent.hpp"
 
@@ -23,4 +23,4 @@ public:
 
 
 
-#endif /* DCSShortCircuit_hpp */
+#endif /* DCSNode_hpp */
