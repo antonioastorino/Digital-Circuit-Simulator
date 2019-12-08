@@ -15,6 +15,7 @@
 #include "DCSSRLatch.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDLatch.hpp"
+#include "DCSUnitDelay.hpp"
 
 void srLatchTest() {
 	binary_signal r = {3, 2, 10};
@@ -84,14 +85,25 @@ void dLatchTest() {
 
 	DCSEngine::initialize();
 	DCSEngine::run(30);
+}
+
+void unitDelayTest() {
+	DCSNot not0 = DCSNot();
+	DCSUnitDelay del0 = DCSUnitDelay();
+
+	not0.connect(&del0, 0, 0, "N0");
+	del0.connect(&not0, 0, 0, "D0");
 	
+	DCSEngine::initialize();
+	DCSEngine::run(11);
 }
 
 int main(int argc, const char * argv[]) {
 
-	srLatchTest();
+//	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
 //	dLatchTest();
+	unitDelayTest();
 	return 0;
 }

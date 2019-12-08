@@ -9,8 +9,9 @@
 #include "DCSNot.hpp"
 
 DCSNot::DCSNot() : DCSComponent(1, 1) {
-	out = 0;
+
 }
+
 void DCSNot::updateOut() {
 	out = !in;
 	updateParentOut();
