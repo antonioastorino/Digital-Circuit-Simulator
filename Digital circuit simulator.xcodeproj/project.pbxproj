@@ -147,6 +147,8 @@
 				A948245E2380459800803F30 /* DCSNot.cpp */,
 				A915F0CD238D9F9000655FC7 /* DCSNor.hpp */,
 				A915F0CC238D9F9000655FC7 /* DCSNor.cpp */,
+				A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */,
+				A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */,
 			);
 			path = "Logic gates";
 			sourceTree = "<group>";
@@ -158,8 +160,6 @@
 				A9C2D18F2393CE79008CAF81 /* DCSWire.cpp */,
 				A9C2D196239460FE008CAF81 /* DCSNode.hpp */,
 				A9C2D195239460FE008CAF81 /* DCSNode.cpp */,
-				A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */,
-				A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */,
 			);
 			path = Connections;
 			sourceTree = "<group>";
