@@ -25,6 +25,7 @@ DCSComponent::~DCSComponent() {
 
 // set single input
 void DCSComponent::setIn(bool inVal, int inPinNum) {
+	if (inPinNum >= fanIn) throw "Input pin number out of range";
 	reachableIn |= 1 << inPinNum;
 	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
 	in |= (inVal << inPinNum); // set the same bit to inVal

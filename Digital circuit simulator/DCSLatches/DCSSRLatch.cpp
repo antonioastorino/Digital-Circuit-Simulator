@@ -28,7 +28,7 @@ DCSComponent* DCSSRLatch::getInComponent(int &inPinNum) {
 void DCSSRLatch::updateOut() {
 	out = nor0.getOutVal(0) + (nor1.getOutVal(0) << 1);
 	updateParentOut();
-	if (out & (out >> 1) & 1)
-		throw "Illegal state";
+//	if (out & (out >> 1) & 1)
+//		throw "Illegal state";
 }
 

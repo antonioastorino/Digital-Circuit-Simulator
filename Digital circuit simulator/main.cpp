@@ -103,7 +103,7 @@ int main(int argc, const char * argv[]) {
 //	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
-//	dLatchTest();
-	unitDelayTest();
+	dLatchTest();
+//	unitDelayTest();
 	return 0;
 }

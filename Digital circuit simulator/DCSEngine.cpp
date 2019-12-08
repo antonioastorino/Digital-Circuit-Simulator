@@ -105,3 +105,13 @@ int DCSEngine::getStepNumber() { return stepNumber; }
 void DCSEngine::setClockPeriod(int numberOfTimeDelays) {
 	clockPeriod = numberOfTimeDelays;
 };
+
+
+// Logging
+void DCSEngine::logInfo(std::string message) {
+	std::cout << "INFO: " << message << "\n";
+}
+
+void DCSEngine::logError(std::string message) {
+	std::cout << "ERROR: " << message << "!\n";
+}

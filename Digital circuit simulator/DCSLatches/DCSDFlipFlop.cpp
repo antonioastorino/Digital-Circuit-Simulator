@@ -7,5 +7,8 @@
 //
 
 #include "DCSDFlipFlop.hpp"
-
-
+//
+//DCSDFlipFlop::DCSDFlipFlop() :
+//DCSComponent(2, 2) {
+//	
+//}
