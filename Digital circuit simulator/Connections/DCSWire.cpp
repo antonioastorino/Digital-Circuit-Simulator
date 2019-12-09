@@ -10,12 +10,39 @@
 #include "DCSComponent.hpp"
 #include <iostream>
 
+DCSWire::DCSWire(DCSComponent* from,
+		int outPinNum,
+		DCSComponent* to,
+		int inPinNum,
+		std::string probeName)
+:
+from(from),
+outPinNum(outPinNum),
+to(to),
+inPinNum(inPinNum),
+probeName(probeName) {
+	if (from->getName() == "") {
+		std::cout << from;
+	}
+	else {
+		std::cout << from->getName();
+	}
+	std::cout << " out " << outPinNum << " --> ";
+	if (to->getName() == "") {
+		std::cout << to;
+	}
+	else {
+		std::cout << to->getName();
+	}
+	std::cout<< " in " << inPinNum << "\n";
+}
+
 std::string DCSWire::getProbeName() {
 	return probeName;
 };
 
 void DCSWire::propagateValue() {	
-//	std::cout << from << " value " << from->getOutVal(outPinNum) << " to " << to << " pin " << inPinNum << "\n";
+	
 	to->setIn(from->getOutVal(outPinNum), inPinNum);
 }
 

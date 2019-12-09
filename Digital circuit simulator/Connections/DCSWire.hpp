@@ -32,15 +32,7 @@ public:
 			int outPinNum,
 			DCSComponent* to,
 			int inPinNum,
-			std::string probeName = "")
-	:
-	from(from),
-	outPinNum(outPinNum),
-	to(to),
-	inPinNum(inPinNum),
-	probeName(probeName) {
-		std::cout << from << " out " << outPinNum << " --> " << to << " in " << inPinNum << "\n";
-	}
+			std::string probeName = "");
 	
 	int getOutPinNum();
 	std::string getProbeName();
