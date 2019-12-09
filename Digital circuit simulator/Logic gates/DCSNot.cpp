@@ -8,7 +8,8 @@
 
 #include "DCSNot.hpp"
 
-DCSNot::DCSNot() : DCSComponent(1, 1) {
+DCSNot::DCSNot(std::string name) :
+DCSComponent(name, 1, 1) {
 
 }
 

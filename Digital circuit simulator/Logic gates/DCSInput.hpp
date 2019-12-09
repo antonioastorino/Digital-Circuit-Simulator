@@ -23,8 +23,8 @@ private:
 	bool constValue = 0;
 	DCSArbitrarySignal signal;
 public:
-	DCSInput(bool initValue);
-	DCSInput(binary_signal signal);
+	DCSInput(std::string name, bool initValue);
+	DCSInput(std::string name, binary_signal signal);
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

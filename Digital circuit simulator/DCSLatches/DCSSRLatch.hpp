@@ -23,12 +23,11 @@
 
 class DCSSRLatch: public DCSComponent {
 private:
-	DCSNor nor0 = DCSNor();
-	DCSNor nor1 = DCSNor();
+	DCSNor nor0 = DCSNor("");
+	DCSNor nor1 = DCSNor("");
 public:
-	DCSSRLatch();
+	DCSSRLatch(std::string name);
 
-//	DCSComponent* getOutComponent(int &outPinNum) override;
 	DCSComponent* getInComponent(int &inPinNum) override;
 	void updateOut() override;
 	int getTimeDelay() override { return 2; };

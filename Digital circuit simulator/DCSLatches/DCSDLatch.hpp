@@ -16,15 +16,15 @@
 
 class DCSDLatch: public DCSComponent {
 private:
-	DCSSRLatch srLatch0 = DCSSRLatch();
-	DCSAnd and0         = DCSAnd();
-	DCSAnd and1         = DCSAnd();
-	DCSNot not0         = DCSNot();
-	DCSShortCiruit D    = DCSShortCiruit();
-	DCSShortCiruit EN   = DCSShortCiruit();
+	DCSSRLatch srLatch0 = DCSSRLatch("");
+	DCSAnd and0         = DCSAnd("");
+	DCSAnd and1         = DCSAnd("");
+	DCSNot not0         = DCSNot("");
+	DCSNode D    = DCSNode("");
+	DCSNode EN   = DCSNode("");
 	
 public:
-	DCSDLatch();
+	DCSDLatch(std::string name);
 	
 	DCSComponent* getOutComponent(int &outPinNum) override;
 	DCSComponent* getInComponent(int &inPinNum) override;

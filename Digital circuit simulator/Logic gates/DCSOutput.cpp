@@ -8,7 +8,7 @@
 
 #include "DCSOutput.hpp"
 
-DCSOutput::DCSOutput() :
-DCSComponent(1, 0, false) {
+DCSOutput::DCSOutput(std::string name) :
+DCSComponent(name, 1, 0, false) {
 	initialized = true;
 }

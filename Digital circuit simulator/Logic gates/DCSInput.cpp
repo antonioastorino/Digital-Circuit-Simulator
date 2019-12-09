@@ -9,15 +9,15 @@
 #include "DCSInput.hpp"
 #include "DCSEngine.hpp"
 
-DCSInput::DCSInput(bool constValue) :
-DCSComponent(0, 1, false),
+DCSInput::DCSInput(std::string name, bool constValue) :
+DCSComponent(name, 0, 1, false),
 signal({0}),
 constValue(constValue){
 	DCSEngine::addInput(this);
 }
 
-DCSInput::DCSInput(binary_signal signal) :
-DCSComponent(1, 1, false),
+DCSInput::DCSInput(std::string name, binary_signal signal) :
+DCSComponent(name, 1, 1, false),
 signal(signal),
 constValue(0) {
 	hasSignal = true;

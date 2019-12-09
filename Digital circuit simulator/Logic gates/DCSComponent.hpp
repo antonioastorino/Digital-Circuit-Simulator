@@ -21,7 +21,8 @@ protected:
 	~DCSComponent();
 	DCSComponent() = delete;
 	// Initialize with add=false if the component is not an elementary block
-	DCSComponent(int fanIn, int fanOut, bool add=true);
+	DCSComponent(std::string name, int fanIn, int fanOut, bool add=true);
+	std::string name;
 	int fanIn, fanOut;
 	uint64_t in = 0;
 	uint64_t out = 0;
@@ -41,6 +42,8 @@ public:
 
 	bool getOutVal(int outPinNum);
 	uint64_t getOutVec();
+	
+	std::string getName();
 	
 	virtual int getTimeDelay() = 0; // Return the latency between input and output
 	virtual void updateOut() = 0;

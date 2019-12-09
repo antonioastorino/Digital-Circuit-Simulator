@@ -35,8 +35,8 @@ public:
 	static void setClockPeriod(int numberOfTimeDelays);
 	
 	// Logging
-	static void logInfo(std::string message);
-	static void logError(std::string message);
+	static void logInfo(std::string callerName, std::string message);
+	static void logError(std::string callerName, std::string message);
 };
 
 #endif /* DCSEngine_hpp */

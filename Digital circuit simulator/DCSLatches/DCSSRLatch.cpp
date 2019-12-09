@@ -10,7 +10,8 @@
 #include "DCSEngine.hpp"
 #include <iostream>
 
-DCSSRLatch::DCSSRLatch() : DCSComponent(2, 2, false) {
+DCSSRLatch::DCSSRLatch(std::string name) :
+DCSComponent(name, 2, 2, false) {
 	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0);
 	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1);
 	nor0.setParent(this);

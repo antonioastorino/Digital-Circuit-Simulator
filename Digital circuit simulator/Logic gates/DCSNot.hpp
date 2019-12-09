@@ -13,7 +13,7 @@
 
 class DCSNot: public DCSComponent {
 public:
-	DCSNot();
+	DCSNot(std::string name);
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

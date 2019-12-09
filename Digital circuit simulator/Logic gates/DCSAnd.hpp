@@ -13,7 +13,7 @@
 
 class DCSAnd: public DCSComponent {
 public:
-	DCSAnd();
+	DCSAnd(std::string name);
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

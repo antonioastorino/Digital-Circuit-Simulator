@@ -13,7 +13,7 @@
 
 class DCSNor: public DCSComponent {
 public:
-	DCSNor();
+	DCSNor(std::string name);
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

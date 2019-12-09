@@ -9,7 +9,8 @@
 #include "DCSNor.hpp"
 
 
-DCSNor::DCSNor(): DCSComponent(2, 1) {
+DCSNor::DCSNor(std::string name):
+DCSComponent(name, 2, 1) {
 	
 };
 

@@ -9,7 +9,8 @@
 #include "DCSComponent.hpp"
 #include "DCSEngine.hpp"
 
-DCSComponent::DCSComponent(int fanIn, int fanOut, bool add):
+DCSComponent::DCSComponent(std::string name, int fanIn, int fanOut, bool add):
+name{name},
 fanIn(fanIn),
 fanOut(fanOut),
 reachableIn(0),
@@ -31,18 +32,19 @@ void DCSComponent::setIn(bool inVal, int inPinNum) {
 	in |= (inVal << inPinNum); // set the same bit to inVal
 }
 
-// get single output
-bool DCSComponent::getOutVal(int outPinNum) {
-	if (reachableIn == allInReached) initialized = true;
-	return (out >> outPinNum) & 1;
-}
-
 // set entire input array
 void DCSComponent::setIn(uint64_t inVec) {
 	in = inVec;
 	reachableIn = allInReached;
 	initialized = true;
 }
+
+// get single output
+bool DCSComponent::getOutVal(int outPinNum) {
+	if (reachableIn == allInReached) initialized = true;
+	return (out >> outPinNum) & 1;
+}
+
 
 // get entire input array
 uint64_t DCSComponent::getOutVec() {
@@ -77,6 +79,8 @@ void DCSComponent::connect(DCSComponent* to,
 	wireVector.push_back(wire);
 	DCSEngine::addWire(wire);
 }
+
+std::string DCSComponent::getName() { return name; }
 
 DCSComponent* DCSComponent::getInComponent(int &inPinNum) {
 	return this;

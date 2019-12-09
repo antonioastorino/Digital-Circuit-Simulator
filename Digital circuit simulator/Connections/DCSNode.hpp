@@ -11,9 +11,9 @@
 
 #include "DCSComponent.hpp"
 
-class DCSShortCiruit: public DCSComponent {
+class DCSNode: public DCSComponent {
 public:
-	DCSShortCiruit();
+	DCSNode(std::string name);
 	
 	void updateOut() override;
 	int getTimeDelay() override { return 0; }

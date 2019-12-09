@@ -23,16 +23,16 @@
 
 #include "DCSNode.hpp"
 
-DCSShortCiruit::DCSShortCiruit() :
-DCSComponent(1,1,false) {
+DCSNode::DCSNode(std::string name) :
+DCSComponent(name, 1, 1, false) {
 	
 }
 
-void DCSShortCiruit::updateOut() {
+void DCSNode::updateOut() {
 	// nothing to do because the output is updated when the input changes
 }
 
-void DCSShortCiruit::setIn(bool inVal, int inPinNum) {
+void DCSNode::setIn(bool inVal, int inPinNum) {
 //	DCSComponent::setIn(inVal, inPinNum);
 //	reachableIn |= 1 << inPinNum;
 	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
@@ -43,7 +43,7 @@ void DCSShortCiruit::setIn(bool inVal, int inPinNum) {
 	}
 }
 
-void DCSShortCiruit::setIn(uint64_t inVec) {
+void DCSNode::setIn(uint64_t inVec) {
 	in = inVec;
 	out = inVec;
 	for (auto wire_p: wireVector) {

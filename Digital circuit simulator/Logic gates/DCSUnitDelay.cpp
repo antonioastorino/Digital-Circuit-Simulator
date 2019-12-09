@@ -8,7 +8,8 @@
 
 #include "DCSUnitDelay.hpp"
 
-DCSUnitDelay::DCSUnitDelay() : DCSComponent(1, 1) {
+DCSUnitDelay::DCSUnitDelay(std::string name) :
+DCSComponent(name, 1, 1) {
 
 }
 void DCSUnitDelay::updateOut() {

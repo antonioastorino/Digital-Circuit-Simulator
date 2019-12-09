@@ -8,7 +8,8 @@
 
 #include "DCSAnd.hpp"
 
-DCSAnd::DCSAnd(): DCSComponent(2, 1) {
+DCSAnd::DCSAnd(std::string name):
+DCSComponent(name, 2, 1) {
 	
 };
 

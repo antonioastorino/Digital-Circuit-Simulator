@@ -13,7 +13,7 @@
 
 class DCSUnitDelay: public DCSComponent {
 public:
-	DCSUnitDelay();
+	DCSUnitDelay(std::string name);
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

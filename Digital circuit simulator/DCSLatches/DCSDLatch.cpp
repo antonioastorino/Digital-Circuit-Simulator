@@ -8,8 +8,8 @@
 
 #include "DCSDLatch.hpp"
 
-DCSDLatch::DCSDLatch() :
-DCSComponent(1, 2, false) {
+DCSDLatch::DCSDLatch(std::string name) :
+DCSComponent(name, 1, 2, false) {
 	D.connect(&and1, 0, 1);
 	D.connect(&not0, 0, 0);
 	EN.connect(&and0, 0, 1);

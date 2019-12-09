@@ -13,7 +13,7 @@
 
 class DCSOutput: public DCSComponent {
 public:
-	DCSOutput();
+	DCSOutput(std::string name);
 	void updateOut() override {};
 	int getTimeDelay() override { return 0; }
 };
