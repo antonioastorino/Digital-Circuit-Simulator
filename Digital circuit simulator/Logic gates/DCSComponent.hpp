@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include "DCSWire.hpp"
+#include "DCSLog.hpp"
 
 class DCSComponent {
 private:

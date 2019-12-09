@@ -9,6 +9,7 @@
 #include "DCSWire.hpp"
 #include "DCSComponent.hpp"
 #include <iostream>
+#include <sstream>
 
 DCSWire::DCSWire(DCSComponent* from,
 		int outPinNum,
@@ -42,6 +43,8 @@ std::string DCSWire::getProbeName() {
 };
 
 void DCSWire::propagateValue() {	
+	std::stringstream message;
+	message << "Propagating from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
 	
 	to->setIn(from->getOutVal(outPinNum), inPinNum);
 }

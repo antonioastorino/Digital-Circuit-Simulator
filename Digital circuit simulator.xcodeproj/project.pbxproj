@@ -21,7 +21,7 @@
 		A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D195239460FE008CAF81 /* DCSNode.cpp */; };
 		A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D19C239CF6C1008CAF81 /* DCSDFlipFlop.cpp */; };
 		A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */; };
-		A9C2D1B7239EE95A008CAF81 /* DCSLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D1B5239EE95A008CAF81 /* DCSLog.cpp */; };
+		A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D1BD239EF853008CAF81 /* DCSLog.cpp */; };
 		A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +66,8 @@
 		A9C2D19D239CF6C1008CAF81 /* DCSDFlipFlop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDFlipFlop.hpp; sourceTree = "<group>"; };
 		A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSUnitDelay.cpp; sourceTree = "<group>"; };
 		A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSUnitDelay.hpp; sourceTree = "<group>"; };
-		A9C2D1B5239EE95A008CAF81 /* DCSLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSLog.cpp; sourceTree = "<group>"; };
-		A9C2D1B6239EE95A008CAF81 /* DCSLog.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSLog.hpp; sourceTree = "<group>"; };
+		A9C2D1BD239EF853008CAF81 /* DCSLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSLog.cpp; sourceTree = "<group>"; };
+		A9C2D1BE239EF853008CAF81 /* DCSLog.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSLog.hpp; sourceTree = "<group>"; };
 		A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSInput.cpp; sourceTree = "<group>"; };
 		A9DE8AEB2388718C0076C6A9 /* DCSInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSInput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,8 +126,8 @@
 			children = (
 				A9BDED8523805EC600650496 /* DCSEngine.hpp */,
 				A9BDED8423805EC600650496 /* DCSEngine.cpp */,
-				A9C2D1B6239EE95A008CAF81 /* DCSLog.hpp */,
-				A9C2D1B5239EE95A008CAF81 /* DCSLog.cpp */,
+				A9C2D1BE239EF853008CAF81 /* DCSLog.hpp */,
+				A9C2D1BD239EF853008CAF81 /* DCSLog.cpp */,
 				A9C2D198239AB888008CAF81 /* Connections */,
 				A9302E372383452200F5DEA9 /* Signals */,
 				A9482461238045BD00803F30 /* Logic gates */,
@@ -233,7 +233,7 @@
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
-				A9C2D1B7239EE95A008CAF81 /* DCSLog.cpp in Sources */,
+				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
