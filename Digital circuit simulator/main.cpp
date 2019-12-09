@@ -18,6 +18,7 @@
 #include "DCSUnitDelay.hpp"
 #include "DCSLog.hpp"
 
+
 void srLatchTest() {
 	binary_signal r = {3, 2, 10};
 	binary_signal s = {7, 2, 6};
@@ -103,9 +104,10 @@ int main(int argc, const char * argv[]) {
 //	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
-	DCSLog::error("Hey", "neh");
+	DCSLog::verbose = false;
+	DCSLog::info("Hello", "gay");
 	dLatchTest();
-	DCSEngine::run(11, true);
+	DCSEngine::run(11);
 //	unitDelayTest();
 	return 0;
 }

@@ -6,14 +6,24 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#ifndef DCSLog_hpp
-#define DCSLog_hpp
+#ifndef DCSLog_h
+#define DCSLog_h
 
 #include <iostream>
 
 namespace DCSLog {
-void info(std::string callerName, std::string message);
 
-void error(std::string callerName, std::string message);
+bool verbose = false;
+
+void info(std::string callerName, std::string message) {
+	if (verbose) {
+		std::cout << "INFO: " << callerName << " says '" << message << "'\n";
+	}
 }
-#endif /* DCSLog_hpp */
+
+void error(std::string callerName, std::string message) {
+	std::cout << "ERROR: " << callerName << " says '" << message << "!'\n";
+}
+}
+
+#endif /* DCSLog_h */
