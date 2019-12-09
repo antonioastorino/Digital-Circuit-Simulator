@@ -106,12 +106,3 @@ void DCSEngine::setClockPeriod(int numberOfTimeDelays) {
 	clockPeriod = numberOfTimeDelays;
 };
 
-
-// Logging
-void DCSEngine::logInfo(std::string callerName, std::string message) {
-	std::cout << "INFO: " << callerName << " says '" << message << "'\n";
-}
-
-void DCSEngine::logError(std::string callerName, std::string message) {
-	std::cout << "ERROR: " << callerName << " says '" << message << "!'\n";
-}

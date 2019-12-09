@@ -28,7 +28,7 @@ public:
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
-	static void run(int steps=10);
+	static void run(int steps=10, bool verbose=false);
 	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static int getClockPeriod();
 	static int getStepNumber();
