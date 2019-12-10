@@ -34,7 +34,6 @@ void srLatchTest() {
 	SR.connect(&O0, 0, 0, " Q");
 	SR.connect(&O1, 1, 0, "!Q");
 	
-	DCSEngine::initialize();
 	DCSEngine::run(11);
 }
 
@@ -47,7 +46,6 @@ void notLoopTest() {
 	not1.connect(&not2, 0, 0, "N1");
 	not2.connect(&not0, 0, 0, "N2");
 	
-	DCSEngine::initialize();
 	DCSEngine::run(11);
 }
 
@@ -66,7 +64,6 @@ void sequentialNetwork() {
 	I1.connect(&and0, 0, 1, "I1");
 	and0.connect(&O0, 0, 0, "O0");
 
-	DCSEngine::initialize();
 	DCSEngine::run();
 }
 
@@ -74,7 +71,7 @@ void dLatchTest() {
 	binary_signal d = {4,5,10};
 	binary_signal en = {4,2,4,2,4};
 	
-	DCSDLatch dLatch0 = DCSDLatch("Latch0");
+	DCSDLatch dLatch0 = DCSDLatch("DLatch0");
 	DCSInput I0 = DCSInput("In0", d);
 	DCSInput I1 = DCSInput("In1", en);
 	DCSOutput O0 = DCSOutput("Out0");
@@ -84,9 +81,8 @@ void dLatchTest() {
 	I1.connect(&dLatch0, 0, 1, "EN");
 	dLatch0.connect(&O0, 0, 0, " Q");
 	dLatch0.connect(&O1, 1, 0, "!Q");
-
-	DCSEngine::initialize();
-	DCSEngine::run(30);
+	
+	DCSEngine::run(20);
 }
 
 void unitDelayTest() {
@@ -95,19 +91,34 @@ void unitDelayTest() {
 
 	not0.connect(&del0, 0, 0, "N0");
 	del0.connect(&not0, 0, 0, "D0");
-	
-	DCSEngine::initialize();
+
+	DCSEngine::run(11);
 }
 
-int main(int argc, const char * argv[]) {
+void risingEdgeDetector() {
+	DCSAnd and0 = DCSAnd("And0");
+	DCSNot not0 = DCSNot("Not0");
+	DCSUnitDelay del0 = DCSUnitDelay("Del0");
+	DCSInput in0 = DCSInput("In0", {5,7,8});
+	DCSOutput out0 = DCSOutput("Out0");
+	
+	in0.connect(&and0, 0, 0, "In");
+	in0.connect(&not0, 0, 0);
+	not0.connect(&del0, 0, 0);
+	del0.connect(&and0, 0, 1, "!In");
+	and0.connect(&out0, 0, 0, "out");
+	
+	DCSEngine::run(40);
+}
+
+int main() {
+	DCSLog::verbose = false;
 
 //	srLatchTest();
 //	notLoopTest();
 //	sequentialNetwork();
-	DCSLog::verbose = false;
-	DCSLog::info("Hello", "gay");
-	dLatchTest();
-	DCSEngine::run(11);
+//	dLatchTest();
 //	unitDelayTest();
+	risingEdgeDetector();
 	return 0;
 }

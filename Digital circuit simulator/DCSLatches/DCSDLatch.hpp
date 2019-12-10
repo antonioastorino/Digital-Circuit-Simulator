@@ -16,12 +16,12 @@
 
 class DCSDLatch: public DCSComponent {
 private:
-	DCSSRLatch srLatch0 = DCSSRLatch("DLatch-SR0");
-	DCSAnd and0         = DCSAnd("DLatch-And0");
-	DCSAnd and1         = DCSAnd("DLatch-And1");
-	DCSNot not0         = DCSNot("DLatch-Not0");
-	DCSNode D    = DCSNode("DLatch-Node0");
-	DCSNode EN   = DCSNode("DLatch-Node1");
+	DCSSRLatch srLatch0 = DCSSRLatch(this->name + "-SR0");
+	DCSAnd and0         = DCSAnd(this->name + "-And0");
+	DCSAnd and1         = DCSAnd(this->name + "-And1");
+	DCSNot not0         = DCSNot(this->name + "-Not0");
+	DCSNode node0    = DCSNode(this->name + "-Node0");
+	DCSNode node1   = DCSNode(this->name + "-Node1");
 	
 public:
 	DCSDLatch(std::string name);

@@ -20,7 +20,7 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint32_t> levelDurationVector
 
 	for (size_t i = 1 ; i < levelDurationVector.size(); i++) {
 		flipBitAtSteps.push_back(levelDurationVector[i] + flipBitAtSteps[i-1]);
-		std::cout << flipBitAtSteps[i] << "\n";
+//		std::cout << flipBitAtSteps[i] << "\n";
 		totalDuration += levelDurationVector[i];
 	}
 }

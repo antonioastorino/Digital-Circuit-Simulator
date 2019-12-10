@@ -33,8 +33,8 @@ protected:
 	std::vector<DCSWire*> wireVector = {};
 	DCSComponent *parent = nullptr;
 	
-	
 public:
+	bool isNode = false;
 	// stores the components to which the output of this component is connected. It is used to propagate signals in series during initialization
 	std::vector<DCSComponent*> rightComponentVector = {};
 	bool initialized = false;

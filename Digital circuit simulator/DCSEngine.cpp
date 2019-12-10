@@ -32,10 +32,11 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 	if (cVec.size() == 0) { cVec = componentVector; }
 	// Array of components from which to propagate at the next iteration
 	std::vector<DCSComponent*> leftComponent = {};
+	DCSLog::info("Engine", "layer ------------------");
 	for (auto component: cVec) {
 		if (!(component->initialized)){
 			component->updateOut();
-			component->propagateValues();
+			if (!(component->isNode)) component->propagateValues();
 			for (auto rightComponent: component->rightComponentVector) {
 				leftComponent.push_back(rightComponent);
 			}
@@ -45,6 +46,11 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 }
 
 void DCSEngine::run(int steps) {
+	
+	DCSLog::info("Engine", "\n--------------Initialization start--------------\n");
+	DCSEngine::initialize();
+	DCSLog::info("Engine", "\n---------------Initialization end---------------\n");
+	
 	for (auto component: componentVector) {
 		if (!(component->initialized)) std::cout << component << " not connected \n";
 	}

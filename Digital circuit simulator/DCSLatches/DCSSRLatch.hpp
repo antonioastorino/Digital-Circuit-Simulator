@@ -23,8 +23,8 @@
 
 class DCSSRLatch: public DCSComponent {
 private:
-	DCSNor nor0 = DCSNor("");
-	DCSNor nor1 = DCSNor("");
+	DCSNor nor0 = DCSNor(this->name + "-Nor0");
+	DCSNor nor1 = DCSNor(this->name + "-Nor1");
 public:
 	DCSSRLatch(std::string name);
 

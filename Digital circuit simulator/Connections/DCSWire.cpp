@@ -12,10 +12,10 @@
 #include <sstream>
 
 DCSWire::DCSWire(DCSComponent* from,
-		int outPinNum,
-		DCSComponent* to,
-		int inPinNum,
-		std::string probeName)
+				 int outPinNum,
+				 DCSComponent* to,
+				 int inPinNum,
+				 std::string probeName)
 :
 from(from),
 outPinNum(outPinNum),
@@ -45,7 +45,7 @@ std::string DCSWire::getProbeName() {
 void DCSWire::propagateValue() {	
 	std::stringstream message;
 	message << "Propagating from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
-	
+	DCSLog::info(from->getName(), message.str());
 	to->setIn(from->getOutVal(outPinNum), inPinNum);
 }
 

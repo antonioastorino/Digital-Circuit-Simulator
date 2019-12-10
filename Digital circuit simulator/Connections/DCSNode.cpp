@@ -25,7 +25,8 @@
 
 DCSNode::DCSNode(std::string name) :
 DCSComponent(name, 1, 1, false) {
-	
+	isNode = true;
+	allInReached = -1; // ensures that nodes are never skipped during engine initialization
 }
 
 void DCSNode::updateOut() {
@@ -33,10 +34,8 @@ void DCSNode::updateOut() {
 }
 
 void DCSNode::setIn(bool inVal, int inPinNum) {
-//	DCSComponent::setIn(inVal, inPinNum);
-//	reachableIn |= 1 << inPinNum;
-	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
-	in |= (inVal << inPinNum); // set the same bit to inVal
+	DCSComponent::setIn(inVal, inPinNum);
+
 	out = in;
 	for (auto wire_p: wireVector) {
 		wire_p->propagateValue();
@@ -50,3 +49,5 @@ void DCSNode::setIn(uint64_t inVec) {
 		wire_p->propagateValue();
 	}
 }
+
+
