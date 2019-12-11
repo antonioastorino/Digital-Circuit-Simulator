@@ -68,6 +68,7 @@
 		A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSUnitDelay.hpp; sourceTree = "<group>"; };
 		A9C2D1BD239EF853008CAF81 /* DCSLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSLog.cpp; sourceTree = "<group>"; };
 		A9C2D1BE239EF853008CAF81 /* DCSLog.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSLog.hpp; sourceTree = "<group>"; };
+		A9C2D1C023A11F41008CAF81 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9DE8AEA2388718C0076C6A9 /* DCSInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSInput.cpp; sourceTree = "<group>"; };
 		A9DE8AEB2388718C0076C6A9 /* DCSInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSInput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +109,7 @@
 		A9482445237F49F500803F30 = {
 			isa = PBXGroup;
 			children = (
+				A9C2D1C023A11F41008CAF81 /* README.md */,
 				A9482450237F49F500803F30 /* Digital circuit simulator */,
 				A948244F237F49F500803F30 /* Products */,
 			);
