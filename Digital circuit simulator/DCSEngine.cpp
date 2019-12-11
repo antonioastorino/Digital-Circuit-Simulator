@@ -55,6 +55,12 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 }
 
 void DCSEngine::run(int steps) {
+	/* Check if all components are connected */
+	for (auto component: componentVector) {
+		if(!(component->isFullyConnected())) {
+			DCSLog::error(component->getName(), "not connected");
+		}
+	}
 	
 	DCSLog::info("Engine", "\n--------------Initialization start--------------\n");
 	DCSEngine::initialize();

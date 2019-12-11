@@ -9,7 +9,7 @@
 #include "DCSDFlipFlop.hpp"
 
 DCSDFlipFlop::DCSDFlipFlop(std::string name) :
-DCSComponent(name, 2, 2) {
+DCSComponent(name, 2, 2, false) {
 	node0.connect(&not0, 0, 0);
 	node0.connect(&and0, 0, 0);
 	not0.connect(&del0, 0, 0);

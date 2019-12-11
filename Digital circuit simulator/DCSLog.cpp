@@ -18,5 +18,6 @@ void DCSLog::info(std::string callerName, std::string message) {
 
 void DCSLog::error(std::string callerName, std::string message) {
 	std::cout << "ERROR: " << callerName << " says '" << message << "!'\n";
+	throw "ERROR";
 }
 

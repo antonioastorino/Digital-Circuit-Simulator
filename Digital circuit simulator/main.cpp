@@ -19,8 +19,13 @@
 #include "DCSDFlipFlop.hpp"
 
 void printTestName(std::string testName) {
-	std::cout << "\n--------------\n" << testName << " test\n--------------\n";
+	std::cout << "\n-----";
+	for (int i = 0; i < testName.size(); i++) std::cout <<"-";
+	std::cout << "\n" << testName << " test\n";
+	for (int i = 0; i < testName.size()+5; i++) std::cout <<"-";
+	std::cout << "\n";
 }
+	
 void srLatchTest() {
 	printTestName("SR-Latch");
 	DCSEngine::reset();
@@ -122,7 +127,7 @@ void risingEdgeDetectorTest() {
 	not0.connect(&del0, 0, 0);
 	del0.connect(&del1, 0, 0);
 	del1.connect(&and0, 0, 1, "!In");
-	and0.connect(&out0, 0, 0, "out");
+	and0.connect(&out0, 0, 0, "Out");
 	
 	DCSEngine::run(20);
 }
@@ -148,7 +153,7 @@ void dFlipFlopTest() {
 }
 
 int main() {
-	DCSLog::verbose = false;
+//	DCSLog::verbose = true;
 
 	srLatchTest();
 	notLoopTest();
@@ -157,5 +162,6 @@ int main() {
 	unitDelayTest();
 	risingEdgeDetectorTest();
 	dFlipFlopTest();
+	
 	return 0;
 }

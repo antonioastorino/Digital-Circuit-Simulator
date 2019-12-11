@@ -14,7 +14,11 @@ name{name},
 fanIn(fanIn),
 fanOut(fanOut),
 reachableIn(0),
-allInReached((1 << fanIn) - 1) {
+allInReached((1 << fanIn) - 1), // 2^fanIn - 1
+connectedIn(0),
+fromTristateIn(0),
+isNode(false),
+isTristate(false) {
 	if (add) DCSEngine::addComponent(this);
 }
 
@@ -56,9 +60,17 @@ void DCSComponent::connect(DCSComponent* to,
 						   int outPinNum,
 						   int inPinNum,
 						   std::string probeName) {
+	
 
 	DCSComponent* leftComponent = getOutComponent(outPinNum);
 	DCSComponent* rightComponent = to->getInComponent(inPinNum);
+	
+	if (rightComponent->isTristate) {
+		rightComponent->setFromTristateIn(inPinNum);
+	}
+	else {
+		rightComponent->setConnectedIn(inPinNum);
+	}
 	
 	bool addToTheRight = true;
 	for (auto component: leftComponent->rightComponentVector) {
@@ -71,10 +83,10 @@ void DCSComponent::connect(DCSComponent* to,
 	
 	
 	DCSWire* wire = new DCSWire(leftComponent,
-						   outPinNum,
-						   rightComponent,
-						   inPinNum,
-						   probeName);
+								outPinNum,
+								rightComponent,
+								inPinNum,
+								probeName);
 	
 	wireVector.push_back(wire);
 	DCSEngine::addWire(wire);
@@ -90,10 +102,36 @@ DCSComponent* DCSComponent::getOutComponent(int &outPinNum) {
 	return this;
 }
 
+bool DCSComponent::getConnectedIn(int inPinNum) {
+	return connectedIn & (1 << inPinNum);
+}
+
+bool DCSComponent::getFromTristateIn(int inPinNum) {
+	return fromTristateIn & (1 << inPinNum);
+}
+
+void DCSComponent::setConnectedIn(int inPinNum) {
+	if (getConnectedIn(inPinNum) || getFromTristateIn(inPinNum)) {
+		DCSLog::error(name, "trying to connect tristate output to connected input");
+	}
+	connectedIn |= (1 << inPinNum);
+}
+
+void DCSComponent::setFromTristateIn(int inPinNum) {
+	if (getConnectedIn(inPinNum)) {
+		DCSLog::error(name, "trying to connect tristate output to connected input");
+	}
+	fromTristateIn |= (1 << inPinNum);
+}
+
 void DCSComponent::propagateValues() {
 	for (auto wire: wireVector) {
 		wire->propagateValue();
 	}
+}
+
+bool DCSComponent::isFullyConnected() {
+	return (connectedIn ^ fromTristateIn) == allInReached;
 }
 
 /* Setting the parent ensures that the parent's output is updated every

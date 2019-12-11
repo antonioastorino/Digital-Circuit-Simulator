@@ -22,20 +22,8 @@ outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
-	if (from->getName() == "") {
-		std::cout << from;
-	}
-	else {
-		std::cout << from->getName();
-	}
-	std::cout << " out " << outPinNum << " --> ";
-	if (to->getName() == "") {
-		std::cout << to;
-	}
-	else {
-		std::cout << to->getName();
-	}
-	std::cout<< " in " << inPinNum << "\n";
+	// TODO: make sure every component has a name != ""
+	std::cout << from->getName() << " out " << outPinNum << " --> " << to->getName() << " in " << inPinNum << "\n";
 }
 
 std::string DCSWire::getProbeName() {
