@@ -68,8 +68,8 @@ void sequentialNetworkTest() {
 }
 
 void dLatchTest() {
-	binary_signal d = {4,5,10};
-	binary_signal en = {4,2,4,2,4};
+	binary_signal d = {0,7,3,3,3,4};
+	binary_signal en = {0,2,6,2,4};
 	
 	DCSDLatch dLatch0 = DCSDLatch("DLatch0");
 	DCSInput I0 = DCSInput("In0", d);
@@ -82,7 +82,7 @@ void dLatchTest() {
 	dLatch0.connect(&O0, 0, 0, " Q");
 	dLatch0.connect(&O1, 1, 0, "!Q");
 	
-	DCSEngine::run(20);
+	DCSEngine::run(25);
 }
 
 void unitDelayTest() {
@@ -99,13 +99,15 @@ void risingEdgeDetectorTest() {
 	DCSAnd and0 = DCSAnd("And0");
 	DCSNot not0 = DCSNot("Not0");
 	DCSUnitDelay del0 = DCSUnitDelay("Del0");
-	DCSInput in0 = DCSInput("In0", {5,7,8});
+	DCSUnitDelay del1 = DCSUnitDelay("Del1");
+	DCSInput in0 = DCSInput("In0", {5,6,8});
 	DCSOutput out0 = DCSOutput("Out0");
 	
 	in0.connect(&and0, 0, 0, "In");
 	in0.connect(&not0, 0, 0);
 	not0.connect(&del0, 0, 0);
-	del0.connect(&and0, 0, 1, "!In");
+	del0.connect(&del1, 0, 0);
+	del1.connect(&and0, 0, 1, "!In");
 	and0.connect(&out0, 0, 0, "out");
 	
 	DCSEngine::run(40);
@@ -135,9 +137,9 @@ int main() {
 //	srLatchTest();
 //	notLoopTest();
 //	sequentialNetworkTest();
-//	dLatchTest();
+	dLatchTest();
 //	unitDelayTest();
 //	risingEdgeDetectorTest();
-	dFlipFlopTest();
+//	dFlipFlopTest();
 	return 0;
 }

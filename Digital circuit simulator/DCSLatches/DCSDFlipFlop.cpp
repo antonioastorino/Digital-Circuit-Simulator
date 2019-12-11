@@ -11,11 +11,11 @@
 DCSDFlipFlop::DCSDFlipFlop(std::string name) :
 DCSComponent(name, 2, 2) {
 	node0.connect(&not0, 0, 0);
-	node0.connect(&and0, 0, 0);
+	node0.connect(&and0, 0, 0, "A");
 	not0.connect(&del0, 0, 0);
 	del0.connect(&del1, 0, 0);
-	del1.connect(&and0, 0, 1);
-	and0.connect(&dLat0, 0, 1);
+	del1.connect(&and0, 0, 1, "B");
+	and0.connect(&dLat0, 0, 1, "C");
 	dLat0.setParent(this);
 }
 
