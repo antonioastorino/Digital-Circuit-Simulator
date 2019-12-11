@@ -10,9 +10,10 @@
 #define DCSEngine_hpp
 
 #include <vector>
-#include "DCSComponent.hpp"
 #include "DCSWire.hpp"
 #include "DCSInput.hpp"
+
+class DCSComponent;
 
 class DCSEngine {
 private:
@@ -25,6 +26,7 @@ private:
 	static void printLogicLevels();
 	static void propagateValues();
 public:
+	static void reset();
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);

@@ -30,11 +30,10 @@ bool DCSArbitrarySignal::getVal(uint32_t step) {
 		std::cout << "Error: trying to access the value in non sequential order\n";
 		exit(-1);
 	}
-	if (counter == totalDuration) {
-		std::cout << "End of signal \n";
-		exit(-2);
-	}
 	counter++;
+	if (counter > totalDuration) {
+		return currVal;
+	}
 	if (step == flipBitAtSteps[leveNumber]) {
 		leveNumber++;
 		currVal = !currVal;

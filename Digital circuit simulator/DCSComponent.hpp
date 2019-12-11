@@ -9,11 +9,9 @@
 #ifndef DCSComponent_hpp
 #define DCSComponent_hpp
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include "DCSWire.hpp"
 #include "DCSLog.hpp"
+#include <vector>
 
 class DCSComponent {
 private:

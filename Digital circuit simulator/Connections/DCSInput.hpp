@@ -16,7 +16,6 @@
 #include "DCSComponent.hpp"
 #include "DCSArbitrarySignal.hpp"
 
-
 class DCSInput: public DCSComponent {
 private:
 	bool hasSignal = false;
@@ -28,6 +27,5 @@ public:
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };
-
 
 #endif /* DCSInput_hpp */

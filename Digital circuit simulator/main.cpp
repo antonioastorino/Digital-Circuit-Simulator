@@ -18,8 +18,12 @@
 #include "DCSUnitDelay.hpp"
 #include "DCSDFlipFlop.hpp"
 
-
+void printTestName(std::string testName) {
+	std::cout << "\n--------------\n" << testName << " test\n--------------\n";
+}
 void srLatchTest() {
+	printTestName("SR-Latch");
+	DCSEngine::reset();
 	binary_signal r = {3, 2, 10};
 	binary_signal s = {7, 2, 6};
 	
@@ -38,6 +42,8 @@ void srLatchTest() {
 }
 
 void notLoopTest() {
+	printTestName("Not loop");
+	DCSEngine::reset();
 	DCSNot not0 = DCSNot("Not0");
 	DCSNot not1 = DCSNot("Not1");
 	DCSNot not2 = DCSNot("Not2");
@@ -50,6 +56,8 @@ void notLoopTest() {
 }
 
 void sequentialNetworkTest() {
+	printTestName("Sequential network");
+	DCSEngine::reset();
 	DCSAnd and0 = DCSAnd("And0");
 //	DCSAnd and1 = DCSAnd();
 	
@@ -68,6 +76,8 @@ void sequentialNetworkTest() {
 }
 
 void dLatchTest() {
+	printTestName("D-Latch");
+	DCSEngine::reset();
 	binary_signal d = {0,7,3,3,3,4};
 	binary_signal en = {0,2,6,2,4};
 	
@@ -86,6 +96,8 @@ void dLatchTest() {
 }
 
 void unitDelayTest() {
+	printTestName("Unit delay");
+	DCSEngine::reset();
 	DCSNot not0 = DCSNot("Not0");
 	DCSUnitDelay del0 = DCSUnitDelay("Del0");
 
@@ -96,6 +108,8 @@ void unitDelayTest() {
 }
 
 void risingEdgeDetectorTest() {
+	printTestName("Rising edge detector");
+	DCSEngine::reset();
 	DCSAnd and0 = DCSAnd("And0");
 	DCSNot not0 = DCSNot("Not0");
 	DCSUnitDelay del0 = DCSUnitDelay("Del0");
@@ -110,10 +124,12 @@ void risingEdgeDetectorTest() {
 	del1.connect(&and0, 0, 1, "!In");
 	and0.connect(&out0, 0, 0, "out");
 	
-	DCSEngine::run(40);
+	DCSEngine::run(20);
 }
 
 void dFlipFlopTest() {
+	printTestName("D-FlipFlop");
+	DCSEngine::reset();
 	binary_signal d = {4,7,3,10};
 	binary_signal clk = {4,2,5,2,4};
 	
@@ -134,12 +150,12 @@ void dFlipFlopTest() {
 int main() {
 	DCSLog::verbose = false;
 
-//	srLatchTest();
-//	notLoopTest();
-//	sequentialNetworkTest();
-//	dLatchTest();
-//	unitDelayTest();
-//	risingEdgeDetectorTest();
+	srLatchTest();
+	notLoopTest();
+	sequentialNetworkTest();
+	dLatchTest();
+	unitDelayTest();
+	risingEdgeDetectorTest();
 	dFlipFlopTest();
 	return 0;
 }

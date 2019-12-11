@@ -7,13 +7,22 @@
 //
 
 #include "DCSEngine.hpp"
+#include "DCSComponent.hpp"
 #include <iostream>
 
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};
 std::vector<DCSWire*> DCSEngine::wireVector = {};
-int DCSEngine::clockPeriod = 10;
-int DCSEngine::stepNumber = 0;
+int DCSEngine::clockPeriod;
+int DCSEngine::stepNumber;
+
+void DCSEngine::reset() {
+	componentVector = {};
+	inputVector = {};
+	wireVector = {};
+	clockPeriod = 10;
+	stepNumber = 0;
+}
 
 void DCSEngine::addComponent(DCSComponent* component) {
 	componentVector.push_back(component);
