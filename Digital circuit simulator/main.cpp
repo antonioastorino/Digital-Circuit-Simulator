@@ -31,8 +31,8 @@ void srLatchTest() {
 	
 	I0.connect(&SR, 0, 0, "R");
 	I1.connect(&SR, 0, 1, "S");
-	SR.connect(&O0, 0, 0, " Q");
-	SR.connect(&O1, 1, 0, "!Q");
+	SR.connect(&O0, 0, 0, "!Q");
+	SR.connect(&O1, 1, 0, " Q");
 	
 	DCSEngine::run(11);
 }
@@ -79,8 +79,8 @@ void dLatchTest() {
 	
 	I0.connect(&dLatch0, 0, 0, "DATA");
 	I1.connect(&dLatch0, 0, 1, "EN");
-	dLatch0.connect(&O0, 0, 0, " Q");
-	dLatch0.connect(&O1, 1, 0, "!Q");
+	dLatch0.connect(&O0, 0, 0, "!Q");
+	dLatch0.connect(&O1, 1, 0, " Q");
 	
 	DCSEngine::run(25);
 }
@@ -114,8 +114,8 @@ void risingEdgeDetectorTest() {
 }
 
 void dFlipFlopTest() {
-	binary_signal d = {4,5,10};
-	binary_signal clk = {4,2,4,2,4};
+	binary_signal d = {4,7,3,10};
+	binary_signal clk = {4,2,5,2,4};
 	
 	DCSDFlipFlop dff0 = DCSDFlipFlop("DFF0");
 	DCSInput I0 = DCSInput("In0", d);
@@ -125,8 +125,8 @@ void dFlipFlopTest() {
 	
 	I0.connect(&dff0, 0, 0, "DATA");
 	I1.connect(&dff0, 0, 1, "CLK");
-	dff0.connect(&O0, 0, 0, " Q");
-	dff0.connect(&O1, 1, 0, "!Q");
+	dff0.connect(&O0, 0, 0, "!Q");
+	dff0.connect(&O1, 1, 0, " Q");
 	
 	DCSEngine::run(20);
 }
@@ -137,9 +137,9 @@ int main() {
 //	srLatchTest();
 //	notLoopTest();
 //	sequentialNetworkTest();
-	dLatchTest();
+//	dLatchTest();
 //	unitDelayTest();
 //	risingEdgeDetectorTest();
-//	dFlipFlopTest();
+	dFlipFlopTest();
 	return 0;
 }

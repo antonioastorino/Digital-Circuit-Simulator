@@ -14,6 +14,23 @@
 #include "DCSAnd.hpp"
 #include "DCSNot.hpp"
 #include "DCSUnitDelay.hpp"
+/*
+Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
+Input 1 and 0 must be stable at least 2 td.
+The output is stable after 4 td from the change in the input
+Here is an example:
+	  |
+DATA: | X___XXXXXXXX
+	  |  ^ start
+	  |  __
+CLK:  | _  ________
+	  |
+	  |
+Q:    | XXXX________
+             _______
+!Q:   | XXXXX
+             ^ ready
+*/
 
 class DCSDFlipFlop: public DCSComponent {
 private:
@@ -22,7 +39,6 @@ private:
 	DCSAnd and0       = DCSAnd(this->name + "-And0");
 	DCSNot not0       = DCSNot(this->name + "-Not0");
 	DCSUnitDelay del0 = DCSUnitDelay(this->name + "-Del0");
-	DCSUnitDelay del1 = DCSUnitDelay(this->name + "-Del1");
 
 public:
 	DCSDFlipFlop(std::string name);
