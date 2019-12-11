@@ -34,6 +34,6 @@ DCSComponent* DCSDLatch::getInComponent(int &inPinNum) {
 }
 
 void DCSDLatch::updateOut() {
-	out = srLatch0.getOutVal(0) + (srLatch0.getOutVal(1) << 1);
+	out = srLatch0.getOutVec();
 	updateParentOut();
 }

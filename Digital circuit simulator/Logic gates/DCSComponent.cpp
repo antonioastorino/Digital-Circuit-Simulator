@@ -96,6 +96,9 @@ void DCSComponent::propagateValues() {
 	}
 }
 
+/* Setting the parent ensures that the parent's output is updated every
+ time the child's output changes
+ */
 void DCSComponent::setParent(DCSComponent* parent) {
 	this->parent = parent;
 }

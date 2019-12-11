@@ -15,20 +15,22 @@
 #include "DCSNot.hpp"
 #include "DCSUnitDelay.hpp"
 
-//class DCSDFlipFlop: public DCSComponent {
-//private:
-//	DCSDLatch lat0    = DCSDLatch();
-//	DCSAnd and0       = DCSAnd();
-//	DCSNot not0       = DCSNot();
-//	DCSUnitDelay del0 = DCSUnitDelay();
-//	
-//public:
-//	DCSDFlipFlop();
-//	
-//	DCSComponent* getOutComponent(int &outPinNum) override;
-//	DCSComponent* getInComponent(int &inPinNum) override;
-//	void updateOut() override;
-//	int getTimeDelay() override { return 4; };
-//};
+class DCSDFlipFlop: public DCSComponent {
+private:
+	DCSNode node0     = DCSNode("CLK0");
+	DCSDLatch dLat0   = DCSDLatch(this->name + "-DLatch0");
+	DCSAnd and0       = DCSAnd(this->name + "-And0");
+	DCSNot not0       = DCSNot(this->name + "-Not0");
+	DCSUnitDelay del0 = DCSUnitDelay(this->name + "-Del0");
+	DCSUnitDelay del1 = DCSUnitDelay(this->name + "-Del1");
+
+public:
+	DCSDFlipFlop(std::string name);
+	
+	DCSComponent* getOutComponent(int &outPinNum) override;
+	DCSComponent* getInComponent(int &inPinNum) override;
+	void updateOut() override;
+	int getTimeDelay() override { return 4; };
+};
 
 #endif /* DCSDFlipFlop_hpp */
