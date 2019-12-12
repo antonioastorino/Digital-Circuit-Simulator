@@ -10,6 +10,7 @@
 #include "DCSEngine.hpp"
 
 DCSComponent::DCSComponent(std::string name, int fanIn, int fanOut, bool add):
+enabled(true),		// only 3-state buffer can be disabled
 name{name},
 fanIn(fanIn),
 fanOut(fanOut),
@@ -60,12 +61,11 @@ void DCSComponent::connect(DCSComponent* to,
 						   int outPinNum,
 						   int inPinNum,
 						   std::string probeName) {
-	
 
 	DCSComponent* leftComponent = getOutComponent(outPinNum);
 	DCSComponent* rightComponent = to->getInComponent(inPinNum);
 	
-	if (rightComponent->isTristate) {
+	if (leftComponent->isTristate) {
 		rightComponent->setFromTristateIn(inPinNum);
 	}
 	else {
@@ -143,4 +143,16 @@ void DCSComponent::setParent(DCSComponent* parent) {
 
 void DCSComponent::updateParentOut() {
 	if (parent != nullptr) parent->updateOut();
+}
+
+void DCSComponent::enable(){
+	throw "Only 3-state buffers can access this function";
+}
+
+void DCSComponent::disable(){
+	throw "Only 3-state buffers can access this function";
+}
+
+bool DCSComponent::getEnabled(){
+	return enabled;
 }

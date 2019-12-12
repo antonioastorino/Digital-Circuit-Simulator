@@ -17,6 +17,7 @@
 #include "DCSDLatch.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSDFlipFlop.hpp"
+#include "DCSTriStateBuffer.hpp"
 
 void printTestName(std::string testName) {
 	std::cout << "\n-----";
@@ -58,26 +59,6 @@ void notLoopTest() {
 	not2.connect(&not0, 0, 0, "N2");
 	
 	DCSEngine::run(11);
-}
-
-void sequentialNetworkTest() {
-	printTestName("Sequential network");
-	DCSEngine::reset();
-	DCSAnd and0 = DCSAnd("And0");
-//	DCSAnd and1 = DCSAnd();
-	
-	binary_signal s0 = {1,1,1,1};
-	binary_signal s1 = {1,1,1,1};
-	
-	DCSInput I0 = DCSInput("In0", s0);
-	DCSInput I1 = DCSInput("In1", s1);
-	DCSOutput O0 = DCSOutput("Out0");
-	
-	I0.connect(&and0, 0, 0, "I0");
-	I1.connect(&and0, 0, 1, "I1");
-	and0.connect(&O0, 0, 0, "O0");
-
-	DCSEngine::run();
 }
 
 void dLatchTest() {
@@ -152,16 +133,50 @@ void dFlipFlopTest() {
 	DCSEngine::run(20);
 }
 
+void triStateBufferTest() {
+	printTestName("Tri-state buffer");
+	DCSEngine::reset();
+	
+	binary_signal inputA = {3,2,2,2,2,2,100};
+	binary_signal inputB = {3,3,30,3,30};
+	binary_signal enableA = {0,2,2,2,2,2,100};
+	binary_signal enableB = {2,2,2,2,2,2,100};
+
+	DCSInput inA0 = DCSInput("A0", 0);
+	DCSInput inA1 = DCSInput("A1", enableA);
+	DCSInput inB0 = DCSInput("B0", 1);
+	DCSInput inB1 = DCSInput("B1", enableB);
+	DCSTriStateBuffer tsbA = DCSTriStateBuffer("tsbA");
+	DCSTriStateBuffer tsbB = DCSTriStateBuffer("tsbB");
+	DCSNode node0 = DCSNode("Del0");
+	DCSOutput out0 = DCSOutput("Out0");
+
+	inA0.connect(&tsbA, 0, 0, "INA");
+	inA1.connect(&tsbA, 0, 1, "ENA");
+	inB0.connect(&tsbB, 0, 0, "INB");
+	inB1.connect(&tsbB, 0, 1, "ENB");
+	tsbA.connect(&node0, 0, 0);
+	tsbB.connect(&node0, 0, 0);
+	node0.connect(&out0, 0, 0, "Out");
+	
+//	tsbA.connect(&out0, 0, 0, "out");
+	
+	DCSEngine::run(20);
+	
+}
+
 int main() {
 //	DCSLog::verbose = true;
 
-	srLatchTest();
-	notLoopTest();
-	sequentialNetworkTest();
-	dLatchTest();
-	unitDelayTest();
-	risingEdgeDetectorTest();
-	dFlipFlopTest();
+//	srLatchTest();
+//	notLoopTest();
+//	dLatchTest();
+//	unitDelayTest();
+//	risingEdgeDetectorTest();
+//	dFlipFlopTest();
+	
+	triStateBufferTest();
+	
 	
 	return 0;
 }

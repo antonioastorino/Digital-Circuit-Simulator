@@ -9,6 +9,6 @@
 #include "DCSOutput.hpp"
 
 DCSOutput::DCSOutput(std::string name) :
-DCSComponent(name, 1, 0, false) {
-	initialized = true;
+DCSComponent(name, 1, 0, true) {
+	initialized = true; // Ensures no signal propagation from the output
 }

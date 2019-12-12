@@ -30,11 +30,13 @@ std::string DCSWire::getProbeName() {
 	return probeName;
 };
 
-void DCSWire::propagateValue() {	
-	std::stringstream message;
-	message << "Propagating from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
-	DCSLog::info(from->getName(), message.str());
-	to->setIn(from->getOutVal(outPinNum), inPinNum);
+void DCSWire::propagateValue() {
+	if (from->getEnabled()) {  // Check if a component is in high-Z state
+		std::stringstream message;
+		message << "Propagating from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
+		DCSLog::info(from->getName(), message.str());
+		to->setIn(from->getOutVal(outPinNum), inPinNum);
+	}
 }
 
 int DCSWire::getOutPinNum() {

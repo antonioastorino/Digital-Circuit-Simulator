@@ -43,7 +43,7 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 	std::vector<DCSComponent*> leftComponent = {};
 	DCSLog::info("Engine", "layer ------------------");
 	for (auto component: cVec) {
-		if (!(component->initialized)){
+		if (!(component->initialized) && component->getEnabled()){
 			component->updateOut();
 			if (!(component->isNode)) component->propagateValues();
 			for (auto rightComponent: component->rightComponentVector) {
@@ -67,7 +67,9 @@ void DCSEngine::run(int steps) {
 	DCSLog::info("Engine", "\n---------------Initialization end---------------\n");
 	
 	for (auto component: componentVector) {
-		if (!(component->initialized)) std::cout << component << " not connected \n";
+		if (!(component->initialized)) {
+			std::cout << component->getName() << " not connected \n";
+		}
 	}
 	// update output values of initial layer (input vector)
 	DCSEngine::printProbes();

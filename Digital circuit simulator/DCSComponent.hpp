@@ -36,6 +36,7 @@ protected:
 
 	std::vector<DCSWire*> wireVector = {};
 	DCSComponent *parent = nullptr;
+	bool enabled;
 	
 public:
 	bool isNode;
@@ -82,6 +83,10 @@ public:
 	 */
 	void setParent(DCSComponent* parent);
 	void updateParentOut();
+	
+	virtual void enable();
+	virtual void disable();
+	bool getEnabled();
 	
 };
 
