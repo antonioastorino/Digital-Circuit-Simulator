@@ -9,11 +9,6 @@
 #include "DCSAnd.hpp"
 
 DCSAnd::DCSAnd(std::string name):
-DCSComponent(name) {
+DCSComponent(name) {};
 
-};
-
-void DCSAnd::updateOut(){
-	out = (in & (in >> 1)) & 1;
-//	updateParentOut();
-}
+void DCSAnd::updateOut(){ out = (in & (in >> 1)) & 1; }

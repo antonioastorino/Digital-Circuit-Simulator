@@ -17,6 +17,7 @@
 		A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */; };
 		A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */; };
 		A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */; };
+		A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9948A4E23A41CCE00D20F06 /* DCSNand.cpp */; };
 		A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */; };
 		A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */; };
 		A999F32523A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F32323A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp */; };
@@ -65,6 +66,8 @@
 		A96BAB6F23A2542F00E7A42E /* DCSTriStateBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSTriStateBuffer.hpp; sourceTree = "<group>"; };
 		A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNand3.cpp; sourceTree = "<group>"; };
 		A9948A4C23A41A6600D20F06 /* DCSNand3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNand3.hpp; sourceTree = "<group>"; };
+		A9948A4E23A41CCE00D20F06 /* DCSNand.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNand.cpp; sourceTree = "<group>"; };
+		A9948A4F23A41CCE00D20F06 /* DCSNand.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNand.hpp; sourceTree = "<group>"; };
 		A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSOr.cpp; sourceTree = "<group>"; };
 		A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSOr.hpp; sourceTree = "<group>"; };
 		A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNor3.cpp; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 			children = (
 				A9482459237F4A2C00803F30 /* DCSAnd.hpp */,
 				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
+				A9948A4F23A41CCE00D20F06 /* DCSNand.hpp */,
+				A9948A4E23A41CCE00D20F06 /* DCSNand.cpp */,
 				A9948A4C23A41A6600D20F06 /* DCSNand3.hpp */,
 				A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */,
 				A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */,
@@ -273,6 +278,7 @@
 				A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */,
 				A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */,
 				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
+				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,

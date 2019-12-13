@@ -9,7 +9,7 @@
 #ifndef DCSDLatchAsyncSR_hpp
 #define DCSDLatchAsyncSR_hpp
 
-#include "DCSNor3.hpp"
+#include "DCSNand3.hpp"
 #include "DCSAnd.hpp"
 #include "DCSNot.hpp"
 #include "DCSNode.hpp"
@@ -23,8 +23,8 @@
 
 class DCSDLatchAsyncSR: public DCSComponent {
 private:
-	DCSNor3 nor3_0      = DCSNor3(this->name + "-Nor0");
-	DCSNor3 nor3_1      = DCSNor3(this->name + "-Nor1");
+	DCSNand3 nand3_0     = DCSNand3(this->name + "-Nor0");
+	DCSNand3 nand3_1     = DCSNand3(this->name + "-Nor1");
 	DCSAnd and0         = DCSAnd(this->name + "-And0");
 	DCSAnd and1         = DCSAnd(this->name + "-And1");
 	DCSNot not0         = DCSNot(this->name + "-Not0");

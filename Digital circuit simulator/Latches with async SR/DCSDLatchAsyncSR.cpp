@@ -15,17 +15,17 @@ DCSComponent(name, false) {
 	node1.connect(&and0, 0, 1);
 	node1.connect(&and1, 0, 0);
 	not0.connect(&and0, 0, 0);
-	and0.connect(&nor3_0, 0, 0);
-	and1.connect(&nor3_1, 0, 1);
-	nor3_0.connect(&nor3_1, 0, 0);
-	nor3_1.connect(&nor3_0, 0, 1);
+	and0.connect(&nand3_0, 0, 0);
+	and1.connect(&nand3_1, 0, 1);
+	nand3_0.connect(&nand3_1, 0, 0);
+	nand3_1.connect(&nand3_0, 0, 1);
 }
 
 DCSComponent* DCSDLatchAsyncSR::getOutComponent(ushort &outPinNum) {
-	if (outPinNum == 0) return &nor3_0;
+	if (outPinNum == 0) return &nand3_0;
 	else if (outPinNum == 1) {
 		outPinNum = 0;
-		return &nor3_1;
+		return &nand3_1;
 	}
 	else exit(-1);
 }
@@ -40,11 +40,11 @@ DCSComponent* DCSDLatchAsyncSR::getInComponent(ushort &inPinNum) {
 			return &node1;
 			break;
 		case 2:
-			return &nor3_0;
+			return &nand3_0;
 			break;
 		case 3:
 			inPinNum = 2;
-			return &nor3_1;
+			return &nand3_1;
 			break;
 		default:
 			exit(-1);
@@ -53,7 +53,7 @@ DCSComponent* DCSDLatchAsyncSR::getInComponent(ushort &inPinNum) {
 }
 
 void DCSDLatchAsyncSR::updateOut() {
-	out = nor3_1.getOutVec() + (nor3_0.getOutVec() << 1);
+	out = nand3_1.getOutVec() + (nand3_0.getOutVec() << 1);
 	if (out == 3)
 		throw "Illegal state";
 }
