@@ -76,17 +76,13 @@ public:
 	
 	bool isFullyConnected();
 	
-	void propagateValues();
-//	/* A parent is a component whose output is shared with this component.
-//	 Every time the output of this component is updated, also the parent's output will.
-//	 See `updateOut()` and `updatedParentOut()`.
-//	 */
-//	void setParent(DCSComponent* parent);
-//	void updateParentOut();
+	bool propagateValues();
 	
 	virtual ushort getNumOfInPins() = 0;
 	virtual ushort getNumOfOutPins() = 0;
 	virtual uint64_t getAllReachedQWord();
+	
+	bool getReachableIn(ushort inPinNum);
 
 	virtual void enable();
 	virtual void disable();

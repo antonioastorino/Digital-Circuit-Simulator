@@ -83,7 +83,7 @@ void DCSComponent::connect(DCSComponent* to,
 								inPinNum,
 								probeName);
 	
-	wireVector.push_back(wire);
+	leftComponent->wireVector.push_back(wire);
 	DCSEngine::addWire(wire);
 }
 
@@ -119,28 +119,23 @@ void DCSComponent::setFromTristateIn(ushort inPinNum) {
 	fromTristateIn |= (1 << inPinNum);
 }
 
-void DCSComponent::propagateValues() {
+bool DCSComponent::propagateValues() {
+	bool propagated = true;
 	for (auto wire: wireVector) {
-		wire->propagateValue();
+		propagated = wire->propagateValue();
 	}
+	return propagated;
 }
 
 bool DCSComponent::isFullyConnected() {
 	return (connectedIn ^ fromTristateIn) == getAllReachedQWord();
 }
 
-///* Setting the parent ensures that the parent's output is updated every
-// time the child's output changes
-// */
-//void DCSComponent::setParent(DCSComponent* parent) {
-//	this->parent = parent;
-//}
-
-//void DCSComponent::updateParentOut() {
-//	if (parent != nullptr) parent->updateOut();
-//}
-
 uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }
+
+bool DCSComponent::getReachableIn(ushort inPinNum) {
+	return reachableIn & (1 << inPinNum);
+}
 
 void DCSComponent::enable(){
 	throw "Only 3-state buffers can access this function";

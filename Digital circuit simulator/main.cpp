@@ -53,25 +53,6 @@ void notLoopTest() {
 	DCSEngine::run(11);
 }
 
-void dLatchTest() {
-	printTestName("D-Latch");
-	DCSEngine::reset();
-	binary_signal d = {0,7,3,3,3,4};
-	binary_signal en = {0,2,6,2,4};
-	
-	DCSDLatch dLatch0("DLatch0");
-	DCSInput I0("In0", d);
-	DCSInput I1("In1", en);
-	DCSOutput O0("Out0");
-	DCSOutput O1("Out1");
-	
-	I0.connect(&dLatch0, 0, 0, "DATA");
-	I1.connect(&dLatch0, 0, 1, "EN");
-	dLatch0.connect(&O0, 0, 0, " Q");
-	dLatch0.connect(&O1, 1, 0, "!Q");
-	
-	DCSEngine::run(25);
-}
 
 void unitDelayTest() {
 	printTestName("Unit delay");
@@ -222,12 +203,56 @@ void nor3Test() {
 	DCSEngine::run(20);
 }
 
+void dLatchTest() {
+	printTestName("D-Latch");
+	DCSEngine::reset();
+	binary_signal d = {0,7,3,3,3,4};
+	binary_signal en = {0,2,6,2,4};
+	
+	DCSDLatch dLatch0("DLatch0");
+	DCSInput I0("In0", d);
+	DCSInput I1("In1", en);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
+	
+	I0.connect(&dLatch0, 0, 0, "DATA");
+	I1.connect(&dLatch0, 0, 1, "EN");
+	dLatch0.connect(&O0, 0, 0, " Q");
+	dLatch0.connect(&O1, 1, 0, "!Q");
+	
+	DCSEngine::run(25);
+}
+void dLatchAsyncSRTest() {
+	printTestName("D-Latch with asynchronous SR");
+	DCSEngine::reset();
+	binary_signal d = {0,7,3,3,3,4};
+	binary_signal en = {0,2,6,2,4};
+	
+	DCSDLatchAsyncSR dLatch0("DLatch0");
+	DCSComponentArray<DCSInput> inArray("In", 4);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
+	
+	inArray.connect(&dLatch0, 0, 0, "DATA");
+	inArray.connect(&dLatch0, 1, 1, "EN");
+	inArray.connect(&dLatch0, 2, 2, "R");
+	inArray.connect(&dLatch0, 3, 3, "S");
+	dLatch0.connect(&O0, 0, 0, " Q");
+	dLatch0.connect(&O1, 1, 0, "!Q");
+	
+	inArray[0]->makeSignal(d);
+	inArray[1]->makeSignal(en);
+	inArray[2]->makeSignal(0);
+	inArray[3]->makeSignal(1);
+
+	DCSEngine::run(25);
+}
+
 int main() {
 //	DCSLog::verbose = true;
 
 //	srLatchTest();
 //	notLoopTest();
-//	dLatchTest();
 //	unitDelayTest();
 //	risingEdgeDetectorTest();
 //	dFlipFlopTest();
@@ -235,7 +260,11 @@ int main() {
 //	triStateBufferTest();
 //	gateArrayTest();
 //	orTest();
-	nor3Test();
+//	nor3Test();
+	dLatchTest();
+	dLatchAsyncSRTest();
+	
+	
 
 	return 0;
 }

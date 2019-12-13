@@ -36,7 +36,7 @@ public:
 	
 	ushort getOutPinNum();
 	std::string getProbeName();
-	void propagateValue();
+	bool propagateValue();
 	bool getOutVal();
 };
 

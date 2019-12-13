@@ -38,16 +38,19 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 // this procedure propagates the first input value though the network. If there are no inputs connected (in case of free-running FSM), then it propagates the default output of all the components. It implements the BFS
 	if (cVec.size() == 0) { cVec = componentVector; }
 	// Array of components from which to propagate at the next iteration
-	std::vector<DCSComponent*> leftComponent = {};
+	std::vector<DCSComponent*> leftComponentVector = {};
 	DCSLog::info("Engine", "layer ------------------");
 	for (auto component: cVec) {
 		if (!(component->initialized) && component->getEnabled()){
 			component->updateOut();
-			if (!(component->isNode)) component->propagateValues();
-			for (auto rightComponent: component->rightComponentVector) {
-				leftComponent.push_back(rightComponent);
+			if (component->isNode) {
+				leftComponentVector = component->rightComponentVector;
+				initialize(leftComponentVector);
 			}
-			initialize(leftComponent);
+			else if (component->propagateValues()) {
+				leftComponentVector = component->rightComponentVector;
+				initialize(leftComponentVector);
+			}
 		}
 	}
 }

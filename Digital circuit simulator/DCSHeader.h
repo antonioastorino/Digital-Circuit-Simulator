@@ -20,6 +20,7 @@
 #include "DCSSRLatch.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDLatch.hpp"
+#include "DCSDLatchAsyncSR.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSTriStateBuffer.hpp"

@@ -7,8 +7,6 @@
 //
 
 #include "DCSSRLatch.hpp"
-#include "DCSEngine.hpp"
-#include <iostream>
 
 DCSSRLatch::DCSSRLatch(std::string name) :
 DCSComponent(name, false) {
