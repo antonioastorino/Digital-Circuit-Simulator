@@ -66,6 +66,7 @@ T* DCSComponentArray<T>::operator [] (ushort  elemNum) {
 template class DCSComponentArray<DCSInput>;
 template class DCSComponentArray<DCSOutput>;
 template class DCSComponentArray<DCSAnd>;
+template class DCSComponentArray<DCSNand>;
 template class DCSComponentArray<DCSOr>;
 template class DCSComponentArray<DCSNot>;
 template class DCSComponentArray<DCSNor>;

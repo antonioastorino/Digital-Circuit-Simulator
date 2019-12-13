@@ -9,11 +9,6 @@
 #include "DCSUnitDelay.hpp"
 
 DCSUnitDelay::DCSUnitDelay(std::string name) :
-DCSComponent(name) {
-	
-}
+DCSComponent(name) { }
 
-void DCSUnitDelay::updateOut() {
-	out = in;
-//	updateParentOut();
-}
+void DCSUnitDelay::updateOut() { out = in; }

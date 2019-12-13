@@ -32,9 +32,6 @@ DCSComponent* DCSSRLatch::getInComponent(ushort &inPinNum) {
 }
 
 void DCSSRLatch::updateOut() {
-	out = nor1.getOutVec() + (nor0.getOutVec() << 1);
-//	updateParentOut();
-	if (out == 3)
-		throw "Illegal state";
+	throw "This function should never be called";
 }
 

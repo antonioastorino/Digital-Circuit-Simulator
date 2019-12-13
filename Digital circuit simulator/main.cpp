@@ -249,8 +249,8 @@ void dLatchTest() {
 void dLatchAsyncSRTest() {
 	printTestName("D-Latch with asynchronous SR");
 	DCSEngine::reset();
-	binary_signal d = {0,7,3,3,3,4};
-	binary_signal en = {0,2,6,2,4};
+	binary_signal d = {10,3,3,4};
+	binary_signal en = {2,3,6,2,4};
 	
 	DCSDLatchAsyncSR dLatch0("DLatch0");
 	DCSComponentArray<DCSInput> inArray("In", 4);
@@ -267,7 +267,7 @@ void dLatchAsyncSRTest() {
 	inArray[0]->makeSignal(d);
 	inArray[1]->makeSignal(en);
 	inArray[2]->makeSignal(0);
-	inArray[3]->makeSignal(1);
+	inArray[3]->makeSignal(0);
 
 	DCSEngine::run(25);
 }
@@ -287,9 +287,10 @@ int main() {
 	//	nor3Test();
 	
 //	dLatchTest();
-//	dLatchAsyncSRTest();
 	
-	nand3Test();
+	dLatchAsyncSRTest();
+	
+//	nand3Test();
 	
 
 	return 0;

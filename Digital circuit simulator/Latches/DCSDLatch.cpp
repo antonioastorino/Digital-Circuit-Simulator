@@ -34,6 +34,5 @@ DCSComponent* DCSDLatch::getInComponent(ushort &inPinNum) {
 }
 
 void DCSDLatch::updateOut() {
-	out = srLatch0.getOutVec();
-//	updateParentOut();
+	throw "This function should never be called";
 }

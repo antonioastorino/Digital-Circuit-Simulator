@@ -11,6 +11,7 @@
 
 #include "DCSEngine.hpp"
 #include "DCSAnd.hpp"
+#include "DCSNand.hpp"
 #include "DCSOr.hpp"
 #include "DCSNot.hpp"
 #include "DCSNor.hpp"

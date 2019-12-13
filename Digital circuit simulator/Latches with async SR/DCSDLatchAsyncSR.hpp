@@ -9,7 +9,7 @@
 #ifndef DCSDLatchAsyncSR_hpp
 #define DCSDLatchAsyncSR_hpp
 
-#include "DCSNand3.hpp"
+#include "DCSNor3.hpp"
 #include "DCSAnd.hpp"
 #include "DCSNot.hpp"
 #include "DCSNode.hpp"
@@ -17,14 +17,17 @@
  Pinout:
  0 -> Data
  1 -> Enable
- 2 -> Asynchronous Reset
- 3 -> Asynchronous Set
+ 2 -> Asynchronous Reset (Clear)
+ 3 -> Asynchronous Set (Preset)
+ 
+ The time diagram is a merge of D-Latch and SR-Latch: when S and R are both low, this component behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch.
+ NOTE: do now use Enable when S or R are high.
  */
 
 class DCSDLatchAsyncSR: public DCSComponent {
 private:
-	DCSNand3 nand3_0     = DCSNand3(this->name + "-Nor0");
-	DCSNand3 nand3_1     = DCSNand3(this->name + "-Nor1");
+	DCSNor3 nor3_0      = DCSNor3(this->name + "-Nor0");
+	DCSNor3 nor3_1      = DCSNor3(this->name + "-Nor1");
 	DCSAnd and0         = DCSAnd(this->name + "-And0");
 	DCSAnd and1         = DCSAnd(this->name + "-And1");
 	DCSNot not0         = DCSNot(this->name + "-Not0");

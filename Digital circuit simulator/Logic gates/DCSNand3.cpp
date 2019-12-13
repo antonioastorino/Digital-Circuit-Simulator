@@ -15,5 +15,4 @@ DCSComponent(name) {
 
 void DCSNand3::updateOut(){
 	out = !((in & (in >> 1) & (in >> 2)) & 1);
-//	updateParentOut();
 }
