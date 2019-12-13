@@ -203,6 +203,30 @@ void nor3Test() {
 	DCSEngine::run(20);
 }
 
+void nand3Test() {
+	printTestName("Nand 3");
+	DCSEngine::reset();
+	
+	DCSComponentArray<DCSInput> inArray("In", 3);
+	DCSNand3 nand3_0("Nand3_0");
+	DCSOutput out0("Out0");
+	
+	binary_signal in0 = {2,2,4,2,2,4,4};
+	binary_signal in1 = {4,2,2,4,2,2,4};
+	binary_signal in2 = {8,12};
+
+	inArray[0]->makeSignal(in0);
+	inArray[1]->makeSignal(in1);
+	inArray[2]->makeSignal(in2);
+
+	inArray.connect(&nand3_0, 0, 0, "In0");
+	inArray.connect(&nand3_0, 1, 1, "In1");
+	inArray.connect(&nand3_0, 2, 2, "In2");
+	nand3_0.connect(&out0, 0, 0, "Out");
+	
+	DCSEngine::run(20);
+}
+
 void dLatchTest() {
 	printTestName("D-Latch");
 	DCSEngine::reset();
@@ -249,21 +273,23 @@ void dLatchAsyncSRTest() {
 }
 
 int main() {
-//	DCSLog::verbose = true;
-
-//	srLatchTest();
-//	notLoopTest();
-//	unitDelayTest();
-//	risingEdgeDetectorTest();
-//	dFlipFlopTest();
-//
-//	triStateBufferTest();
-//	gateArrayTest();
-//	orTest();
-//	nor3Test();
-	dLatchTest();
-	dLatchAsyncSRTest();
+	//	DCSLog::verbose = true;
 	
+	//	srLatchTest();
+	//	notLoopTest();
+	//	unitDelayTest();
+	//	risingEdgeDetectorTest();
+	//	dFlipFlopTest();
+	//
+	//	triStateBufferTest();
+	//	gateArrayTest();
+	//	orTest();
+	//	nor3Test();
+	
+//	dLatchTest();
+//	dLatchAsyncSRTest();
+	
+	nand3Test();
 	
 
 	return 0;

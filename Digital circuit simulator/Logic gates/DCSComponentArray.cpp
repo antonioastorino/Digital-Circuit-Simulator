@@ -70,5 +70,6 @@ template class DCSComponentArray<DCSOr>;
 template class DCSComponentArray<DCSNot>;
 template class DCSComponentArray<DCSNor>;
 template class DCSComponentArray<DCSNor3>;
+template class DCSComponentArray<DCSNand3>;
 template class DCSComponentArray<DCSUnitDelay>;
 template class DCSComponentArray<DCSNode>;

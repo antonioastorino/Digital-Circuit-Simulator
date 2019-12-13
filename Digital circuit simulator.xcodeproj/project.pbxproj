@@ -16,6 +16,7 @@
 		A94824602380459800803F30 /* DCSNot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245E2380459800803F30 /* DCSNot.cpp */; };
 		A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */; };
 		A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */; };
+		A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */; };
 		A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */; };
 		A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */; };
 		A999F32523A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F32323A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp */; };
@@ -62,6 +63,8 @@
 		A95D55C923A2DAA000701DE9 /* DCSHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCSHeader.h; sourceTree = "<group>"; };
 		A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSTriStateBuffer.cpp; sourceTree = "<group>"; };
 		A96BAB6F23A2542F00E7A42E /* DCSTriStateBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSTriStateBuffer.hpp; sourceTree = "<group>"; };
+		A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNand3.cpp; sourceTree = "<group>"; };
+		A9948A4C23A41A6600D20F06 /* DCSNand3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNand3.hpp; sourceTree = "<group>"; };
 		A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSOr.cpp; sourceTree = "<group>"; };
 		A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSOr.hpp; sourceTree = "<group>"; };
 		A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNor3.cpp; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 			children = (
 				A9482459237F4A2C00803F30 /* DCSAnd.hpp */,
 				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
+				A9948A4C23A41A6600D20F06 /* DCSNand3.hpp */,
+				A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */,
 				A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */,
 				A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */,
 				A948245F2380459800803F30 /* DCSNot.hpp */,
@@ -276,6 +281,7 @@
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */,
+				A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
 				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
 				A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */,

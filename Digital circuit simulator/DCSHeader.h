@@ -15,6 +15,7 @@
 #include "DCSNot.hpp"
 #include "DCSNor.hpp"
 #include "DCSNor3.hpp"
+#include "DCSNand3.hpp"
 #include "DCSEngine.hpp"
 #include "DCSInput.hpp"
 #include "DCSSRLatch.hpp"
