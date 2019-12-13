@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "DCSAnd.hpp"
+#include "DCSOr.hpp"
 #include "DCSNot.hpp"
 #include "DCSEngine.hpp"
 #include "DCSInput.hpp"

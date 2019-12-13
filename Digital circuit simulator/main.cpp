@@ -151,8 +151,6 @@ void triStateBufferTest() {
 	tsbB.connect(&node0, 0, 0);
 	node0.connect(&out0, 0, 0, "Out");
 	
-//	tsbA.connect(&out0, 0, 0, "out");
-	
 	DCSEngine::run(20);
 	
 }
@@ -179,19 +177,41 @@ void gateArrayTest() {
 	DCSEngine::run(20);
 }
 
+void orTest() {
+	printTestName("Or");
+	DCSEngine::reset();
+	
+	DCSComponentArray<DCSInput> inArray("In", 2);
+	DCSOr or0("Or0");
+	DCSOutput out0("Out0");
+	
+	binary_signal in0 = {2,2,4,10};
+	binary_signal in1 = {4,2,2,10};
+	
+	inArray[0]->makeSignal(in0);
+	inArray[1]->makeSignal(in1);
+	
+	inArray.connect(&or0, 0, 0, "In0");
+	inArray.connect(&or0, 1, 1, "In1");
+	or0.connect(&out0, 0, 0, "Out");
+	
+	DCSEngine::run();
+}
 
 int main() {
-	DCSLog::verbose = true;
+//	DCSLog::verbose = true;
 
-	srLatchTest();
-	notLoopTest();
-	dLatchTest();
-	unitDelayTest();
-	risingEdgeDetectorTest();
-	dFlipFlopTest();
-
-	triStateBufferTest();
-	gateArrayTest();
+//	srLatchTest();
+//	notLoopTest();
+//	dLatchTest();
+//	unitDelayTest();
+//	risingEdgeDetectorTest();
+//	dFlipFlopTest();
+//
+//	triStateBufferTest();
+//	gateArrayTest();
+	
+	orTest();
 	
 	return 0;
 }

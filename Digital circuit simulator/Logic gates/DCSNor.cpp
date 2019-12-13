@@ -8,14 +8,12 @@
 
 #include "DCSNor.hpp"
 
-
 DCSNor::DCSNor(std::string name):
 DCSComponent(name) {
 
 };
 
 void DCSNor::updateOut(){
-//	std::cout << in[0] << in[1] << std::endl;
 	out = !((in | (in >> 1)) & 1);
 //	updateParentOut();
 }

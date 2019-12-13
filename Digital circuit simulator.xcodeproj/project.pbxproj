@@ -16,6 +16,8 @@
 		A94824602380459800803F30 /* DCSNot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245E2380459800803F30 /* DCSNot.cpp */; };
 		A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */; };
 		A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */; };
+		A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */; };
+		A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */; };
 		A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BDED8423805EC600650496 /* DCSEngine.cpp */; };
 		A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D18C23930890008CAF81 /* DCSDLatch.cpp */; };
 		A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D18F2393CE79008CAF81 /* DCSWire.cpp */; };
@@ -59,6 +61,10 @@
 		A95D55C923A2DAA000701DE9 /* DCSHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCSHeader.h; sourceTree = "<group>"; };
 		A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSTriStateBuffer.cpp; sourceTree = "<group>"; };
 		A96BAB6F23A2542F00E7A42E /* DCSTriStateBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSTriStateBuffer.hpp; sourceTree = "<group>"; };
+		A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSOr.cpp; sourceTree = "<group>"; };
+		A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSOr.hpp; sourceTree = "<group>"; };
+		A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNor3.cpp; sourceTree = "<group>"; };
+		A999F31F23A3BBA100E0E6A6 /* DCSNor3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNor3.hpp; sourceTree = "<group>"; };
 		A9BDED8423805EC600650496 /* DCSEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSEngine.cpp; sourceTree = "<group>"; };
 		A9BDED8523805EC600650496 /* DCSEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSEngine.hpp; sourceTree = "<group>"; };
 		A9C2D18C23930890008CAF81 /* DCSDLatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDLatch.cpp; sourceTree = "<group>"; };
@@ -154,10 +160,14 @@
 			children = (
 				A9482459237F4A2C00803F30 /* DCSAnd.hpp */,
 				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
+				A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */,
+				A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */,
 				A948245F2380459800803F30 /* DCSNot.hpp */,
 				A948245E2380459800803F30 /* DCSNot.cpp */,
 				A915F0CD238D9F9000655FC7 /* DCSNor.hpp */,
 				A915F0CC238D9F9000655FC7 /* DCSNor.cpp */,
+				A999F31F23A3BBA100E0E6A6 /* DCSNor3.hpp */,
+				A999F31E23A3BBA100E0E6A6 /* DCSNor3.cpp */,
 				A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */,
 				A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */,
 				A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */,
@@ -248,11 +258,13 @@
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
+				A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */,
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
 				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
+				A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */,
 				A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */,
 				A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */,
 				A94824602380459800803F30 /* DCSNot.cpp in Sources */,
