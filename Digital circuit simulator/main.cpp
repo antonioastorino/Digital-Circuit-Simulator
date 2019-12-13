@@ -198,6 +198,30 @@ void orTest() {
 	DCSEngine::run();
 }
 
+void nor3Test() {
+	printTestName("Nor 3");
+	DCSEngine::reset();
+	
+	DCSComponentArray<DCSInput> inArray("In", 3);
+	DCSNor3 nor30("Nor30");
+	DCSOutput out0("Out0");
+	
+	binary_signal in0 = {2,2,4,2,2,4,4};
+	binary_signal in1 = {4,2,2,4,2,2,4};
+	binary_signal in2 = {8,12};
+
+	inArray[0]->makeSignal(in0);
+	inArray[1]->makeSignal(in1);
+	inArray[2]->makeSignal(in2);
+
+	inArray.connect(&nor30, 0, 0, "In0");
+	inArray.connect(&nor30, 1, 1, "In1");
+	inArray.connect(&nor30, 2, 2, "In2");
+	nor30.connect(&out0, 0, 0, "Out");
+	
+	DCSEngine::run(20);
+}
+
 int main() {
 //	DCSLog::verbose = true;
 
@@ -210,9 +234,9 @@ int main() {
 //
 //	triStateBufferTest();
 //	gateArrayTest();
-	
-	orTest();
-	
+//	orTest();
+	nor3Test();
+
 	return 0;
 }
 

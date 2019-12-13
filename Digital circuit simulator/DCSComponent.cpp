@@ -109,7 +109,7 @@ bool DCSComponent::getFromTristateIn(ushort inPinNum) {
 
 void DCSComponent::setConnectedIn(ushort inPinNum) {
 	if (getConnectedIn(inPinNum) || getFromTristateIn(inPinNum)) {
-		DCSLog::error(name, "trying to connect tristate output to connected input");
+		DCSLog::error(name, "trying to connect output to connected input");
 	}
 	connectedIn |= (1 << inPinNum);
 }
