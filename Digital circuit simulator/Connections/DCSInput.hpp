@@ -22,9 +22,17 @@ private:
 	bool constValue = 0;
 	DCSArbitrarySignal signal;
 public:
+	DCSInput(std::string name);
 	DCSInput(std::string name, bool initValue);
 	DCSInput(std::string name, binary_signal signal);
+	
+	void makeSignal(bool constValue);
+	void makeSignal(binary_signal signal);
 	void updateOut() override;
+	
+	ushort getNumOfInPins() override { return 0; };
+	ushort getNumOfOutPins() override { return 1; };
+
 	int getTimeDelay() override { return 1; };
 };
 

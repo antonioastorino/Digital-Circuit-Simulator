@@ -14,6 +14,7 @@
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
 		A94824602380459800803F30 /* DCSNot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245E2380459800803F30 /* DCSNot.cpp */; };
+		A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */; };
 		A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */; };
 		A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BDED8423805EC600650496 /* DCSEngine.cpp */; };
 		A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C2D18C23930890008CAF81 /* DCSDLatch.cpp */; };
@@ -53,6 +54,9 @@
 		A948245C237F5E1B00803F30 /* DCSComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSComponent.hpp; sourceTree = "<group>"; };
 		A948245E2380459800803F30 /* DCSNot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNot.cpp; sourceTree = "<group>"; };
 		A948245F2380459800803F30 /* DCSNot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNot.hpp; sourceTree = "<group>"; };
+		A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSComponentArray.cpp; sourceTree = "<group>"; };
+		A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSComponentArray.hpp; sourceTree = "<group>"; };
+		A95D55C923A2DAA000701DE9 /* DCSHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCSHeader.h; sourceTree = "<group>"; };
 		A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSTriStateBuffer.cpp; sourceTree = "<group>"; };
 		A96BAB6F23A2542F00E7A42E /* DCSTriStateBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSTriStateBuffer.hpp; sourceTree = "<group>"; };
 		A9BDED8423805EC600650496 /* DCSEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSEngine.cpp; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		A9482450237F49F500803F30 /* Digital circuit simulator */ = {
 			isa = PBXGroup;
 			children = (
+				A95D55C923A2DAA000701DE9 /* DCSHeader.h */,
 				A9BDED8523805EC600650496 /* DCSEngine.hpp */,
 				A9BDED8423805EC600650496 /* DCSEngine.cpp */,
 				A948245C237F5E1B00803F30 /* DCSComponent.hpp */,
@@ -155,6 +160,8 @@
 				A915F0CC238D9F9000655FC7 /* DCSNor.cpp */,
 				A9C2D1A0239CF9B6008CAF81 /* DCSUnitDelay.hpp */,
 				A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */,
+				A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */,
+				A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */,
 			);
 			path = "Logic gates";
 			sourceTree = "<group>";
@@ -202,7 +209,7 @@
 		A9482446237F49F500803F30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Antonio Astorino";
 				TargetAttributes = {
 					A948244D237F49F500803F30 = {
@@ -235,6 +242,7 @@
 			files = (
 				A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */,
 				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
+				A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */,
 				A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */,
 				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
@@ -368,6 +376,7 @@
 		A9482456237F49F500803F30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3WYL439Q5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -378,6 +387,7 @@
 		A9482457237F49F500803F30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3WYL439Q5;
 				ENABLE_HARDENED_RUNTIME = YES;

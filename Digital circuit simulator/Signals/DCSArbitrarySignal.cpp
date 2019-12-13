@@ -10,7 +10,7 @@
 #include "DCSEngine.hpp"
 #include <iostream>
 
-DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint32_t> levelDurationVector, bool synch) {
+DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool synch) {
 	if(levelDurationVector[0]) initVal = 0;
 	else initVal = 1;
 	

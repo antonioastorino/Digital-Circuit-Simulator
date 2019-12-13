@@ -9,16 +9,15 @@
 #include "DCSNode.hpp"
 
 DCSNode::DCSNode(std::string name) :
-DCSComponent(name, 1, 1, false) {
+DCSComponent(name, false) {
 	isNode = true;
-	allInReached = -1; // ensures that nodes are never skipped during engine initialization
 }
 
 void DCSNode::updateOut() {
 	// nothing to do because the output is updated when the input changes
 }
 
-void DCSNode::setIn(bool inVal, int inPinNum) {
+void DCSNode::setIn(bool inVal, ushort inPinNum) {
 	DCSComponent::setIn(inVal, inPinNum);
 
 	out = in;
@@ -35,4 +34,5 @@ void DCSNode::setIn(uint64_t inVec) {
 	}
 }
 
+uint64_t DCSNode::getAllReachedQWord() { return -1; };
 

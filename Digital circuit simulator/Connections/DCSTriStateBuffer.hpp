@@ -19,6 +19,10 @@ class DCSTriStateBuffer: public DCSComponent {
 
 public:
 	DCSTriStateBuffer(std::string name);
+	
+	ushort getNumOfInPins() override {return 2; };
+	ushort getNumOfOutPins() override {return 1; };
+	
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };	
 	

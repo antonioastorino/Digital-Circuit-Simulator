@@ -11,21 +11,21 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<uint32_t> binary_signal;
+typedef std::vector<uint64_t> binary_signal;
 
 class DCSArbitrarySignal {
 private:
 	bool currVal = 0;
 	bool initVal;
-	uint32_t leveNumber = 0;
-	uint32_t counter = 0;
+	uint64_t leveNumber = 0;
+	uint64_t counter = 0;
 	size_t totalDuration = 0;
-	std::vector<uint32_t> flipBitAtSteps = {}; // stores the time at wich the level needs to change
-	std::vector<uint32_t> levelDurationVector ={}; // stores the duration of each level
+	std::vector<uint64_t> flipBitAtSteps = {}; // stores the time at wich the level needs to change
+	std::vector<uint64_t> levelDurationVector ={}; // stores the duration of each level
 
 public:
 	DCSArbitrarySignal() = delete;
-	DCSArbitrarySignal(std::vector<uint32_t> levelDurationVector, bool synch = true);
+	DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool synch = true);
 	bool getVal(uint32_t step);
 };
 

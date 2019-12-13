@@ -8,6 +8,7 @@
 
 #include "DCSEngine.hpp"
 #include "DCSComponent.hpp"
+#include "DCSLog.hpp"
 #include <iostream>
 
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
@@ -114,8 +115,8 @@ void DCSEngine::printLogicLevels() {
 				}
 				bool currVal = wire->getOutVal();
 				if (currVal)
-					std::cout << " | ";
-				else std::cout << "|  ";
+					std::cout << " 1 ";
+				else std::cout << " 0 ";
 
 			}
 		}

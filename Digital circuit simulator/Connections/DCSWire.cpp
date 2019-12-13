@@ -8,13 +8,14 @@
 
 #include "DCSWire.hpp"
 #include "DCSComponent.hpp"
+#include "DCSLog.hpp"
 #include <iostream>
 #include <sstream>
 
 DCSWire::DCSWire(DCSComponent* from,
-				 int outPinNum,
+				 ushort outPinNum,
 				 DCSComponent* to,
-				 int inPinNum,
+				 ushort inPinNum,
 				 std::string probeName)
 :
 from(from),
@@ -32,14 +33,15 @@ std::string DCSWire::getProbeName() {
 
 void DCSWire::propagateValue() {
 	if (from->getEnabled()) {  // Check if a component is in high-Z state
+		bool outVal = from->getOutVal(outPinNum);
 		std::stringstream message;
-		message << "Propagating from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
+		message << "Propagating " << outVal << " from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
 		DCSLog::info(from->getName(), message.str());
-		to->setIn(from->getOutVal(outPinNum), inPinNum);
+		to->setIn(outVal, inPinNum);
 	}
 }
 
-int DCSWire::getOutPinNum() {
+ushort DCSWire::getOutPinNum() {
 	return outPinNum;
 }
 

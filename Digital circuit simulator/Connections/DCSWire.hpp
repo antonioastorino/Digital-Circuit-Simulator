@@ -19,22 +19,22 @@ private:
 	// Driving component
 	DCSComponent* from;
 	// output pin number of the output component
-	int outPinNum;
+	ushort outPinNum;
 	// Drived component
 	DCSComponent* to;
 	// input pin number of the driven component
-	int inPinNum;
+	ushort inPinNum;
 	std::string probeName;
 	
 public:
 	DCSWire() = delete;
 	DCSWire(DCSComponent* from,
-			int outPinNum,
+			ushort outPinNum,
 			DCSComponent* to,
-			int inPinNum,
+			ushort inPinNum,
 			std::string probeName = "");
 	
-	int getOutPinNum();
+	ushort getOutPinNum();
 	std::string getProbeName();
 	void propagateValue();
 	bool getOutVal();

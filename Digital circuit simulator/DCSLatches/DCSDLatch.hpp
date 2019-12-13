@@ -43,8 +43,12 @@ private:
 public:
 	DCSDLatch(std::string name);
 	
-	DCSComponent* getOutComponent(int &outPinNum) override;
-	DCSComponent* getInComponent(int &inPinNum) override;
+	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(ushort &inPinNum) override;
+	
+	ushort getNumOfInPins() override {return 2; };
+	ushort getNumOfOutPins() override {return 2; };
+	
 	void updateOut() override;
 	int getTimeDelay() override { return 4; };
 };

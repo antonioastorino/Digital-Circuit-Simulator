@@ -9,7 +9,7 @@
 #include "DCSDLatch.hpp"
 
 DCSDLatch::DCSDLatch(std::string name) :
-DCSComponent(name, 1, 2, false) {
+DCSComponent(name, false) {
 	node0.connect(&and1, 0, 1);
 	node0.connect(&not0, 0, 0);
 	node1.connect(&and0, 0, 1);
@@ -17,14 +17,14 @@ DCSComponent(name, 1, 2, false) {
 	not0.connect(&and0, 0, 0);
 	and0.connect(&srLatch0, 0, 0);
 	and1.connect(&srLatch0, 0, 1);
-	srLatch0.setParent(this);
+//	srLatch0.setParent(this);
 }
 
-DCSComponent* DCSDLatch::getOutComponent(int &outPinNum) {
+DCSComponent* DCSDLatch::getOutComponent(ushort &outPinNum) {
 	return srLatch0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDLatch::getInComponent(int &inPinNum) {
+DCSComponent* DCSDLatch::getInComponent(ushort &inPinNum) {
 	if (inPinNum == 0) return &node0;
 	else if (inPinNum == 1) {
 		inPinNum = 0; // pin 1 in D latch is EN pin 0
@@ -35,5 +35,5 @@ DCSComponent* DCSDLatch::getInComponent(int &inPinNum) {
 
 void DCSDLatch::updateOut() {
 	out = srLatch0.getOutVec();
-	updateParentOut();
+//	updateParentOut();
 }

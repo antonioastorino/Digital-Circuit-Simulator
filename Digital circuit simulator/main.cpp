@@ -7,17 +7,9 @@
 //
 
 #include <iostream>
-#include "DCSAnd.hpp"
-#include "DCSNot.hpp"
-#include "DCSEngine.hpp"
-#include "DCSInput.hpp"
-#include "DCSNor.hpp"
-#include "DCSSRLatch.hpp"
-#include "DCSOutput.hpp"
-#include "DCSDLatch.hpp"
-#include "DCSUnitDelay.hpp"
-#include "DCSDFlipFlop.hpp"
-#include "DCSTriStateBuffer.hpp"
+#include "DCSHeader.h"
+#include "DCSLog.hpp"
+#include "DCSComponentArray.hpp"
 
 void printTestName(std::string testName) {
 	std::cout << "\n-----";
@@ -30,19 +22,19 @@ void printTestName(std::string testName) {
 void srLatchTest() {
 	printTestName("SR-Latch");
 	DCSEngine::reset();
-	binary_signal r = {3, 2, 10};
-	binary_signal s = {7, 2, 6};
+	binary_signal s = {3, 2, 10};
+	binary_signal r = {7, 2, 6};
 	
-	DCSSRLatch SR = DCSSRLatch("Latch1");
-	DCSInput I0 = DCSInput("In0", r);
-	DCSInput I1 = DCSInput("In1", s);
-	DCSOutput O0 = DCSOutput("Out0");
-	DCSOutput O1 = DCSOutput("Out1");
+	DCSSRLatch SR("Latch1");
+	DCSInput I0("In0", s);
+	DCSInput I1("In1", r);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
 	
 	I0.connect(&SR, 0, 0, "R");
 	I1.connect(&SR, 0, 1, "S");
-	SR.connect(&O0, 0, 0, "!Q");
-	SR.connect(&O1, 1, 0, " Q");
+	SR.connect(&O0, 0, 0, " Q");
+	SR.connect(&O1, 1, 0, "!Q");
 	
 	DCSEngine::run(11);
 }
@@ -50,9 +42,9 @@ void srLatchTest() {
 void notLoopTest() {
 	printTestName("Not loop");
 	DCSEngine::reset();
-	DCSNot not0 = DCSNot("Not0");
-	DCSNot not1 = DCSNot("Not1");
-	DCSNot not2 = DCSNot("Not2");
+	DCSNot not0("Not0");
+	DCSNot not1("Not1");
+	DCSNot not2("Not2");
 
 	not0.connect(&not1, 0, 0, "N0");
 	not1.connect(&not2, 0, 0, "N1");
@@ -67,16 +59,16 @@ void dLatchTest() {
 	binary_signal d = {0,7,3,3,3,4};
 	binary_signal en = {0,2,6,2,4};
 	
-	DCSDLatch dLatch0 = DCSDLatch("DLatch0");
-	DCSInput I0 = DCSInput("In0", d);
-	DCSInput I1 = DCSInput("In1", en);
-	DCSOutput O0 = DCSOutput("Out0");
-	DCSOutput O1 = DCSOutput("Out1");
+	DCSDLatch dLatch0("DLatch0");
+	DCSInput I0("In0", d);
+	DCSInput I1("In1", en);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
 	
 	I0.connect(&dLatch0, 0, 0, "DATA");
 	I1.connect(&dLatch0, 0, 1, "EN");
-	dLatch0.connect(&O0, 0, 0, "!Q");
-	dLatch0.connect(&O1, 1, 0, " Q");
+	dLatch0.connect(&O0, 0, 0, " Q");
+	dLatch0.connect(&O1, 1, 0, "!Q");
 	
 	DCSEngine::run(25);
 }
@@ -84,8 +76,8 @@ void dLatchTest() {
 void unitDelayTest() {
 	printTestName("Unit delay");
 	DCSEngine::reset();
-	DCSNot not0 = DCSNot("Not0");
-	DCSUnitDelay del0 = DCSUnitDelay("Del0");
+	DCSNot not0("Not0");
+	DCSUnitDelay del0("Del0");
 
 	not0.connect(&del0, 0, 0, "N0");
 	del0.connect(&not0, 0, 0, "D0");
@@ -96,18 +88,18 @@ void unitDelayTest() {
 void risingEdgeDetectorTest() {
 	printTestName("Rising edge detector");
 	DCSEngine::reset();
-	DCSAnd and0 = DCSAnd("And0");
-	DCSNot not0 = DCSNot("Not0");
-	DCSUnitDelay del0 = DCSUnitDelay("Del0");
-	DCSUnitDelay del1 = DCSUnitDelay("Del1");
-	DCSInput in0 = DCSInput("In0", {5,6,8});
-	DCSOutput out0 = DCSOutput("Out0");
+	DCSAnd and0("And0");
+	DCSNot not0("Not0");
+	DCSUnitDelay del0("Del0");
+	DCSUnitDelay del1("Del1");
+	DCSInput in0("In0", {5,20});
+	DCSOutput out0("Out0");
 	
 	in0.connect(&and0, 0, 0, "In");
 	in0.connect(&not0, 0, 0);
 	not0.connect(&del0, 0, 0);
 	del0.connect(&del1, 0, 0);
-	del1.connect(&and0, 0, 1, "!In");
+	del1.connect(&and0, 0, 1);
 	and0.connect(&out0, 0, 0, "Out");
 	
 	DCSEngine::run(20);
@@ -119,16 +111,16 @@ void dFlipFlopTest() {
 	binary_signal d = {4,7,3,10};
 	binary_signal clk = {4,2,5,2,4};
 	
-	DCSDFlipFlop dff0 = DCSDFlipFlop("DFF0");
-	DCSInput I0 = DCSInput("In0", d);
-	DCSInput I1 = DCSInput("In1", clk);
-	DCSOutput O0 = DCSOutput("Out0");
-	DCSOutput O1 = DCSOutput("Out1");
+	DCSDFlipFlop dff0("DFF0");
+	DCSInput I0("In0", d);
+	DCSInput I1("In1", clk);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
 	
 	I0.connect(&dff0, 0, 0, "DATA");
 	I1.connect(&dff0, 0, 1, "CLK");
-	dff0.connect(&O0, 0, 0, "!Q");
-	dff0.connect(&O1, 1, 0, " Q");
+	dff0.connect(&O0, 0, 0, " Q");
+	dff0.connect(&O1, 1, 0, "!Q");
 	
 	DCSEngine::run(20);
 }
@@ -142,14 +134,14 @@ void triStateBufferTest() {
 	binary_signal enableA = {0,2,2,2,2,2,100};
 	binary_signal enableB = {2,2,2,2,2,2,100};
 
-	DCSInput inA0 = DCSInput("A0", 0);
-	DCSInput inA1 = DCSInput("A1", enableA);
-	DCSInput inB0 = DCSInput("B0", 1);
-	DCSInput inB1 = DCSInput("B1", enableB);
-	DCSTriStateBuffer tsbA = DCSTriStateBuffer("tsbA");
-	DCSTriStateBuffer tsbB = DCSTriStateBuffer("tsbB");
-	DCSNode node0 = DCSNode("Del0");
-	DCSOutput out0 = DCSOutput("Out0");
+	DCSInput inA0("A0", 0);
+	DCSInput inA1("A1", enableA);
+	DCSInput inB0("B0", 1);
+	DCSInput inB1("B1", enableB);
+	DCSTriStateBuffer tsbA("tsbA");
+	DCSTriStateBuffer tsbB("tsbB");
+	DCSNode node0("Del0");
+	DCSOutput out0("Out0");
 
 	inA0.connect(&tsbA, 0, 0, "INA");
 	inA1.connect(&tsbA, 0, 1, "ENA");
@@ -165,18 +157,42 @@ void triStateBufferTest() {
 	
 }
 
-int main() {
-//	DCSLog::verbose = true;
 
-//	srLatchTest();
-//	notLoopTest();
-//	dLatchTest();
-//	unitDelayTest();
-//	risingEdgeDetectorTest();
-//	dFlipFlopTest();
+void gateArrayTest() {
+	printTestName("Gate array");
+	DCSEngine::reset();
 	
+	DCSComponentArray<DCSInput> inArray("In", 2);
+	DCSComponentArray<DCSOutput> outArray("Out", 2);
+	DCSComponentArray<DCSAnd> andArray("And", 2);
+	
+	inArray[0]->makeSignal(0);
+	inArray[1]->makeSignal(1);
+
+	inArray.connect(&andArray, 0, 0, "In0");
+	inArray.connect(&andArray, 0, 1);
+	inArray.connect(&andArray, 1, 2, "In1");
+	inArray.connect(&andArray, 1, 3);
+	andArray.connect(&outArray, 0, 0, "Out0");
+	andArray.connect(&outArray, 1, 1, "Out1");
+
+	DCSEngine::run(20);
+}
+
+
+int main() {
+	DCSLog::verbose = true;
+
+	srLatchTest();
+	notLoopTest();
+	dLatchTest();
+	unitDelayTest();
+	risingEdgeDetectorTest();
+	dFlipFlopTest();
+
 	triStateBufferTest();
-	
+	gateArrayTest();
 	
 	return 0;
 }
+

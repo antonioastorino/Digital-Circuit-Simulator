@@ -8,14 +8,12 @@
 
 #include "DCSComponent.hpp"
 #include "DCSEngine.hpp"
+#include "DCSLog.hpp"
 
-DCSComponent::DCSComponent(std::string name, int fanIn, int fanOut, bool add):
+DCSComponent::DCSComponent(std::string name, bool add):
 enabled(true),		// only 3-state buffer can be disabled
 name{name},
-fanIn(fanIn),
-fanOut(fanOut),
 reachableIn(0),
-allInReached((1 << fanIn) - 1), // 2^fanIn - 1
 connectedIn(0),
 fromTristateIn(0),
 isNode(false),
@@ -30,8 +28,8 @@ DCSComponent::~DCSComponent() {
 }
 
 // set single input
-void DCSComponent::setIn(bool inVal, int inPinNum) {
-	if (inPinNum >= fanIn) throw "Input pin number out of range";
+void DCSComponent::setIn(bool inVal, ushort inPinNum) {
+	if (inPinNum >= getNumOfInPins()) throw "Input pin number out of range";
 	reachableIn |= 1 << inPinNum;
 	in &= (~(1 << inPinNum)); // reset inPinNum-th bit
 	in |= (inVal << inPinNum); // set the same bit to inVal
@@ -40,26 +38,25 @@ void DCSComponent::setIn(bool inVal, int inPinNum) {
 // set entire input array
 void DCSComponent::setIn(uint64_t inVec) {
 	in = inVec;
-	reachableIn = allInReached;
-	initialized = true;
+	reachableIn = getAllReachedQWord();
 }
 
 // get single output
-bool DCSComponent::getOutVal(int outPinNum) {
-	if (reachableIn == allInReached) initialized = true;
+bool DCSComponent::getOutVal(ushort outPinNum) {
+	if (reachableIn == getAllReachedQWord()) initialized = true;
 	return (out >> outPinNum) & 1;
 }
 
 
 // get entire input array
 uint64_t DCSComponent::getOutVec() {
-	if (reachableIn == allInReached) initialized = true;
+	if (reachableIn == getAllReachedQWord()) initialized = true;
 	return out;
 }
 
 void DCSComponent::connect(DCSComponent* to,
-						   int outPinNum,
-						   int inPinNum,
+						   ushort outPinNum,
+						   ushort inPinNum,
 						   std::string probeName) {
 
 	DCSComponent* leftComponent = getOutComponent(outPinNum);
@@ -94,30 +91,30 @@ void DCSComponent::connect(DCSComponent* to,
 
 std::string DCSComponent::getName() { return name; }
 
-DCSComponent* DCSComponent::getInComponent(int &inPinNum) {
+DCSComponent* DCSComponent::getInComponent(ushort &inPinNum) {
 	return this;
 }
 
-DCSComponent* DCSComponent::getOutComponent(int &outPinNum) {
+DCSComponent* DCSComponent::getOutComponent(ushort &outPinNum) {
 	return this;
 }
 
-bool DCSComponent::getConnectedIn(int inPinNum) {
+bool DCSComponent::getConnectedIn(ushort inPinNum) {
 	return connectedIn & (1 << inPinNum);
 }
 
-bool DCSComponent::getFromTristateIn(int inPinNum) {
+bool DCSComponent::getFromTristateIn(ushort inPinNum) {
 	return fromTristateIn & (1 << inPinNum);
 }
 
-void DCSComponent::setConnectedIn(int inPinNum) {
+void DCSComponent::setConnectedIn(ushort inPinNum) {
 	if (getConnectedIn(inPinNum) || getFromTristateIn(inPinNum)) {
 		DCSLog::error(name, "trying to connect tristate output to connected input");
 	}
 	connectedIn |= (1 << inPinNum);
 }
 
-void DCSComponent::setFromTristateIn(int inPinNum) {
+void DCSComponent::setFromTristateIn(ushort inPinNum) {
 	if (getConnectedIn(inPinNum)) {
 		DCSLog::error(name, "trying to connect tristate output to connected input");
 	}
@@ -131,19 +128,21 @@ void DCSComponent::propagateValues() {
 }
 
 bool DCSComponent::isFullyConnected() {
-	return (connectedIn ^ fromTristateIn) == allInReached;
+	return (connectedIn ^ fromTristateIn) == getAllReachedQWord();
 }
 
-/* Setting the parent ensures that the parent's output is updated every
- time the child's output changes
- */
-void DCSComponent::setParent(DCSComponent* parent) {
-	this->parent = parent;
-}
+///* Setting the parent ensures that the parent's output is updated every
+// time the child's output changes
+// */
+//void DCSComponent::setParent(DCSComponent* parent) {
+//	this->parent = parent;
+//}
 
-void DCSComponent::updateParentOut() {
-	if (parent != nullptr) parent->updateOut();
-}
+//void DCSComponent::updateParentOut() {
+//	if (parent != nullptr) parent->updateOut();
+//}
+
+uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }
 
 void DCSComponent::enable(){
 	throw "Only 3-state buffers can access this function";

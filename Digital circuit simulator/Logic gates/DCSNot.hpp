@@ -14,6 +14,10 @@
 class DCSNot: public DCSComponent {
 public:
 	DCSNot(std::string name);
+	
+	ushort getNumOfInPins() override {return 1; };
+	ushort getNumOfOutPins() override {return 1; };
+	
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
 };

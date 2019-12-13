@@ -9,9 +9,9 @@
 #ifndef DCSEngine_hpp
 #define DCSEngine_hpp
 
-#include <vector>
 #include "DCSWire.hpp"
 #include "DCSInput.hpp"
+#include <vector>
 
 class DCSComponent;
 

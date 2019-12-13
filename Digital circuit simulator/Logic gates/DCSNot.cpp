@@ -9,11 +9,11 @@
 #include "DCSNot.hpp"
 
 DCSNot::DCSNot(std::string name) :
-DCSComponent(name, 1, 1) {
+DCSComponent(name) {
 
 }
 
 void DCSNot::updateOut() {
 	out = !in;
-	updateParentOut();
+//	updateParentOut();
 }

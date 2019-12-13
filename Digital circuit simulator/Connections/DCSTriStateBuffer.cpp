@@ -9,7 +9,7 @@
 #include "DCSTriStateBuffer.hpp"
 
 DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :
-DCSComponent(name, 2, 1) {
+DCSComponent(name) {
 	isTristate = true;
 	enabled = false; // disabled by default
 }
@@ -19,7 +19,7 @@ void DCSTriStateBuffer::updateOut() {
 		enable();
 		
 		out = in & 1;
-		updateParentOut();
+//		updateParentOut();
 	}
 	else { disable(); }
 }

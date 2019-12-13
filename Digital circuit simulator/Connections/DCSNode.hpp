@@ -17,8 +17,12 @@ public:
 	
 	void updateOut() override;
 	int getTimeDelay() override { return 0; }
-	void setIn(bool inVal, int inPinNum) override;
+	void setIn(bool inVal, ushort inPinNum) override;
 	void setIn(uint64_t inVec) override;
+	
+	ushort getNumOfInPins() override {return 1; };
+	ushort getNumOfOutPins() override {return 1; };
+	uint64_t getAllReachedQWord() override;
 };
 
 
