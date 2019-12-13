@@ -9,8 +9,10 @@
 #ifndef DCSComponent_hpp
 #define DCSComponent_hpp
 
-#include "DCSWire.hpp"
 #include <vector>
+#include <sstream>
+
+class DCSWire;
 
 class DCSComponent {
 private:

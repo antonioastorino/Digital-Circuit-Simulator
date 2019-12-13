@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSNode.hpp"
+#include "DCSHeader.h"
 
 DCSNode::DCSNode(std::string name) :
 DCSComponent(name, false) {

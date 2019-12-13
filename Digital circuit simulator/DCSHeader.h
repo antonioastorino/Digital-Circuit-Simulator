@@ -9,6 +9,26 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
+#include "DCSEngine.hpp"
+#include "DCSAnd.hpp"
+#include "DCSOr.hpp"
+#include "DCSNot.hpp"
+#include "DCSNor.hpp"
+#include "DCSNor3.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSSRLatch.hpp"
+#include "DCSOutput.hpp"
+#include "DCSDLatch.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSDFlipFlop.hpp"
+#include "DCSTriStateBuffer.hpp"
 #include "DCSComponentArray.hpp"
+#include "DCSWire.hpp"
+
+#include "DCSLog.hpp"
+
+#include <sstream>
+#include <iostream>
 
 #endif /* DCSHeader_h */

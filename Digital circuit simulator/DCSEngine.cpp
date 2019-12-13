@@ -6,10 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSEngine.hpp"
-#include "DCSComponent.hpp"
-#include "DCSLog.hpp"
-#include <iostream>
+#include "DCSHeader.h"
 
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};

@@ -6,9 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSComponent.hpp"
-#include "DCSEngine.hpp"
-#include "DCSLog.hpp"
+#include "DCSHeader.h"
 
 DCSComponent::DCSComponent(std::string name, bool add):
 enabled(true),		// only 3-state buffer can be disabled

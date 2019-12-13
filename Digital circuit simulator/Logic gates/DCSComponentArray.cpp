@@ -6,9 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSComponentArray.hpp"
-#include <sstream>
-
+#include "DCSHeader.h"
 
 template<class T>
 DCSComponentArray<T>::DCSComponentArray(std::string name, ushort numOfElements):

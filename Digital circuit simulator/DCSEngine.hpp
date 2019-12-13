@@ -9,11 +9,11 @@
 #ifndef DCSEngine_hpp
 #define DCSEngine_hpp
 
-#include "DCSWire.hpp"
-#include "DCSInput.hpp"
 #include <vector>
 
 class DCSComponent;
+class DCSInput;
+class DCSWire;
 
 class DCSEngine {
 private:

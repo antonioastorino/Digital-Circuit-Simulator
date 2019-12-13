@@ -10,19 +10,8 @@
 #define DCSComponentArray_hpp
 
 #include <vector>
-#include "DCSAnd.hpp"
-#include "DCSOr.hpp"
-#include "DCSNot.hpp"
-#include "DCSNor.hpp"
-#include "DCSNor3.hpp"
-#include "DCSEngine.hpp"
-#include "DCSInput.hpp"
-#include "DCSSRLatch.hpp"
-#include "DCSOutput.hpp"
-#include "DCSDLatch.hpp"
-#include "DCSUnitDelay.hpp"
-#include "DCSDFlipFlop.hpp"
-#include "DCSTriStateBuffer.hpp"
+
+class DCSComponent;
 
 template<class T>
 class DCSComponentArray: public DCSComponent {
