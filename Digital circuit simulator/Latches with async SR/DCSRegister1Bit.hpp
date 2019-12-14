@@ -10,10 +10,11 @@
  Both have to be stable at least 2 tau before the rising edge of input 3 (clock) and remain stable at least 1 extra tau.
  Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with input 4 low.
  Here is an example:
-	   |
- LOAD: | X____XXXXXXXX
+	   |  ____
+ LOAD: | X    XXXXXXXX
 	   |  ^ start
- DATA: | XX___XXXXXXXX
+       |   ___
+ DATA: | XX   XXXXXXXX
 	   |     __
  CLK:  | ____  _______
 			     _____
