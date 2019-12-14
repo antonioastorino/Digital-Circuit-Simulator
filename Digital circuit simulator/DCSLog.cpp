@@ -12,12 +12,12 @@ bool DCSLog::verbose = false;
 
 void DCSLog::info(std::string callerName, std::string message) {
 	if (verbose) {
-		std::cout << "INFO: " << callerName << " says '" << message << "'\n";
+		std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
 	}
 }
 
 void DCSLog::error(std::string callerName, std::string message) {
-	std::cout << "ERROR: " << callerName << " says '" << message << "!'\n";
+	std::cout << "ERROR: " << callerName << " says: '" << message << "!'\n";
 	throw "ERROR";
 }
 

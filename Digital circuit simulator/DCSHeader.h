@@ -25,6 +25,7 @@
 #include "DCSDLatchAsyncSR.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSDFlipFlop.hpp"
+#include "DCSDFlipFlopAsyncSR.hpp"
 #include "DCSTriStateBuffer.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSWire.hpp"

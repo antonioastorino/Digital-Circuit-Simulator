@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSDFlipFlop.hpp"
+#include "DCSHeader.h"
 
 DCSDFlipFlop::DCSDFlipFlop(std::string name) :
 DCSComponent(name, false) {
@@ -15,7 +15,6 @@ DCSComponent(name, false) {
 	not0.connect(&del0, 0, 0);
 	del0.connect(&and0, 0, 1);
 	and0.connect(&dLat0, 0, 1);
-	//	dLat0.setParent(this);
 }
 
 DCSComponent* DCSDFlipFlop::getOutComponent(ushort &outPinNum) {

@@ -9,11 +9,7 @@
 #ifndef DCSDFlipFlop_hpp
 #define DCSDFlipFlop_hpp
 
-#include "DCSComponent.hpp"
-#include "DCSDLatch.hpp"
-#include "DCSAnd.hpp"
-#include "DCSNot.hpp"
-#include "DCSUnitDelay.hpp"
+
 /*
 Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
 Input 1 and 0 must be stable at least 2 tau.
@@ -31,6 +27,12 @@ Q:    | XXXX________
 !Q:   | XXXXX
              ^ ready
 */
+
+class DCSComponent;
+class DCSDLatch;
+class DCSAnd;
+class DCSNot;
+class DCSUnitDelay;
 
 class DCSDFlipFlop: public DCSComponent {
 private:

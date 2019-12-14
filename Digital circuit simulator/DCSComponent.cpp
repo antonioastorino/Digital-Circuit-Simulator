@@ -16,6 +16,7 @@ connectedIn(0),
 fromTristateIn(0),
 isNode(false),
 isTristate(false) {
+	if (name == "") DCSLog::error("Component", "I don't have name");
 	if (add) DCSEngine::addComponent(this);
 }
 
