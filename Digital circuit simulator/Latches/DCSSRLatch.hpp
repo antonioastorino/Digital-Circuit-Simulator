@@ -19,8 +19,6 @@
 #ifndef DCSSRLatch_hpp
 #define DCSSRLatch_hpp
 
-#include "DCSNor.hpp"
-
 class DCSSRLatch: public DCSComponent {
 private:
 	DCSNor nor0 = DCSNor(this->name + "-Nor0");

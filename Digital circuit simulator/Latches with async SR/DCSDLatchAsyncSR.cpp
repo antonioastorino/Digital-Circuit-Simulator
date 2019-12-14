@@ -10,11 +10,12 @@
 
 DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) :
 DCSComponent(name, false) {
-	node0.connect(&and1, 0, 1);
+	node0.connect(&del0, 0, 0);
 	node0.connect(&not0, 0, 0);
 	node1.connect(&and0, 0, 1);
 	node1.connect(&and1, 0, 0);
 	not0.connect(&and0, 0, 0);
+	del0.connect(&and1, 0, 1);
 	and0.connect(&nor3_0, 0, 0);
 	and1.connect(&nor3_1, 0, 1);
 	nor3_0.connect(&nor3_1, 0, 0);

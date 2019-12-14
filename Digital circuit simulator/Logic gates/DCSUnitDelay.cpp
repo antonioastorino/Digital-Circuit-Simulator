@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSUnitDelay.hpp"
+#include "DCSHeader.h"
 
 DCSUnitDelay::DCSUnitDelay(std::string name) :
 DCSComponent(name) { }

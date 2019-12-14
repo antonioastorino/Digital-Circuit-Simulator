@@ -6,10 +6,6 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#ifndef DCSDFlipFlop_hpp
-#define DCSDFlipFlop_hpp
-
-
 /*
 Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
 Input 1 and 0 must be stable at least 2 tau.
@@ -28,11 +24,9 @@ Q:    | XXXX________
              ^ ready
 */
 
-class DCSComponent;
-class DCSDLatch;
-class DCSAnd;
-class DCSNot;
-class DCSUnitDelay;
+
+#ifndef DCSDFlipFlop_hpp
+#define DCSDFlipFlop_hpp
 
 class DCSDFlipFlop: public DCSComponent {
 private:

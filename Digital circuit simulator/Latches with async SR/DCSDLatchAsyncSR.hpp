@@ -6,13 +6,6 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#ifndef DCSDLatchAsyncSR_hpp
-#define DCSDLatchAsyncSR_hpp
-
-#include "DCSNor3.hpp"
-#include "DCSAnd.hpp"
-#include "DCSNot.hpp"
-#include "DCSNode.hpp"
 /*
  Pinout:
  0 -> Data
@@ -24,6 +17,9 @@
  NOTE: do now use Enable when S or R are high.
  */
 
+#ifndef DCSDLatchAsyncSR_hpp
+#define DCSDLatchAsyncSR_hpp
+
 class DCSDLatchAsyncSR: public DCSComponent {
 private:
 	DCSNor3 nor3_0      = DCSNor3(this->name + "-Nor0");
@@ -31,6 +27,7 @@ private:
 	DCSAnd and0         = DCSAnd(this->name + "-And0");
 	DCSAnd and1         = DCSAnd(this->name + "-And1");
 	DCSNot not0         = DCSNot(this->name + "-Not0");
+	DCSUnitDelay del0   = DCSUnitDelay(this->name + "-Del0");
 	DCSNode node0       = DCSNode(this->name + "-Node0");
 	DCSNode node1       = DCSNode(this->name + "-Node1");
 public:

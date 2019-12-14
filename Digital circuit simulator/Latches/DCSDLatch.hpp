@@ -26,17 +26,13 @@ Q:    | XXXX________
 #ifndef DCSDLatch_hpp
 #define DCSDLatch_hpp
 
-#include "DCSSRLatch.hpp"
-#include "DCSNot.hpp"
-#include "DCSAnd.hpp"
-#include "DCSNode.hpp"
-
 class DCSDLatch: public DCSComponent {
 private:
 	DCSSRLatch srLatch0 = DCSSRLatch(this->name + "-SR0");
 	DCSAnd and0         = DCSAnd(this->name + "-And0");
 	DCSAnd and1         = DCSAnd(this->name + "-And1");
 	DCSNot not0         = DCSNot(this->name + "-Not0");
+	DCSUnitDelay del0   = DCSUnitDelay(this->name + "-Del0");
 	DCSNode node0       = DCSNode(this->name + "-Node0");
 	DCSNode node1       = DCSNode(this->name + "-Node1");
 	

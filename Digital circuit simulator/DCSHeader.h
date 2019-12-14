@@ -14,21 +14,25 @@
 #include "DCSNand.hpp"
 #include "DCSOr.hpp"
 #include "DCSNot.hpp"
+#include "DCSUnitDelay.hpp"
 #include "DCSNor.hpp"
 #include "DCSNor3.hpp"
 #include "DCSNand3.hpp"
-#include "DCSEngine.hpp"
+#include "DCSTriStateBuffer.hpp"
+
 #include "DCSInput.hpp"
-#include "DCSSRLatch.hpp"
 #include "DCSOutput.hpp"
+
+#include "DCSWire.hpp"
+#include "DCSNode.hpp"
+
+#include "DCSSRLatch.hpp"
 #include "DCSDLatch.hpp"
 #include "DCSDLatchAsyncSR.hpp"
-#include "DCSUnitDelay.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSDFlipFlopAsyncSR.hpp"
-#include "DCSTriStateBuffer.hpp"
+#include "DCSRegister1Bit.hpp"
 #include "DCSComponentArray.hpp"
-#include "DCSWire.hpp"
 
 #include "DCSLog.hpp"
 

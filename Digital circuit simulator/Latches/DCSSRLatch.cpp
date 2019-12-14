@@ -6,14 +6,12 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSSRLatch.hpp"
+#include "DCSHeader.h"
 
 DCSSRLatch::DCSSRLatch(std::string name) :
 DCSComponent(name, false) {
 	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0);
 	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1);
-//	nor0.setParent(this);
-//	nor1.setParent(this);
 }
 
 DCSComponent* DCSSRLatch::getOutComponent(ushort &outPinNum) {

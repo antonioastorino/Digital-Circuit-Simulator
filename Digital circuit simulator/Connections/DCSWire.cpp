@@ -23,7 +23,6 @@ outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
-	// TODO: make sure every component has a name != ""
 	std::cout << from->getName() << " out " << outPinNum << " --> " << to->getName() << " in " << inPinNum << "\n";
 }
 

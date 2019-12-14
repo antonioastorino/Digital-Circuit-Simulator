@@ -8,7 +8,6 @@
 
 #include "DCSHeader.h"
 
-
 DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) :
 DCSComponent(name, false) {
 	node0.connect(&not0, 0, 0);

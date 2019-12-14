@@ -6,10 +6,43 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include <iostream>
 #include "DCSHeader.h"
-#include "DCSLog.hpp"
-#include "DCSComponentArray.hpp"
+
+void printTestName(std::string testName);
+void srLatchTest();
+void notLoopTest();
+void unitDelayTest();
+void risingEdgeDetectorTest();
+void dFlipFlopTest();
+void triStateBufferTest();
+void gateArrayTest();
+void orTest();
+void nor3Test();void nand3Test();
+void dLatchTest();
+void dLatchAsyncSRTest();
+void register1BitTest();
+
+int main() {
+//	DCSLog::verbose = true;
+	
+//	srLatchTest();
+//	notLoopTest();
+//	unitDelayTest();
+//	risingEdgeDetectorTest();
+//	dFlipFlopTest();
+//
+//	triStateBufferTest();
+//	gateArrayTest();
+//	orTest();
+//	nor3Test();
+//	nand3Test();
+//
+//	dLatchTest();
+//	dLatchAsyncSRTest();
+	register1BitTest();
+
+	return 0;
+}
 
 void printTestName(std::string testName) {
 	std::cout << "\n-----";
@@ -274,26 +307,33 @@ void dLatchAsyncSRTest() {
 	DCSEngine::run(25);
 }
 
-int main() {
-	//		DCSLog::verbose = true;
+void register1BitTest() {
+	printTestName("1-bit register");
+	DCSEngine::reset();
 	
-//	srLatchTest();
-//	notLoopTest();
-//	unitDelayTest();
-//	risingEdgeDetectorTest();
-//	dFlipFlopTest();
-//
-//	triStateBufferTest();
-//	gateArrayTest();
-//	orTest();
-//	nor3Test();
-//	nand3Test();
-//
-//	dLatchTest();
-	
-	dLatchAsyncSRTest();
-	
+	binary_signal d = {13,3,10};
+	binary_signal clk{5,5,5,5,5,5,5};
+	binary_signal ld{12,4,40,40};
+	binary_signal reset{20, 2,1};
 
-	return 0;
+	DCSRegister1Bit reg0("Reg0");
+	DCSComponentArray<DCSInput> inArray("In", 5);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
+	
+	inArray.connect(&reg0, 1, 1, "CLK");
+	inArray.connect(&reg0, 4, 4, "LD");
+	inArray.connect(&reg0, 0, 0, "D");
+	inArray.connect(&reg0, 2, 2, "R");
+	inArray.connect(&reg0, 3, 3/*, "S"*/);
+	reg0.connect(&O0, 0, 0, " Q");
+	reg0.connect(&O1, 1, 0, "!Q");
+	
+	inArray[0]->makeSignal(d);
+	inArray[1]->makeSignal(clk);
+	inArray[2]->makeSignal(reset);
+	inArray[3]->makeSignal(0);
+	inArray[4]->makeSignal(ld);
+	
+	DCSEngine::run(40);
 }
-

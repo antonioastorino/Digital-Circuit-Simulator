@@ -9,15 +9,9 @@
 #ifndef DCSDFlipFlopAsyncSR_hpp
 #define DCSDFlipFlopAsyncSR_hpp
 
-class DCSComponent;
-class DCSDLatch;
-class DCSAnd;
-class DCSNot;
-class DCSUnitDelay;
-
 class DCSDFlipFlopAsyncSR: public DCSComponent {
 private:
-	DCSNode node0            = DCSNode(this->name + "CLK0");
+	DCSNode node0            = DCSNode(this->name + "-CLK0");
 	DCSDLatchAsyncSR dLatSR0 = DCSDLatchAsyncSR(this->name + "-DLatch0");
 	DCSAnd and0              = DCSAnd(this->name + "-And0");
 	DCSNot not0              = DCSNot(this->name + "-Not0");
