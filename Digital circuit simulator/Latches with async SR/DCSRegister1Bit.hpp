@@ -30,12 +30,12 @@
 
 class DCSRegister1Bit: public DCSComponent {
 private:
-	DCSNode node0              = DCSNode(this->name + "-Node0");
-	DCSNot not0                = DCSNot(this->name + "-Not0");
-	DCSAnd and0                = DCSAnd(this->name + "-And0");
-	DCSAnd and1                = DCSAnd(this->name + "-And1");
-	DCSOr or0                  = DCSOr(this->name + "-Or0");
-	DCSDFlipFlopAsyncSR dffsr0 = DCSDFlipFlopAsyncSR(this->name + "-DFFSR0");
+	DCSNode node0              = DCSNode(name + "-Node0");
+	DCSNot not0                = DCSNot(name + "-Not0");
+	DCSAnd and0                = DCSAnd(name + "-And0");
+	DCSAnd and1                = DCSAnd(name + "-And1");
+	DCSOr or0                  = DCSOr(name + "-Or0");
+	DCSDFlipFlopAsyncSR dffsr0 = DCSDFlipFlopAsyncSR(name + "-DFFSR0");
 public:
 	DCSRegister1Bit(std::string name);
 	

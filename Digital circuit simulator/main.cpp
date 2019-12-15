@@ -20,7 +20,9 @@ void orTest();
 void nor3Test();void nand3Test();
 void dLatchTest();
 void dLatchAsyncSRTest();
+void jkLatchMasterSlaveAsyncSRTest();
 void register1BitTest();
+void dividerTest();
 
 int main() {
 //	DCSLog::verbose = true;
@@ -39,8 +41,11 @@ int main() {
 //
 //	dLatchTest();
 //	dLatchAsyncSRTest();
-	register1BitTest();
-
+//	register1BitTest();
+//	jkLatchMasterSlaveAsyncSRTest();
+	dividerTest();
+	
+	
 	return 0;
 }
 
@@ -307,13 +312,43 @@ void dLatchAsyncSRTest() {
 	DCSEngine::run(25);
 }
 
+void jkLatchMasterSlaveAsyncSRTest() {
+	printTestName("JK-Latch Master-Slave with asynchronous SR");
+	DCSEngine::reset();
+	binary_signal j = {12,2,1};
+	binary_signal k = {12,2,1};
+	binary_signal clk = {4,4,4,2,44,4,4,4,4};
+	
+	
+	DCSJKLatchMasterSlaveAsyncSR jk0("jk0");
+	DCSComponentArray<DCSInput> inArray("In", 5);
+	DCSOutput O0("Out0");
+	DCSOutput O1("Out1");
+	
+	inArray.connect(&jk0, 0, 0, "J");
+	inArray.connect(&jk0, 1, 1, "K");
+	inArray.connect(&jk0, 2, 2, "CLK");
+	inArray.connect(&jk0, 3, 3, "R");
+	inArray.connect(&jk0, 4, 4, "S");
+	jk0.connect(&O0, 0, 0, "Q");
+	jk0.connect(&O1, 1, 0, "!Q");
+	
+	inArray[0]->makeSignal(j);
+	inArray[1]->makeSignal(k);
+	inArray[2]->makeSignal(clk);
+	inArray[3]->makeSignal({20,3,100});
+	inArray[4]->makeSignal(0);
+
+	DCSEngine::run(40);
+}
+
 void register1BitTest() {
 	printTestName("1-bit register");
 	DCSEngine::reset();
 	
 	binary_signal d = {13,3,10};
-	binary_signal clk{5,5,5,5,5,5,5};
-	binary_signal ld{12,4,40,40};
+	binary_signal clk{5,5,5,5,5,5,5,5,5,5,5,5,5};
+	binary_signal ld{12,40,40};
 	binary_signal reset{20, 2,1};
 
 	DCSRegister1Bit reg0("Reg0");
@@ -335,5 +370,37 @@ void register1BitTest() {
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(ld);
 	
+	DCSEngine::run(40);
+}
+
+
+void dividerTest() {
+	printTestName("Divider");
+	DCSEngine::reset();
+	
+	DCSClockDiv2WithEnableAndLoad div0("Div0");
+	DCSComponentArray<DCSInput> inArray("In", 6);
+	DCSComponentArray<DCSOutput> outArray("Out", 3);
+	
+	inArray.connect(&div0,{
+		"D",    // 0 - D
+		"LD",   // 1 - LD
+		"CLK",  // 2
+		"R",    // 3 - R
+		"S",    // 4 - S
+		"C_in"  // 6 - C_in
+	});
+	
+	uint64_t c = 5;
+	inArray[0]->makeSignal({120,2,1});
+	inArray[1]->makeSignal({13,3,1});
+	inArray[2]->makeSignal({c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c});
+	inArray[3]->makeSignal(0);
+	inArray[4]->makeSignal(0);
+	inArray[5]->makeSignal(0);
+
+	
+	div0.connect(&outArray, {"Q", "!Q", "C_out"});
+
 	DCSEngine::run(40);
 }

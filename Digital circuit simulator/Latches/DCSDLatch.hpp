@@ -28,13 +28,13 @@ Q:    | XXXX________
 
 class DCSDLatch: public DCSComponent {
 private:
-	DCSSRLatch srLatch0 = DCSSRLatch(this->name + "-SR0");
-	DCSAnd and0         = DCSAnd(this->name + "-And0");
-	DCSAnd and1         = DCSAnd(this->name + "-And1");
-	DCSNot not0         = DCSNot(this->name + "-Not0");
-	DCSUnitDelay del0   = DCSUnitDelay(this->name + "-Del0");
-	DCSNode node0       = DCSNode(this->name + "-Node0");
-	DCSNode node1       = DCSNode(this->name + "-Node1");
+	DCSSRLatch srLatch0 = DCSSRLatch(name + "-SR0");
+	DCSAnd and0         = DCSAnd(name + "-And0");
+	DCSAnd and1         = DCSAnd(name + "-And1");
+	DCSNot not0         = DCSNot(name + "-Not0");
+	DCSUnitDelay del0   = DCSUnitDelay(name + "-Del0");
+	DCSNode node0       = DCSNode(name + "-Node0");
+	DCSNode node1       = DCSNode(name + "-Node1");
 	
 public:
 	DCSDLatch(std::string name);

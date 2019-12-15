@@ -1,0 +1,76 @@
+//
+//  DCSClockDiv2WithEnableAndLoad.cpp
+//  Digital circuit simulator
+//
+//  Created by Antonio Astorino on 15/12/2019.
+//  Copyright © 2019 Antonio Astorino. All rights reserved.
+//
+
+#include "DCSHeader.h"
+
+DCSClockDiv2WithEnableAndLoad::DCSClockDiv2WithEnableAndLoad(std::string name):
+DCSComponent(name, false){
+	// D
+	node0.connect(&not0, 0, 0);
+	node0.connect(&and0, 0, 1);
+	// Load
+	node1.connect(&not1, 0, 0);
+	node1.connect(&and0, 0, 0);
+	node1.connect(&and1, 0, 0);
+	// Count in
+	node2.connect(&and2, 0, 1);
+	node2.connect(&and3, 0, 1);
+	// Others
+	not0.connect(&and1, 0, 1);
+	not1.connect(&and2, 0, 0);
+	and2.connect(&or0, 0, 1);
+	and2.connect(&or1, 0, 1);
+	and0.connect(&or0, 0, 0);
+	and1.connect(&or1, 0, 0);
+	or0.connect(&jk0, 0, 0);
+	or1.connect(&jk0, 0, 1);
+	jk0.connect(&and3, 0, 0);
+}
+
+DCSComponent* DCSClockDiv2WithEnableAndLoad::getOutComponent(ushort &outPinNum) {
+	if (outPinNum == 0 || outPinNum == 1) {
+		return jk0.getOutComponent(outPinNum);
+	}
+	else if (outPinNum == 2) {
+		outPinNum = 0;
+		return &and3;
+	}
+	else exit(-1);
+}
+DCSComponent* DCSClockDiv2WithEnableAndLoad::getInComponent(ushort &inPinNum) {
+	switch (inPinNum) {
+		case 0: // Data
+			return &node0;
+			break;
+		case 1: // Load
+			inPinNum = 0;
+			return &node1;
+			break;
+		case 2: // CLK
+			return jk0.getInComponent(inPinNum);
+			break;
+		case 3: // Clear
+			return jk0.getInComponent(inPinNum);
+			break;
+		case 4: // Preset
+			return jk0.getInComponent(inPinNum);
+			break;
+		case 5: // Enable
+			inPinNum = 0;
+			return &node2;
+			break;
+		default:
+			DCSLog::error(name, "Pin out of range");
+			break;
+	}
+	exit(-1);
+}
+
+void DCSClockDiv2WithEnableAndLoad::updateOut() {
+	DCSLog::error(name, "This function should never be called");
+}

@@ -48,6 +48,6 @@ DCSComponent* DCSRegister1Bit::getInComponent(ushort &inPinNum) {
 	exit(-1);
 }
 void DCSRegister1Bit::updateOut() {
-	
+	DCSLog::error(name, "This function should never be called");
 }
 

@@ -11,6 +11,7 @@
 
 #include "DCSEngine.hpp"
 #include "DCSAnd.hpp"
+#include "DCSAnd3.hpp"
 #include "DCSNand.hpp"
 #include "DCSOr.hpp"
 #include "DCSNot.hpp"
@@ -31,12 +32,19 @@
 #include "DCSDLatchAsyncSR.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSDFlipFlopAsyncSR.hpp"
+#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSRegister1Bit.hpp"
+
+#include "DCSClockDiv2WithEnableAndLoad.hpp"
+
 #include "DCSComponentArray.hpp"
+
+#include "DCSArbitrarySignal.hpp"
 
 #include "DCSLog.hpp"
 
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 #endif /* DCSHeader_h */

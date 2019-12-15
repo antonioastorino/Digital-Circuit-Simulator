@@ -88,6 +88,19 @@ void DCSComponent::connect(DCSComponent* to,
 	DCSEngine::addWire(wire);
 }
 
+void DCSComponent::connect(DCSComponent* to,
+						   std::vector<std::string> probeNames) {
+	ushort numOfOutPins = this->getNumOfOutPins();
+	ushort numOfInPins = to->getNumOfInPins();
+	if (numOfInPins != numOfOutPins) {
+		DCSLog::error(name, "Number of output pins do not coincide with number of in pins");
+	}
+	for (ushort i = 0; i < numOfInPins; i++) {
+		this->connect(to, i, i, probeNames[i]);
+	}
+	
+}
+
 std::string DCSComponent::getName() { return name; }
 
 DCSComponent* DCSComponent::getInComponent(ushort &inPinNum) {

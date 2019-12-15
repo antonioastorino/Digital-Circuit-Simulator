@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSNand3.hpp"
+#include "DCSHeader.h"
 
 DCSNand3::DCSNand3(std::string name):
 DCSComponent(name) {

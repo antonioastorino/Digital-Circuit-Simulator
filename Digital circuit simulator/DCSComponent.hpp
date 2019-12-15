@@ -58,10 +58,13 @@ public:
 	virtual int getTimeDelay() = 0; // Return the latency between input and output
 	virtual void updateOut() = 0;
 	
-	virtual void connect(DCSComponent* to,
-						 ushort outPinNum,
-						 ushort inPinNum,
-						 std::string probeName = "");
+	void connect(DCSComponent* to,
+				 ushort outPinNum,
+				 ushort inPinNum,
+				 std::string probeName = "");
+	
+	void connect(DCSComponent* to,
+				 std::vector<std::string> probeNames = {});
 	
 	virtual DCSComponent* getOutComponent(ushort &outPinNum);
 	virtual DCSComponent* getInComponent(ushort &inPinNum);

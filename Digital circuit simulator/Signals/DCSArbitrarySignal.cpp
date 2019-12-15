@@ -6,16 +6,14 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSArbitrarySignal.hpp"
-#include "DCSEngine.hpp"
-#include <iostream>
+#include "DCSHeader.h"
 
-DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool synch) {
+DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector,
+									   bool synch) {
 	if(levelDurationVector[0]) initVal = 0;
 	else initVal = 1;
 	
-	flipBitAtSteps.push_back(levelDurationVector[0]); // the first variation occurs when the first level ends
-	
+	flipBitAtSteps.push_back(levelDurationVector[0]);
 	totalDuration = levelDurationVector[0];
 
 	for (size_t i = 1 ; i < levelDurationVector.size(); i++) {
@@ -27,7 +25,8 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector
 
 bool DCSArbitrarySignal::getVal(uint32_t step) {
 	if (step != counter) {
-		std::cout << "Error: trying to access the value in non sequential order\n";
+		std::cout <<
+		"Error: trying to access the value in non sequential order\n";
 		exit(-1);
 	}
 	counter++;

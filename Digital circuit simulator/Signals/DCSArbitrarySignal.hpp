@@ -8,8 +8,6 @@
 
 #ifndef DCSArbitrarySignal_hpp
 #define DCSArbitrarySignal_hpp
-#include <string>
-#include <vector>
 
 typedef std::vector<uint64_t> binary_signal;
 
@@ -25,7 +23,8 @@ private:
 
 public:
 	DCSArbitrarySignal() = delete;
-	DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool synch = true);
+	DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector,
+					   bool synch = false);
 	bool getVal(uint32_t step);
 };
 

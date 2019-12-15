@@ -36,5 +36,5 @@ DCSComponent* DCSDFlipFlopAsyncSR::getInComponent(ushort &inPinNum) {
 }
 
 void DCSDFlipFlopAsyncSR::updateOut() {
-	throw "This function should never be called";
+	DCSLog::error(name, "This function should never be called");
 }
