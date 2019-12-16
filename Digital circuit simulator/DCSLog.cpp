@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSLog.hpp"
+#include "DCSHeader.h"
 
 bool DCSLog::verbose = false;
 

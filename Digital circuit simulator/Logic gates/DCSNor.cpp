@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSNor.hpp"
+#include "DCSHeader.h"
 
 DCSNor::DCSNor(std::string name):
 DCSComponent(name) {

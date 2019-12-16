@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSOr.hpp"
+#include "DCSHeader.h"
 
 DCSOr::DCSOr(std::string name):
 DCSComponent(name) {

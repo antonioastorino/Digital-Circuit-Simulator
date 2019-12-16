@@ -9,8 +9,6 @@
 #ifndef DCSComponentArray_hpp
 #define DCSComponentArray_hpp
 
-#include <vector>
-
 class DCSComponent;
 
 template<class T>

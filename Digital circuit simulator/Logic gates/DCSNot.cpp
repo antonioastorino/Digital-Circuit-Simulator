@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSNot.hpp"
+#include "DCSHeader.h"
 
 DCSNot::DCSNot(std::string name) :
 DCSComponent(name) {

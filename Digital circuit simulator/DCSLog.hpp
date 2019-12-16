@@ -9,8 +9,6 @@
 #ifndef DCSLog_hpp
 #define DCSLog_hpp
 
-#include <iostream>
-
 class DCSLog {
 public:
 	static bool verbose;

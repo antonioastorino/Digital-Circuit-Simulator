@@ -74,3 +74,12 @@ template class DCSComponentArray<DCSNor3>;
 template class DCSComponentArray<DCSNand3>;
 template class DCSComponentArray<DCSUnitDelay>;
 template class DCSComponentArray<DCSNode>;
+template class DCSComponentArray<DCSSRLatch>;
+template class DCSComponentArray<DCSDLatch>;
+template class DCSComponentArray<DCSDFlipFlop>;
+template class DCSComponentArray<DCSDLatchAsyncSR>;
+template class DCSComponentArray<DCSDFlipFlopAsyncSR>;
+template class DCSComponentArray<DCSRegister1Bit>;
+template class DCSComponentArray<DCSJKLatchMasterSlaveAsyncSR>;
+template class DCSComponentArray<DCSClockDiv2WithEnableAndLoad>;
+

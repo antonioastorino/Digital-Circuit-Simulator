@@ -9,7 +9,16 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-#include "DCSEngine.hpp"
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include "DCSLog.hpp"
+
+#include "DCSArbitrarySignal.hpp"
+
+#include "DCSComponent.hpp"
+#include "DCSComponentArray.hpp"
+
 #include "DCSAnd.hpp"
 #include "DCSAnd3.hpp"
 #include "DCSNand.hpp"
@@ -36,15 +45,10 @@
 #include "DCSRegister1Bit.hpp"
 
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
-#include "DCSComponentArray.hpp"
 
-#include "DCSArbitrarySignal.hpp"
+#include "DCSEngine.hpp"
 
-#include "DCSLog.hpp"
-
-#include <sstream>
-#include <iostream>
-#include <vector>
 
 #endif /* DCSHeader_h */
