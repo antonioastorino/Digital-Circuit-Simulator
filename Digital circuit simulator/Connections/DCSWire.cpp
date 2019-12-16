@@ -23,7 +23,7 @@ outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
-	std::cout << from->getName() << " out " << outPinNum << " --> " << to->getName() << " in " << inPinNum << "\n";
+	std::cout << from->getName() << " --> " << to->getName() << " in " << inPinNum << "\n";
 }
 
 std::string DCSWire::getProbeName() {
@@ -35,12 +35,8 @@ bool DCSWire::propagateValue() {
 	if (from->getEnabled()) {  // Check if a component is in high-Z state
 		bool outVal = from->getOutVal(outPinNum);
 		std::stringstream message;
-		if (to->getReachableIn(inPinNum)) {
-//			message << to->getName() << " pin " << inPinNum << " already updated";
-//			DCSLog::info(from->getName(), message.str());
+		if (to->getReachableIn(inPinNum)) { // If alread reached
 			propagated = false;
-		}
-		else {
 		}
 		message << "Propagating " << outVal << " from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
 		DCSLog::info(from->getName(), message.str());

@@ -23,6 +23,7 @@ void dLatchAsyncSRTest();
 void jkLatchMasterSlaveAsyncSRTest();
 void register1BitTest();
 void dividerTest();
+void upCounterTest();
 
 int main() {
 //	DCSLog::verbose = true;
@@ -43,8 +44,8 @@ int main() {
 //	dLatchAsyncSRTest();
 //	register1BitTest();
 //	jkLatchMasterSlaveAsyncSRTest();
-	dividerTest();
-	
+//	dividerTest();
+	upCounterTest();
 	
 	return 0;
 }
@@ -385,7 +386,7 @@ void dividerTest() {
 	inArray.connect(&div0,{
 		"D",    // 0 - D
 		"LD",   // 1 - LD
-		"CLK",  // 2
+		"CLK",  // 2 -CLK
 		"R",    // 3 - R
 		"S",    // 4 - S
 		"C_in"  // 6 - C_in
@@ -403,4 +404,47 @@ void dividerTest() {
 	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 
 	DCSEngine::run(40);
+}
+
+void upCounterTest() {
+	printTestName("Up counter");
+	DCSEngine::reset();
+	
+	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
+	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
+	DCSComponentArray<DCSOutput> outArray("Out", count0.getNumOfOutPins());
+	
+//	inArray.connect(&count0, {
+//		"C_in", "LD", "CLK", "CLR", "R", "S",
+//		"I0", "I1", "I2", "I3"});
+	inArray.connect(&count0, {
+		"C_in", "", "CLK", "", "", "",
+		"", "", "", "",
+		"", "", "", ""});
+
+	count0.connect(&outArray,{
+		"O0","O1","O2","O3",
+		"O4","O5","O6","O7",
+		"Cout"});
+	
+//	
+//
+	uint64_t c = count0.getTimeDelay()+1;
+	uint64_t cl = c +1;
+	uint64_t cs = c -1;
+	inArray[0]->makeSignal({14,
+		c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,
+		c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,cl,cs});
+//	inArray[1]->makeSignal({13,3,1});
+	inArray[2]->makeSignal({
+		c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,
+		c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c});
+	//	inArray[3]->makeSignal(0);
+//	inArray[4]->makeSignal(0);
+//	inArray[5]->makeSignal(0);
+//
+//	
+//	div0.connect(&outArray, {"Q", "!Q", "C_out"});
+//
+	DCSEngine::run(c * 512);
 }

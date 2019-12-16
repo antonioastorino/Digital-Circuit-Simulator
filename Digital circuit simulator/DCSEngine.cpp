@@ -35,27 +35,33 @@ void DCSEngine::addWire(DCSWire* p_wire) {
 }
 
 void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
-// this procedure propagates the first input value though the network. If there are no inputs connected (in case of free-running FSM), then it propagates the default output of all the components. It implements the BFS
+	/*
+	 This procedure propagates the first input value though the network.
+	 If there are no inputs connected (in case of free-running FSM)
+	 then `cVec` is empty. In this case, the algorithm uses all the components
+	 as starting propagation point using DSF.
+	 */
 	if (cVec.size() == 0) { cVec = componentVector; }
 	// Array of components from which to propagate at the next iteration
-	std::vector<DCSComponent*> leftComponentVector = {};
+	std::vector<DCSComponent*> newComponentVector = {};
 	DCSLog::info("Engine", "layer ------------------");
 	for (auto component: cVec) {
 		if (!(component->initialized) && component->getEnabled()){
 			component->updateOut();
 			if (component->isNode) {
-				leftComponentVector = component->rightComponentVector;
-				initialize(leftComponentVector);
+				newComponentVector = component->rightComponentVector;
+				initialize(newComponentVector);
 			}
 			else if (component->propagateValues()) {
-				leftComponentVector = component->rightComponentVector;
-				initialize(leftComponentVector);
+				newComponentVector = component->rightComponentVector;
+				if (newComponentVector.size()) //
+					initialize(newComponentVector);
 			}
 		}
 	}
 }
 
-void DCSEngine::run(int steps) {
+void DCSEngine::run(uint64_t steps) {
 	/* Check if all components are connected */
 	for (auto component: componentVector) {
 		if(!(component->isFullyConnected())) {

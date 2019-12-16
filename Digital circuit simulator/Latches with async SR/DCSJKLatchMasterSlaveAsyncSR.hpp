@@ -39,10 +39,10 @@ private:
 	DCSNot not0         = DCSNot(name + "-Not0");
 	DCSAnd and0         = DCSAnd(name + "-And0");
 	DCSAnd and1         = DCSAnd(name + "-And1");
-	DCSNor3 nor3_0      = DCSNor3(name + "-Nor3_0");
-	DCSNor3 nor3_1      = DCSNor3(name + "-Nor3_1");
-	DCSNor3 nor3_2      = DCSNor3(name + "-Nor3_2");
-	DCSNor3 nor3_3      = DCSNor3(name + "-Nor3_3");
+	DCSNor3 nor3_0      = DCSNor3(name + "-Master Q");
+	DCSNor3 nor3_1      = DCSNor3(name + "-Master !Q");
+	DCSNor3 nor3_2      = DCSNor3(name + "-Q");
+	DCSNor3 nor3_3      = DCSNor3(name + "-!Q");
 public:
 	DCSJKLatchMasterSlaveAsyncSR(std::string name);
 

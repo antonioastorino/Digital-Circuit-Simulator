@@ -19,9 +19,20 @@ name{name} {
 				cName << name << i;
 		// Indentation bug here: Xcode thinks that '<' is a bracket and expects '>>>>' to fix the indentation. Help!
 		T* component = new T(cName.str());
-//		component->setParent(this);
-		componentArray.push_back(component);
+		componentArray.push_back(component);		
+	}
+}
 		
+template<class T>
+DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray,
+										ushort numOfElements):
+DCSComponent("Array", false),
+numOfElements(numOfElements),
+name{"Array"} {
+	componentArray.reserve(numOfElements);
+	for (int i =0; i < numOfElements; i++) {
+		T* component = new T(nameArray[i]);
+		componentArray.push_back(component);
 	}
 }
 

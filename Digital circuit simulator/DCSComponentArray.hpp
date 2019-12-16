@@ -19,13 +19,18 @@ private:
 	ushort numOfElements;
 public:
 	DCSComponentArray(std::string name, ushort numOfElements);
+	DCSComponentArray(std::vector<std::string> nameVector, ushort numOfElements);
 	~DCSComponentArray();
 	
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	
-	ushort getNumOfInPins() override { return componentArray[0]->getNumOfInPins() * numOfElements; };
-	ushort getNumOfOutPins() override { return componentArray[0]->getNumOfOutPins() * numOfElements; };
+	ushort getNumOfInPins() override {
+		return componentArray[0]->getNumOfInPins() * numOfElements;
+	};
+	ushort getNumOfOutPins() override {
+		return componentArray[0]->getNumOfOutPins() * numOfElements;
+	};
 	
 	void updateOut() override;
 	int getTimeDelay() override { return 1; };
