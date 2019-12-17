@@ -6,8 +6,9 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 /*
- Input 4 (load) must be asserted at least 1 tau before input 1 (data) changes.
- Both have to be stable at least 2 tau before the rising edge of input 3 (clock) and remain stable at least 1 extra tau.
+ Input 4 (load) must be asserted at least 3 tau before the clock falling edge.
+ Input 0 (Data) must be stable at least 2 tau before the clock falling edge.
+ Both have to be stable for at least 1 tau after the clock falling edge.
  Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with input 4 low.
  Here is an example:
 	   |  ____
@@ -15,13 +16,22 @@
 	   |  ^ start
        |   ___
  DATA: | XX   XXXXXXXX
-	   |     __
- CLK:  | ____  _______
+	   | ____  _______
+ CLK:  |     __
 			     _____
  Q:    | ________
        | _______
  !Q:   |        ______
 			     ^ ready
+ 
+ PINOUT
+ Input 0: Data
+ Input 1: Clock
+ Input 2: Clear
+ Input 3: Preset
+ Input 4: Load
+ Out   0: Q
+ Out   1: !Q
  */
 
 #ifndef DCSRegister1Bit_hpp
@@ -30,8 +40,8 @@
 
 class DCSRegister1Bit: public DCSComponent {
 private:
-	DCSNode node0              = DCSNode(name + "-Node0");
-	DCSNot not0                = DCSNot(name + "-Not0");
+	DCSNode node0              = DCSNode(name + "-Load");
+	DCSNot not0                = DCSNot(name + "-Data");
 	DCSAnd and0                = DCSAnd(name + "-And0");
 	DCSAnd and1                = DCSAnd(name + "-And1");
 	DCSOr or0                  = DCSOr(name + "-Or0");

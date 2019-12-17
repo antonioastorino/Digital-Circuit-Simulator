@@ -24,6 +24,8 @@ void jkLatchMasterSlaveAsyncSRTest();
 void register1BitTest();
 void dividerTest();
 void upCounterTest();
+void register8BitsTest();
+void countAndStoreTest();
 
 int main() {
 //	DCSLog::verbose = true;
@@ -45,8 +47,9 @@ int main() {
 //	register1BitTest();
 //	jkLatchMasterSlaveAsyncSRTest();
 //	dividerTest();
-	upCounterTest();
-	
+//	upCounterTest();
+//	register8BitsTest();
+	countAndStoreTest();
 	return 0;
 }
 
@@ -347,10 +350,9 @@ void register1BitTest() {
 	printTestName("1-bit register");
 	DCSEngine::reset();
 	
-	binary_signal d = {13,3,10};
-	binary_signal clk{5,5,5,5,5,5,5,5,5,5,5,5,5};
-	binary_signal ld{12,40,40};
-	binary_signal reset{20, 2,1};
+	binary_signal d = {8,3,10};
+	binary_signal ld{0};
+
 
 	DCSRegister1Bit reg0("Reg0");
 	DCSComponentArray<DCSInput> inArray("In", 5);
@@ -358,20 +360,22 @@ void register1BitTest() {
 	DCSOutput O1("Out1");
 	
 	inArray.connect(&reg0, 1, 1, "CLK");
-	inArray.connect(&reg0, 4, 4, "LD");
+	inArray.connect(&reg0, 4, 4, "");
 	inArray.connect(&reg0, 0, 0, "D");
-	inArray.connect(&reg0, 2, 2, "R");
+	inArray.connect(&reg0, 2, 2, "");
 	inArray.connect(&reg0, 3, 3/*, "S"*/);
 	reg0.connect(&O0, 0, 0, " Q");
 	reg0.connect(&O1, 1, 0, "!Q");
 	
 	inArray[0]->makeSignal(d);
-	inArray[1]->makeSignal(clk);
-	inArray[2]->makeSignal(reset);
+	inArray[1]->makeClock();
+	inArray[2]->makeSignal(0);
 	inArray[3]->makeSignal(0);
-	inArray[4]->makeSignal(ld);
+	inArray[4]->makeSignal(1);
 	
-	DCSEngine::run(40);
+	DCSEngine::setHalfClockPeriod(10);
+	
+	DCSEngine::run(70);
 }
 
 
@@ -407,7 +411,7 @@ void dividerTest() {
 
 void upCounterTest() {
 	printTestName("Up counter");
-	DCSEngine::reset(1, true);
+	DCSEngine::reset();
 	
 	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
 	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
@@ -447,5 +451,90 @@ void upCounterTest() {
 //	
 //	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 //
-	DCSEngine::run(160);
+	DCSEngine::run(160, false);
+}
+
+void register8BitsTest() {
+	printTestName("8-bit register test");
+	DCSEngine::reset();
+	
+	DCSRegister8Bits reg0("reg0");
+	DCSComponentArray<DCSInput> inArray("In", reg0.getNumOfInPins());
+	DCSComponentArray<DCSOutput> outArray("Out", reg0.getNumOfOutPins());
+	
+//	inArray.connect(&count0, {
+//		"C_in", "LD", "CLK", "R", "S",
+//		"I0", "I1", "I2", "I3"});
+	inArray.connect(&reg0, {
+		"LD", "CLK", "", "",
+		"I", "I", "I", "I",
+		"I", "I", "I", "I"});
+
+	reg0.connect(&outArray,{
+		" O0","O1","O2","O3",
+		"O4","O5","O6","O7"});
+	
+//
+//
+	ushort clkHalfPeriod = reg0.getTimeDelay()/2+4;
+	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
+	
+	inArray[0]->makeSignal({1,1}, true);
+	inArray[1]->makeClock();
+	inArray[4]->makeSignal({1,1, 1, 1}, true);
+	inArray[5]->makeSignal({1,1, 1, 1}, true);
+	inArray[6]->makeSignal({1,1, 2}, true);
+	inArray[7]->makeSignal({1,1, 1, 1}, true);
+	inArray[8]->makeSignal({1,1, 1, 1}, true);
+	inArray[9]->makeSignal({1,1, 1, 1}, true);
+	inArray[10]->makeSignal({1,1, 1, 1}, true);
+	inArray[11]->makeSignal({1,1, 1, 1}, true);
+//	inArray[4]->makeSignal(0);
+//	inArray[5]->makeSignal(0);
+//
+//
+//	div0.connect(&outArray, {"Q", "!Q", "C_out"});
+//
+	DCSEngine::run(clkHalfPeriod * 10);
+}
+
+void countAndStoreTest() {
+	DCSEngine::reset();
+	
+	DCSUpCounterWithLoadAndAsyncSR count0("count0", 8);
+	DCSRegister8Bits reg8_0("reg8_0");
+	
+	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
+	DCSComponentArray<DCSInput> regInArray("R-in", 4);
+
+	DCSComponentArray<DCSOutput> outArray({"O", 8});
+
+	// connect input array to counter
+	inArray.connect(&count0);
+	// connect register control inputs
+	for (ushort i = 0; i < 4; i++) {
+		regInArray.connect(&reg8_0, i, i);
+	}
+	// connect counter out to register data in
+	for (ushort i = 0; i < 8; i++) {
+		count0.connect(&reg8_0, i, 4 + i, "C");
+	}
+	reg8_0.connect(&outArray, {
+		" O","O","O","O",
+		"O","O","O","O"
+	});
+	
+	// enable counting
+	inArray[0]->makeSignal(1);
+	// connect clock to counter
+	inArray[2]->makeClock();
+	// enable register write
+	regInArray[0]->makeSignal(1);
+	// connect clock to register
+	regInArray[1]->makeClock();
+	
+	ushort clockHalfPeriod = 8;
+	DCSEngine::setHalfClockPeriod(clockHalfPeriod);
+	
+	DCSEngine::run(128 * 4 * clockHalfPeriod, true);
 }

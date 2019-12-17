@@ -10,9 +10,9 @@
 
 DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) :
 DCSComponent(name, false) {
-	node0.connect(&not0, 0, 0);
-	node0.connect(&and0, 0, 0);
-	not0.connect(&del0, 0, 0);
+	not0.connect(&not1, 0, 0);
+	not0.connect(&and0, 0, 0);
+	not1.connect(&del0, 0, 0);
 	del0.connect(&and0, 0, 1);
 	and0.connect(&dLatSR0, 0, 1);
 }
@@ -30,7 +30,7 @@ DCSComponent* DCSDFlipFlopAsyncSR::getInComponent(ushort &inPinNum) {
 		return dLatSR0.getInComponent(inPinNum);
 	else if (inPinNum == 1) {
 		inPinNum = 0;
-		return &node0;
+		return &not0;
 	}
 	else exit(-1);
 }

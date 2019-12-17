@@ -17,8 +17,8 @@
 	   |   ^ start
        |   __
  K:    | XX  XXXXXXXX
-	   |    ________
- CLK:  | X__
+	   |    __
+ CLK:  | X__  \\\\\\  go down any time 2 tau after rising edge
 	   |    ^ stored
        |        _____
  Q:    | _______

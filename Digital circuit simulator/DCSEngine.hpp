@@ -29,11 +29,11 @@ private:
 	static void printLogicLevels();
 	static void propagateValues();
 public:
-	static void reset(ushort clockHalfPeriod=5, bool sampling=false);
+	static void reset(ushort clockHalfPeriod=5);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
-	static void run(uint64_t steps=10);
+	static void run(uint64_t steps=10, bool sampling=false);
 	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static int getClockPeriod();
 	static int getStepNumber();

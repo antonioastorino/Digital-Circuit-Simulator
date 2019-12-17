@@ -79,6 +79,7 @@ template class DCSComponentArray<DCSOutput>;
 template class DCSComponentArray<DCSAnd>;
 template class DCSComponentArray<DCSNand>;
 template class DCSComponentArray<DCSOr>;
+template class DCSComponentArray<DCSXor>;
 template class DCSComponentArray<DCSNot>;
 template class DCSComponentArray<DCSNor>;
 template class DCSComponentArray<DCSNor3>;

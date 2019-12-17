@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A90237F723A90DE6007A9985 /* DCSXor.cpp */; };
+		A90237FC23A9165E007A9985 /* DCSRegister8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A90237FA23A9165E007A9985 /* DCSRegister8Bits.cpp */; };
 		A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */; };
 		A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0CC238D9F9000655FC7 /* DCSNor.cpp */; };
 		A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */; };
@@ -52,6 +54,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A90237F723A90DE6007A9985 /* DCSXor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSXor.cpp; sourceTree = "<group>"; };
+		A90237F823A90DE7007A9985 /* DCSXor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSXor.hpp; sourceTree = "<group>"; };
+		A90237FA23A9165E007A9985 /* DCSRegister8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSRegister8Bits.cpp; sourceTree = "<group>"; };
+		A90237FB23A9165E007A9985 /* DCSRegister8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSRegister8Bits.hpp; sourceTree = "<group>"; };
 		A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSArbitrarySignal.cpp; sourceTree = "<group>"; };
 		A915F0CA238AF4E400655FC7 /* DCSArbitrarySignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSArbitrarySignal.hpp; sourceTree = "<group>"; };
 		A915F0CC238D9F9000655FC7 /* DCSNor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNor.cpp; sourceTree = "<group>"; };
@@ -127,6 +133,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A90237F623A90D12007A9985 /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				A9948A5523A4D3BB00D20F06 /* DCSRegister1Bit.hpp */,
+				A9948A5423A4D3BB00D20F06 /* DCSRegister1Bit.cpp */,
+				A90237FB23A9165E007A9985 /* DCSRegister8Bits.hpp */,
+				A90237FA23A9165E007A9985 /* DCSRegister8Bits.cpp */,
+			);
+			path = Memory;
+			sourceTree = "<group>";
+		};
 		A915F0CF23926ACB00655FC7 /* Latches */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +202,7 @@
 				A9482461238045BD00803F30 /* Logic gates */,
 				A915F0CF23926ACB00655FC7 /* Latches */,
 				A999F32223A3C9A600E0E6A6 /* Latches with async SR */,
+				A90237F623A90D12007A9985 /* Memory */,
 				A9948A5D23A63D1E00D20F06 /* Counters */,
 				A9482451237F49F500803F30 /* main.cpp */,
 			);
@@ -204,6 +222,8 @@
 				A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */,
 				A999F31C23A3B4BE00E0E6A6 /* DCSOr.hpp */,
 				A999F31B23A3B4BE00E0E6A6 /* DCSOr.cpp */,
+				A90237F823A90DE7007A9985 /* DCSXor.hpp */,
+				A90237F723A90DE6007A9985 /* DCSXor.cpp */,
 				A948245F2380459800803F30 /* DCSNot.hpp */,
 				A948245E2380459800803F30 /* DCSNot.cpp */,
 				A915F0CD238D9F9000655FC7 /* DCSNor.hpp */,
@@ -234,8 +254,6 @@
 				A999F32323A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp */,
 				A9948A5223A430C800D20F06 /* DCSDFlipFlopAsyncSR.hpp */,
 				A9948A5123A430C800D20F06 /* DCSDFlipFlopAsyncSR.cpp */,
-				A9948A5523A4D3BB00D20F06 /* DCSRegister1Bit.hpp */,
-				A9948A5423A4D3BB00D20F06 /* DCSRegister1Bit.cpp */,
 				A9948A5823A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.hpp */,
 				A9948A5723A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.cpp */,
 			);
@@ -327,6 +345,7 @@
 				A9948A5323A430C800D20F06 /* DCSDFlipFlopAsyncSR.cpp in Sources */,
 				A9948A6623A6DC7F00D20F06 /* DCSUpCounterWithLoadAndAsyncSR.cpp in Sources */,
 				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
+				A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
@@ -342,6 +361,7 @@
 				A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */,
 				A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */,
 				A9948A5623A4D3BB00D20F06 /* DCSRegister1Bit.cpp in Sources */,
+				A90237FC23A9165E007A9985 /* DCSRegister8Bits.cpp in Sources */,
 				A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */,
 				A94824602380459800803F30 /* DCSNot.cpp in Sources */,
 				A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */,

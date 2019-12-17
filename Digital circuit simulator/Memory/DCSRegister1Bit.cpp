@@ -24,20 +24,20 @@ DCSComponent* DCSRegister1Bit::getOutComponent(ushort &outPinNum) {
 }
 DCSComponent* DCSRegister1Bit::getInComponent(ushort &inPinNum) {
 	switch (inPinNum) {
-		case 0:
+		case 0: // Data
 			inPinNum = 1;
 			return &and1;
 			break;
-		case 1:
+		case 1: // Clock
 			return dffsr0.getInComponent(inPinNum);
 			break;
-		case 2:
+		case 2:  // Clear
 			return dffsr0.getInComponent(inPinNum);
 			break;
-		case 3:
+		case 3:  // Preset
 			return dffsr0.getInComponent(inPinNum);
 			break;
-		case 4:
+		case 4:  // Load
 			inPinNum = 0;
 			return &node0;
 			break;

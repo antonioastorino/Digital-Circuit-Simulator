@@ -28,6 +28,7 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSAnd3.hpp"
 #include "DCSNand.hpp"
 #include "DCSOr.hpp"
+#include "DCSXor.hpp"
 #include "DCSNot.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSNor.hpp"
@@ -48,6 +49,7 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSDFlipFlopAsyncSR.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSRegister1Bit.hpp"
+#include "DCSRegister8Bits.hpp"
 
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"

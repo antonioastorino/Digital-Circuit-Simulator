@@ -11,10 +11,10 @@
 
 class DCSDFlipFlopAsyncSR: public DCSComponent {
 private:
-	DCSNode node0            = DCSNode(name + "-Node0");
+	DCSNot not0              = DCSNot(name + "-CLK");
 	DCSDLatchAsyncSR dLatSR0 = DCSDLatchAsyncSR(name + "-DLatch0");
 	DCSAnd and0              = DCSAnd(name + "-And0");
-	DCSNot not0              = DCSNot(name + "-Not0");
+	DCSNot not1              = DCSNot(name + "-Not1");
 	DCSUnitDelay del0        = DCSUnitDelay(name + "-Del0");
 
 public:

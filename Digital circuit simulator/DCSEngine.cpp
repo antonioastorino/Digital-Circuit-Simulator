@@ -16,13 +16,12 @@ ushort DCSEngine::clockPeriod;
 ushort DCSEngine::stepNumber;
 bool DCSEngine::sampling;
 
-void DCSEngine::reset(ushort clockHalfPeriod, bool sampling) {
+void DCSEngine::reset(ushort clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
 	clockPeriod = 2 * clockHalfPeriod;
 	stepNumber = 0;
-	DCSEngine::sampling = sampling;
 }
 
 void DCSEngine::addComponent(DCSComponent* component) {
@@ -64,7 +63,8 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 	}
 }
 
-void DCSEngine::run(uint64_t steps) {
+void DCSEngine::run(uint64_t steps, bool sampling) {
+	DCSEngine::sampling = sampling;
 	/* Check if all components are connected */
 	for (auto component: componentVector) {
 		if(!(component->isFullyConnected())) {
