@@ -407,7 +407,7 @@ void dividerTest() {
 
 void upCounterTest() {
 	printTestName("Up counter");
-	DCSEngine::reset();
+	DCSEngine::reset(1, true);
 	
 	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
 	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
@@ -418,8 +418,8 @@ void upCounterTest() {
 //		"I0", "I1", "I2", "I3"});
 	inArray.connect(&count0, {
 		"C_in", "LD", "CLK", "", "",
-		"", "", "", "",
-		"", "", "", ""});
+		"I", "I", "I", "I",
+		"I", "I", "I", "I"});
 
 	count0.connect(&outArray,{
 		" O0","O1","O2","O3",
@@ -429,23 +429,23 @@ void upCounterTest() {
 //	
 //
 	DCSEngine::setHalfClockPeriod(count0.getTimeDelay()/2+1);
-	inArray[0]->makeSignal({1,1}, true);
-	inArray[1]->makeSignal({0,1,1}, true);
+	inArray[0]->makeSignal({2,1}, true);
+	inArray[1]->makeSignal({1,1,1}, true);
 	inArray[2]->makeClock();
 //	inArray[4]->makeSignal({0, 3, 1}, false);
 //	inArray[5]->makeSignal({0, 1, 1}, true);
-	inArray[6]->makeSignal({0, 1, 1}, true);
-	inArray[7]->makeSignal({0, 1, 1}, true);
-	inArray[8]->makeSignal({0, 1, 1}, true);
-	inArray[9]->makeSignal({0, 1, 1}, true);
-	inArray[10]->makeSignal({0, 1, 1}, true);
-	inArray[11]->makeSignal({0, 1, 1}, true);
-	inArray[12]->makeSignal({0, 1, 1}, true);
+	inArray[6]->makeSignal({1,1, 1, 1}, true);
+	inArray[7]->makeSignal({1,1, 1, 1}, true);
+	inArray[8]->makeSignal({1,1, 1, 1}, true);
+	inArray[9]->makeSignal({1,1, 1, 1}, true);
+	inArray[10]->makeSignal({1,1, 1, 1}, true);
+	inArray[11]->makeSignal({1,1, 1, 1}, true);
+	inArray[12]->makeSignal({1,1, 1, 1}, true);
 //	inArray[4]->makeSignal(0);
 //	inArray[5]->makeSignal(0);
 //
 //	
 //	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 //
-	DCSEngine::run(80);
+	DCSEngine::run(160);
 }

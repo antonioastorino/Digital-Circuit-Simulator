@@ -20,13 +20,16 @@ private:
 	static std::vector<DCSComponent*> componentVector;
 	static std::vector<DCSComponent*> inputVector;
 	static std::vector<DCSWire*> wireVector;
-	static int clockPeriod;
-	static int stepNumber;
+	
+	static ushort clockPeriod;
+	static ushort stepNumber;
+	static bool sampling;
+	
 	static void printProbes();
 	static void printLogicLevels();
 	static void propagateValues();
 public:
-	static void reset(ushort clockHalfPeriod = 5);
+	static void reset(ushort clockHalfPeriod=5, bool sampling=false);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
@@ -34,6 +37,7 @@ public:
 	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static int getClockPeriod();
 	static int getStepNumber();
+	static void setSampling(bool sampling);
 	static void setHalfClockPeriod(ushort numberOfTimeSteps);
 };
 

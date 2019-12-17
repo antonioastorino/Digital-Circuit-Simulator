@@ -37,8 +37,8 @@ numOfElements(numOfElements)
 		// cascade dividers
 		dividerArray[i]->connect(dividerArray[i+1],
 								 2, // Count out
-								 5, // Count in
-								 "C");
+								 5  // Count in
+								 );
 	}
 	// NOTE: The first Count in is an array input.
 	//       The last Count out is an array output.
