@@ -27,8 +27,8 @@ DCSComponent(name, false){
 	and2.connect(&or1, 0, 1);
 	and0.connect(&or0, 0, 0);
 	and1.connect(&or1, 0, 0);
-	or0.connect(&jk0, 0, 0);
-	or1.connect(&jk0, 0, 1);
+	or0.connect(&jk0, 0, 0); // to master J
+	or1.connect(&jk0, 0, 1); // to master K
 	jk0.connect(&and3, 0, 0);
 }
 

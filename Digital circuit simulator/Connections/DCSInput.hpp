@@ -13,21 +13,21 @@
 #ifndef DCSInput_hpp
 #define DCSInput_hpp
 
-#include "DCSComponent.hpp"
-#include "DCSArbitrarySignal.hpp"
 
 class DCSInput: public DCSComponent {
 private:
 	bool hasSignal = false;
 	bool constValue = 0;
-	DCSArbitrarySignal signal;
+	DCSArbitrarySignal *signal;
 public:
 	DCSInput(std::string name);
 	DCSInput(std::string name, bool initValue);
-	DCSInput(std::string name, binary_signal signal);
+	DCSInput(std::string name, binary_signal signal, bool synch = false);
+	~DCSInput();
 	
 	void makeSignal(bool constValue);
-	void makeSignal(binary_signal signal);
+	void makeSignal(binary_signal signal, bool synch=false);
+	void makeClock();
 	void updateOut() override;
 	
 	ushort getNumOfInPins() override { return 0; };

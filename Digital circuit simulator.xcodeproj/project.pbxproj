@@ -10,6 +10,7 @@
 		A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */; };
 		A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0CC238D9F9000655FC7 /* DCSNor.cpp */; };
 		A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */; };
+		A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -57,6 +58,8 @@
 		A915F0CD238D9F9000655FC7 /* DCSNor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNor.hpp; sourceTree = "<group>"; };
 		A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSSRLatch.cpp; sourceTree = "<group>"; };
 		A915F0D123926B3100655FC7 /* DCSSRLatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSSRLatch.hpp; sourceTree = "<group>"; };
+		A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSClockSignal.cpp; sourceTree = "<group>"; };
+		A93A1E5123A815E900980FC7 /* DCSClockSignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSClockSignal.hpp; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 			children = (
 				A915F0CA238AF4E400655FC7 /* DCSArbitrarySignal.hpp */,
 				A915F0C9238AF4E400655FC7 /* DCSArbitrarySignal.cpp */,
+				A93A1E5123A815E900980FC7 /* DCSClockSignal.hpp */,
+				A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */,
 			);
 			path = Signals;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */,
+				A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */,
 				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
 				A9948A5923A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.cpp in Sources */,
 				A9948A6323A6407100D20F06 /* DCSClockDiv2WithEnableAndLoad.cpp in Sources */,

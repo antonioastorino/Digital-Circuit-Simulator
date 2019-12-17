@@ -14,11 +14,11 @@ std::vector<DCSWire*> DCSEngine::wireVector = {};
 int DCSEngine::clockPeriod;
 int DCSEngine::stepNumber;
 
-void DCSEngine::reset() {
+void DCSEngine::reset(ushort clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
-	clockPeriod = 10;
+	clockPeriod = 2 * clockHalfPeriod;
 	stepNumber = 0;
 }
 
@@ -107,7 +107,7 @@ void DCSEngine::propagateValues() {
 void DCSEngine::printProbes() {
 	for (auto wire: wireVector) {
 		if (wire->getProbeName().length() > 0) {
-			std::cout << "  " << wire->getProbeName() << " ";
+			std::cout << " " << wire->getProbeName() << "";
 		}
 	}
 	std::cout << std::endl;
@@ -121,8 +121,8 @@ void DCSEngine::printLogicLevels() {
 				}
 				bool currVal = wire->getOutVal();
 				if (currVal)
-					std::cout << " 1 ";
-				else std::cout << " 0 ";
+					std::cout << "1";
+				else std::cout << "0";
 
 			}
 		}
@@ -132,7 +132,7 @@ void DCSEngine::printLogicLevels() {
 int DCSEngine::getClockPeriod() { return clockPeriod; };
 int DCSEngine::getStepNumber() { return stepNumber; }
 
-void DCSEngine::setClockPeriod(int numberOfTimeDelays) {
-	clockPeriod = numberOfTimeDelays;
+void DCSEngine::setHalfClockPeriod(ushort numberOfTimeSteps) {
+	clockPeriod = 2 *numberOfTimeSteps;
 };
 

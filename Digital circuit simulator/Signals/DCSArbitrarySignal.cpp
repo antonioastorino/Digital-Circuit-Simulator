@@ -13,13 +13,19 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector
 	if(levelDurationVector[0]) initVal = 0;
 	else initVal = 1;
 	
-	flipBitAtSteps.push_back(levelDurationVector[0]);
-	totalDuration = levelDurationVector[0];
+	uint64_t timeMultiplier = 1;
+	if (synch) timeMultiplier = DCSEngine::getClockPeriod();
+	
+	flipBitAtSteps.reserve(levelDurationVector.size());
+	
+	// add length as the fist value is used to initialize
+	
+	totalDuration = levelDurationVector[0] * timeMultiplier + 1;
+	flipBitAtSteps.push_back(totalDuration);
 
 	for (size_t i = 1 ; i < levelDurationVector.size(); i++) {
-		flipBitAtSteps.push_back(levelDurationVector[i] + flipBitAtSteps[i-1]);
-//		std::cout << flipBitAtSteps[i] << "\n";
-		totalDuration += levelDurationVector[i];
+		flipBitAtSteps.push_back(levelDurationVector[i] * timeMultiplier + flipBitAtSteps[i-1]);
+		totalDuration += levelDurationVector[i] * timeMultiplier;
 	}
 }
 

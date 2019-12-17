@@ -26,7 +26,7 @@ private:
 	static void printLogicLevels();
 	static void propagateValues();
 public:
-	static void reset();
+	static void reset(ushort clockHalfPeriod = 5);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
@@ -34,7 +34,7 @@ public:
 	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static int getClockPeriod();
 	static int getStepNumber();
-	static void setClockPeriod(int numberOfTimeDelays);
+	static void setHalfClockPeriod(ushort numberOfTimeSteps);
 };
 
 #endif /* DCSEngine_hpp */

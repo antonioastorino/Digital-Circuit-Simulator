@@ -9,12 +9,17 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
+
 #include <sstream>
 #include <iostream>
 #include <vector>
+
+typedef std::vector<uint64_t> binary_signal;
+
 #include "DCSLog.hpp"
 
 #include "DCSArbitrarySignal.hpp"
+#include "DCSClockSignal.hpp"
 
 #include "DCSComponent.hpp"
 #include "DCSComponentArray.hpp"

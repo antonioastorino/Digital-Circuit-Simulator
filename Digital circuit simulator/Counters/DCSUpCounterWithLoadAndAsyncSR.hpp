@@ -43,7 +43,7 @@
    1 |   X  |  X  |  Load
  ----+------+-----+---------
  
- According to the divider specs, C_IN need to be set not later than 2 tau after the clock rising edge. However, due to the cascade anding of the C_in signal in the counter, this time has to be anticipated by 1 tau for each additional divider. E.g. for 4-bit and 8-bit counters, C_IN has to be set not later than 1 tau and 5 tau before the clock rising edge, respectively.
+ Input 0 (Cout in) follows the rule of input 5 of the first divider. Therefore, it hast to be set from 3 to 1 tau before the clock rising edge. However, every Count in in the subsequent dividers is delayed by 1 tau. In addition, the output byte of the counter is ready 5 tau after the clock rising edge. As a consequence, supposing that the expected output is all 1's, the last Count in will be ready 5+N-1 tau after the clock rising edge and, as usual, has to be ready 3 tau before the next clock rising edge. Therefore, the clock period has to be at least 5+N-1+3 = 7+N tau.
  
  */
 
@@ -67,7 +67,7 @@ public:
 	ushort getNumOfOutPins() override {return 1 + numOfElements; };
 	
 	void updateOut() override;
-	int getTimeDelay() override { return 6; };
+	int getTimeDelay() override { return 7 + numOfElements; };
 };
 
 #endif /* DCSUpCounterWithLoadAndAsyncSR_hpp */

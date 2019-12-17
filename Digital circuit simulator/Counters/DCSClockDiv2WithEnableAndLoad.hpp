@@ -8,12 +8,12 @@
 /*
  This clock divider is mainly meant to be used as a building block for counters
  The minimum clock period is 10 (5 high + 5 low) tau.
- Reset and clear must be stable for at least 3 tau. Their effect is visible 3 tau after they are set.
- Inputs 0 (Data) and 1 (Load) must become stable not later than 3 tau before the clock rising edge and they have to remain stable for at least 2 tau after the that same time.
- Inputs 3 (Clear) and 4 (Preset) are directly connected to the internal JK master-slave.
- Input 5 (Count in) must be stable from not later 2 tau from the clock rising edge and stay stable from at least 4 tau after this clock transition.
  
- Output 2 (Count out) is high when input 5 and out 0 are high, with a delay of 1 tau. When connecting several dividers in cascade, this delay is multiplied by the number of dividers. This has to be taken into account when chosing the clock speed.
+ Inputs 0 (Data) and 1 (Load) must be stable for at least 4 tau before and 1 tau before the clock rising edge. The resulting output is displayed 5 time after the rising edge.
+ Inputs 3 (Clear) and 4 (Preset) are directly connected to the internal JK master-slave. They must be stable for at least 3 tau and their effect is visible 3 tau after they are set.
+ Input 5 (Count in) asserts both J and K in the internal latch with a delay of 2 tau. Therefore, it has to remain stable from 3 tau to 1 tau before the clock rising edge while Load is low.
+ 
+ Output 2 (Count out) is high when input 5 and out 0 are high, with a delay of 1 tau. When connecting several dividers in cascade, this delay is multiplied by the number of dividers. This has to be taken into account when chosing the clock speed. When counting
  
  */
 

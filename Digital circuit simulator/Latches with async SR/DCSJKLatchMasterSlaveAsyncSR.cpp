@@ -11,18 +11,18 @@
 DCSJKLatchMasterSlaveAsyncSR::DCSJKLatchMasterSlaveAsyncSR(std::string name) :
 DCSComponent(name, false) {
 	// Clock to SR master
-	node0.connect(&and3_0, 0, 2);
-	node0.connect(&and3_1, 0, 0);
-	node0.connect(&not0, 0, 0);
+	not0.connect(&and3_0, 0, 2);
+	not0.connect(&and3_1, 0, 0);
+	not0.connect(&not1, 0, 0);
 	// Clock to SR slave
-	not0.connect(&and0, 0, 1);
-	not0.connect(&and1, 0, 0);
+	not1.connect(&and0, 0, 1);
+	not1.connect(&and1, 0, 0);
 	// Clear
-	node1.connect(&nor3_2, 0, 2);
-	node1.connect(&nor3_1, 0, 2);
+	node0.connect(&nor3_2, 0, 2);
+	node0.connect(&nor3_1, 0, 2);
 	// Preset
-	node2.connect(&nor3_3, 0, 2);
-	node2.connect(&nor3_0, 0, 2);
+	node1.connect(&nor3_3, 0, 2);
+	node1.connect(&nor3_0, 0, 2);
 	// SR master
 	nor3_0.connect(&nor3_1, 0, 0);
 	nor3_1.connect(&nor3_0, 0, 1);
@@ -62,15 +62,15 @@ DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(ushort &inPinNum) {
 			break;
 		case 2: // CLK
 			inPinNum = 0;
-			return &node0;
+			return &not0;
 			break;
 		case 3: // Clear
 			inPinNum = 0;
-			return &node1;
+			return &node0;
 			break;
 		case 4: // Preset
 			inPinNum = 0;
-			return &node2;
+			return &node1;
 			break;
 		default:
 			break;

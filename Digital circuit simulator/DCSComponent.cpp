@@ -93,7 +93,10 @@ void DCSComponent::connect(DCSComponent* to,
 	ushort numOfOutPins = this->getNumOfOutPins();
 	ushort numOfInPins = to->getNumOfInPins();
 	if (numOfInPins != numOfOutPins) {
-		DCSLog::error(name, "Number of output pins do not coincide with number of in pins");
+		DCSLog::error(name, "Number of output pins does not coincide with number of in pins");
+	}
+	if (probeNames.size() != numOfInPins) {
+		DCSLog::error(name, "Number probe names does not coincide with number of connections");
 	}
 	for (ushort i = 0; i < numOfInPins; i++) {
 		this->connect(to, i, i, probeNames[i]);
