@@ -9,7 +9,6 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-
 #include <sstream>
 #include <iostream>
 #include <vector>

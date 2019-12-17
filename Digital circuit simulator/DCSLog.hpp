@@ -11,10 +11,9 @@
 
 class DCSLog {
 public:
-	static bool verbose;
-	
+	static void output(uint64_t stepNumber, std::string message);
 	static void info(std::string callerName, std::string message);
-	
+	static void debug(std::string callerName, std::string message);
 	static void error(std::string callerName, std::string message);
 	
 };

@@ -23,7 +23,9 @@ outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
-	std::cout << from->getName() << " --> " << to->getName() << " in " << inPinNum << "\n";
+	std::stringstream s;
+	s << from->getName() << " --> " << to->getName() << " in " << inPinNum << "\n";
+	DCSLog::info("", s.str());
 }
 
 std::string DCSWire::getProbeName() {
@@ -39,7 +41,7 @@ bool DCSWire::propagateValue() {
 			propagated = false;
 		}
 		message << "Propagating " << outVal << " from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
-		DCSLog::info(from->getName(), message.str());
+		DCSLog::debug(from->getName(), message.str());
 		to->setIn(outVal, inPinNum);
 	}
 	return propagated;

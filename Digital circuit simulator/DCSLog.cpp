@@ -8,13 +8,26 @@
 
 #include "DCSHeader.h"
 
-bool DCSLog::verbose = false;
+#define LOG_LEVEL 1
+
+void DCSLog::output(uint64_t stepNumber, std::string message) {
+#if LOG_LEVEL>0
+		std::cout << message << "    " << stepNumber << "\n";
+#endif
+}
 
 void DCSLog::info(std::string callerName, std::string message) {
-	if (verbose) {
-		std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
-	}
+#if LOG_LEVEL>1
+	std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
+#endif
 }
+
+void DCSLog::debug(std::string callerName, std::string message) {
+#if LOG_LEVEL>2
+	std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
+#endif
+}
+
 
 void DCSLog::error(std::string callerName, std::string message) {
 	std::cout << "ERROR: " << callerName << " says: '" << message << "!'\n";

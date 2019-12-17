@@ -46,7 +46,6 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 	if (cVec.size() == 0) { cVec = componentVector; }
 	// Array of components from which to propagate at the next iteration
 	std::vector<DCSComponent*> newComponentVector = {};
-	DCSLog::info("Engine", "layer ------------------");
 	for (auto component: cVec) {
 		if (!(component->initialized) && component->getEnabled()){
 			component->updateOut();
@@ -73,16 +72,16 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 	}
 	
 	DCSLog::info("Engine", "\n--------------Initialization start--------------\n");
-	DCSEngine::initialize();
+	initialize();
 	DCSLog::info("Engine", "\n---------------Initialization end---------------\n");
 	
 	for (auto component: componentVector) {
 		if (!(component->initialized)) {
-			std::cout << component->getName() << " not connected \n";
+			DCSLog::info(component->getName(), "not connected");
 		}
 	}
 	// update output values of initial layer (input vector)
-	DCSEngine::printProbes();
+	printProbes();
 	for (int i = 1; i < steps; i++) {
 		stepNumber = i;
 		
@@ -101,29 +100,30 @@ void DCSEngine::propagateValues() {
 }
 
 void DCSEngine::printProbes() {
+	std::stringstream s;
 	for (auto wire: wireVector) {
 		if (wire->getProbeName().length() > 0) {
-			std::cout << " " << wire->getProbeName() << "";
+			s << " " << wire->getProbeName() << "";
 		}
 	}
-	std::cout << std::endl;
+	DCSLog::output(0, s.str());
 }
 
 void DCSEngine::printLogicLevels() {
 	if (!sampling || DCSEngine::stepNumber % (clockPeriod/2) == 1) {
+		std::stringstream s;
 		for (auto wire: wireVector) {
 			if (wire->getProbeName().length() > 0) {
 				for (int i = 0; i < wire->getProbeName().length(); i++) {
-					std::cout << ' ';
+					s << ' ';
 				}
 				bool currVal = wire->getOutVal();
 				if (currVal)
-					std::cout << "1";
-				else std::cout << "0";
-				
+					s << "1";
+				else s << "0";
 			}
 		}
-		std::cout << "     " << stepNumber - 1 << "\n";
+		DCSLog::output(stepNumber, s.str());
 	}
 }
 

@@ -8,6 +8,8 @@
 
 #include "DCSHeader.h"
 
+
+
 void printTestName(std::string testName);
 void srLatchTest();
 void notLoopTest();
@@ -28,8 +30,7 @@ void register8BitsTest();
 void countAndStoreTest();
 
 int main() {
-//	DCSLog::verbose = true;
-	
+
 //	srLatchTest();
 //	notLoopTest();
 //	unitDelayTest();
@@ -536,5 +537,5 @@ void countAndStoreTest() {
 	ushort clockHalfPeriod = 8;
 	DCSEngine::setHalfClockPeriod(clockHalfPeriod);
 	
-	DCSEngine::run(128 * 4 * clockHalfPeriod, true);
+	DCSEngine::run(512 * clockHalfPeriod, true);
 }
