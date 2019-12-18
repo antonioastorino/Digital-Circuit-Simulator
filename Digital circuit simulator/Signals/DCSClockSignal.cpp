@@ -8,8 +8,11 @@
 
 #include "DCSHeader.h"
 
-DCSClockSignal::DCSClockSignal():
-DCSArbitrarySignal({0}) { }
+DCSClockSignal::DCSClockSignal(ushort halfPeriod):
+DCSArbitrarySignal({0}) {
+	if (halfPeriod) this->halfPeriod = halfPeriod;
+	else this->halfPeriod = DCSEngine::getClockPeriod() / 2;
+}
 
 bool DCSClockSignal::getVal(uint32_t step) {
 	if (step != counter) {
@@ -19,7 +22,7 @@ bool DCSClockSignal::getVal(uint32_t step) {
 	}
 	counter++;
 	// Shift the commutation by 1 tau because the first one is used to initialize the system
-	if (step % (DCSEngine::getClockPeriod() / 2) == 1) {
+	if (step % (halfPeriod) == 1) {
 		currVal = !currVal;
 	}
 	return currVal;

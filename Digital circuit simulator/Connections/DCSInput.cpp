@@ -43,8 +43,8 @@ void DCSInput::makeSignal(binary_signal signal, bool synch) {
 	hasSignal = true;
 }
 
-void DCSInput::makeClock() {
-	this->signal = new DCSClockSignal();
+void DCSInput::makeClock(ushort halfPeriod) {
+	this->signal = new DCSClockSignal(halfPeriod);
 	hasSignal = true;
 }
 

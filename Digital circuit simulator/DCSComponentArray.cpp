@@ -12,17 +12,16 @@ template<class T>
 DCSComponentArray<T>::DCSComponentArray(std::string name, ushort numOfElements):
 DCSComponent(name, false),
 numOfElements(numOfElements),
-name{name} {
+name({name}) {
 	componentArray.reserve(numOfElements);
 	for (int i =0; i < numOfElements; i++) {
 		std::stringstream cName;
-				cName << name << i;
-		// Indentation bug here: Xcode thinks that '<' is a bracket and expects '>>>>' to fix the indentation. Help!
+		cName << name << i;
 		T* component = new T(cName.str());
-		componentArray.push_back(component);		
+		componentArray.push_back(component);
 	}
 }
-		
+
 template<class T>
 DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray,
 										ushort numOfElements):
@@ -50,8 +49,8 @@ DCSComponent* DCSComponentArray<T>::getOutComponent(ushort &outPinNum) {
 	outPinNum %= numOfOutPins;
 	return componentArray[oldPin / numOfOutPins];
 }
-		
-		
+
+
 template<class T>
 DCSComponent* DCSComponentArray<T>::getInComponent(ushort &inPinNum) {
 	ushort oldPin = inPinNum;
@@ -59,14 +58,13 @@ DCSComponent* DCSComponentArray<T>::getInComponent(ushort &inPinNum) {
 	inPinNum %= numOfInPins;
 	return componentArray[oldPin / numOfInPins];
 }
-		
+
 template<class T>
 void DCSComponentArray<T>::updateOut() {
 	out = 0;
 	for (uint64_t i = 0; i < numOfElements; i++) {
 		out |= componentArray[i]->getOutVec() << (i * getNumOfOutPins());
 	}
-//	updateParentOut();
 }
 
 template<class T>
@@ -76,7 +74,12 @@ T* DCSComponentArray<T>::operator [] (ushort  elemNum) {
 
 template class DCSComponentArray<DCSInput>;
 template class DCSComponentArray<DCSOutput>;
+template class DCSComponentArray<DCSTriStateBuffer>;
+template class DCSComponentArray<DCSTriStateBuffer8Bits>;
 template class DCSComponentArray<DCSAnd>;
+template class DCSComponentArray<DCSAnd3>;
+template class DCSComponentArray<DCSAnd4>;
+template class DCSComponentArray<DCSAnd6>;
 template class DCSComponentArray<DCSNand>;
 template class DCSComponentArray<DCSOr>;
 template class DCSComponentArray<DCSXor>;
@@ -92,6 +95,7 @@ template class DCSComponentArray<DCSDFlipFlop>;
 template class DCSComponentArray<DCSDLatchAsyncSR>;
 template class DCSComponentArray<DCSDFlipFlopAsyncSR>;
 template class DCSComponentArray<DCSRegister1Bit>;
+template class DCSComponentArray<DCSRegister8Bits>;
 template class DCSComponentArray<DCSJKLatchMasterSlaveAsyncSR>;
 template class DCSComponentArray<DCSClockDiv2WithEnableAndLoad>;
 

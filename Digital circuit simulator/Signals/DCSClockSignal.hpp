@@ -10,8 +10,10 @@
 #define DCSClockSignal_hpp
 
 class DCSClockSignal: public DCSArbitrarySignal {
+private:
+	ushort halfPeriod;
 public:
-	DCSClockSignal();
+	DCSClockSignal(ushort halfPeriod=0);
 	
 	bool getVal(uint32_t step) override;
 };

@@ -19,7 +19,9 @@ void dFlipFlopTest();
 void triStateBufferTest();
 void gateArrayTest();
 void orTest();
-void nor3Test();void nand3Test();
+void nor3Test();
+void nand3Test();
+void and6Test();
 void dLatchTest();
 void dLatchAsyncSRTest();
 void jkLatchMasterSlaveAsyncSRTest();
@@ -28,6 +30,7 @@ void dividerTest();
 void upCounterTest();
 void register8BitsTest();
 void countAndStoreTest();
+void ramTest();
 
 int main() {
 
@@ -41,6 +44,7 @@ int main() {
 //	gateArrayTest();
 //	orTest();
 //	nor3Test();
+//	and6Test();
 //	nand3Test();
 //
 //	dLatchTest();
@@ -50,7 +54,8 @@ int main() {
 //	dividerTest();
 //	upCounterTest();
 //	register8BitsTest();
-	countAndStoreTest();
+//	countAndStoreTest();
+	ramTest();
 	return 0;
 }
 
@@ -268,6 +273,25 @@ void nand3Test() {
 	nand3_0.connect(&out0, 0, 0, "Out");
 	
 	DCSEngine::run(20);
+}
+
+void and6Test() {
+	printTestName("And 6");
+	DCSEngine::reset(8);
+
+	DCSComponentArray<DCSInput> inArray("In", 6);
+	DCSAnd6 and6_0("And6_0");
+	DCSOutput out0("Out0");
+	
+	inArray.connect(&and6_0, {"I"});
+	and6_0.connect(&out0, {"O"});
+	
+	for (ushort i = 0; i < 6; i ++) {
+		inArray[i]->makeClock(1<<(i+1));
+	}
+
+	DCSEngine::run(129, false);
+	
 }
 
 void dLatchTest() {
@@ -538,4 +562,24 @@ void countAndStoreTest() {
 	DCSEngine::setHalfClockPeriod(clockHalfPeriod);
 	
 	DCSEngine::run(512 * clockHalfPeriod, true);
+}
+
+void ramTest() {
+	DCSEngine::reset(10);
+	DCSAddressDecoder4Bits         addr4("Addr");
+	DCSComponentArray<DCSInput>    inArray0("In", 9);
+	DCSUpCounterWithLoadAndAsyncSR count0("Count0", 4);
+	DCSComponentArray<DCSOutput>   out("Out", 16);
+	
+	inArray0.connect(&count0, {""});
+	for (ushort i = 0; i < 4; i ++) {
+		count0.connect(&addr4, i, i, "");
+	}
+	addr4.connect(&out, {"O"});
+	
+	inArray0[0]->makeSignal(1);
+	inArray0[2]->makeClock();
+	
+	DCSEngine::run(20 * 18, true);
+
 }

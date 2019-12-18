@@ -6,6 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 /*
+ 
  This clock divider is mainly meant to be used as a building block for counters
  The minimum clock period is 10 (5 high + 5 low) tau.
  

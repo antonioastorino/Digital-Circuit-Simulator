@@ -10,7 +10,7 @@
 
 DCSComponent::DCSComponent(std::string name, bool add):
 enabled(true),		// only 3-state buffer can be disabled
-name{name},
+name({name}),
 reachableIn(0),
 connectedIn(0),
 fromTristateIn(0),
@@ -95,17 +95,22 @@ void DCSComponent::connect(DCSComponent* to,
 	if (numOfInPins != numOfOutPins) {
 		DCSLog::error(name, "Number of output pins does not coincide with number of in pins");
 	}
-	if (probeNames.size() > 0) {
+	if (probeNames.size() == 0) {
+		for (ushort i = 0; i < numOfInPins; i++) {
+			this->connect(to, i, i);
+		}
+	}
+	else if (probeNames.size() == 1) {
+		for (ushort i = 0; i < numOfInPins; i++) {
+			this->connect(to, i, i, probeNames[0]);
+		}
+	}
+	else {
 		if (probeNames.size() != numOfInPins) {
 			DCSLog::error(name, "Number probe names does not coincide with number of connections");
 		}
 		for (ushort i = 0; i < numOfInPins; i++) {
 			this->connect(to, i, i, probeNames[i]);
-		}
-	}
-	else {
-		for (ushort i = 0; i < numOfInPins; i++) {
-			this->connect(to, i, i);
 		}
 	}
 }

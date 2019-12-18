@@ -10,7 +10,7 @@
 
 DCSRegister8Bits::DCSRegister8Bits(std::string name) :
 DCSComponent(name, false),
-registerArray(name, 8),
+registerArray(name + "-reg", 8),
 nodeArray({"Load", "Clock", "Clear", "Preset"}, 4) {
 	for (ushort i = 0; i < 8; i++) {
 		nodeArray[0]->connect(registerArray[i], 0, 4); // Load

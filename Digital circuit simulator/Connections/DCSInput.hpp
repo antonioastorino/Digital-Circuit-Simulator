@@ -27,7 +27,7 @@ public:
 	
 	void makeSignal(bool constValue);
 	void makeSignal(binary_signal signal, bool synch=false);
-	void makeClock();
+	void makeClock(ushort halfPeriod=0);
 	void updateOut() override;
 	
 	ushort getNumOfInPins() override { return 0; };

@@ -9,7 +9,7 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-#define LOG_LEVEL 1
+#define LOG_LEVEL 2
 
 #include <sstream>
 #include <iostream>
@@ -27,6 +27,8 @@ typedef std::vector<uint64_t> binary_signal;
 
 #include "DCSAnd.hpp"
 #include "DCSAnd3.hpp"
+#include "DCSAnd4.hpp"
+#include "DCSAnd6.hpp"
 #include "DCSNand.hpp"
 #include "DCSOr.hpp"
 #include "DCSXor.hpp"
@@ -35,13 +37,16 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSNor.hpp"
 #include "DCSNor3.hpp"
 #include "DCSNand3.hpp"
-#include "DCSTriStateBuffer.hpp"
 
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 
 #include "DCSWire.hpp"
 #include "DCSNode.hpp"
+
+#include "DCSAddressDecoder4Bits.hpp"
+#include "DCSTriStateBuffer.hpp"
+#include "DCSTriStateBuffer8Bits.hpp"
 
 #include "DCSSRLatch.hpp"
 #include "DCSDLatch.hpp"
@@ -51,10 +56,11 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSRegister8Bits.hpp"
+//#include "DCSRam8Bits.hpp"
+
 
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
-
 
 #include "DCSEngine.hpp"
 

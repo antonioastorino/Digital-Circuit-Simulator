@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSTriStateBuffer.hpp"
+#include "DCSHeader.h"
 
 DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :
 DCSComponent(name) {

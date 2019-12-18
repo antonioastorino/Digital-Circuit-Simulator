@@ -17,6 +17,11 @@
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
 		A94824602380459800803F30 /* DCSNot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245E2380459800803F30 /* DCSNot.cpp */; };
+		A94A6CC823AA45A000B3E83D /* DCSRam8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CC623AA45A000B3E83D /* DCSRam8Bits.cpp */; };
+		A94A6CCE23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CCC23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp */; };
+		A94A6CD223AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CD023AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp */; };
+		A94A6CD523AA6C8500B3E83D /* DCSAnd4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CD323AA6C8500B3E83D /* DCSAnd4.cpp */; };
+		A94A6CD823AACAC200B3E83D /* DCSAnd6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CD623AACAC200B3E83D /* DCSAnd6.cpp */; };
 		A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */; };
 		A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */; };
 		A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9948A4B23A41A6600D20F06 /* DCSNand3.cpp */; };
@@ -74,6 +79,16 @@
 		A948245C237F5E1B00803F30 /* DCSComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSComponent.hpp; sourceTree = "<group>"; };
 		A948245E2380459800803F30 /* DCSNot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSNot.cpp; sourceTree = "<group>"; };
 		A948245F2380459800803F30 /* DCSNot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSNot.hpp; sourceTree = "<group>"; };
+		A94A6CC623AA45A000B3E83D /* DCSRam8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSRam8Bits.cpp; sourceTree = "<group>"; };
+		A94A6CC723AA45A000B3E83D /* DCSRam8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSRam8Bits.hpp; sourceTree = "<group>"; };
+		A94A6CCC23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSTriStateBuffer8Bits.cpp; sourceTree = "<group>"; };
+		A94A6CCD23AA485600B3E83D /* DCSTriStateBuffer8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSTriStateBuffer8Bits.hpp; sourceTree = "<group>"; };
+		A94A6CD023AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAddressDecoder4Bits.cpp; sourceTree = "<group>"; };
+		A94A6CD123AA6A1200B3E83D /* DCSAddressDecoder4Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSAddressDecoder4Bits.hpp; sourceTree = "<group>"; };
+		A94A6CD323AA6C8500B3E83D /* DCSAnd4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd4.cpp; sourceTree = "<group>"; };
+		A94A6CD423AA6C8500B3E83D /* DCSAnd4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSAnd4.hpp; sourceTree = "<group>"; };
+		A94A6CD623AACAC200B3E83D /* DCSAnd6.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd6.cpp; sourceTree = "<group>"; };
+		A94A6CD723AACAC200B3E83D /* DCSAnd6.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSAnd6.hpp; sourceTree = "<group>"; };
 		A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSComponentArray.cpp; sourceTree = "<group>"; };
 		A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSComponentArray.hpp; sourceTree = "<group>"; };
 		A95D55C923A2DAA000701DE9 /* DCSHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCSHeader.h; sourceTree = "<group>"; };
@@ -140,6 +155,8 @@
 				A9948A5423A4D3BB00D20F06 /* DCSRegister1Bit.cpp */,
 				A90237FB23A9165E007A9985 /* DCSRegister8Bits.hpp */,
 				A90237FA23A9165E007A9985 /* DCSRegister8Bits.cpp */,
+				A94A6CC723AA45A000B3E83D /* DCSRam8Bits.hpp */,
+				A94A6CC623AA45A000B3E83D /* DCSRam8Bits.cpp */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -202,6 +219,7 @@
 				A9482461238045BD00803F30 /* Logic gates */,
 				A915F0CF23926ACB00655FC7 /* Latches */,
 				A999F32223A3C9A600E0E6A6 /* Latches with async SR */,
+				A94A6CCF23AA69DC00B3E83D /* Decoders */,
 				A90237F623A90D12007A9985 /* Memory */,
 				A9948A5D23A63D1E00D20F06 /* Counters */,
 				A9482451237F49F500803F30 /* main.cpp */,
@@ -216,6 +234,10 @@
 				A9482458237F4A2C00803F30 /* DCSAnd.cpp */,
 				A9948A5B23A543B000D20F06 /* DCSAnd3.hpp */,
 				A9948A5A23A543B000D20F06 /* DCSAnd3.cpp */,
+				A94A6CD423AA6C8500B3E83D /* DCSAnd4.hpp */,
+				A94A6CD323AA6C8500B3E83D /* DCSAnd4.cpp */,
+				A94A6CD723AACAC200B3E83D /* DCSAnd6.hpp */,
+				A94A6CD623AACAC200B3E83D /* DCSAnd6.cpp */,
 				A9948A4F23A41CCE00D20F06 /* DCSNand.hpp */,
 				A9948A4E23A41CCE00D20F06 /* DCSNand.cpp */,
 				A9948A4C23A41A6600D20F06 /* DCSNand3.hpp */,
@@ -234,6 +256,15 @@
 				A9C2D19F239CF9B6008CAF81 /* DCSUnitDelay.cpp */,
 			);
 			path = "Logic gates";
+			sourceTree = "<group>";
+		};
+		A94A6CCF23AA69DC00B3E83D /* Decoders */ = {
+			isa = PBXGroup;
+			children = (
+				A94A6CD023AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp */,
+				A94A6CD123AA6A1200B3E83D /* DCSAddressDecoder4Bits.hpp */,
+			);
+			path = Decoders;
 			sourceTree = "<group>";
 		};
 		A9948A5D23A63D1E00D20F06 /* Counters */ = {
@@ -273,6 +304,8 @@
 				A9C2D19223944B72008CAF81 /* DCSOutput.cpp */,
 				A96BAB6F23A2542F00E7A42E /* DCSTriStateBuffer.hpp */,
 				A96BAB6E23A2542F00E7A42E /* DCSTriStateBuffer.cpp */,
+				A94A6CCD23AA485600B3E83D /* DCSTriStateBuffer8Bits.hpp */,
+				A94A6CCC23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp */,
 			);
 			path = Connections;
 			sourceTree = "<group>";
@@ -335,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */,
+				A94A6CD823AACAC200B3E83D /* DCSAnd6.cpp in Sources */,
 				A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */,
 				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
 				A9948A5923A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.cpp in Sources */,
@@ -349,6 +383,8 @@
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
+				A94A6CD223AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp in Sources */,
+				A94A6CCE23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp in Sources */,
 				A999F32523A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp in Sources */,
 				A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */,
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
@@ -365,7 +401,9 @@
 				A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */,
 				A94824602380459800803F30 /* DCSNot.cpp in Sources */,
 				A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */,
+				A94A6CD523AA6C8500B3E83D /* DCSAnd4.cpp in Sources */,
 				A9482452237F49F500803F30 /* main.cpp in Sources */,
+				A94A6CC823AA45A000B3E83D /* DCSRam8Bits.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

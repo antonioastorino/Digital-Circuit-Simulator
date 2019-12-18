@@ -22,7 +22,7 @@
  Out   0: Out bit 0
  Out   1: Out bit 1
  ...
- */
+ */                         
 
 #ifndef DCSRegister8Bits_hpp
 #define DCSRegister8Bits_hpp
