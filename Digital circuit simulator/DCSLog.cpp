@@ -8,8 +8,6 @@
 
 #include "DCSHeader.h"
 
-#define LOG_LEVEL 1
-
 void DCSLog::output(uint64_t stepNumber, std::string message) {
 #if LOG_LEVEL>0
 		std::cout << message << "    " << stepNumber << "\n";

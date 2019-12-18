@@ -6,11 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSWire.hpp"
-#include "DCSComponent.hpp"
-#include "DCSLog.hpp"
-#include <iostream>
-#include <sstream>
+#include "DCSHeader.h"
 
 DCSWire::DCSWire(DCSComponent* from,
 				 ushort outPinNum,
@@ -23,9 +19,11 @@ outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
+#if LOG_LEVEL>1
 	std::stringstream s;
-	s << from->getName() << " --> " << to->getName() << " in " << inPinNum << "\n";
+	s << from->getName() << " --> " << to->getName() << " in " << inPinNum;
 	DCSLog::info("", s.str());
+#endif
 }
 
 std::string DCSWire::getProbeName() {
@@ -36,13 +34,15 @@ bool DCSWire::propagateValue() {
 	bool propagated = true;
 	if (from->getEnabled()) {  // Check if a component is in high-Z state
 		bool outVal = from->getOutVal(outPinNum);
-		std::stringstream message;
 		if (to->getReachableIn(inPinNum)) { // If alread reached
 			propagated = false;
 		}
-		message << "Propagating " << outVal << " from out " << outPinNum << " to " << to->getName() << " in " << inPinNum;
-		DCSLog::debug(from->getName(), message.str());
 		to->setIn(outVal, inPinNum);
+#if LOG_LEVEL>2
+		std::stringstream message;
+		message << "Sending" << outVal << " to " << to->getName() << " in " << inPinNum;
+		DCSLog::debug(from->getName(), message.str());
+#endif
 	}
 	return propagated;
 }

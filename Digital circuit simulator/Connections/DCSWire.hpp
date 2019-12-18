@@ -9,9 +9,6 @@
 #ifndef DCSWire_hpp
 #define DCSWire_hpp
 
-#include <string>
-#include <iostream>
-
 class DCSComponent;
 
 class DCSWire {
