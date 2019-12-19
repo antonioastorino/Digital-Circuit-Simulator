@@ -47,7 +47,7 @@ DCSComponent* DCSComponentArray<T>::getOutComponent(ushort &outPinNum) {
 	ushort oldPin = outPinNum;
 	ushort numOfOutPins = componentArray[0]->getNumOfOutPins();
 	outPinNum %= numOfOutPins;
-	return componentArray[oldPin / numOfOutPins];
+	return componentArray[oldPin / numOfOutPins]->getOutComponent(outPinNum);
 }
 
 
@@ -56,7 +56,7 @@ DCSComponent* DCSComponentArray<T>::getInComponent(ushort &inPinNum) {
 	ushort oldPin = inPinNum;
 	ushort numOfInPins = componentArray[0]->getNumOfInPins();
 	inPinNum %= numOfInPins;
-	return componentArray[oldPin / numOfInPins];
+	return componentArray[oldPin / numOfInPins]->getInComponent(inPinNum);
 }
 
 template<class T>

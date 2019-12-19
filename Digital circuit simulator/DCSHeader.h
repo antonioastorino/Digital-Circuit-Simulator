@@ -56,7 +56,7 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSRegister8Bits.hpp"
-//#include "DCSRam8Bits.hpp"
+#include "DCSRam16x8.hpp"
 
 
 #include "DCSClockDiv2WithEnableAndLoad.hpp"

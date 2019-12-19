@@ -9,24 +9,35 @@
 #include "DCSHeader.h"
 
 DCSRegister1Bit::DCSRegister1Bit(std::string name) :
-DCSComponent(name, false) {
+DCSComponent(name, false),
+node0(name + "-Load"),
+not0(name + "-Data"),
+and0(name + "-And0"),
+and1(name + "-And1"),
+or0(name + "-Or0"),
+tris0(name + "-OutTris"),
+dffsr0(name + "DFFSR0"){
 	node0.connect(&not0, 0, 0);
 	node0.connect(&and1, 0, 0);
 	not0.connect(&and0, 0, 1);
 	dffsr0.connect(&and0, 0, 0);
+	dffsr0.connect(&tris0, 0, 0); // tri-state buffer
 	and0.connect(&or0, 0, 0);
 	and1.connect(&or0, 0, 1);
 	or0.connect(&dffsr0, 0, 0);
 }
 
 DCSComponent* DCSRegister1Bit::getOutComponent(ushort &outPinNum) {
-	return dffsr0.getOutComponent(outPinNum);
+	if (outPinNum == 0)	return &tris0;
+	DCSLog::error(name, "Pin out of range");
+	exit(-1);
 }
+
 DCSComponent* DCSRegister1Bit::getInComponent(ushort &inPinNum) {
 	switch (inPinNum) {
-		case 0: // Data
+		case 0: // Tris-state OE
 			inPinNum = 1;
-			return &and1;
+			return &tris0;
 			break;
 		case 1: // Clock
 			return dffsr0.getInComponent(inPinNum);
@@ -40,6 +51,9 @@ DCSComponent* DCSRegister1Bit::getInComponent(ushort &inPinNum) {
 		case 4:  // Load
 			inPinNum = 0;
 			return &node0;
+		case 5:
+			inPinNum = 1;
+			return &and1;
 			break;
 		default:
 			break;

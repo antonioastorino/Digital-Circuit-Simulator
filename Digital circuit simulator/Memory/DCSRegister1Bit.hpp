@@ -18,20 +18,20 @@
  DATA: | XX   XXXXXXXX
 	   | ____  _______
  CLK:  |     __
-			     _____
- Q:    | ________
-       | _______
- !Q:   |        ______
-			     ^ ready
+       |          ____
+ Q:    | _________
+       | ________
+ !Q:   |         _____
+				  ^ ready
  
  PINOUT
- Input 0: Data
+ Input 0: Output Enable
  Input 1: Clock
  Input 2: Clear
  Input 3: Preset
  Input 4: Load
- Out   0: Q
- Out   1: !Q
+ Input 5: Data in
+ Out   0: Data out
  */
 
 #ifndef DCSRegister1Bit_hpp
@@ -40,12 +40,13 @@
 
 class DCSRegister1Bit: public DCSComponent {
 private:
-	DCSNode node0              = DCSNode(name + "-Load");
-	DCSNot not0                = DCSNot(name + "-Data");
-	DCSAnd and0                = DCSAnd(name + "-And0");
-	DCSAnd and1                = DCSAnd(name + "-And1");
-	DCSOr or0                  = DCSOr(name + "-Or0");
-	DCSDFlipFlopAsyncSR dffsr0 = DCSDFlipFlopAsyncSR(name + "-DFFSR0");
+	DCSNode node0;
+	DCSNot not0;
+	DCSAnd and0;
+	DCSAnd and1;
+	DCSOr or0;
+	DCSTriStateBuffer tris0;
+	DCSDFlipFlopAsyncSR dffsr0;
 public:
 	DCSRegister1Bit(std::string name);
 	
@@ -53,10 +54,10 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
 	
-	ushort getNumOfInPins() override {return 5; };
-	ushort getNumOfOutPins() override {return 2; };
+	ushort getNumOfInPins() override {return 6; };
+	ushort getNumOfOutPins() override {return 1; };
 	
-	int getTimeDelay() override { return 7; };
+	int getTimeDelay() override { return 8; };
 };
 #endif /* DCSRegister1Bit_hpp */
 

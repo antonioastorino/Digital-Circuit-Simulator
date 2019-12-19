@@ -10,16 +10,16 @@ Input 0 (data) needs to be ready at least 1 tau before input 1 (enable) is asser
 Input 1 and 0 must be stable at least 2 tau.
 The output is stable after 4 tau from the change in the input
 Here is an example:
-	  |
+	  |  ___
 DATA: | X___XXXXXXXX
 	  |  ^ start
 	  |   __
 EN:   | __  ________
 	  |
-	  |
+	  |     ________
 Q:    | XXXX________
              _______
-!Q:   | XXXXX
+!Q:   | XXXXX_______
              ^ ready
 */
 

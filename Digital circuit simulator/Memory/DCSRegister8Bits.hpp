@@ -6,17 +6,14 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 /*
- 
- nodeArray[0]->connect(registerArray[i], 0, 4); // Load
- nodeArray[1]->connect(registerArray[i], 0, 1); // Clock
- nodeArray[2]->connect(registerArray[i], 0, 2); // Clear
- nodeArray[3]->connect(registerArray[i], 0, 3); // Preset
- Input 0: Load
+
+ Input 0: Output Enable
  Input 1: Clock
  Input 2: Clear
  Input 3: Preset
- Input 4: In bit 0
- Input 5: In bit 1
+ Input 4: Load
+ Input 5: In bit 0
+ Input 6: In bit 1
  ...
  
  Out   0: Out bit 0
@@ -38,7 +35,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
 	
-	ushort getNumOfInPins() override {return 12; };
+	ushort getNumOfInPins() override {return 13; };
 	ushort getNumOfOutPins() override {return 8; };
 	
 	int getTimeDelay() override { return 7; };

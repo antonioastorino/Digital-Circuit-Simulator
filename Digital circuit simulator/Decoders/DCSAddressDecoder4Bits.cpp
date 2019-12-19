@@ -15,14 +15,14 @@ notArray(name + "-Not", 4),
 delArray(name + "-Del", 4),
 and4Array(name + "-And4", 16){
 	for (ushort i = 0; i < 4; i++) {
-		nodeArray[i]->connect(delArray[i], 0, 0);
-		nodeArray[i]->connect(notArray[i], 0, 0);
+		nodeArray.connect(&delArray, i, i);
+		nodeArray.connect(&notArray, i, i);
 		for (ushort IN = 0; IN < 16; IN ++) {
 			if ((IN >> i) & 1) {
-				delArray[i]->connect(and4Array[IN], 0, i);
+				delArray.connect(and4Array[IN], i, i);
 			}
 			else {
-				notArray[i]->connect(and4Array[IN], 0, i);
+				notArray.connect(and4Array[IN], i, i);
 			}
 		}
 	}
@@ -30,9 +30,7 @@ and4Array(name + "-And4", 16){
 
 DCSComponent* DCSAddressDecoder4Bits::getOutComponent(ushort &outPinNum) {
 	if (outPinNum < 16) {
-		ushort elementNumber = outPinNum;
-		outPinNum = 0;
-		return and4Array[elementNumber]->getOutComponent(outPinNum);
+		return and4Array.getOutComponent(outPinNum);
 	}
 	DCSLog::error(name, "Pin out of range");
 	exit(-1);
@@ -40,9 +38,7 @@ DCSComponent* DCSAddressDecoder4Bits::getOutComponent(ushort &outPinNum) {
 
 DCSComponent* DCSAddressDecoder4Bits::getInComponent(ushort &inPinNum) {
 	if (inPinNum < 4) {
-		ushort elementNumber = inPinNum;
-		inPinNum = 0;
-		return nodeArray[elementNumber]->getInComponent(inPinNum);
+		return nodeArray.getInComponent(inPinNum);
 	}
 	DCSLog::error(name, "Pin out of range");
 	exit(-1);

@@ -297,8 +297,8 @@ void and6Test() {
 void dLatchTest() {
 	printTestName("D-Latch");
 	DCSEngine::reset();
-	binary_signal d = {0,7,3,3,3,4};
-	binary_signal en = {0,2,6,2,4};
+	binary_signal d = {3,7,3,3,3};
+	binary_signal en = {4,2,5,2,6};
 	
 	DCSDLatch dLatch0("DLatch0");
 	DCSInput I0("In0", d);
@@ -311,7 +311,7 @@ void dLatchTest() {
 	dLatch0.connect(&O0, 0, 0, " Q");
 	dLatch0.connect(&O1, 1, 0, "!Q");
 	
-	DCSEngine::run(25);
+	DCSEngine::run(20);
 }
 void dLatchAsyncSRTest() {
 	printTestName("D-Latch with asynchronous SR");
@@ -373,34 +373,34 @@ void jkLatchMasterSlaveAsyncSRTest() {
 
 void register1BitTest() {
 	printTestName("1-bit register");
-	DCSEngine::reset();
+	DCSEngine::reset(5);
 	
-	binary_signal d = {8,3,10};
-	binary_signal ld{0};
+	binary_signal d{13,3,10};
+	binary_signal ld{12,4,1};
 
 
 	DCSRegister1Bit reg0("Reg0");
-	DCSComponentArray<DCSInput> inArray("In", 5);
+	DCSComponentArray<DCSInput> inArray("In", reg0.getNumOfInPins());
 	DCSOutput O0("Out0");
-	DCSOutput O1("Out1");
+
 	
+	inArray.connect(&reg0, 0, 0, "OE");
 	inArray.connect(&reg0, 1, 1, "CLK");
-	inArray.connect(&reg0, 4, 4, "");
-	inArray.connect(&reg0, 0, 0, "D");
-	inArray.connect(&reg0, 2, 2, "");
-	inArray.connect(&reg0, 3, 3/*, "S"*/);
+	inArray.connect(&reg0, 2, 2, "R");
+	inArray.connect(&reg0, 3, 3, "S");
+	inArray.connect(&reg0, 4, 4, "LD");
+	inArray.connect(&reg0, 5, 5, "D");
 	reg0.connect(&O0, 0, 0, " Q");
-	reg0.connect(&O1, 1, 0, "!Q");
 	
-	inArray[0]->makeSignal(d);
+	inArray[0]->makeSignal({3,1}, true);
 	inArray[1]->makeClock();
-	inArray[2]->makeSignal(0);
-	inArray[3]->makeSignal(0);
-	inArray[4]->makeSignal(1);
+	inArray[2]->makeSignal({0,1,4,1,1}, true);
+	inArray[3]->makeSignal({6,1}, true);
+	inArray[4]->makeSignal(ld);
+	inArray[5]->makeSignal(d);
 	
-	DCSEngine::setHalfClockPeriod(10);
 	
-	DCSEngine::run(70);
+	DCSEngine::run(100, false);
 }
 
 
@@ -418,7 +418,7 @@ void dividerTest() {
 		"CLK",  // 2 -CLK
 		"",    // 3 - R
 		"",    // 4 - S
-		"C_in"  // 6 - C_in
+		"C_in"  // 5 - C_in
 	});
 	
 	inArray[0]->makeSignal({28,3,1});
@@ -426,12 +426,11 @@ void dividerTest() {
 	inArray[2]->makeClock();
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
-	inArray[5]->makeSignal({290,2,8,2,8,2,5,5,5,5});
+	inArray[5]->makeSignal({55,1});
 
-	
 	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 
-	DCSEngine::run(60);
+	DCSEngine::run(80);
 }
 
 void upCounterTest() {
@@ -491,7 +490,7 @@ void register8BitsTest() {
 //		"C_in", "LD", "CLK", "R", "S",
 //		"I0", "I1", "I2", "I3"});
 	inArray.connect(&reg0, {
-		"LD", "CLK", "", "",
+		"OE", "CLK", "R", "S", "LD",
 		"I", "I", "I", "I",
 		"I", "I", "I", "I"});
 
@@ -504,9 +503,11 @@ void register8BitsTest() {
 	ushort clkHalfPeriod = reg0.getTimeDelay()/2+4;
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
-	inArray[0]->makeSignal({1,1}, true);
+	inArray[0]->makeSignal({3,1}, true); // OE
 	inArray[1]->makeClock();
-	inArray[4]->makeSignal({1,1, 1, 1}, true);
+	inArray[2]->makeSignal(0);
+	inArray[3]->makeSignal({5,1}, true);
+	inArray[4]->makeSignal({1,3,1}, true); // LD
 	inArray[5]->makeSignal({1,1, 1, 1}, true);
 	inArray[6]->makeSignal({1,1, 2}, true);
 	inArray[7]->makeSignal({1,1, 1, 1}, true);
@@ -514,35 +515,37 @@ void register8BitsTest() {
 	inArray[9]->makeSignal({1,1, 1, 1}, true);
 	inArray[10]->makeSignal({1,1, 1, 1}, true);
 	inArray[11]->makeSignal({1,1, 1, 1}, true);
+	inArray[12]->makeSignal({1,1, 1, 1}, true);
 //	inArray[4]->makeSignal(0);
 //	inArray[5]->makeSignal(0);
 //
 //
 //	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 //
-	DCSEngine::run(clkHalfPeriod * 10);
+	DCSEngine::run(clkHalfPeriod * 20);
 }
 
 void countAndStoreTest() {
-	DCSEngine::reset();
-	
+	ushort clockHalfPeriod = 10;
+	DCSEngine::reset(clockHalfPeriod);
+
 	DCSUpCounterWithLoadAndAsyncSR count0("count0", 8);
 	DCSRegister8Bits reg8_0("reg8_0");
 	
 	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
-	DCSComponentArray<DCSInput> regInArray("R-in", 4);
+	DCSComponentArray<DCSInput> regInArray("R-in", 5);
 
 	DCSComponentArray<DCSOutput> outArray({"O", 8});
 
 	// connect input array to counter
 	inArray.connect(&count0);
 	// connect register control inputs
-	for (ushort i = 0; i < 4; i++) {
+	for (ushort i = 0; i < 5; i++) {
 		regInArray.connect(&reg8_0, i, i);
 	}
 	// connect counter out to register data in
 	for (ushort i = 0; i < 8; i++) {
-		count0.connect(&reg8_0, i, 4 + i, "C");
+		count0.connect(&reg8_0, i, 5 + i, "C");
 	}
 	reg8_0.connect(&outArray, {
 		" O","O","O","O",
@@ -553,33 +556,41 @@ void countAndStoreTest() {
 	inArray[0]->makeSignal(1);
 	// connect clock to counter
 	inArray[2]->makeClock();
-	// enable register write
+	// enable register output
 	regInArray[0]->makeSignal(1);
+	// enable register write
+	regInArray[4]->makeSignal(1);
 	// connect clock to register
 	regInArray[1]->makeClock();
-	
-	ushort clockHalfPeriod = 8;
-	DCSEngine::setHalfClockPeriod(clockHalfPeriod);
 	
 	DCSEngine::run(512 * clockHalfPeriod, true);
 }
 
 void ramTest() {
-	DCSEngine::reset(10);
-	DCSAddressDecoder4Bits         addr4("Addr");
-	DCSComponentArray<DCSInput>    inArray0("In", 9);
-	DCSUpCounterWithLoadAndAsyncSR count0("Count0", 4);
-	DCSComponentArray<DCSOutput>   out("Out", 16);
+	ushort hcp = 10; // half clock period
+	DCSEngine::reset(hcp);
+	DCSRam16x8                   ram0("Ram0");
+	DCSComponentArray<DCSInput>  inArray0("In", ram0.getNumOfInPins());
+	DCSComponentArray<DCSOutput> out0("Out", ram0.getNumOfOutPins());
 	
-	inArray0.connect(&count0, {""});
-	for (ushort i = 0; i < 4; i ++) {
-		count0.connect(&addr4, i, i, "");
-	}
-	addr4.connect(&out, {"O"});
+	inArray0.connect(&ram0, {
+		"EN",  // 0 - out enable
+		"CLK", // 1 - clock
+		"R",    // 2 - Reset
+		"S",    // 3 - Preset
+		"WR",  // 4 - Write
+		"I","I","I","I","I","I","I","I", //5-12 - Data
+		"A","A","A","A" // 13-16 - Address
+	});
+	
+	ram0.connect(&out0, {"O"});
 	
 	inArray0[0]->makeSignal(1);
-	inArray0[2]->makeClock();
+	inArray0[1]->makeClock();
+	inArray0[3]->makeSignal({ 0,1,1          }, true); // Preset
+	inArray0[4]->makeSignal({   2,  1,1      }, true); // Write
+	inArray0[13]->makeSignal({  5,        2,1}, 1); // Address 0
 	
-	DCSEngine::run(20 * 18, true);
+	DCSEngine::run(200, true);
 
 }

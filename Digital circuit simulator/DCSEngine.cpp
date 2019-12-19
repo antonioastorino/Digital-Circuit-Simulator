@@ -77,7 +77,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 	
 	for (auto component: componentVector) {
 		if (!(component->initialized)) {
-			DCSLog::info(component->getName(), "not connected");
+			DCSLog::info(component->getName(), "not initialized");
 		}
 	}
 	// update output values of initial layer (input vector)
