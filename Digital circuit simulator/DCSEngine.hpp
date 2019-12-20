@@ -9,8 +9,6 @@
 #ifndef DCSEngine_hpp
 #define DCSEngine_hpp
 
-#include <vector>
-
 class DCSComponent;
 class DCSInput;
 class DCSWire;

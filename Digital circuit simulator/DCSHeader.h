@@ -45,6 +45,9 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSNode.hpp"
 
 #include "DCSAddressDecoder4Bits.hpp"
+
+#include "DCSMux2to1.hpp"
+
 #include "DCSTriStateBuffer.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 
@@ -61,6 +64,8 @@ typedef std::vector<uint64_t> binary_signal;
 
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+
+#include "DCSFullAdder.hpp"
 
 #include "DCSEngine.hpp"
 

@@ -8,8 +8,6 @@
 
 #include "DCSHeader.h"
 
-
-
 void printTestName(std::string testName);
 void srLatchTest();
 void notLoopTest();
@@ -31,6 +29,8 @@ void upCounterTest();
 void register8BitsTest();
 void countAndStoreTest();
 void ramTest();
+void mux2to1Test();
+void fullAdderTest();
 
 int main() {
 // TODO: make unit test
@@ -55,7 +55,9 @@ int main() {
 //	upCounterTest();
 //	register8BitsTest();
 //	countAndStoreTest();
-	ramTest();
+//	ramTest();
+//	mux2to1Test();
+	fullAdderTest();
 	return 0;
 }
 
@@ -609,5 +611,85 @@ void ramTest() {
 	inArray0[13]->makeSignal({  2,    1, 1, 1}, true); // Address 0
 	inArray0[14]->makeSignal({  2,    1, 2   }, true); // Address
 	DCSEngine::run(110, true);
+}
 
+void mux2to1Test() {
+	printTestName("Mux 2 to 1");
+	ushort hp = 3;
+	DCSEngine::reset(hp);
+	
+	DCSMux2to1 mux0("Mux0");
+	
+	DCSInput in0("In0");
+	DCSInput in1("In1");
+	DCSInput in2("Sel0");
+	
+	DCSOutput out0("Out0");
+	
+	in0.connect(&mux0, 0, 0, "I0");
+	in1.connect(&mux0, 0, 1, "I1");
+	in2.connect(&mux0, 0, 2, "SEL");
+	
+	mux0.connect(&out0, 0,0, "OUT");
+
+	/*
+	 Expected result:
+	I0 I1 SEL OUT    0
+	 1  1   1   0    0
+	 1  1   0   1    3
+	 0  1   1   1    6
+	 0  1   0   1    9
+	 1  0   1   0    12
+	 1  0   0   0    15
+	 0  0   1   1    18
+	 0  0   0   0    21
+	 1  1   1   0    24
+	 */
+	in0.makeClock(hp * 2);
+	in1.makeClock(hp * 4);
+	in2.makeClock();
+
+	
+	DCSEngine::run(hp * 9, true);
+}
+
+void fullAdderTest() {
+	printTestName("Full adder");
+	ushort hp = 3;
+	DCSEngine::reset(hp);
+	
+	DCSFullAdder fa0("FA0");
+	
+	DCSInput in0("A");
+	DCSInput in1("B");
+	DCSInput in2("Cin");
+	
+	DCSOutput out0("Sum");
+	DCSOutput out1("Cout");
+
+	in0.connect(&fa0, 0, 0, "A");
+	in1.connect(&fa0, 0, 1, "A");
+	in2.connect(&fa0, 0, 2, "Cin");
+	
+	fa0.connect(&out0, 0,0, "Sum");
+	fa0.connect(&out1, 1,0, "Cout");
+
+	/*
+	 Expected result:
+	A A Cin Sum Cout    0
+	1 1   1   0    0    0
+	1 1   0   1    1    3
+	0 1   1   0    1    6
+	0 1   0   0    1    9
+	1 0   1   1    0    12
+	1 0   0   0    1    15
+	0 0   1   1    0    18
+	0 0   0   1    0    21
+	1 1   1   0    0    24
+	 */
+	in0.makeClock(hp * 2);
+	in1.makeClock(hp * 4);
+	in2.makeClock();
+
+	DCSEngine::run(hp * 9, true);
 }

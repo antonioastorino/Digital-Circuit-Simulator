@@ -9,24 +9,26 @@
 #include "DCSHeader.h"
 
 DCSSRLatch::DCSSRLatch(std::string name) :
-DCSComponent(name, false) {
+DCSComponent(name, false),
+nor0(name + "-Nor0"),
+nor1(name + "-Nor1") {
 	nor0.connect(&nor1, /*out*/ 0, /*in*/ 0);
 	nor1.connect(&nor0, /*out*/ 0, /*in*/ 1);
 }
 
 DCSComponent* DCSSRLatch::getOutComponent(ushort &outPinNum) {
 	if (outPinNum == 0) return &nor0;
-	else if (outPinNum == 1) {
+	if (outPinNum == 1) {
 		outPinNum = 0;
 		return &nor1;
 	}
-	else exit(-1);
+	exit(-1);
 }
 
 DCSComponent* DCSSRLatch::getInComponent(ushort &inPinNum) {
 	if (inPinNum == 0) return &nor0;
-	else if (inPinNum == 1) return &nor1;
-	else exit(-1);
+	if (inPinNum == 1) return &nor1;
+	exit(-1);
 }
 
 void DCSSRLatch::updateOut() {

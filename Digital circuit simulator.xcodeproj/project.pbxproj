@@ -13,6 +13,8 @@
 		A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0CC238D9F9000655FC7 /* DCSNor.cpp */; };
 		A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A915F0D023926B3100655FC7 /* DCSSRLatch.cpp */; };
 		A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */; };
+		A93CB50623ACE7720087D629 /* DCSMux2to1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50423ACE7720087D629 /* DCSMux2to1.cpp */; };
+		A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -71,6 +73,10 @@
 		A915F0D123926B3100655FC7 /* DCSSRLatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSSRLatch.hpp; sourceTree = "<group>"; };
 		A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSClockSignal.cpp; sourceTree = "<group>"; };
 		A93A1E5123A815E900980FC7 /* DCSClockSignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSClockSignal.hpp; sourceTree = "<group>"; };
+		A93CB50423ACE7720087D629 /* DCSMux2to1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSMux2to1.cpp; sourceTree = "<group>"; };
+		A93CB50523ACE7720087D629 /* DCSMux2to1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSMux2to1.hpp; sourceTree = "<group>"; };
+		A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSFullAdder.cpp; sourceTree = "<group>"; };
+		A93CB50A23AD358F0087D629 /* DCSFullAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSFullAdder.hpp; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -185,6 +191,24 @@
 			path = Signals;
 			sourceTree = "<group>";
 		};
+		A93CB50723ACE7930087D629 /* Muxes and Demuxes */ = {
+			isa = PBXGroup;
+			children = (
+				A93CB50523ACE7720087D629 /* DCSMux2to1.hpp */,
+				A93CB50423ACE7720087D629 /* DCSMux2to1.cpp */,
+			);
+			path = "Muxes and Demuxes";
+			sourceTree = "<group>";
+		};
+		A93CB50823AD35630087D629 /* Arithmetic components */ = {
+			isa = PBXGroup;
+			children = (
+				A93CB50A23AD358F0087D629 /* DCSFullAdder.hpp */,
+				A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */,
+			);
+			path = "Arithmetic components";
+			sourceTree = "<group>";
+		};
 		A9482445237F49F500803F30 = {
 			isa = PBXGroup;
 			children = (
@@ -219,9 +243,11 @@
 				A9482461238045BD00803F30 /* Logic gates */,
 				A915F0CF23926ACB00655FC7 /* Latches */,
 				A999F32223A3C9A600E0E6A6 /* Latches with async SR */,
+				A93CB50723ACE7930087D629 /* Muxes and Demuxes */,
 				A94A6CCF23AA69DC00B3E83D /* Decoders */,
 				A90237F623A90D12007A9985 /* Memory */,
 				A9948A5D23A63D1E00D20F06 /* Counters */,
+				A93CB50823AD35630087D629 /* Arithmetic components */,
 				A9482451237F49F500803F30 /* main.cpp */,
 			);
 			path = "Digital circuit simulator";
@@ -369,6 +395,7 @@
 			files = (
 				A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */,
 				A94A6CD823AACAC200B3E83D /* DCSAnd6.cpp in Sources */,
+				A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */,
 				A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */,
 				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
 				A9948A5923A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.cpp in Sources */,
@@ -390,6 +417,7 @@
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */,
+				A93CB50623ACE7720087D629 /* DCSMux2to1.cpp in Sources */,
 				A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
 				A9948A5C23A543B000D20F06 /* DCSAnd3.cpp in Sources */,

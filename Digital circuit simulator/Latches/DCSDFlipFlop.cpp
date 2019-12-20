@@ -9,7 +9,12 @@
 #include "DCSHeader.h"
 
 DCSDFlipFlop::DCSDFlipFlop(std::string name) :
-DCSComponent(name, false) {
+DCSComponent(name, false),
+node0(name + "CLK0"),
+dLat0(name + "-DLatch0"),
+and0(name + "-And0"),
+not0(name + "-Not0"),
+del0(name + "-Del0") {
 	node0.connect(&not0, 0, 0);
 	node0.connect(&and0, 0, 0);
 	not0.connect(&del0, 0, 0);

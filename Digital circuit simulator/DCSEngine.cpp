@@ -71,13 +71,13 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 		}
 	}
 	
-	DCSLog::info("Engine", "\n--------------Initialization start--------------\n");
+	DCSLog::debug("Engine", "--------------Initialization start--------------");
 	initialize();
-	DCSLog::info("Engine", "\n---------------Initialization end---------------\n");
+	DCSLog::debug("Engine", "---------------Initialization end---------------");
 	
 	for (auto component: componentVector) {
 		if (!(component->initialized)) {
-			DCSLog::info(component->getName(), "not initialized");
+			DCSLog::debug(component->getName(), "not initialized");
 		}
 	}
 	// update output values of initial layer (input vector)
@@ -103,7 +103,7 @@ void DCSEngine::printProbes() {
 	std::stringstream s;
 	for (auto wire: wireVector) {
 		if (wire->getProbeName().length() > 0) {
-			s << " " << wire->getProbeName() << "";
+			s << " " << wire->getProbeName();
 		}
 	}
 	DCSLog::output(0, s.str());

@@ -30,11 +30,11 @@ Q:    | XXXX________
 
 class DCSDFlipFlop: public DCSComponent {
 private:
-	DCSNode node0     = DCSNode(name + "CLK0");
-	DCSDLatch dLat0   = DCSDLatch(name + "-DLatch0");
-	DCSAnd and0       = DCSAnd(name + "-And0");
-	DCSNot not0       = DCSNot(name + "-Not0");
-	DCSUnitDelay del0 = DCSUnitDelay(name + "-Del0");
+	DCSNode node0;
+	DCSDLatch dLat0;
+	DCSAnd and0;
+	DCSNot not0;
+	DCSUnitDelay del0;
 
 public:
 	DCSDFlipFlop(std::string name);
