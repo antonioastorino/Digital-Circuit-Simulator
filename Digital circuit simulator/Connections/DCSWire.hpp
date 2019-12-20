@@ -9,17 +9,15 @@
 #ifndef DCSWire_hpp
 #define DCSWire_hpp
 
-class DCSComponent;
-
 class DCSWire {
 private:
 	// Driving component
 	DCSComponent* from;
-	// output pin number of the output component
+	// output pin number of the `from` component
 	ushort outPinNum;
-	// Drived component
+	// Driven component
 	DCSComponent* to;
-	// input pin number of the driven component
+	// input pin number of the `right` component
 	ushort inPinNum;
 	std::string probeName;
 	

@@ -6,11 +6,11 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 /*
- Input 0: Write
+ Input 0: Output enable
  Input 1: Clock
  Input 2: Clear
  Input 3: Preset
- Input 4: Enable
+ Input 4: Write
  Input 5: Data in bit 0
  Input 6: Data in bit 1
  ...

@@ -12,8 +12,7 @@ DCSWire::DCSWire(DCSComponent* from,
 				 ushort outPinNum,
 				 DCSComponent* to,
 				 ushort inPinNum,
-				 std::string probeName)
-:
+				 std::string probeName):
 from(from),
 outPinNum(outPinNum),
 to(to),

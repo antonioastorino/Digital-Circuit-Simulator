@@ -33,7 +33,7 @@ void countAndStoreTest();
 void ramTest();
 
 int main() {
-
+// TODO: make unit test
 //	srLatchTest();
 //	notLoopTest();
 //	unitDelayTest();
@@ -479,7 +479,7 @@ void upCounterTest() {
 }
 
 void register8BitsTest() {
-	printTestName("8-bit register test");
+	printTestName("8-bit register");
 	DCSEngine::reset();
 	
 	DCSRegister8Bits reg0("reg0");
@@ -526,6 +526,7 @@ void register8BitsTest() {
 }
 
 void countAndStoreTest() {
+	printTestName("Count and store");
 	ushort clockHalfPeriod = 10;
 	DCSEngine::reset(clockHalfPeriod);
 
@@ -567,6 +568,9 @@ void countAndStoreTest() {
 }
 
 void ramTest() {
+	printTestName("RAM");
+	
+	
 	ushort hcp = 10; // half clock period
 	DCSEngine::reset(hcp);
 	DCSRam16x8                   ram0("Ram0");
@@ -574,23 +578,36 @@ void ramTest() {
 	DCSComponentArray<DCSOutput> out0("Out", ram0.getNumOfOutPins());
 	
 	inArray0.connect(&ram0, {
-		"EN",  // 0 - out enable
-		"CLK", // 1 - clock
-		"R",    // 2 - Reset
-		"S",    // 3 - Preset
+		"OE",  // 0 - Output Enable
+		"CLK", // 1 - Clock
+		" R",  // 2 - Clear
+		" S",  // 3 - Preset
 		"WR",  // 4 - Write
 		"I","I","I","I","I","I","I","I", //5-12 - Data
 		"A","A","A","A" // 13-16 - Address
 	});
 	
 	ram0.connect(&out0, {"O"});
-	
-	inArray0[0]->makeSignal(1);
+	/*
+	Steps:
+	0 - EN=1, R=0, S=1, WR=0, Addr=0 (Preset to write ones at every location)
+		 The output should be all 1's
+	1 - EN=0, WR=1 (Write 0's at address 0)
+		 The output should not change because EN=0
+	2 - Addr=<ANY !=0>, WR=0, EN=1 (End writing and output another location)
+		 The output should not change because at location ANY != 0 all 1's are stored
+	3 - Addr=0;
+		 The output should be all 0's
+	4 - R=1, Addr=<ANY != 0>
+		 The output should be all 0's at any location due to reset
+	*/
+	inArray0[0]->makeSignal({0, 1, 1, 1       }, true); // Enable
 	inArray0[1]->makeClock();
-	inArray0[3]->makeSignal({ 0,1,1          }, true); // Preset
-	inArray0[4]->makeSignal({   2,  1,1      }, true); // Write
-	inArray0[13]->makeSignal({  5,        2,1}, 1); // Address 0
-	
-	DCSEngine::run(200, true);
+	inArray0[2]->makeSignal({   4,       1, 1}, true); // Clear
+	inArray0[3]->makeSignal({0, 1, 1         }, true); // Preset
+	inArray0[4]->makeSignal({   1, 1, 1      }, true); // Write
+	inArray0[13]->makeSignal({  2,    1, 1, 1}, true); // Address 0
+	inArray0[14]->makeSignal({  2,    1, 2   }, true); // Address
+	DCSEngine::run(110, true);
 
 }

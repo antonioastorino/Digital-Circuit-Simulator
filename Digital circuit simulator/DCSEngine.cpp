@@ -123,7 +123,7 @@ void DCSEngine::printLogicLevels() {
 				else s << "0";
 			}
 		}
-		DCSLog::output(stepNumber, s.str());
+		DCSLog::output(stepNumber - 1, s.str());
 	}
 }
 
