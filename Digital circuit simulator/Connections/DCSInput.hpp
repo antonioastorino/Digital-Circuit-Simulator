@@ -26,8 +26,9 @@ public:
 	~DCSInput();
 	
 	void makeSignal(bool constValue);
-	void makeSignal(binary_signal signal, bool synch=false);
-	void makeClock(ushort halfPeriod=0);
+	void makeSignal(binary_signal signal, bool initVal=0, bool synch=false);
+	void makeSignal(std::string signal, bool synch=false);
+	void makeClock(ushort halfPeriod=0, bool initVal=0);
 	void updateOut() override;
 	
 	ushort getNumOfInPins() override { return 0; };

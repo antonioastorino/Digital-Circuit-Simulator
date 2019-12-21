@@ -9,14 +9,49 @@
 #include "DCSHeader.h"
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector,
+									   bool initVal,
+									   bool synch):
+leveNumber(0),
+totalDuration(0),
+flipBitAtSteps({}),
+counter(0) {
+	this->currVal = initVal;
+	fromLevelsToFlipBitAtSteps(levelDurationVector, synch);
+}
+
+DCSArbitrarySignal::DCSArbitrarySignal(std::string zerosAndOnes,
 									   bool synch) {
-	if(levelDurationVector[0]) initVal = 0;
-	else initVal = 1;
+
+	std::vector<uint64_t> levelDurationVector;
+	uint64_t consecutive = 0;
+	char currBit = zerosAndOnes[0];
+	currBit == '1' ? currVal = 1 : currVal = 0;
+	
+	for (char ch: zerosAndOnes) {
+		if (ch == currBit) {
+			consecutive ++;
+		}
+		else {
+			levelDurationVector.push_back(consecutive);
+		}
+		currBit = ch;
+		consecutive = 1;
+	}
+	levelDurationVector.push_back(consecutive);
+	fromLevelsToFlipBitAtSteps(levelDurationVector, synch);
+	
+}
+
+void DCSArbitrarySignal::fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelDurationVector,
+											   bool synch) {
 	
 	uint64_t timeMultiplier = 1;
-	if (synch) timeMultiplier = DCSEngine::getClockPeriod();
+	if (synch) {
+		timeMultiplier = DCSEngine::getClockPeriod();
+	}
 	
 	flipBitAtSteps.reserve(levelDurationVector.size());
+
 	
 	// add length as the fist value is used to initialize
 	

@@ -23,6 +23,7 @@ private:
 	static ushort stepNumber;
 	static bool sampling;
 	
+	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static void printProbes();
 	static void printLogicLevels();
 	static void propagateValues();
@@ -32,7 +33,6 @@ public:
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
 	static void run(uint64_t steps=10, bool sampling=false);
-	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
 	static int getClockPeriod();
 	static int getStepNumber();
 	static void setSampling(bool sampling);

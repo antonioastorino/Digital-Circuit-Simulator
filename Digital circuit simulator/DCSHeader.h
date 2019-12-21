@@ -9,7 +9,7 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-#define LOG_LEVEL 2
+#define LOG_LEVEL 1
 
 #include <sstream>
 #include <iostream>

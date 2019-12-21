@@ -13,7 +13,7 @@ class DCSClockSignal: public DCSArbitrarySignal {
 private:
 	ushort halfPeriod;
 public:
-	DCSClockSignal(ushort halfPeriod=0);
+	DCSClockSignal(ushort halfPeriod=0, bool initVal=0);
 	
 	bool getVal(uint32_t step) override;
 };

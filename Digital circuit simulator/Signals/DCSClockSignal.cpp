@@ -8,8 +8,9 @@
 
 #include "DCSHeader.h"
 
-DCSClockSignal::DCSClockSignal(ushort halfPeriod):
-DCSArbitrarySignal({0}) {
+DCSClockSignal::DCSClockSignal(ushort halfPeriod, bool initVal):
+DCSArbitrarySignal(binary_signal{0}) {
+	currVal = !initVal; // it's negated because the first transition occurs at step 1
 	if (halfPeriod) this->halfPeriod = halfPeriod;
 	else this->halfPeriod = DCSEngine::getClockPeriod() / 2;
 }

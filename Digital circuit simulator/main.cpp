@@ -31,33 +31,36 @@ void countAndStoreTest();
 void ramTest();
 void mux2to1Test();
 void fullAdderTest();
+void bitSignalTest();
 
 int main() {
 // TODO: make unit test
-//	srLatchTest();
-//	notLoopTest();
-//	unitDelayTest();
-//	risingEdgeDetectorTest();
-//	dFlipFlopTest();
-//
-//	triStateBufferTest();
-//	gateArrayTest();
-//	orTest();
-//	nor3Test();
-//	and6Test();
-//	nand3Test();
-//
-//	dLatchTest();
-//	dLatchAsyncSRTest();
-//	register1BitTest();
-//	jkLatchMasterSlaveAsyncSRTest();
-//	dividerTest();
-//	upCounterTest();
-//	register8BitsTest();
-//	countAndStoreTest();
-//	ramTest();
-//	mux2to1Test();
+	srLatchTest();
+	notLoopTest();
+	unitDelayTest();
+	risingEdgeDetectorTest();
+	dFlipFlopTest();
+
+	triStateBufferTest();
+	gateArrayTest();
+	orTest();
+	nor3Test();
+	and6Test();
+	nand3Test();
+
+	dLatchTest();
+	dLatchAsyncSRTest();
+	register1BitTest();
+	jkLatchMasterSlaveAsyncSRTest();
+	dividerTest();
+	upCounterTest();
+	register8BitsTest();
+	countAndStoreTest();
+	ramTest();
+	mux2to1Test();
 	fullAdderTest();
+	bitSignalTest();
+	
 	return 0;
 }
 
@@ -162,11 +165,11 @@ void triStateBufferTest() {
 	
 	binary_signal inputA = {3,2,2,2,2,2,100};
 	binary_signal inputB = {3,3,30,3,30};
-	binary_signal enableA = {0,2,2,2,2,2,100};
+	binary_signal enableA = {2,2,2,2,2,100};
 	binary_signal enableB = {2,2,2,2,2,2,100};
 
 	DCSInput inA0("A0", 0);
-	DCSInput inA1("A1", enableA);
+	DCSInput inA1("A1", enableA, 1);
 	DCSInput inB0("B0", 1);
 	DCSInput inB1("B1", enableB);
 	DCSTriStateBuffer tsbA("tsbA");
@@ -347,7 +350,7 @@ void jkLatchMasterSlaveAsyncSRTest() {
 	printTestName("JK-Latch Master-Slave with asynchronous SR");
 	DCSEngine::reset(8);
 	binary_signal j = {4,2,4,2};
-	binary_signal k = {0,4,2,4,2};
+	binary_signal k = {4,2,4,2};
 	binary_signal clk = {5,20,4,2,1};
 	
 	
@@ -365,7 +368,7 @@ void jkLatchMasterSlaveAsyncSRTest() {
 	jk0.connect(&O1, 1, 0, "!Q");
 	
 	inArray[0]->makeSignal(j);
-	inArray[1]->makeSignal(k);
+	inArray[1]->makeSignal(k, 1);
 	inArray[2]->makeSignal(clk);
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
@@ -394,10 +397,10 @@ void register1BitTest() {
 	inArray.connect(&reg0, 5, 5, "D");
 	reg0.connect(&O0, 0, 0, " Q");
 	
-	inArray[0]->makeSignal({3,1}, true);
+	inArray[0]->makeSignal(binary_signal{3,1}, 0, true);
 	inArray[1]->makeClock();
-	inArray[2]->makeSignal({0,1,4,1,1}, true);
-	inArray[3]->makeSignal({6,1}, true);
+	inArray[2]->makeSignal(binary_signal{1,4,1,1}, 1, true);
+	inArray[3]->makeSignal(binary_signal{6,1}, 0, true);
 	inArray[4]->makeSignal(ld);
 	inArray[5]->makeSignal(d);
 	
@@ -423,12 +426,12 @@ void dividerTest() {
 		"C_in"  // 5 - C_in
 	});
 	
-	inArray[0]->makeSignal({28,3,1});
-	inArray[1]->makeSignal({13,2,13,3,1});
+	inArray[0]->makeSignal(binary_signal{28,3,1});
+	inArray[1]->makeSignal(binary_signal{13,2,13,3,1});
 	inArray[2]->makeClock();
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
-	inArray[5]->makeSignal({55,1});
+	inArray[5]->makeSignal(binary_signal{55,1});
 
 	div0.connect(&outArray, {"Q", "!Q", "C_out"});
 
@@ -459,24 +462,18 @@ void upCounterTest() {
 //	
 //
 	DCSEngine::setHalfClockPeriod(count0.getTimeDelay()/2+1);
-	inArray[0]->makeSignal({2,1}, true);
-	inArray[1]->makeSignal({1,1,1}, true);
+	inArray[0]->makeSignal(binary_signal{2,1}, 0, true);
+	inArray[1]->makeSignal(binary_signal{1,1,1}, 0, true);
 	inArray[2]->makeClock();
-//	inArray[4]->makeSignal({0, 3, 1}, false);
-//	inArray[5]->makeSignal({0, 1, 1}, true);
-	inArray[6]->makeSignal({1,1, 1, 1}, true);
-	inArray[7]->makeSignal({1,1, 1, 1}, true);
-	inArray[8]->makeSignal({1,1, 1, 1}, true);
-	inArray[9]->makeSignal({1,1, 1, 1}, true);
-	inArray[10]->makeSignal({1,1, 1, 1}, true);
-	inArray[11]->makeSignal({1,1, 1, 1}, true);
-	inArray[12]->makeSignal({1,1, 1, 1}, true);
-//	inArray[4]->makeSignal(0);
-//	inArray[5]->makeSignal(0);
-//
-//	
-//	div0.connect(&outArray, {"Q", "!Q", "C_out"});
-//
+
+	inArray[6]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[7]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[8]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[9]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[10]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+
 	DCSEngine::run(160, false);
 }
 
@@ -505,19 +502,19 @@ void register8BitsTest() {
 	ushort clkHalfPeriod = reg0.getTimeDelay()/2+4;
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
-	inArray[0]->makeSignal({3,1}, true); // OE
+	inArray[0]->makeSignal(binary_signal{3,1}, 0, true); // OE
 	inArray[1]->makeClock();
 	inArray[2]->makeSignal(0);
-	inArray[3]->makeSignal({5,1}, true);
-	inArray[4]->makeSignal({1,3,1}, true); // LD
-	inArray[5]->makeSignal({1,1, 1, 1}, true);
-	inArray[6]->makeSignal({1,1, 2}, true);
-	inArray[7]->makeSignal({1,1, 1, 1}, true);
-	inArray[8]->makeSignal({1,1, 1, 1}, true);
-	inArray[9]->makeSignal({1,1, 1, 1}, true);
-	inArray[10]->makeSignal({1,1, 1, 1}, true);
-	inArray[11]->makeSignal({1,1, 1, 1}, true);
-	inArray[12]->makeSignal({1,1, 1, 1}, true);
+	inArray[3]->makeSignal(binary_signal{5,1}, 0, true);
+	inArray[4]->makeSignal(binary_signal{1,3,1}, 0, true); // LD
+	inArray[5]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[6]->makeSignal(binary_signal{1,1, 2}, 0, true);
+	inArray[7]->makeSignal(binary_signal{1,1, 1, 1}, 0,true);
+	inArray[8]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[9]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[10]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
 //	inArray[4]->makeSignal(0);
 //	inArray[5]->makeSignal(0);
 //
@@ -602,14 +599,28 @@ void ramTest() {
 		 The output should be all 0's
 	4 - R=1, Addr=<ANY != 0>
 		 The output should be all 0's at any location due to reset
+	 Expected output:
+	 OE CLK  R  S WR I I I I I I I I A A A A O O O O O O O O    0
+	  1   1  0  1  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0    0
+	  1   0  0  1  0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    10
+	  0   1  0  0  1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    20
+	  0   0  0  0  1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    30
+	  1   1  0  0  0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 1 1 1 1    40
+	  1   0  0  0  0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 1 1 1 1    50
+	  1   1  0  0  0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    60
+	  1   0  0  0  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0    70
+	  1   1  1  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    80
+	  1   0  1  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    90
+	  1   1  0  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    100
+	 
 	*/
-	inArray0[0]->makeSignal({0, 1, 1, 1       }, true); // Enable
+	inArray0[0]->makeSignal(binary_signal{ 1, 1, 1      }, 1, true); // Enable
 	inArray0[1]->makeClock();
-	inArray0[2]->makeSignal({   4,       1, 1}, true); // Clear
-	inArray0[3]->makeSignal({0, 1, 1         }, true); // Preset
-	inArray0[4]->makeSignal({   1, 1, 1      }, true); // Write
-	inArray0[13]->makeSignal({  2,    1, 1, 1}, true); // Address 0
-	inArray0[14]->makeSignal({  2,    1, 2   }, true); // Address
+	inArray0[2]->makeSignal(binary_signal{ 4,       1, 1}, 0, true); // Clear
+	inArray0[3]->makeSignal(binary_signal{ 1, 1         }, 1, true); // Preset
+	inArray0[4]->makeSignal(binary_signal{ 1, 1, 1      }, 0, true); // Write
+	inArray0[13]->makeSignal(binary_signal{2,    1, 1, 1}, 0, true); // Address 0
+	inArray0[14]->makeSignal(binary_signal{2,    1, 2   }, 0, true); // Address 1
 	DCSEngine::run(110, true);
 }
 
@@ -655,7 +666,7 @@ void mux2to1Test() {
 
 void fullAdderTest() {
 	printTestName("Full adder");
-	ushort hp = 3;
+	ushort hp = 2;
 	DCSEngine::reset(hp);
 	
 	DCSFullAdder fa0("FA0");
@@ -692,4 +703,25 @@ void fullAdderTest() {
 	in2.makeClock();
 
 	DCSEngine::run(hp * 9, true);
+}
+
+
+void bitSignalTest() {
+	printTestName("Bit-sequence signal");
+	ushort hp = 1;
+	DCSEngine::reset(hp);
+	
+	DCSInput in0("A");
+	
+	DCSOutput out0("Sum");
+	
+	in0.connect(&out0, 0, 0, "In0");
+	
+//	in0.makeSignal(std::string{"10101"}, true);
+//	in0.makeSignal(binary_signal{1,1,1,1,1}, 1, true);
+
+	in0.makeClock(3, 0);
+	
+	DCSEngine::run(7*hp*2, false);
+	
 }
