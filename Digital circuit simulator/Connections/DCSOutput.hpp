@@ -9,8 +9,6 @@
 #ifndef DCSOutput_hpp
 #define DCSOutput_hpp
 
-#include "DCSComponent.hpp"
-
 class DCSOutput: public DCSComponent {
 public:
 	DCSOutput(std::string name);

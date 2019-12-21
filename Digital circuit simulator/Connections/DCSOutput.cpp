@@ -6,7 +6,7 @@
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
 //
 
-#include "DCSOutput.hpp"
+#include "DCSHeader.h"
 
 DCSOutput::DCSOutput(std::string name) :
 DCSComponent(name, true) {

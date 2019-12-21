@@ -31,35 +31,38 @@ void countAndStoreTest();
 void ramTest();
 void mux2to1Test();
 void fullAdderTest();
-void bitSignalTest();
+void bitStreamSignalTest();
+void displayTest();
 
 int main() {
 // TODO: make unit test
-	srLatchTest();
-	notLoopTest();
-	unitDelayTest();
-	risingEdgeDetectorTest();
-	dFlipFlopTest();
-
-	triStateBufferTest();
-	gateArrayTest();
-	orTest();
-	nor3Test();
-	and6Test();
-	nand3Test();
-
-	dLatchTest();
-	dLatchAsyncSRTest();
-	register1BitTest();
-	jkLatchMasterSlaveAsyncSRTest();
-	dividerTest();
-	upCounterTest();
-	register8BitsTest();
-	countAndStoreTest();
-	ramTest();
-	mux2to1Test();
-	fullAdderTest();
-	bitSignalTest();
+//	srLatchTest();
+//	notLoopTest();
+//	unitDelayTest();
+//	risingEdgeDetectorTest();
+//	dFlipFlopTest();
+//
+//	triStateBufferTest();
+//	gateArrayTest();
+//	orTest();
+//	nor3Test();
+//	and6Test();
+//	nand3Test();
+//
+//	dLatchTest();
+//	dLatchAsyncSRTest();
+//	register1BitTest();
+//	jkLatchMasterSlaveAsyncSRTest();
+//	dividerTest();
+//	upCounterTest();
+//	register8BitsTest();
+//	countAndStoreTest();
+//	ramTest();
+//	mux2to1Test();
+//	fullAdderTest();
+	bitStreamSignalTest();
+	displayTest();
+	
 	
 	return 0;
 }
@@ -706,8 +709,8 @@ void fullAdderTest() {
 }
 
 
-void bitSignalTest() {
-	printTestName("Bit-sequence signal");
+void bitStreamSignalTest() {
+	printTestName("Bit-tstream signal");
 	ushort hp = 1;
 	DCSEngine::reset(hp);
 	
@@ -724,4 +727,20 @@ void bitSignalTest() {
 	
 	DCSEngine::run(7*hp*2, false);
 	
+}
+
+void displayTest() {
+	printTestName("Display");
+		ushort hp = 1;
+		DCSEngine::reset(hp);
+		
+	DCSComponentArray<DCSInput> inArray("In", 8);
+	
+	DCSDisplay8Bits disp0("Display");
+	
+	inArray[0]->makeClock(1,0);
+	inArray[1]->makeClock(1,0);
+	inArray.connect(&disp0);
+		
+	DCSEngine::run(7*hp*14, false);
 }

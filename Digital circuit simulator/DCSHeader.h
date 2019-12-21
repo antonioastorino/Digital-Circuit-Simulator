@@ -67,6 +67,8 @@ typedef std::vector<uint64_t> binary_signal;
 
 #include "DCSFullAdder.hpp"
 
+#include "DCSDisplay8Bits.hpp"
+
 #include "DCSEngine.hpp"
 
 

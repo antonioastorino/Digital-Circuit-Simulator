@@ -23,7 +23,7 @@ bool DCSClockSignal::getVal(uint32_t step) {
 	}
 	counter++;
 	// Shift the commutation by 1 tau because the first one is used to initialize the system
-	if (step % (halfPeriod) == 1) {
+	if (step % (halfPeriod) == 1 || halfPeriod == 1) {
 		currVal = !currVal;
 	}
 	return currVal;
