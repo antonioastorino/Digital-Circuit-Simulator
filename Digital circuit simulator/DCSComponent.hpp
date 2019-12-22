@@ -64,6 +64,11 @@ public:
 				 std::string probeName = "");
 	
 	void connect(DCSComponent* to,
+				 DCSPinNumRange outPinNumRange,
+				 DCSPinNumRange inPinNumRange,
+				 std::vector<std::string> probeNames = {});
+	
+	void connect(DCSComponent* to,
 				 std::vector<std::string> probeNames = {});
 	
 	virtual DCSComponent* getOutComponent(ushort &outPinNum);

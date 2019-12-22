@@ -89,20 +89,22 @@ void DCSComponent::connect(DCSComponent* to,
 }
 
 void DCSComponent::connect(DCSComponent* to,
+						   DCSPinNumRange outPinNumRange,
+						   DCSPinNumRange inPinNumRange,
 						   std::vector<std::string> probeNames) {
-	ushort numOfOutPins = this->getNumOfOutPins();
-	ushort numOfInPins = to->getNumOfInPins();
+	ushort numOfInPins = inPinNumRange.endPinNum - inPinNumRange.startPinNum + 1;
+	ushort numOfOutPins = outPinNumRange.endPinNum - outPinNumRange.startPinNum + 1;
 	if (numOfInPins != numOfOutPins) {
 		DCSLog::error(name, "Number of output pins does not coincide with number of in pins");
 	}
 	if (probeNames.size() == 0) {
 		for (ushort i = 0; i < numOfInPins; i++) {
-			this->connect(to, i, i);
+			this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i);
 		}
 	}
 	else if (probeNames.size() == 1) {
 		for (ushort i = 0; i < numOfInPins; i++) {
-			this->connect(to, i, i, probeNames[0]);
+			this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i, probeNames[0]);
 		}
 	}
 	else {
@@ -110,9 +112,16 @@ void DCSComponent::connect(DCSComponent* to,
 			DCSLog::error(name, "Number probe names does not coincide with number of connections");
 		}
 		for (ushort i = 0; i < numOfInPins; i++) {
-			this->connect(to, i, i, probeNames[i]);
+			this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i, probeNames[i]);
 		}
 	}
+}
+
+void DCSComponent::connect(DCSComponent* to,
+						   std::vector<std::string> probeNames) {
+	ushort numOfOutPins = this->getNumOfOutPins();
+	ushort numOfInPins = to->getNumOfInPins();
+	connect(to, {0, static_cast<ushort>(numOfOutPins - 1)}, {0, static_cast<ushort>(numOfInPins -1)}, probeNames);
 }
 
 std::string DCSComponent::getName() { return name; }

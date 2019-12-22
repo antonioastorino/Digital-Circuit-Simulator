@@ -19,7 +19,6 @@ void DCSNode::updateOut() {
 
 void DCSNode::setIn(bool inVal, ushort inPinNum) {
 	DCSComponent::setIn(inVal, inPinNum);
-
 	out = in;
 	for (auto wire_p: wireVector) {
 		wire_p->propagateValue();

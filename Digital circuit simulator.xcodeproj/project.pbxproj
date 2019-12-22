@@ -16,6 +16,8 @@
 		A93CB50623ACE7720087D629 /* DCSMux2to1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50423ACE7720087D629 /* DCSMux2to1.cpp */; };
 		A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */; };
 		A93CB51223AE74310087D629 /* DCSDisplay8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */; };
+		A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */; };
+		A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -80,6 +82,10 @@
 		A93CB50A23AD358F0087D629 /* DCSFullAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSFullAdder.hpp; sourceTree = "<group>"; };
 		A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDisplay8Bits.cpp; sourceTree = "<group>"; };
 		A93CB51123AE74310087D629 /* DCSDisplay8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDisplay8Bits.hpp; sourceTree = "<group>"; };
+		A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSRippleAdder8Bits.cpp; sourceTree = "<group>"; };
+		A93CB51423AEABDF0087D629 /* DCSRippleAdder8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSRippleAdder8Bits.hpp; sourceTree = "<group>"; };
+		A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDisplayNBits.cpp; sourceTree = "<group>"; };
+		A93CB51723AF71DE0087D629 /* DCSDisplayNBits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDisplayNBits.hpp; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -208,6 +214,8 @@
 			children = (
 				A93CB50A23AD358F0087D629 /* DCSFullAdder.hpp */,
 				A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */,
+				A93CB51423AEABDF0087D629 /* DCSRippleAdder8Bits.hpp */,
+				A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */,
 			);
 			path = "Arithmetic components";
 			sourceTree = "<group>";
@@ -217,6 +225,8 @@
 			children = (
 				A93CB51123AE74310087D629 /* DCSDisplay8Bits.hpp */,
 				A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */,
+				A93CB51723AF71DE0087D629 /* DCSDisplayNBits.hpp */,
+				A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */,
 			);
 			path = Displays;
 			sourceTree = "<group>";
@@ -418,6 +428,7 @@
 				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
 				A9948A5323A430C800D20F06 /* DCSDFlipFlopAsyncSR.cpp in Sources */,
 				A9948A6623A6DC7F00D20F06 /* DCSUpCounterWithLoadAndAsyncSR.cpp in Sources */,
+				A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */,
 				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
 				A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */,
 				A93CB51223AE74310087D629 /* DCSDisplay8Bits.cpp in Sources */,
@@ -445,6 +456,7 @@
 				A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */,
 				A94A6CD523AA6C8500B3E83D /* DCSAnd4.cpp in Sources */,
 				A9482452237F49F500803F30 /* main.cpp in Sources */,
+				A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */,
 				A94A6CC823AA45A000B3E83D /* DCSRam16x8.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

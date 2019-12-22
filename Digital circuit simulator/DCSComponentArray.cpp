@@ -98,4 +98,5 @@ template class DCSComponentArray<DCSRegister1Bit>;
 template class DCSComponentArray<DCSRegister8Bits>;
 template class DCSComponentArray<DCSJKLatchMasterSlaveAsyncSR>;
 template class DCSComponentArray<DCSClockDiv2WithEnableAndLoad>;
+template class DCSComponentArray<DCSFullAdder>;
 

@@ -18,5 +18,8 @@ void DCSDisplay8Bits::updateOut() {
 	for (ushort i = 0; i < 8; i++) {
 		std::cout << ((in >> (7 - i)) & 1);
 	}
-	std::cout << "b " << in << "d";
+	std::cout << "b ";
+	if (in < 100) std::cout << ' ';
+	if (in < 10) std::cout << ' ';
+	std::cout << in << "d  ";
 }

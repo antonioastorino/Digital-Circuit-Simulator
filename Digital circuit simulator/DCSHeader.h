@@ -9,13 +9,22 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-#define LOG_LEVEL 1
+#define LOG_LEVEL 2
 
 #include <sstream>
 #include <iostream>
 #include <vector>
 
 typedef std::vector<uint64_t> binary_signal;
+
+// TODO: put somewhere else
+struct DCSPinNumRange {
+	ushort startPinNum;
+	ushort endPinNum;
+	DCSPinNumRange(ushort startPinNum, ushort endPinNum) :
+	startPinNum(startPinNum),
+	endPinNum(endPinNum) {}
+};
 
 #include "DCSLog.hpp"
 
@@ -66,8 +75,10 @@ typedef std::vector<uint64_t> binary_signal;
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 #include "DCSFullAdder.hpp"
+#include "DCSRippleAdder8Bits.hpp"
 
 #include "DCSDisplay8Bits.hpp"
+#include "DCSDisplayNBits.hpp"
 
 #include "DCSEngine.hpp"
 

@@ -82,7 +82,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 	}
 	// update output values of initial layer (input vector)
 	printProbes();
-	for (int i = 1; i < steps; i++) {
+	for (int i = 1; i <= steps; i++) {
 		stepNumber = i;
 		
 		for (auto input: inputVector) { input->updateOut(); }
