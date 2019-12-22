@@ -15,7 +15,6 @@
 		A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93A1E5023A815E900980FC7 /* DCSClockSignal.cpp */; };
 		A93CB50623ACE7720087D629 /* DCSMux2to1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50423ACE7720087D629 /* DCSMux2to1.cpp */; };
 		A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */; };
-		A93CB51223AE74310087D629 /* DCSDisplay8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */; };
 		A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */; };
 		A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
@@ -80,8 +79,6 @@
 		A93CB50523ACE7720087D629 /* DCSMux2to1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSMux2to1.hpp; sourceTree = "<group>"; };
 		A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSFullAdder.cpp; sourceTree = "<group>"; };
 		A93CB50A23AD358F0087D629 /* DCSFullAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSFullAdder.hpp; sourceTree = "<group>"; };
-		A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDisplay8Bits.cpp; sourceTree = "<group>"; };
-		A93CB51123AE74310087D629 /* DCSDisplay8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDisplay8Bits.hpp; sourceTree = "<group>"; };
 		A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSRippleAdder8Bits.cpp; sourceTree = "<group>"; };
 		A93CB51423AEABDF0087D629 /* DCSRippleAdder8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSRippleAdder8Bits.hpp; sourceTree = "<group>"; };
 		A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDisplayNBits.cpp; sourceTree = "<group>"; };
@@ -223,8 +220,6 @@
 		A93CB50C23AE73330087D629 /* Displays */ = {
 			isa = PBXGroup;
 			children = (
-				A93CB51123AE74310087D629 /* DCSDisplay8Bits.hpp */,
-				A93CB51023AE74310087D629 /* DCSDisplay8Bits.cpp */,
 				A93CB51723AF71DE0087D629 /* DCSDisplayNBits.hpp */,
 				A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */,
 			);
@@ -431,7 +426,6 @@
 				A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */,
 				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
 				A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */,
-				A93CB51223AE74310087D629 /* DCSDisplay8Bits.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,

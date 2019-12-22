@@ -9,7 +9,7 @@
 #ifndef DCSHeader_h
 #define DCSHeader_h
 
-#define LOG_LEVEL 2
+#define LOG_LEVEL 1
 
 #include <sstream>
 #include <iostream>
@@ -77,7 +77,6 @@ struct DCSPinNumRange {
 #include "DCSFullAdder.hpp"
 #include "DCSRippleAdder8Bits.hpp"
 
-#include "DCSDisplay8Bits.hpp"
 #include "DCSDisplayNBits.hpp"
 
 #include "DCSEngine.hpp"

@@ -18,6 +18,7 @@ private:
 	static std::vector<DCSComponent*> componentVector;
 	static std::vector<DCSComponent*> inputVector;
 	static std::vector<DCSWire*> wireVector;
+	static std::vector<DCSDisplayNBits*> displayVector;
 	
 	static ushort clockPeriod;
 	static ushort stepNumber;
@@ -32,6 +33,7 @@ public:
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
+	static void addDisplay(DCSDisplayNBits* p_display);
 	static void run(uint64_t steps=10, bool sampling=false);
 	static int getClockPeriod();
 	static int getStepNumber();

@@ -8,9 +8,9 @@
 
 #include "DCSHeader.h"
 
-void DCSLog::output(uint64_t stepNumber, std::string message) {
+void DCSLog::output(std::string label, std::string message) {
 #if LOG_LEVEL>0
-		std::cout << message << "    " << stepNumber << "\n";
+		std::cout << " " << label << ":" << message;
 #endif
 }
 

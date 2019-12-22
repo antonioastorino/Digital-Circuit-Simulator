@@ -49,21 +49,20 @@ int main() {
 //	nor3Test();
 //	and6Test();
 //	nand3Test();
-//
 //	dLatchTest();
 //	dLatchAsyncSRTest();
 //	register1BitTest();
-//	jkLatchMasterSlaveAsyncSRTest();
+	jkLatchMasterSlaveAsyncSRTest();
 //	dividerTest();
 //	upCounterTest();
 //	register8BitsTest();
 //	countAndStoreTest();
 //	ramTest();
 //	mux2to1Test();
-	fullAdderTest();
+//	fullAdderTest();
 //	bitStreamSignalTest();
 //	displayTest();
-	rippleAdderTest();
+//	rippleAdderTest();
 	
 	return 0;
 }
@@ -217,7 +216,7 @@ void gateArrayTest() {
 
 void orTest() {
 	printTestName("Or");
-	DCSEngine::reset();
+	DCSEngine::reset(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 2);
 	DCSOr or0("Or0");
@@ -226,67 +225,60 @@ void orTest() {
 	binary_signal in0 = {2,2,4,10};
 	binary_signal in1 = {4,2,2,10};
 	
-	inArray[0]->makeSignal(in0);
-	inArray[1]->makeSignal(in1);
+	inArray[0]->makeClock(1);
+	inArray[1]->makeClock(2);
 	
-	inArray.connect(&or0, 0, 0, "In0");
-	inArray.connect(&or0, 1, 1, "In1");
-	or0.connect(&out0, 0, 0, "Out");
+	inArray.connect(&or0, 0, 0, "A");
+	inArray.connect(&or0, 1, 1, "B");
+	or0.connect(&out0, 0, 0, "OAorB");
 	
-	DCSEngine::run();
+	DCSEngine::run(5);
 }
 
 void nor3Test() {
 	printTestName("Nor 3");
-	DCSEngine::reset();
+	DCSEngine::reset(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 3);
 	DCSNor3 nor30("Nor30");
 	DCSOutput out0("Out0");
-	
-	binary_signal in0 = {2,2,4,2,2,4,4};
-	binary_signal in1 = {4,2,2,4,2,2,4};
-	binary_signal in2 = {8,12};
 
-	inArray[0]->makeSignal(in0);
-	inArray[1]->makeSignal(in1);
-	inArray[2]->makeSignal(in2);
+	inArray[0]->makeClock(1, 0);
+	inArray[1]->makeClock(2, 0);
+	inArray[2]->makeClock(4, 0);
 
-	inArray.connect(&nor30, 0, 0, "In0");
-	inArray.connect(&nor30, 1, 1, "In1");
-	inArray.connect(&nor30, 2, 2, "In2");
-	nor30.connect(&out0, 0, 0, "Out");
+	inArray.connect(&nor30, 0, 0, "A");
+	inArray.connect(&nor30, 1, 1, "B");
+	inArray.connect(&nor30, 2, 2, "C");
+	nor30.connect(&out0, 0, 0, "Nor");
 	
-	DCSEngine::run(20);
+	DCSEngine::run(9);
 }
 
 void nand3Test() {
 	printTestName("Nand 3");
-	DCSEngine::reset();
+	DCSEngine::reset(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 3);
 	DCSNand3 nand3_0("Nand3_0");
 	DCSOutput out0("Out0");
-	
-	binary_signal in0 = {2,2,4,2,2,4,4};
-	binary_signal in1 = {4,2,2,4,2,2,4};
-	binary_signal in2 = {8,12};
 
-	inArray[0]->makeSignal(in0);
-	inArray[1]->makeSignal(in1);
-	inArray[2]->makeSignal(in2);
+	inArray[0]->makeClock(1, 0);
+	inArray[1]->makeClock(2, 0);
+	inArray[2]->makeClock(4, 0);
 
 	inArray.connect(&nand3_0, 0, 0, "In0");
 	inArray.connect(&nand3_0, 1, 1, "In1");
 	inArray.connect(&nand3_0, 2, 2, "In2");
 	nand3_0.connect(&out0, 0, 0, "Out");
 	
-	DCSEngine::run(20);
+	DCSEngine::run(9);
 }
 
 void and6Test() {
 	printTestName("And 6");
-	DCSEngine::reset(8);
+	ushort hp = 2;
+	DCSEngine::reset(hp);
 
 	DCSComponentArray<DCSInput> inArray("In", 6);
 	DCSAnd6 and6_0("And6_0");
@@ -296,10 +288,10 @@ void and6Test() {
 	and6_0.connect(&out0, {"O"});
 	
 	for (ushort i = 0; i < 6; i ++) {
-		inArray[i]->makeClock(1<<(i+1));
+		inArray[i]->makeClock(hp<<i, 0);
 	}
 
-	DCSEngine::run(129, false);
+	DCSEngine::run(64*hp+1, true);
 	
 }
 
@@ -352,32 +344,25 @@ void dLatchAsyncSRTest() {
 
 void jkLatchMasterSlaveAsyncSRTest() {
 	printTestName("JK-Latch Master-Slave with asynchronous SR");
-	DCSEngine::reset(8);
-	binary_signal j = {4,2,4,2};
-	binary_signal k = {4,2,4,2};
-	binary_signal clk = {5,20,4,2,1};
-	
-	
+	ushort hp = 28;
+	DCSEngine::reset(hp);
+		
 	DCSJKLatchMasterSlaveAsyncSR jk0("jk0");
 	DCSComponentArray<DCSInput> inArray("In", 5);
 	DCSOutput O0("Out0");
 	DCSOutput O1("Out1");
 	
-	inArray.connect(&jk0, 0, 0, "J");
-	inArray.connect(&jk0, 1, 1, "K");
-	inArray.connect(&jk0, 2, 2, "CLK");
-	inArray.connect(&jk0, 3, 3, "");
-	inArray.connect(&jk0, 4, 4, "");
+	inArray.connect(&jk0, {"J","K","CLK","",""});
 	jk0.connect(&O0, 0, 0, "Q");
 	jk0.connect(&O1, 1, 0, "!Q");
 	
-	inArray[0]->makeSignal(j);
-	inArray[1]->makeSignal(k, 1);
-	inArray[2]->makeSignal(clk);
+	inArray[0]->makeClock(hp*2, 0);
+	inArray[1]->makeClock(hp*4, 0);
+	inArray[2]->makeClock(hp, 0);
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
 
-	DCSEngine::run(15);
+	DCSEngine::run(17*hp, true);
 }
 
 void register1BitTest() {
@@ -449,23 +434,24 @@ void upCounterTest() {
 	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
 	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
 	DCSComponentArray<DCSOutput> outArray("Out", count0.getNumOfOutPins());
-	
-//	inArray.connect(&count0, {
-//		"C_in", "LD", "CLK", "R", "S",
-//		"I0", "I1", "I2", "I3"});
+	DCSDisplayNBits disp0("In", 8);
+	DCSDisplayNBits disp1("Count", 8);
+
 	inArray.connect(&count0, {
 		"C_in", "LD", "CLK", "", "",
-		"I", "I", "I", "I",
-		"I", "I", "I", "I"});
+		"", "", "", "",
+		"", "", "", ""});
 
 	count0.connect(&outArray,{
-		" O0","O1","O2","O3",
-		"O4","O5","O6","O7",
+		"","","","",
+		"","","","",
 		"Cout"});
 	
-//	
-//
-	DCSEngine::setHalfClockPeriod(count0.getTimeDelay()/2+1);
+	inArray.connect(&disp0, {5, 12}, {0, 7});
+	count0.connect(&disp1, {0, 7}, {0, 7});
+	
+	ushort hp = count0.getTimeDelay()/2+1;
+	DCSEngine::setHalfClockPeriod(hp);
 	inArray[0]->makeSignal(binary_signal{2,1}, 0, true);
 	inArray[1]->makeSignal(binary_signal{1,1,1}, 0, true);
 	inArray[2]->makeClock();
@@ -478,7 +464,7 @@ void upCounterTest() {
 	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
 	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
 
-	DCSEngine::run(160, false);
+	DCSEngine::run(265 * hp * 2, true);
 }
 
 void register8BitsTest() {
@@ -737,7 +723,7 @@ void displayTest() {
 	
 	DCSComponentArray<DCSInput> inArray("In", 8);
 	
-	DCSDisplay8Bits disp0("Display");
+	DCSDisplayNBits disp0("Display", 8);
 	
 	inArray[0]->makeClock(1,0);
 	inArray[1]->makeClock(1,0);
@@ -753,9 +739,9 @@ void rippleAdderTest() {
 	
 	DCSComponentArray<DCSInput> inArray("In", 17);
 	DCSRippleAdder8Bits ra0("RA");
-	DCSDisplay8Bits disp0("A");
-	DCSDisplay8Bits disp1("B");
-	DCSDisplay8Bits disp2("SUM");
+	DCSDisplayNBits disp0("A", 8);
+	DCSDisplayNBits disp1("B", 8);
+	DCSDisplayNBits disp2("SUM", 8);
 	DCSDisplayNBits disp3("Cout", 1);
 
 	inArray[0]->makeSignal(1);

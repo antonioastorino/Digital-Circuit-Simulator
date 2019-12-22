@@ -12,6 +12,7 @@
 class DCSDisplayNBits: public DCSComponent {
 private:
 	ushort numOfBits;
+	ushort numOfDecimalDigits;
 public:
 	DCSDisplayNBits(std::string name, ushort numOfBits);
 	void updateOut() override;

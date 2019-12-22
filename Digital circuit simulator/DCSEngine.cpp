@@ -11,6 +11,7 @@
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};
 std::vector<DCSWire*> DCSEngine::wireVector = {};
+std::vector<DCSDisplayNBits*> DCSEngine::displayVector = {};
 
 ushort DCSEngine::clockPeriod;
 ushort DCSEngine::stepNumber;
@@ -20,6 +21,7 @@ void DCSEngine::reset(ushort clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
+	displayVector = {};
 	clockPeriod = 2 * clockHalfPeriod;
 	stepNumber = 0;
 }
@@ -34,6 +36,10 @@ void DCSEngine::addInput(DCSInput* input) {
 
 void DCSEngine::addWire(DCSWire* p_wire) {
 	wireVector.push_back(p_wire);
+}
+
+void DCSEngine::addDisplay(DCSDisplayNBits* p_display) {
+	displayVector.push_back(p_display);
 }
 
 void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
@@ -80,15 +86,16 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 			DCSLog::debug(component->getName(), "not initialized");
 		}
 	}
-	// update output values of initial layer (input vector)
-	printProbes();
+	// update output values of initial layer (input vector
 	for (int i = 1; i <= steps; i++) {
 		stepNumber = i;
 		
 		for (auto input: inputVector) { input->updateOut(); }
 		for (auto component: componentVector) { component->updateOut(); }
 		propagateValues();
+#if LOG_LEVEL>0
 		printLogicLevels();
+#endif
 	}
 }
 
@@ -99,31 +106,19 @@ void DCSEngine::propagateValues() {
 	}
 }
 
-void DCSEngine::printProbes() {
-	std::stringstream s;
-	for (auto wire: wireVector) {
-		if (wire->getProbeName().length() > 0) {
-			s << " " << wire->getProbeName();
-		}
-	}
-	DCSLog::output(0, s.str());
-}
-
 void DCSEngine::printLogicLevels() {
 	if (!sampling || DCSEngine::stepNumber % (clockPeriod/2) == 1) {
-		std::stringstream s;
 		for (auto wire: wireVector) {
 			if (wire->getProbeName().length() > 0) {
-				for (int i = 0; i < wire->getProbeName().length(); i++) {
-					s << ' ';
-				}
-				bool currVal = wire->getOutVal();
-				if (currVal)
-					s << "1";
-				else s << "0";
+				std::string message;
+				if (wire->getOutVal()) message = "1";
+				else message = "0";
+				DCSLog::output(wire->getProbeName(), message);
 			}
 		}
-		DCSLog::output(stepNumber - 1, s.str());
+		for (auto display: displayVector) { display->updateOut(); }
+		std::stringstream n; n << stepNumber -1 << '\n';
+		DCSLog::output("STEP", n.str());
 	}
 }
 
