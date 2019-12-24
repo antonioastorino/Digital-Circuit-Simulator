@@ -21,11 +21,6 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override {return 4; };
-	ushort getNumOfOutPins() override {return 16; };
-	
-	int getTimeDelay() override { return 2; };
 };
 
 #endif /* DCSAddressDecoder4Bits_hpp */

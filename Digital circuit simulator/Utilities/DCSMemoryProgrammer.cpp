@@ -21,7 +21,6 @@ memory(memory) {
 	for (ushort i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
-//		DCSEngine::printLogicLevels();
 	}
 	DCSLog::output("CLEAR", "1 - Erasing memory\n");
 	// Clear disabled
@@ -30,7 +29,6 @@ memory(memory) {
 	for (ushort i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
-//		DCSEngine::printLogicLevels();
 	}
 	DCSLog::output("CLEAR", "0 - Memory erased\n");
 }

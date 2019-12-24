@@ -20,6 +20,10 @@ del0(name + "-Del0") {
 	not0.connect(&del0, 0, 0);
 	del0.connect(&and0, 0, 1);
 	and0.connect(&dLat0, 0, 1);
+	
+	timeDelay = 4;
+	numOfInPins = 2;
+	numOfOutPins = 2;
 }
 
 DCSComponent* DCSDFlipFlop::getOutComponent(ushort &outPinNum) {

@@ -11,6 +11,10 @@
 DCSNode::DCSNode(std::string name) :
 DCSComponent(name, false) {
 	isNode = true;
+	
+	timeDelay = 0;
+	numOfInPins = 1;
+	numOfOutPins = 1;
 }
 
 void DCSNode::updateOut() {
@@ -34,4 +38,3 @@ void DCSNode::setIn(uint64_t inVec) {
 }
 
 uint64_t DCSNode::getAllReachedQWord() { return -1; };
-

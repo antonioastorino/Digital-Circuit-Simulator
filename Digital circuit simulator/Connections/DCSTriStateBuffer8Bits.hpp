@@ -20,11 +20,6 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
 	
-	ushort getNumOfInPins() override { return 9; };
-	ushort getNumOfOutPins() override { return 8; };
-	
-	int getTimeDelay() override { return 1; };
-	
 	void enable() override;
 	void disable() override;
 };

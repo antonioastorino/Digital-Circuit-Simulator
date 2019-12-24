@@ -63,11 +63,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	
-	ushort getNumOfInPins() override {return 5 + numOfElements; };
-	ushort getNumOfOutPins() override {return 1 + numOfElements; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 7 + numOfElements; };
 };
 
 #endif /* DCSUpCounterWithLoadAndAsyncSR_hpp */

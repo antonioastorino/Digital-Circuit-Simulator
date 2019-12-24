@@ -18,11 +18,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	
-	ushort getNumOfInPins() override {return 17; };
-	ushort getNumOfOutPins() override {return 9; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 14; };
 };
 
 #endif /* DCSRippleAdder8Bits_hpp */

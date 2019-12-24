@@ -13,11 +13,7 @@ class DCSUnitDelay: public DCSComponent {
 public:
 	DCSUnitDelay(std::string name);
 	
-	ushort getNumOfInPins() override {return 1; };
-	ushort getNumOfOutPins() override {return 1; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 1; };
 };
 
 

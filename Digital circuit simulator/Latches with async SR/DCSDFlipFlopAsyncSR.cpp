@@ -15,6 +15,10 @@ DCSComponent(name, false) {
 	not1.connect(&del0, 0, 0);
 	del0.connect(&and0, 0, 1);
 	and0.connect(&dLatSR0, 0, 1);
+	
+	timeDelay = 4;
+	numOfInPins = 4;
+	numOfOutPins = 2;
 }
 
 DCSComponent* DCSDFlipFlopAsyncSR::getOutComponent(ushort &outPinNum) {

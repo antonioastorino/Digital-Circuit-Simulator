@@ -14,6 +14,9 @@ faArray("FA", 8) {
 	for (ushort i = 1; i < 8; i++) {
 		faArray[i-1]->connect(faArray[i], 1, 2);
 	}
+	timeDelay = 14;
+	numOfInPins = 17;
+	numOfOutPins = 9;
 }
 
 DCSComponent* DCSRippleAdder8Bits::getInComponent(ushort &inPinNum) {

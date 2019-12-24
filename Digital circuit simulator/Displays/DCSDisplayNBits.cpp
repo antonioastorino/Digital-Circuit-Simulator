@@ -20,6 +20,9 @@ numOfDecimalDigits(1) {
 		numOfDecimalDigits ++;
 	}
 	
+	timeDelay = 0;
+	numOfInPins = numOfBits;
+	numOfOutPins = 0;
 }
 
 void DCSDisplayNBits::updateOut() {

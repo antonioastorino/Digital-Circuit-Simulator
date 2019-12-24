@@ -18,6 +18,10 @@ DCSComponent(name, false) {
 	del0.connect(&and1, 0, 1);
 	and0.connect(&srLatch0, 0, 0);
 	and1.connect(&srLatch0, 0, 1);
+	
+	timeDelay = 4;
+	numOfInPins = 2;
+	numOfOutPins = 2;
 }
 
 DCSComponent* DCSDLatch::getOutComponent(ushort &outPinNum) {

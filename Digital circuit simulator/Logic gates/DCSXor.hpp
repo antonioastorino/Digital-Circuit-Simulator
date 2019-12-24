@@ -13,11 +13,7 @@ class DCSXor: public DCSComponent {
 public:
 	DCSXor(std::string name);
 	
-	ushort getNumOfInPins() override {return 2; };
-	ushort getNumOfOutPins() override {return 1; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 1; };
 };
 
 #endif /* DCSXor_hpp */

@@ -13,7 +13,11 @@ DCSComponent(name, false),
 and3array(name + "-and3array", 2),
 and0(name + "-and0") {
 	and3array.connect(&and0);
-};
+	
+	timeDelay = 2;
+	numOfInPins = 6;
+	numOfOutPins = 1;
+}
 
 DCSComponent* DCSAnd6::getOutComponent(ushort &outPinNum) {
 	if (outPinNum == 0) return &and0;

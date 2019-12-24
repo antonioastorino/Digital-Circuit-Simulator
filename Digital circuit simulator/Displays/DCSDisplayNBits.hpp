@@ -16,10 +16,6 @@ private:
 public:
 	DCSDisplayNBits(std::string name, ushort numOfBits);
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override {return numOfBits; };
-	ushort getNumOfOutPins() override {return 0; };
-	int getTimeDelay() override { return 0; }
 };
 
 #endif /* DCSDisplayNBits_hpp */

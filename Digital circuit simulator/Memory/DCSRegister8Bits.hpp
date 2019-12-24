@@ -34,11 +34,6 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override {return 13; };
-	ushort getNumOfOutPins() override {return 8; };
-	
-	int getTimeDelay() override { return 7; };
 };
 
 #endif /* DCSRegister8Bits_hpp */

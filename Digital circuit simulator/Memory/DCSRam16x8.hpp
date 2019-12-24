@@ -57,12 +57,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	
-	ushort getNumOfInPins() override {return 17; }
-	ushort getNumOfOutPins() override { return 8; }
-	
 	void updateOut() override;
-	int getTimeDelay() override { return dec0.getTimeDelay() +
-		regArray[0]->getTimeDelay();}
 };
 
 #endif /* DCSRam16x8_hpp */

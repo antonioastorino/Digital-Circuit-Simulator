@@ -40,8 +40,12 @@ numOfElements(numOfElements)
 								 5  // Count in
 								 );
 	}
-	// NOTE: The first Count in is an array input.
-	//       The last Count out is an array output.
+	// NOTE: The Count in of dividerArray[0] is an array input.
+	//       The Count out of dividerArray[numOfElements-1] is an array output.
+	
+	timeDelay = 7 + numOfElements;
+	numOfInPins = 5 + numOfElements;
+	numOfOutPins = 1 + numOfElements;
 	 
 }
 DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(ushort &outPinNum) {

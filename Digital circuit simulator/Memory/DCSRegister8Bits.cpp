@@ -20,6 +20,10 @@ nodeArray({"OutEnable", "Clock", "Clear", "Preset", "Load"}, 5) {
 		nodeArray.connect(registerArray[i], 3, 3);
 		nodeArray.connect(registerArray[i], 4, 4);
 	}
+	
+	timeDelay = registerArray[0]->getTimeDelay();
+	numOfInPins = 13;
+	numOfOutPins = 8;
 }
 
 DCSComponent* DCSRegister8Bits::getOutComponent(ushort &outPinNum) {

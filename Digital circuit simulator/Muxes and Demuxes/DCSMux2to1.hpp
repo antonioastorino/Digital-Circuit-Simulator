@@ -23,11 +23,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	
-	ushort getNumOfInPins() override {return 3; };
-	ushort getNumOfOutPins() override {return 1; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 2; };
 };
 
 #endif /* DCSMux2to1_hpp */

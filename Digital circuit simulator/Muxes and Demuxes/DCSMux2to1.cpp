@@ -31,6 +31,10 @@ node0(name + "-Sel0") {
 	del0.connect(&and1, 0, 1);
 	and0.connect(&or0, 0, 0);
 	and1.connect(&or0, 0, 1);
+	
+	timeDelay = 2;
+	numOfInPins = 3;
+	numOfOutPins = 1;
 }
 
 DCSComponent* DCSMux2to1::getOutComponent(ushort &outPinNum) {

@@ -29,11 +29,14 @@ protected:
 	DCSComponent(std::string name, bool shouldUpdate=true);
 	std::string name;
 	
-	uint64_t in = 0;
-	uint64_t out = 0;
+	uint64_t in;
+	uint64_t out;
 	uint64_t reachableIn;
 	uint64_t connectedIn;
 	uint64_t fromTristateIn;
+	ushort timeDelay;
+	ushort numOfInPins;
+	ushort numOfOutPins;
 
 	std::vector<DCSWire*> wireVector = {};
 	bool enabled;
@@ -43,7 +46,7 @@ public:
 	bool isTristate;
 	
 	std::vector<DCSComponent*> rightComponentVector = {};
-	bool initialized = false;
+	bool initialized;
 	
 	virtual void setIn(bool inVal, ushort inPinNum);
 	virtual void setIn(uint64_t inVec);
@@ -52,7 +55,7 @@ public:
 	uint64_t getOutVec();
 	
 	std::string getName();
-	virtual int getTimeDelay() = 0; // Return the latency between input and outpu
+	ushort getTimeDelay(); // Return the latency between input and outpu
 	virtual void updateOut() = 0;
 	
 	void connect(DCSComponent* to,
@@ -80,8 +83,8 @@ public:
 	
 	bool propagateValues();
 	
-	virtual ushort getNumOfInPins() = 0;
-	virtual ushort getNumOfOutPins() = 0;
+	ushort getNumOfInPins();
+	ushort getNumOfOutPins();
 	virtual uint64_t getAllReachedQWord();
 	
 	bool getReachableIn(ushort inPinNum);

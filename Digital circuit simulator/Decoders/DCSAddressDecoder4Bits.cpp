@@ -13,7 +13,7 @@ DCSComponent(name, false),
 nodeArray(name + "-In", 4),
 notArray(name + "-Not", 4),
 delArray(name + "-Del", 4),
-and4Array(name + "-And4", 16){
+and4Array(name + "-And4", 16) {
 	for (ushort i = 0; i < 4; i++) {
 		nodeArray.connect(&delArray, i, i);
 		nodeArray.connect(&notArray, i, i);
@@ -26,6 +26,10 @@ and4Array(name + "-And4", 16){
 			}
 		}
 	}
+	
+	timeDelay = 2;
+	numOfInPins = 4;
+	numOfOutPins = 16;
 }
 
 DCSComponent* DCSAddressDecoder4Bits::getOutComponent(ushort &outPinNum) {

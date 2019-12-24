@@ -42,11 +42,7 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	
-	ushort getNumOfInPins() override {return 2; };
-	ushort getNumOfOutPins() override {return 2; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 4; };
 };
 
 #endif /* DCSDLatch_hpp */

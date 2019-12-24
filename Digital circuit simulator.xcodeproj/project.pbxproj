@@ -18,8 +18,32 @@
 		A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */; };
 		A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */; };
 		A93CB51D23AFB4790087D629 /* DCSMemoryProgrammer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51B23AFB4790087D629 /* DCSMemoryProgrammer.cpp */; };
-		A93CB52323AFFEA00087D629 /* RamProgrammer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */; };
-		A93CB52523B16D4A0087D629 /* Ram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52423B16D4A0087D629 /* Ram.cpp */; };
+		A93CB52323AFFEA00087D629 /* RamProgrammer-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52223AFFEA00087D629 /* RamProgrammer-Test.cpp */; };
+		A93CB52523B16D4A0087D629 /* Ram-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52423B16D4A0087D629 /* Ram-Test.cpp */; };
+		A93CB52723B2400A0087D629 /* SRLatch-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52623B2400A0087D629 /* SRLatch-Test.cpp */; };
+		A93CB52A23B241FC0087D629 /* NorLoop-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52823B241FC0087D629 /* NorLoop-Test.cpp */; };
+		A93CB52C23B2425F0087D629 /* UnitDelay-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52B23B2425F0087D629 /* UnitDelay-Test.cpp */; };
+		A93CB52E23B242C10087D629 /* RisingEdgeDetector-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52D23B242C10087D629 /* RisingEdgeDetector-Test.cpp */; };
+		A93CB53023B243040087D629 /* DFlipFlop-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52F23B243040087D629 /* DFlipFlop-Test.cpp */; };
+		A93CB53223B243390087D629 /* TriStateBuffer-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53123B243390087D629 /* TriStateBuffer-Test.cpp */; };
+		A93CB53423B2436B0087D629 /* AndArray-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53323B2436B0087D629 /* AndArray-Test.cpp */; };
+		A93CB53723B2458C0087D629 /* Or-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53523B2458C0087D629 /* Or-Test.cpp */; };
+		A93CB53923B2462D0087D629 /* Nor3-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53823B2462D0087D629 /* Nor3-Test.cpp */; };
+		A93CB53B23B2465D0087D629 /* Nand3-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53A23B2465D0087D629 /* Nand3-Test.cpp */; };
+		A93CB53D23B246940087D629 /* And6-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53C23B246940087D629 /* And6-Test.cpp */; };
+		A93CB53F23B246D60087D629 /* DLatch-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB53E23B246D60087D629 /* DLatch-Test.cpp */; };
+		A93CB54123B247080087D629 /* DLatchAsyncSR-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54023B247080087D629 /* DLatchAsyncSR-Test.cpp */; };
+		A93CB54323B247510087D629 /* JKMasterSlave-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54223B247510087D629 /* JKMasterSlave-Test.cpp */; };
+		A93CB54523B2478A0087D629 /* Register1Bit-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54423B2478A0087D629 /* Register1Bit-Test.cpp */; };
+		A93CB54723B247C80087D629 /* Divider-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54623B247C80087D629 /* Divider-Test.cpp */; };
+		A93CB54923B247FA0087D629 /* UpCounter-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54823B247FA0087D629 /* UpCounter-Test.cpp */; };
+		A93CB54B23B248360087D629 /* Register8Bits-Teest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54A23B248360087D629 /* Register8Bits-Teest.cpp */; };
+		A93CB54D23B248800087D629 /* CountAndStore-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54C23B248800087D629 /* CountAndStore-Test.cpp */; };
+		A93CB54F23B248BF0087D629 /* Mux2To1-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB54E23B248BF0087D629 /* Mux2To1-Test.cpp */; };
+		A93CB55123B249350087D629 /* FullAdder-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55023B249350087D629 /* FullAdder-Test.cpp */; };
+		A93CB55323B2498A0087D629 /* BitStreamSignal-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */; };
+		A93CB55523B249B70087D629 /* Display-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55423B249B70087D629 /* Display-Test.cpp */; };
+		A93CB55723B249D70087D629 /* RippleAdder-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -88,8 +112,32 @@
 		A93CB51723AF71DE0087D629 /* DCSDisplayNBits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDisplayNBits.hpp; sourceTree = "<group>"; };
 		A93CB51B23AFB4790087D629 /* DCSMemoryProgrammer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSMemoryProgrammer.cpp; sourceTree = "<group>"; };
 		A93CB51C23AFB4790087D629 /* DCSMemoryProgrammer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSMemoryProgrammer.hpp; sourceTree = "<group>"; };
-		A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RamProgrammer.cpp; sourceTree = "<group>"; };
-		A93CB52423B16D4A0087D629 /* Ram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ram.cpp; sourceTree = "<group>"; };
+		A93CB52223AFFEA00087D629 /* RamProgrammer-Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "RamProgrammer-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52423B16D4A0087D629 /* Ram-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Ram-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52623B2400A0087D629 /* SRLatch-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "SRLatch-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52823B241FC0087D629 /* NorLoop-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "NorLoop-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52B23B2425F0087D629 /* UnitDelay-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "UnitDelay-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52D23B242C10087D629 /* RisingEdgeDetector-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "RisingEdgeDetector-Test.cpp"; sourceTree = "<group>"; };
+		A93CB52F23B243040087D629 /* DFlipFlop-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "DFlipFlop-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53123B243390087D629 /* TriStateBuffer-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "TriStateBuffer-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53323B2436B0087D629 /* AndArray-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "AndArray-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53523B2458C0087D629 /* Or-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Or-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53823B2462D0087D629 /* Nor3-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Nor3-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53A23B2465D0087D629 /* Nand3-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Nand3-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53C23B246940087D629 /* And6-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "And6-Test.cpp"; sourceTree = "<group>"; };
+		A93CB53E23B246D60087D629 /* DLatch-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "DLatch-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54023B247080087D629 /* DLatchAsyncSR-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "DLatchAsyncSR-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54223B247510087D629 /* JKMasterSlave-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "JKMasterSlave-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54423B2478A0087D629 /* Register1Bit-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Register1Bit-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54623B247C80087D629 /* Divider-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Divider-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54823B247FA0087D629 /* UpCounter-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "UpCounter-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54A23B248360087D629 /* Register8Bits-Teest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Register8Bits-Teest.cpp"; sourceTree = "<group>"; };
+		A93CB54C23B248800087D629 /* CountAndStore-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "CountAndStore-Test.cpp"; sourceTree = "<group>"; };
+		A93CB54E23B248BF0087D629 /* Mux2To1-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Mux2To1-Test.cpp"; sourceTree = "<group>"; };
+		A93CB55023B249350087D629 /* FullAdder-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "FullAdder-Test.cpp"; sourceTree = "<group>"; };
+		A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "BitStreamSignal-Test.cpp"; sourceTree = "<group>"; };
+		A93CB55423B249B70087D629 /* Display-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Display-Test.cpp"; sourceTree = "<group>"; };
+		A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "RippleAdder-Test.cpp"; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -256,8 +304,32 @@
 		A93CB52123AFFE740087D629 /* Test files */ = {
 			isa = PBXGroup;
 			children = (
-				A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */,
-				A93CB52423B16D4A0087D629 /* Ram.cpp */,
+				A93CB52B23B2425F0087D629 /* UnitDelay-Test.cpp */,
+				A93CB52623B2400A0087D629 /* SRLatch-Test.cpp */,
+				A93CB52223AFFEA00087D629 /* RamProgrammer-Test.cpp */,
+				A93CB52423B16D4A0087D629 /* Ram-Test.cpp */,
+				A93CB52823B241FC0087D629 /* NorLoop-Test.cpp */,
+				A93CB52D23B242C10087D629 /* RisingEdgeDetector-Test.cpp */,
+				A93CB52F23B243040087D629 /* DFlipFlop-Test.cpp */,
+				A93CB53123B243390087D629 /* TriStateBuffer-Test.cpp */,
+				A93CB53323B2436B0087D629 /* AndArray-Test.cpp */,
+				A93CB53523B2458C0087D629 /* Or-Test.cpp */,
+				A93CB53823B2462D0087D629 /* Nor3-Test.cpp */,
+				A93CB53A23B2465D0087D629 /* Nand3-Test.cpp */,
+				A93CB53C23B246940087D629 /* And6-Test.cpp */,
+				A93CB53E23B246D60087D629 /* DLatch-Test.cpp */,
+				A93CB54023B247080087D629 /* DLatchAsyncSR-Test.cpp */,
+				A93CB54223B247510087D629 /* JKMasterSlave-Test.cpp */,
+				A93CB54423B2478A0087D629 /* Register1Bit-Test.cpp */,
+				A93CB54623B247C80087D629 /* Divider-Test.cpp */,
+				A93CB54823B247FA0087D629 /* UpCounter-Test.cpp */,
+				A93CB54A23B248360087D629 /* Register8Bits-Teest.cpp */,
+				A93CB54C23B248800087D629 /* CountAndStore-Test.cpp */,
+				A93CB54E23B248BF0087D629 /* Mux2To1-Test.cpp */,
+				A93CB55023B249350087D629 /* FullAdder-Test.cpp */,
+				A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */,
+				A93CB55423B249B70087D629 /* Display-Test.cpp */,
+				A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */,
 			);
 			path = "Test files";
 			sourceTree = "<group>";
@@ -447,14 +519,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DE8AEC2388718C0076C6A9 /* DCSInput.cpp in Sources */,
+				A93CB54B23B248360087D629 /* Register8Bits-Teest.cpp in Sources */,
+				A93CB54923B247FA0087D629 /* UpCounter-Test.cpp in Sources */,
 				A94A6CD823AACAC200B3E83D /* DCSAnd6.cpp in Sources */,
 				A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */,
 				A93A1E5223A815E900980FC7 /* DCSClockSignal.cpp in Sources */,
+				A93CB52E23B242C10087D629 /* RisingEdgeDetector-Test.cpp in Sources */,
+				A93CB53F23B246D60087D629 /* DLatch-Test.cpp in Sources */,
 				A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */,
+				A93CB52C23B2425F0087D629 /* UnitDelay-Test.cpp in Sources */,
 				A9948A5923A53DF200D20F06 /* DCSJKLatchMasterSlaveAsyncSR.cpp in Sources */,
 				A9948A6323A6407100D20F06 /* DCSClockDiv2WithEnableAndLoad.cpp in Sources */,
+				A93CB55523B249B70087D629 /* Display-Test.cpp in Sources */,
 				A95D55C823A2D80C00701DE9 /* DCSComponentArray.cpp in Sources */,
+				A93CB53923B2462D0087D629 /* Nor3-Test.cpp in Sources */,
 				A915F0CB238AF4E400655FC7 /* DCSArbitrarySignal.cpp in Sources */,
+				A93CB55123B249350087D629 /* FullAdder-Test.cpp in Sources */,
 				A9BDED8623805EC600650496 /* DCSEngine.cpp in Sources */,
 				A9948A5323A430C800D20F06 /* DCSDFlipFlopAsyncSR.cpp in Sources */,
 				A9948A6623A6DC7F00D20F06 /* DCSUpCounterWithLoadAndAsyncSR.cpp in Sources */,
@@ -462,33 +542,49 @@
 				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
 				A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
-				A93CB52523B16D4A0087D629 /* Ram.cpp in Sources */,
+				A93CB52523B16D4A0087D629 /* Ram-Test.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
 				A94A6CD223AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp in Sources */,
-				A93CB52323AFFEA00087D629 /* RamProgrammer.cpp in Sources */,
+				A93CB52723B2400A0087D629 /* SRLatch-Test.cpp in Sources */,
+				A93CB53423B2436B0087D629 /* AndArray-Test.cpp in Sources */,
+				A93CB52323AFFEA00087D629 /* RamProgrammer-Test.cpp in Sources */,
 				A94A6CCE23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp in Sources */,
+				A93CB54323B247510087D629 /* JKMasterSlave-Test.cpp in Sources */,
 				A999F32523A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp in Sources */,
 				A93CB51D23AFB4790087D629 /* DCSMemoryProgrammer.cpp in Sources */,
+				A93CB53223B243390087D629 /* TriStateBuffer-Test.cpp in Sources */,
+				A93CB54523B2478A0087D629 /* Register1Bit-Test.cpp in Sources */,
+				A93CB54723B247C80087D629 /* Divider-Test.cpp in Sources */,
 				A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */,
+				A93CB53723B2458C0087D629 /* Or-Test.cpp in Sources */,
+				A93CB53B23B2465D0087D629 /* Nand3-Test.cpp in Sources */,
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,
 				A9C2D197239460FE008CAF81 /* DCSNode.cpp in Sources */,
+				A93CB53D23B246940087D629 /* And6-Test.cpp in Sources */,
 				A93CB50623ACE7720087D629 /* DCSMux2to1.cpp in Sources */,
 				A9948A4D23A41A6600D20F06 /* DCSNand3.cpp in Sources */,
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
+				A93CB54F23B248BF0087D629 /* Mux2To1-Test.cpp in Sources */,
 				A9948A5C23A543B000D20F06 /* DCSAnd3.cpp in Sources */,
+				A93CB52A23B241FC0087D629 /* NorLoop-Test.cpp in Sources */,
 				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
 				A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */,
 				A9C2D18E23930890008CAF81 /* DCSDLatch.cpp in Sources */,
+				A93CB55323B2498A0087D629 /* BitStreamSignal-Test.cpp in Sources */,
 				A9948A5623A4D3BB00D20F06 /* DCSRegister1Bit.cpp in Sources */,
 				A90237FC23A9165E007A9985 /* DCSRegister8Bits.cpp in Sources */,
+				A93CB54D23B248800087D629 /* CountAndStore-Test.cpp in Sources */,
 				A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */,
+				A93CB53023B243040087D629 /* DFlipFlop-Test.cpp in Sources */,
 				A94824602380459800803F30 /* DCSNot.cpp in Sources */,
 				A96BAB7023A2542F00E7A42E /* DCSTriStateBuffer.cpp in Sources */,
 				A94A6CD523AA6C8500B3E83D /* DCSAnd4.cpp in Sources */,
+				A93CB54123B247080087D629 /* DLatchAsyncSR-Test.cpp in Sources */,
 				A9482452237F49F500803F30 /* main.cpp in Sources */,
 				A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */,
+				A93CB55723B249D70087D629 /* RippleAdder-Test.cpp in Sources */,
 				A94A6CC823AA45A000B3E83D /* DCSRam16x8.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

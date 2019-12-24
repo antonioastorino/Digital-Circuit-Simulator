@@ -20,6 +20,8 @@ name({name}) {
 		T* component = new T(cName.str());
 		componentArray.push_back(component);
 	}
+	
+	initialize();
 }
 
 template<class T>
@@ -33,6 +35,14 @@ name{"Array"} {
 		T* component = new T(nameArray[i]);
 		componentArray.push_back(component);
 	}
+	initialize();
+}
+
+template<class T>
+void DCSComponentArray<T>::initialize() {
+	timeDelay = componentArray[0]->getTimeDelay();
+	numOfInPins = componentArray[0]->getNumOfInPins() * numOfElements;
+	numOfOutPins = componentArray[0]->getNumOfOutPins() * numOfElements;
 }
 
 template<class T>

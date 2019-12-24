@@ -16,7 +16,7 @@ and0(name + "-And0"),
 and1(name + "-And1"),
 or0(name + "-Or0"),
 tris0(name + "-OutTris"),
-dffsr0(name + "DFFSR0"){
+dffsr0(name + "DFFSR0") {
 	node0.connect(&not0, 0, 0);
 	node0.connect(&and1, 0, 0);
 	not0.connect(&and0, 0, 1);
@@ -25,6 +25,10 @@ dffsr0(name + "DFFSR0"){
 	and0.connect(&or0, 0, 0);
 	and1.connect(&or0, 0, 1);
 	or0.connect(&dffsr0, 0, 0);
+	
+	timeDelay = 7;
+	numOfInPins = 6;
+	numOfOutPins = 1;
 }
 
 DCSComponent* DCSRegister1Bit::getOutComponent(ushort &outPinNum) {

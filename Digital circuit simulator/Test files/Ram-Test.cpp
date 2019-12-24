@@ -1,5 +1,5 @@
 //
-//  Ram.cpp
+//  Ram-Test.cpp
 //  Digital circuit simulator
 //
 //  Created by Antonio Astorino on 23/12/2019.

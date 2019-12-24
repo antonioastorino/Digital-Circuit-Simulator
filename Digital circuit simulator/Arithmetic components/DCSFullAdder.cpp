@@ -28,6 +28,10 @@ or0(name + "-CoutOr0") {
 	xor0.connect(&and0, 0, 1);
 	and0.connect(&or0, 0, 0);
 	and1.connect(&or0, 0, 1);
+	
+	timeDelay = 3;
+	numOfInPins = 3;
+	numOfOutPins = 2;
 }
 
 DCSComponent* DCSFullAdder::getInComponent(ushort &inPinNum) {

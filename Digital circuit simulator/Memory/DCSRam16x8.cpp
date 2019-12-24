@@ -47,6 +47,10 @@ dec0(name + "-dec0") {
 		}
 		regArray[regNum]->connect(&outNodeArray);
 	}
+	
+	timeDelay = dec0.getTimeDelay() + regArray[0]->getTimeDelay();
+	numOfInPins = 17;
+	numOfOutPins = 8;
 }
 
 DCSComponent* DCSRam16x8::getOutComponent(ushort &outPinNum) {

@@ -39,6 +39,10 @@ DCSComponent(name, false) {
 	// Slave to master
 	and3_0.connect(&nor3_0, 0, 0);
 	and3_1.connect(&nor3_1, 0, 1);
+	
+	timeDelay = 6;
+	numOfInPins = 5;
+	numOfOutPins = 2;
 }
 
 DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(ushort &outPinNum) {

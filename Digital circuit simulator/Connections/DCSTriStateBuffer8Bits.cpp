@@ -16,6 +16,10 @@ node0(name + "-Enable") {
 	for (ushort i = 0; i < 8; i++) {
 		node0.connect(bufferArray[i], 0, 1);
 	}
+	
+	timeDelay = 1;
+	numOfInPins = 9;
+	numOfOutPins = 8;
 }
 
 DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(ushort &outPinNum) {

@@ -13,11 +13,7 @@ class DCSAnd3: public DCSComponent {
 public:
 	DCSAnd3(std::string name);
 	
-	ushort getNumOfInPins() override {return 3; };
-	ushort getNumOfOutPins() override {return 1; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 1; };
 };
 
 #endif /* DCSAnd3_hpp */

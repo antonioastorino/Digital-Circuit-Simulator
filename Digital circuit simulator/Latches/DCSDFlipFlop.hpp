@@ -42,11 +42,6 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override {return 2; };
-	ushort getNumOfOutPins() override {return 2; };
-	
-	int getTimeDelay() override { return 4; };
 };
 
 #endif /* DCSDFlipFlop_hpp */

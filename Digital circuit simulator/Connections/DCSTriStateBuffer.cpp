@@ -12,6 +12,10 @@ DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :
 DCSComponent(name) {
 	isTristate = true;
 	enabled = false; // disabled by default
+	
+	timeDelay = 1;
+	numOfInPins = 2;
+	numOfOutPins = 1;
 }
 
 void DCSTriStateBuffer::updateOut() {
@@ -24,5 +28,5 @@ void DCSTriStateBuffer::updateOut() {
 	else { disable(); }
 }
 
-void DCSTriStateBuffer::enable(){ enabled = true;}
-void DCSTriStateBuffer::disable(){ enabled = false;}
+void DCSTriStateBuffer::enable(){ enabled = true; }
+void DCSTriStateBuffer::disable(){ enabled = false; }

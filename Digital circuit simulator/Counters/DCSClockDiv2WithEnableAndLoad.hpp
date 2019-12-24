@@ -41,11 +41,7 @@ public:
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	
-	ushort getNumOfInPins() override {return 6; };
-	ushort getNumOfOutPins() override {return 3; };
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 10; };
 };
 
 #endif /* DCSClockDiv2WithEnableAndLoad_hpp */

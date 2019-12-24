@@ -34,11 +34,6 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override {return 3; };
-	ushort getNumOfOutPins() override {return 2; };
-	
-	int getTimeDelay() override { return 3; };
 };
 
 #endif /* DCSFullAdder_hpp */

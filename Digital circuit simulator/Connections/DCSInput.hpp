@@ -19,6 +19,7 @@ private:
 	bool hasSignal = false;
 	bool constValue = 0;
 	DCSArbitrarySignal *signal;
+	void initialize();
 public:
 	DCSInput(std::string name);
 	DCSInput(std::string name, bool initValue);
@@ -30,11 +31,6 @@ public:
 	void makeSignal(std::string signal, bool synch=false);
 	void makeClock(ushort halfPeriod=0, bool initVal=0);
 	void updateOut() override;
-	
-	ushort getNumOfInPins() override { return 0; };
-	ushort getNumOfOutPins() override { return 1; };
-
-	int getTimeDelay() override { return 1; };
 };
 
 #endif /* DCSInput_hpp */

@@ -9,13 +9,20 @@
 #include "DCSHeader.h"
 
 DCSComponent::DCSComponent(std::string name, bool shouldUpdate):
-enabled(true),		// only 3-state buffer can be disabled
+in(0),
+out(0),
 name({name}),
 reachableIn(0),
 connectedIn(0),
 fromTristateIn(0),
+enabled(true),		// only 3-state buffer can be disabled
+timeDelay(-1),
+numOfInPins(-1),
+numOfOutPins(-1),
 isNode(false),
-isTristate(false) {
+isTristate(false),
+initialized(false)
+{
 	if (name == "") DCSLog::error("Component", "I don't have name");
 	if (shouldUpdate) DCSEngine::addComponent(this);
 }
@@ -168,6 +175,7 @@ bool DCSComponent::isFullyConnected() {
 	return (connectedIn ^ fromTristateIn) == getAllReachedQWord();
 }
 
+
 uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }
 
 bool DCSComponent::getReachableIn(ushort inPinNum) {
@@ -184,4 +192,25 @@ void DCSComponent::disable(){
 
 bool DCSComponent::getEnabled(){
 	return enabled;
+}
+
+ushort DCSComponent::getNumOfInPins() {
+	if (numOfInPins == ushort(-1)) {
+		DCSLog::error(name, "Number of input pins not set");
+	}
+	return numOfInPins;
+}
+
+ushort DCSComponent::getNumOfOutPins() {
+	if (numOfOutPins == ushort(-1)) {
+		DCSLog::error(name, "Number of output pins not set");
+	}
+	return numOfOutPins;
+}
+
+ushort DCSComponent::getTimeDelay() {
+	if (timeDelay  == ushort(-1)) {
+		DCSLog::error(name, "Time delay not set");
+	}
+	return timeDelay;
 }

@@ -30,6 +30,10 @@ DCSComponent(name, false){
 	or0.connect(&jk0, 0, 0); // to master J
 	or1.connect(&jk0, 0, 1); // to master K
 	jk0.connect(&and3, 0, 0);
+	
+	timeDelay = 10;
+	numOfInPins = 6;
+	numOfOutPins = 3;
 }
 
 DCSComponent* DCSClockDiv2WithEnableAndLoad::getOutComponent(ushort &outPinNum) {

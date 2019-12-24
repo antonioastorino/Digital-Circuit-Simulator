@@ -10,16 +10,18 @@
 
 DCSInput::DCSInput(std::string name) :
 DCSComponent(name, false),
-constValue(0){
+constValue(0) {
 	signal = new DCSArbitrarySignal(binary_signal{0});
-	DCSEngine::addInput(this);
+	initialize();
 }
+
+
 
 DCSInput::DCSInput(std::string name, bool constValue) :
 DCSComponent(name, false),
 constValue(constValue){
 	signal = new DCSArbitrarySignal(binary_signal{0});
-	DCSEngine::addInput(this);
+	initialize();
 }
 
 DCSInput::DCSInput(std::string name, binary_signal signal, bool synch) :
@@ -27,8 +29,16 @@ DCSComponent(name, false),
 constValue(0) {
 	this->signal = new DCSArbitrarySignal(signal, synch);
 	hasSignal = true;
+	initialize();
+}
+
+void DCSInput::initialize() {
+	timeDelay = 0;
+	numOfInPins = 0;
+	numOfOutPins = 1;
 	DCSEngine::addInput(this);
 }
+
 
 DCSInput::~DCSInput() {
 	delete signal;

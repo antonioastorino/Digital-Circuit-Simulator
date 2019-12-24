@@ -17,6 +17,9 @@ private:
 	std::vector<T*> componentArray;
 	std::string name;
 	ushort numOfElements;
+
+	void initialize();
+
 public:
 	DCSComponentArray(std::string name, ushort numOfElements);
 	DCSComponentArray(std::vector<std::string> nameVector, ushort numOfElements);
@@ -25,15 +28,7 @@ public:
 	DCSComponent* getOutComponent(ushort &outPinNum) override;
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	
-	ushort getNumOfInPins() override {
-		return componentArray[0]->getNumOfInPins() * numOfElements;
-	};
-	ushort getNumOfOutPins() override {
-		return componentArray[0]->getNumOfOutPins() * numOfElements;
-	};
-	
 	void updateOut() override;
-	int getTimeDelay() override { return 1; };
 	T* operator [] (ushort  elemNum);
 };
 
