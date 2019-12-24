@@ -16,6 +16,9 @@
 #include <vector>
 
 typedef std::vector<uint64_t> binary_signal;
+void printTestName(std::string testName);
+void ramTest();
+void ramProgrammerTest();
 
 // TODO: put somewhere else
 struct DCSPinNumRange {
@@ -79,7 +82,8 @@ struct DCSPinNumRange {
 
 #include "DCSDisplayNBits.hpp"
 
-#include "DCSEngine.hpp"
+#include "DCSMemoryProgrammer.hpp"
 
+#include "DCSEngine.hpp"
 
 #endif /* DCSHeader_h */

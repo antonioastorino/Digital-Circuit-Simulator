@@ -17,6 +17,9 @@
 		A93CB50B23AD358F0087D629 /* DCSFullAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB50923AD358F0087D629 /* DCSFullAdder.cpp */; };
 		A93CB51523AEABDF0087D629 /* DCSRippleAdder8Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51323AEABDF0087D629 /* DCSRippleAdder8Bits.cpp */; };
 		A93CB51823AF71DE0087D629 /* DCSDisplayNBits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */; };
+		A93CB51D23AFB4790087D629 /* DCSMemoryProgrammer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB51B23AFB4790087D629 /* DCSMemoryProgrammer.cpp */; };
+		A93CB52323AFFEA00087D629 /* RamProgrammer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */; };
+		A93CB52523B16D4A0087D629 /* Ram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB52423B16D4A0087D629 /* Ram.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -83,6 +86,10 @@
 		A93CB51423AEABDF0087D629 /* DCSRippleAdder8Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSRippleAdder8Bits.hpp; sourceTree = "<group>"; };
 		A93CB51623AF71DE0087D629 /* DCSDisplayNBits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSDisplayNBits.cpp; sourceTree = "<group>"; };
 		A93CB51723AF71DE0087D629 /* DCSDisplayNBits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSDisplayNBits.hpp; sourceTree = "<group>"; };
+		A93CB51B23AFB4790087D629 /* DCSMemoryProgrammer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSMemoryProgrammer.cpp; sourceTree = "<group>"; };
+		A93CB51C23AFB4790087D629 /* DCSMemoryProgrammer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DCSMemoryProgrammer.hpp; sourceTree = "<group>"; };
+		A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RamProgrammer.cpp; sourceTree = "<group>"; };
+		A93CB52423B16D4A0087D629 /* Ram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ram.cpp; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -226,6 +233,35 @@
 			path = Displays;
 			sourceTree = "<group>";
 		};
+		A93CB51923AFB3DC0087D629 /* Base components */ = {
+			isa = PBXGroup;
+			children = (
+				A948245C237F5E1B00803F30 /* DCSComponent.hpp */,
+				A948245B237F5E1B00803F30 /* DCSComponent.cpp */,
+				A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */,
+				A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */,
+			);
+			path = "Base components";
+			sourceTree = "<group>";
+		};
+		A93CB51A23AFB4540087D629 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A93CB51C23AFB4790087D629 /* DCSMemoryProgrammer.hpp */,
+				A93CB51B23AFB4790087D629 /* DCSMemoryProgrammer.cpp */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A93CB52123AFFE740087D629 /* Test files */ = {
+			isa = PBXGroup;
+			children = (
+				A93CB52223AFFEA00087D629 /* RamProgrammer.cpp */,
+				A93CB52423B16D4A0087D629 /* Ram.cpp */,
+			);
+			path = "Test files";
+			sourceTree = "<group>";
+		};
 		A9482445237F49F500803F30 = {
 			isa = PBXGroup;
 			children = (
@@ -246,15 +282,13 @@
 		A9482450237F49F500803F30 /* Digital circuit simulator */ = {
 			isa = PBXGroup;
 			children = (
+				A93CB51A23AFB4540087D629 /* Utilities */,
 				A95D55C923A2DAA000701DE9 /* DCSHeader.h */,
 				A9BDED8523805EC600650496 /* DCSEngine.hpp */,
 				A9BDED8423805EC600650496 /* DCSEngine.cpp */,
-				A948245C237F5E1B00803F30 /* DCSComponent.hpp */,
-				A948245B237F5E1B00803F30 /* DCSComponent.cpp */,
-				A95D55C723A2D80C00701DE9 /* DCSComponentArray.hpp */,
-				A95D55C623A2D80C00701DE9 /* DCSComponentArray.cpp */,
 				A9C2D1BE239EF853008CAF81 /* DCSLog.hpp */,
 				A9C2D1BD239EF853008CAF81 /* DCSLog.cpp */,
+				A93CB51923AFB3DC0087D629 /* Base components */,
 				A9C2D198239AB888008CAF81 /* Connections */,
 				A9302E372383452200F5DEA9 /* Signals */,
 				A9482461238045BD00803F30 /* Logic gates */,
@@ -267,6 +301,7 @@
 				A93CB50823AD35630087D629 /* Arithmetic components */,
 				A93CB50C23AE73330087D629 /* Displays */,
 				A9482451237F49F500803F30 /* main.cpp */,
+				A93CB52123AFFE740087D629 /* Test files */,
 			);
 			path = "Digital circuit simulator";
 			sourceTree = "<group>";
@@ -427,11 +462,14 @@
 				A9948A5023A41CCE00D20F06 /* DCSNand.cpp in Sources */,
 				A90237F923A90DE7007A9985 /* DCSXor.cpp in Sources */,
 				A9C2D1A1239CF9B6008CAF81 /* DCSUnitDelay.cpp in Sources */,
+				A93CB52523B16D4A0087D629 /* Ram.cpp in Sources */,
 				A9C2D19E239CF6C1008CAF81 /* DCSDFlipFlop.cpp in Sources */,
 				A9C2D1912393CE79008CAF81 /* DCSWire.cpp in Sources */,
 				A94A6CD223AA6A1200B3E83D /* DCSAddressDecoder4Bits.cpp in Sources */,
+				A93CB52323AFFEA00087D629 /* RamProgrammer.cpp in Sources */,
 				A94A6CCE23AA485600B3E83D /* DCSTriStateBuffer8Bits.cpp in Sources */,
 				A999F32523A3CABE00E0E6A6 /* DCSDLatchAsyncSR.cpp in Sources */,
+				A93CB51D23AFB4790087D629 /* DCSMemoryProgrammer.cpp in Sources */,
 				A999F32023A3BBA100E0E6A6 /* DCSNor3.cpp in Sources */,
 				A9C2D1BF239EF853008CAF81 /* DCSLog.cpp in Sources */,
 				A9C2D19423944B72008CAF81 /* DCSOutput.cpp in Sources */,

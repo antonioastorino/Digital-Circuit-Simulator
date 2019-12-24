@@ -25,9 +25,17 @@ private:
 	static bool sampling;
 	
 	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
+	
+	static void checkConnections();
+	static void checkInitialization();
+	
+	static void updateOutputs();
+	static void propagateValues();
+	
 	static void printProbes();
 	static void printLogicLevels();
-	static void propagateValues();
+	
+	friend class DCSMemoryProgrammer;
 public:
 	static void reset(ushort clockHalfPeriod=5);
 	static void addComponent(DCSComponent* component);

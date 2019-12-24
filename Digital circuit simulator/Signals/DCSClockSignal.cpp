@@ -10,7 +10,7 @@
 
 DCSClockSignal::DCSClockSignal(ushort halfPeriod, bool initVal):
 DCSArbitrarySignal(binary_signal{0}) {
-	currVal = !initVal; // it's negated because the first transition occurs at step 1
+	currVal = initVal;
 	if (halfPeriod) this->halfPeriod = halfPeriod;
 	else this->halfPeriod = DCSEngine::getClockPeriod() / 2;
 }
@@ -23,7 +23,7 @@ bool DCSClockSignal::getVal(uint32_t step) {
 	}
 	counter++;
 	// Shift the commutation by 1 tau because the first one is used to initialize the system
-	if (step) { // don't change at first step
+	if (step > 1) { // don't change at first step
 		if (step % (halfPeriod) == 1 || halfPeriod == 1) {
 			currVal = !currVal;
 		}

@@ -17,7 +17,7 @@
  Output N (array Count out) corresponds to output 2 (Count out) of the last divider.
 
  PINOUT:
- IN  0 - Count in (corresponding to input 5 in the divider)
+ IN  0 - Count in (corresponding to input 5 in the internal divider)
  IN  1 - Load  - node arrray with index 0
  IN  2 - Clock - node arrray with index 1
  IN  3 - Clear - node arrray with index 2

@@ -70,33 +70,41 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 
 void DCSEngine::run(uint64_t steps, bool sampling) {
 	DCSEngine::sampling = sampling;
+	stepNumber = 0;
 	/* Check if all components are connected */
-	for (auto component: componentVector) {
-		if(!(component->isFullyConnected())) {
-			DCSLog::error(component->getName(), "not connected");
-		}
-	}
-	
-	DCSLog::debug("Engine", "--------------Initialization start--------------");
+	checkConnections();
 	initialize();
-	DCSLog::debug("Engine", "---------------Initialization end---------------");
+	printLogicLevels();
+	checkInitialization();
 	
-	for (auto component: componentVector) {
-		if (!(component->initialized)) {
-			DCSLog::debug(component->getName(), "not initialized");
-		}
-	}
-	// update output values of initial layer (input vector
-	for (int i = 1; i <= steps; i++) {
-		stepNumber = i;
-		
-		for (auto input: inputVector) { input->updateOut(); }
-		for (auto component: componentVector) { component->updateOut(); }
+	for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+		updateOutputs();
 		propagateValues();
 #if LOG_LEVEL>0
 		printLogicLevels();
 #endif
 	}
+}
+
+void DCSEngine::checkConnections() {
+	for (auto component: componentVector) {
+		if(!(component->isFullyConnected())) {
+			DCSLog::error(component->getName(), "not connected");
+		}
+	}
+}
+
+void DCSEngine::checkInitialization() {
+	for (auto component: componentVector) {
+		if (!(component->initialized)) {
+			DCSLog::debug(component->getName(), "not initialized");
+		}
+	}
+}
+
+void DCSEngine::updateOutputs() {
+	for (auto input: inputVector) { input->updateOut(); }
+	for (auto component: componentVector) { component->updateOut(); }
 }
 
 void DCSEngine::propagateValues() {

@@ -20,8 +20,11 @@ counter(0) {
 }
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::string zerosAndOnes,
-									   bool synch) {
-
+									   bool synch):
+leveNumber(0),
+totalDuration(0),
+flipBitAtSteps({}),
+counter(0) {
 	std::vector<uint64_t> levelDurationVector;
 	uint64_t consecutive = 0;
 	char currBit = zerosAndOnes[0];
@@ -33,9 +36,9 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::string zerosAndOnes,
 		}
 		else {
 			levelDurationVector.push_back(consecutive);
+			consecutive = 1;
+			currBit = ch;
 		}
-		currBit = ch;
-		consecutive = 1;
 	}
 	levelDurationVector.push_back(consecutive);
 	fromLevelsToFlipBitAtSteps(levelDurationVector, synch);
@@ -43,17 +46,13 @@ DCSArbitrarySignal::DCSArbitrarySignal(std::string zerosAndOnes,
 }
 
 void DCSArbitrarySignal::fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelDurationVector,
-											   bool synch) {
-	
+													bool synch) {
 	uint64_t timeMultiplier = 1;
 	if (synch) {
 		timeMultiplier = DCSEngine::getClockPeriod();
 	}
 	
 	flipBitAtSteps.reserve(levelDurationVector.size());
-
-	
-	// add length as the fist value is used to initialize
 	
 	totalDuration = levelDurationVector[0] * timeMultiplier + 1;
 	flipBitAtSteps.push_back(totalDuration);

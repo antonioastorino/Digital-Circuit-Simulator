@@ -8,7 +8,7 @@
 
 #include "DCSHeader.h"
 
-DCSComponent::DCSComponent(std::string name, bool add):
+DCSComponent::DCSComponent(std::string name, bool shouldUpdate):
 enabled(true),		// only 3-state buffer can be disabled
 name({name}),
 reachableIn(0),
@@ -17,7 +17,7 @@ fromTristateIn(0),
 isNode(false),
 isTristate(false) {
 	if (name == "") DCSLog::error("Component", "I don't have name");
-	if (add) DCSEngine::addComponent(this);
+	if (shouldUpdate) DCSEngine::addComponent(this);
 }
 
 DCSComponent::~DCSComponent() {

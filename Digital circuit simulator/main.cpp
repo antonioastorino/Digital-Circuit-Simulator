@@ -28,7 +28,6 @@ void dividerTest();
 void upCounterTest();
 void register8BitsTest();
 void countAndStoreTest();
-void ramTest();
 void mux2to1Test();
 void fullAdderTest();
 void bitStreamSignalTest();
@@ -52,17 +51,18 @@ int main() {
 //	dLatchTest();
 //	dLatchAsyncSRTest();
 //	register1BitTest();
-	jkLatchMasterSlaveAsyncSRTest();
+//	jkLatchMasterSlaveAsyncSRTest();
 //	dividerTest();
 //	upCounterTest();
 //	register8BitsTest();
 //	countAndStoreTest();
-//	ramTest();
 //	mux2to1Test();
 //	fullAdderTest();
 //	bitStreamSignalTest();
 //	displayTest();
 //	rippleAdderTest();
+//	ramTest();
+	ramProgrammerTest();
 	
 	return 0;
 }
@@ -554,64 +554,6 @@ void countAndStoreTest() {
 	regInArray[1]->makeClock();
 	
 	DCSEngine::run(512 * clockHalfPeriod, true);
-}
-
-void ramTest() {
-	printTestName("RAM");
-	
-	
-	ushort hcp = 10; // half clock period
-	DCSEngine::reset(hcp);
-	DCSRam16x8                   ram0("Ram0");
-	DCSComponentArray<DCSInput>  inArray0("In", ram0.getNumOfInPins());
-	DCSComponentArray<DCSOutput> out0("Out", ram0.getNumOfOutPins());
-	
-	inArray0.connect(&ram0, {
-		"OE",  // 0 - Output Enable
-		"CLK", // 1 - Clock
-		" R",  // 2 - Clear
-		" S",  // 3 - Preset
-		"WR",  // 4 - Write
-		"I","I","I","I","I","I","I","I", //5-12 - Data
-		"A","A","A","A" // 13-16 - Address
-	});
-	
-	ram0.connect(&out0, {"O"});
-	/*
-	Steps:
-	0 - EN=1, R=0, S=1, WR=0, Addr=0 (Preset to write ones at every location)
-		 The output should be all 1's
-	1 - EN=0, WR=1 (Write 0's at address 0)
-		 The output should not change because EN=0
-	2 - Addr=<ANY !=0>, WR=0, EN=1 (End writing and output another location)
-		 The output should not change because at location ANY != 0 all 1's are stored
-	3 - Addr=0;
-		 The output should be all 0's
-	4 - R=1, Addr=<ANY != 0>
-		 The output should be all 0's at any location due to reset
-	 Expected output:
-	 OE CLK  R  S WR I I I I I I I I A A A A O O O O O O O O    0
-	  1   1  0  1  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0    0
-	  1   0  0  1  0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    10
-	  0   1  0  0  1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    20
-	  0   0  0  0  1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    30
-	  1   1  0  0  0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 1 1 1 1    40
-	  1   0  0  0  0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 1 1 1 1    50
-	  1   1  0  0  0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1    60
-	  1   0  0  0  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0    70
-	  1   1  1  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    80
-	  1   0  1  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    90
-	  1   1  0  0  0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0    100
-	 
-	*/
-	inArray0[0]->makeSignal(binary_signal{ 1, 1, 1      }, 1, true); // Enable
-	inArray0[1]->makeClock();
-	inArray0[2]->makeSignal(binary_signal{ 4,       1, 1}, 0, true); // Clear
-	inArray0[3]->makeSignal(binary_signal{ 1, 1         }, 1, true); // Preset
-	inArray0[4]->makeSignal(binary_signal{ 1, 1, 1      }, 0, true); // Write
-	inArray0[13]->makeSignal(binary_signal{2,    1, 1, 1}, 0, true); // Address 0
-	inArray0[14]->makeSignal(binary_signal{2,    1, 2   }, 0, true); // Address 1
-	DCSEngine::run(110, true);
 }
 
 void mux2to1Test() {
