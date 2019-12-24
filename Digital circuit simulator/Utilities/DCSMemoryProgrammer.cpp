@@ -51,7 +51,7 @@ void DCSMemoryProgrammer::program(ushort address, ushort value) {
 	for (ushort i = 0; i < 8; i++) {
 		inputPin = i + 5;
 		memory->getInComponent(inputPin)->setIn((value >> i) & 1, inputPin);
-		message << ((value >> (8 - i)) & 1);
+		message << ((value >> (7 - i)) & 1);
 	}
 	message << '\n';
 	DCSLog::output("Writing", message.str());
@@ -79,4 +79,10 @@ void DCSMemoryProgrammer::program(ushort address, ushort value) {
 		DCSEngine::propagateValues();
 //		DCSEngine::printLogicLevels();
 	}
+}
+
+void DCSMemoryProgrammer::program(ushort address,
+								  ushort instruction,
+								  ushort operand) {
+	program(address, (instruction << 4) | operand);
 }
