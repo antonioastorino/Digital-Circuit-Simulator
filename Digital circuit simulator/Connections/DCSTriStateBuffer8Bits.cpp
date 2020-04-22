@@ -22,16 +22,6 @@ node0(name + "-Enable") {
 	numOfOutPins = 8;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(ushort &outPinNum) {
-	if (outPinNum >= 8) {
-		DCSLog::error(name, "Pin out of range");
-		exit(-1);
-	}
-	ushort elementNumber = outPinNum;
-	outPinNum = 0;
-	return bufferArray[elementNumber]->getOutComponent(outPinNum);
-}
-
 DCSComponent* DCSTriStateBuffer8Bits::getInComponent(ushort &inPinNum) {
 	if (inPinNum == 0) {
 		return &node0;
@@ -44,6 +34,16 @@ DCSComponent* DCSTriStateBuffer8Bits::getInComponent(ushort &inPinNum) {
 	}
 	DCSLog::error(name, "Pin out of range");
 	exit(-1);
+}
+
+DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(ushort &outPinNum) {
+	if (outPinNum >= 8) {
+		DCSLog::error(name, "Pin out of range");
+		exit(-1);
+	}
+	ushort elementNumber = outPinNum;
+	outPinNum = 0;
+	return bufferArray[elementNumber]->getOutComponent(outPinNum);
 }
 
 void DCSTriStateBuffer8Bits::enable() {

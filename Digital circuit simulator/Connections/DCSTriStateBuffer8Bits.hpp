@@ -4,7 +4,12 @@
 //
 //  Created by Antonio Astorino on 18/12/2019.
 //  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
+/*
+ PINOUT:
+ INPUT 0: Output enable
+ INPUT 1-8: Data input
+ OUTPUT 0-7: Data out
+ */
 
 #ifndef DCSTriStateBuffer8Bits_hpp
 #define DCSTriStateBuffer8Bits_hpp

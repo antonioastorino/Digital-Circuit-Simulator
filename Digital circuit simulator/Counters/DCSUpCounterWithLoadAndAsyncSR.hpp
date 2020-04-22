@@ -54,11 +54,11 @@ class DCSUpCounterWithLoadAndAsyncSR: public DCSComponent {
 private:
 	DCSComponentArray<DCSClockDiv2WithEnableAndLoad> dividerArray;
 	DCSComponentArray<DCSNode> nodeArray; // inputs shared among dividers
-	ushort numOfElements;
+	ushort numOfBits;
 	
 public:
 	DCSUpCounterWithLoadAndAsyncSR(std::string name,
-								   ushort numOfElements);
+								   ushort numBits);
 	
 	DCSComponent* getInComponent(ushort &inPinNum) override;
 	DCSComponent* getOutComponent(ushort &outPinNum) override;

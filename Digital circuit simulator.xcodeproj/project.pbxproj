@@ -44,6 +44,7 @@
 		A93CB55323B2498A0087D629 /* BitStreamSignal-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */; };
 		A93CB55523B249B70087D629 /* Display-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55423B249B70087D629 /* Display-Test.cpp */; };
 		A93CB55723B249D70087D629 /* RippleAdder-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */; };
+		A93CB55923B2B1FE0087D629 /* FirstProgram-Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A93CB55823B2B1FE0087D629 /* FirstProgram-Test.cpp */; };
 		A9482452237F49F500803F30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482451237F49F500803F30 /* main.cpp */; };
 		A948245A237F4A2C00803F30 /* DCSAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9482458237F4A2C00803F30 /* DCSAnd.cpp */; };
 		A948245D237F5E1B00803F30 /* DCSComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948245B237F5E1B00803F30 /* DCSComponent.cpp */; };
@@ -138,6 +139,7 @@
 		A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "BitStreamSignal-Test.cpp"; sourceTree = "<group>"; };
 		A93CB55423B249B70087D629 /* Display-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Display-Test.cpp"; sourceTree = "<group>"; };
 		A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "RippleAdder-Test.cpp"; sourceTree = "<group>"; };
+		A93CB55823B2B1FE0087D629 /* FirstProgram-Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "FirstProgram-Test.cpp"; sourceTree = "<group>"; };
 		A948244E237F49F500803F30 /* Digital circuit simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Digital circuit simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9482451237F49F500803F30 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A9482458237F4A2C00803F30 /* DCSAnd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DCSAnd.cpp; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				A93CB55223B2498A0087D629 /* BitStreamSignal-Test.cpp */,
 				A93CB55423B249B70087D629 /* Display-Test.cpp */,
 				A93CB55623B249D70087D629 /* RippleAdder-Test.cpp */,
+				A93CB55823B2B1FE0087D629 /* FirstProgram-Test.cpp */,
 			);
 			path = "Test files";
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				A915F0D223926B3100655FC7 /* DCSSRLatch.cpp in Sources */,
 				A93CB54F23B248BF0087D629 /* Mux2To1-Test.cpp in Sources */,
 				A9948A5C23A543B000D20F06 /* DCSAnd3.cpp in Sources */,
+				A93CB55923B2B1FE0087D629 /* FirstProgram-Test.cpp in Sources */,
 				A93CB52A23B241FC0087D629 /* NorLoop-Test.cpp in Sources */,
 				A915F0CE238D9F9000655FC7 /* DCSNor.cpp in Sources */,
 				A999F31D23A3B4BE00E0E6A6 /* DCSOr.cpp in Sources */,

@@ -45,6 +45,6 @@ void upCounterTest() {
 	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
 	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
 
-	DCSEngine::run(265 * hp * 2, true);
+	DCSEngine::run(265 * hp * 2, false);
 }
 

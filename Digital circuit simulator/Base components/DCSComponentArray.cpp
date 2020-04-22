@@ -71,10 +71,7 @@ DCSComponent* DCSComponentArray<T>::getInComponent(ushort &inPinNum) {
 
 template<class T>
 void DCSComponentArray<T>::updateOut() {
-	out = 0;
-	for (uint64_t i = 0; i < numOfElements; i++) {
-		out |= componentArray[i]->getOutVec() << (i * getNumOfOutPins());
-	}
+	DCSLog::error(name, "This function should never be called");
 }
 
 template<class T>

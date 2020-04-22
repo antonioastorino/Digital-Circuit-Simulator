@@ -48,14 +48,7 @@ void DCSComponent::setIn(uint64_t inVec) {
 }
 
 // get single output
-bool DCSComponent::getOutVal(ushort outPinNum) {
-	if (reachableIn == getAllReachedQWord()) initialized = true;
-	return (out >> outPinNum) & 1;
-}
-
-
-// get entire input array
-uint64_t DCSComponent::getOutVec() {
+bool DCSComponent::getOutput() {
 	if (reachableIn == getAllReachedQWord()) initialized = true;
 	return out;
 }
@@ -84,9 +77,7 @@ void DCSComponent::connect(DCSComponent* to,
 	}
 	if (addToTheRight) leftComponent->rightComponentVector.push_back(rightComponent);
 	
-	
 	DCSWire* wire = new DCSWire(leftComponent,
-								outPinNum,
 								rightComponent,
 								inPinNum,
 								probeName);

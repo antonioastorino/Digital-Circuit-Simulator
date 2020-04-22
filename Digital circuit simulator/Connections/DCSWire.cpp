@@ -9,12 +9,10 @@
 #include "DCSHeader.h"
 
 DCSWire::DCSWire(DCSComponent* from,
-				 ushort outPinNum,
 				 DCSComponent* to,
 				 ushort inPinNum,
 				 std::string probeName):
 from(from),
-outPinNum(outPinNum),
 to(to),
 inPinNum(inPinNum),
 probeName(probeName) {
@@ -32,7 +30,7 @@ std::string DCSWire::getProbeName() {
 bool DCSWire::propagateValue() {
 	bool propagated = true;
 	if (from->getEnabled()) {  // Check if a component is in high-Z state
-		bool outVal = from->getOutVal(outPinNum);
+		bool outVal = from->getOutput();
 		if (to->getReachableIn(inPinNum)) { // If alread reached
 			propagated = false;
 		}
@@ -46,10 +44,6 @@ bool DCSWire::propagateValue() {
 	return propagated;
 }
 
-ushort DCSWire::getOutPinNum() {
-	return outPinNum;
-}
-
 bool DCSWire::getOutVal() {
-	return from->getOutVal(outPinNum);
+	return from->getOutput();
 }

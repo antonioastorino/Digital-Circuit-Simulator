@@ -33,6 +33,7 @@ void fullAdderTest();
 void bitStreamSignalTest();
 void displayTest();
 void rippleAdderTest();
+void firstProgramTest();
 
 int main() {
 // TODO: make unit test
@@ -51,17 +52,18 @@ int main() {
 //	dLatchAsyncSRTest();
 //	jkLatchMasterSlaveAsyncSRTest();
 //	register1BitTest();
-//	dividerTest();
-//	upCounterTest();
-//	register8BitsTest();
-//	countAndStoreTest();
-//	mux2To1Test();
-//	fullAdderTest();
-//	bitStreamSignalTest();
-//	displayTest();
+	dividerTest();
+	upCounterTest();
+	register8BitsTest();
+	countAndStoreTest();
+	mux2To1Test();
+	fullAdderTest();
+	bitStreamSignalTest();
+	displayTest();
 	rippleAdderTest();
-//	ramTest();
-//	ramProgrammerTest();
+	ramTest();
+	ramProgrammerTest();
+	firstProgramTest();
 	
 	return 0;
 }

@@ -21,6 +21,7 @@ It is used to propagate signals in sequence during engine initialization.
 
 class DCSWire;
 
+/// Base class for every logic components
 class DCSComponent {
 private:
 	DCSComponent();
@@ -30,7 +31,7 @@ protected:
 	std::string name;
 	
 	uint64_t in;
-	uint64_t out;
+	bool out;
 	uint64_t reachableIn;
 	uint64_t connectedIn;
 	uint64_t fromTristateIn;
@@ -51,8 +52,7 @@ public:
 	virtual void setIn(bool inVal, ushort inPinNum);
 	virtual void setIn(uint64_t inVec);
 	
-	bool getOutVal(ushort outPinNum);
-	uint64_t getOutVec();
+	bool getOutput();
 	
 	std::string getName();
 	ushort getTimeDelay(); // Return the latency between input and outpu

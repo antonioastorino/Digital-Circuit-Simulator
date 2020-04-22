@@ -9,12 +9,11 @@
 #ifndef DCSWire_hpp
 #define DCSWire_hpp
 
+/// Represents a link between one output pin of one component (`from`) and one pin of another component (`to`)
 class DCSWire {
 private:
 	// Driving component
 	DCSComponent* from;
-	// output pin number of the `from` component
-	ushort outPinNum;
 	// Driven component
 	DCSComponent* to;
 	// input pin number of the `right` component
@@ -24,12 +23,10 @@ private:
 public:
 	DCSWire() = delete;
 	DCSWire(DCSComponent* from,
-			ushort outPinNum,
 			DCSComponent* to,
 			ushort inPinNum,
 			std::string probeName = "");
-	
-	ushort getOutPinNum();
+
 	std::string getProbeName();
 	bool propagateValue();
 	bool getOutVal();

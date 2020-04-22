@@ -17,6 +17,7 @@ public:
 	DCSMemoryProgrammer(DCSRam16x8 *memory);
 	
 	void program(ushort address, ushort value);
+	void program(ushort address, ushort instruction, ushort operand);
 };
 
 #endif /* DCSMemoryProgrammer_hpp */

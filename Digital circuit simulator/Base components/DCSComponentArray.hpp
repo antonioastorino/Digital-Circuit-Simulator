@@ -12,6 +12,7 @@
 class DCSComponent;
 
 template<class T>
+/// Array of components
 class DCSComponentArray: public DCSComponent {
 private:
 	std::vector<T*> componentArray;
