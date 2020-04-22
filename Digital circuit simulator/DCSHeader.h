@@ -16,7 +16,7 @@
 #include <vector>
 
 #ifndef ushort
-#define ushort unsigned short
+typedef unsigned short ushort;
 #endif
 typedef std::vector<uint64_t> binary_signal;
 void printTestName(std::string testName);
