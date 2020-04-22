@@ -15,6 +15,9 @@
 #include <iostream>
 #include <vector>
 
+#ifndef ushort
+#define ushort unsigned short
+#endif
 typedef std::vector<uint64_t> binary_signal;
 void printTestName(std::string testName);
 void ramTest();
