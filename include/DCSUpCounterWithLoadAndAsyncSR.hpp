@@ -1,10 +1,3 @@
-//
-//  DCSUpCounterWithLoadAndAsyncSR.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 15/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  This component is an up-counter with syncrhonous load and asynchronous clear and reset.
  Internally, there are N clock dividers which share most of the control inputs,

@@ -1,11 +1,3 @@
-//
-//  DCSXor.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 17/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSXor_hpp
 #define DCSXor_hpp
 #include "DCSComponent.hpp"

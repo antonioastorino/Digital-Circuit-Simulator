@@ -135,7 +135,7 @@ DCSComponent* DCSComponent::getOutComponent(ushort &outPinNum) {
 	return this;
 }
 
-bool DCSComponent::getConnectedIn(ushort inPinNum) {
+bool DCSComponent::isInConnected(ushort inPinNum) {
 	return connectedIn & (1 << inPinNum);
 }
 
@@ -144,14 +144,14 @@ bool DCSComponent::getFromTristateIn(ushort inPinNum) {
 }
 
 void DCSComponent::setConnectedIn(ushort inPinNum) {
-	if (getConnectedIn(inPinNum) || getFromTristateIn(inPinNum)) {
+	if (isInConnected(inPinNum) || getFromTristateIn(inPinNum)) {
 		DCSLog::error(name, "trying to connect output to connected input");
 	}
 	connectedIn |= (1 << inPinNum);
 }
 
 void DCSComponent::setFromTristateIn(ushort inPinNum) {
-	if (getConnectedIn(inPinNum)) {
+	if (isInConnected(inPinNum)) {
 		DCSLog::error(name, "trying to connect tristate output to connected input");
 	}
 	fromTristateIn |= (1 << inPinNum);
