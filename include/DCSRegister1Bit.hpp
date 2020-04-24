@@ -38,6 +38,7 @@
 #define DCSRegister1Bit_hpp
 class DCSNode;
 #include "DCSTriStateBuffer.hpp"
+#include "DCSDFlipFlopAsyncSR.hpp"
 
 class DCSRegister1Bit: public DCSComponent {
 private:

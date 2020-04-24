@@ -8,6 +8,7 @@
 
 #ifndef DCSEngine_hpp
 #define DCSEngine_hpp
+#include "DCSDisplayNBits.hpp"
 
 class DCSComponent;
 class DCSInput;

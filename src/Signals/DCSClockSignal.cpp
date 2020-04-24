@@ -9,6 +9,7 @@
 #include "DCSHeader.h"
 #include "DCSArbitrarySignal.hpp"
 #include "DCSClockSignal.hpp"
+#include "DCSEngine.hpp"
 
 DCSClockSignal::DCSClockSignal(ushort halfPeriod, bool initVal):
 DCSArbitrarySignal(binary_signal{0}) {

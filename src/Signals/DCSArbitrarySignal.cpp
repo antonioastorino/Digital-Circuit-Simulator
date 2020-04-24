@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSArbitrarySignal.hpp"
+#include "DCSEngine.hpp"
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector,
 									   bool initVal,

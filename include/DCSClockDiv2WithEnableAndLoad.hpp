@@ -21,6 +21,7 @@
 #ifndef DCSClockDiv2WithEnableAndLoad_hpp
 #define DCSClockDiv2WithEnableAndLoad_hpp
 #include "DCSNode.hpp"
+#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 
 class DCSClockDiv2WithEnableAndLoad: public DCSComponent {
 private:

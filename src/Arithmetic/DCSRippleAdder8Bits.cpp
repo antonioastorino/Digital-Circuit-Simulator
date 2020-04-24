@@ -7,6 +7,8 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSRippleAdder8Bits.hpp"
+#include "DCSFullAdder.hpp"
 
 DCSRippleAdder8Bits::DCSRippleAdder8Bits(std::string name) :
 DCSComponent(name, false),

@@ -9,6 +9,8 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSFullAdder.hpp"
+#include "DCSEngine.hpp"
 
 void fullAdderTest() {
 	printTestName("Full adder");

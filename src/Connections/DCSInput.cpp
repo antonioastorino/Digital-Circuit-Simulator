@@ -9,6 +9,7 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSClockSignal.hpp"
+#include "DCSEngine.hpp"
 
 DCSInput::DCSInput(std::string name) :
 DCSComponent(name, false),

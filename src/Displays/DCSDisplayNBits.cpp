@@ -7,6 +7,8 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSDisplayNBits.hpp"
+#include "DCSEngine.hpp"
 
 DCSDisplayNBits::DCSDisplayNBits(std::string name, ushort numOfBits) :
 DCSComponent(name, false),

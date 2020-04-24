@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSRegister8Bits.hpp"
 
 DCSRegister8Bits::DCSRegister8Bits(std::string name) :
 DCSComponent(name, false),

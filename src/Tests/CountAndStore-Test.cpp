@@ -9,6 +9,9 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSRegister8Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSEngine.hpp"
 
 void countAndStoreTest() {
 	printTestName("Count and store");

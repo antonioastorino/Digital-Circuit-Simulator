@@ -7,6 +7,8 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSMemoryProgrammer.hpp"
+#include "DCSEngine.hpp"
 
 DCSMemoryProgrammer::DCSMemoryProgrammer(DCSRam16x8 *memory):
 memory(memory) {

@@ -9,6 +9,9 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSEngine.hpp"
+
 
 void dividerTest() {
 	printTestName("Divider");

@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSTriStateBuffer.hpp"
 
 DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :
 DCSComponent(name) {

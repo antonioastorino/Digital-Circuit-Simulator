@@ -10,6 +10,7 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSMux2to1.hpp"
+#include "DCSEngine.hpp"
 
 void mux2To1Test() {
 	printTestName("Mux 2 to 1");

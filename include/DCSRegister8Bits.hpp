@@ -24,6 +24,7 @@
 #ifndef DCSRegister8Bits_hpp
 #define DCSRegister8Bits_hpp
 class DCSNode;
+#include "DCSRegister1Bit.hpp"
 
 class DCSRegister8Bits: public DCSComponent {
 private:

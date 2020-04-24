@@ -9,6 +9,9 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSTriStateBuffer.hpp"
+#include "DCSNode.hpp"
+#include "DCSEngine.hpp"
 
 void triStateBufferTest() {
 	printTestName("Tri-state buffer");

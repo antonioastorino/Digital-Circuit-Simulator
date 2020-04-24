@@ -10,6 +10,7 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDFlipFlop.hpp"
+#include "DCSEngine.hpp"
 
 void dFlipFlopTest() {
 	printTestName("D-FlipFlop");

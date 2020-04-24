@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSEngine.hpp"
 
 void unitDelayTest() {
 	printTestName("Unit delay");

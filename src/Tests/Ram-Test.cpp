@@ -8,6 +8,8 @@
 
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSEngine.hpp"
 
 void ramTest() {
 	printTestName("RAM");

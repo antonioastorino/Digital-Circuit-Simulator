@@ -9,6 +9,8 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSRegister8Bits.hpp"
+#include "DCSEngine.hpp"
 
 void register8BitsTest() {
 	printTestName("8-bit register");

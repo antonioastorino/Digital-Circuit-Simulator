@@ -51,7 +51,7 @@ struct DCSPinNumRange {
 #include "DCSUnitDelay.hpp"
 #include "DCSNor.hpp"
 #include "DCSNor3.hpp"
-#include "DCSNand3.hpp"
+// #include "DCSNand3.hpp"
 
 //#include "DCSInput.hpp"
 //#include "DCSOutput.hpp"
@@ -70,23 +70,23 @@ struct DCSPinNumRange {
 //#include "DCSDLatch.hpp"
 //#include "DCSDLatchAsyncSR.hpp"
 //#include "DCSDFlipFlop.hpp"
-#include "DCSDFlipFlopAsyncSR.hpp"
-#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
-#include "DCSRegister1Bit.hpp"
-#include "DCSRegister8Bits.hpp"
-#include "DCSRam16x8.hpp"
+// #include "DCSDFlipFlopAsyncSR.hpp"
+// #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
+// #include "DCSRegister1Bit.hpp"
+// #include "DCSRegister8Bits.hpp"
+// #include "DCSRam16x8.hpp"
 
 
 //#include "DCSClockDiv2WithEnableAndLoad.hpp"
-#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+// #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
-#include "DCSFullAdder.hpp"
-#include "DCSRippleAdder8Bits.hpp"
+// #include "DCSFullAdder.hpp"
+// #include "DCSRippleAdder8Bits.hpp"
 
-#include "DCSDisplayNBits.hpp"
+// #include "DCSDisplayNBits.hpp"
 
-#include "DCSMemoryProgrammer.hpp"
+// #include "DCSMemoryProgrammer.hpp"
 
-#include "DCSEngine.hpp"
+// #include "DCSEngine.hpp"
 
 #endif /* DCSHeader_h */

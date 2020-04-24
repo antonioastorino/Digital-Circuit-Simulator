@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
+#include "DCSEngine.hpp"
 
 void andArrayTest() {
 	printTestName("Gate array");

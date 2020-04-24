@@ -10,6 +10,7 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSSRLatch.hpp"
+#include "DCSEngine.hpp"
 
 void srLatchTest() {
 	printTestName("SR-Latch");

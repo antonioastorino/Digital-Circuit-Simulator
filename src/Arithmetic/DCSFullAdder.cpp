@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSFullAdder.hpp"
 
 DCSFullAdder::~DCSFullAdder() {}
 

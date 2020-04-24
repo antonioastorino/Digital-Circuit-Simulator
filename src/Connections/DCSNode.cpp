@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSWire.hpp"
+#include "DCSNode.hpp"
 
 DCSNode::DCSNode(std::string name) :
 DCSComponent(name, false) {

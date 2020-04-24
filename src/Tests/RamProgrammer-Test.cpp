@@ -7,6 +7,10 @@
 //
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSMemoryProgrammer.hpp"
+#include "DCSEngine.hpp"
 
 void ramProgrammerTest() {
 	printTestName("Ram programmer");

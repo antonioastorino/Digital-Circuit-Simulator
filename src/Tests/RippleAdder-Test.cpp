@@ -8,6 +8,8 @@
 
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
+#include "DCSRippleAdder8Bits.hpp"
+#include "DCSEngine.hpp"
 
 void rippleAdderTest() {
 	printTestName("8-bit ripple adder");

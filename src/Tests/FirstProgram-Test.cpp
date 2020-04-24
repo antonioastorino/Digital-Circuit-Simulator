@@ -9,6 +9,10 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSMemoryProgrammer.hpp"
+#include "DCSEngine.hpp"
 
 ushort LDA = 0b0000;
 ushort ADD = 0b0001;

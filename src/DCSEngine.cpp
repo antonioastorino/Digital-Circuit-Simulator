@@ -10,6 +10,7 @@
 #include "DCSArbitrarySignal.hpp"
 #include "DCSInput.hpp"
 #include "DCSWire.hpp"
+#include "DCSEngine.hpp"
 
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};

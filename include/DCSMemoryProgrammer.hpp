@@ -8,6 +8,7 @@
 
 #ifndef DCSMemoryProgrammer_hpp
 #define DCSMemoryProgrammer_hpp
+#include "DCSRam16x8.hpp"
 
 class DCSMemoryProgrammer {
 private:

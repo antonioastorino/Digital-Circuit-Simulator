@@ -9,6 +9,8 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSEngine.hpp"
 
 void upCounterTest() {
 	printTestName("Up counter");

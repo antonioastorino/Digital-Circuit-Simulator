@@ -9,6 +9,8 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
+#include "DCSEngine.hpp"
 
 void jkLatchMasterSlaveAsyncSRTest() {
 	printTestName("JK-Latch Master-Slave with asynchronous SR");

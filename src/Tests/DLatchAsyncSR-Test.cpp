@@ -10,6 +10,7 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDLatchAsyncSR.hpp"
+#include "DCSEngine.hpp"
 
 void dLatchAsyncSRTest() {
 	printTestName("D-Latch with asynchronous SR");

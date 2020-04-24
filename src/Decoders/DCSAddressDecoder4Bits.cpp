@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSAddressDecoder4Bits.hpp"
 
 DCSAddressDecoder4Bits::DCSAddressDecoder4Bits(std::string name) :
 DCSComponent(name, false),

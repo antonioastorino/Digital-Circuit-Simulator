@@ -8,6 +8,7 @@
 
 #ifndef DCSRippleAdder8Bits_hpp
 #define DCSRippleAdder8Bits_hpp
+class DCSFullAdder;
 
 class DCSRippleAdder8Bits: public DCSComponent {
 private:

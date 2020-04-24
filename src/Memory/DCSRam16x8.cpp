@@ -7,6 +7,8 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSRegister8Bits.hpp"
+#include "DCSRam16x8.hpp"
 
 DCSRam16x8::DCSRam16x8(std::string name) :
 DCSComponent(name, false),

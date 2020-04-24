@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSWire.hpp"
+#include "DCSEngine.hpp"
 
 DCSComponent::DCSComponent(std::string name, bool shouldUpdate):
 in(0),

@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSDFlipFlopAsyncSR.hpp"
 
 DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) :
 DCSComponent(name, false) {

@@ -9,6 +9,7 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSEngine.hpp"
 
 void risingEdgeDetectorTest() {
 	printTestName("Rising edge detector");

@@ -9,6 +9,7 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSEngine.hpp"
 
 void nor3Test() {
 	printTestName("Nor 3");

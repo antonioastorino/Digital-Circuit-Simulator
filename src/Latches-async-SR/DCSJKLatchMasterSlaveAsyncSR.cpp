@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 
 DCSJKLatchMasterSlaveAsyncSR::DCSJKLatchMasterSlaveAsyncSR(std::string name) :
 DCSComponent(name, false) {

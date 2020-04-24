@@ -9,6 +9,8 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
+#include "DCSEngine.hpp"
+#include "DCSNand3.hpp"
 
 void nand3Test() {
 	printTestName("Nand 3");

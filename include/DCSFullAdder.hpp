@@ -17,7 +17,8 @@
 
 #ifndef DCSFullAdder_hpp
 #define DCSFullAdder_hpp
-class DCSNode;
+#include "DCSNode.hpp"
+#include "DCSFullAdder.hpp"
 
 class DCSFullAdder: public DCSComponent {
 private:
