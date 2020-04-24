@@ -11,7 +11,7 @@
 #include "DCSOutput.hpp"
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSEngine.hpp"
-
+#include "DCSComponentArray.hpp"
 
 void dividerTest() {
 	printTestName("Divider");

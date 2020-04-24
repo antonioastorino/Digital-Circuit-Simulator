@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
+#include "DCSLog.hpp"
 
 DCSJKLatchMasterSlaveAsyncSR::DCSJKLatchMasterSlaveAsyncSR(std::string name) :
 DCSComponent(name, false) {

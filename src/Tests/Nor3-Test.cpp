@@ -10,6 +10,8 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
+#include "DCSNor3.hpp"
+#include "DCSComponentArray.hpp"
 
 void nor3Test() {
 	printTestName("Nor 3");

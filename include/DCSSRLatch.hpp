@@ -16,6 +16,7 @@
 */
 #ifndef DCSSRLatch_hpp
 #define DCSSRLatch_hpp
+#include "DCSNor.hpp"
 
 class DCSSRLatch: public DCSComponent {
 private:

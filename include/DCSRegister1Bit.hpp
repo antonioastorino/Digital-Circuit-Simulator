@@ -39,6 +39,7 @@
 class DCSNode;
 #include "DCSTriStateBuffer.hpp"
 #include "DCSDFlipFlopAsyncSR.hpp"
+#include "DCSOr.hpp"
 
 class DCSRegister1Bit: public DCSComponent {
 private:

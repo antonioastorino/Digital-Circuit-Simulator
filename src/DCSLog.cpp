@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSLog.hpp"
 
 void DCSLog::output(std::string label, std::string message) {
 #if LOG_LEVEL>0

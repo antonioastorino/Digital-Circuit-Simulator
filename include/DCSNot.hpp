@@ -8,6 +8,7 @@
 
 #ifndef DCSNot_hpp
 #define DCSNot_hpp
+#include "DCSComponent.hpp"
 
 class DCSNot: public DCSComponent {
 public:

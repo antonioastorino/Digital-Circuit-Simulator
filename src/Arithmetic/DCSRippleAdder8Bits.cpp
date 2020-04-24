@@ -1,14 +1,7 @@
-//
-//  DCSRippleAdder8Bits.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 21/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #include "DCSHeader.h"
 #include "DCSRippleAdder8Bits.hpp"
 #include "DCSFullAdder.hpp"
+#include "DCSLog.hpp"
 
 DCSRippleAdder8Bits::DCSRippleAdder8Bits(std::string name) :
 DCSComponent(name, false),

@@ -8,7 +8,11 @@
 
 #ifndef DCSAddressDecoder4Bits_hpp
 #define DCSAddressDecoder4Bits_hpp
+#include "DCSComponentArray.hpp"
 class DCSNode;
+class DCSUnitDelay;
+class DCSNot;
+class DCSAnd4;
 
 class DCSAddressDecoder4Bits: public DCSComponent {
 private:

@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSAnd4.hpp"
 
 DCSAnd4::DCSAnd4(std::string name):
 DCSComponent(name) {

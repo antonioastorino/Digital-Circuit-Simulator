@@ -15,6 +15,7 @@
 #define DCSTriStateBuffer8Bits_hpp
 #include "DCSNode.hpp"
 #include "DCSTriStateBuffer.hpp"
+#include "DCSComponentArray.hpp"
 
 class DCSTriStateBuffer8Bits: public DCSComponent {
 private:

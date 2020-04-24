@@ -8,6 +8,7 @@
 
 #ifndef DCSNor3_hpp
 #define DCSNor3_hpp
+#include "DCSComponent.hpp"
 
 class DCSNor3: public DCSComponent {
 public:

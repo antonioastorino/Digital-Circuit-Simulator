@@ -8,6 +8,7 @@
 
 #ifndef DCSXor_hpp
 #define DCSXor_hpp
+#include "DCSComponent.hpp"
 
 class DCSXor: public DCSComponent {
 public:

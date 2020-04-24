@@ -8,8 +8,7 @@
 
 #ifndef DCSComponentArray_hpp
 #define DCSComponentArray_hpp
-
-class DCSComponent;
+#include "DCSComponent.hpp"
 
 template<class T>
 /// Array of components

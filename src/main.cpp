@@ -7,8 +7,6 @@
 //
 
 #include "DCSHeader.h"
-
-void printTestName(std::string testName);
 void srLatchTest();
 void notLoopTest();
 void unitDelayTest();
@@ -33,7 +31,9 @@ void fullAdderTest();
 void bitStreamSignalTest();
 void displayTest();
 void rippleAdderTest();
+void ramProgrammerTest();
 void firstProgramTest();
+void ramTest();
 
 int main() {
 // TODO: make unit test
@@ -64,7 +64,6 @@ int main() {
 	ramTest();
 	ramProgrammerTest();
 	firstProgramTest();
-	
 	return 0;
 }
 

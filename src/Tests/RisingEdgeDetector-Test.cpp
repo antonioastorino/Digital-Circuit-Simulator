@@ -10,6 +10,9 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd.hpp"
 
 void risingEdgeDetectorTest() {
 	printTestName("Rising edge detector");

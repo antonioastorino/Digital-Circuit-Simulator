@@ -8,6 +8,7 @@
 
 #ifndef DCSAnd4_hpp
 #define DCSAnd4_hpp
+#include "DCSComponent.hpp"
 
 class DCSAnd4: public DCSComponent {
 public:

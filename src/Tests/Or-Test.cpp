@@ -10,6 +10,8 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
+#include "DCSOr.hpp"
+#include "DCSComponentArray.hpp"
 
 void orTest() {
 	printTestName("Or");

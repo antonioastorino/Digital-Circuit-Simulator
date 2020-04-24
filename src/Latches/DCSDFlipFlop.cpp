@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSDFlipFlop.hpp"
+#include "DCSLog.hpp"
 
 
 DCSDFlipFlop::DCSDFlipFlop(std::string name) :

@@ -8,6 +8,7 @@
 
 #ifndef DCSDisplayNBits_hpp
 #define DCSDisplayNBits_hpp
+#include "DCSComponent.hpp"
 
 class DCSDisplayNBits: public DCSComponent {
 private:

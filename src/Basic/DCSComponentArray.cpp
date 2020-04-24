@@ -34,6 +34,8 @@
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSFullAdder.hpp"
+#include "DCSComponentArray.hpp"
+#include "DCSLog.hpp"
 
 
 class DCSNode;

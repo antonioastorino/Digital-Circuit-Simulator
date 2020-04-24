@@ -27,6 +27,9 @@ Q:    | XXXX________
 #define DCSDLatch_hpp
 #include "DCSNode.hpp"
 #include "DCSSRLatch.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd.hpp"
 
 class DCSDLatch: public DCSComponent {
 private:

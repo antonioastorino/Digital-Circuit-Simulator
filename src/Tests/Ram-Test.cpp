@@ -10,6 +10,7 @@
 #include "DCSInput.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSEngine.hpp"
+#include "DCSComponentArray.hpp"
 
 void ramTest() {
 	printTestName("RAM");

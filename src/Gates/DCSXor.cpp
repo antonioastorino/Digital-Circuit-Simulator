@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSXor.hpp"
 
 DCSXor::DCSXor(std::string name):
 DCSComponent(name) {

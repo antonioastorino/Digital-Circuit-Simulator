@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSEngine.hpp"
+#include "DCSNot.hpp"
 
 void notLoopTest() {
 	printTestName("Not loop");

@@ -30,6 +30,10 @@
 #ifndef DCSJKLatchMasterSlaveAsyncSR_hpp
 #define DCSJKLatchMasterSlaveAsyncSR_hpp
 #include "DCSNode.hpp"
+#include "DCSNor3.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd3.hpp"
+#include "DCSAnd.hpp"
 
 class DCSJKLatchMasterSlaveAsyncSR: public DCSComponent {
 private:

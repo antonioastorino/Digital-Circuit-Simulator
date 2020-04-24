@@ -8,6 +8,8 @@
 
 #include "DCSHeader.h"
 #include "DCSAddressDecoder4Bits.hpp"
+#include "DCSAnd4.hpp"
+#include "DCSLog.hpp"
 
 DCSAddressDecoder4Bits::DCSAddressDecoder4Bits(std::string name) :
 DCSComponent(name, false),

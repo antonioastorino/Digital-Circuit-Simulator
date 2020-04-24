@@ -50,6 +50,7 @@
 #ifndef DCSUpCounterWithLoadAndAsyncSR_hpp
 #define DCSUpCounterWithLoadAndAsyncSR_hpp
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSComponentArray.hpp"
 
 class DCSUpCounterWithLoadAndAsyncSR: public DCSComponent {
 private:

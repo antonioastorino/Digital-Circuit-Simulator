@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSUnitDelay.hpp"
 
 DCSUnitDelay::DCSUnitDelay(std::string name) :
 DCSComponent(name) {

@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSFullAdder.hpp"
+#include "DCSLog.hpp"
 
 DCSFullAdder::~DCSFullAdder() {}
 

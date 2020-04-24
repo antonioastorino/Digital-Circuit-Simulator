@@ -20,6 +20,10 @@
 #ifndef DCSDLatchAsyncSR_hpp
 #define DCSDLatchAsyncSR_hpp
 #include "DCSNode.hpp"
+#include "DCSNor3.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd.hpp"
 
 class DCSDLatchAsyncSR: public DCSComponent {
 private:

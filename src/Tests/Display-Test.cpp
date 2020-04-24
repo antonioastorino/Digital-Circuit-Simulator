@@ -9,6 +9,7 @@
 #include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSEngine.hpp"
+#include "DCSComponentArray.hpp"
 
 void displayTest() {
 	printTestName("Display");

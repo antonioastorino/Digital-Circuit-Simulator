@@ -10,6 +10,8 @@
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
+#include "DCSAnd6.hpp"
+#include "DCSComponentArray.hpp"
 
 void and6Test() {
 	printTestName("And 6");

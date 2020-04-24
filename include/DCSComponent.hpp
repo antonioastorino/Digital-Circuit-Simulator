@@ -21,6 +21,14 @@ It is used to propagate signals in sequence during engine initialization.
 
 class DCSWire;
 
+struct DCSPinNumRange {
+	ushort startPinNum;
+	ushort endPinNum;
+	DCSPinNumRange(ushort startPinNum, ushort endPinNum) :
+	startPinNum(startPinNum),
+	endPinNum(endPinNum) {}
+};
+
 /// Base class for every logic components
 class DCSComponent {
 private:

@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSLog.hpp"
 
 DCSClockDiv2WithEnableAndLoad::DCSClockDiv2WithEnableAndLoad(std::string name):
 DCSComponent(name, false){

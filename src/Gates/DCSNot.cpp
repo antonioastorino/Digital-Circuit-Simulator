@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSNot.hpp"
 
 DCSNot::DCSNot(std::string name) :
 DCSComponent(name) {

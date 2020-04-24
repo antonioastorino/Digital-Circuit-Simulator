@@ -7,6 +7,7 @@
 //
 
 #include "DCSHeader.h"
+#include "DCSNor.hpp"
 
 DCSNor::DCSNor(std::string name):
 DCSComponent(name) {

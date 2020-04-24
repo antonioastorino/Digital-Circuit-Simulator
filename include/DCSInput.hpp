@@ -14,6 +14,7 @@
 #define DCSInput_hpp
 
 #include "DCSArbitrarySignal.hpp"
+#include "DCSComponent.hpp"
 
 class DCSInput: public DCSComponent {
 private:

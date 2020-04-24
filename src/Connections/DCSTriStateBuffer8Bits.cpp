@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSTriStateBuffer8Bits.hpp"
+#include "DCSLog.hpp"
 
 DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name):
 DCSComponent(name, false),

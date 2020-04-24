@@ -17,6 +17,7 @@
 #include "DCSHeader.h"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSMux2to1.hpp"
+#include "DCSLog.hpp"
 
 DCSMux2to1::DCSMux2to1(std::string name) :
 DCSComponent(name, false),

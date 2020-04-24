@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSDFlipFlopAsyncSR.hpp"
+#include "DCSLog.hpp"
 
 DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) :
 DCSComponent(name, false) {

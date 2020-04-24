@@ -8,6 +8,7 @@
 
 #ifndef DCSWire_hpp
 #define DCSWire_hpp
+#include "DCSComponent.hpp"
 
 /// Represents a link between one output pin of one component (`from`) and one pin of another component (`to`)
 class DCSWire {

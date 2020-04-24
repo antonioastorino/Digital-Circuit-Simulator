@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSLog.hpp"
 
 DCSUpCounterWithLoadAndAsyncSR::DCSUpCounterWithLoadAndAsyncSR(std::string name,
 															   ushort numOfBits):

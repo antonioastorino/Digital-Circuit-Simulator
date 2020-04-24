@@ -45,6 +45,7 @@
 
 class DCSNode;
 class DCSRegister8Bits;
+class DCSAnd;
 
 class DCSRam16x8: public DCSComponent {
 private:

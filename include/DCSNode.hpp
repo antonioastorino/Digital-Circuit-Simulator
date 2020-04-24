@@ -8,7 +8,6 @@
 
 #ifndef DCSNode_hpp
 #define DCSNode_hpp
-
 #include "DCSComponent.hpp"
 
 class DCSNode: public DCSComponent {

@@ -9,6 +9,8 @@
 #ifndef DCSDFlipFlopAsyncSR_hpp
 #define DCSDFlipFlopAsyncSR_hpp
 #include "DCSDLatchAsyncSR.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd.hpp"
 
 class DCSDFlipFlopAsyncSR: public DCSComponent {
 private:

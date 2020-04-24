@@ -18,7 +18,9 @@
 #ifndef DCSFullAdder_hpp
 #define DCSFullAdder_hpp
 #include "DCSNode.hpp"
-#include "DCSFullAdder.hpp"
+#include "DCSXor.hpp"
+#include "DCSOr.hpp"
+#include "DCSAnd.hpp"
 
 class DCSFullAdder: public DCSComponent {
 private:

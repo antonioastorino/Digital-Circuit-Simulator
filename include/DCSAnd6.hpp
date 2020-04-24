@@ -8,6 +8,9 @@
 
 #ifndef DCSAnd6_hpp
 #define DCSAnd6_hpp
+#include "DCSAnd.hpp"
+#include "DCSComponentArray.hpp"
+class DCSAnd3;
 
 class DCSAnd6: public DCSComponent {
 private:

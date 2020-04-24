@@ -60,6 +60,9 @@ while read -r cpp_full_path; do
 	# pf "\n $file_name.o: "
 done < cpp-full.list
 
-pf "\nclean:\n\trm -f build/*"
+pf "\nclean:\n\trm -f build .readytomake"
+
+pf "\nbuild/:.readytomake"
+pf "\n\tmkdir -p build; touch ./readytomake"
 
 rm *.list

@@ -11,6 +11,7 @@
 #include "DCSOutput.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSEngine.hpp"
+#include "DCSComponentArray.hpp"
 
 void jkLatchMasterSlaveAsyncSRTest() {
 	printTestName("JK-Latch Master-Slave with asynchronous SR");

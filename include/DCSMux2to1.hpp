@@ -9,6 +9,10 @@
 #ifndef DCSMux2to1_hpp
 #define DCSMux2to1_hpp
 #include "DCSNode.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSNot.hpp"
+#include "DCSOr.hpp"
+#include "DCSAnd.hpp"
 
 class DCSMux2to1: public DCSComponent {
 private:

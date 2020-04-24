@@ -8,6 +8,7 @@
 
 #include "DCSHeader.h"
 #include "DCSWire.hpp"
+#include "DCSLog.hpp"
 
 DCSWire::DCSWire(DCSComponent* from,
 				 DCSComponent* to,
