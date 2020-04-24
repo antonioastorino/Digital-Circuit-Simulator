@@ -70,8 +70,8 @@ int main() {
 
 void printTestName(std::string testName) {
 	std::cout << "\n-----";
-	for (int i = 0; i < testName.size(); i++) std::cout <<"-";
+	for (size_t i = 0; i < testName.size(); i++) std::cout <<"-";
 	std::cout << "\n" << testName << " test\n";
-	for (int i = 0; i < testName.size()+5; i++) std::cout <<"-";
+	for (size_t i = 0; i < testName.size()+5; i++) std::cout <<"-";
 	std::cout << "\n";
 }

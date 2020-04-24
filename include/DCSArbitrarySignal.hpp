@@ -36,7 +36,7 @@ public:
 	DCSArbitrarySignal(std::string zerosAndOnes,
 					   bool synch = false);   
 	virtual bool getVal(uint32_t step);
-	~DCSArbitrarySignal();
+	virtual ~DCSArbitrarySignal();
 };
 
 #endif /* DCSArbitrarySignal_hpp */

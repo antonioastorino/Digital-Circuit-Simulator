@@ -26,7 +26,7 @@ class DCSComponent {
 private:
 	DCSComponent();
 protected:
-	~DCSComponent();
+	virtual ~DCSComponent();
 	DCSComponent(std::string name, bool shouldUpdate=true);
 	uint64_t in;
 	bool out;
