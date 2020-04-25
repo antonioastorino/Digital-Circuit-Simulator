@@ -8,3 +8,22 @@ Examples of how to use the component library are in the main.cpp file.
 If you have questions or want to contribute to this project feel free to contact me.
 
 Antonio.
+
+## How to build (Mac and Linux)
+You are welcome to build the project the way you prefer. However, you can also use the tool provided here.
+#### Generate a Makefile file
+1. ```makeMakefile.sh```
+2. ```make [OPT=<x>] [OUT=<executable_file_name>]```
+
+`<x> = 0, 1, 2, or 3` is the optimization level. ```OPT``` not specified is equivalent to ```OPT=0```
+
+`executable_file_name` is the name of the executable file, which will be placed in the `./build` folder. The default name is `out`
+
+The compiled object files will be located in `./build/objects`.
+
+#### Example:
+```
+make OPT=2 OUT=test # produces /build/test with optimization level 2
+```
+#### Known issue
+Before recompiling with different optimization level it is necessary to run `make clean` or the old object files will be reused.
