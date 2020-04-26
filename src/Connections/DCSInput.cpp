@@ -1,12 +1,4 @@
-//
-//  DCSInput.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 22/11/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 
-#include "DCSHeader.h"
 #include "DCSInput.hpp"
 #include "DCSClockSignal.hpp"
 #include "DCSEngine.hpp"
@@ -58,7 +50,7 @@ void DCSInput::makeSignal(std::string signal, bool synch) {
 	hasSignal = true;
 }
 
-void DCSInput::makeClock(ushort halfPeriod, bool initVal) {
+void DCSInput::makeClock(unsigned short halfPeriod, bool initVal) {
 	this->signal = new DCSClockSignal(halfPeriod, initVal);
 	hasSignal = true;
 }

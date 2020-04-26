@@ -1,11 +1,3 @@
-//
-//  DCSMemoryProgrammer.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 22/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSMemoryProgrammer_hpp
 #define DCSMemoryProgrammer_hpp
 #include "DCSRam16x8.hpp"
@@ -17,8 +9,8 @@ public:
 	DCSMemoryProgrammer() = delete;
 	DCSMemoryProgrammer(DCSRam16x8 *memory);
 	
-	void program(ushort address, ushort value);
-	void program(ushort address, ushort instruction, ushort operand);
+	void program(unsigned short address, unsigned short value);
+	void program(unsigned short address, unsigned short instruction, unsigned short operand);
 };
 
 #endif /* DCSMemoryProgrammer_hpp */

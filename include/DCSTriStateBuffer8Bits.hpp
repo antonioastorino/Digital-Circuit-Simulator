@@ -1,9 +1,3 @@
-//
-//  DCSTriStateBuffer8Bits.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
 /*
  PINOUT:
  INPUT 0: Output enable
@@ -24,8 +18,8 @@ private:
 public:
 	DCSTriStateBuffer8Bits(std::string name);
 	
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
-	DCSComponent* getInComponent(ushort &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
 	void updateOut() override;
 	
 	void enable() override;

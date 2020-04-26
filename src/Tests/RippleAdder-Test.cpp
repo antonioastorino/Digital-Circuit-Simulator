@@ -1,19 +1,11 @@
-//
-//  RippleAdder-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSRippleAdder8Bits.hpp"
 #include "DCSEngine.hpp"
 
 void rippleAdderTest() {
-	printTestName("8-bit ripple adder");
-	ushort hp = 2;
+	DCSLog::printTestName("8-bit ripple adder");
+	unsigned short hp = 2;
 	DCSEngine::reset(hp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 17);

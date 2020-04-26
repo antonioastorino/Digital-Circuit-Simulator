@@ -1,12 +1,3 @@
-//
-//  DCSRegister1Bit.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 14/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSRegister8Bits.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSLog.hpp"
@@ -34,13 +25,13 @@ dffsr0(name + "DFFSR0") {
 	numOfOutPins = 1;
 }
 
-DCSComponent* DCSRegister1Bit::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSRegister1Bit::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0)	return &tris0;
 	DCSLog::error(name, "Pin out of range");
 	exit(-1);
 }
 
-DCSComponent* DCSRegister1Bit::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSRegister1Bit::getInComponent(unsigned short &inPinNum) {
 	switch (inPinNum) {
 		case 0: // Tris-state OE
 			inPinNum = 1;

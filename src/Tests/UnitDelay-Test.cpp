@@ -1,18 +1,10 @@
-//
-//  UnitDelay-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSEngine.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSNot.hpp"
 
 void unitDelayTest() {
-	printTestName("Unit delay");
+	DCSLog::printTestName("Unit delay");
 	DCSEngine::reset();
 	DCSNot not0("Not0");
 	DCSUnitDelay del0("Del0");

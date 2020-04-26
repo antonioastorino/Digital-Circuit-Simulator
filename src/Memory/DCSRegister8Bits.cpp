@@ -1,12 +1,3 @@
-//
-//  DCSRegister8Bits.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 17/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSRegister8Bits.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSLog.hpp"
@@ -16,7 +7,7 @@ DCSComponent(name, false),
 registerArray(name + "-reg", 8),
 nodeArray({"OutEnable", "Clock", "Clear", "Preset", "Load"}, 5) {
 	// connect control signals
-	for (ushort i = 0; i < 8; i++) {
+	for (unsigned short i = 0; i < 8; i++) {
 		nodeArray.connect(registerArray[i], 0, 0);
 		nodeArray.connect(registerArray[i], 1, 1);
 		nodeArray.connect(registerArray[i], 2, 2);
@@ -29,7 +20,7 @@ nodeArray({"OutEnable", "Clock", "Clear", "Preset", "Load"}, 5) {
 	numOfOutPins = 8;
 }
 
-DCSComponent* DCSRegister8Bits::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSRegister8Bits::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum < 8) {
 		return registerArray.getOutComponent(outPinNum);
 	}
@@ -37,12 +28,12 @@ DCSComponent* DCSRegister8Bits::getOutComponent(ushort &outPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSRegister8Bits::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSRegister8Bits::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum < 5) {
 		return nodeArray.getInComponent(inPinNum);
 	}
 	else if (inPinNum < 13) {
-		ushort elementNumber = inPinNum - 5;
+		unsigned short elementNumber = inPinNum - 5;
 		inPinNum = 5;
 		return registerArray[elementNumber]->getInComponent(inPinNum);
 	}

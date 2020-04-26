@@ -1,12 +1,3 @@
-//
-//  DCSArbitrarySignal.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/11/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSArbitrarySignal.hpp"
 #include "DCSEngine.hpp"
 
@@ -67,8 +58,7 @@ void DCSArbitrarySignal::fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelD
 
 bool DCSArbitrarySignal::getVal(uint32_t step) {
 	if (step != counter) {
-		std::cout <<
-		"Error: trying to access the value in non sequential order\n";
+		DCSLog::error("Arbitrary signal", "Trying to access the value in non sequential order");
 		exit(-1);
 	}
 	counter++;

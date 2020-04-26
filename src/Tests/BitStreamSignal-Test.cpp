@@ -1,19 +1,11 @@
-//
-//  BitStreamSignal-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
 
 void bitStreamSignalTest() {
-	printTestName("Bit-stream signal");
-	ushort hp = 1;
+	DCSLog::printTestName("Bit-stream signal");
+	unsigned short hp = 1;
 	DCSEngine::reset(hp);
 	
 	DCSInput in0("A");

@@ -1,12 +1,4 @@
-//
-//  DCSXor.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 17/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 
-#include "DCSHeader.h"
 #include "DCSXor.hpp"
 
 DCSXor::DCSXor(std::string name):

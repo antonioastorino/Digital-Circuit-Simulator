@@ -1,10 +1,3 @@
-//
-//  DCSRegister1Bit.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 14/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  Input 4 (load) must be asserted at least 3 tau before the clock falling edge.
  Input 0 (Data) must be stable at least 2 tau before the clock falling edge.
@@ -53,8 +46,8 @@ private:
 public:
 	DCSRegister1Bit(std::string name);
 	
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
-	DCSComponent* getInComponent(ushort &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
 	void updateOut() override;
 };
 #endif /* DCSRegister1Bit_hpp */

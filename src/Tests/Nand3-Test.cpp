@@ -1,12 +1,4 @@
-//
-//  Nand3-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
@@ -14,7 +6,7 @@
 #include "DCSComponentArray.hpp"
 
 void nand3Test() {
-	printTestName("Nand 3");
+	DCSLog::printTestName("Nand 3");
 	DCSEngine::reset(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 3);

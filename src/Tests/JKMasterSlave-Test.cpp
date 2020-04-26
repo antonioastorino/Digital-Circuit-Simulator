@@ -1,12 +1,4 @@
-//
-//  JKMasterSlave-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
@@ -14,8 +6,8 @@
 #include "DCSComponentArray.hpp"
 
 void jkLatchMasterSlaveAsyncSRTest() {
-	printTestName("JK-Latch Master-Slave with asynchronous SR");
-	ushort hp = 28;
+	DCSLog::printTestName("JK-Latch Master-Slave with asynchronous SR");
+	unsigned short hp = 28;
 	DCSEngine::reset(hp);
 		
 	DCSJKLatchMasterSlaveAsyncSR jk0("jk0");

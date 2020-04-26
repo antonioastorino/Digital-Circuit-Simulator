@@ -1,27 +1,20 @@
-//
-//  DCSEngine.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 16/11/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 
-#include "DCSHeader.h"
 #include "DCSArbitrarySignal.hpp"
 #include "DCSInput.hpp"
 #include "DCSWire.hpp"
 #include "DCSEngine.hpp"
+#include "DCSLog.hpp"
 
 std::vector<DCSComponent*> DCSEngine::componentVector = {};
 std::vector<DCSComponent*> DCSEngine::inputVector = {};
 std::vector<DCSWire*> DCSEngine::wireVector = {};
 std::vector<DCSDisplayNBits*> DCSEngine::displayVector = {};
 
-ushort DCSEngine::clockPeriod;
-ushort DCSEngine::stepNumber;
+unsigned short DCSEngine::clockPeriod;
+unsigned short DCSEngine::stepNumber;
 bool DCSEngine::sampling;
 
-void DCSEngine::reset(ushort clockHalfPeriod) {
+void DCSEngine::reset(unsigned short clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
@@ -137,7 +130,7 @@ void DCSEngine::printLogicLevels() {
 int DCSEngine::getClockPeriod() { return clockPeriod; };
 int DCSEngine::getStepNumber() { return stepNumber; }
 void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
-void DCSEngine::setHalfClockPeriod(ushort numberOfTimeSteps) {
+void DCSEngine::setHalfClockPeriod(unsigned short numberOfTimeSteps) {
 	clockPeriod = 2 *numberOfTimeSteps;
 };
 

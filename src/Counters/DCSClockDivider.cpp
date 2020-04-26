@@ -1,16 +1,7 @@
-//
-//  DCSClockDiv2WithEnableAndLoad.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 15/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
-#include "DCSClockDiv2WithEnableAndLoad.hpp"
 #include "DCSLog.hpp"
+#include "DCSClockDivider.hpp"
 
-DCSClockDiv2WithEnableAndLoad::DCSClockDiv2WithEnableAndLoad(std::string name):
+DCSClockDivider::DCSClockDivider(std::string name):
 DCSComponent(name, false){
 	// D
 	node0.connect(&not0, 0, 0);
@@ -38,7 +29,7 @@ DCSComponent(name, false){
 	numOfOutPins = 3;
 }
 
-DCSComponent* DCSClockDiv2WithEnableAndLoad::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSClockDivider::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0 || outPinNum == 1) {
 		return jk0.getOutComponent(outPinNum);
 	}
@@ -48,7 +39,7 @@ DCSComponent* DCSClockDiv2WithEnableAndLoad::getOutComponent(ushort &outPinNum) 
 	}
 	else exit(-1);
 }
-DCSComponent* DCSClockDiv2WithEnableAndLoad::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSClockDivider::getInComponent(unsigned short &inPinNum) {
 	switch (inPinNum) {
 		case 0: // Data
 			return &node0;
@@ -77,6 +68,6 @@ DCSComponent* DCSClockDiv2WithEnableAndLoad::getInComponent(ushort &inPinNum) {
 	exit(-1);
 }
 
-void DCSClockDiv2WithEnableAndLoad::updateOut() {
+void DCSClockDivider::updateOut() {
 	DCSLog::error(name, "This function should never be called");
 }

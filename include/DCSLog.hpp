@@ -1,13 +1,7 @@
-//
-//  DCSLog.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 09/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSLog_hpp
 #define DCSLog_hpp
+#define LOG_LEVEL 1
+#include <iostream>
 
 class DCSLog {
 public:
@@ -15,6 +9,6 @@ public:
 	static void info(std::string callerName, std::string message);
 	static void debug(std::string callerName, std::string message);
 	static void error(std::string callerName, std::string message);
-	
+	static void printTestName(std::string testName);
 };
 #endif /* DCSLog_hpp */

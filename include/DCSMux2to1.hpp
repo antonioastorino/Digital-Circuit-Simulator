@@ -1,11 +1,3 @@
-//
-//  DCSMux2to1.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 20/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSMux2to1_hpp
 #define DCSMux2to1_hpp
 #include "DCSNode.hpp"
@@ -25,8 +17,8 @@ private:
 public:
 	DCSMux2to1(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

@@ -1,17 +1,9 @@
-//
-//  DCSClockSignal.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 16/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 
-#include "DCSHeader.h"
 #include "DCSArbitrarySignal.hpp"
 #include "DCSClockSignal.hpp"
 #include "DCSEngine.hpp"
 
-DCSClockSignal::DCSClockSignal(ushort halfPeriod, bool initVal):
+DCSClockSignal::DCSClockSignal(unsigned short halfPeriod, bool initVal):
 DCSArbitrarySignal(binary_signal{0}) {
 	currVal = initVal;
 	if (halfPeriod) this->halfPeriod = halfPeriod;
@@ -20,8 +12,7 @@ DCSArbitrarySignal(binary_signal{0}) {
 
 bool DCSClockSignal::getVal(uint32_t step) {
 	if (step != counter) {
-		std::cout <<
-		"Error: trying to access the value in non sequential order\n";
+		DCSLog::error("Clock signal", "Trying to access the value in non sequential order");
 		exit(-1);
 	}
 	counter++;

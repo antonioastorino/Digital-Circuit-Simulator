@@ -1,21 +1,3 @@
-//
-//  DCSDLatchAsyncSR.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 13/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-/*
- Pinout:
- 0 -> Data
- 1 -> Enable
- 2 -> Asynchronous Reset (Clear)
- 3 -> Asynchronous Set (Preset)
- 
- The time diagram is a merge of D-Latch and SR-Latch: when S and R are both low, this component behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch.
- NOTE: do now use Enable when S or R are high.
- */
 
 #ifndef DCSDLatchAsyncSR_hpp
 #define DCSDLatchAsyncSR_hpp
@@ -25,6 +7,18 @@
 #include "DCSNot.hpp"
 #include "DCSAnd.hpp"
 
+/**
+ * @class DCSDLatchAsyncSR
+ * Implements a D Latch with asynchronous Set and Reset
+ * Pinout:
+ * 0 -> In Data
+ * 1 -> In Enable
+ * 2 -> In Asynchronous Reset (Clear)
+ * 3 -> In Asynchronous Set (Preset)
+ * 
+ * The time diagram is a merge of D-Latch and SR-Latch: when S and R are both low, this component behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch.
+ * NOTE: do now use Enable when S or R are high.
+ */
 class DCSDLatchAsyncSR: public DCSComponent {
 private:
 	DCSNor3 nor3_0      = DCSNor3(name + "-Nor0");
@@ -38,8 +32,8 @@ private:
 public:
 	DCSDLatchAsyncSR(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

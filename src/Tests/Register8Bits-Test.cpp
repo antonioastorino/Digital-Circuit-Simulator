@@ -1,19 +1,11 @@
-//
-//  Register8Bits-Teest.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRegister8Bits.hpp"
 #include "DCSEngine.hpp"
 
 void register8BitsTest() {
-	printTestName("8-bit register");
+	DCSLog::printTestName("8-bit register");
 	DCSEngine::reset();
 	
 	DCSRegister8Bits reg0("reg0");
@@ -34,7 +26,7 @@ void register8BitsTest() {
 	
 //
 //
-	ushort clkHalfPeriod = reg0.getTimeDelay()/2+4;
+	unsigned short clkHalfPeriod = reg0.getTimeDelay()/2+4;
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
 	inArray[0]->makeSignal(binary_signal{3,1}, 0, true); // OE

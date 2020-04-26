@@ -1,23 +1,15 @@
-//
-//  Divider-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
-#include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSClockDivider.hpp"
 #include "DCSEngine.hpp"
 #include "DCSComponentArray.hpp"
 
 void dividerTest() {
-	printTestName("Divider");
+	DCSLog::printTestName("Divider");
 	DCSEngine::reset(8);
 	
-	DCSClockDiv2WithEnableAndLoad div0("Div0");
+	DCSClockDivider div0("Div0");
 	DCSComponentArray<DCSInput> inArray("In", 6);
 	DCSComponentArray<DCSOutput> outArray("Out", 3);
 	

@@ -1,12 +1,3 @@
-//
-//  DCSRam16x8.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSRegister8Bits.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSRegister1Bit.hpp"
@@ -27,7 +18,7 @@ ctrlNodeArray({
 dataNodeArray(name +"-dataNodeArr0_", 8),
 outNodeArray(name +"-outNodeArr0_", 8),
 dec0(name + "-dec0") {
-	for (ushort regNum = 0; regNum < 16; regNum ++) {
+	for (unsigned short regNum = 0; regNum < 16; regNum ++) {
 		// connect each decoder output pin to and gates at input 0
 		// either for anding the Enable signal or the Write signal
 		/* Enable */
@@ -44,7 +35,7 @@ dec0(name + "-dec0") {
 		ctrlNodeArray.connect(regArray[regNum], 2, 2); // Clear
 		ctrlNodeArray.connect(regArray[regNum], 3, 3); // Preset
 
-		for (ushort j = 0; j < 8; j++) {
+		for (unsigned short j = 0; j < 8; j++) {
 			// connect data in to all register data ins
 			dataNodeArray.connect(regArray[regNum], j, 5+j); // Data
 			// connect all register data outs to output nodes
@@ -57,7 +48,7 @@ dec0(name + "-dec0") {
 	numOfOutPins = 8;
 }
 
-DCSComponent* DCSRam16x8::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSRam16x8::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum < 8) {
 		return outNodeArray.getOutComponent(outPinNum);
 	}
@@ -65,7 +56,7 @@ DCSComponent* DCSRam16x8::getOutComponent(ushort &outPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSRam16x8::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSRam16x8::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum < 5) {
 		return ctrlNodeArray.getInComponent(inPinNum);
 	}

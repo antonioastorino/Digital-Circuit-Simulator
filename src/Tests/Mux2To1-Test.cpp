@@ -1,20 +1,12 @@
-//
-//  Mux2To1-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSMux2to1.hpp"
 #include "DCSEngine.hpp"
 
 void mux2To1Test() {
-	printTestName("Mux 2 to 1");
-	ushort hp = 3;
+	DCSLog::printTestName("Mux 2 to 1");
+	unsigned short hp = 3;
 	DCSEngine::reset(hp);
 	
 	DCSMux2to1 mux0("Mux0");

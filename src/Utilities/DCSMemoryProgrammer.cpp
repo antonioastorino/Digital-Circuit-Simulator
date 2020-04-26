@@ -1,27 +1,18 @@
-//
-//  DCSMemoryProgrammer.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 22/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSMemoryProgrammer.hpp"
 #include "DCSEngine.hpp"
 #include "DCSLog.hpp"
 
 DCSMemoryProgrammer::DCSMemoryProgrammer(DCSRam16x8 *memory):
 memory(memory) {
-	ushort hp = memory->getTimeDelay();
+	unsigned short hp = memory->getTimeDelay();
 	DCSEngine::setHalfClockPeriod(hp);
 	DCSEngine::initialize();
 	
-	ushort inputPin;
-	// Clear acive
+	unsigned short inputPin;
+	// Clear active
 	inputPin = 2;
 	memory->getInComponent(inputPin)->setIn(1, inputPin);
-	for (ushort i = 0; i < hp; i++) {
+	for (unsigned short i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
 	}
@@ -29,29 +20,29 @@ memory(memory) {
 	// Clear disabled
 	inputPin = 2;
 	memory->getInComponent(inputPin)->setIn(0, inputPin);
-	for (ushort i = 0; i < hp; i++) {
+	for (unsigned short i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
 	}
 	DCSLog::output("CLEAR", "0 - Memory erased\n");
 }
 
-void DCSMemoryProgrammer::program(ushort address, ushort value) {
+void DCSMemoryProgrammer::program(unsigned short address, unsigned short value) {
 
-	ushort hp = memory->getTimeDelay();
-	ushort inputPin;
+	unsigned short hp = memory->getTimeDelay();
+	unsigned short inputPin;
 	
 	std::stringstream message;
 	message << " ADDR=";
 	// set addresses
-	for (ushort i = 0; i < 4; i++) {
+	for (unsigned short i = 0; i < 4; i++) {
 		inputPin = i + 13;
 		memory->getInComponent(inputPin)->setIn((address >> i) & 1, inputPin);
 		message << ((address >> (3 - i)) & 1);
 	}
 	message << " DATA=";
 	// set input value
-	for (ushort i = 0; i < 8; i++) {
+	for (unsigned short i = 0; i < 8; i++) {
 		inputPin = i + 5;
 		memory->getInComponent(inputPin)->setIn((value >> i) & 1, inputPin);
 		message << ((value >> (7 - i)) & 1);
@@ -66,7 +57,7 @@ void DCSMemoryProgrammer::program(ushort address, ushort value) {
 	// clock high
 	inputPin = 1;
 	memory->getInComponent(inputPin)->setIn(1, inputPin);
-	for (ushort i = 0; i < hp; i++) {
+	for (unsigned short i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
 //		DCSEngine::printLogicLevels();
@@ -77,15 +68,15 @@ void DCSMemoryProgrammer::program(ushort address, ushort value) {
 //	// disable write
 //	inputPin = 4;
 //	memory->getInComponent(inputPin)->setIn(0, inputPin);
-	for (ushort i = 0; i < hp; i++) {
+	for (unsigned short i = 0; i < hp; i++) {
 		DCSEngine::updateOutputs();
 		DCSEngine::propagateValues();
 //		DCSEngine::printLogicLevels();
 	}
 }
 
-void DCSMemoryProgrammer::program(ushort address,
-								  ushort instruction,
-								  ushort operand) {
+void DCSMemoryProgrammer::program(unsigned short address,
+								  unsigned short instruction,
+								  unsigned short operand) {
 	program(address, (instruction << 4) | operand);
 }

@@ -1,17 +1,8 @@
-//
-//  DCSUpCounterWithLoadAndAsyncSR.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 15/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSLog.hpp"
 
 DCSUpCounterWithLoadAndAsyncSR::DCSUpCounterWithLoadAndAsyncSR(std::string name,
-															   ushort numOfBits):
+															   unsigned short numOfBits):
 DCSComponent(name, false),
 dividerArray(name + "-divArray", numOfBits),
 nodeArray({
@@ -22,8 +13,8 @@ nodeArray({
 	4),
 numOfBits(numOfBits)
 {
-	for (ushort i = 0; i < numOfBits; i ++) {
-		for (ushort j = 0; j < 4; j ++) {
+	for (unsigned short i = 0; i < numOfBits; i ++) {
+		for (unsigned short j = 0; j < 4; j ++) {
 			/*
 			 connect nodes to internal inputs of dividers:
 			 1 = Load
@@ -35,7 +26,7 @@ numOfBits(numOfBits)
 			nodeArray[j]->connect(dividerArray[i], 0, j + 1);
 		}
 	}
-	for (ushort i = 0; i < numOfBits - 1; i++) {
+	for (unsigned short i = 0; i < numOfBits - 1; i++) {
 		// cascade dividers
 		dividerArray[i]->connect(dividerArray[i+1],
 								 2, // Count out
@@ -50,9 +41,9 @@ numOfBits(numOfBits)
 	numOfOutPins = 1 + numOfBits;
 	 
 }
-DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum >=0 && outPinNum < numOfBits) {
-		ushort arrayElement = outPinNum;
+		unsigned short arrayElement = outPinNum;
 		outPinNum  = 0;
 		return dividerArray[arrayElement]->getOutComponent(outPinNum);
 	}
@@ -62,18 +53,18 @@ DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(ushort &outPinNum)
 	}
 	else exit(-1);
 }
-DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum == 0) {
 		inPinNum = 5;
 		return dividerArray[0]->getInComponent(inPinNum); // Count in
 	}
 	else if (inPinNum < 5) {
-		ushort arrayElement = inPinNum - 1;
+		unsigned short arrayElement = inPinNum - 1;
 		inPinNum = 0;
 		return nodeArray[arrayElement];
 	}
 	else if (inPinNum < 5 + numOfBits) {
-		ushort arrayElement = inPinNum - 5;
+		unsigned short arrayElement = inPinNum - 5;
 		inPinNum = 0; // Data
 		return dividerArray[arrayElement]->getInComponent(inPinNum);
 	}

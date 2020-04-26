@@ -1,19 +1,11 @@
-//
-//  Display-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSEngine.hpp"
 #include "DCSComponentArray.hpp"
 
 void displayTest() {
-	printTestName("Display");
-	ushort hp = 1;
+	DCSLog::printTestName("Display");
+	unsigned short hp = 1;
 	DCSEngine::reset(hp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 8);

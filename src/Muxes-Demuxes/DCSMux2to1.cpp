@@ -1,10 +1,3 @@
-//
-//  DCSMux2to1.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 20/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  PINOUT:
  Input 0 - Data in 0
@@ -14,7 +7,7 @@
  Out 0 - Data out 0
  */
 
-#include "DCSHeader.h"
+
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSMux2to1.hpp"
 #include "DCSLog.hpp"
@@ -40,13 +33,13 @@ node0(name + "-Sel0") {
 	numOfOutPins = 1;
 }
 
-DCSComponent* DCSMux2to1::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSMux2to1::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0) return &or0;
 	DCSLog::error(name, "Output pin out of range");
 	exit(-1);
 }
 
-DCSComponent* DCSMux2to1::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSMux2to1::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum == 0) return &and0;
 	else if (inPinNum == 1) {
 		inPinNum = 0;

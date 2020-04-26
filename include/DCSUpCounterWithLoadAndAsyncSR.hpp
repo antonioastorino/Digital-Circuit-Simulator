@@ -42,21 +42,21 @@
 
 #ifndef DCSUpCounterWithLoadAndAsyncSR_hpp
 #define DCSUpCounterWithLoadAndAsyncSR_hpp
-#include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSClockDivider.hpp"
 #include "DCSComponentArray.hpp"
 
 class DCSUpCounterWithLoadAndAsyncSR: public DCSComponent {
 private:
-	DCSComponentArray<DCSClockDiv2WithEnableAndLoad> dividerArray;
+	DCSComponentArray<DCSClockDivider> dividerArray;
 	DCSComponentArray<DCSNode> nodeArray; // inputs shared among dividers
-	ushort numOfBits;
+	unsigned short numOfBits;
 	
 public:
 	DCSUpCounterWithLoadAndAsyncSR(std::string name,
-								   ushort numBits);
+								   unsigned short numBits);
 	
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

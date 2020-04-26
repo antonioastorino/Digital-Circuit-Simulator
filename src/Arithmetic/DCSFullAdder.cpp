@@ -1,12 +1,3 @@
-//
-//  DCSFullAdder.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 20/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSFullAdder.hpp"
 #include "DCSLog.hpp"
 
@@ -38,7 +29,7 @@ or0(name + "-CoutOr0") {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSFullAdder::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSFullAdder::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum == 0) {
 		return &node0;
 	}
@@ -54,7 +45,7 @@ DCSComponent* DCSFullAdder::getInComponent(ushort &inPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSFullAdder::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSFullAdder::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0) {
 		return &xor1;
 	}

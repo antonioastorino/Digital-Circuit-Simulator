@@ -1,10 +1,3 @@
-//
-//  DCSJKLatchMasterSlaveAsyncSR.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 14/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  IMPORTANT!: the imput value is read when the clock is low.
  
@@ -52,8 +45,8 @@ private:
 public:
 	DCSJKLatchMasterSlaveAsyncSR(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 
 	void updateOut() override;
 };

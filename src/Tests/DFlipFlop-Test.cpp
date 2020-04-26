@@ -1,19 +1,11 @@
-//
-//  DFlipFlop-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSEngine.hpp"
 
 void dFlipFlopTest() {
-	printTestName("D-FlipFlop");
+	DCSLog::printTestName("D-FlipFlop");
 	DCSEngine::reset();
 	binary_signal d = {4, 7, 3, 10};
 	binary_signal clk = {4, 2, 5, 2, 4};

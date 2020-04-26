@@ -1,12 +1,4 @@
-//
-//  And6-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
@@ -14,8 +6,8 @@
 #include "DCSComponentArray.hpp"
 
 void and6Test() {
-	printTestName("And 6");
-	ushort hp = 2;
+	DCSLog::printTestName("And 6");
+	unsigned short hp = 2;
 	DCSEngine::reset(hp);
 
 	DCSComponentArray<DCSInput> inArray("In", 6);
@@ -25,7 +17,7 @@ void and6Test() {
 	inArray.connect(&and6_0, {"I"});
 	and6_0.connect(&out0, {"O"});
 	
-	for (ushort i = 0; i < 6; i ++) {
+	for (unsigned short i = 0; i < 6; i ++) {
 		inArray[i]->makeClock(hp<<i, 0);
 	}
 

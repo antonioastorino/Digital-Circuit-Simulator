@@ -8,3 +8,4 @@ PointerAlignment: Left
 AlignConsecutiveAssignments: true
 ColumnLimit: 100
 AccessModifierOffset: -4
+ConstructorInitializerAllOnOneLineOrOnePerLine: true

@@ -1,12 +1,4 @@
-//
-//  Register1Bit-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRegister1Bit.hpp"
@@ -14,7 +6,7 @@
 #include "DCSComponentArray.hpp"
 
 void register1BitTest() {
-	printTestName("1-bit register");
+	DCSLog::printTestName("1-bit register");
 	DCSEngine::reset(5);
 	
 	binary_signal d{13,3,10};

@@ -1,12 +1,4 @@
-//
-//  FirstProgram-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
@@ -14,13 +6,12 @@
 #include "DCSMemoryProgrammer.hpp"
 #include "DCSEngine.hpp"
 
-ushort LDA = 0b0000;
-ushort ADD = 0b0001;
-ushort OUT = 0b0010;
-
+unsigned short LDA = 0b0000;
+unsigned short ADD = 0b0001;
+unsigned short OUT = 0b0010;
 
 void firstProgramTest() {
-	printTestName("First program");
+	DCSLog::printTestName("First program");
 	DCSEngine::reset();
 	
 	DCSRam16x8 ram0("Ram0");
@@ -42,7 +33,6 @@ void firstProgramTest() {
 	DCSComponentArray<DCSInput> dummyIn0("Dummy0", 4);
 	DCSTriStateBuffer8Bits trisPC("TrisPC");
 	
-	
 	// connect PC to first 4 inputs of tris0
 	pc0.connect(&trisPC, {0,3}, {0,3});
 	// connect dummy input to the other 4 inputs of tris0
@@ -50,9 +40,5 @@ void firstProgramTest() {
 	// Connect tri-state buffer to the bus
 	trisPC.connect(&bus0);
 	
-	
-	
-	
 	// Program ram
-	
 }

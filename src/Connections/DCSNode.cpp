@@ -1,12 +1,3 @@
-//
-//  DCSNode.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 01/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSWire.hpp"
 #include "DCSNode.hpp"
 
@@ -23,7 +14,7 @@ void DCSNode::updateOut() {
 	// nothing to do because the output is updated when the input changes
 }
 
-void DCSNode::setIn(bool inVal, ushort inPinNum) {
+void DCSNode::setIn(bool inVal, unsigned short inPinNum) {
 	DCSComponent::setIn(inVal, inPinNum);
 	out = in;
 	for (auto wire_p: wireVector) {

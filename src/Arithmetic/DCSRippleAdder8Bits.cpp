@@ -1,4 +1,3 @@
-#include "DCSHeader.h"
 #include "DCSRippleAdder8Bits.hpp"
 #include "DCSFullAdder.hpp"
 #include "DCSLog.hpp"
@@ -6,7 +5,7 @@
 DCSRippleAdder8Bits::DCSRippleAdder8Bits(std::string name) :
 DCSComponent(name, false),
 faArray("FA", 8) {
-	for (ushort i = 1; i < 8; i++) {
+	for (unsigned short i = 1; i < 8; i++) {
 		faArray[i-1]->connect(faArray[i], 1, 2);
 	}
 	timeDelay = 14;
@@ -14,8 +13,8 @@ faArray("FA", 8) {
 	numOfOutPins = 9;
 }
 
-DCSComponent* DCSRippleAdder8Bits::getInComponent(ushort &inPinNum) {
-	ushort elementNumber;
+DCSComponent* DCSRippleAdder8Bits::getInComponent(unsigned short &inPinNum) {
+	unsigned short elementNumber;
 	if (inPinNum < 8) {
 		elementNumber = inPinNum;
 		inPinNum = 0;
@@ -34,9 +33,9 @@ DCSComponent* DCSRippleAdder8Bits::getInComponent(ushort &inPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSRippleAdder8Bits::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSRippleAdder8Bits::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum < 8) {
-		ushort elementNumber = outPinNum;
+		unsigned short elementNumber = outPinNum;
 		outPinNum = 0;
 		return faArray[elementNumber]->getOutComponent(outPinNum);
 	}

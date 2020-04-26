@@ -1,18 +1,9 @@
-//
-//  DCSWire.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 01/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSWire.hpp"
 #include "DCSLog.hpp"
 
 DCSWire::DCSWire(DCSComponent* from,
 				 DCSComponent* to,
-				 ushort inPinNum,
+				 unsigned short inPinNum,
 				 std::string probeName):
 from(from),
 to(to),
@@ -39,7 +30,7 @@ bool DCSWire::propagateValue() {
 		to->setIn(outVal, inPinNum);
 #if LOG_LEVEL>2
 		std::stringstream message;
-		message << "Sending" << outVal << " to " << to->getName() << " in " << inPinNum;
+		message << "Sending " << outVal << " to " << to->getName() << " in " << inPinNum;
 		DCSLog::debug(from->getName(), message.str());
 #endif
 	}

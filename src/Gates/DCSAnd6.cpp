@@ -1,12 +1,3 @@
-//
-//  DCSAnd6.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSAnd6.hpp"
 
 DCSAnd6::DCSAnd6(std::string name):
@@ -20,12 +11,12 @@ and0(name + "-and0") {
 	numOfOutPins = 1;
 }
 
-DCSComponent* DCSAnd6::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSAnd6::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0) return &and0;
 	exit(-1);
 }
 
-DCSComponent* DCSAnd6::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSAnd6::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum < 6) return and3array.getInComponent(inPinNum);
 	else exit(-1);
 }

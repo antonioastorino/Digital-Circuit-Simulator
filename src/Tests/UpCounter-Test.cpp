@@ -1,19 +1,11 @@
-//
-//  UpCounter-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSEngine.hpp"
 
 void upCounterTest() {
-	printTestName("Up counter");
+	DCSLog::printTestName("Up counter");
 	DCSEngine::reset();
 	
 	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
@@ -35,7 +27,7 @@ void upCounterTest() {
 	inArray.connect(&disp0, {5, 12}, {0, 7});
 	count0.connect(&disp1, {0, 7}, {0, 7});
 	
-	ushort hp = count0.getTimeDelay()/2+1;
+	unsigned short hp = count0.getTimeDelay()/2+1;
 	DCSEngine::setHalfClockPeriod(hp);
 	inArray[0]->makeSignal(binary_signal{2,1}, 0, true);
 	inArray[1]->makeSignal(binary_signal{1,1,1}, 0, true);

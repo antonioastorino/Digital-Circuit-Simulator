@@ -1,11 +1,4 @@
-//
-//  RamProgrammer-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 22/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSRam16x8.hpp"
@@ -13,12 +6,12 @@
 #include "DCSEngine.hpp"
 
 void ramProgrammerTest() {
-	printTestName("Ram programmer");
+	DCSLog::printTestName("Ram programmer");
 	DCSEngine::reset(10);
 	
 	DCSRam16x8 ram0("Ram0");
 	DCSMemoryProgrammer programmer(&ram0);
-	for (ushort i = 0; i < 16; i++) {
+	for (unsigned short i = 0; i < 16; i++) {
 		programmer.program(i,3*i+1);
 	}
 	DCSUpCounterWithLoadAndAsyncSR count0("Count0", 4);

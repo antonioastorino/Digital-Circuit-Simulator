@@ -1,10 +1,3 @@
-//
-//  DCSFullAdder.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 20/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  PINOUT
  IN  0 - A
@@ -36,8 +29,8 @@ public:
 	DCSFullAdder(std::string name);
 	~DCSFullAdder();
 	
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
-	DCSComponent* getInComponent(ushort &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
 	virtual void updateOut() override;
 };
 

@@ -1,12 +1,3 @@
-//
-//  DCSTriStateBuffer.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 12/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSTriStateBuffer.hpp"
 
 DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :

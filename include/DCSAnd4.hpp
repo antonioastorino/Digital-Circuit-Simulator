@@ -1,15 +1,11 @@
-//
-//  DCSAnd4.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSAnd4_hpp
 #define DCSAnd4_hpp
 #include "DCSComponent.hpp"
 
+/**
+ * @class DCSAnd4
+ * Implements the AND gate with 4 inputs
+ */
 class DCSAnd4: public DCSComponent {
 public:
 	DCSAnd4(std::string name);

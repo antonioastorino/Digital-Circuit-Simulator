@@ -1,20 +1,12 @@
-//
-//  AndArray-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSEngine.hpp"
 #include "DCSAnd.hpp"
 #include "DCSComponentArray.hpp"
 
 void andArrayTest() {
-	printTestName("Gate array");
-	ushort hcp = 2;
+	DCSLog::printTestName("Gate array");
+	unsigned short hcp = 2;
 	DCSEngine::reset(hcp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 4);

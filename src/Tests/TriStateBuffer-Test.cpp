@@ -1,12 +1,4 @@
-//
-//  TriStateBuffer-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSTriStateBuffer.hpp"
@@ -14,7 +6,7 @@
 #include "DCSEngine.hpp"
 
 void triStateBufferTest() {
-	printTestName("Tri-state buffer");
+	DCSLog::printTestName("Tri-state buffer");
 	DCSEngine::reset();
 	
 	binary_signal inputA = {3,2,2,2,2,2,100};

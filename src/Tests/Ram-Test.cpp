@@ -1,21 +1,13 @@
-//
-//  Ram-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 23/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSEngine.hpp"
 #include "DCSComponentArray.hpp"
 
 void ramTest() {
-	printTestName("RAM");
+	DCSLog::printTestName("RAM");
 	
-	ushort hcp = 10; // half clock period
+	unsigned short hcp = 10; // half clock period
 	DCSEngine::reset(hcp);
 	DCSRam16x8                   ram0("Ram0");
 	

@@ -1,12 +1,3 @@
-//
-//  DCSJKLatchMasterSlaveAsyncSR.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 14/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSLog.hpp"
 
@@ -47,7 +38,7 @@ DCSComponent(name, false) {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0) {
 		return &nor3_2;
 	}
@@ -57,7 +48,7 @@ DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(ushort &outPinNum) {
 	}
 	else exit(-1);
 }
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(unsigned short &inPinNum) {
 	switch (inPinNum) {
 		case 0: // J
 			inPinNum = 1;

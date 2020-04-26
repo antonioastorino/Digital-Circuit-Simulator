@@ -1,10 +1,3 @@
-//
-//  DCSSRLatch.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 30/11/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  SR latch whose input pin 0 resets and 1 sets
  
@@ -25,8 +18,8 @@ private:
 public:
 	DCSSRLatch(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

@@ -1,12 +1,4 @@
-//
-//  DLatchAsyncSR-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSDLatchAsyncSR.hpp"
@@ -14,7 +6,7 @@
 #include "DCSComponentArray.hpp"
 
 void dLatchAsyncSRTest() {
-	printTestName("D-Latch with asynchronous SR");
+	DCSLog::printTestName("D-Latch with asynchronous SR");
 	DCSEngine::reset();
 	binary_signal d = {10,3,3,4};
 	binary_signal en = {2,3,6,2,4};

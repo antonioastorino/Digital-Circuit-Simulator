@@ -1,12 +1,3 @@
-//
-//  DCSAddressDecoder4Bits.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSAddressDecoder4Bits.hpp"
 #include "DCSAnd4.hpp"
 #include "DCSLog.hpp"
@@ -17,10 +8,10 @@ nodeArray(name + "-In", 4),
 notArray(name + "-Not", 4),
 delArray(name + "-Del", 4),
 and4Array(name + "-And4", 16) {
-	for (ushort i = 0; i < 4; i++) {
+	for (unsigned short i = 0; i < 4; i++) {
 		nodeArray.connect(&delArray, i, i);
 		nodeArray.connect(&notArray, i, i);
-		for (ushort IN = 0; IN < 16; IN ++) {
+		for (unsigned short IN = 0; IN < 16; IN ++) {
 			if ((IN >> i) & 1) {
 				delArray.connect(and4Array[IN], i, i);
 			}
@@ -35,7 +26,7 @@ and4Array(name + "-And4", 16) {
 	numOfOutPins = 16;
 }
 
-DCSComponent* DCSAddressDecoder4Bits::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSAddressDecoder4Bits::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum < 16) {
 		return and4Array.getOutComponent(outPinNum);
 	}
@@ -43,7 +34,7 @@ DCSComponent* DCSAddressDecoder4Bits::getOutComponent(ushort &outPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSAddressDecoder4Bits::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSAddressDecoder4Bits::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum < 4) {
 		return nodeArray.getInComponent(inPinNum);
 	}

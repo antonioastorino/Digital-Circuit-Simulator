@@ -1,12 +1,3 @@
-//
-//  DCSDLatchAsyncSR.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 13/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSDLatchAsyncSR.hpp"
 
 DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) :
@@ -27,7 +18,7 @@ DCSComponent(name, false) {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSDLatchAsyncSR::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum == 0) return &nor3_0;
 	else if (outPinNum == 1) {
 		outPinNum = 0;
@@ -36,7 +27,7 @@ DCSComponent* DCSDLatchAsyncSR::getOutComponent(ushort &outPinNum) {
 	else exit(-1);
 }
 
-DCSComponent* DCSDLatchAsyncSR::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getInComponent(unsigned short &inPinNum) {
 	switch (inPinNum) {
 		case 0:
 			return &node0;

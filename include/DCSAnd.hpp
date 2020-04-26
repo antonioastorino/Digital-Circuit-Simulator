@@ -2,6 +2,10 @@
 #define DCSAnd_hpp
 #include "DCSComponent.hpp"
 
+/**
+ * @class DCSAnd
+ * Implements the AND gate
+ */
 class DCSAnd: public DCSComponent {
 public:
 	DCSAnd(std::string name);

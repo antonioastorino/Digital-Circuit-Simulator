@@ -1,20 +1,12 @@
-//
-//  FullAdder-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSFullAdder.hpp"
 #include "DCSEngine.hpp"
 
 void fullAdderTest() {
-	printTestName("Full adder");
-	ushort hp = 3;
+	DCSLog::printTestName("Full adder");
+	unsigned short hp = 3;
 	DCSEngine::reset(hp);
 	
 	DCSFullAdder fa0("FA0");

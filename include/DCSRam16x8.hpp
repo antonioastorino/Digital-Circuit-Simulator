@@ -1,10 +1,3 @@
-//
-//  DCSRam16x8.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
 /*
  When inputs 13 to 16 (address) change, the output changes after 3 tau, independently of the clock.
  Since the Load signal of each individual register (here called Write - input 4) is anded with the address decoder, compared to a single register, the RAM needs the address to be ready 3 tau before the Load of each address. Hence, the write sequence is
@@ -59,8 +52,8 @@ private:
 public:
 	DCSRam16x8(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

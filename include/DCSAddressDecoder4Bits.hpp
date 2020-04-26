@@ -1,11 +1,3 @@
-//
-//  DCSAddressDecoder4Bits.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSAddressDecoder4Bits_hpp
 #define DCSAddressDecoder4Bits_hpp
 #include "DCSComponentArray.hpp"
@@ -23,8 +15,8 @@ private:
 public:
 	DCSAddressDecoder4Bits(std::string name);
 	
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
-	DCSComponent* getInComponent(ushort &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
 	void updateOut() override;
 };
 

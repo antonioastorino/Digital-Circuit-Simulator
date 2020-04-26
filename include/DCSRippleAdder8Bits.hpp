@@ -1,11 +1,3 @@
-//
-//  DCSRippleAdder8Bits.hpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 21/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
 #ifndef DCSRippleAdder8Bits_hpp
 #define DCSRippleAdder8Bits_hpp
 #include "DCSComponentArray.hpp"
@@ -17,8 +9,8 @@ private:
 public:
 	DCSRippleAdder8Bits(std::string name);
 
-	DCSComponent* getInComponent(ushort &inPinNum) override;
-	DCSComponent* getOutComponent(ushort &outPinNum) override;
+	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
 	
 	void updateOut() override;
 };

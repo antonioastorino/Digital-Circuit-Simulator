@@ -1,12 +1,4 @@
-//
-//  RisingEdgeDetector-Test.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 24/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSInput.hpp"
 #include "DCSOutput.hpp"
 #include "DCSEngine.hpp"
@@ -15,7 +7,7 @@
 #include "DCSAnd.hpp"
 
 void risingEdgeDetectorTest() {
-	printTestName("Rising edge detector");
+	DCSLog::printTestName("Rising edge detector");
 	DCSEngine::reset();
 	DCSAnd and0("And0");
 	DCSNot not0("Not0");

@@ -3,13 +3,13 @@
 #include "DCSAnd3.hpp"
 #include "DCSAnd4.hpp"
 #include "DCSAnd6.hpp"
-#include "DCSClockDiv2WithEnableAndLoad.hpp"
+#include "DCSClockDivider.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSDFlipFlopAsyncSR.hpp"
 #include "DCSDLatch.hpp"
 #include "DCSDLatchAsyncSR.hpp"
 #include "DCSFullAdder.hpp"
-#include "DCSHeader.h"
+
 #include "DCSInput.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSLog.hpp"
@@ -32,7 +32,7 @@
 class DCSNode;
 
 template <class T>
-DCSComponentArray<T>::DCSComponentArray(std::string name, ushort numOfElements)
+DCSComponentArray<T>::DCSComponentArray(std::string name, unsigned short numOfElements)
     : DCSComponent(name, false), numOfElements(numOfElements), name({name}) {
     componentArray.reserve(numOfElements);
     for (int i = 0; i < numOfElements; i++) {
@@ -46,10 +46,8 @@ DCSComponentArray<T>::DCSComponentArray(std::string name, ushort numOfElements)
 }
 
 template <class T>
-DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray,
-                                        ushort numOfElements)
-    : DCSComponent("Array", false),
-      numOfElements(numOfElements), name{"Array"} {
+DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray, unsigned short numOfElements)
+    : DCSComponent("Array", false), numOfElements(numOfElements), name{"Array"} {
     componentArray.reserve(numOfElements);
     for (int i = 0; i < numOfElements; i++) {
         T* component = new T(nameArray[i]);
@@ -70,18 +68,16 @@ template <class T> DCSComponentArray<T>::~DCSComponentArray() {
     }
 }
 
-template <class T>
-DCSComponent* DCSComponentArray<T>::getOutComponent(ushort& outPinNum) {
-    ushort oldPin       = outPinNum;
-    ushort numOfOutPins = componentArray[0]->getNumOfOutPins();
+template <class T> DCSComponent* DCSComponentArray<T>::getOutComponent(unsigned short& outPinNum) {
+    unsigned short oldPin       = outPinNum;
+    unsigned short numOfOutPins = componentArray[0]->getNumOfOutPins();
     outPinNum %= numOfOutPins;
     return componentArray[oldPin / numOfOutPins]->getOutComponent(outPinNum);
 }
 
-template <class T>
-DCSComponent* DCSComponentArray<T>::getInComponent(ushort& inPinNum) {
-    ushort oldPin      = inPinNum;
-    ushort numOfInPins = componentArray[0]->getNumOfInPins();
+template <class T> DCSComponent* DCSComponentArray<T>::getInComponent(unsigned short& inPinNum) {
+    unsigned short oldPin      = inPinNum;
+    unsigned short numOfInPins = componentArray[0]->getNumOfInPins();
     inPinNum %= numOfInPins;
     return componentArray[oldPin / numOfInPins]->getInComponent(inPinNum);
 }
@@ -90,7 +86,7 @@ template <class T> void DCSComponentArray<T>::updateOut() {
     DCSLog::error(name, "This function should never be called");
 }
 
-template <class T> T* DCSComponentArray<T>::operator[](ushort elemNum) {
+template <class T> T* DCSComponentArray<T>::operator[](unsigned short elemNum) {
     return componentArray[elemNum];
 }
 
@@ -119,5 +115,5 @@ template class DCSComponentArray<DCSDFlipFlopAsyncSR>;
 template class DCSComponentArray<DCSRegister1Bit>;
 template class DCSComponentArray<DCSRegister8Bits>;
 template class DCSComponentArray<DCSJKLatchMasterSlaveAsyncSR>;
-template class DCSComponentArray<DCSClockDiv2WithEnableAndLoad>;
+template class DCSComponentArray<DCSClockDivider>;
 template class DCSComponentArray<DCSFullAdder>;

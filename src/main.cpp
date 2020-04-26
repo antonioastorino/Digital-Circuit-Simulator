@@ -1,12 +1,3 @@
-//
-//  main.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 15/11/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 void srLatchTest();
 void notLoopTest();
 void unitDelayTest();
@@ -36,7 +27,8 @@ void firstProgramTest();
 void ramTest();
 
 int main() {
-// TODO: make unit test
+/** TODO: create proper unit tests
+ */
 	srLatchTest();
 	notLoopTest();
 	unitDelayTest();
@@ -65,12 +57,4 @@ int main() {
 	ramProgrammerTest();
 	firstProgramTest();
 	return 0;
-}
-
-void printTestName(std::string testName) {
-	std::cout << "\n-----";
-	for (size_t i = 0; i < testName.size(); i++) std::cout <<"-";
-	std::cout << "\n" << testName << " test\n";
-	for (size_t i = 0; i < testName.size()+5; i++) std::cout <<"-";
-	std::cout << "\n";
 }

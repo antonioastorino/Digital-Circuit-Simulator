@@ -1,12 +1,3 @@
-//
-//  DCSTriStateBuffer8Bits.cpp
-//  Digital circuit simulator
-//
-//  Created by Antonio Astorino on 18/12/2019.
-//  Copyright © 2019 Antonio Astorino. All rights reserved.
-//
-
-#include "DCSHeader.h"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSLog.hpp"
 
@@ -15,7 +6,7 @@ DCSComponent(name, false),
 bufferArray(name, 8),
 node0(name + "-Enable") {
 	// Connect global enable to that of all buffers
-	for (ushort i = 0; i < 8; i++) {
+	for (unsigned short i = 0; i < 8; i++) {
 		node0.connect(bufferArray[i], 0, 1);
 	}
 	
@@ -24,12 +15,12 @@ node0(name + "-Enable") {
 	numOfOutPins = 8;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getInComponent(ushort &inPinNum) {
+DCSComponent* DCSTriStateBuffer8Bits::getInComponent(unsigned short &inPinNum) {
 	if (inPinNum == 0) {
 		return &node0;
 	}
 	else if (inPinNum < 9) {
-		ushort elementNumber = inPinNum - 1;
+		unsigned short elementNumber = inPinNum - 1;
 		inPinNum = 0;
 		// TODO: check if the buffer element can be directly returned
 		return bufferArray[elementNumber]->getInComponent(inPinNum);
@@ -38,24 +29,24 @@ DCSComponent* DCSTriStateBuffer8Bits::getInComponent(ushort &inPinNum) {
 	exit(-1);
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(ushort &outPinNum) {
+DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(unsigned short &outPinNum) {
 	if (outPinNum >= 8) {
 		DCSLog::error(name, "Pin out of range");
 		exit(-1);
 	}
-	ushort elementNumber = outPinNum;
+	unsigned short elementNumber = outPinNum;
 	outPinNum = 0;
 	return bufferArray[elementNumber]->getOutComponent(outPinNum);
 }
 
 void DCSTriStateBuffer8Bits::enable() {
-	for (ushort i = 0; i < 8; i++) {
+	for (unsigned short i = 0; i < 8; i++) {
 		bufferArray[i]->enable();
 	}
 }
 
 void DCSTriStateBuffer8Bits::disable() {
-	for (ushort i = 0; i < 8; i++) {
+	for (unsigned short i = 0; i < 8; i++) {
 		bufferArray[i]->disable();
 	}
 }

@@ -1,9 +1,9 @@
-#include "DCSHeader.h"
+#include "DCSLog.hpp"
 #include "DCSEngine.hpp"
 #include "DCSNot.hpp"
 
 void notLoopTest() {
-	printTestName("Not loop");
+	DCSLog::printTestName("Not loop");
 	DCSEngine::reset();
 	DCSNot not0("Not0");
 	DCSNot not1("Not1");
