@@ -19,20 +19,18 @@ private:
     size_t totalDuration;
     std::vector<uint64_t> flipBitAtSteps; // stores the time at witch the level needs to change
     void fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelDurationVector, bool synch);
-	
+
 protected:
-	uint64_t counter;
-	bool currVal;
-	
+    uint64_t counter;
+    bool currVal;
+
 public:
-	DCSArbitrarySignal() = delete;
-	DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector,
-					   bool initVal = 0,
-					   bool synch = false);
-	DCSArbitrarySignal(std::string zerosAndOnes,
-					   bool synch = false);   
-	virtual bool getVal(uint32_t step);
-	virtual ~DCSArbitrarySignal();
+    DCSArbitrarySignal() = delete;
+    DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool initVal = 0,
+                       bool synch = false);
+    DCSArbitrarySignal(std::string zerosAndOnes, bool synch = false);
+    virtual bool getVal(uint32_t step);
+    virtual ~DCSArbitrarySignal();
 };
 
 #endif /* DCSArbitrarySignal_hpp */

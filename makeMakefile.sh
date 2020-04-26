@@ -45,10 +45,10 @@ pf "\n\t\tmake check-opt-value OUT=\$(OUT) OPT=\$(OPT) ;\\"
 pf "\n\tfi\n"
 
 pf "\ncheck-opt-value:"
-pf "\n\t[ \"\$(OPT)\" == \"\" ] && make make-opt OUT=\$(OUT) OPT=0 || make make-opt OUT=\$(OUT) OPT=\$(OPT)\n"
+pf "\n\t@[ \"\$(OPT)\" == \"\" ] && make make-opt OUT=\$(OUT) OPT=0 || make make-opt OUT=\$(OUT) OPT=\$(OPT)\n"
 
 pf "\nmake-opt:"
-pf "\n\tif [ ! -f \"$executable_folder/.\$(OUT)-\$(OPT)\" ] || [ ! -f \"$executable_folder/\$(OUT)-\$(OPT)\" ]; then \\"
+pf "\n\t@if [ ! -f \"$executable_folder/.\$(OUT)-\$(OPT)\" ] || [ ! -f \"$executable_folder/\$(OUT)-\$(OPT)\" ]; then \\"
 pf "\n\t\trm -rf $build_folder/*; \\"
 pf "\n\t\tmkdir -p $build_folder; \\"
 pf "\n\t\ttouch $executable_folder/.\$(OUT)-\$(OPT); \\"
@@ -63,34 +63,34 @@ pf "\n\t\$(CC) \$(INC) -o \$@ \$^"
 
 pf "\n"
 
+echo "Adding headers to dependency list"
 while read -r cpp_full_path; do
-	cat /dev/null > hpp-file.list # dependency list
 	echo "Parsing $cpp_full_path"
 
 	cpp_file_name="`echo $(basename $cpp_full_path) | awk -F '.' '{print $1}'`"
 	cpp_dir_name="`dirname $cpp_full_path`"
 	pf "\n$build_folder/$cpp_file_name.o: $cpp_dir_name/$cpp_file_name.cpp "
 
-	echo "Adding headers to dependency list"
 	#find all the included libraries in the cpp file
-	grep "#include" "$cpp_full_path" | awk -F '"' '{print $2}' | tee hpp-file.list
+	includes=`grep "^#include" "$cpp_full_path" | grep -v "<" | awk -F '"' '{print $2}'`
+	for hpp_file in ${includes[@]}; do
+		pf "`find ./ -name $hpp_file` "
+	done
 	#find all the included libraries in the hpp file
 	hpp_full_path="`find ./ -name "$cpp_file_name.hpp"`"
 	# if the hpp file exists, look for dependencies in the hpp file as well
 	if [ "$hpp_full_path" != "" ]; then
-		grep "#include" "$hpp_full_path" | awk -F '"' '{print $2}' | tee -a hpp-file.list
+		hpp_dep=`grep "^#include" "$hpp_full_path" | grep -v "<" | awk -F '"' '{print $2}' | awk -F '.hpp' '{print $1}'`
+		for hpp_file in ${hpp_dep[@]}; do
+			# echo $hpp_file); exit
+			cpp_dep=`find ./ -name "$(basename $hpp_file).cpp"`
+			[ "$cpp_dep" != "" ] && echo $build_folder/$hpp_file.o && pf "$build_folder/$hpp_file.o "
+		done
 	else
 		echo "No headers in $cpp_file_name.hpp"
 	fi
 
-	sort hpp-file.list | uniq -c | head -1
-
-	while read -r hpp; do
-		pf "`find ./ -name $hpp` "
-	done < hpp-file.list
-	
 	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
-	# pf "\n $file_name.o: "
 done < cpp-full.list
 
 pf "\nclean:\n\trm -rf $build_folder"
