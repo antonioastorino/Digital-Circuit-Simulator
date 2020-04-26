@@ -8,9 +8,9 @@
  */
 class DCSClockSignal: public DCSArbitrarySignal {
 private:
-	unsigned short halfPeriod;
+	uint16_t halfPeriod;
 public:
-	DCSClockSignal(unsigned short halfPeriod=0, bool initVal=0);
+	DCSClockSignal(uint16_t halfPeriod=0, bool initVal=0);
 	
 	bool getVal(uint32_t step) override;
 };

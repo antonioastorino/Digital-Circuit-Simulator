@@ -14,7 +14,7 @@ void DCSNode::updateOut() {
 	// nothing to do because the output is updated when the input changes
 }
 
-void DCSNode::setIn(bool inVal, unsigned short inPinNum) {
+void DCSNode::setIn(bool inVal, uint16_t inPinNum) {
 	DCSComponent::setIn(inVal, inPinNum);
 	out = in;
 	for (auto wire_p: wireVector) {

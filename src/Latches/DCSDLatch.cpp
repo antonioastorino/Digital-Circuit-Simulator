@@ -1,4 +1,5 @@
 #include "DCSDLatch.hpp"
+#include "DCSLog.hpp"
 
 DCSDLatch::DCSDLatch(std::string name) : DCSComponent(name, false) {
     node0.connect(&del0, 0, 0);
@@ -15,18 +16,19 @@ DCSDLatch::DCSDLatch(std::string name) : DCSComponent(name, false) {
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDLatch::getOutComponent(unsigned short& outPinNum) {
+DCSComponent* DCSDLatch::getOutComponent(uint16_t& outPinNum) {
     return srLatch0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDLatch::getInComponent(unsigned short& inPinNum) {
+DCSComponent* DCSDLatch::getInComponent(uint16_t& inPinNum) {
     if (inPinNum == 0)
         return &node0;
     else if (inPinNum == 1) {
         inPinNum = 0; // pin 1 in D latch is EN pin 0
         return &node1;
-    } else
-        exit(-1);
+    }
+    DCSLog::error(this->name, 11);
+    return nullptr;
 }
 
-void DCSDLatch::updateOut() { throw "This function should never be called"; }
+void DCSDLatch::updateOut() { DCSLog::error(name, 0); }

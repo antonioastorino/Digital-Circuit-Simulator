@@ -5,7 +5,7 @@
 
 void rippleAdderTest() {
 	DCSLog::printTestName("8-bit ripple adder");
-	unsigned short hp = 2;
+	uint16_t hp = 2;
 	DCSEngine::initialize(hp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 17);

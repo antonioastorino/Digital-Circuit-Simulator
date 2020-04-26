@@ -6,7 +6,7 @@
 
 void fullAdderTest() {
 	DCSLog::printTestName("Full adder");
-	unsigned short hp = 3;
+	uint16_t hp = 3;
 	DCSEngine::initialize(hp);
 	
 	DCSFullAdder fa0("FA0");

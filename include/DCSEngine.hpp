@@ -18,8 +18,8 @@ private:
 	static std::vector<DCSWire*> wireVector;
 	static std::vector<DCSDisplayNBits*> displayVector;
 	
-	static unsigned short clockPeriod;
-	static unsigned short stepNumber;
+	static uint16_t clockPeriod;
+	static uint16_t stepNumber;
 	static bool sampling;
 	
 	static void initCircuit(std::vector<DCSComponent*> cVec = inputVector);
@@ -35,7 +35,7 @@ private:
 	
 	friend class DCSMemoryProgrammer;
 public:
-	static void initialize(unsigned short clockHalfPeriod=5);
+	static void initialize(uint16_t clockHalfPeriod=5);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
@@ -44,7 +44,7 @@ public:
 	static int getClockPeriod();
 	static int getStepNumber();
 	static void setSampling(bool sampling);
-	static void setHalfClockPeriod(unsigned short numberOfTimeSteps);
+	static void setHalfClockPeriod(uint16_t numberOfTimeSteps);
 };
 
 #endif /* DCSEngine_hpp */

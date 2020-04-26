@@ -3,7 +3,7 @@
 #include "DCSClockSignal.hpp"
 #include "DCSEngine.hpp"
 
-DCSClockSignal::DCSClockSignal(unsigned short halfPeriod, bool initVal):
+DCSClockSignal::DCSClockSignal(uint16_t halfPeriod, bool initVal):
 DCSArbitrarySignal(binary_signal{0}) {
 	currVal = initVal;
 	if (halfPeriod) this->halfPeriod = halfPeriod;
@@ -12,8 +12,8 @@ DCSArbitrarySignal(binary_signal{0}) {
 
 bool DCSClockSignal::getVal(uint32_t step) {
 	if (step != counter) {
-		DCSLog::error("Clock signal", "Trying to access the value in non sequential order");
-		exit(-1);
+		DCSLog::error("Clock signal", 12);
+		;
 	}
 	counter++;
 	// Shift the commutation by 1 tau because the first one is used to initialize the system

@@ -6,9 +6,9 @@
 #include "DCSMemoryProgrammer.hpp"
 #include "DCSEngine.hpp"
 
-unsigned short LDA = 0b0000;
-unsigned short ADD = 0b0001;
-unsigned short OUT = 0b0010;
+uint16_t LDA = 0b0000;
+uint16_t ADD = 0b0001;
+uint16_t OUT = 0b0010;
 
 void firstProgramTest() {
 	DCSLog::printTestName("First program");

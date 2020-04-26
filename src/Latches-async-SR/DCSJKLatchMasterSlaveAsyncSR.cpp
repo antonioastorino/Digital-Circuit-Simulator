@@ -38,7 +38,7 @@ DCSComponent(name, false) {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum == 0) {
 		return &nor3_2;
 	}
@@ -46,9 +46,10 @@ DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(unsigned short &outP
 		outPinNum = 0;
 		return &nor3_3;
 	}
-	else exit(-1);
+	DCSLog::error(this->name, 10);
+	return nullptr;
 }
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(uint16_t &inPinNum) {
 	switch (inPinNum) {
 		case 0: // J
 			inPinNum = 1;
@@ -72,10 +73,10 @@ DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(unsigned short &inPin
 		default:
 			break;
 	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+	DCSLog::error(this->name, 11);
+	return nullptr;
 }
 
 void DCSJKLatchMasterSlaveAsyncSR::updateOut() {
-	DCSLog::error(name, "This function should never be called");
+	DCSLog::error(name, 0);
 }

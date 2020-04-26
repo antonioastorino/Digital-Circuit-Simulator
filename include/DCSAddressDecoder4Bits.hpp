@@ -15,8 +15,8 @@ private:
 public:
 	DCSAddressDecoder4Bits(std::string name);
 	
-	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
-	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(uint16_t &outPinNum) override;
+	DCSComponent* getInComponent(uint16_t &inPinNum) override;
 	void updateOut() override;
 };
 

@@ -7,7 +7,7 @@
 
 void and6Test() {
 	DCSLog::printTestName("And 6");
-	unsigned short hp = 2;
+	uint16_t hp = 2;
 	DCSEngine::initialize(hp);
 
 	DCSComponentArray<DCSInput> inArray("In", 6);
@@ -17,7 +17,7 @@ void and6Test() {
 	inArray.connect(&and6_0, {"I"});
 	and6_0.connect(&out0, {"O"});
 	
-	for (unsigned short i = 0; i < 6; i ++) {
+	for (uint16_t i = 0; i < 6; i ++) {
 		inArray[i]->makeClock(hp<<i, 0);
 	}
 

@@ -9,10 +9,10 @@
 */
 class DCSDisplayNBits: public DCSComponent {
 private:
-	unsigned short numOfBits;
-	unsigned short numOfDecimalDigits;
+	uint16_t numOfBits;
+	uint16_t numOfDecimalDigits;
 public:
-	DCSDisplayNBits(std::string name, unsigned short numOfBits);
+	DCSDisplayNBits(std::string name, uint16_t numOfBits);
 	void updateOut() override;
 };
 

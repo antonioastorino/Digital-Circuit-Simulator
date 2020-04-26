@@ -18,7 +18,7 @@ ctrlNodeArray({
 dataNodeArray(name +"-dataNodeArr0_", 8),
 outNodeArray(name +"-outNodeArr0_", 8),
 dec0(name + "-dec0") {
-	for (unsigned short regNum = 0; regNum < 16; regNum ++) {
+	for (uint16_t regNum = 0; regNum < 16; regNum ++) {
 		// connect each decoder output pin to and gates at input 0
 		// either for anding the Enable signal or the Write signal
 		/* Enable */
@@ -35,7 +35,7 @@ dec0(name + "-dec0") {
 		ctrlNodeArray.connect(regArray[regNum], 2, 2); // Clear
 		ctrlNodeArray.connect(regArray[regNum], 3, 3); // Preset
 
-		for (unsigned short j = 0; j < 8; j++) {
+		for (uint16_t j = 0; j < 8; j++) {
 			// connect data in to all register data ins
 			dataNodeArray.connect(regArray[regNum], j, 5+j); // Data
 			// connect all register data outs to output nodes
@@ -48,15 +48,15 @@ dec0(name + "-dec0") {
 	numOfOutPins = 8;
 }
 
-DCSComponent* DCSRam16x8::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSRam16x8::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum < 8) {
 		return outNodeArray.getOutComponent(outPinNum);
 	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+	DCSLog::error(this->name, 10);
+	return nullptr;
 }
 
-DCSComponent* DCSRam16x8::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSRam16x8::getInComponent(uint16_t &inPinNum) {
 	if (inPinNum < 5) {
 		return ctrlNodeArray.getInComponent(inPinNum);
 	}
@@ -68,10 +68,10 @@ DCSComponent* DCSRam16x8::getInComponent(unsigned short &inPinNum) {
 		inPinNum -= 13;
 		return dec0.getInComponent(inPinNum);
 	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+	DCSLog::error(this->name, 11);
+	return nullptr;
 }
 
 void DCSRam16x8::updateOut() {
-	DCSLog::error(name, "This function should never be called");
+	DCSLog::error(name, 0);
 }

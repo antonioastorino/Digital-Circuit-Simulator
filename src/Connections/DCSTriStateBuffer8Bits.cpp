@@ -1,56 +1,48 @@
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSLog.hpp"
 
-DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name):
-DCSComponent(name, false),
-bufferArray(name, 8),
-node0(name + "-Enable") {
-	// Connect global enable to that of all buffers
-	for (unsigned short i = 0; i < 8; i++) {
-		node0.connect(bufferArray[i], 0, 1);
-	}
-	
-	timeDelay = 1;
-	numOfInPins = 9;
-	numOfOutPins = 8;
+DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name)
+    : DCSComponent(name, false), bufferArray(name, 8), node0(name + "-Enable") {
+    // Connect global enable to that of all buffers
+    for (uint16_t i = 0; i < 8; i++) {
+        node0.connect(bufferArray[i], 0, 1);
+    }
+    this->timeDelay    = 1;
+    this->numOfInPins  = 9;
+    this->numOfOutPins = 8;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getInComponent(unsigned short &inPinNum) {
-	if (inPinNum == 0) {
-		return &node0;
-	}
-	else if (inPinNum < 9) {
-		unsigned short elementNumber = inPinNum - 1;
-		inPinNum = 0;
-		// TODO: check if the buffer element can be directly returned
-		return bufferArray[elementNumber]->getInComponent(inPinNum);
-	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum) {
+    if (inPinNum == 0) {
+        return &node0;
+    } else if (inPinNum < 9) {
+        uint16_t elementNumber = inPinNum - 1;
+        inPinNum               = 0;
+        // TODO: check if the buffer element can be directly returned
+        return bufferArray[elementNumber]->getInComponent(inPinNum);
+    }
+    DCSLog::error(this->name, 11);
+    return nullptr;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(unsigned short &outPinNum) {
-	if (outPinNum >= 8) {
-		DCSLog::error(name, "Pin out of range");
-		exit(-1);
-	}
-	unsigned short elementNumber = outPinNum;
-	outPinNum = 0;
-	return bufferArray[elementNumber]->getOutComponent(outPinNum);
+DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t& outPinNum) {
+    if (outPinNum >= 8)
+        DCSLog::error(name, 10);
+    uint16_t elementNumber = outPinNum;
+    outPinNum              = 0;
+    return bufferArray[elementNumber]->getOutComponent(outPinNum);
 }
 
 void DCSTriStateBuffer8Bits::enable() {
-	for (unsigned short i = 0; i < 8; i++) {
-		bufferArray[i]->enable();
-	}
+    for (uint16_t i = 0; i < 8; i++) {
+        bufferArray[i]->enable();
+    }
 }
 
 void DCSTriStateBuffer8Bits::disable() {
-	for (unsigned short i = 0; i < 8; i++) {
-		bufferArray[i]->disable();
-	}
+    for (uint16_t i = 0; i < 8; i++) {
+        bufferArray[i]->disable();
+    }
 }
 
-void DCSTriStateBuffer8Bits::updateOut() {
-	DCSLog::error(name, "This function should never be called");
-}
+void DCSTriStateBuffer8Bits::updateOut() { DCSLog::error(name, 0); }

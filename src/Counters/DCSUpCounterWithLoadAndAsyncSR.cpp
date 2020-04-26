@@ -2,7 +2,7 @@
 #include "DCSLog.hpp"
 
 DCSUpCounterWithLoadAndAsyncSR::DCSUpCounterWithLoadAndAsyncSR(std::string name,
-															   unsigned short numOfBits):
+															   uint16_t numOfBits):
 DCSComponent(name, false),
 dividerArray(name + "-divArray", numOfBits),
 nodeArray({
@@ -13,8 +13,8 @@ nodeArray({
 	4),
 numOfBits(numOfBits)
 {
-	for (unsigned short i = 0; i < numOfBits; i ++) {
-		for (unsigned short j = 0; j < 4; j ++) {
+	for (uint16_t i = 0; i < numOfBits; i ++) {
+		for (uint16_t j = 0; j < 4; j ++) {
 			/*
 			 connect nodes to internal inputs of dividers:
 			 1 = Load
@@ -26,7 +26,7 @@ numOfBits(numOfBits)
 			nodeArray[j]->connect(dividerArray[i], 0, j + 1);
 		}
 	}
-	for (unsigned short i = 0; i < numOfBits - 1; i++) {
+	for (uint16_t i = 0; i < numOfBits - 1; i++) {
 		// cascade dividers
 		dividerArray[i]->connect(dividerArray[i+1],
 								 2, // Count out
@@ -41,9 +41,9 @@ numOfBits(numOfBits)
 	numOfOutPins = 1 + numOfBits;
 	 
 }
-DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum >=0 && outPinNum < numOfBits) {
-		unsigned short arrayElement = outPinNum;
+		uint16_t arrayElement = outPinNum;
 		outPinNum  = 0;
 		return dividerArray[arrayElement]->getOutComponent(outPinNum);
 	}
@@ -51,27 +51,28 @@ DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(unsigned short &ou
 		outPinNum = 2;
 		return dividerArray[numOfBits - 1]->getOutComponent(outPinNum);
 	}
-	else exit(-1);
+	else DCSLog::error(this->name, 10);
+	return nullptr;
 }
-DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getInComponent(uint16_t &inPinNum) {
 	if (inPinNum == 0) {
 		inPinNum = 5;
 		return dividerArray[0]->getInComponent(inPinNum); // Count in
 	}
 	else if (inPinNum < 5) {
-		unsigned short arrayElement = inPinNum - 1;
+		uint16_t arrayElement = inPinNum - 1;
 		inPinNum = 0;
 		return nodeArray[arrayElement];
 	}
 	else if (inPinNum < 5 + numOfBits) {
-		unsigned short arrayElement = inPinNum - 5;
+		uint16_t arrayElement = inPinNum - 5;
 		inPinNum = 0; // Data
 		return dividerArray[arrayElement]->getInComponent(inPinNum);
 	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+	DCSLog::error(this->name, 11);
+	return nullptr;
 }
 
 void DCSUpCounterWithLoadAndAsyncSR::updateOut() {
-	DCSLog::error(name, "This function should never be called");
+	DCSLog::error(name, 0);
 }

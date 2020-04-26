@@ -26,7 +26,7 @@ void register8BitsTest() {
 	
 //
 //
-	unsigned short clkHalfPeriod = reg0.getTimeDelay()/2+4;
+	uint16_t clkHalfPeriod = reg0.getTimeDelay()/2+4;
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
 	inArray[0]->makeSignal(binary_signal{3,1}, 0, true); // OE

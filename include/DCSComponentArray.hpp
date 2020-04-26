@@ -9,22 +9,22 @@
 template<class T>
 class DCSComponentArray: public DCSComponent {
 private:
-	unsigned short numOfElements;
+	uint16_t numOfElements;
 	std::string name;
 	std::vector<T*> componentArray;
 
 	void initialize();
 
 public:
-	DCSComponentArray(std::string name, unsigned short numOfElements);
-	DCSComponentArray(std::vector<std::string> nameVector, unsigned short numOfElements);
+	DCSComponentArray(std::string name, uint16_t numOfElements);
+	DCSComponentArray(std::vector<std::string> nameVector, uint16_t numOfElements);
 	~DCSComponentArray();
 	
-	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
-	DCSComponent* getInComponent(unsigned short &inPinNum) override;
+	DCSComponent* getOutComponent(uint16_t &outPinNum) override;
+	DCSComponent* getInComponent(uint16_t &inPinNum) override;
 	
 	void updateOut() override;
-	T* operator [] (unsigned short  elemNum);
+	T* operator [] (uint16_t  elemNum);
 };
 
 #endif /* DCSComponentArray_hpp */

@@ -29,7 +29,7 @@ or0(name + "-CoutOr0") {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSFullAdder::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSFullAdder::getInComponent(uint16_t &inPinNum) {
 	if (inPinNum == 0) {
 		return &node0;
 	}
@@ -41,11 +41,11 @@ DCSComponent* DCSFullAdder::getInComponent(unsigned short &inPinNum) {
 		inPinNum = 0;
 		return &node2;
 	}
-	DCSLog::error(name, "Input pin number out of range");
-	exit(-1);
+	DCSLog::error(name, 11);
+	return nullptr;
 }
 
-DCSComponent* DCSFullAdder::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSFullAdder::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum == 0) {
 		return &xor1;
 	}
@@ -53,10 +53,8 @@ DCSComponent* DCSFullAdder::getOutComponent(unsigned short &outPinNum) {
 		outPinNum = 0;
 		return &or0;
 	}
-	DCSLog::error(name, "Output pin number out of range");
-	exit(-1);
+	DCSLog::error(name, 10);
+	return nullptr;
 }
 
-void DCSFullAdder::updateOut() {
-	DCSLog::error(name, "This function should never be called");
-}
+void DCSFullAdder::updateOut() { DCSLog::error(name, 0);}

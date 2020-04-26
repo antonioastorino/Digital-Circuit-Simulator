@@ -13,11 +13,11 @@ DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) : DCSComponent(name, 
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDFlipFlopAsyncSR::getOutComponent(unsigned short& outPinNum) {
+DCSComponent* DCSDFlipFlopAsyncSR::getOutComponent(uint16_t& outPinNum) {
     return dLatSR0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDFlipFlopAsyncSR::getInComponent(unsigned short& inPinNum) {
+DCSComponent* DCSDFlipFlopAsyncSR::getInComponent(uint16_t& inPinNum) {
     // Input pin 1 is the clock, connected to the node at pin 0 \
      The other inputs (0, 2, and 3) are mapped by the D-Latch with SR
     if (inPinNum == 0 || inPinNum == 2 || inPinNum == 3)
@@ -25,10 +25,11 @@ DCSComponent* DCSDFlipFlopAsyncSR::getInComponent(unsigned short& inPinNum) {
     else if (inPinNum == 1) {
         inPinNum = 0;
         return &not0;
-    } else
-        exit(-1);
+    }
+    DCSLog::error(this->name, 11);
+    return nullptr;
 }
 
 void DCSDFlipFlopAsyncSR::updateOut() {
-    DCSLog::error(name, "This function should never be called");
+    DCSLog::error(name, 0);
 }

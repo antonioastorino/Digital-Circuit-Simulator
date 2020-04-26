@@ -10,11 +10,11 @@ std::vector<DCSComponent*> DCSEngine::inputVector = {};
 std::vector<DCSWire*> DCSEngine::wireVector = {};
 std::vector<DCSDisplayNBits*> DCSEngine::displayVector = {};
 
-unsigned short DCSEngine::clockPeriod;
-unsigned short DCSEngine::stepNumber;
+uint16_t DCSEngine::clockPeriod;
+uint16_t DCSEngine::stepNumber;
 bool DCSEngine::sampling;
 
-void DCSEngine::initialize(unsigned short clockHalfPeriod) {
+void DCSEngine::initialize(uint16_t clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
@@ -68,10 +68,13 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
 void DCSEngine::run(uint64_t steps, bool sampling) {
 	DCSEngine::sampling = sampling;
 	stepNumber = 0;
-	/* Check if all components are connected */
+	// Check if all components are connected
 	checkConnections();
+	// Put the circuit in a plausible initial state
 	initCircuit();
+	// Print the initial state -- step -1
 	printLogicLevels();
+	// Check that all the components are initialized
 	checkInitialization();
 	
 	for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
@@ -86,7 +89,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 void DCSEngine::checkConnections() {
 	for (auto component: componentVector) {
 		if(!(component->isFullyConnected())) {
-			DCSLog::error(component->getName(), "not connected");
+			DCSLog::error(component->getName(), 1);
 		}
 	}
 }
@@ -94,7 +97,7 @@ void DCSEngine::checkConnections() {
 void DCSEngine::checkInitialization() {
 	for (auto component: componentVector) {
 		if (!(component->initialized)) {
-			DCSLog::debug(component->getName(), "not initialized");
+			DCSLog::debug(component->getName(), "I'm not initialized");
 		}
 	}
 }
@@ -130,7 +133,7 @@ void DCSEngine::printLogicLevels() {
 int DCSEngine::getClockPeriod() { return clockPeriod; };
 int DCSEngine::getStepNumber() { return stepNumber; }
 void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
-void DCSEngine::setHalfClockPeriod(unsigned short numberOfTimeSteps) {
+void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
 	clockPeriod = 2 *numberOfTimeSteps;
 };
 

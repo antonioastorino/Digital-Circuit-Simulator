@@ -5,7 +5,7 @@
 
 void bitStreamSignalTest() {
 	DCSLog::printTestName("Bit-stream signal");
-	unsigned short hp = 1;
+	uint16_t hp = 1;
 	DCSEngine::initialize(hp);
 	
 	DCSInput in0("A");

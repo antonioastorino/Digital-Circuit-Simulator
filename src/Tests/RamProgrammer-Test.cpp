@@ -11,7 +11,7 @@ void ramProgrammerTest() {
 	
 	DCSRam16x8 ram0("Ram0");
 	DCSMemoryProgrammer programmer(&ram0);
-	for (unsigned short i = 0; i < 16; i++) {
+	for (uint16_t i = 0; i < 16; i++) {
 		programmer.program(i,3*i+1);
 	}
 	DCSUpCounterWithLoadAndAsyncSR count0("Count0", 4);

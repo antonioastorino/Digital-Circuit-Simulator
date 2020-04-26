@@ -5,7 +5,7 @@
 
 void displayTest() {
 	DCSLog::printTestName("Display");
-	unsigned short hp = 1;
+	uint16_t hp = 1;
 	DCSEngine::initialize(hp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 8);

@@ -50,7 +50,7 @@ void DCSInput::makeSignal(std::string signal, bool synch) {
 	hasSignal = true;
 }
 
-void DCSInput::makeClock(unsigned short halfPeriod, bool initVal) {
+void DCSInput::makeClock(uint16_t halfPeriod, bool initVal) {
 	this->signal = new DCSClockSignal(halfPeriod, initVal);
 	hasSignal = true;
 }

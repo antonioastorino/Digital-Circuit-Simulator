@@ -25,6 +25,7 @@ void rippleAdderTest();
 void ramProgrammerTest();
 void firstProgramTest();
 void ramTest();
+void demoTest();
 
 int main() {
 /** TODO: create proper unit tests
@@ -52,9 +53,10 @@ int main() {
 	// fullAdderTest();
 	// bitStreamSignalTest();
 	// displayTest();
-	rippleAdderTest();
+	// rippleAdderTest();
 	// ramTest();
 	// ramProgrammerTest();
 	// firstProgramTest();
+	demoTest();
 	// return 0;
 }

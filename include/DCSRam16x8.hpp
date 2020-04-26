@@ -52,8 +52,8 @@ private:
 public:
 	DCSRam16x8(std::string name);
 
-	DCSComponent* getInComponent(unsigned short &inPinNum) override;
-	DCSComponent* getOutComponent(unsigned short &outPinNum) override;
+	DCSComponent* getInComponent(uint16_t &inPinNum) override;
+	DCSComponent* getOutComponent(uint16_t &outPinNum) override;
 	
 	void updateOut() override;
 };

@@ -7,7 +7,7 @@
 
 void countAndStoreTest() {
 	DCSLog::printTestName("Count and store");
-	unsigned short clockHalfPeriod = 10;
+	uint16_t clockHalfPeriod = 10;
 	DCSEngine::initialize(clockHalfPeriod);
 
 	DCSUpCounterWithLoadAndAsyncSR count0("count0", 8);
@@ -21,11 +21,11 @@ void countAndStoreTest() {
 	// connect input array to counter
 	inArray.connect(&count0);
 	// connect register control inputs
-	for (unsigned short i = 0; i < 5; i++) {
+	for (uint16_t i = 0; i < 5; i++) {
 		regInArray.connect(&reg8_0, i, i);
 	}
 	// connect counter out to register data in
-	for (unsigned short i = 0; i < 8; i++) {
+	for (uint16_t i = 0; i < 8; i++) {
 		count0.connect(&reg8_0, i, 5 + i, "C");
 	}
 	reg8_0.connect(&outArray, {

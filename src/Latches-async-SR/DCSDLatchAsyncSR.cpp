@@ -1,4 +1,5 @@
 #include "DCSDLatchAsyncSR.hpp"
+#include "DCSLog.hpp"
 
 DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) :
 DCSComponent(name, false) {
@@ -18,37 +19,32 @@ DCSComponent(name, false) {
 	numOfOutPins = 2;
 }
 
-DCSComponent* DCSDLatchAsyncSR::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum == 0) return &nor3_0;
 	else if (outPinNum == 1) {
 		outPinNum = 0;
 		return &nor3_1;
 	}
-	else exit(-1);
+	DCSLog::error(this->name, 10);
+	return nullptr;
 }
 
-DCSComponent* DCSDLatchAsyncSR::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getInComponent(uint16_t &inPinNum) {
 	switch (inPinNum) {
 		case 0:
 			return &node0;
-			break;
 		case 1:
 			inPinNum = 0;
 			return &node1;
-			break;
 		case 2:
 			return &nor3_0;
-			break;
 		case 3:
 			inPinNum = 2;
 			return &nor3_1;
-			break;
 		default:
-			exit(-1);
-			break;
+			DCSLog::error(this->name, 11);
 	}
+	return nullptr;
 }
 
-void DCSDLatchAsyncSR::updateOut() {
-	throw "This function should never be called";
-}
+void DCSDLatchAsyncSR::updateOut() { DCSLog::error(this->name, 0); }

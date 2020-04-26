@@ -27,7 +27,7 @@ void upCounterTest() {
 	inArray.connect(&disp0, {5, 12}, {0, 7});
 	count0.connect(&disp1, {0, 7}, {0, 7});
 	
-	unsigned short hp = count0.getTimeDelay()/2+1;
+	uint16_t hp = count0.getTimeDelay()/2+1;
 	DCSEngine::setHalfClockPeriod(hp);
 	inArray[0]->makeSignal(binary_signal{2,1}, 0, true);
 	inArray[1]->makeSignal(binary_signal{1,1,1}, 0, true);

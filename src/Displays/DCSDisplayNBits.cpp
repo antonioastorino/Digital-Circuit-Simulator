@@ -2,7 +2,7 @@
 #include "DCSEngine.hpp"
 
 
-DCSDisplayNBits::DCSDisplayNBits(std::string name, unsigned short numOfBits)
+DCSDisplayNBits::DCSDisplayNBits(std::string name, uint16_t numOfBits)
     : DCSComponent(name, false), numOfBits(numOfBits), numOfDecimalDigits(1) {
     DCSEngine::addDisplay(this);
     initialized     = true; // Ensures no signal propagation from the output
@@ -20,12 +20,12 @@ DCSDisplayNBits::DCSDisplayNBits(std::string name, unsigned short numOfBits)
 
 void DCSDisplayNBits::updateOut() {
     std::stringstream message;
-    for (unsigned short i = 0; i < numOfBits; i++) {
+    for (uint16_t i = 0; i < numOfBits; i++) {
         message << ((in >> (numOfBits - 1 - i)) & 1);
     }
     message << "b ";
     uint64_t n = 10;
-    for (unsigned short i = 1; i < numOfDecimalDigits; i++) {
+    for (uint16_t i = 1; i < numOfDecimalDigits; i++) {
         if (in < n)
             message << ' ';
         n *= 10;

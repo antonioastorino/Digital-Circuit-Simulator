@@ -25,41 +25,35 @@ dffsr0(name + "DFFSR0") {
 	numOfOutPins = 1;
 }
 
-DCSComponent* DCSRegister1Bit::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSRegister1Bit::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum == 0)	return &tris0;
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
+	DCSLog::error(this->name, 10);
+	return nullptr;
 }
 
-DCSComponent* DCSRegister1Bit::getInComponent(unsigned short &inPinNum) {
+DCSComponent* DCSRegister1Bit::getInComponent(uint16_t &inPinNum) {
 	switch (inPinNum) {
 		case 0: // Tris-state OE
 			inPinNum = 1;
 			return &tris0;
-			break;
 		case 1: // Clock
 			return dffsr0.getInComponent(inPinNum);
-			break;
 		case 2:  // Clear
 			return dffsr0.getInComponent(inPinNum);
-			break;
 		case 3:  // Preset
 			return dffsr0.getInComponent(inPinNum);
-			break;
 		case 4:  // Load
 			inPinNum = 0;
 			return &node0;
 		case 5:
 			inPinNum = 1;
 			return &and1;
-			break;
 		default:
-			break;
+			DCSLog::error(this->name, 11);
+			return nullptr;
 	}
-	DCSLog::error(name, "Pin out of range");
-	exit(-1);
 }
 void DCSRegister1Bit::updateOut() {
-	DCSLog::error(name, "This function should never be called");
+	DCSLog::error(name, 0);
 }
 

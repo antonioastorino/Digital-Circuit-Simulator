@@ -25,7 +25,7 @@ public:
 	void makeSignal(bool constValue);
 	void makeSignal(binary_signal signal, bool initVal=0, bool synch=false);
 	void makeSignal(std::string signal, bool synch=false);
-	void makeClock(unsigned short halfPeriod=0, bool initVal=0);
+	void makeClock(uint16_t halfPeriod=0, bool initVal=0);
 	void updateOut() override;
 };
 

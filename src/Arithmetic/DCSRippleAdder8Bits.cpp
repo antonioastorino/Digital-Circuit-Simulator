@@ -5,7 +5,7 @@
 DCSRippleAdder8Bits::DCSRippleAdder8Bits(std::string name) :
 DCSComponent(name, false),
 faArray("FA", 8) {
-	for (unsigned short i = 1; i < 8; i++) {
+	for (uint16_t i = 1; i < 8; i++) {
 		faArray[i-1]->connect(faArray[i], 1, 2);
 	}
 	timeDelay = 14;
@@ -13,8 +13,8 @@ faArray("FA", 8) {
 	numOfOutPins = 9;
 }
 
-DCSComponent* DCSRippleAdder8Bits::getInComponent(unsigned short &inPinNum) {
-	unsigned short elementNumber;
+DCSComponent* DCSRippleAdder8Bits::getInComponent(uint16_t &inPinNum) {
+	uint16_t elementNumber;
 	if (inPinNum < 8) {
 		elementNumber = inPinNum;
 		inPinNum = 0;
@@ -29,13 +29,13 @@ DCSComponent* DCSRippleAdder8Bits::getInComponent(unsigned short &inPinNum) {
 		inPinNum = 2;
 		return faArray[0]->getInComponent(inPinNum);
 	}
-	DCSLog::error(name, "Input pin number out of range");
-	exit(-1);
+	DCSLog::error(name, 11);
+	return nullptr;
 }
 
-DCSComponent* DCSRippleAdder8Bits::getOutComponent(unsigned short &outPinNum) {
+DCSComponent* DCSRippleAdder8Bits::getOutComponent(uint16_t &outPinNum) {
 	if (outPinNum < 8) {
-		unsigned short elementNumber = outPinNum;
+		uint16_t elementNumber = outPinNum;
 		outPinNum = 0;
 		return faArray[elementNumber]->getOutComponent(outPinNum);
 	}
@@ -43,11 +43,11 @@ DCSComponent* DCSRippleAdder8Bits::getOutComponent(unsigned short &outPinNum) {
 		outPinNum = 1;
 		return faArray[7]->getOutComponent(outPinNum);
 	}
-	DCSLog::error(name, "Output pin number out of range");
-	exit(-1);
+	DCSLog::error(name, 10);
+	return nullptr;
 }
 
 void DCSRippleAdder8Bits::updateOut() {
-	throw "This function should never be called";
+	DCSLog::error(this->name, 0);
 }
 

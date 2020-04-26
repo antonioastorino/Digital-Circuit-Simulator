@@ -82,17 +82,14 @@ while read -r cpp_full_path; do
 	else
 		echo "No headers in $cpp_file_name.hpp"
 	fi
-	
-	# [ "`sort hpp-file.list | uniq -c | head -1`" != ""] && echo "Warning"
 
 	sort hpp-file.list | uniq -c | head -1
 
 	while read -r hpp; do
 		pf "`find ./ -name $hpp` "
 	done < hpp-file.list
-
-	pf "\n"
-	pf "\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
+	
+	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
 	# pf "\n $file_name.o: "
 done < cpp-full.list
 

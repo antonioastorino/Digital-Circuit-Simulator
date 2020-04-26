@@ -10,14 +10,14 @@ private:
 	// Driven component
 	DCSComponent* to;
 	// input pin number of the `right` component
-	unsigned short inPinNum;
+	uint16_t inPinNum;
 	std::string probeName;
 	
 public:
 	DCSWire() = delete;
 	DCSWire(DCSComponent* from,
 			DCSComponent* to,
-			unsigned short inPinNum,
+			uint16_t inPinNum,
 			std::string probeName = "");
 
 	std::string getProbeName();

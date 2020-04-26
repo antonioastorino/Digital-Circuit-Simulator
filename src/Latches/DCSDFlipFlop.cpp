@@ -1,5 +1,4 @@
 #include "DCSDFlipFlop.hpp"
-
 #include "DCSLog.hpp"
 
 DCSDFlipFlop::DCSDFlipFlop(std::string name)
@@ -20,19 +19,20 @@ DCSDFlipFlop::DCSDFlipFlop(std::string name)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDFlipFlop::getOutComponent(unsigned short& outPinNum) {
+DCSComponent* DCSDFlipFlop::getOutComponent(uint16_t& outPinNum) {
     return dLat0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDFlipFlop::getInComponent(unsigned short& inPinNum) {
+DCSComponent* DCSDFlipFlop::getInComponent(uint16_t& inPinNum) {
     if (inPinNum == 0)
         return dLat0.getInComponent(inPinNum);
     else if (inPinNum == 1) {
         // input pin 1 is the clock, connected to the node pin 0
         inPinNum = 0;
         return &node0;
-    } else
-        exit(-1);
+    }
+    DCSLog::error(this->name, 10);
+    return nullptr;
 }
 
-void DCSDFlipFlop::updateOut() { throw "This function should never be called"; }
+void DCSDFlipFlop::updateOut() { DCSLog::error(this->name, 0); }

@@ -6,7 +6,7 @@
 
 void andArrayTest() {
 	DCSLog::printTestName("Gate array");
-	unsigned short hcp = 2;
+	uint16_t hcp = 2;
 	DCSEngine::initialize(hcp);
 	
 	DCSComponentArray<DCSInput> inArray("In", 4);

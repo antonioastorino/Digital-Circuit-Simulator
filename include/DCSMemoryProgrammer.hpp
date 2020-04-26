@@ -9,8 +9,8 @@ public:
 	DCSMemoryProgrammer() = delete;
 	DCSMemoryProgrammer(DCSRam16x8 *memory);
 	
-	void program(unsigned short address, unsigned short value);
-	void program(unsigned short address, unsigned short instruction, unsigned short operand);
+	void program(uint16_t address, uint16_t value);
+	void program(uint16_t address, uint16_t instruction, uint16_t operand);
 };
 
 #endif /* DCSMemoryProgrammer_hpp */

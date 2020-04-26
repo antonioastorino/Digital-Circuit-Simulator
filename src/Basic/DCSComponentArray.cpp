@@ -32,7 +32,7 @@
 class DCSNode;
 
 template <class T>
-DCSComponentArray<T>::DCSComponentArray(std::string name, unsigned short numOfElements)
+DCSComponentArray<T>::DCSComponentArray(std::string name, uint16_t numOfElements)
     : DCSComponent(name, false), numOfElements(numOfElements), name({name}) {
     componentArray.reserve(numOfElements);
     for (int i = 0; i < numOfElements; i++) {
@@ -46,7 +46,7 @@ DCSComponentArray<T>::DCSComponentArray(std::string name, unsigned short numOfEl
 }
 
 template <class T>
-DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray, unsigned short numOfElements)
+DCSComponentArray<T>::DCSComponentArray(std::vector<std::string> nameArray, uint16_t numOfElements)
     : DCSComponent("Array", false), numOfElements(numOfElements), name{"Array"} {
     componentArray.reserve(numOfElements);
     for (int i = 0; i < numOfElements; i++) {
@@ -68,25 +68,25 @@ template <class T> DCSComponentArray<T>::~DCSComponentArray() {
     }
 }
 
-template <class T> DCSComponent* DCSComponentArray<T>::getOutComponent(unsigned short& outPinNum) {
-    unsigned short oldPin       = outPinNum;
-    unsigned short numOfOutPins = componentArray[0]->getNumOfOutPins();
+template <class T> DCSComponent* DCSComponentArray<T>::getOutComponent(uint16_t& outPinNum) {
+    uint16_t oldPin       = outPinNum;
+    uint16_t numOfOutPins = componentArray[0]->getNumOfOutPins();
     outPinNum %= numOfOutPins;
     return componentArray[oldPin / numOfOutPins]->getOutComponent(outPinNum);
 }
 
-template <class T> DCSComponent* DCSComponentArray<T>::getInComponent(unsigned short& inPinNum) {
-    unsigned short oldPin      = inPinNum;
-    unsigned short numOfInPins = componentArray[0]->getNumOfInPins();
+template <class T> DCSComponent* DCSComponentArray<T>::getInComponent(uint16_t& inPinNum) {
+    uint16_t oldPin      = inPinNum;
+    uint16_t numOfInPins = componentArray[0]->getNumOfInPins();
     inPinNum %= numOfInPins;
     return componentArray[oldPin / numOfInPins]->getInComponent(inPinNum);
 }
 
 template <class T> void DCSComponentArray<T>::updateOut() {
-    DCSLog::error(name, "This function should never be called");
+    DCSLog::error(name, 0);
 }
 
-template <class T> T* DCSComponentArray<T>::operator[](unsigned short elemNum) {
+template <class T> T* DCSComponentArray<T>::operator[](uint16_t elemNum) {
     return componentArray[elemNum];
 }
 

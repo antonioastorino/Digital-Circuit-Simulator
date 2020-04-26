@@ -7,9 +7,9 @@
 class DCSWire;
 
 struct DCSPinNumRange {
-    unsigned short startPinNum;
-    unsigned short endPinNum;
-    DCSPinNumRange(unsigned short startPinNum, unsigned short endPinNum)
+    uint16_t startPinNum;
+    uint16_t endPinNum;
+    DCSPinNumRange(uint16_t startPinNum, uint16_t endPinNum)
         : startPinNum(startPinNum), endPinNum(endPinNum) {}
 };
 
@@ -31,9 +31,9 @@ protected:
     uint64_t connectedIn;    // Detect if the component input is fully connected
     uint64_t fromTristateIn; // Detect which input is connected to a tristate output
     bool enabled;
-    unsigned short timeDelay;
-    unsigned short numOfInPins;
-    unsigned short numOfOutPins;
+    uint16_t timeDelay;
+    uint16_t numOfInPins;
+    uint16_t numOfOutPins;
 
     std::vector<DCSWire*> wireVector = {};
 
@@ -44,14 +44,14 @@ public:
     std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
     bool initialized;
 
-    virtual void setIn(bool inVal, unsigned short inPinNum);
+    virtual void setIn(bool inVal, uint16_t inPinNum);
     virtual void setIn(uint64_t inVec);
     virtual void updateOut() = 0;
-    virtual DCSComponent* getOutComponent(unsigned short& outPinNum);
-    virtual DCSComponent* getInComponent(unsigned short& inPinNum);
+    virtual DCSComponent* getOutComponent(uint16_t& outPinNum);
+    virtual DCSComponent* getInComponent(uint16_t& inPinNum);
 
     // Connect a single output to a single output of another component
-    void connect(DCSComponent* to, unsigned short outPinNum, unsigned short inPinNum, std::string probeName = "");
+    void connect(DCSComponent* to, uint16_t outPinNum, uint16_t inPinNum, std::string probeName = "");
     // Connect a set of consecutive outputs to a set of consecutive inputs of another component
     void connect(DCSComponent* to, DCSPinNumRange outPinNumRange, DCSPinNumRange inPinNumRange,
                  std::vector<std::string> probeNames = {});
@@ -59,23 +59,23 @@ public:
     void connect(DCSComponent* to, std::vector<std::string> probeNames = {});
 
     std::string getName();
-    unsigned short getTimeDelay(); // Return the latency between input and output
+    uint16_t getTimeDelay(); // Return the latency between input and output
     bool getOutput();      // single-bit output value
-    bool isInConnected(unsigned short inPinNum);
-    bool getFromTristateIn(unsigned short inPinNum);
+    bool isInConnected(uint16_t inPinNum);
+    bool getFromTristateIn(uint16_t inPinNum);
 
-    void setConnectedIn(unsigned short inPinNum);
-    void setFromTristateIn(unsigned short inPinNum);
+    void setConnectedIn(uint16_t inPinNum);
+    void setFromTristateIn(uint16_t inPinNum);
 
     bool isFullyConnected();
+    bool isReachableAtIn(uint16_t inPinNum);
 
     bool propagateValues();
 
-    unsigned short getNumOfInPins();
-    unsigned short getNumOfOutPins();
+    uint16_t getNumOfInPins();
+    uint16_t getNumOfOutPins();
     virtual uint64_t getAllReachedQWord();
 
-    bool isReachableAtIn(unsigned short inPinNum);
 
     virtual void enable();
     virtual void disable();

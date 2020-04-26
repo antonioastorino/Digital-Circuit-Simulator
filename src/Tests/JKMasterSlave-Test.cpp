@@ -7,7 +7,7 @@
 
 void jkLatchMasterSlaveAsyncSRTest() {
 	DCSLog::printTestName("JK-Latch Master-Slave with asynchronous SR");
-	unsigned short hp = 28;
+	uint16_t hp = 28;
 	DCSEngine::initialize(hp);
 		
 	DCSJKLatchMasterSlaveAsyncSR jk0("jk0");
