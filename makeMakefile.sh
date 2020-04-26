@@ -4,20 +4,6 @@ executable_folder="build"
 
 function pf () { printf "$1" >> Makefile; }
 
-pf "\n"
-pf "CFLAGS=-c -Wextra -std=c++11 -O\$(OPT)\n"
-pf "CC=g++\n"
-pf ".PHONY: all clean pre-build\n"
-
-pf "\npre-build:\n"
-pf "\t[ -d \"$build_folder\" ] || mkdir -p $build_folder\n"
-pf "\t[ -d \"$executable_folder\" ] || mkdir -p $executable_folder\n"
-pf "\tif [ \"\$(OUT)\" == \"\" ]; then\\"
-pf "\n\t\tmake $executable_folder/out OUT=out OPT=\$(OPT);\\"
-pf "\n\telse\\"
-pf "\n\t\tmake $executable_folder/\$(OUT) OUT=\$(OUT) OPT=\$(OPT);\\"
-pf "\n\tfi\n"
-
 # Find all the directories containing header files
 cat /dev/null > hpp-dir.list       # dir only
 cat /dev/null > hpp-file.list      # file name only
@@ -37,16 +23,39 @@ for f in `find ./ -name "*cpp"`; do
 	echo "`basename $f | awk -F '.' '{print $1}'`" >> cpp-file.list
 done
 
+pf "\nCFLAGS=-c -Wextra -std=c++11 -O\$(OPT)"
+pf "\nCC=g++"
 pf "\nINC="
 while read -r folder; do
 	pf " -I$folder\\"
 	pf "\n"
 done < hpp-sorted-dir.list
+pf "\n.PHONY: all clean check-out-value make-opt check-opt-value"
+pf "\n"
+pf "\nall: check-out-value"
 pf "\n"
 
-pf "all: pre-build\n"
+pf "\ncheck-out-value:"
+pf "\n\t@[ -d \"$build_folder\" ] || mkdir -p $build_folder"
+pf "\n\t@[ -d \"$executable_folder\" ] || mkdir -p $executable_folder"
+pf "\n\t@if [ \"\$(OUT)\" == \"\" ]; then\\"
+pf "\n\t\tmake check-opt-value OUT=out OPT=\$(OPT) ;\\"
+pf "\n\telse\\"
+pf "\n\t\tmake check-opt-value OUT=\$(OUT) OPT=\$(OPT) ;\\"
+pf "\n\tfi\n"
 
-pf "\n$executable_folder/\$(OUT):"
+pf "\ncheck-opt-value:"
+pf "\n\t[ \"\$(OPT)\" == \"\" ] && make make-opt OUT=\$(OUT) OPT=0 || make make-opt OUT=\$(OUT) OPT=\$(OPT)\n"
+
+pf "\nmake-opt:"
+pf "\n\tif [ ! -f \"$executable_folder/.\$(OUT)-\$(OPT)\" ] || [ ! -f \"$executable_folder/\$(OUT)-\$(OPT)\" ]; then \\"
+pf "\n\t\trm -rf $build_folder/*; \\"
+pf "\n\t\tmkdir -p $build_folder; \\"
+pf "\n\t\ttouch $executable_folder/.\$(OUT)-\$(OPT); \\"
+pf "\n\tfi"
+pf "\n\tmake $executable_folder/\$(OUT)-\$(OPT) OUT=\$(OUT) OPT=\$(OPT);"
+pf "\n"
+pf "\n$executable_folder/\$(OUT)-\$(OPT):"
 while read -r file_name; do
 	pf " $build_folder/$file_name.o"
 done < cpp-file.list
