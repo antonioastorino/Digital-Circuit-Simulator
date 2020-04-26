@@ -7,7 +7,7 @@
 
 void nand3Test() {
 	DCSLog::printTestName("Nand 3");
-	DCSEngine::reset(1);
+	DCSEngine::initialize(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 3);
 	DCSNand3 nand3_0("Nand3_0");

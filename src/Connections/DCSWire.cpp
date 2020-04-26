@@ -22,9 +22,9 @@ std::string DCSWire::getProbeName() {
 
 bool DCSWire::propagateValue() {
 	bool propagated = true;
-	if (from->getEnabled()) {  // Check if a component is in high-Z state
+	if (from->isEnabled()) {  // Check if a component is in high-Z state
 		bool outVal = from->getOutput();
-		if (to->getReachableIn(inPinNum)) { // If alread reached
+		if (to->isReachableAtIn(inPinNum)) { // If alread reached
 			propagated = false;
 		}
 		to->setIn(outVal, inPinNum);

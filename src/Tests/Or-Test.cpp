@@ -7,7 +7,7 @@
 
 void orTest() {
 	DCSLog::printTestName("Or");
-	DCSEngine::reset(1);
+	DCSEngine::initialize(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 2);
 	DCSOr or0("Or0");
@@ -21,7 +21,7 @@ void orTest() {
 	
 	inArray.connect(&or0, 0, 0, "A");
 	inArray.connect(&or0, 1, 1, "B");
-	or0.connect(&out0, 0, 0, "OAorB");
+	or0.connect(&out0, 0, 0, "AorB");
 	
 	DCSEngine::run(5);
 }

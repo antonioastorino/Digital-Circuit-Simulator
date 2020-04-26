@@ -8,7 +8,7 @@ void ramTest() {
 	DCSLog::printTestName("RAM");
 	
 	unsigned short hcp = 10; // half clock period
-	DCSEngine::reset(hcp);
+	DCSEngine::initialize(hcp);
 	DCSRam16x8                   ram0("Ram0");
 	
 	DCSComponentArray<DCSInput>  inArray0("In", ram0.getNumOfInPins());

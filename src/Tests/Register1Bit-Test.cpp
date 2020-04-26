@@ -7,7 +7,7 @@
 
 void register1BitTest() {
 	DCSLog::printTestName("1-bit register");
-	DCSEngine::reset(5);
+	DCSEngine::initialize(5);
 	
 	binary_signal d{13,3,10};
 	binary_signal ld{12,4,1};

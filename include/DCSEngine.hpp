@@ -22,7 +22,7 @@ private:
 	static unsigned short stepNumber;
 	static bool sampling;
 	
-	static void initialize(std::vector<DCSComponent*> cVec = inputVector);
+	static void initCircuit(std::vector<DCSComponent*> cVec = inputVector);
 	
 	static void checkConnections();
 	static void checkInitialization();
@@ -35,7 +35,7 @@ private:
 	
 	friend class DCSMemoryProgrammer;
 public:
-	static void reset(unsigned short clockHalfPeriod=5);
+	static void initialize(unsigned short clockHalfPeriod=5);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);

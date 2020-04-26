@@ -149,13 +149,13 @@ bool DCSComponent::isFullyConnected() {
 
 uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }
 
-bool DCSComponent::getReachableIn(unsigned short inPinNum) { return reachableIn & (1 << inPinNum); }
+bool DCSComponent::isReachableAtIn(unsigned short inPinNum) { return reachableIn & (1 << inPinNum); }
 
 void DCSComponent::enable() { throw "Only 3-state buffers can access this function"; }
 
 void DCSComponent::disable() { throw "Only 3-state buffers can access this function"; }
 
-bool DCSComponent::getEnabled() { return enabled; }
+bool DCSComponent::isEnabled() { return enabled; }
 
 unsigned short DCSComponent::getNumOfInPins() {
     if (numOfInPins == (unsigned short)(-1)) {

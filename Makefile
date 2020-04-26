@@ -88,7 +88,7 @@ build/objects/DCSSRLatch.o: .//src/Latches/DCSSRLatch.cpp .//include/DCSSRLatch.
 build/objects/DCSDFlipFlop.o: .//src/Latches/DCSDFlipFlop.cpp .//include/DCSDFlipFlop.hpp .//include/DCSLog.hpp .//include/DCSDLatch.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/DCSDLatch.o: .//src/Latches/DCSDLatch.cpp .//include/DCSDLatch.hpp .//include/DCSNode.hpp .//include/DCSSRLatch.hpp .//include/DCSUnitDelay.hpp .//include/DCSNot.hpp .//include/DCSAnd.hpp 
+build/objects/DCSDLatch.o: .//src/Latches/DCSDLatch.cpp .//include/DCSDLatch.hpp .//include/DCSAnd.hpp .//include/DCSNode.hpp .//include/DCSNot.hpp .//include/DCSSRLatch.hpp .//include/DCSUnitDelay.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSClockSignal.o: .//src/Signals/DCSClockSignal.cpp .//include/DCSArbitrarySignal.hpp .//include/DCSClockSignal.hpp .//include/DCSEngine.hpp .//include/DCSArbitrarySignal.hpp 

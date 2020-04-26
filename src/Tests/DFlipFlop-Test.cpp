@@ -6,7 +6,7 @@
 
 void dFlipFlopTest() {
 	DCSLog::printTestName("D-FlipFlop");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	binary_signal d = {4, 7, 3, 10};
 	binary_signal clk = {4, 2, 5, 2, 4};
 

@@ -6,7 +6,7 @@ DCSMemoryProgrammer::DCSMemoryProgrammer(DCSRam16x8 *memory):
 memory(memory) {
 	unsigned short hp = memory->getTimeDelay();
 	DCSEngine::setHalfClockPeriod(hp);
-	DCSEngine::initialize();
+	DCSEngine::initCircuit();
 	
 	unsigned short inputPin;
 	// Clear active

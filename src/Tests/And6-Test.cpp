@@ -8,7 +8,7 @@
 void and6Test() {
 	DCSLog::printTestName("And 6");
 	unsigned short hp = 2;
-	DCSEngine::reset(hp);
+	DCSEngine::initialize(hp);
 
 	DCSComponentArray<DCSInput> inArray("In", 6);
 	DCSAnd6 and6_0("And6_0");

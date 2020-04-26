@@ -7,7 +7,7 @@
 
 void ramProgrammerTest() {
 	DCSLog::printTestName("Ram programmer");
-	DCSEngine::reset(10);
+	DCSEngine::initialize(10);
 	
 	DCSRam16x8 ram0("Ram0");
 	DCSMemoryProgrammer programmer(&ram0);

@@ -7,7 +7,7 @@
 
 void dividerTest() {
 	DCSLog::printTestName("Divider");
-	DCSEngine::reset(8);
+	DCSEngine::initialize(8);
 	
 	DCSClockDivider div0("Div0");
 	DCSComponentArray<DCSInput> inArray("In", 6);

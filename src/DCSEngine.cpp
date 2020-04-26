@@ -14,7 +14,7 @@ unsigned short DCSEngine::clockPeriod;
 unsigned short DCSEngine::stepNumber;
 bool DCSEngine::sampling;
 
-void DCSEngine::reset(unsigned short clockHalfPeriod) {
+void DCSEngine::initialize(unsigned short clockHalfPeriod) {
 	componentVector = {};
 	inputVector = {};
 	wireVector = {};
@@ -39,7 +39,7 @@ void DCSEngine::addDisplay(DCSDisplayNBits* p_display) {
 	displayVector.push_back(p_display);
 }
 
-void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
+void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
 	/*
 	 This procedure propagates the first input value though the network.
 	 If there are no inputs connected (in case of free-running FSM)
@@ -50,16 +50,16 @@ void DCSEngine::initialize(std::vector<DCSComponent*> cVec) {
 	// Array of components from which to propagate at the next iteration
 	std::vector<DCSComponent*> newComponentVector = {};
 	for (auto component: cVec) {
-		if (!(component->initialized) && component->getEnabled()){
+		if (!(component->initialized) && component->isEnabled()){
 			component->updateOut();
 			if (component->isNode) {
 				newComponentVector = component->rightComponentVector;
-				initialize(newComponentVector);
+				initCircuit(newComponentVector);
 			}
 			else if (component->propagateValues()) {
 				newComponentVector = component->rightComponentVector;
 				if (newComponentVector.size()) //
-					initialize(newComponentVector);
+					initCircuit(newComponentVector);
 			}
 		}
 	}
@@ -70,7 +70,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 	stepNumber = 0;
 	/* Check if all components are connected */
 	checkConnections();
-	initialize();
+	initCircuit();
 	printLogicLevels();
 	checkInitialization();
 	

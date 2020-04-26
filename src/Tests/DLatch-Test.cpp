@@ -6,7 +6,7 @@
 
 void dLatchTest() {
 	DCSLog::printTestName("D-Latch");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	binary_signal d = {3,7,3,3,3};
 	binary_signal en = {4,2,5,2,6};
 	

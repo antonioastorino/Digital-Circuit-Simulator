@@ -7,7 +7,7 @@
 void mux2To1Test() {
 	DCSLog::printTestName("Mux 2 to 1");
 	unsigned short hp = 3;
-	DCSEngine::reset(hp);
+	DCSEngine::initialize(hp);
 	
 	DCSMux2to1 mux0("Mux0");
 	

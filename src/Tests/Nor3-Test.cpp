@@ -7,7 +7,7 @@
 
 void nor3Test() {
 	DCSLog::printTestName("Nor 3");
-	DCSEngine::reset(1);
+	DCSEngine::initialize(1);
 	
 	DCSComponentArray<DCSInput> inArray("In", 3);
 	DCSNor3 nor30("Nor30");

@@ -7,7 +7,7 @@
 
 void triStateBufferTest() {
 	DCSLog::printTestName("Tri-state buffer");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	
 	binary_signal inputA = {3,2,2,2,2,2,100};
 	binary_signal inputB = {3,3,30,3,30};

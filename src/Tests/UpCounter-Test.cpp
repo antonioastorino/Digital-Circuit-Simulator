@@ -6,7 +6,7 @@
 
 void upCounterTest() {
 	DCSLog::printTestName("Up counter");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	
 	DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
 	DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());

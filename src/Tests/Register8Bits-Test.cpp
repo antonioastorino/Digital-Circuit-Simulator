@@ -6,7 +6,7 @@
 
 void register8BitsTest() {
 	DCSLog::printTestName("8-bit register");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	
 	DCSRegister8Bits reg0("reg0");
 	DCSComponentArray<DCSInput> inArray("In", reg0.getNumOfInPins());

@@ -23,7 +23,7 @@ for f in `find ./ -name "*cpp"`; do
 	echo "`basename $f | awk -F '.' '{print $1}'`" >> cpp-file.list
 done
 
-pf "\nCFLAGS=-c -Wextra -std=c++11 -O\$(OPT)"
+pf "\nCFLAGS=-c -Wextra -std=c++11 -O\$(OPT) -g"
 pf "\nCC=g++"
 pf "\nINC="
 while read -r folder; do

@@ -12,7 +12,7 @@ unsigned short OUT = 0b0010;
 
 void firstProgramTest() {
 	DCSLog::printTestName("First program");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	
 	DCSRam16x8 ram0("Ram0");
 	DCSMemoryProgrammer programmer0(&ram0);

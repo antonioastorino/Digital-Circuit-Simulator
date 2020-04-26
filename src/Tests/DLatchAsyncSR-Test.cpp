@@ -7,7 +7,7 @@
 
 void dLatchAsyncSRTest() {
 	DCSLog::printTestName("D-Latch with asynchronous SR");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	binary_signal d = {10,3,3,4};
 	binary_signal en = {2,3,6,2,4};
 	binary_signal reset = {18,2,5};

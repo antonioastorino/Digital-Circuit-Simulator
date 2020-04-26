@@ -8,7 +8,7 @@
 void countAndStoreTest() {
 	DCSLog::printTestName("Count and store");
 	unsigned short clockHalfPeriod = 10;
-	DCSEngine::reset(clockHalfPeriod);
+	DCSEngine::initialize(clockHalfPeriod);
 
 	DCSUpCounterWithLoadAndAsyncSR count0("count0", 8);
 	DCSRegister8Bits reg8_0("reg8_0");

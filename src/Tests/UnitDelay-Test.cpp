@@ -5,7 +5,7 @@
 
 void unitDelayTest() {
 	DCSLog::printTestName("Unit delay");
-	DCSEngine::reset();
+	DCSEngine::initialize();
 	DCSNot not0("Not0");
 	DCSUnitDelay del0("Del0");
 

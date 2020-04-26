@@ -75,11 +75,11 @@ public:
     unsigned short getNumOfOutPins();
     virtual uint64_t getAllReachedQWord();
 
-    bool getReachableIn(unsigned short inPinNum);
+    bool isReachableAtIn(unsigned short inPinNum);
 
     virtual void enable();
     virtual void disable();
-    bool getEnabled();
+    bool isEnabled();
 };
 
 #endif /* DCSComponent_hpp */
