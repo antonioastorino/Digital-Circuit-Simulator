@@ -38,9 +38,9 @@ void fullAdderTest() {
 	0 0   0   1    0    21
 	1 1   1   0    0    24
 	 */
-	in0.makeClock(hp * 2);
-	in1.makeClock(hp * 4);
-	in2.makeClock();
+	in0.makeSquareWave(hp * 2);
+	in1.makeSquareWave(hp * 4);
+	in2.makeSquareWave();
 
 	DCSEngine::run(hp * 9, true);
 }

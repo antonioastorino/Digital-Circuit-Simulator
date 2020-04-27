@@ -33,5 +33,5 @@ void ramTest() {
     inArray0[7]->makeSignal(std::string("000011100"));
     inArray0[15]->makeSignal({2, 1, 1}, 0, true);
 
-    DCSEngine::run(15 * hcp, true);
+    DCSEngine::run(15 * hcp, false);
 }

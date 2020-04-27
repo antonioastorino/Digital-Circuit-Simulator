@@ -13,9 +13,9 @@ void nand3Test() {
 	DCSNand3 nand3_0("Nand3_0");
 	DCSOutput out0("Out0");
 
-	inArray[0]->makeClock(1, 0);
-	inArray[1]->makeClock(2, 0);
-	inArray[2]->makeClock(4, 0);
+	inArray[0]->makeSquareWave(1, 0);
+	inArray[1]->makeSquareWave(2, 0);
+	inArray[2]->makeSquareWave(4, 0);
 
 	inArray.connect(&nand3_0, 0, 0, "In0");
 	inArray.connect(&nand3_0, 1, 1, "In1");

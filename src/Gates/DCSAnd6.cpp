@@ -10,7 +10,7 @@ DCSAnd6::DCSAnd6(std::string name)
     numOfOutPins = 1;
 }
 
-DCSComponent* DCSAnd6::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSAnd6::getOutComponent(uint16_t outPinNum) {
     if (outPinNum == 0)
         return &and0;
     DCSLog::error(this->name, 10);

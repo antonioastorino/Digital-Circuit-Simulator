@@ -39,7 +39,7 @@ public:
     DCSClockDivider(std::string name);
 
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
-    DCSComponent* getOutComponent(uint16_t& outPinNum) override;
+    DCSComponent* getOutComponent(uint16_t outPinNum) override;
 
     void updateOut() override;
 };

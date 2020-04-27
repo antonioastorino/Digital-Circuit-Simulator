@@ -4,16 +4,17 @@
 
 /**
  * @class DCSDisplayNBits
- * 
  *
-*/
-class DCSDisplayNBits: public DCSComponent {
+ *
+ */
+class DCSDisplayNBits : public DCSComponent {
 private:
-	uint16_t numOfBits;
-	uint16_t numOfDecimalDigits;
+    uint16_t numOfBits;
+    uint16_t numOfDecimalDigits;
+
 public:
-	DCSDisplayNBits(std::string name, uint16_t numOfBits);
-	void updateOut() override;
+    DCSDisplayNBits(std::string name, uint16_t numOfBits);
+    void updateOut() override;
 };
 
 #endif /* DCSDisplayNBits_hpp */

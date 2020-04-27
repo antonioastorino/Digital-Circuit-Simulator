@@ -22,12 +22,4 @@ void DCSNode::setIn(bool inVal, uint16_t inPinNum) {
 	}
 }
 
-void DCSNode::setIn(uint64_t inVec) {
-	in = inVec;
-	out = inVec;
-	for (auto wire_p: wireVector) {
-		wire_p->propagateValue();
-	}
-}
-
 uint64_t DCSNode::getAllReachedQWord() { return -1; };

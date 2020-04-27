@@ -2,7 +2,7 @@
 #include "DCSEngine.hpp"
 #include "DCSWire.hpp"
 
-DCSComponent::DCSComponent(std::string name, bool shouldUpdate)
+DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate)
     : in(0),
       out(0),
       name({name}),
@@ -30,16 +30,11 @@ DCSComponent::~DCSComponent() {
 
 // set single input
 void DCSComponent::setIn(bool inVal, uint16_t inPinNum) {
-    if (inPinNum >= getNumOfInPins()) DCSLog::error(this->name, 11);
+    if (inPinNum >= getNumOfInPins())
+        DCSLog::error(this->name, 11);
     reachableIn |= 1 << inPinNum;
     in &= (~(1 << inPinNum));  // reset inPinNum-th bit
     in |= (inVal << inPinNum); // set the same bit to inVal
-}
-
-// set entire input array
-void DCSComponent::setIn(uint64_t inVec) {
-    this->in          = inVec;
-    this->reachableIn = getAllReachedQWord();
 }
 
 // get single output
@@ -49,8 +44,8 @@ bool DCSComponent::getOutput() {
     return out;
 }
 
-void DCSComponent::connect(DCSComponent* to, uint16_t outPinNum, uint16_t inPinNum,
-                           std::string probeName) {
+void DCSComponent::connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum,
+                           const std::string& probeName) {
 
     DCSComponent* leftComponent  = getOutComponent(outPinNum);
     DCSComponent* rightComponent = to->getInComponent(inPinNum);
@@ -77,8 +72,9 @@ void DCSComponent::connect(DCSComponent* to, uint16_t outPinNum, uint16_t inPinN
     DCSEngine::addWire(wire);
 }
 
-void DCSComponent::connect(DCSComponent* to, DCSPinNumRange outPinNumRange,
-                           DCSPinNumRange inPinNumRange, std::vector<std::string> probeNames) {
+void DCSComponent::connect(DCSComponent* const to, DCSPinNumRange outPinNumRange,
+                           DCSPinNumRange inPinNumRange,
+                           const std::vector<std::string>& probeNames) {
     uint16_t numOfInPins  = inPinNumRange.endPinNum - inPinNumRange.startPinNum + 1;
     uint16_t numOfOutPins = outPinNumRange.endPinNum - outPinNumRange.startPinNum + 1;
     if (numOfInPins != numOfOutPins)
@@ -103,7 +99,7 @@ void DCSComponent::connect(DCSComponent* to, DCSPinNumRange outPinNumRange,
     }
 }
 
-void DCSComponent::connect(DCSComponent* to, std::vector<std::string> probeNames) {
+void DCSComponent::connect(DCSComponent* const to, const std::vector<std::string>& probeNames) {
     uint16_t numOfOutPins = this->getNumOfOutPins();
     uint16_t numOfInPins  = to->getNumOfInPins();
     this->connect(to, {0, static_cast<uint16_t>(numOfOutPins - 1)},
@@ -113,7 +109,7 @@ void DCSComponent::connect(DCSComponent* to, std::vector<std::string> probeNames
 std::string DCSComponent::getName() { return name; }
 
 DCSComponent* DCSComponent::getInComponent(uint16_t& inPinNum) { return this; }
-DCSComponent* DCSComponent::getOutComponent(uint16_t& outPinNum) { return this; }
+DCSComponent* DCSComponent::getOutComponent(uint16_t outPinNum) { return this; }
 
 bool DCSComponent::isInConnected(uint16_t inPinNum) { return connectedIn & (1 << inPinNum); }
 

@@ -28,7 +28,7 @@ DCSClockDivider::DCSClockDivider(std::string name) : DCSComponent(name, false) {
     numOfOutPins = 3;
 }
 
-DCSComponent* DCSClockDivider::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSClockDivider::getOutComponent(uint16_t outPinNum) {
     if (outPinNum == 0 || outPinNum == 1) {
         return jk0.getOutComponent(outPinNum);
     } else if (outPinNum == 2) {

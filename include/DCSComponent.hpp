@@ -23,7 +23,7 @@ private:
 
 protected:
     virtual ~DCSComponent();
-    DCSComponent(std::string name, bool shouldUpdate = true);
+    DCSComponent(const std::string& name, bool shouldUpdate = true);
     uint64_t in;
     bool out;
     std::string name;
@@ -45,22 +45,22 @@ public:
     bool initialized;
 
     virtual void setIn(bool inVal, uint16_t inPinNum);
-    virtual void setIn(uint64_t inVec);
     virtual void updateOut() = 0;
-    virtual DCSComponent* getOutComponent(uint16_t& outPinNum);
+    virtual DCSComponent* getOutComponent(uint16_t outPinNum);
     virtual DCSComponent* getInComponent(uint16_t& inPinNum);
 
     // Connect a single output to a single output of another component
-    void connect(DCSComponent* to, uint16_t outPinNum, uint16_t inPinNum, std::string probeName = "");
+    void connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum,
+                 const std::string& probeName = "");
     // Connect a set of consecutive outputs to a set of consecutive inputs of another component
-    void connect(DCSComponent* to, DCSPinNumRange outPinNumRange, DCSPinNumRange inPinNumRange,
-                 std::vector<std::string> probeNames = {});
+    void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange,
+                 DCSPinNumRange inPinNumRange, const std::vector<std::string>& probeNames = {});
     // Connect all the outputs to all the inputs of another component
-    void connect(DCSComponent* to, std::vector<std::string> probeNames = {});
+    void connect(DCSComponent* const to, const std::vector<std::string>& probeNames = {});
 
     std::string getName();
     uint16_t getTimeDelay(); // Return the latency between input and output
-    bool getOutput();      // single-bit output value
+    bool getOutput();        // single-bit output value
     bool isInConnected(uint16_t inPinNum);
     bool getFromTristateIn(uint16_t inPinNum);
 
@@ -75,7 +75,6 @@ public:
     uint16_t getNumOfInPins();
     uint16_t getNumOfOutPins();
     virtual uint64_t getAllReachedQWord();
-
 
     virtual void enable();
     virtual void disable();

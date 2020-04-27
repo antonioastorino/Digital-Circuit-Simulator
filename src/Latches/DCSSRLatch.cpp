@@ -11,7 +11,7 @@ DCSSRLatch::DCSSRLatch(std::string name)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSSRLatch::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSSRLatch::getOutComponent(uint16_t outPinNum) {
     if (outPinNum == 0)
         return &nor0;
     if (outPinNum == 1) {

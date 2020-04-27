@@ -68,7 +68,7 @@ template <class T> DCSComponentArray<T>::~DCSComponentArray() {
     }
 }
 
-template <class T> DCSComponent* DCSComponentArray<T>::getOutComponent(uint16_t& outPinNum) {
+template <class T> DCSComponent* DCSComponentArray<T>::getOutComponent(uint16_t outPinNum) {
     uint16_t oldPin       = outPinNum;
     uint16_t numOfOutPins = componentArray[0]->getNumOfOutPins();
     outPinNum %= numOfOutPins;

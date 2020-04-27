@@ -13,9 +13,9 @@ void nor3Test() {
 	DCSNor3 nor30("Nor30");
 	DCSOutput out0("Out0");
 
-	inArray[0]->makeClock(1, 0);
-	inArray[1]->makeClock(2, 0);
-	inArray[2]->makeClock(4, 0);
+	inArray[0]->makeSquareWave(1, 0);
+	inArray[1]->makeSquareWave(2, 0);
+	inArray[2]->makeSquareWave(4, 0);
 
 	inArray.connect(&nor30, 0, 0, "A");
 	inArray.connect(&nor30, 1, 1, "B");

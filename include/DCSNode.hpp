@@ -9,7 +9,6 @@ public:
     void updateOut() override;
 
     void setIn(bool inVal, uint16_t inPinNum) override;
-    void setIn(uint64_t inVec) override;
 
     uint64_t getAllReachedQWord() override;
 };

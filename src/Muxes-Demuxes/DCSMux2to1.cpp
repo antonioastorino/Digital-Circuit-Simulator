@@ -33,11 +33,11 @@ DCSMux2to1::DCSMux2to1(std::string name)
     numOfOutPins = 1;
 }
 
-DCSComponent* DCSMux2to1::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSMux2to1::getOutComponent(uint16_t outPinNum) {
     if (outPinNum == 0)
         return &or0;
     DCSLog::error(name, 10);
-	return nullptr;
+    return nullptr;
 }
 
 DCSComponent* DCSMux2to1::getInComponent(uint16_t& inPinNum) {
@@ -51,7 +51,7 @@ DCSComponent* DCSMux2to1::getInComponent(uint16_t& inPinNum) {
         return &node0;
     }
     DCSLog::error(name, 11);
-	return nullptr;
+    return nullptr;
 }
 
 void DCSMux2to1::updateOut() { DCSLog::error(name, 0); }

@@ -29,10 +29,10 @@ void ramProgrammerTest() {
 	count0.connect(&dispAddr, {0,3}, {0,3});
 
 	ramCtrlIn[0] ->makeSignal(1);
-	ramCtrlIn[1] ->makeClock();
+	ramCtrlIn[1] ->makeSquareWave();
 	
 	countIn[0] ->makeSignal(1);
-	countIn[2] ->makeClock();
+	countIn[2] ->makeSquareWave();
 	
 	
 	DCSEngine::run(320, true);

@@ -19,9 +19,9 @@ void jkLatchMasterSlaveAsyncSRTest() {
 	jk0.connect(&O0, 0, 0, "Q");
 	jk0.connect(&O1, 1, 0, "!Q");
 	
-	inArray[0]->makeClock(hp*2, 0);
-	inArray[1]->makeClock(hp*4, 0);
-	inArray[2]->makeClock(hp, 0);
+	inArray[0]->makeSquareWave(hp*2, 0);
+	inArray[1]->makeSquareWave(hp*4, 0);
+	inArray[2]->makeSquareWave(hp, 0);
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
 

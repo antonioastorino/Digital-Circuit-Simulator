@@ -18,7 +18,7 @@ void and6Test() {
 	and6_0.connect(&out0, {"O"});
 	
 	for (uint16_t i = 0; i < 6; i ++) {
-		inArray[i]->makeClock(hp<<i, 0);
+		inArray[i]->makeSquareWave(hp<<i, 0);
 	}
 
 	DCSEngine::run(64*hp+1, true);

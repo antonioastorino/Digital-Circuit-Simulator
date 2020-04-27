@@ -8,11 +8,11 @@
  Input 5: In bit 0
  Input 6: In bit 1
  ...
- 
+
  Out   0: Out bit 0
  Out   1: Out bit 1
  ...
- */                         
+ */
 
 #ifndef DCSRegister8Bits_hpp
 #define DCSRegister8Bits_hpp
@@ -20,16 +20,17 @@
 class DCSRegister1Bit;
 class DCSNode;
 
-class DCSRegister8Bits: public DCSComponent {
+class DCSRegister8Bits : public DCSComponent {
 private:
-	DCSComponentArray<DCSRegister1Bit> registerArray;
-	DCSComponentArray<DCSNode> nodeArray;
+    DCSComponentArray<DCSRegister1Bit> registerArray;
+    DCSComponentArray<DCSNode> nodeArray;
+
 public:
-	DCSRegister8Bits(std::string name);
-	
-	DCSComponent* getOutComponent(uint16_t &outPinNum) override;
-	DCSComponent* getInComponent(uint16_t &inPinNum) override;
-	void updateOut() override;
+    DCSRegister8Bits(std::string name);
+
+    DCSComponent* getOutComponent(uint16_t outPinNum) override;
+    DCSComponent* getInComponent(uint16_t& inPinNum) override;
+    void updateOut() override;
 };
 
 #endif /* DCSRegister8Bits_hpp */

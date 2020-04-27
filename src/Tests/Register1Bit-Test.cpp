@@ -25,7 +25,7 @@ void register1BitTest() {
 	reg0.connect(&O0, 0, 0, " Q");
 	
 	inArray[0]->makeSignal(binary_signal{3,1}, 0, true);
-	inArray[1]->makeClock();
+	inArray[1]->makeSquareWave();
 	inArray[2]->makeSignal(binary_signal{1,4,1,1}, 1, true);
 	inArray[3]->makeSignal(binary_signal{6,1}, 0, true);
 	inArray[4]->makeSignal(ld);

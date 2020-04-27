@@ -19,7 +19,7 @@ DCSDFlipFlop::DCSDFlipFlop(std::string name)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDFlipFlop::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSDFlipFlop::getOutComponent(uint16_t outPinNum) {
     return dLat0.getOutComponent(outPinNum);
 }
 

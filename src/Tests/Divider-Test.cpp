@@ -24,7 +24,7 @@ void dividerTest() {
 	
 	inArray[0]->makeSignal(binary_signal{28,3,1});
 	inArray[1]->makeSignal(binary_signal{13,2,13,3,1});
-	inArray[2]->makeClock();
+	inArray[2]->makeSquareWave();
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
 	inArray[5]->makeSignal(binary_signal{55,1});

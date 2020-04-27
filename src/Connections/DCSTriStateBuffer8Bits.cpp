@@ -25,7 +25,7 @@ DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum) {
     return nullptr;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t outPinNum) {
     if (outPinNum >= 8)
         DCSLog::error(name, 10);
     uint16_t elementNumber = outPinNum;

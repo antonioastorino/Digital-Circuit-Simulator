@@ -19,7 +19,7 @@ private:
 public:
     DCSDFlipFlopAsyncSR(std::string name);
 
-    DCSComponent* getOutComponent(uint16_t& outPinNum) override;
+    DCSComponent* getOutComponent(uint16_t outPinNum) override;
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };

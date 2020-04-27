@@ -36,13 +36,13 @@ void countAndStoreTest() {
 	// enable counting
 	inArray[0]->makeSignal(1);
 	// connect clock to counter
-	inArray[2]->makeClock();
+	inArray[2]->makeSquareWave();
 	// enable register output
 	regInArray[0]->makeSignal(1);
 	// enable register write
 	regInArray[4]->makeSignal(1);
 	// connect clock to register
-	regInArray[1]->makeClock();
+	regInArray[1]->makeSquareWave();
 	
 	DCSEngine::run(512 * clockHalfPeriod, true);
 }

@@ -13,7 +13,7 @@ DCSDFlipFlopAsyncSR::DCSDFlipFlopAsyncSR(std::string name) : DCSComponent(name, 
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDFlipFlopAsyncSR::getOutComponent(uint16_t& outPinNum) {
+DCSComponent* DCSDFlipFlopAsyncSR::getOutComponent(uint16_t outPinNum) {
     return dLatSR0.getOutComponent(outPinNum);
 }
 

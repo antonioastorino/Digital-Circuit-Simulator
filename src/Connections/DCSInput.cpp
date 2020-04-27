@@ -17,10 +17,10 @@ constValue(constValue){
 	initialize();
 }
 
-DCSInput::DCSInput(std::string name, binary_signal signal, bool synch) :
+DCSInput::DCSInput(std::string name, binary_signal signal, bool initVal, bool synch) :
 DCSComponent(name, false),
 constValue(0) {
-	this->signal = new DCSArbitrarySignal(signal, synch);
+	this->signal = new DCSArbitrarySignal(signal, initVal, synch);
 	hasSignal = true;
 	initialize();
 }
@@ -50,7 +50,7 @@ void DCSInput::makeSignal(std::string signal, bool synch) {
 	hasSignal = true;
 }
 
-void DCSInput::makeClock(uint16_t halfPeriod, bool initVal) {
+void DCSInput::makeSquareWave(uint16_t halfPeriod, bool initVal) {
 	this->signal = new DCSClockSignal(halfPeriod, initVal);
 	hasSignal = true;
 }

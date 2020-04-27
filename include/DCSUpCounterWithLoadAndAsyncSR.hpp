@@ -35,9 +35,14 @@
  ----+------+-----+---------
    1 |   X  |  X  |  Load
  ----+------+-----+---------
- 
- Input 0 (Cout in) follows the rule of input 5 of the first divider. Therefore, it hast to be set from 3 to 1 tau before the clock rising edge. However, every Count in in the subsequent dividers is delayed by 1 tau. In addition, the output byte of the counter is ready 5 tau after the clock rising edge. As a consequence, supposing that the expected output is all 1's, the last Count in will be ready 5+N-1 tau after the clock rising edge and, as usual, has to be ready 3 tau before the next clock rising edge. Therefore, the clock period has to be at least 5+N-1+3 = 7+N tau.
- 
+
+ Input 0 (Cout in) follows the rule of input 5 of the first divider. Therefore, it hast to be set
+ from 3 to 1 tau before the clock rising edge. However, every Count in in the subsequent dividers is
+ delayed by 1 tau. In addition, the output byte of the counter is ready 5 tau after the clock rising
+ edge. As a consequence, supposing that the expected output is all 1's, the last Count in will be
+ ready 5+N-1 tau after the clock rising edge and, as usual, has to be ready 3 tau before the next
+ clock rising edge. Therefore, the clock period has to be at least 5+N-1+3 = 7+N tau.
+
  */
 
 #ifndef DCSUpCounterWithLoadAndAsyncSR_hpp
@@ -45,20 +50,19 @@
 #include "DCSClockDivider.hpp"
 #include "DCSComponentArray.hpp"
 
-class DCSUpCounterWithLoadAndAsyncSR: public DCSComponent {
+class DCSUpCounterWithLoadAndAsyncSR : public DCSComponent {
 private:
-	DCSComponentArray<DCSClockDivider> dividerArray;
-	DCSComponentArray<DCSNode> nodeArray; // inputs shared among dividers
-	uint16_t numOfBits;
-	
+    DCSComponentArray<DCSClockDivider> dividerArray;
+    DCSComponentArray<DCSNode> nodeArray; // inputs shared among dividers
+    uint16_t numOfBits;
+
 public:
-	DCSUpCounterWithLoadAndAsyncSR(std::string name,
-								   uint16_t numBits);
-	
-	DCSComponent* getInComponent(uint16_t &inPinNum) override;
-	DCSComponent* getOutComponent(uint16_t &outPinNum) override;
-	
-	void updateOut() override;
+    DCSUpCounterWithLoadAndAsyncSR(std::string name, uint16_t numBits);
+
+    DCSComponent* getInComponent(uint16_t& inPinNum) override;
+    DCSComponent* getOutComponent(uint16_t outPinNum) override;
+
+    void updateOut() override;
 };
 
 #endif /* DCSUpCounterWithLoadAndAsyncSR_hpp */

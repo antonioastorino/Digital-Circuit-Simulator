@@ -17,7 +17,7 @@ void bitStreamSignalTest() {
 //	in0.makeSignal(std::string{"10101"}, true);
 //	in0.makeSignal(binary_signal{1,1,1,1,1}, 1, true);
 
-	in0.makeClock(3, 0);
+	in0.makeSquareWave(3, 0);
 	
 	DCSEngine::run(7*hp*2, false);
 }
