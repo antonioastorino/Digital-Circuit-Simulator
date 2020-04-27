@@ -29,7 +29,7 @@ void demoTest();
 
 int main() {
 /** TODO: create proper unit tests
- */
+ *
 	srLatchTest();
 	notLoopTest();
 	unitDelayTest();
@@ -55,9 +55,9 @@ int main() {
 	displayTest();
 	rippleAdderTest();
 	ramTest();
-	ramProgrammerTest();
 	firstProgramTest();
 	//*/
+	ramProgrammerTest();
 	demoTest();
 	return 0;
 }

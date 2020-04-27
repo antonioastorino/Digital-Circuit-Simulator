@@ -22,8 +22,6 @@ private:
     DCSComponent();
 
 protected:
-    virtual ~DCSComponent();
-    DCSComponent(const std::string& name, bool shouldUpdate = true);
     uint64_t in;
     bool out;
     std::string name;
@@ -40,10 +38,18 @@ protected:
 public:
     bool isNode;     // true for DCSNode child only
     bool isTristate; // true for DCSTristate child only
-
-    std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
     bool initialized;
 
+    std::vector<DCSComponent*>
+        updatedByVector; // stores the component who updated a given pin each clock cycle
+    std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
+
+protected:
+    virtual ~DCSComponent();
+    DCSComponent(const std::string& name, bool shouldUpdate = true, bool isNode=false);
+
+public:
+    void resetUpdatedByVector();
     virtual void setIn(bool inVal, uint16_t inPinNum);
     virtual void updateOut() = 0;
     virtual DCSComponent* getOutComponent(uint16_t outPinNum);
@@ -74,7 +80,7 @@ public:
 
     uint16_t getNumOfInPins();
     uint16_t getNumOfOutPins();
-    virtual uint64_t getAllReachedQWord();
+    uint64_t getAllReachedQWord();
 
     virtual void enable();
     virtual void disable();

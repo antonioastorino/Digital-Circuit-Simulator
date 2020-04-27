@@ -9,8 +9,8 @@ void register1BitTest() {
 	DCSLog::printTestName("1-bit register");
 	DCSEngine::initialize(5);
 	
-	binary_signal d{13,3,10};
-	binary_signal ld{12,4,1};
+	transitions d{13,3,10};
+	transitions ld{12,4,1};
 
 	DCSRegister1Bit reg0("Reg0");
 	DCSComponentArray<DCSInput> inArray("In", reg0.getNumOfInPins());
@@ -24,10 +24,10 @@ void register1BitTest() {
 	inArray.connect(&reg0, 5, 5, "D");
 	reg0.connect(&O0, 0, 0, " Q");
 	
-	inArray[0]->makeSignal(binary_signal{3,1}, 0, true);
+	inArray[0]->makeSignal(transitions{3,1}, 0, true);
 	inArray[1]->makeSquareWave();
-	inArray[2]->makeSignal(binary_signal{1,4,1,1}, 1, true);
-	inArray[3]->makeSignal(binary_signal{6,1}, 0, true);
+	inArray[2]->makeSignal(transitions{1,4,1,1}, 1, true);
+	inArray[3]->makeSignal(transitions{6,1}, 0, true);
 	inArray[4]->makeSignal(ld);
 	inArray[5]->makeSignal(d);
 	

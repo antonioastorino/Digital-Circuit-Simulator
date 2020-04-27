@@ -6,6 +6,7 @@ DCSMemoryProgrammer::DCSMemoryProgrammer(DCSRam16x8 *memory):
 memory(memory) {
 	uint16_t hp = memory->getTimeDelay();
 	DCSEngine::setHalfClockPeriod(hp);
+	DCSEngine::checkConnections();
 	DCSEngine::initCircuit();
 	
 	uint16_t inputPin;
@@ -13,7 +14,7 @@ memory(memory) {
 	inputPin = 2;
 	memory->getInComponent(inputPin)->setIn(1, inputPin);
 	for (uint16_t i = 0; i < hp; i++) {
-		DCSEngine::updateOutputs();
+		DCSEngine::updateComponents();
 		DCSEngine::propagateValues();
 	}
 	DCSLog::output("CLEAR", "1 - Erasing memory\n");
@@ -21,7 +22,7 @@ memory(memory) {
 	inputPin = 2;
 	memory->getInComponent(inputPin)->setIn(0, inputPin);
 	for (uint16_t i = 0; i < hp; i++) {
-		DCSEngine::updateOutputs();
+		DCSEngine::updateComponents();
 		DCSEngine::propagateValues();
 	}
 	DCSLog::output("CLEAR", "0 - Memory erased\n");
@@ -58,7 +59,7 @@ void DCSMemoryProgrammer::program(uint16_t address, uint16_t value) {
 	inputPin = 1;
 	memory->getInComponent(inputPin)->setIn(1, inputPin);
 	for (uint16_t i = 0; i < hp; i++) {
-		DCSEngine::updateOutputs();
+		DCSEngine::updateComponents();
 		DCSEngine::propagateValues();
 //		DCSEngine::printLogicLevels();
 	}
@@ -69,7 +70,7 @@ void DCSMemoryProgrammer::program(uint16_t address, uint16_t value) {
 //	inputPin = 4;
 //	memory->getInComponent(inputPin)->setIn(0, inputPin);
 	for (uint16_t i = 0; i < hp; i++) {
-		DCSEngine::updateOutputs();
+		DCSEngine::updateComponents();
 		DCSEngine::propagateValues();
 //		DCSEngine::printLogicLevels();
 	}

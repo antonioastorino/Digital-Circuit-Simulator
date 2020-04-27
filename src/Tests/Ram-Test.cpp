@@ -24,7 +24,7 @@ void ramTest() {
     inArray0.connect(&dispCtrl, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
     ram0.connect(&dispOut);
 
-    inArray0[0]->makeSignal(binary_signal{100}, 1, true); // Enable
+    inArray0[0]->makeSignal(transitions{100}, 1, true); // Enable
     inArray0[1]->makeSignal(std::string("111111001"));
     inArray0[2]->makeSignal(std::string("111000000")); // Clear
     inArray0[3]->makeSignal({4, 1, 1}, 0, true);       // Preset

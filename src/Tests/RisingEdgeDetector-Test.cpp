@@ -13,8 +13,10 @@ void risingEdgeDetectorTest() {
 	DCSNot not0("Not0");
 	DCSUnitDelay del0("Del0");
 	DCSUnitDelay del1("Del1");
-	DCSInput in0("In0", {5,20});
+	DCSInput in0("In0");
 	DCSOutput out0("Out0");
+
+	in0.makeSignal(transitions{5,20});
 	
 	in0.connect(&and0, 0, 0, "In");
 	in0.connect(&not0, 0, 0);

@@ -4,7 +4,7 @@
 
 #include "DCSArbitrarySignal.hpp"
 #include "DCSComponent.hpp"
-typedef std::vector<uint64_t> binary_signal;
+typedef std::vector<uint64_t> transitions;
 
 /**
  * @class DCSInput
@@ -16,8 +16,8 @@ typedef std::vector<uint64_t> binary_signal;
  * The signal can be attached afterwards using one of the following methods:
  * - assign a constant value
  * 		void makeSignal(bool constValue);
- * - assign a signal that changes at given time intervals, defined in 'binary_signal'
- * 		void makeSignal(binary_signal signal, bool initVal = 0, bool synch = false);
+ * - assign a signal that changes at given time intervals, defined in 'transitions'
+ * 		void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
  * 		For example, a signal that starts at 0 and changes after 3 clock cycles and then
  * again after 2 clock cycles can be obtained as follows:
  * 		@example makeSignal({2, 3}, 0, true);
@@ -46,11 +46,10 @@ private:
 public:
     DCSInput(std::string name);
     DCSInput(std::string name, bool initValue);
-    DCSInput(std::string name, binary_signal signal, bool initVal = 0, bool synch = false);
     ~DCSInput();
 
     void makeSignal(bool constValue);
-    void makeSignal(binary_signal signal, bool initVal = 0, bool synch = false);
+    void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
     void makeSignal(std::string signal, bool synch = false);
     void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
     void updateOut() override;

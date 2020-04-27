@@ -113,8 +113,8 @@ NOTE: Generator under construction - be patient :)
  The signal can be attached afterwards using one of the following methods:
  - assign a constant value
  		void makeSignal(bool constValue);
- - assign a signal that changes at given time intervals, defined in 'binary_signal'
- 		void makeSignal(binary_signal signal, bool initVal = 0, bool synch = false);
+ - assign a signal that changes at given time intervals, defined in 'transitions'
+ 		void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
  		For example, a signal that starts at 0 and changes after 3 clock cycles and then
  again after 2 clock cycles can be obtained as follows:
  		@example makeSignal({2, 3}, 0, true);

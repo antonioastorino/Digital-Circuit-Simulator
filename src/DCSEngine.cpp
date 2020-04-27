@@ -30,6 +30,46 @@ void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
+void DCSEngine::run(uint64_t steps, bool sampling) {
+    DCSEngine::sampling   = sampling;
+    DCSEngine::stepNumber = 0;
+    // Check if all components are connected
+    checkConnections();
+    // Put the circuit in a plausible initial state
+    initCircuit();
+    // Print the initial state -- step -1
+    printLogicLevels();
+    // Check that all the components are initialized
+    checkInitialization();
+
+    for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+        updateComponents();
+        propagateValues();
+#if LOG_LEVEL > 0
+        printLogicLevels();
+#endif
+    }
+}
+
+void DCSEngine::checkConnections() {
+    for (auto component : componentVector) {
+        if (!(component->isFullyConnected())) {
+            DCSLog::error(component->getName(), 1);
+        }
+        // initialize updateByVector with nullptr
+        for (uint16_t i = 0; i < component->getNumOfInPins(); i++)
+            component->updatedByVector.push_back(nullptr);
+    }
+    for (auto display : displayVector) {
+        if (!(display->isFullyConnected())) {
+            DCSLog::error(display->getName(), 1);
+        }
+        // initialize updateByVector with nullptr
+        for (uint16_t i = 0; i < display->getNumOfInPins(); i++)
+            display->updatedByVector.push_back(nullptr);
+    }
+}
+
 void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     /*
      This procedure propagates the first input value though the network.
@@ -57,35 +97,6 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     }
 }
 
-void DCSEngine::run(uint64_t steps, bool sampling) {
-    DCSEngine::sampling = sampling;
-    stepNumber          = 0;
-    // Check if all components are connected
-    checkConnections();
-    // Put the circuit in a plausible initial state
-    initCircuit();
-    // Print the initial state -- step -1
-    printLogicLevels();
-    // Check that all the components are initialized
-    checkInitialization();
-
-    for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
-        updateOutputs();
-        propagateValues();
-#if LOG_LEVEL > 0
-        printLogicLevels();
-#endif
-    }
-}
-
-void DCSEngine::checkConnections() {
-    for (auto component : componentVector) {
-        if (!(component->isFullyConnected())) {
-            DCSLog::error(component->getName(), 1);
-        }
-    }
-}
-
 void DCSEngine::checkInitialization() {
     for (auto component : componentVector) {
         if (!(component->initialized)) {
@@ -94,19 +105,20 @@ void DCSEngine::checkInitialization() {
     }
 }
 
-void DCSEngine::updateOutputs() {
-    for (auto input : inputVector) {
-        input->updateOut();
-    }
+void DCSEngine::updateComponents() {
+    for (auto input : inputVector) input->updateOut();
     for (auto component : componentVector) {
-        component->updateOut();
+        if (!component->isNode)
+            component->updateOut();
+        component->resetUpdatedByVector();
     }
 }
 
 void DCSEngine::propagateValues() {
     // assing the output value of a given pin to the connected input pin
     for (auto wire : wireVector) {
-        wire->propagateValue();
+        if (!wire->fromNode()) // Nodes propagate themselves when updated
+            wire->propagateValue();
     }
 }
 

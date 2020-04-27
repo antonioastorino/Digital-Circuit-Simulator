@@ -13,9 +13,7 @@ DCSComponent(name) {
 void DCSTriStateBuffer::updateOut() {
 	if ((in >> 1) & 1) {
 		enable();
-		
 		out = in & 1;
-//		updateParentOut();
 	}
 	else { disable(); }
 }

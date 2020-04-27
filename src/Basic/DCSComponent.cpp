@@ -2,7 +2,7 @@
 #include "DCSEngine.hpp"
 #include "DCSWire.hpp"
 
-DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate)
+DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool isNode)
     : in(0),
       out(0),
       name({name}),
@@ -13,11 +13,12 @@ DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate)
       timeDelay(-1),
       numOfInPins(-1),
       numOfOutPins(-1),
-      isNode(false),
+      isNode(isNode),
       isTristate(false),
       initialized(false) {
     if (name == "")
         DCSLog::error("Component", 13); // I don't have a name
+
     if (shouldUpdate)
         DCSEngine::addComponent(this);
 }
@@ -46,7 +47,6 @@ bool DCSComponent::getOutput() {
 
 void DCSComponent::connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum,
                            const std::string& probeName) {
-
     DCSComponent* leftComponent  = getOutComponent(outPinNum);
     DCSComponent* rightComponent = to->getInComponent(inPinNum);
 
@@ -67,7 +67,6 @@ void DCSComponent::connect(DCSComponent* const to, uint16_t outPinNum, uint16_t 
         leftComponent->rightComponentVector.push_back(rightComponent);
 
     DCSWire* wire = new DCSWire(leftComponent, rightComponent, inPinNum, probeName);
-
     leftComponent->wireVector.push_back(wire);
     DCSEngine::addWire(wire);
 }
@@ -130,15 +129,20 @@ void DCSComponent::setFromTristateIn(uint16_t inPinNum) {
 }
 
 bool DCSComponent::propagateValues() {
-    bool propagated = true;
     for (auto wire : wireVector) {
-        propagated = wire->propagateValue();
+        if (!wire->propagateValue())
+            return false;
     }
-    return propagated;
+    return true;
+}
+
+void DCSComponent::resetUpdatedByVector() {
+    for (int i = 0; i < this->numOfInPins; i++)
+        this->updatedByVector[i] = nullptr;
 }
 
 bool DCSComponent::isFullyConnected() {
-    return (connectedIn ^ fromTristateIn) == getAllReachedQWord();
+    return (this->connectedIn ^ this->fromTristateIn) == this->getAllReachedQWord();
 }
 
 uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }

@@ -27,7 +27,7 @@ private:
 	static void checkConnections();
 	static void checkInitialization();
 	
-	static void updateOutputs();
+	static void updateComponents();
 	static void propagateValues();
 	
 	static void printProbes();

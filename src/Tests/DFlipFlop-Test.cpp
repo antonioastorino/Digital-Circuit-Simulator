@@ -7,12 +7,16 @@
 void dFlipFlopTest() {
 	DCSLog::printTestName("D-FlipFlop");
 	DCSEngine::initialize();
-	binary_signal d = {4, 7, 3, 10};
-	binary_signal clk = {4, 2, 5, 2, 4};
+	transitions d = {4, 7, 3, 10};
+	transitions clk = {4, 2, 5, 2, 4};
 
 	DCSDFlipFlop dff0("DFF0");
-	DCSInput I0("In0", d);
-	DCSInput I1("In1", clk);
+	DCSInput I0("In0");
+	DCSInput I1("In1");
+
+	I0.makeSignal(d);
+	I1.makeSignal(clk);
+	
 	DCSOutput O0("Out0");
 	DCSOutput O1("Out1");
 

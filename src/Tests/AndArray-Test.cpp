@@ -5,7 +5,7 @@
 #include "DCSComponentArray.hpp"
 
 void andArrayTest() {
-	DCSLog::printTestName("Gate array");
+	DCSLog::printTestName("And array");
 	uint16_t hcp = 2;
 	DCSEngine::initialize(hcp);
 	

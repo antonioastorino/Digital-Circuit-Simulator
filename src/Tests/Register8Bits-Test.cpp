@@ -29,19 +29,19 @@ void register8BitsTest() {
 	uint16_t clkHalfPeriod = reg0.getTimeDelay()/2+4;
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
-	inArray[0]->makeSignal(binary_signal{3,1}, 0, true); // OE
+	inArray[0]->makeSignal(transitions{3,1}, 0, true); // OE
 	inArray[1]->makeSquareWave();
 	inArray[2]->makeSignal(0);
-	inArray[3]->makeSignal(binary_signal{5,1}, 0, true);
-	inArray[4]->makeSignal(binary_signal{1,3,1}, 0, true); // LD
-	inArray[5]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[6]->makeSignal(binary_signal{1,1, 2}, 0, true);
-	inArray[7]->makeSignal(binary_signal{1,1, 1, 1}, 0,true);
-	inArray[8]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[9]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[10]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[3]->makeSignal(transitions{5,1}, 0, true);
+	inArray[4]->makeSignal(transitions{1,3,1}, 0, true); // LD
+	inArray[5]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[6]->makeSignal(transitions{1,1, 2}, 0, true);
+	inArray[7]->makeSignal(transitions{1,1, 1, 1}, 0,true);
+	inArray[8]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[9]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[10]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[11]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[12]->makeSignal(transitions{1,1, 1, 1}, 0, true);
 //	inArray[4]->makeSignal(0);
 //	inArray[5]->makeSignal(0);
 //

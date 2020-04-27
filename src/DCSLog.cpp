@@ -38,6 +38,8 @@ public:
             return "Trying to access the value in non sequential order";
         case 13:
             return "I don't have a name";
+        case 14:
+            return "Conflict on the bus among tristate buffers";
         default:
             return "Uncategorized exception";
         }
@@ -52,13 +54,13 @@ void DCSLog::output(std::string label, std::string message) {
 
 void DCSLog::info(std::string callerName, std::string message) {
 #if LOG_LEVEL > 1
-    std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
+    std::cout << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
 void DCSLog::debug(std::string callerName, std::string message) {
 #if LOG_LEVEL > 2
-    std::cout << "INFO: " << callerName << " says: '" << message << "'\n";
+    std::cout << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
@@ -66,7 +68,7 @@ void DCSLog::error(std::string callerName, int code) {
     try {
         throw custom_exception(code);
     } catch (custom_exception& e) {
-        std::cout << "ERROR: " << callerName << " says: '" << e.what() << "!'\n";
+        std::cout << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
         exit(e.code);
     }
 }

@@ -15,7 +15,7 @@ void bitStreamSignalTest() {
 	in0.connect(&out0, 0, 0, "In0");
 	
 //	in0.makeSignal(std::string{"10101"}, true);
-//	in0.makeSignal(binary_signal{1,1,1,1,1}, 1, true);
+//	in0.makeSignal(transitions{1,1,1,1,1}, 1, true);
 
 	in0.makeSquareWave(3, 0);
 	

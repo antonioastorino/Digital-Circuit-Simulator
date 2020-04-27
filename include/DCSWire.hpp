@@ -21,6 +21,7 @@ public:
 			std::string probeName = "");
 
 	std::string getProbeName();
+	bool fromNode();
 	bool propagateValue();
 	bool getOutVal();
 };

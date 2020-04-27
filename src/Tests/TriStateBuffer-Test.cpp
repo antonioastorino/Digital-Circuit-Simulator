@@ -8,20 +8,18 @@
 void triStateBufferTest() {
 	DCSLog::printTestName("Tri-state buffer");
 	DCSEngine::initialize();
-	
-	binary_signal inputA = {3,2,2,2,2,2,100};
-	binary_signal inputB = {3,3,30,3,30};
-	binary_signal enableA = {2,2,2,2,2,100};
-	binary_signal enableB = {2,2,2,2,2,2,100};
 
 	DCSInput inA0("A0", 0);
-	DCSInput inA1("A1", enableA, 1);
+	DCSInput inA1("A1");
 	DCSInput inB0("B0", 1);
-	DCSInput inB1("B1", enableB);
+	DCSInput inB1("B1");
 	DCSTriStateBuffer tsbA("tsbA");
 	DCSTriStateBuffer tsbB("tsbB");
 	DCSNode node0("Del0");
 	DCSOutput out0("Out0");
+
+	inA1.makeSignal({2,2,2,2,2,100}, 1, false);
+	inB1.makeSignal(transitions{2,2,2,2,2,2,100});
 
 	inA0.connect(&tsbA, 0, 0, "INA");
 	inA1.connect(&tsbA, 0, 1, "ENA");

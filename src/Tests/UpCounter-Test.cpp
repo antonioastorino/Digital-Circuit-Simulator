@@ -29,17 +29,17 @@ void upCounterTest() {
 	
 	uint16_t hp = count0.getTimeDelay()/2+1;
 	DCSEngine::setHalfClockPeriod(hp);
-	inArray[0]->makeSignal(binary_signal{2,1}, 0, true);
-	inArray[1]->makeSignal(binary_signal{1,1,1}, 0, true);
+	inArray[0]->makeSignal(transitions{2,1}, 0, true);
+	inArray[1]->makeSignal(transitions{1,1,1}, 0, true);
 	inArray[2]->makeSquareWave();
 
-	inArray[6]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[7]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[8]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[9]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[10]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[11]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
-	inArray[12]->makeSignal(binary_signal{1,1, 1, 1}, 0, true);
+	inArray[6]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[7]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[8]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[9]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[10]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[11]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	inArray[12]->makeSignal(transitions{1,1, 1, 1}, 0, true);
 
 	DCSEngine::run(265 * hp * 2, false);
 }
