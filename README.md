@@ -1,7 +1,7 @@
 # DCS
 Digital circuit simulator - from logic gates up
 
-Inspired by the work of [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtXNTBypGqImE405J2565dvjafglHU) and not having the possibility to follow his work with hardware, I have decided to write a circuit simulator and build on top of it a processor. I am trying to take into account the time dependency of the system evolution. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, I define the unit delay `tau` as the maximum delay that any of the elementary logic gates (and, or, not, nand, nor, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which can be seen as a free parameter whose value cannot be established a priori. Time itself is therefore discretized in steps of length `tau`.
+Inspired by the work of [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtXNTBypGqImE405J2565dvjafglHU) and not having the possibility to follow his work with hardware, I have decided to write a circuit simulator and build on top of it a processor. I am trying to take into account the time dependency of the system evolution. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, I define the unit delay `tau` as the maximum delay that any of the elementary logic gates (and, or, not, nand, nor, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which, can be seen as a free parameter whose value cannot be established a priori. Time itself is therefore discretized in steps of length `tau`.
 
 Examples of how to use the component library are in the main.cpp file.
 
@@ -48,7 +48,7 @@ make OUT=name OPT=1 # ok
 make OUT=name OPT=0 # will override ./build/name-0 without recompiling the object files
 ```
 ##### Workaround: don't do that! (or run `make clean` first)
-## Documentation automatically generated on Mon Apr 27 11:30:18 CEST 2020
+## Documentation automatically generated on Tue Apr 28 13:02:04 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ```
@@ -126,12 +126,6 @@ NOTE: Generator under construction - be patient :)
       void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
  Initialization 2
  DCSInput I0("I0", 1); // initialized with constant value 1
- @example Initialization 3
- DCSInput I0("I0", {2,2,3}, true); // initialized with a signal that will evolve with
- synchronously with the clock (synch = true) as follows: Start with value 0 and stay at 0 for 2
- clock cycles Switch to 1 and stay at 1 for 2 clock cycles Switch to 0 and stay at 0 for 3 clock
- cycles Switch to 1 and stay at 1 indefinitely. NOTE: if you want the signal to start with a 1,
- initialize with {0, ..., ...}
 ```
 
 

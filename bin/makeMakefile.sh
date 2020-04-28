@@ -1,8 +1,12 @@
-echo "# Makefile auto generated using custom generator" > Makefile # Initialize Makefile
+base_dir="`pwd`/`dirname $0`/../"
+make_file="$base_dir/Makefile"
 build_folder="build/objects"
 executable_folder="build"
+pushd $base_dir
 
 function pf () { printf "$1" >> Makefile; }
+
+echo "# Makefile auto generated using custom generator" > "$make_file" # Initialize Makefile
 
 # Find all the directories containing header files
 cat /dev/null > hpp-dir.list       # dir only
@@ -96,3 +100,5 @@ done < cpp-full.list
 pf "\nclean:\n\trm -rf $build_folder"
 
 rm *.list
+
+popd
