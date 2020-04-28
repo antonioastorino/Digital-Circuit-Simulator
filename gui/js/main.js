@@ -1,5 +1,4 @@
 window.onload = main;
-window.onresize = resizeCanvas
 let canvas = document.getElementById("canvas");
 const marginTop = 280; // canvas distance from window top
 var stepLength = 50;
@@ -12,6 +11,7 @@ var signals = {};
 
 function main() {
     console.log("Welcome back!")
+    window.onresize = resizeCanvas
     canvas.width = window.innerWidth - 20;
     canvas.height = window.innerHeight - marginTop;
     let ctx = canvas.getContext("2d");
@@ -21,13 +21,13 @@ function main() {
     const refresh = document.getElementById("refresh");
     const select = document.querySelector("select");
     const reader = new FileReader;
-
     const sliderHZoom = document.getElementById("h-zoom");
     const sliderVZoom = document.getElementById("v-zoom");
     const sliderFirstStep = document.getElementById("first-step");
     const spanFirstStep = document.getElementById("span-first-step");
+    const headerTestTitle = document.getElementById("test-title");
 
-    let dummyOption = new Option("Load files", 1);
+    let dummyOption = new Option("no file loaded", 1);
     select.appendChild(dummyOption);
     let files = [];
 
@@ -73,7 +73,7 @@ function main() {
             ctx.lineTo(offsetLeft + (stepLength * (numOfVerticalLines - firstStep - 1)), positionY);
             ctx.stroke();
             ctx.closePath();
-            ctx.fillText(keys[lineNum],10, baseline * stepHeight + offsetTop + 1);
+            ctx.fillText(keys[lineNum], 10, baseline * stepHeight + offsetTop + 1);
             baseline += 1.3;
         }
         baseline -= 1.3;
@@ -86,7 +86,7 @@ function main() {
             ctx.stroke();
             ctx.closePath();
         }
-    } 
+    }
 
     let parseText = (text) => {
         signals = {};
@@ -112,7 +112,10 @@ function main() {
 
         let lines = text.split("\n");
         for (let i = 0; i < lines.length; i++) {
-            if (lines[i].includes("STEP:")) {
+            if (lines[i].includes("test")) {
+                parseTitle(lines[i]);
+            }
+            else if (lines[i].includes("STEP:")) {
                 let pairs = lines[i].split(" ");
                 for (let j = 0; j < pairs.length; j++) {
                     let pair = pairs[j];
@@ -128,6 +131,9 @@ function main() {
         return signals;
     }
 
+    let parseTitle = (str) => {
+        headerTestTitle.innerHTML = str;
+    }
 
     let read = (file, reader) => new Promise((resolve, reject) => {
         reader.onload = () => {
@@ -138,6 +144,20 @@ function main() {
         reader.readAsText(file);
     })
 
+    let updateData = async () => {
+        let result = await read(files[select.selectedIndex], reader);
+        signals = parseText(result);
+        let signalLength = Object.values(signals)[0].length;
+        sliderFirstStep.setAttribute("max", Math.max(signalLength - 10, 0).toString())
+    }
+    
+    let refreshCanvas = () => {
+        if (Object.keys(signals).length == 0) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGrid();
+        drawSignals();
+    }
+    
     input.onchange = async () => {
         select.innerHTML = "";
         files.length = 0;
@@ -149,42 +169,45 @@ function main() {
             files.push(file);
             select.appendChild(option);
         }
+        if (files.length == 0) {
+            select.appendChild(dummyOption);
+        }
+        else {
+            await updateData();
+            refreshCanvas();
+        }
     }
 
-    let refreshCanvas = () => {
-        if (Object.keys(signals).length == 0) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawGrid();
-        drawSignals();
+    select.onchange = async () => {
+        await updateData();
+        refreshCanvas();
     }
     
     refresh.onclick = async () => {
         if (files.length == 0) return;
-        let result = await read(files[select.selectedIndex], reader);
-        signals = parseText(result);
-        let signalLength = Object.values(signals)[0].length;
-        sliderFirstStep.setAttribute("max", Math.max(signalLength - 10, 0).toString())
+        await updateData();
         refreshCanvas();
     }
 
-    sliderHZoom.oninput = function() {
+    sliderHZoom.oninput = function () {
         stepLength = parseInt(this.value);
         refreshCanvas();
     }
 
-    sliderVZoom.oninput = function() {
+    sliderVZoom.oninput = function () {
         stepHeight = parseInt(this.value);
         refreshCanvas();
     }
 
-    sliderFirstStep.oninput = function() {
+    sliderFirstStep.oninput = function () {
         firstStep = parseInt(this.value);
         spanFirstStep.innerText = firstStep;
         refreshCanvas();
     }
-}
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - marginTop;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth - 20;
+        canvas.height = window.innerHeight - marginTop;
+        refreshCanvas();
+    }
 }

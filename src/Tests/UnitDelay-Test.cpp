@@ -9,8 +9,8 @@ void unitDelayTest() {
 	DCSNot not0("Not0");
 	DCSUnitDelay del0("Del0");
 
-	not0.connect(&del0, 0, 0, "N0");
-	del0.connect(&not0, 0, 0, "D0");
+	not0.connect(&del0, {"N0"});
+	del0.connect(&not0, {"D0"});
 
 	DCSEngine::run(11);
 }

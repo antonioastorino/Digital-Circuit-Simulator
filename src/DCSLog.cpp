@@ -75,7 +75,7 @@ void DCSLog::error(std::string callerName, int code) {
 
 void DCSLog::printTestName(std::string testName) {
 #if LOG_LEVEL > 0
-    std::cout << "\n-----";
+    std::cout << "-----";
     for (size_t i = 0; i < testName.size(); i++)
         std::cout << "-";
     std::cout << "\n" << testName << " test\n";
