@@ -30,7 +30,6 @@ void demoTest();
 int main() {
 /** TODO: create proper unit tests
  *
-	srLatchTest();
 	notLoopTest();
 	unitDelayTest();
 	risingEdgeDetectorTest();
@@ -42,7 +41,6 @@ int main() {
 	andArrayTest();
 	and6Test();
 	dLatchTest();
-	dLatchAsyncSRTest();
 	jkLatchMasterSlaveAsyncSRTest();
 	register1BitTest();
 	dividerTest();
@@ -55,9 +53,11 @@ int main() {
 	rippleAdderTest();
 	ramTest();
 	firstProgramTest();
-	//*/
 	countAndStoreTest();
-	// ramProgrammerTest();
-	// demoTest();
+	ramProgrammerTest();
+	demoTest();
+	dLatchAsyncSRTest();
+	//*/
+	srLatchTest();
 	return 0;
 }

@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
 		body {
-			margin: 0;
+			margin: 5;
+			overflow: hidden;
 		}
 	</style>
 </head>
+
 <body>
-	<input type="file" id="" name="" multiple><br><br>
-	<select name="" id=""></select>
-	<input type="button" value="Refresh" id="refresh"><br><br>
-	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	<h1 style="text-align: center;">Logic analyzer</h1>
+	<div style="width: 70%; float: left;">
+		<input type="range" min="10" max="100" value="50" id="h-zoom">
+		<label>H-zoom</label>
+		<br><br>
+		<input type="range" min="14" max="100" value="50" id="v-zoom">
+		<label>V-zoom</label>
+		<br><br>
+		<input type="range" min="0" max="100" value="0" id="first-step">
+		<label>start at step </label><span id="span-first-step">0</span>
+	</div>
+	<div style="width: 30%; float: right;">
+		<input type="file" id="" name="" multiple>
+		<br><br>
+		<select name="" id=""></select>
+		<br><br>
+		<input type="button" value="Refresh" id="refresh"><br><br><br>
+	</div>
+	<div>
+		<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	</div>
 	<script src="./js/main.js" type="module"></script>
 </body>
+
 </html>

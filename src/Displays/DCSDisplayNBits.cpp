@@ -20,16 +20,17 @@ DCSDisplayNBits::DCSDisplayNBits(std::string name, uint16_t numOfBits)
 
 void DCSDisplayNBits::updateOut() {
     std::stringstream message;
+    message << "0b";
     for (uint16_t i = 0; i < numOfBits; i++) {
         message << ((in >> (numOfBits - 1 - i)) & 1);
     }
-    message << "b ";
+    message << " ";
     uint64_t n = 10;
     for (uint16_t i = 1; i < numOfDecimalDigits; i++) {
         if (in < n)
             message << ' ';
         n *= 10;
     }
-    message << in << "d  ";
+    message << in << "d";
     DCSLog::output(name, message.str());
 }

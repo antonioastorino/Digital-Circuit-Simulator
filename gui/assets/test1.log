@@ -1,9 +1,16 @@
-c:1 LD:0 CLK:1 R:0 S:0 DATA:00000000b   0d   OUT:00000000b   0d   COUT:000000000b   0d   STEP:140
-c:1 LD:0 CL00b   0dsdafdsaf
 
-
-
-
-
-
-fsfadfas
+-------------
+SR-Latch test
+-------------
+ R:0 S:0  Q:1 !Q:0 STEP:-1
+ R:0 S:0  Q:1 !Q:0 STEP:0
+ R:0 S:0  Q:1 !Q:0 STEP:1
+ R:1 S:0  Q:1 !Q:0 STEP:2
+ R:1 S:0  Q:0 !Q:0 STEP:3
+ R:0 S:0  Q:0 !Q:1 STEP:4
+ R:0 S:0  Q:0 !Q:1 STEP:5
+ R:0 S:1  Q:0 !Q:1 STEP:6
+ R:0 S:1  Q:0 !Q:0 STEP:7
+ R:0 S:0  Q:1 !Q:0 STEP:8
+ R:0 S:0  Q:1 !Q:0 STEP:9
+ R:0 S:0  Q:1 !Q:0 STEP:10

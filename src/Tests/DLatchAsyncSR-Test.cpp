@@ -9,7 +9,7 @@ void dLatchAsyncSRTest() {
 	DCSLog::printTestName("D-Latch with asynchronous SR");
 	DCSEngine::initialize();
 	transitions d = {10,3,3,4};
-	transitions en = {2,3,6,2,4};
+	transitions en = {2,2,7,2,4};
 	transitions reset = {18,2,5};
 
 	
