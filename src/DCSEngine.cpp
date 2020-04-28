@@ -84,7 +84,7 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     // Array of components from which to propagate at the next iteration
     std::vector<DCSComponent*> newComponentVector = {};
     for (auto component : cVec) {
-        if (!(component->initialized) && component->isEnabled()) {
+        if (component->isNode || (!(component->initialized) && component->isEnabled())) {
             component->updateOut();
             if (component->isNode) {
                 newComponentVector = component->rightComponentVector;
