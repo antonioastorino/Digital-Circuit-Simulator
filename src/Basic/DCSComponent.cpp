@@ -84,8 +84,10 @@ void DCSComponent::connect(DCSComponent* const to, DCSPinNumRange outPinNumRange
         }
     } else if (probeNames.size() == 1) {
         for (uint16_t i = 0; i < numOfInPins; i++) {
+            std::stringstream pinName;
+            pinName << probeNames[0] << i;
             this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i,
-                          probeNames[0]);
+                          pinName.str());
         }
     } else {
         if (probeNames.size() != numOfInPins) {
@@ -112,10 +114,10 @@ DCSComponent* DCSComponent::getOutComponent(uint16_t outPinNum) { return this; }
 
 bool DCSComponent::isInConnected(uint16_t inPinNum) { return connectedIn & (1 << inPinNum); }
 
-bool DCSComponent::getFromTristateIn(uint16_t inPinNum) { return fromTristateIn & (1 << inPinNum); }
+bool DCSComponent::isFromTristateIn(uint16_t inPinNum) { return fromTristateIn & (1 << inPinNum); }
 
 void DCSComponent::setConnectedIn(uint16_t inPinNum) {
-    if (isInConnected(inPinNum) || getFromTristateIn(inPinNum)) {
+    if (isInConnected(inPinNum) || isFromTristateIn(inPinNum)) {
         DCSLog::error(this->name, 3);
     }
     this->connectedIn |= (1 << inPinNum);
@@ -141,18 +143,15 @@ void DCSComponent::resetUpdatedByVector() {
         this->updatedByVector[i] = nullptr;
 }
 
+bool DCSComponent::isReachableAtIn(uint16_t inPinNum) { return reachableIn & (1 << inPinNum); }
+void DCSComponent::enable() { DCSLog::error(this->name, 5); }
+void DCSComponent::disable() { DCSLog::error(this->name, 5); }
+bool DCSComponent::isEnabled() { return enabled; }
 bool DCSComponent::isFullyConnected() {
     return (this->connectedIn ^ this->fromTristateIn) == this->getAllReachedQWord();
 }
 
 uint64_t DCSComponent::getAllReachedQWord() { return (1 << getNumOfInPins()) - 1; }
-
-bool DCSComponent::isReachableAtIn(uint16_t inPinNum) { return reachableIn & (1 << inPinNum); }
-
-void DCSComponent::enable() { DCSLog::error(this->name, 5); }
-void DCSComponent::disable() { DCSLog::error(this->name, 5); }
-
-bool DCSComponent::isEnabled() { return enabled; }
 
 uint16_t DCSComponent::getNumOfInPins() {
     if (numOfInPins == (uint16_t)(-1))

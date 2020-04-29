@@ -31,8 +31,10 @@ void demoTest();
 
 int main(int argc, const char* argv[]) {
     // TODO: create proper unit tests
-    int testNum;
-    sscanf(argv[1], "%d", &testNum);
+    int testNum = -1;
+	if (argc == 2) {
+    	sscanf(argv[1], "%d", &testNum);
+	}
     switch (testNum) {
     case (0):
         bitStreamSignalTest();
@@ -113,12 +115,10 @@ int main(int argc, const char* argv[]) {
         ramProgrammerTest();
         break;
     case (26):
-        demoTest();
-        break;
-    case (27):
         risingEdgeDetectorTest();
         break;
     default:
+		demoTest();
         break;
     }
     return 0;

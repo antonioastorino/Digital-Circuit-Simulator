@@ -68,7 +68,7 @@ public:
     uint16_t getTimeDelay(); // Return the latency between input and output
     bool getOutput();        // single-bit output value
     bool isInConnected(uint16_t inPinNum);
-    bool getFromTristateIn(uint16_t inPinNum);
+    bool isFromTristateIn(uint16_t inPinNum);
 
     void setConnectedIn(uint16_t inPinNum);
     void setFromTristateIn(uint16_t inPinNum);
