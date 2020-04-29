@@ -12,21 +12,22 @@ class DCSNode;
  * Input 0 (Data) must be stable at least 2 tau before the clock falling edge.
  * Both have to be stable for at least 1 tau after the clock falling edge.
  * Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with input 4 low.
- * Here is an example:
- *       |  ____
- * LOAD: | X    XXXXXXXX
- *       |  ^ start
- *       |   ___
- * DATA: | XX   XXXXXXXX
- *       | ____  _______
- * CLK:  |     __
- *       |          ____
- * Q:    | _________
- *       | ________
- *!Q:    |         _____
- *                  ^ ready
- *
- * PINOUT
+ * 
+ * @diagram
+ *|       |  ____
+ *| LOAD: | X    XXXXXXXX
+ *|       |  ^ start
+ *|       |   ___
+ *| DATA: | XX   XXXXXXXX
+ *|       | ____  _______
+ *| CLK:  |     __
+ *|       |          ____
+ *| Q:    | _________
+ *|       | ________
+ *|!Q:    |         _____
+ *|                  ^ ready
+ * @end_diagram
+ * PINOUT:
  * Input 0: Output Enable
  * Input 1: Clock
  * Input 2: Clear

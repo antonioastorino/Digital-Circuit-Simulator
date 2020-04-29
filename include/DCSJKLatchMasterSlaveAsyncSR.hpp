@@ -13,21 +13,23 @@
  * Inputs 0 (J) and 1 (K) must be stable for at least 1 tau before and 1 tau after the clock rising
  * edge.
  * The output is read 4 tau after the rising edge of the clock. Inputs 3 (Clear) and 4 (Preset) must
- * be stable at least 3 tau for the reset to have effect (after 3 tau) Here is an example:
- */
-/* 	    |   __
- * J:   | XX  XXXXXXXX
- *      |   ^ start
- *      |   __
- * K:   | XX  XXXXXXXX
- *      |    __
- * CLK: | X__  \\\\\\  go down any time 2 tau after rising edge
- *      |    ^ stored
- *      |        _____
- * Q:   | _______
- *      | ______
- *!Q:   |       ______
- *      |        ^ ready
+ * be stable at least 3 tau for the reset to have effect (after 3 tau)
+ *
+ * @diagram
+ *|      |   __
+ *| J:   | XX  XXXXXXXX
+ *|      |   ^ start
+ *|      |   __
+ *| K:   | XX  XXXXXXXX
+ *|      |    __
+ *| CLK: | X__  \\\\\\  go down any time 2 tau after rising edge
+ *|      |    ^ stored
+ *|      |        _____
+ *| Q:   | _______
+ *|      | ______
+ *|!Q:   |       ______
+ *|      |        ^ ready
+ * @end_diagram
  */
 class DCSJKLatchMasterSlaveAsyncSR : public DCSComponent {
 private:

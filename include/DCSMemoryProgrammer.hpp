@@ -2,6 +2,9 @@
 #define DCSMemoryProgrammer_hpp
 #include "DCSRam16x8.hpp"
 
+/**
+ * @class DCSMemoryProgrammer
+ */
 class DCSMemoryProgrammer {
 private:
 	DCSRam16x8 *memory;
