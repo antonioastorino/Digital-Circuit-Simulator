@@ -44,5 +44,5 @@ void countAndStoreTest() {
     // connect clock to register
     regInArray[1]->makeSquareWave(hp);
 
-    DCSEngine::run(12 * hp, false);
+    DCSEngine::run(514 * hp, true);
 }

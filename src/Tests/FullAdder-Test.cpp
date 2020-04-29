@@ -6,7 +6,7 @@
 
 void fullAdderTest() {
 	DCSLog::printTestName("Full adder");
-	uint16_t hp = 3;
+	uint16_t hp = 10;
 	DCSEngine::initialize(hp);
 	
 	DCSFullAdder fa0("FA0");
@@ -19,28 +19,15 @@ void fullAdderTest() {
 	DCSOutput out1("Cout");
 
 	in0.connect(&fa0, 0, 0, "A");
-	in1.connect(&fa0, 0, 1, "A");
+	in1.connect(&fa0, 0, 1, "B");
 	in2.connect(&fa0, 0, 2, "Cin");
 	
 	fa0.connect(&out0, 0,0, "Sum");
 	fa0.connect(&out1, 1,0, "Cout");
 
-	/*
-	 Expected result:
-	A A Cin Sum Cout    0
-	1 1   1   0    0    0
-	1 1   0   1    1    3
-	0 1   1   0    1    6
-	0 1   0   0    1    9
-	1 0   1   1    0    12
-	1 0   0   0    1    15
-	0 0   1   1    0    18
-	0 0   0   1    0    21
-	1 1   1   0    0    24
-	 */
 	in0.makeSquareWave(hp * 2);
 	in1.makeSquareWave(hp * 4);
-	in2.makeSquareWave(1);
+	in2.makeSquareWave(hp);
 
-	DCSEngine::run(hp * 9, true);
+	DCSEngine::run(hp * 9, false);
 }

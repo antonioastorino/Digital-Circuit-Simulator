@@ -1,22 +1,16 @@
 window.onload = main;
 let canvas = document.getElementById("canvas");
-const marginTop = 280; // canvas distance from window top
+const marginTop = 350; // canvas distance from window top
 var stepLength = 50;
 var stepHeight = 50;
 var firstStep = 0;
 const offsetLeft = 80;
 const offsetTop = 40;
+const offsetRight = 40
 var signals = {};
-
 
 function main() {
     console.log("Welcome back!")
-    window.onresize = resizeCanvas
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - marginTop;
-    let ctx = canvas.getContext("2d");
-    ctx.font = "14px Arial";
-
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
     const select = document.querySelector("select");
@@ -26,6 +20,35 @@ function main() {
     const sliderFirstStep = document.getElementById("first-step");
     const spanFirstStep = document.getElementById("span-first-step");
     const headerTestTitle = document.getElementById("test-title");
+    const pError = document.getElementById("p-error");
+    const divCanvas = document.getElementById("div-canvas");
+
+    let refreshCanvas = () => {
+        if (Object.keys(signals).length == 0) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        resizeCanvas();
+        drawGrid();
+        drawSignals();
+    }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth - offsetRight;
+        canvas.height = canvasHeight;
+        divCanvas.style.maxHeight = window.innerHeight - marginTop + 40 + "px";
+    }
+
+    window.onresize = function () {
+        resizeCanvas();
+        refreshCanvas();
+    }
+
+    let canvasHeight = window.innerHeight - marginTop;
+    resizeCanvas();
+    refreshCanvas();
+
+    let ctx = canvas.getContext("2d");
+    ctx.font = "14px Arial";
+
 
     let dummyOption = new Option("no file loaded", 1);
     select.appendChild(dummyOption);
@@ -59,12 +82,15 @@ function main() {
     }
 
     let drawGrid = () => {
-        ctx.setLineDash([5, 7]);
         ctx.lineWidth = 1;
         let baseline = 1;
         let keys = Object.keys(signals);
         let numOfHorizontalLines = keys.length;
         let numOfVerticalLines = signals[keys[0]].length;
+        canvasHeight = baseline * 1.3 * stepHeight * numOfHorizontalLines + offsetTop;
+        resizeCanvas();
+        ctx.setLineDash([5, 7]);
+
         // draw horizontal lines and labels
         for (let lineNum = 0; lineNum < numOfHorizontalLines; lineNum++) {
             let positionY = baseline * stepHeight + offsetTop + 1;
@@ -89,6 +115,7 @@ function main() {
     }
 
     let parseText = (text) => {
+        pError.innerHTML = ""
         signals = {};
         let parseKV = (kv) => {
             let binary = kv[1].split("b") // check if the value is binary and convert accordingly
@@ -100,7 +127,6 @@ function main() {
                     }
                     signals[kv[0] + i].push(parseInt(bits[i]));
                 }
-                console.log(binary[1]);
             }
             else {
                 if (signals[kv[0]] == undefined) {
@@ -110,10 +136,21 @@ function main() {
             }
         }
 
+        let parseTitle = (str) => {
+            headerTestTitle.innerHTML = str;
+        }
+
+        let parseError = (str) => {
+            pError.innerHTML = str;
+        }
+
         let lines = text.split("\n");
         for (let i = 0; i < lines.length; i++) {
             if (lines[i].includes("test")) {
                 parseTitle(lines[i]);
+            }
+            if (lines[i].includes("ERROR:")) {
+                parseError(lines[i]);
             }
             else if (lines[i].includes("STEP:")) {
                 let pairs = lines[i].split(" ");
@@ -131,9 +168,6 @@ function main() {
         return signals;
     }
 
-    let parseTitle = (str) => {
-        headerTestTitle.innerHTML = str;
-    }
 
     let read = (file, reader) => new Promise((resolve, reject) => {
         reader.onload = () => {
@@ -147,17 +181,15 @@ function main() {
     let updateData = async () => {
         let result = await read(files[select.selectedIndex], reader);
         signals = parseText(result);
-        let signalLength = Object.values(signals)[0].length;
-        sliderFirstStep.setAttribute("max", Math.max(signalLength - 10, 0).toString())
+        try {
+            let signalLength = Object.values(signals)[0].length;
+            sliderFirstStep.setAttribute("max", Math.max(signalLength - 10, 0).toString())
+        } catch {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            console.log("No signal loaded");
+        }
     }
-    
-    let refreshCanvas = () => {
-        if (Object.keys(signals).length == 0) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawGrid();
-        drawSignals();
-    }
-    
+
     input.onchange = async () => {
         select.innerHTML = "";
         files.length = 0;
@@ -182,7 +214,7 @@ function main() {
         await updateData();
         refreshCanvas();
     }
-    
+
     refresh.onclick = async () => {
         if (files.length == 0) return;
         await updateData();
@@ -202,12 +234,6 @@ function main() {
     sliderFirstStep.oninput = function () {
         firstStep = parseInt(this.value);
         spanFirstStep.innerText = firstStep;
-        refreshCanvas();
-    }
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth - 20;
-        canvas.height = window.innerHeight - marginTop;
         refreshCanvas();
     }
 }

@@ -27,37 +27,99 @@ void firstProgramTest();
 void ramTest();
 void demoTest();
 
-int main() {
-/** TODO: create proper unit tests
- *
-	notLoopTest();
-	unitDelayTest();
-	risingEdgeDetectorTest();
-	dFlipFlopTest();
-	triStateBufferTest();
-	orTest();
-	nor3Test();
-	nand3Test();
-	andArrayTest();
-	and6Test();
-	dLatchTest();
-	jkLatchMasterSlaveAsyncSRTest();
-	register1BitTest();
-	dividerTest();
-	upCounterTest();
-	register8BitsTest();
-	mux2To1Test();
-	fullAdderTest();
-	bitStreamSignalTest();
-	displayTest();
-	rippleAdderTest();
-	ramTest();
-	firstProgramTest();
-	countAndStoreTest();
-	ramProgrammerTest();
-	demoTest();
-	dLatchAsyncSRTest();
-	//*/
-	srLatchTest();
-	return 0;
+#include <iostream>
+
+int main(int argc, const char* argv[]) {
+    // TODO: create proper unit tests
+    int testNum;
+    sscanf(argv[1], "%d", &testNum);
+    switch (testNum) {
+    case (0):
+        bitStreamSignalTest();
+        break;
+    case (1):
+        orTest();
+        break;
+    case (2):
+        unitDelayTest();
+        break;
+    case (3):
+        nor3Test();
+        break;
+    case (4):
+        notLoopTest();
+        break;
+    case (5):
+        nand3Test();
+        break;
+    case (6):
+        andArrayTest();
+        break;
+    case (7):
+        and6Test();
+        break;
+    case (8):
+        srLatchTest();
+        break;
+    case (9):
+        triStateBufferTest();
+        break;
+    case (10):
+        dLatchTest();
+        break;
+    case (11):
+        dLatchAsyncSRTest();
+        break;
+    case (12):
+        dFlipFlopTest();
+        break;
+    case (13):
+        register1BitTest();
+        break;
+    case (14):
+        register8BitsTest();
+        break;
+    case (15):
+        jkLatchMasterSlaveAsyncSRTest();
+        break;
+    case (16):
+        dividerTest();
+        break;
+    case (17):
+        upCounterTest();
+        break;
+    case (18):
+        mux2To1Test();
+        break;
+    case (19):
+        fullAdderTest();
+        break;
+    case (20):
+        displayTest();
+        break;
+    case (21):
+        rippleAdderTest();
+        break;
+    case (22):
+        countAndStoreTest();
+        break;
+    case (23):
+        ramTest();
+        break;
+    case (24):
+        firstProgramTest();
+        break;
+    case (25):
+        ramProgrammerTest();
+        break;
+    case (26):
+        demoTest();
+        break;
+    case (27):
+        risingEdgeDetectorTest();
+        break;
+    default:
+        break;
+    }
+    return 0;
 }

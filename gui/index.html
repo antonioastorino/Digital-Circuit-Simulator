@@ -17,13 +17,13 @@
 	<h1 style="text-align: center;">Logic analyzer</h1>
 	<h2 style="text-align: center;" id="test-title">Logic analyzer</h1>
 	<div style="width: 70%; float: left;">
-		<input type="range" min="10" max="100" value="50" id="h-zoom">
+		<input type="range" min="10" max="100" value="50" id="h-zoom" style="width: 80%;">
 		<label>H-zoom</label>
 		<br><br>
-		<input type="range" min="14" max="100" value="50" id="v-zoom">
+		<input type="range" min="14" max="100" value="50" id="v-zoom" style="width: 80%;">
 		<label>V-zoom</label>
 		<br><br>
-		<input type="range" min="0" max="100" value="0" id="first-step">
+		<input type="range" min="0" max="100" value="0" id="first-step" style="width: 80%;">
 		<label>start at step </label><span id="span-first-step">0</span>
 	</div>
 	<div style="width: 30%; float: right;">
@@ -33,8 +33,11 @@
 		<br><br>
 		<input type="button" value="Refresh" id="refresh"><br><br><br>
 	</div>
-	<div>
+	<div id="div-canvas" style=" float: right; width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
 		<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	</div>
+	<div>
+		<p id="p-error"></p>
 	</div>
 	<script src="./js/main.js" type="module"></script>
 </body>

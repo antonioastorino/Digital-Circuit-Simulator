@@ -80,7 +80,7 @@ void demoTest() {
 
         DCSEngine::run(5);
     }//*/
-    DCSLog::printTestName("Tri-state buffer");
+    DCSLog::printTestName("Demo - Tri-state buffer");
 
     {
         DCSEngine::initialize();
