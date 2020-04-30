@@ -4,6 +4,7 @@
 #include <thread>
 
 std::vector<TimingResult> DCSTimer::results = {};
+std::mutex DCSTimer::m;
 
 DCSTimer::DCSTimer(const char* title)
     : m_title(title), m_startTimepoint(std::chrono::steady_clock::now()) {}
@@ -18,20 +19,21 @@ DCSTimer::~DCSTimer() {
                        .time_since_epoch()
                        .count();
     int64_t elapsedTime = stop - start;
-	uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+    uint32_t threadID   = std::hash<std::thread::id>{}(std::this_thread::get_id());
 
+    m.lock();
     DCSTimer::results.push_back({m_title, elapsedTime, threadID});
+    m.unlock();
 }
 
-
-
 void DCSTimer::printResults() {
-	std::ofstream profilingFile;
-	profilingFile.open("profilinFile");
+    if (DCSTimer::results.size()) {
+        std::ofstream profilingFile;
+        profilingFile.open("profilinFile");
 
-	for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
-
-		profilingFile << it->threadID << ":" << it->functionName << ":" << it->duration << "\n";
-	}
-	profilingFile.close();
+        for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
+            profilingFile << it->threadID << ":" << it->functionName << ":" << it->duration << "\n";
+        }
+        profilingFile.close();
+    }
 }

@@ -23,11 +23,8 @@ void DCSEngine::initialize(uint16_t clockHalfPeriod) {
 }
 
 void DCSEngine::addComponent(DCSComponent* component) { componentVector.push_back(component); }
-
 void DCSEngine::addInput(DCSInput* input) { inputVector.push_back(input); }
-
 void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
-
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
 void DCSEngine::run(uint64_t steps, bool sampling) {
@@ -99,7 +96,7 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
 }
 
 void DCSEngine::checkInitialization() {
-    for (auto component : componentVector) {
+    for (auto component : DCSEngine::componentVector) {
         if (!(component->initialized)) {
             DCSLog::debug(component->getName(), "I'm not initialized");
         }
@@ -107,11 +104,12 @@ void DCSEngine::checkInitialization() {
 }
 
 void DCSEngine::updateInputs() {
-    for (auto input : inputVector) input->updateOut();
+    for (auto input : inputVector)
+        input->updateOut();
 }
 
 void DCSEngine::updateComponents() {
-    for (auto component : componentVector) {
+    for (auto component : DCSEngine::componentVector) {
         if (!component->isNode)
             component->updateOut();
         component->resetUpdatedByVector();
