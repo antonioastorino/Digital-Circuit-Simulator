@@ -28,6 +28,7 @@ void ramTest();
 void demoTest();
 
 #include <iostream>
+#include "DCSTimer.hpp"
 
 int main(int argc, const char* argv[]) {
     // TODO: create proper unit tests
@@ -121,5 +122,6 @@ int main(int argc, const char* argv[]) {
 		demoTest();
         break;
     }
+    DCSTimer::printResults();
     return 0;
 }
