@@ -29,7 +29,7 @@ DCSTimer::~DCSTimer() {
 void DCSTimer::printResults() {
     if (DCSTimer::results.size()) {
         std::ofstream profilingFile;
-        profilingFile.open("profilinFile");
+        profilingFile.open("gui/performance-analyzer/assets/profileFile");
 
         for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
             profilingFile << it->threadID << ":" << it->functionName << ":" << it->duration << "\n";

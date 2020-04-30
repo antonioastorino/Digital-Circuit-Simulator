@@ -130,10 +130,9 @@ void DCSEngine::printLogicLevels() {
             if (wire->getProbeName().length() > 0) {
                 std::string message;
                 if (wire->getOutVal())
-                    message = "1";
+                    DCSLog::output(wire->getProbeName(), "1");
                 else
-                    message = "0";
-                DCSLog::output(wire->getProbeName(), message);
+                    DCSLog::output(wire->getProbeName(), "0");
             }
         }
         for (auto display : displayVector) {
