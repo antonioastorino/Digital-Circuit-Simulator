@@ -84,3 +84,10 @@ void DCSLog::printTestName(std::string testName) {
     std::cout << "\n";
 #endif
 }
+
+void DCSLog::profile(std::string functionName, int64_t duration) {
+#if PROFILING
+    std::cout<< functionName << ":" << duration << "\n";
+#endif
+}
+
