@@ -2,6 +2,6 @@
 curr_dir="`pwd`/`dirname $0`"
 pushd $curr_dir/../
 pwd
-make $1
-build/out-0
+make $2
+build/out-0 $1
 popd

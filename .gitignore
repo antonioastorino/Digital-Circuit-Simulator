@@ -1,3 +1,4 @@
-build
+build/objects
 makedoc.sh
-
+gui/assets/test*
+.DS_Store
