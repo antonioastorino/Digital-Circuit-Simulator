@@ -19,23 +19,22 @@
 	<div style="width: 70%; float: left;">
 		<input type="range" min="14" max="100" value="50" id="v-zoom" style="width: 80%;">
 		<label>V-zoom</label>
-		<div id="div-legend">
-		</div>
+		<table id="table-legend" style="margin: 5px;">
+		</table>
 
 	</div>
 	<div style="width: 30%; float: right;">
-		<input type="file" id="" name="" multiple>
+		<input type="file" multiple onclick="this.value-null">
 		<br><br>
 		<select id="select-file"></select>
 		<br><br>
-		<input type="button" value="Refresh" id="refresh"><br><br><br>
+		<input type="button" value="Refresh" id="refresh"><br><br>
+		<input type="button" value="Expand" id="expand-collapse-button"><br><br>
 	</div>
-	<div id="div-canvas" style=" float: right; width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
+	<div id="div-canvas" style="width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
 		<canvas id="canvas" style="border:1px solid #000000;"></canvas>
 	</div>
-	<div>
-		<p id="p-error"></p>
-	</div>
+	<br><br><br>
 	<script src="./js/main.js" type="module"></script>
 </body>
 

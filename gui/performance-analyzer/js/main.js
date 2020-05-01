@@ -15,20 +15,46 @@ function main() {
     let scaleX;
     let expandThread = false;
     let maxNumOfFunctions = 0;
+    let minumumLineWidth = 4;
 
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
     const select = document.getElementById("select-file");
-    const reader = new FileReader;
     const sliderVZoom = document.getElementById("v-zoom");
     const divCanvas = document.getElementById("div-canvas");
-    const divLegend = document.getElementById("div-legend");
+    const legendTable = document.getElementById("table-legend");
+    const expandCollapseButton = document.getElementById("expand-collapse-button");
 
-    let addLabelToLegend = (label, color) => {
-        let labelDiv = document.createElement("div");
-        labelDiv.innerHTML = label;
-        labelDiv.style.backgroundColor = color;
-        divLegend.appendChild(labelDiv);
+    let addLabelToLegend = () => {
+        let threadNames = Object.keys(measurements);
+        let numOfThreads = threadNames.length;
+
+        for (let threadNum = 0; threadNum < numOfThreads; threadNum++) {
+            let threadID = threadNames[threadNum];
+            let functions = Object.keys(measurements[threadID]);
+            for (let functionNum = 0; functionNum < functions.length; functionNum++) {
+                let functionName = functions[functionNum];
+                let data = measurements[threadID][functionName].data;
+                let color = measurements[threadID][functionName].color;
+                let numOfCalls = measurements[threadID][functionName].numOfCalls;
+                let totalExecutionTime = measurements[threadID][functionName].totalExecutionTime;
+                let averageExecutionTime = Math.round(totalExecutionTime / numOfCalls);
+
+                let labelRow = legendTable.insertRow();
+                let threadIDCell = labelRow.insertCell();
+                let labelCell = labelRow.insertCell();
+                let numOfCallsCell = labelRow.insertCell();
+                let averageExecutionTimeCell = labelRow.insertCell();
+                let totalExecutionTimeCell = labelRow.insertCell();
+                
+                labelRow.style.backgroundColor = color;
+                threadIDCell.innerHTML = threadID;
+                labelCell.innerHTML = functionName;
+                numOfCallsCell.innerHTML = numOfCalls;
+                averageExecutionTimeCell.innerHTML = averageExecutionTime  + " ns";
+                totalExecutionTimeCell.innerHTML = totalExecutionTime + " ns";
+            }
+        }
     }
 
     let ctx = canvas.getContext("2d");
@@ -70,9 +96,8 @@ function main() {
         return color;
     }
 
-    expandThread = true;
+    expandThread = false;
     let draw = () => {
-        let baseline = 0;
         let threadNames = Object.keys(measurements);
         let numOfThreads = threadNames.length;
         if (expandThread) {
@@ -81,24 +106,26 @@ function main() {
             canvasHeight = stepHeight * numOfThreads + baselineOffset * (numOfThreads - 1) * stepHeight;
         }
         resizeCanvas();
-
+        
+        let baseline = 0;
         for (let threadNum = 0; threadNum < numOfThreads; threadNum++) {
-            let threadName = threadNames[threadNum];
-            let functions = Object.keys(measurements[threadName]);
+            let threadID = threadNames[threadNum];
+            let functions = Object.keys(measurements[threadID]);
             for (let functionNum = 0; functionNum < functions.length; functionNum++) {
                 baseline ++;
                 let functionName = functions[functionNum];
-                let data = measurements[threadName][functionName].data;
-                let color = measurements[threadName][functionName].color;
+                let data = measurements[threadID][functionName].data;
+                let color = measurements[threadID][functionName].color;
                 let positionY = baseline * stepHeight;
                 let height = stepHeight;
+
                 for (let dataNum = 0; dataNum < data.length; dataNum++) {
                     let positionX = offsetLeft + (data[dataNum][0] - firstStep) * scaleX * stepLength;
                     let width = data[dataNum][1] * scaleX * stepLength;
-                    if (positionX > canvas.width || positionX + width < offsetLeft) continue;
+                    if (positionX > canvas.width || (positionX + width) < 0) continue;
                     ctx.fillStyle = color;
                     ctx.fillRect(positionX, positionY, width, -height);
-                    if (width < 10) continue;
+                    if (width < minumumLineWidth) continue;
                     ctx.fillStyle = "black";
                     ctx.save();
                     ctx.translate(positionX + width / 2, baseline * stepHeight)
@@ -106,60 +133,84 @@ function main() {
                     ctx.fillText(functionName, 0, 0);
                     ctx.restore();
                 }
+                if (!expandThread) baseline --;
             }
+            if (!expandThread) baseline ++;
+            baseline += baselineOffset / 2;
             ctx.fillStyle = "black";
-            ctx.fillText(threadName, 10, baseline * stepHeight);
-            baseline += baselineOffset;
+            ctx.fillText(threadID, 10, baseline * stepHeight - 10);
+            ctx.moveTo(0, baseline * stepHeight);
+            ctx.lineTo(canvas.width, baseline * stepHeight)
+            ctx.stroke();
+            baseline += baselineOffset / 2;
         }
     }
 
-
-
     let parseText = (text) => {
         measurements = {};
-        divLegend.innerHTML = "";
+        legendTable.innerHTML = "<tr>" +
+            "<td>Thread ID</td>" +
+            "<td>Function name</td>" +
+            "<td>Number of calls</td>" +
+            "<td>Average execution time</td>" +
+            "<td>Total execution time</td>" +
+            "</tr>"
         let lines = text.split("\n");
         let threadID, functionName, startTimepoint, elapsedTime;
         maxNumOfFunctions = 0;
         for (let i = 0; i < lines.length; i++) {
+            if (lines[i].split(":").length != 4) continue; // rough check if the line format is correct
+
             [threadID, functionName, startTimepoint, elapsedTime] = lines[i].split(":");
+
             if (measurements[threadID] == undefined) { // first time you see this thread?
                 measurements[threadID] = {};
             }
             if (measurements[threadID][functionName] == undefined) { // first time you see this function?
                 maxNumOfFunctions ++;
                 let color = getRandomColor()
-                addLabelToLegend(functionName, color);
                 measurements[threadID][functionName] = {
                     data: [],
-                    color: color
+                    color: color,
+                    totalExecutionTime: 0,
+                    numOfCalls: 0
                 };
             }
             measurements[threadID][functionName].data.push([parseInt(startTimepoint), parseInt(elapsedTime)]);
+            measurements[threadID][functionName].totalExecutionTime += parseInt(elapsedTime);
+            measurements[threadID][functionName].numOfCalls++;
         }
         let lastStart = parseInt(startTimepoint);
         let lastDuration = parseInt(elapsedTime);
         let totalDuration = lastStart + lastDuration;
-        scaleX = (window.innerWidth - offsetLeft) / totalDuration;
+        scaleX = (window.innerWidth - offsetLeft - offsetRight) / totalDuration;
         maxStep = lastStart;
         firstStep = Math.min(maxStep, firstStep); // adjust if current first step exceeds the max step admissible
+        addLabelToLegend();
     }
 
 
-    let read = (file, reader) => new Promise((resolve, reject) => {
-        reader.onload = () => {
-            reader.onload = reader.onerror = null;
-            resolve(reader.result);
-        }
-        reader.onerror = reject;
-        reader.readAsText(file);
-    })
+    let readFile = async (filePath)  => {
+        let xhttp = new XMLHttpRequest();
+		return new Promise((resolve) => {
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState != 4) return;
+				if (xhttp.status >= 200 && xhttp.status < 300) {
+					let text = xhttp.response;
+					resolve(text);
+				}
+			};
+			xhttp.open("GET", filePath, true);
+			xhttp.responseType = "text";
+			xhttp.send();
+		});
+    }
 
     let updateData = async () => {
-        let result = await read(files[select.selectedIndex], reader);
+        let result = await readFile("./assets/" + files[select.selectedIndex].name);
+
         parseText(result);
     }
-
 
     input.onchange = async () => {
         select.innerHTML = "";
@@ -202,7 +253,7 @@ function main() {
 
     canvas.onmousewheel = function (e) {
         let magnification = (Math.atan(e.deltaY / 1000) + Math.PI / 2) / Math.PI * 2;
-        stepLength = Math.max(stepLength * magnification, 0.001);
+        stepLength = Math.max(stepLength * magnification, 0.01);
         refreshCanvas();
     }
 
@@ -228,6 +279,11 @@ function main() {
             refreshCanvas();
         }
         canvas.style.cursor = "grab";
+    }
+
+    expandCollapseButton.onclick = () => {
+        expandThread = !expandThread;
+        refreshCanvas();
     }
 
     canvas.onmouseup = function (evt) {

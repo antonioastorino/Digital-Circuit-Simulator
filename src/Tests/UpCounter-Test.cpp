@@ -39,8 +39,8 @@ void upCounterTest() {
 	inArray[9]->makeSignal(transitions{1,1, 1, 1}, 0, true);
 	inArray[10]->makeSignal(transitions{1,1, 1, 1}, 0, true);
 	inArray[11]->makeSignal(transitions{1,1, 1, 1}, 0, true);
-	inArray[12]->makeSignal(transitions{1,1, 1, 1}, 0, true);
+	
 
-	DCSEngine::run(300 * hp * 2, true);
+	DCSEngine::run(100 * hp * 2, true);
 }
 

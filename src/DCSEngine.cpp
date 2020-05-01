@@ -4,6 +4,7 @@
 #include "DCSLog.hpp"
 #include "DCSWire.hpp"
 #include "DCSTimer.hpp"
+#include <thread>
 
 std::vector<DCSComponent*> DCSEngine::componentVector  = {};
 std::vector<DCSComponent*> DCSEngine::inputVector      = {};
@@ -29,27 +30,38 @@ void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
 void DCSEngine::run(uint64_t steps, bool sampling) {
+    
     DCSTimer::initialize();
+
     DCSEngine::sampling   = sampling;
     DCSEngine::stepNumber = 0;
+
     // Check if all components are connected
     checkConnections();
+
     // Put the circuit in a plausible initial state
     {
         PROFILE_WITH_CUSTOM_NAME("initCircuit");
         initCircuit();
     }
-    // Print the initial state -- step -1
-    printLogicLevels();
+    std::thread t1;
+
     // Check that all the components are initialized
-    checkInitialization();
+    t1 = std::thread(checkInitialization);
+    printLogicLevels();
+    // Print the initial state -- step -1
+    t1.join();
 
     for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
         updateInputs();
         updateComponents();
-        propagateValues();
-#if LOG_LEVEL > 0
+
+        t1 = std::thread(propagateValues);
+
         printLogicLevels();
+
+#if LOG_LEVEL > 0
+        t1.join();
 #endif
     }
 }
@@ -135,6 +147,7 @@ void DCSEngine::propagateValues() {
 }
 
 void DCSEngine::printLogicLevels() {
+    PROFILE();
     if (!sampling || DCSEngine::stepNumber % (clockPeriod / 2) == 1) {
         for (auto wire : wireVector) {
             if (wire->getProbeName().length() > 0) {
