@@ -3,6 +3,7 @@
 #include "DCSInput.hpp"
 #include "DCSLog.hpp"
 #include "DCSWire.hpp"
+#include "DCSTimer.hpp"
 
 std::vector<DCSComponent*> DCSEngine::componentVector  = {};
 std::vector<DCSComponent*> DCSEngine::inputVector      = {};
@@ -28,12 +29,16 @@ void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
 void DCSEngine::run(uint64_t steps, bool sampling) {
+    DCSTimer::initialize();
     DCSEngine::sampling   = sampling;
     DCSEngine::stepNumber = 0;
     // Check if all components are connected
     checkConnections();
     // Put the circuit in a plausible initial state
-    initCircuit();
+    {
+        PROFILE_WITH_CUSTOM_NAME("initCircuit");
+        initCircuit();
+    }
     // Print the initial state -- step -1
     printLogicLevels();
     // Check that all the components are initialized
@@ -50,6 +55,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
 }
 
 void DCSEngine::checkConnections() {
+    PROFILE();
     for (auto component : componentVector) {
         if (!(component->isFullyConnected())) {
             DCSLog::error(component->getName(), 1);
@@ -96,6 +102,7 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
 }
 
 void DCSEngine::checkInitialization() {
+    PROFILE();
     for (auto component : DCSEngine::componentVector) {
         if (!(component->initialized)) {
             DCSLog::debug(component->getName(), "I'm not initialized");
@@ -104,11 +111,13 @@ void DCSEngine::checkInitialization() {
 }
 
 void DCSEngine::updateInputs() {
+    PROFILE();
     for (auto input : inputVector)
         input->updateOut();
 }
 
 void DCSEngine::updateComponents() {
+    PROFILE();
     for (auto component : DCSEngine::componentVector) {
         if (!component->isNode)
             component->updateOut();
@@ -117,6 +126,7 @@ void DCSEngine::updateComponents() {
 }
 
 void DCSEngine::propagateValues() {
+    PROFILE();
     // assing the output value of a given pin to the connected input pin
     for (auto wire : wireVector) {
         if (!wire->fromNode()) // Nodes propagate themselves when updated
@@ -144,9 +154,12 @@ void DCSEngine::printLogicLevels() {
     }
 }
 
-int DCSEngine::getClockPeriod() { return clockPeriod; };
-int DCSEngine::getStepNumber() { return stepNumber; }
-void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
+int DCSEngine::getClockPeriod() {
+        return clockPeriod; };
+int DCSEngine::getStepNumber() {
+        return stepNumber; }
+void DCSEngine::setSampling(bool sampling) {
+        DCSEngine::sampling = sampling; }
 void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
     clockPeriod = 2 * numberOfTimeSteps;
 };

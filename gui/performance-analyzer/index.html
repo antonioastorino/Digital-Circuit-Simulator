@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 5;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 style="text-align: center;">Performance analyzer</h1>
+	<h2 style="text-align: center;" id="test-title">no profile loaded</h2>
+	<div style="width: 70%; float: left;">
+		<input type="range" min="14" max="100" value="50" id="v-zoom" style="width: 80%;">
+		<label>V-zoom</label>
+		<div id="div-legend">
+		</div>
+
+	</div>
+	<div style="width: 30%; float: right;">
+		<input type="file" id="" name="" multiple>
+		<br><br>
+		<select id="select-file"></select>
+		<br><br>
+		<input type="button" value="Refresh" id="refresh"><br><br><br>
+	</div>
+	<div id="div-canvas" style=" float: right; width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
+		<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	</div>
+	<div>
+		<p id="p-error"></p>
+	</div>
+	<script src="./js/main.js" type="module"></script>
+</body>
+
+</html>
