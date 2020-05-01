@@ -4,37 +4,42 @@ function main() {
     console.log("Welcome back!")
     let canvas = document.getElementById("canvas");
     const marginTop = 350; // canvas distance from window top
-    const offsetLeft = 80;
     const offsetRight = 40
     const baselineOffset = 0.3;
-    var stepLength = 1;
     var stepHeight = 50;
-    var firstStep = 0;
-    var maxStep = 0;
+    var translateX = 0;
+    var maxTranslateX = 0;
     var measurements = {}
     let scaleX;
+    let normalizationFactor;
     let expandThread = false;
     let maxNumOfFunctions = 0;
     let minumumLineWidth = 4;
 
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
+    const testTitle = document.getElementById("test-title");
     const select = document.getElementById("select-file");
     const sliderVZoom = document.getElementById("v-zoom");
     const divCanvas = document.getElementById("div-canvas");
     const legendTable = document.getElementById("table-legend");
     const expandCollapseButton = document.getElementById("expand-collapse-button");
 
+    let ctx = canvas.getContext("2d");
+    ctx.font = "14px Arial";
+    let canvasHeight = window.innerHeight - marginTop;
+    resizeCanvas();
+    refreshCanvas();
+
     let addLabelToLegend = () => {
         let threadNames = Object.keys(measurements);
         let numOfThreads = threadNames.length;
-
+        testTitle.innerHTML = files[select.selectedIndex].name;
         for (let threadNum = 0; threadNum < numOfThreads; threadNum++) {
             let threadID = threadNames[threadNum];
             let functions = Object.keys(measurements[threadID]);
             for (let functionNum = 0; functionNum < functions.length; functionNum++) {
                 let functionName = functions[functionNum];
-                let data = measurements[threadID][functionName].data;
                 let color = measurements[threadID][functionName].color;
                 let numOfCalls = measurements[threadID][functionName].numOfCalls;
                 let totalExecutionTime = measurements[threadID][functionName].totalExecutionTime;
@@ -52,15 +57,14 @@ function main() {
                 labelCell.innerHTML = functionName;
                 numOfCallsCell.innerHTML = numOfCalls;
                 averageExecutionTimeCell.innerHTML = averageExecutionTime  + " ns";
-                totalExecutionTimeCell.innerHTML = totalExecutionTime + " ns";
+                if (totalExecutionTime > 1000000) totalExecutionTime = Math.round(totalExecutionTime / 1000);
+                totalExecutionTimeCell.innerHTML = totalExecutionTime + " us";
             }
         }
     }
 
-    let ctx = canvas.getContext("2d");
-    ctx.font = "14px Arial";
 
-    let refreshCanvas = () => {
+    function refreshCanvas () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (Object.keys(measurements).length == 0) return;
         resizeCanvas();
@@ -78,9 +82,6 @@ function main() {
         refreshCanvas();
     }
 
-    let canvasHeight = window.innerHeight - marginTop;
-    resizeCanvas();
-    refreshCanvas();
 
     let dummyOption = new Option("no file loaded", 1);
     select.appendChild(dummyOption);
@@ -120,8 +121,8 @@ function main() {
                 let height = stepHeight;
 
                 for (let dataNum = 0; dataNum < data.length; dataNum++) {
-                    let positionX = offsetLeft + (data[dataNum][0] - firstStep) * scaleX * stepLength;
-                    let width = data[dataNum][1] * scaleX * stepLength;
+                    let positionX = (data[dataNum][0] * normalizationFactor - translateX - canvas.width / 2) * scaleX + canvas.width/2;
+                    let width = data[dataNum][1] * normalizationFactor * scaleX;
                     if (positionX > canvas.width || (positionX + width) < 0) continue;
                     ctx.fillStyle = color;
                     ctx.fillRect(positionX, positionY, width, -height);
@@ -183,9 +184,10 @@ function main() {
         let lastStart = parseInt(startTimepoint);
         let lastDuration = parseInt(elapsedTime);
         let totalDuration = lastStart + lastDuration;
-        scaleX = (window.innerWidth - offsetLeft - offsetRight) / totalDuration;
-        maxStep = lastStart;
-        firstStep = Math.min(maxStep, firstStep); // adjust if current first step exceeds the max step admissible
+        scaleX = 1;
+        normalizationFactor = (window.innerWidth - offsetRight) / totalDuration;
+        maxTranslateX = lastStart * normalizationFactor;
+        translateX =0;
         addLabelToLegend();
     }
 
@@ -208,7 +210,6 @@ function main() {
 
     let updateData = async () => {
         let result = await readFile("./assets/" + files[select.selectedIndex].name);
-
         parseText(result);
     }
 
@@ -225,8 +226,9 @@ function main() {
         }
         if (files.length == 0) {
             select.appendChild(dummyOption);
+            testTitle.innerHTML = "no file loaded";
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            firstStep = 0;
+            translateX = 0;
             console.log("no profile loaded");
         }
         else {
@@ -253,7 +255,8 @@ function main() {
 
     canvas.onmousewheel = function (e) {
         let magnification = (Math.atan(e.deltaY / 1000) + Math.PI / 2) / Math.PI * 2;
-        stepLength = Math.max(stepLength * magnification, 0.01);
+        scaleX = Math.max(scaleX * magnification, 0.01);
+        maxTranslateX /= scaleX;
         refreshCanvas();
     }
 
@@ -272,9 +275,9 @@ function main() {
         if (drag == true) {
             var pos_x = evt.clientX;
             var dx = last_x - pos_x;
-            firstStep += dx / scaleX / stepLength;
-            firstStep = Math.min(firstStep, maxStep);
-            firstStep = Math.max(firstStep, - (canvas.width - 10));
+            translateX += dx / scaleX;
+            // translateX = Math.min(canvas.width - 10, scaleX * translateX);
+            // translateX = Math.max(translateX * scaleX, - canvas.width + 10);
             last_x = pos_x;
             refreshCanvas();
         }
