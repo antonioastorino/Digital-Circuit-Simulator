@@ -1,6 +1,9 @@
-[ ] make Component->initialized private
+[X] make V-zoom longer
+[X] make Component->initialized private
 [ ] check if it is necessary to know who has updated a component whose input is connected to a tristate component
-[ ] change this:
+[X] nothing loaded does not erase the loaded file list
+[X] change `</h1>` into `</h2>` in logic analyzer
+[X] change this:
 
 ```
 std::string message;
@@ -11,4 +14,25 @@ std::string message;
  DCSLog::output(wire->getProbeName(), message);
 ```
 [ ] Add MODE to Makefile for release
-[ ] Fix makefile that generates `.out-` file
+[X] Fix makefile that generates `.out-` file
+[X] Retrieve thread ID using
+
+```
+uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+```
+
+
+measurements = {
+    thread1 = {
+        function1: []
+        function2:
+        ...
+    }
+    thread2 = {
+        function1
+        function2
+        ...
+    }
+    ...
+}
+

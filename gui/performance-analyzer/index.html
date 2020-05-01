@@ -16,15 +16,18 @@
 <body>
 	<h1 style="text-align: center;">Performance analyzer</h1>
 	<h2 style="text-align: center;" id="test-title">no profile loaded</h2>
+	<div>
+		<input type="range" min="1" max="200" value="100" id="v-zoom" style="width: 90%;">
+		<label>V-zoom</label><br><br>
+	</div>
+
 	<div style="width: 70%; float: left;">
-		<input type="range" min="14" max="100" value="50" id="v-zoom" style="width: 80%;">
-		<label>V-zoom</label>
 		<table id="table-legend" style="margin: 5px;">
 		</table>
 
 	</div>
 	<div style="width: 30%; float: right;">
-		<input type="file" multiple onclick="this.value-null">
+		<input type="file" multiple>
 		<br><br>
 		<select id="select-file"></select>
 		<br><br>

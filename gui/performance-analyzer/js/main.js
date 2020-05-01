@@ -6,7 +6,7 @@ function main() {
     const marginTop = 350; // canvas distance from window top
     const offsetRight = 40
     const baselineOffset = 0.3;
-    var stepHeight = 50;
+    var stepHeight = 1;
     var translateX = 0;
     var maxTranslateX = 0;
     var measurements = {}
@@ -28,6 +28,7 @@ function main() {
     let ctx = canvas.getContext("2d");
     ctx.font = "14px Arial";
     let canvasHeight = window.innerHeight - marginTop;
+    stepHeight = parseInt(sliderVZoom.value);
     resizeCanvas();
     refreshCanvas();
 
@@ -56,9 +57,12 @@ function main() {
                 threadIDCell.innerHTML = threadID;
                 labelCell.innerHTML = functionName;
                 numOfCallsCell.innerHTML = numOfCalls;
-                averageExecutionTimeCell.innerHTML = averageExecutionTime  + " ns";
-                if (totalExecutionTime > 1000000) totalExecutionTime = Math.round(totalExecutionTime / 1000);
-                totalExecutionTimeCell.innerHTML = totalExecutionTime + " us";
+                averageExecutionTimeCell.innerHTML = averageExecutionTime + " ns";
+                if (totalExecutionTime > 100000) {
+                    totalExecutionTimeCell.innerHTML = Math.round(totalExecutionTime / 1000) + " us";
+                } else {
+                    totalExecutionTimeCell.innerHTML = totalExecutionTime + " ns";
+                }
             }
         }
     }
