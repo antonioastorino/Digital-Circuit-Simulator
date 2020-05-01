@@ -2,7 +2,7 @@
 
 DCSTriStateBuffer::DCSTriStateBuffer(std::string name) :
 DCSComponent(name) {
-	isTristate = true;
+	tristate = true;
 	enabled = false; // disabled by default
 	
 	timeDelay = 1;

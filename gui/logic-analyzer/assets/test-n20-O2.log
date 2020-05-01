@@ -1,0 +1,20 @@
+------------
+Display test
+------------
+ Display:0b00000000   0d STEP:-1
+ Display:0b00000000   0d STEP:0
+ Display:0b00000000   0d STEP:1
+ Display:0b00000001   1d STEP:2
+ Display:0b00000010   2d STEP:3
+ Display:0b00000111   7d STEP:4
+ Display:0b00001100  12d STEP:5
+ Display:0b00011101  29d STEP:6
+ Display:0b00111010  58d STEP:7
+ Display:0b01111011 123d STEP:8
+ Display:0b11110000 240d STEP:9
+ Display:0b11110101 245d STEP:10
+ Display:0b11100110 230d STEP:11
+ Display:0b11100111 231d STEP:12
+ Display:0b11001000 200d STEP:13
+ Display:0b11001001 201d STEP:14
+ Display:0b10001010 138d STEP:15

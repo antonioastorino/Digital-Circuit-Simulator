@@ -12,7 +12,7 @@ DCSWire::DCSWire(DCSComponent* from, DCSComponent* to, uint16_t inPinNum, std::s
 
 std::string DCSWire::getProbeName() { return probeName; };
 
-bool DCSWire::fromNode() { return from->isNode; }
+bool DCSWire::fromNode() { return from->isNode(); }
 
 bool DCSWire::propagateValue() {
     bool propagated = true;

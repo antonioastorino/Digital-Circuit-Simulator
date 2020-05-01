@@ -99,9 +99,9 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     // Array of components from which to propagate at the next iteration
     std::vector<DCSComponent*> newComponentVector = {};
     for (auto component : cVec) {
-        if (component->isNode || (!(component->initialized) && component->isEnabled())) {
+        if (component->isNode() || (!(component->isInitialized()) && component->isEnabled())) {
             component->updateOut();
-            if (component->isNode) {
+            if (component->isNode()) {
                 newComponentVector = component->rightComponentVector;
                 initCircuit(newComponentVector);
             } else if (component->propagateValues()) {
@@ -116,7 +116,7 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
 void DCSEngine::checkInitialization() {
     PROFILE();
     for (auto component : DCSEngine::componentVector) {
-        if (!(component->initialized)) {
+        if (!(component->isInitialized())) {
             DCSLog::debug(component->getName(), "I'm not initialized");
         }
     }
@@ -131,7 +131,7 @@ void DCSEngine::updateInputs() {
 void DCSEngine::updateComponents() {
     PROFILE();
     for (auto component : DCSEngine::componentVector) {
-        if (!component->isNode)
+        if (!component->isNode())
             component->updateOut();
         component->resetUpdatedByVector();
     }

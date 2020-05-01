@@ -2,7 +2,7 @@
 #include "DCSEngine.hpp"
 #include "DCSWire.hpp"
 
-DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool isNode)
+DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool node)
     : in(0),
       out(0),
       name({name}),
@@ -13,8 +13,8 @@ DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool isNo
       timeDelay(-1),
       numOfInPins(-1),
       numOfOutPins(-1),
-      isNode(isNode),
-      isTristate(false),
+      node(node),
+      tristate(false),
       initialized(false) {
     if (name == "")
         DCSLog::error("Component", 13); // I don't have a name
@@ -50,7 +50,7 @@ void DCSComponent::connect(DCSComponent* const to, uint16_t outPinNum, uint16_t 
     DCSComponent* leftComponent  = getOutComponent(outPinNum);
     DCSComponent* rightComponent = to->getInComponent(inPinNum);
 
-    if (leftComponent->isTristate) {
+    if (leftComponent->isTristate()) {
         rightComponent->setFromTristateIn(inPinNum);
     } else {
         rightComponent->setConnectedIn(inPinNum);
@@ -147,7 +147,11 @@ void DCSComponent::resetUpdatedByVector() {
 bool DCSComponent::isReachableAtIn(uint16_t inPinNum) { return reachableIn & (1 << inPinNum); }
 void DCSComponent::enable() { DCSLog::error(this->name, 5); }
 void DCSComponent::disable() { DCSLog::error(this->name, 5); }
-bool DCSComponent::isEnabled() { return enabled; }
+bool DCSComponent::isEnabled() { return this->enabled; }
+bool DCSComponent::isInitialized() { return this->initialized; }
+bool DCSComponent::isNode() { return node; }
+bool DCSComponent::isTristate() { return tristate; }
+
 bool DCSComponent::isFullyConnected() {
     return (this->connectedIn ^ this->fromTristateIn) == this->getAllReachedQWord();
 }

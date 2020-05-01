@@ -78,11 +78,11 @@ protected:
 
     std::vector<DCSWire*> wireVector = {};
 
-public:
-    bool isNode;     // true for DCSNode child only
-    bool isTristate; // true for DCSTristate child only
     bool initialized;
+    bool node;     // true for DCSNode child only
+    bool tristate; // true for DCSTristate child only
 
+public:
     std::vector<DCSComponent*>
         updatedByVector; // stores the component who updated a given pin each clock cycle
     std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
@@ -112,6 +112,9 @@ public:
     bool getOutput();        // single-bit output value
     bool isInConnected(uint16_t inPinNum);
     bool isFromTristateIn(uint16_t inPinNum);
+    bool isInitialized();
+    bool isNode();
+    bool isTristate();
 
     void setConnectedIn(uint16_t inPinNum);
     void setFromTristateIn(uint16_t inPinNum);
