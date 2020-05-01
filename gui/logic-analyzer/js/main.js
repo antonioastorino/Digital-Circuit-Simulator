@@ -130,7 +130,7 @@ function main() {
                     if (signals[kv[0] + i] == undefined) {
                         signals[kv[0] + i] = [];
                     }
-                    signals[kv[0] + i].push(parseInt(bits[i]));
+                    signals[kv[0] + i].push(parseInt(bits[bits.length - i - 1]));
                 }
             }
             else {
