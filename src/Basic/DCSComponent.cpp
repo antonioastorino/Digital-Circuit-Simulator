@@ -76,8 +76,9 @@ void DCSComponent::connect(DCSComponent* const to, DCSPinNumRange outPinNumRange
                            const std::vector<std::string>& probeNames) {
     uint16_t numOfInPins  = inPinNumRange.endPinNum - inPinNumRange.startPinNum + 1;
     uint16_t numOfOutPins = outPinNumRange.endPinNum - outPinNumRange.startPinNum + 1;
-    if (numOfInPins != numOfOutPins)
+    if (numOfInPins != numOfOutPins) {
         DCSLog::error(name, 9);
+    }
     if (probeNames.size() == 0) {
         for (uint16_t i = 0; i < numOfInPins; i++) {
             this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i);

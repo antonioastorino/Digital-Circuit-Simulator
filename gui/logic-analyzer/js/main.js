@@ -177,17 +177,24 @@ function main() {
     }
 
 
-    let read = (file, reader) => new Promise((resolve, reject) => {
-        reader.onload = () => {
-            reader.onload = reader.onerror = null;
-            resolve(reader.result);
-        }
-        reader.onerror = reject;
-        reader.readAsText(file);
-    })
+    let readFile = async (filePath)  => {
+        let xhttp = new XMLHttpRequest();
+		return new Promise((resolve) => {
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState != 4) return;
+				if (xhttp.status >= 200 && xhttp.status < 300) {
+					let text = xhttp.response;
+					resolve(text);
+				}
+			};
+			xhttp.open("GET", filePath, true);
+			xhttp.responseType = "text";
+			xhttp.send();
+		});
+    }
 
     let updateData = async () => {
-        let result = await read(files[select.selectedIndex], reader);
+        let result = await readFile("./assets/" + files[select.selectedIndex].name);
         parseText(result);
         try {
             let signalLength = Object.values(signals)[0].length;
@@ -199,6 +206,7 @@ function main() {
             console.log("No signal loaded");
         }
     }
+
 
     input.onchange = async () => {
         select.innerHTML = "";

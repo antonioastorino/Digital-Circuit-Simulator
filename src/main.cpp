@@ -26,6 +26,7 @@ void ramProgrammerTest();
 void firstProgramTest();
 void ramTest();
 void demoTest();
+void upCounter4BitsTest();
 
 #include <iostream>
 #include "DCSTimer.hpp"
@@ -117,6 +118,9 @@ int main(int argc, const char* argv[]) {
         break;
     case (26):
         risingEdgeDetectorTest();
+        break;
+    case (27):
+        upCounter4BitsTest();
         break;
     default:
 		demoTest();
