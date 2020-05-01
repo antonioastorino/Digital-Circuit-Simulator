@@ -1,9 +1,7 @@
 #!/bin/bash
 curr_dir="`pwd`/`dirname $0`"
-pushd $curr_dir/../
-pwd
-make OPT="$2"
+cd $curr_dir/../
+make OPT="$2" 1>/dev/null
 if [ "$?" -eq "0" ]; then
 	[ "$1" == "" ] && build/out-0 "$1" || build/out-"$2" "$1"
 fi
-popd
