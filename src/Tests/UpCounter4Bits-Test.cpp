@@ -14,7 +14,7 @@ void upCounter4BitsTest() {
 	DCSDisplayNBits disp0("In", 4);
 	DCSDisplayNBits disp1("Count", 4);
 
-	inArray.connect(&count0, {0, 4}, {0, 4} /*, {"C_in", "LD", "CLK", "", ""}*/);
+	inArray.connect(&count0, {0, 4}, {0, 4}, {"C_in", "LD", "CLK", "", ""});
 	inArray.connect(&count0, {5, 8}, {5, 8});
 
 	count0.connect(&outArray,{0,3}, {0,3}, {"C"});

@@ -214,6 +214,7 @@ function main() {
     }
 
     input.onchange = async () => {
+        if (input.files.length == 0) return;
         select.innerHTML = "";
         files.length = 0;
         for (const file of input.files) {
@@ -224,17 +225,8 @@ function main() {
             files.push(file);
             select.appendChild(option);
         }
-        if (files.length == 0) {
-            select.appendChild(dummyOption);
-            testTitle.innerHTML = "no file loaded";
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            translateX = 0;
-            console.log("no profile loaded");
-        }
-        else {
-            await updateData();
-            refreshCanvas();
-        }
+        await updateData();
+        refreshCanvas();
     }
 
     select.onchange = async () => {
