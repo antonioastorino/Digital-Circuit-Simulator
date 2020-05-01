@@ -14,17 +14,28 @@ typedef std::vector<uint64_t> transitions;
  * Initialization 1
  * DCSInput I0("I0");
  * The signal can be attached afterwards using one of the following methods:
+ *
  * - assign a constant value
- * 		void makeSignal(bool constValue);
+ *
+ * ```
+ * void makeSignal(bool constValue);
+ *
+ * ```
  * - assign a signal that changes at given time intervals, defined in 'transitions'
+ * 
+ * ```
  * 		void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
- * 		For example, a signal that starts at 0 and changes after 3 clock cycles and then
+ * ```
+ * For example, a signal that starts at 0 and changes after 3 clock cycles and then
  * again after 2 clock cycles can be obtained as follows:
- * 		@example makeSignal({2, 3}, 0, true);
+ *
+ * ```
+ * makeSignal({2, 3}, 0, true);
+ * ```
  * - assign a signal expressed as a string of bits
  * 		void makeSignal(std::string signal, bool synch = false);
  * 		To generate the same signal as in the previous example, you can use
- * 		@example makeSignal("001110");
+ * 		```makeSignal("001110");```
  * - assign a square wave
  *      void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
  * Initialization 2

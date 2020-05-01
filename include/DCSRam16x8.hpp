@@ -13,17 +13,19 @@ class DCSAnd;
  * with the address decoder, compared to a single register, the RAM needs the address to be ready 3
  * taus before the Load of each address.
  *
- * The write sequence is
- *       |  ___
- * ADDR: | X___XXXXXXXX
- *       |  ^ start
- *       |   ____
- * WRITE:| XX    XXXXXX
- *       |     ___
- * DATA: | XXXX   XXXXX
- *       | ______  ____
- * CLK:  |       __
- *
+ * @diagram
+ *|       |  ___
+ *| ADDR: | X___XXXXXXXX
+ *|       |  ^ start
+ *|       |   ____
+ *| WRITE:| XX    XXXXXX
+ *|       |     ___
+ *| DATA: | XXXX   XXXXX
+ *|       | ______  ____
+ *| CLK:  |       __
+ *|       |         ^ start
+ * @end_diagram
+ * @pinout
  * Input 0: Output enable
  * Input 1: Clock
  * Input 2: Clear
@@ -42,6 +44,7 @@ class DCSAnd;
  * Out   0: Data out bit 0
  * Out   1: Data out bit 1
  * ...
+ * @end_pinout
  */
 class DCSRam16x8 : public DCSComponent {
 private:

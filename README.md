@@ -1,13 +1,9 @@
 # DCS
-Digital circuit simulator - from logic gates up
+## Digital circuit simulator - from logic gates up
 
 Inspired by the work of [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtXNTBypGqImE405J2565dvjafglHU) and not having the possibility to follow his work with hardware, I have decided to write a circuit simulator and build on top of it a processor. I am trying to take into account the time dependency of the system evolution. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, I define the unit delay `tau` as the maximum delay that any of the elementary logic gates (and, or, not, nand, nor, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which, can be seen as a free parameter whose value cannot be established a priori. Time itself is therefore discretized in steps of length `tau`.
 
 Examples of how to use the component library are located in `./scr/Tests` folder.
-
-## Add-ons
-
-### makeMakefile
 
 ## How to build (Mac and Linux)
 You are welcome to build the project the way you prefer. However, you can also use the tool provided here.
@@ -68,7 +64,21 @@ make OUT=name OPT=1 # ok
 make OUT=name OPT=0 # will override ./build/name-0 without recompiling the object files
 ```
 ##### Workaround: don't do that! (or run `make clean` first)
-## Documentation automatically generated on Wed Apr 29 21:39:49 CEST 2020
+
+## How to display the data
+A small web application can be found in the `./gui/` folder. At the time of writing, the interface looks as shown in the following figure
+<!--[![web-gui-image](https://github.com/antonioastorino/DCS/blob/master/gui/images/web-app-0.png)]-->
+![web-gui-image](images/web-gui-0.png)
+To load one or more file, open the `./gui/assets/` folder and select one or more files from there. Those files are generated when running the script `build-run-save.sh` or `clean-build-run-save.sh`, located in the `./bin/` folder. If you don't have any, you can find some samples in `./gui/assets/samples/`.
+
+The gui allows to
+
+- select the desired file from the dropdown menu
+- set the horizontal and vertical stretching factors
+- scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
+- scroll up-down by using the regular mouse wheel or trackpad
+- refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
+## Documentation automatically generated on Fri May  1 20:36:38 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -128,17 +138,28 @@ coming from this component first.
 Initialization 1
 DCSInput I0("I0");
 The signal can be attached afterwards using one of the following methods:
+
 - assign a constant value
+
+```
 void makeSignal(bool constValue);
+
+```
 - assign a signal that changes at given time intervals, defined in 'transitions'
+
+```
 void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
+```
 For example, a signal that starts at 0 and changes after 3 clock cycles and then
 again after 2 clock cycles can be obtained as follows:
-@example makeSignal({2, 3}, 0, true);
+
+```
+makeSignal({2, 3}, 0, true);
+```
 - assign a signal expressed as a string of bits
 void makeSignal(std::string signal, bool synch = false);
 To generate the same signal as in the previous example, you can use
-@example makeSignal("001110");
+```makeSignal("001110");```
 - assign a square wave
 void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
 Initialization 2
@@ -172,7 +193,7 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |      |   __
 | K:   | XX  XXXXXXXX
 |      |    __
-| CLK: | X__  \\\\\\  go down any time 2 tau after rising edge
+| CLK: | X__  \\\  go down any time 2 tau after rising edge
 |      |    ^ stored
 |      |        _____
 | Q:   | _______
@@ -181,6 +202,53 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |      |        ^ ready
 ```
 
+
+
+## Class DCSUpCounterWithLoadAndAsyncSR
+
+This component is an up-counter with syncrhonous load and asynchronous clear and reset.
+Internally, there are N clock dividers which share most of the control inputs,
+hence converging to nodes.
+Input 0 (Count in) of the counter is connected to the first divider only.
+Inputs 1 to 4 are connected to the node array with indices 0 to 3, respectively.
+The other N remaining inputs (Data 0 to N-1) are numbered from 5 to 5 + N.
+Each of them is connected to input 0 (Data) of the corresponding divider.
+The outputs from 0 to N-1 (Q) correspond to output 0 (array Q) of a divider.
+Output N (array Count out) corresponds to output 2 (Count out) of the last divider.
+
+#### Pinout
+```
+IN  0         - Count in (corresponding to input 5 in the internal divider)
+IN  1         - Load  - node arrray with index 0
+IN  2         - Clock - node arrray with index 1
+IN  3         - Clear - node arrray with index 2
+IN  4         - Preset - node arrray with index 3
+IN  5         - Bit 0
+IN  6         - Bit 1
+IN  ...
+IN  5 + N-1   - Bit N-1;
+OUT 0         - Bit 0
+OUT 1         - Bit 1
+...
+OUT N-1 - Bit N-1
+OUT N - Count out
+```
+
+#### Table
+
+| LD | C_IN | CLK | Function
+|----|:-----|:----|:--------
+|  0 |   0  |  X  |  Pause
+|  0 |   1  |  X  |  Count
+|  1 |   X  |  X  |  Load
+
+
+Input 0 (Cout in) follows the rule of input 5 of the first divider. Therefore, it hast to be set
+from 3 to 1 tau before the clock rising edge. However, every Count in in the subsequent dividers
+is delayed by 1 tau. In addition, the output byte of the counter is ready 5 tau after the clock
+rising edge. As a consequence, supposing that the expected output is all 1's, the last Count in
+will be ready 5+N-1 tau after the clock rising edge and, as usual, has to be ready 3 tau before
+the next clock rising edge. Therefore, the clock period has to be at least 5+N-1+3 = 7+N tau.
 
 
 ## Class DCSDLatchAsyncSR
@@ -205,17 +273,22 @@ clock. Since the Load signal of each individual register (here called Write - in
 with the address decoder, compared to a single register, the RAM needs the address to be ready 3
 taus before the Load of each address.
 
-The write sequence is
-|  ___
-ADDR: | X___XXXXXXXX
-|  ^ start
-|   ____
-WRITE:| XX    XXXXXX
-|     ___
-DATA: | XXXX   XXXXX
-| ______  ____
-CLK:  |       __
+#### Time diagram
+```
+|       |  ___
+| ADDR: | X___XXXXXXXX
+|       |  ^ start
+|       |   ____
+| WRITE:| XX    XXXXXX
+|       |     ___
+| DATA: | XXXX   XXXXX
+|       | ______  ____
+| CLK:  |       __
+|       |         ^ start
+```
 
+#### Pinout
+```
 Input 0: Output enable
 Input 1: Clock
 Input 2: Clear
@@ -234,6 +307,8 @@ Input 16: Address bit 3
 Out   0: Data out bit 0
 Out   1: Data out bit 1
 ...
+```
+
 
 
 ## Class DCSComponentArray
@@ -263,7 +338,7 @@ has to be taken into account when choosing the clock speed.
 Implements the NAND gate
 
 
-## Class DCSDFlipFlop_hpp
+## Class DCSDFlipFlop
 
 
 Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
@@ -334,7 +409,46 @@ Out   0: Data out
 
 ## Class DCSComponent
 
-Base virtual class for every logic component.
+Base virtual class for every logic component which provides components with the necessary
+functionalities, e.g:
+
+- connect with other components using `DCSWire` objects
+- update the output based on the current state (values read at the input)
+- keep track of which pins are not connected
+- keep track of which pins are not reached during the initialization process
+
+#### How to connect two components
+Supposing we have two components, `compA` and `compB`, and we want to connect the output of the
+first to the second. If `compA.getNumOfOutPins()` returns the same value as
+`compB.getNumOfInPins()`, say `N`, the easiest way to perform the connection is by using the method
+
+```
+void connect(DCSComponent* const to, const std::vector<std::string>& probeNames = {});
+```
+as follows
+
+```
+compA.connect(&compB);
+```
+or
+
+```
+compA.connect(&compB, {"<probe_name1>", "<probe_name2>", ..., "<probe_nameN>"});
+```
+NOTE: Specifying the lables entails the probes to be prompted at run time.
+
+This will connect the output pins of `compA` to the corresponding (same pin number) input pins of
+`compB`. If this is not the desired order or the pin numbers do not match it is possible to connect one pin at a time using
+
+```
+void connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum, const std::string& probeName = "");
+```
+
+In addition, one can select a range of output pins to connect to a range of input pins using
+
+```
+void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange inPinNumRange, const std::vector<std::string>& probeNames = {});
+```
 
 
 ## Class DCSNot

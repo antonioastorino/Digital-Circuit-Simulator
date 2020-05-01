@@ -1,5 +1,10 @@
+#ifndef DCSDFlipFlop_hpp
+#define DCSDFlipFlop_hpp
+#include "DCSDLatch.hpp"
+class DCSNode;
+
 /**
- * @class DCSDFlipFlop_hpp
+ * @class DCSDFlipFlop
  * 
  * Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
  * Input 1 and 0 must be stable at least 2 tau.
@@ -18,12 +23,6 @@
  *|       |      ^ ready
  * @end_diagram
  */
-
-#ifndef DCSDFlipFlop_hpp
-#define DCSDFlipFlop_hpp
-#include "DCSDLatch.hpp"
-class DCSNode;
-
 class DCSDFlipFlop : public DCSComponent {
 private:
     DCSNode node0;

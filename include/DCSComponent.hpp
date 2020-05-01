@@ -15,7 +15,50 @@ struct DCSPinNumRange {
 
 /**
  * @class DCSComponent
- * Base virtual class for every logic component.
+ * Base virtual class for every logic component which provides components with the necessary
+ * functionalities, e.g:
+ *
+ * - connect with other components using `DCSWire` objects
+ * - update the output based on the current state (values read at the input)
+ * - keep track of which pins are not connected
+ * - keep track of which pins are not reached during the initialization process
+ *
+ * #### How to connect two components
+ * Supposing we have two components, `compA` and `compB`, and we want to connect the output of the
+ * first to the second. If `compA.getNumOfOutPins()` returns the same value as
+ * `compB.getNumOfInPins()`, say `N`, the easiest way to perform the connection is by using the
+ * method
+ *
+ * ```
+ * void connect(DCSComponent* const to, const std::vector<std::string>& probeNames = {});
+ * ```
+ * as follows
+ *
+ * ```
+ * compA.connect(&compB);
+ * ```
+ * or
+ *
+ * ```
+ * compA.connect(&compB, {"<probe_name1>", "<probe_name2>", ..., "<probe_nameN>"});
+ * ```
+ * NOTE: Specifying the lables entails the probes to be prompted at run time.
+ *
+ * This will connect the output pins of `compA` to the corresponding (same pin number) input pins of
+ * `compB`. If this is not the desired order or the pin numbers do not match it is possible to
+ * connect one pin at a time using
+ *
+ * ```
+ * void connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum, const std::string&
+ * probeName = "");
+ * ```
+ *
+ * In addition, one can select a range of output pins to connect to a range of input pins using
+ *
+ * ```
+ *  void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange
+ * inPinNumRange, const std::vector<std::string>& probeNames = {});
+ * ```
  */
 class DCSComponent {
 private:
@@ -46,7 +89,7 @@ public:
 
 protected:
     virtual ~DCSComponent();
-    DCSComponent(const std::string& name, bool shouldUpdate = true, bool isNode=false);
+    DCSComponent(const std::string& name, bool shouldUpdate = true, bool isNode = false);
 
 public:
     void resetUpdatedByVector();
