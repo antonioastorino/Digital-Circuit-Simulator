@@ -82,13 +82,15 @@ template <class T> DCSComponent* DCSComponentArray<T>::getInComponent(uint16_t& 
     return componentArray[oldPin / numOfInPins]->getInComponent(inPinNum);
 }
 
-template <class T> void DCSComponentArray<T>::updateOut() {
-    DCSLog::error(name, 0);
-}
+template <class T> void DCSComponentArray<T>::updateOut() { DCSLog::error(name, 0); }
 
 template <class T> T* DCSComponentArray<T>::operator[](uint16_t elemNum) {
     return componentArray[elemNum];
 }
+
+template <class T> uint16_t DCSComponentArray<T>::getNumOfElements() {
+    return this->numOfElements;
+};
 
 template class DCSComponentArray<DCSInput>;
 template class DCSComponentArray<DCSOutput>;

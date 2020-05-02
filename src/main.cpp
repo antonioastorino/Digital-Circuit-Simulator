@@ -48,7 +48,6 @@ int main() {
 	dividerTest();
 	upCounterTest();
 	register8BitsTest();
-	countAndStoreTest();
 	mux2To1Test();
 	fullAdderTest();
 	bitStreamSignalTest();
@@ -57,7 +56,8 @@ int main() {
 	ramTest();
 	firstProgramTest();
 	//*/
-	ramProgrammerTest();
-	demoTest();
+	countAndStoreTest();
+	// ramProgrammerTest();
+	// demoTest();
 	return 0;
 }

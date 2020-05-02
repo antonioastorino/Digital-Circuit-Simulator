@@ -24,6 +24,7 @@ public:
 
     void updateOut() override;
     T* operator[](uint16_t elemNum);
+    uint16_t getNumOfElements();
 };
 
 #endif /* DCSComponentArray_hpp */

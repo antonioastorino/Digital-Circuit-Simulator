@@ -24,7 +24,7 @@ void dividerTest() {
 	
 	inArray[0]->makeSignal(transitions{28,3,1});
 	inArray[1]->makeSignal(transitions{13,2,13,3,1});
-	inArray[2]->makeSquareWave();
+	inArray[2]->makeSquareWave(1);
 	inArray[3]->makeSignal(0);
 	inArray[4]->makeSignal(0);
 	inArray[5]->makeSignal(transitions{55,1});

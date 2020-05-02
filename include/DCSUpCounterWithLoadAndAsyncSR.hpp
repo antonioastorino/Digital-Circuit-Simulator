@@ -14,7 +14,7 @@
  IN  1 - Load  - node arrray with index 0
  IN  2 - Clock - node arrray with index 1
  IN  3 - Clear - node arrray with index 2
- IN  4 - Reset - node arrray with index 3
+ IN  4 - Preset - node arrray with index 3
  IN  5 - Bit 0
  IN  6 - Bit 1
  IN  ...

@@ -13,7 +13,7 @@ public:
         case 1:
             return "I'm not connected";
         case 2:
-            return "Number probe names does not coincide with number of connections";
+            return "Number probe names does not match the number of connections";
         case 3:
             return "Trying to connect output to already connected input\nMultiple connections must "
                    "be tristate";

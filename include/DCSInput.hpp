@@ -29,12 +29,6 @@ typedef std::vector<uint64_t> transitions;
  *      void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
  * Initialization 2
  * DCSInput I0("I0", 1); // initialized with constant value 1
- * @example Initialization 3
- * DCSInput I0("I0", {2,2,3}, true); // initialized with a signal that will evolve with
- * synchronously with the clock (synch = true) as follows: Start with value 0 and stay at 0 for 2
- * clock cycles Switch to 1 and stay at 1 for 2 clock cycles Switch to 0 and stay at 0 for 3 clock
- * cycles Switch to 1 and stay at 1 indefinitely. NOTE: if you want the signal to start with a 1,
- * initialize with {0, ..., ...}
  */
 class DCSInput : public DCSComponent {
 private:
@@ -51,7 +45,7 @@ public:
     void makeSignal(bool constValue);
     void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
     void makeSignal(std::string signal, bool synch = false);
-    void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
+    void makeSquareWave(uint16_t halfPeriod, bool initVal = 0);
     void updateOut() override;
 };
 

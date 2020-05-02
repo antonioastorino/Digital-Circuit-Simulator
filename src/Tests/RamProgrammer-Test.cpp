@@ -15,6 +15,7 @@ void ramProgrammerTest() {
     DCSComponentArray<DCSInput> countIn("CountIn", count0.getNumOfInPins());
     DCSComponentArray<DCSInput> ramCtrlIn("RamCtrlIn", 5);
     DCSComponentArray<DCSInput> ramDataIn("RamDataIn", 8);
+
     DCSDisplayNBits dispCtrl("CTRL", 5);
     DCSDisplayNBits dispAddr("ADDR", 4);
     DCSDisplayNBits dispOut("OUT", 8);
@@ -28,10 +29,10 @@ void ramProgrammerTest() {
     count0.connect(&dispAddr, {0, 3}, {0, 3});
 
     ramCtrlIn[0]->makeSignal(1);
-    ramCtrlIn[1]->makeSquareWave();
+    ramCtrlIn[1]->makeSquareWave(1);
 
     countIn[0]->makeSignal(1);
-    countIn[2]->makeSquareWave();
+    countIn[2]->makeSquareWave(1);
 
     DCSMemoryProgrammer programmer(&ram0);
     for (uint16_t i = 0; i < 16; i++) {

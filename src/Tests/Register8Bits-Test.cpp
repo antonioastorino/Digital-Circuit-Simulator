@@ -30,7 +30,7 @@ void register8BitsTest() {
 	DCSEngine::setHalfClockPeriod(clkHalfPeriod);
 	
 	inArray[0]->makeSignal(transitions{3,1}, 0, true); // OE
-	inArray[1]->makeSquareWave();
+	inArray[1]->makeSquareWave(1);
 	inArray[2]->makeSignal(0);
 	inArray[3]->makeSignal(transitions{5,1}, 0, true);
 	inArray[4]->makeSignal(transitions{1,3,1}, 0, true); // LD

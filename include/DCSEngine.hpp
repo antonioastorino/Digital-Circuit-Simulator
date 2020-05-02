@@ -28,6 +28,7 @@ private:
 	static void checkInitialization();
 	
 	static void updateComponents();
+	static void updateInputs();
 	static void propagateValues();
 	
 	static void printProbes();

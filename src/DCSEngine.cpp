@@ -43,6 +43,7 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
     checkInitialization();
 
     for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+        updateInputs();
         updateComponents();
         propagateValues();
 #if LOG_LEVEL > 0
@@ -105,8 +106,11 @@ void DCSEngine::checkInitialization() {
     }
 }
 
-void DCSEngine::updateComponents() {
+void DCSEngine::updateInputs() {
     for (auto input : inputVector) input->updateOut();
+}
+
+void DCSEngine::updateComponents() {
     for (auto component : componentVector) {
         if (!component->isNode)
             component->updateOut();

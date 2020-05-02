@@ -38,7 +38,7 @@ void mux2To1Test() {
 	 */
 	in0.makeSquareWave(hp * 2);
 	in1.makeSquareWave(hp * 4);
-	in2.makeSquareWave();
+	in2.makeSquareWave(1);
 
 	
 	DCSEngine::run(hp * 9, true);
