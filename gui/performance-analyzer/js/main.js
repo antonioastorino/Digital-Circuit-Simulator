@@ -3,10 +3,10 @@ window.onload = main;
 function main() {
     console.log("Welcome back!")
     let canvas = document.getElementById("canvas");
-    const marginTop = 350; // canvas distance from window top
+    const marginBottom = 40; // canvas distance from window top
     const offsetRight = 40
     const baselineOffset = 0.3;
-    var stepHeight = 1;
+    var frameHeight = 1;
     var translateX = 0;
     var maxTranslateX = 10;
     var measurements = {}
@@ -17,6 +17,9 @@ function main() {
     let minimumLineWidth = 4;
     let totalDuration = 0;
     let lastDuration = 0;
+    let minStep = 50;
+    let maxStep = 300;
+    let step = minStep;
 
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
@@ -28,10 +31,21 @@ function main() {
     const resetButton = document.getElementById("reset-button");
 
     let ctx = canvas.getContext("2d");
-    let canvasHeight = window.innerHeight - marginTop;
-    stepHeight = parseInt(sliderVZoom.value);
+    let canvasHeight = 20;
+    frameHeight = parseInt(sliderVZoom.value);
     resizeCanvas();
     refreshCanvas();
+
+    let makeReadableTimeLabel = (time) => {
+        if (time >= 1000000) {
+            return Math.round(time / 1000) / 1000 + " ms";
+        } else if (time >= 1000) {
+            return (time / 1000) + " us";
+        }
+        else {
+            return time + " ns";
+        }
+    }
 
     let addLabelToLegend = () => {
         let threadNames = Object.keys(measurements);
@@ -46,29 +60,30 @@ function main() {
                 let totalExecutionTime = measurements[threadID][functionName].totalExecutionTime;
                 let averageExecutionTime = Math.round(totalExecutionTime / numOfCalls);
 
-                let labelRow = legendTable.insertRow();
-                let threadIDCell = labelRow.insertCell();
-                let labelCell = labelRow.insertCell();
-                let numOfCallsCell = labelRow.insertCell();
-                let averageExecutionTimeCell = labelRow.insertCell();
-                let totalExecutionTimeCell = labelRow.insertCell();
+                let tableRow = legendTable.insertRow();
+                let threadIDCell = tableRow.insertCell();
+                let labelCell = tableRow.insertCell();
+                let numOfCallsCell = tableRow.insertCell();
+                let averageExecutionTimeCell = tableRow.insertCell();
+                let totalExecutionTimeCell = tableRow.insertCell();
 
-                labelRow.style.backgroundColor = color;
+                numOfCallsCell.style.textAlign = "right";
+                totalExecutionTimeCell.style.textAlign = "right";
+                averageExecutionTimeCell.style.textAlign = "right";
+
+                tableRow.style.backgroundColor = color;
                 threadIDCell.innerHTML = threadID;
                 labelCell.innerHTML = functionName;
                 numOfCallsCell.innerHTML = numOfCalls;
-                averageExecutionTimeCell.innerHTML = averageExecutionTime + " ns";
-                if (totalExecutionTime > 100000) {
-                    totalExecutionTimeCell.innerHTML = Math.round(totalExecutionTime / 1000) + " us";
-                } else {
-                    totalExecutionTimeCell.innerHTML = totalExecutionTime + " ns";
-                }
+                averageExecutionTimeCell.innerHTML = makeReadableTimeLabel(averageExecutionTime);
+                totalExecutionTimeCell.innerHTML = makeReadableTimeLabel(totalExecutionTime);
             }
         }
     }
 
 
     function refreshCanvas() {
+
         if (Object.keys(measurements).length == 0) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         draw();
@@ -83,8 +98,9 @@ function main() {
 
     function resizeCanvas() {
         canvas.width = window.innerWidth - offsetRight;
+        var rect = canvas.getBoundingClientRect();
         canvas.height = canvasHeight;
-        divCanvas.style.maxHeight = window.innerHeight - marginTop + 40 + "px";
+        divCanvas.style.maxHeight = (window.innerHeight - rect.top - marginBottom) + "px";
     }
 
     let dummyOption = new Option("no file loaded", 1);
@@ -101,13 +117,65 @@ function main() {
         return color;
     }
 
+    let transformX = (x) => {
+        return (x * normalizationFactor - translateX - canvas.width / 2) * scaleX + canvas.width / 2;
+    }
+
+    let drawRuler = () => {
+        function round_to_precision(x, precision) {
+            return x - (x % precision);
+        }
+        ctx.strokeStyle = '#a0a0ff';
+        ctx.fillStyle = "black";
+        while ((step * normalizationFactor * scaleX) < minStep) {
+            step *= 5;
+        }
+        while ((step * normalizationFactor * scaleX) > maxStep && step > 5) {
+            step /= 5;
+        }
+        // get the first drawable element
+        for (var pos = 0; pos < totalDuration; pos += step) {
+            let transformedPos = transformX(pos);
+            if (transformedPos < 0) {
+                let actualZero = (translateX + canvas.width / 2 * (1 - 1 / scaleX)) / normalizationFactor;
+                // console.log("actual zero " + actualZero);
+                pos = round_to_precision(actualZero, step);
+                // console.log("first element starts at position " + pos);
+            }
+            if (transformedPos > canvas.width) {
+                // console.log("print interrupted at position " + pos);
+                break;
+            }
+            // ticks
+            ctx.fillRect(transformedPos - 1, 0, 2, 6);
+            ctx.font = "12px Arial";
+            let labelLocationY = 15;
+            // labels
+            if (step > 1000000) {
+                ctx.fillText(pos / 1000000 + " ms", transformedPos, labelLocationY);
+            }
+            else if (step > 1000) {
+                ctx.fillText(pos / 1000 + " us", transformedPos, labelLocationY);
+            }
+            else {
+                ctx.fillText(pos + " ns", transformedPos, labelLocationY);
+            }
+            ctx.setLineDash([5, 7]);
+            ctx.beginPath();
+            ctx.moveTo(transformedPos, 0);
+            ctx.lineTo(transformedPos, canvas.height);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
     let draw = () => {
         let threadNames = Object.keys(measurements);
         let numOfThreads = threadNames.length;
         if (expandThread) {
-            canvasHeight = (stepHeight * maxNumOfFunctions) + baselineOffset * (numOfThreads - 1) * stepHeight;
+            canvasHeight = (frameHeight * maxNumOfFunctions) + baselineOffset * (numOfThreads) * frameHeight;
         } else {
-            canvasHeight = stepHeight * numOfThreads + baselineOffset * (numOfThreads) * stepHeight;
+            canvasHeight = frameHeight * numOfThreads + baselineOffset * (numOfThreads) * frameHeight;
         }
         resizeCanvas();
 
@@ -120,11 +188,11 @@ function main() {
                 let functionName = functions[functionNum];
                 let data = measurements[threadID][functionName].data;
                 let color = measurements[threadID][functionName].color;
-                let positionY = baseline * stepHeight;
-                let height = stepHeight;
+                let positionY = baseline * frameHeight;
+                let height = frameHeight;
 
                 for (let dataNum = 0; dataNum < data.length; dataNum++) {
-                    let positionX = (data[dataNum][0] * normalizationFactor - translateX - canvas.width / 2) * scaleX + canvas.width / 2;
+                    let positionX = transformX(data[dataNum][0]);
                     let width = data[dataNum][1] * normalizationFactor * scaleX;
                     if (positionX > canvas.width || (positionX + width) < 0) continue;
                     ctx.fillStyle = color;
@@ -133,9 +201,9 @@ function main() {
                     if (width < minimumLineWidth) continue;
                     ctx.fillStyle = "black";
                     ctx.save();
-                    ctx.translate(positionX + width / 2, baseline * stepHeight)
+                    ctx.translate(positionX + width / 2, baseline * frameHeight)
                     ctx.rotate(-Math.PI / 2);
-                    ctx.font = "20px Arial";
+                    ctx.font = "15px Times";
                     ctx.fillText(functionName, 0, 0);
                     ctx.restore();
                 }
@@ -143,13 +211,15 @@ function main() {
             }
             if (!expandThread) baseline++;
             baseline += baselineOffset / 2;
+            ctx.font = "20px monospace";
             ctx.fillStyle = "black";
-            ctx.fillText(threadID, 10, baseline * stepHeight - 10);
-            ctx.moveTo(0, baseline * stepHeight);
-            ctx.lineTo(canvas.width, baseline * stepHeight)
+            ctx.fillText("ID:" + threadID, 10, baseline * frameHeight / 2);
+            ctx.moveTo(0, baseline * frameHeight);
+            ctx.lineTo(canvas.width, baseline * frameHeight)
             ctx.stroke();
             baseline += baselineOffset / 2;
         }
+        drawRuler();
     }
 
     let parseText = (text) => {
@@ -157,7 +227,7 @@ function main() {
         legendTable.innerHTML = "<tr>" +
             "<td>Thread ID</td>" +
             "<td>Function name</td>" +
-            "<td>Number of calls</td>" +
+            "<td># of calls</td>" +
             "<td>Average execution time</td>" +
             "<td>Total execution time</td>" +
             "</tr>"
@@ -226,7 +296,7 @@ function main() {
         translateX = 0;
         scaleX = 1;
         sliderVZoom.value = 100;
-        stepHeight = 100;
+        frameHeight = 100;
         refreshCanvas();
     }
 
@@ -258,15 +328,16 @@ function main() {
     }
 
     sliderVZoom.oninput = function () {
-        stepHeight = parseInt(this.value);
+        frameHeight = parseInt(this.value);
         resizeCanvas();
         refreshCanvas();
     }
 
 
     canvas.onmousewheel = function (e) {
-        let magnification = (Math.atan(e.deltaY / 1000) + Math.PI / 2) / Math.PI * 2;
-        scaleX = Math.max(scaleX * magnification, 0.01);
+        scaleX *= (Math.atan(e.deltaY / 1000) + Math.PI / 2) / Math.PI * 2;
+        scaleX = Math.max(scaleX, 1);
+        scaleX = Math.min(scaleX, canvas.width / normalizationFactor / 2);
         adjustTranslateX()
         refreshCanvas();
     }
