@@ -13,6 +13,8 @@ function main() {
     var firstStep = 0;
     var signals = {};
     var stepNumbers = [];
+    var binaryHexadecimal = true; // means binary
+    var result = "";
 
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
@@ -23,6 +25,7 @@ function main() {
     const headerTestTitle = document.getElementById("test-title");
     const pError = document.getElementById("p-error");
     const divCanvas = document.getElementById("div-canvas");
+    const binaryHexadecimalButton = document.getElementById("bin-hex-button");
 
     let refreshCanvas = () => {
         if (Object.keys(signals).length == 0) return;
@@ -57,9 +60,9 @@ function main() {
     let drawLine = (baseline, stepNumber, currValue, prevValue) => {
         let locationY = (baseline - currValue) * stepHeight + offsetTop;
         if (currValue != prevValue) {
-            ctx.lineTo(offsetLeft + (stepNumber - 1) * stepLength, locationY);
+            ctx.lineTo(offsetLeft + (stepNumber - 1) * stepLength + 2, locationY);
         }
-        ctx.lineTo(offsetLeft + stepNumber * stepLength, locationY);
+        ctx.lineTo(offsetLeft + stepNumber * stepLength - 2, locationY);
     }
 
     let drawSignals = () => {
@@ -69,16 +72,38 @@ function main() {
         let baseline = 1;
         Object.keys(signals).forEach(signalName => {
             let values = signals[signalName];
-            ctx.beginPath();
+            
             let prevVal = values[firstStep];
-            ctx.moveTo(offsetLeft, (baseline - prevVal) * stepHeight + offsetTop);
-            for (let k = 0; k < values.length - firstStep; k++) {
-                drawLine(baseline, k, values[k + firstStep], prevVal);
-                prevVal = values[k + firstStep];
+            if (prevVal.length > 1) {
+                for (var startLevel of [true, false]) {
+                    prevVal = values[firstStep];
+                    let level = startLevel // start drawing from high
+                    let prevLevel = startLevel // start drawing from high
+                    ctx.beginPath();
+                    ctx.moveTo(offsetLeft, (baseline - (level ? 1 : 0)) * stepHeight + offsetTop);
+                    for (let k = 0; k < values.length - firstStep; k++) {
+                        if (values[k + firstStep] != prevVal) level =! level;
+                        drawLine(baseline, k, level ? 1 : 0, prevLevel ? 1 : 0);
+                        prevVal = values[k + firstStep];
+                        prevLevel = level;
+                    }
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+                baseline += baselineOffset;
             }
-            ctx.stroke();
-            ctx.closePath();
-            baseline += baselineOffset;
+            else {
+                prevVal = values[firstStep];
+                ctx.beginPath();
+                ctx.moveTo(offsetLeft, (baseline - prevVal) * stepHeight + offsetTop);
+                for (let k = 0; k < values.length - firstStep; k++) {
+                    drawLine(baseline, k, values[k + firstStep], prevVal);
+                    prevVal = values[k + firstStep];
+                }
+                ctx.stroke();
+                ctx.closePath();
+                baseline += baselineOffset;
+            }
         });
     }
 
@@ -102,7 +127,7 @@ function main() {
             ctx.stroke();
             ctx.closePath();
             ctx.font = "14px Verdana";
-            ctx.fillText(keys[lineNum], 10, baseline * stepHeight + offsetTop + 1);
+            ctx.fillText(keys[lineNum], 10, (baseline - 1/2) * stepHeight + offsetTop + 1);
             baseline += baselineOffset;
         }
         baseline -= baselineOffset;
@@ -118,7 +143,7 @@ function main() {
         }
     }
 
-    let parseText = (text) => {
+    let parseText = () => {
         pError.innerHTML = ""
         signals = {};
         stepNumbers = [];
@@ -126,12 +151,21 @@ function main() {
 
             let binary = kv[1].split("b") // check if the value is binary and convert accordingly
             if (binary.length > 1) {
-                let bits = binary[1].split("");
-                for (let i = 0; i < bits.length; i++) {
-                    if (signals[kv[0] + i] == undefined) {
-                        signals[kv[0] + i] = [];
+
+                if (binaryHexadecimal) {  // binary representation (one line per bit)
+                    let bits = binary[1].split("");
+                    for (let i = 0; i < bits.length; i++) {
+                        if (signals[kv[0] + i] == undefined) {
+                            signals[kv[0] + i] = [];
+                        }
+                        signals[kv[0] + i].push(parseInt(bits[bits.length - i - 1]));
                     }
-                    signals[kv[0] + i].push(parseInt(bits[bits.length - i - 1]));
+                }
+                else {
+                    if (signals[kv[0]] == undefined) {
+                        signals[kv[0]] = [];
+                    }
+                    signals[kv[0]].push(kv[1]);
                 }
             }
             else {
@@ -154,7 +188,7 @@ function main() {
             pError.innerHTML = str;
         }
 
-        let lines = text.split("\n");
+        let lines = result.split("\n");
         for (let i = 0; i < lines.length; i++) {
             if (lines[i].includes("test")) {
                 parseTitle(lines[i]);
@@ -195,8 +229,8 @@ function main() {
     }
 
     let updateData = async () => {
-        let result = await readFile("./assets/" + files[select.selectedIndex].name);
-        parseText(result);
+        result = await readFile("./assets/" + files[select.selectedIndex].name);
+        parseText();
         try {
             let signalLength = Object.values(signals)[0].length;
             sliderFirstStep.setAttribute("max", Math.max(signalLength - 10, 0).toString())
@@ -230,9 +264,9 @@ function main() {
         refreshCanvas();
     }
 
-    refresh.onclick = async () => {
+    refresh.onclick = () => {
         if (files.length == 0) return;
-        await updateData();
+        parseText();
         refreshCanvas();
     }
 
@@ -248,6 +282,13 @@ function main() {
 
     sliderFirstStep.oninput = function () {
         firstStep = parseInt(this.value);
+        refreshCanvas();
+    }
+
+    binaryHexadecimalButton.onclick = () => {
+        binaryHexadecimal = !binaryHexadecimal;
+        binaryHexadecimalButton.value = binaryHexadecimal ? "Binary" : "Hexadecimal";
+        parseText();
         refreshCanvas();
     }
 }
