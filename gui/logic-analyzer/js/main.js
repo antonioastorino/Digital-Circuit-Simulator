@@ -3,7 +3,7 @@ window.onload = main;
 function main() {
     console.log("Welcome back!")
     let canvas = document.getElementById("canvas");
-    const marginTop = 350; // canvas distance from window top
+    const marginBottom = 40; // canvas distance from window top
     const offsetLeft = 80;
     const offsetTop = 40;
     const offsetRight = 40
@@ -17,7 +17,6 @@ function main() {
     const input = document.querySelector("input[type=file]");
     const refresh = document.getElementById("refresh");
     const select = document.getElementById("select-file");
-    const reader = new FileReader;
     const sliderHZoom = document.getElementById("h-zoom");
     const sliderVZoom = document.getElementById("v-zoom");
     const sliderFirstStep = document.getElementById("first-step");
@@ -35,8 +34,9 @@ function main() {
     
     function resizeCanvas() {
         canvas.width = window.innerWidth - offsetRight;
+        var rect = canvas.getBoundingClientRect();
         canvas.height = canvasHeight;
-        divCanvas.style.maxHeight = window.innerHeight - marginTop + 40 + "px";
+        divCanvas.style.maxHeight = (window.innerHeight - rect.top - marginBottom) + "px";
     }
     
     window.onresize = function () {
@@ -44,13 +44,11 @@ function main() {
         refreshCanvas();
     }
     
-    let canvasHeight = window.innerHeight - marginTop;
+    let canvasHeight = window.innerHeight - marginBottom;
     resizeCanvas();
     refreshCanvas();
 
     let ctx = canvas.getContext("2d");
-    ctx.font = "14px Arial";
-
 
     let dummyOption = new Option("no file loaded", 1);
     select.appendChild(dummyOption);
@@ -66,6 +64,7 @@ function main() {
 
     let drawSignals = () => {
         ctx.setLineDash([]);
+        ctx.strokeStyle = '#020228';
         ctx.lineWidth = 2;
         let baseline = 1;
         Object.keys(signals).forEach(signalName => {
@@ -84,7 +83,7 @@ function main() {
     }
 
     let drawGrid = () => {
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 0.5;
         let baseline = 1;
         let keys = Object.keys(signals);
         let numOfHorizontalLines = keys.length;
@@ -97,10 +96,12 @@ function main() {
         for (let lineNum = 0; lineNum < numOfHorizontalLines; lineNum++) {
             let positionY = baseline * stepHeight + offsetTop + 1;
             ctx.beginPath();
+            ctx.strokeStyle = '#a0a0ff';
             ctx.moveTo(offsetLeft, positionY);
             ctx.lineTo(offsetLeft + (stepLength * (numOfVerticalLines - firstStep - 1)), positionY);
             ctx.stroke();
             ctx.closePath();
+            ctx.font = "14px Verdana";
             ctx.fillText(keys[lineNum], 10, baseline * stepHeight + offsetTop + 1);
             baseline += baselineOffset;
         }

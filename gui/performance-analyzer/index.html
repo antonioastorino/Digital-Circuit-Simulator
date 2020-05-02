@@ -4,22 +4,30 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Performance analyzer</title>
 	<style>
+		* {
+			font-family: monospace;
+		}
+		h1 {
+			font-size: larger;
+			background-color: beige;
+		}
 		body {
 			margin: 5;
 			overflow: hidden;
+		}
+		tr {
+			background-color: azure;
+		}
+		table {
+			width: 100%;
 		}
 	</style>
 </head>
 
 <body>
 	<h1 style="text-align: center;">Performance analyzer</h1>
-	<h2 style="text-align: center;" id="test-title">no profile loaded</h2>
-	<div>
-		<input type="range" min="1" max="200" value="100" id="v-zoom" style="width: 90%;">
-		<label>V-zoom</label><br><br>
-	</div>
 
 	<div style="width: 70%; float: left;">
 		<table id="table-legend" style="margin: 5px;">
@@ -27,12 +35,39 @@
 
 	</div>
 	<div style="width: 30%; float: right;">
-		<input type="file" multiple>
-		<br><br>
-		<select id="select-file"></select>
-		<br><br>
-		<input type="button" value="Refresh" id="refresh"><br><br>
-		<input type="button" value="Expand" id="expand-collapse-button"><br><br>
+		<table>
+			<body>
+				<tr>
+					<td>
+						<input type="file" multiple>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="select-file"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="Refresh" id="refresh">
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="Expand" id="expand-collapse-button">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="Reset" id="reset-button">
+					</td>
+				</tr>
+			</body>
+		</table>
+	</div>
+	<div>
+		<input type="range" min="1" max="200" value="100" id="v-zoom" style="width: 100%;">
 	</div>
 	<div id="div-canvas" style="width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
 		<canvas id="canvas" style="border:1px solid #000000;"></canvas>
