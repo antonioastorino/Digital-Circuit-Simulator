@@ -7,9 +7,9 @@ function main() {
     const offsetLeft = 80;
     const offsetTop = 40;
     const offsetRight = 40
-    const baselineOffset = 1.3;
+    const baselineOffset = 1.5;
     var stepLength = 50;
-    var stepHeight = 50;
+    var stepHeight = 40;
     var firstStep = 0;
     var signals = {};
     var stepNumbers = [];
@@ -64,6 +64,11 @@ function main() {
         }
         ctx.lineTo(offsetLeft + stepNumber * stepLength - 2, locationY);
     }
+    let printLabel = (baseline, stepNumber, text) => {
+        let locationY = (baseline - 1/2) * stepHeight + offsetTop;
+            ctx.font = "14px Verdana";
+            ctx.fillText(text, offsetLeft + stepNumber * stepLength + 2, locationY+5);
+    }
 
     let drawSignals = () => {
         ctx.setLineDash([]);
@@ -72,17 +77,20 @@ function main() {
         let baseline = 1;
         Object.keys(signals).forEach(signalName => {
             let values = signals[signalName];
-            
-            let prevVal = values[firstStep];
-            if (prevVal.length > 1) {
+            let prevVal;
+            if (values[firstStep].length > 1) {
                 for (var startLevel of [true, false]) {
                     prevVal = values[firstStep];
                     let level = startLevel // start drawing from high
                     let prevLevel = startLevel // start drawing from high
+                    printLabel(baseline, 0, values[firstStep + 1]);
                     ctx.beginPath();
                     ctx.moveTo(offsetLeft, (baseline - (level ? 1 : 0)) * stepHeight + offsetTop);
                     for (let k = 0; k < values.length - firstStep; k++) {
-                        if (values[k + firstStep] != prevVal) level =! level;
+                        if (values[k + firstStep] != prevVal) {
+                            level =! level;
+                            printLabel(baseline, k - 1, values[k + firstStep]);
+                        }
                         drawLine(baseline, k, level ? 1 : 0, prevLevel ? 1 : 0);
                         prevVal = values[k + firstStep];
                         prevLevel = level;
@@ -162,10 +170,10 @@ function main() {
                     }
                 }
                 else {
-                    if (signals[kv[0]] == undefined) {
+                    if (signals[kv[0]] == undefined) { // hexadecimal representation
                         signals[kv[0]] = [];
                     }
-                    signals[kv[0]].push(kv[1]);
+                    signals[kv[0]].push(binary[1]);
                 }
             }
             else {
