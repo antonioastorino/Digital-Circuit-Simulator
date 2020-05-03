@@ -3,13 +3,13 @@
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool initVal,
                                        bool synch)
-    : leveNumber(0), totalDuration(0), flipBitAtSteps({}), counter(0) {
+    : leveNumber(0), totalDuration(0), flipBitAtSteps({}), m_counter(0) {
     this->currVal = initVal;
     fromLevelsToFlipBitAtSteps(levelDurationVector, synch);
 }
 
 DCSArbitrarySignal::DCSArbitrarySignal(std::string zerosAndOnes, bool synch)
-    : leveNumber(0), totalDuration(0), flipBitAtSteps({}), counter(0) {
+    : leveNumber(0), totalDuration(0), flipBitAtSteps({}), m_counter(0) {
     std::vector<uint64_t> levelDurationVector;
     uint64_t consecutive     = 0;
     char currBit             = zerosAndOnes[0];
@@ -47,11 +47,11 @@ void DCSArbitrarySignal::fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelD
 }
 
 bool DCSArbitrarySignal::getVal(uint32_t step) {
-    if (step != counter) {
+    if (step != this->m_counter) {
         DCSLog::error("Arbitrary signal", 12);
     }
-    counter++;
-    if (counter > totalDuration) {
+    m_counter++;
+    if (m_counter > totalDuration) {
         return currVal;
     }
     if (step == flipBitAtSteps[leveNumber]) {
@@ -60,5 +60,7 @@ bool DCSArbitrarySignal::getVal(uint32_t step) {
     }
     return currVal;
 }
+
+void DCSArbitrarySignal::resetCounter() { this->m_counter = 0; }
 
 DCSArbitrarySignal::~DCSArbitrarySignal(){};

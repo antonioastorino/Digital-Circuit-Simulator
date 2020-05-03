@@ -83,7 +83,7 @@ void demoTest() {
     DCSLog::printTestName("Demo - Tri-state buffer");
 
     {
-        DCSEngine::initialize();
+        DCSEngine::initialize(1);
 
         DCSInput inA0("in0", 0);
         DCSInput inA1("c0");

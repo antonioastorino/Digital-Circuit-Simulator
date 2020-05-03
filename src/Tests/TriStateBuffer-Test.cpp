@@ -7,7 +7,7 @@
 
 void triStateBufferTest() {
 	DCSLog::printTestName("Tri-state buffer");
-	DCSEngine::initialize();
+	DCSEngine::initialize(5);
 
 	DCSInput inA0("A0", 0);
 	DCSInput inA1("A1");

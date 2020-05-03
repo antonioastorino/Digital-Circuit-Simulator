@@ -103,10 +103,10 @@ build/objects/DCSDisplayNBits.o: .//src/Displays/DCSDisplayNBits.cpp .//include/
 build/objects/DCSLog.o: .//src/DCSLog.cpp .//include/DCSLog.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/Register8Bits-Test.o: .//src/Tests/Register8Bits-Test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp .//include/DCSRegister8Bits.hpp .//include/DCSEngine.hpp 
+build/objects/Register8Bits-Test.o: .//src/Tests/Register8Bits-Test.cpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRegister8Bits.hpp .//include/DCSDisplayNBits.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/UpCounter-Test.o: .//src/Tests/UpCounter-Test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp .//include/DCSEngine.hpp 
+build/objects/UpCounter-Test.o: .//src/Tests/UpCounter-Test.cpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/Display-Test.o: .//src/Tests/Display-Test.cpp .//include/DCSComponentArray.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp 
@@ -133,7 +133,7 @@ build/objects/BitStreamSignal-Test.o: .//src/Tests/BitStreamSignal-Test.cpp .//i
 build/objects/CountAndStore-Test.o: .//src/Tests/CountAndStore-Test.cpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRegister8Bits.hpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/Divider-Test.o: .//src/Tests/Divider-Test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp .//include/DCSClockDivider.hpp .//include/DCSEngine.hpp .//include/DCSComponentArray.hpp 
+build/objects/Divider-Test.o: .//src/Tests/Divider-Test.cpp .//include/DCSClockDivider.hpp .//include/DCSComponentArray.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/RippleAdder-test.o: .//src/Tests/RippleAdder-test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSRippleAdder8Bits.hpp .//include/DCSEngine.hpp 
@@ -169,7 +169,7 @@ build/objects/JKMasterSlave-Test.o: .//src/Tests/JKMasterSlave-Test.cpp .//inclu
 build/objects/AndArray-Test.o: .//src/Tests/AndArray-Test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSEngine.hpp .//include/DCSAnd.hpp .//include/DCSComponentArray.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/AddressDecoder-test.o: .//src/Tests/AddressDecoder-test.cpp .//include/DCSAddressDecoder4Bits.hpp .//include/DCSEngine.hpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp 
+build/objects/AddressDecoder-test.o: .//src/Tests/AddressDecoder-test.cpp .//include/DCSAddressDecoder4Bits.hpp .//include/DCSEngine.hpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp .//include/DCSComponentArray.hpp .//include/DCSDisplayNBits.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/Demo-test.o: .//src/Tests/Demo-test.cpp .//include/DCSAnd.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSNode.hpp .//include/DCSNot.hpp .//include/DCSOutput.hpp .//include/DCSTriStateBuffer.hpp 

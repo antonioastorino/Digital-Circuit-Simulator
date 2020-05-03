@@ -11,10 +11,10 @@ DCSArbitrarySignal(transitions{0}) {
 }
 
 bool DCSClockSignal::getVal(uint32_t step) {
-	if (step != counter) {
+	if (step != m_counter) {
 		DCSLog::error("Clock signal", 12);
 	}
-	counter++;
+	m_counter++;
 	// Shift the commutation by 1 tau because the first one is used to initialize the system
 	if (step > 1) { // don't change at first step
 		if (step % (halfPeriod) == 1 || halfPeriod == 1) {

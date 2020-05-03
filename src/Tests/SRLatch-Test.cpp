@@ -6,7 +6,7 @@
 
 void srLatchTest() {
 	DCSLog::printTestName("SR-Latch");
-	DCSEngine::initialize();
+	DCSEngine::initialize(5);
 	transitions s = {2, 2, 1};
 	transitions r = {6, 2, 1};
 	

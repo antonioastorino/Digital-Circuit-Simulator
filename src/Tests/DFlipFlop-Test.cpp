@@ -6,7 +6,7 @@
 
 void dFlipFlopTest() {
 	DCSLog::printTestName("D-FlipFlop");
-	DCSEngine::initialize();
+	DCSEngine::initialize(1);
 	transitions d = {4, 7, 3, 10};
 	transitions clk = {4, 2, 5, 2, 4};
 

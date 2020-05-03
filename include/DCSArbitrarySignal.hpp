@@ -21,7 +21,7 @@ private:
     void fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelDurationVector, bool synch);
 
 protected:
-    uint64_t counter;
+    uint64_t m_counter;
     bool currVal;
 
 public:
@@ -30,6 +30,7 @@ public:
                        bool synch = false);
     DCSArbitrarySignal(std::string zerosAndOnes, bool synch = false);
     virtual bool getVal(uint32_t step);
+    void resetCounter();
     virtual ~DCSArbitrarySignal();
 };
 

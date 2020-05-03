@@ -8,7 +8,7 @@
 
 void risingEdgeDetectorTest() {
 	DCSLog::printTestName("Rising edge detector");
-	DCSEngine::initialize();
+	DCSEngine::initialize(5);
 	DCSAnd and0("And0");
 	DCSNot not0("Not0");
 	DCSUnitDelay del0("Del0");

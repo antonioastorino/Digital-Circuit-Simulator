@@ -112,10 +112,10 @@ int main(int argc, const char* argv[]) {
         ramTest();
         break;
     case (24):
-        firstProgramTest();
+        // firstProgramTest();
         break;
     case (25):
-        ramProgrammerTest();
+        // ramProgrammerTest();
         break;
     case (26):
         risingEdgeDetectorTest();

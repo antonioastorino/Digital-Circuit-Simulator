@@ -6,7 +6,7 @@
 
 void dLatchTest() {
 	DCSLog::printTestName("D-Latch");
-	DCSEngine::initialize();
+	DCSEngine::initialize(5);
 	
 	DCSDLatch dLatch0("DLatch0");
 	DCSInput I0("In0");

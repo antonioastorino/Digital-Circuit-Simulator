@@ -4,7 +4,7 @@
 
 void notLoopTest() {
 	DCSLog::printTestName("Not loop");
-	DCSEngine::initialize();
+	DCSEngine::initialize(5);
 	DCSNot not0("Not0");
 	DCSNot not1("Not1");
 	DCSNot not2("Not2");
