@@ -22,7 +22,7 @@ void fullAdderTest();
 void bitStreamSignalTest();
 void displayTest();
 void rippleAdderTest();
-void ramProgrammerTest();
+void singleNotLoopTest();
 void firstProgramTest();
 void ramTest();
 void demoTest();
@@ -115,7 +115,7 @@ int main(int argc, const char* argv[]) {
         firstProgramTest();
         break;
     case (25):
-        // ramProgrammerTest();
+        singleNotLoopTest();
         break;
     case (26):
         risingEdgeDetectorTest();

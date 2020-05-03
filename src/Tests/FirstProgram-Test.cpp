@@ -38,7 +38,7 @@ void firstProgramTest() {
     }
 
     /*
-    IMPORTANT: This ram must be between DCSEngine::initialize() and DCSEngine::programMemory()
+    IMPORTANT: itialize() and DCSEngine::programMemory()
     */
     DCSRam16x8 ram("r");
 
@@ -73,6 +73,6 @@ void firstProgramTest() {
     inArray0[16]->makeSquareWave(8 * hcp);
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
-        DCSEngine::run(20 * hcp, true);
+        DCSEngine::run(16 * hcp, true);
     }
 }
