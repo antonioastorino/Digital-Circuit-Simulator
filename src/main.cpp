@@ -27,6 +27,7 @@ void firstProgramTest();
 void ramTest();
 void demoTest();
 void upCounter4BitsTest();
+void addressDecoderTest();
 
 #include <iostream>
 #include "DCSTimer.hpp"
@@ -121,6 +122,9 @@ int main(int argc, const char* argv[]) {
         break;
     case (27):
         upCounter4BitsTest();
+        break;
+    case (28):
+        addressDecoderTest();
         break;
     default:
 		demoTest();
