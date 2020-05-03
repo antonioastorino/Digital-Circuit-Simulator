@@ -83,7 +83,6 @@ function main() {
 
 
     function refreshCanvas() {
-
         if (Object.keys(measurements).length == 0) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         draw();
@@ -367,7 +366,7 @@ function main() {
 
     expandCollapseButton.onclick = () => {
         expandThread = !expandThread;
-        resizeCanvas();
+        expandCollapseButton.value = expandThread ? "Collapse" : "Expand"
         refreshCanvas();
     }
 

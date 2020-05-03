@@ -181,9 +181,17 @@ function main() {
             ctx.lineTo(positionX, baseline * stepHeight + offsetTop);
             ctx.stroke();
             ctx.closePath();
-            ctx.font = "12px Verdana";
-            ctx.fillStyle = "#000000";
-            ctx.fillText(stepNumbers[lineNum + firstStep], stepLength * lineNum + offsetLeft, 30);
+            if (stepLength > 20 || (lineNum % 2) == 0) {
+                if (stepLength > 10 || (lineNum % 4) == 0) {
+                    if (stepLength > 5 || (lineNum % 8) == 0) {
+                        if (stepLength > 2 || (lineNum % 24) == 0) {
+                            ctx.font = "12px Verdana";
+                            ctx.fillStyle = "#000000";
+                            ctx.fillText(stepNumbers[lineNum + firstStep], stepLength * lineNum + offsetLeft, 30);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -308,9 +316,9 @@ function main() {
         refreshCanvas();
     }
 
-    refresh.onclick = () => {
+    refresh.onclick = async () => {
         if (files.length == 0) return;
-        parseText();
+        await updateData();
         refreshCanvas();
     }
 
