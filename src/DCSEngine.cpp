@@ -211,7 +211,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
             inArray0[5 + i]->makeSignal(s[i].str(), true);
         }
         // program memory
-        DCSEngine::run(10 * hcp, true);
+        DCSEngine::run(16 * hcp, true);
         memory->disconnect();
     }
 
