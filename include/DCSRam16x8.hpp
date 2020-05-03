@@ -23,7 +23,7 @@ class DCSAnd;
  *| DATA: | XXXX   XXXXX
  *|       | ______  ____
  *| CLK:  |       __
- *|       |         ^ start
+ *|       |         ^ ready
  * @end_diagram
  * @pinout
  * Input 0: Output enable

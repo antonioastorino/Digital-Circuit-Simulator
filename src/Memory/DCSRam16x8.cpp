@@ -37,7 +37,6 @@ DCSRam16x8::DCSRam16x8(std::string name)
         for (uint16_t j = 0; j < 8; j++) {
             // connect data in to all register data ins
             dataNodeArray.connect(regArray[regNum], j, 5 + j); // Data
-            // connect all register data outs to output nodes
         }
         regArray[regNum]->connect(&outNodeArray);
     }
@@ -75,18 +74,18 @@ void DCSRam16x8::disconnect() {
     // clearing the state of the input components
     for (int i = 0; i < this->numOfInPins; i++) {
         uint16_t inPinNum = i;
-        DCSComponent *c = this->getInComponent(inPinNum);
-        c->connectedIn = 0;
+        DCSComponent* c   = this->getInComponent(inPinNum);
+        c->connectedIn    = 0;
         c->fromTristateIn = 0;
-        c->initialized = false;
-        c->reachableIn = 0;
+        c->initialized    = false;
+        c->reachableIn    = 0;
         for (int j = 0; j < c->getNumOfInPins(); c++) {
             c->updatedByVector[j] = nullptr;
         }
     }
     // removing connections from the output components
     for (int i = 0; i < this->numOfOutPins; i++) {
-        DCSComponent *c = this->getOutComponent(i);
+        DCSComponent* c = this->getOutComponent(i);
         c->wireVector.clear();
     }
 }

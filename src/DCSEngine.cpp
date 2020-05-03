@@ -7,6 +7,7 @@
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
 #include "DCSWire.hpp"
+#include "DCSUnitDelay.hpp"
 
 std::vector<DCSComponent*> DCSEngine::componentVector  = {};
 std::vector<DCSComponent*> DCSEngine::inputVector      = {};
@@ -167,7 +168,7 @@ void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
     clockPeriod = 2 * numberOfTimeSteps;
 };
 
-void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
+void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
 
     // store the engine state
     static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
@@ -189,26 +190,44 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
 
         DCSComponentArray<DCSInput> inArray0("In-tmp", memory->getNumOfInPins());
         DCSComponentArray<DCSOutput> outArray0("Out-tmp", 5);
+        DCSComponentArray<DCSUnitDelay> delArray0("Del-tmp", 8);
 
         DCSDisplayNBits dispAddr("ADDR-tmp", 4);
         DCSDisplayNBits dispData("DATA-tmp", 8);
         // DCSDisplayNBits dispCtrl("CTRL", 5);
         DCSDisplayNBits dispOut("OUT-tmp", 8);
 
-        inArray0.connect(memory);
+        inArray0.connect(memory, {0, 4}, {0, 4}); // control bits
+        inArray0.connect(&delArray0, {5, 12}, {0, 7}); // data
+        delArray0.connect(memory, {0, 7}, {5, 12}); // data (delayed by 1 tau)
+        inArray0.connect(memory, {13, 16}, {13, 16}); // addresses
         inArray0.connect(&dispAddr, {13, 16}, {0, 3});
-        inArray0.connect(&dispData, {5, 12}, {0, 7});
+        delArray0.connect(&dispData);
         inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
         memory->connect(&dispOut);
 
-        inArray0[0]->makeSignal(transitions{100}, 1, true); // Enable
-        inArray0[1]->makeSignal(std::string("1111111001"));
-        inArray0[2]->makeSignal(std::string("1111000000")); // Clear
-        inArray0[3]->makeSignal({5, 1, 1}, 0, true);        // Preset
-        inArray0[4]->makeSignal(std::string("0001111000")); // Write
-        inArray0[5]->makeSignal(std::string("0000011100"));
-        inArray0[7]->makeSignal(std::string("0000011100"));
-        inArray0[15]->makeSignal({2, 1, 1}, 0, true);
+        inArray0[0]->makeSignal(1); // Enable
+        inArray0[1]->makeSquareWave(hcp / 2);
+        inArray0[2]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
+        inArray0[3]->makeSignal(0);        // Preset
+        inArray0[4]->makeSignal(1); // Write
+        inArray0[13]->makeSquareWave(2 *hcp, false); // Addr 0
+        inArray0[14]->makeSquareWave(4 * hcp, false); //  Addr 1
+        inArray0[15]->makeSquareWave(8 * hcp, false); //  Addr 2
+        inArray0[16]->makeSquareWave(16 * hcp, false); //  Addr 3
+
+        std::stringstream s[8];
+        for (int i =0; i < 16; i ++) {
+            for (int j = 0; j < 4; j ++) { // 
+                s[j] << (program[i][0] >> j & 1);
+            }
+            for (int j = 0; j < 4; j ++) {
+                s[j + 4] << (program[i][1] >> j & 1);
+            }
+        }
+        for (int i = 0; i < 8; i ++) {
+            inArray0[5 + i]->makeSignal(s[i].str(), true);
+        }
     // program memory
         DCSEngine::run(15 * hcp, false);
 

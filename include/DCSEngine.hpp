@@ -46,7 +46,7 @@ public:
 	static void setSampling(bool sampling);
 	static void setHalfClockPeriod(uint16_t numberOfTimeSteps);
 	static void restart();
-	static void programMemory(DCSRam16x8 * memory, uint16_t program[16]);
+	static void programMemory(DCSRam16x8 * memory, uint16_t program[16][2]);
 };
 
 #endif /* DCSEngine_hpp */
