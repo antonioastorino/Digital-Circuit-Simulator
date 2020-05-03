@@ -131,6 +131,8 @@ public:
     virtual void enable();
     virtual void disable();
     bool isEnabled();
+
+    friend class DCSRam16x8;
 };
 
 #endif /* DCSComponent_hpp */

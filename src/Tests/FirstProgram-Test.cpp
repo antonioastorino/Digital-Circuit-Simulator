@@ -1,49 +1,46 @@
-#include "DCSLog.hpp"
+#include "DCSEngine.hpp"
 #include "DCSInput.hpp"
+#include "DCSOutput.hpp"
+#include "DCSLog.hpp"
+#include "DCSRam16x8.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
-#include "DCSRam16x8.hpp"
-#include "DCSEngine.hpp"
 
 uint16_t LDA = 0b0000;
 uint16_t ADD = 0b0001;
 uint16_t OUT = 0b0010;
 
 void firstProgramTest() {
-	DCSLog::printTestName("First program");
-	DCSEngine::initialize(10);
+    DCSLog::printTestName("First program");
+	uint16_t hcp = 10;
+    DCSEngine::initialize(hcp);
 
-	DCSRam16x8 ram("r");
-	uint16_t program[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-	DCSEngine::programMemory(&ram, program);
-	
-	// DCSRam16x8 ram0("Ram0");
-	
-	
-	// DCSMemoryProgrammer programmer0(&ram0);
-	
-	// programmer0.program(0, LDA, 14);
-	// programmer0.program(1, ADD, 15);
-	// programmer0.program(2, OUT, 0);
-	
-	// DCSComponentArray<DCSNode> bus0("Bus0", 8);
-	// DCSDisplayNBits busDisplay("BUS", 8);
-	// bus0.connect(&busDisplay);
-	
-	// DCSInput CO("CO"); // Counter OUT
-	// DCSInput CE("CO"); // Counter ENABLE
-	// DCSInput MI("MI"); // Memory address register IN
+    DCSRam16x8 ram("r");
+    uint16_t program[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    DCSEngine::programMemory(&ram, program);
 
-	// DCSUpCounterWithLoadAndAsyncSR pc0("PC0", 4);
-	// DCSComponentArray<DCSInput> dummyIn0("Dummy0", 4);
-	// DCSTriStateBuffer8Bits trisPC("TrisPC");
-	
-	// // connect PC to first 4 inputs of tris0
-	// pc0.connect(&trisPC, {0,3}, {0,3});
-	// // connect dummy input to the other 4 inputs of tris0
-	// dummyIn0.connect(&trisPC, {0,3}, {4,7});
-	// // Connect tri-state buffer to the bus
-	// trisPC.connect(&bus0);
-	
-	// Program ram
+    DCSComponentArray<DCSInput> inArray0("In", ram.getNumOfInPins());
+    DCSComponentArray<DCSOutput> outArray0("Out", 5);
+
+    DCSDisplayNBits dispAddr("ADDR", 4);
+    DCSDisplayNBits dispData("DATA", 8);
+    DCSDisplayNBits dispOut("OUT", 8);
+
+    inArray0.connect(&ram);
+    inArray0.connect(&dispAddr, {13, 16}, {0, 3});
+    inArray0.connect(&dispData, {5, 12}, {0, 7});
+    inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
+    ram.connect(&dispOut);
+
+    inArray0[0]->makeSignal(transitions{100}, 1, true); // Enable
+    inArray0[1]->makeSignal(std::string("1111111001")); // CLK
+    inArray0[2]->makeSignal(0); // Clear
+    inArray0[3]->makeSignal(0);        // Preset
+    inArray0[4]->makeSignal(0); // Write
+    inArray0[5]->makeSignal(std::string("0000011100"));
+    inArray0[7]->makeSignal(std::string("0000011100"));
+    inArray0[15]->makeSignal({2, 1, 1}, 0, true);
+    // READ MEMORY
+    DCSEngine::run(15 * hcp, false);
+
 }

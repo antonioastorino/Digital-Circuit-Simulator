@@ -63,6 +63,7 @@ public:
     DCSComponent* getOutComponent(uint16_t outPinNum) override;
 
     void updateOut() override;
+    void disconnect();
 };
 
 #endif /* DCSRam16x8_hpp */

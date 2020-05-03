@@ -184,16 +184,16 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
 
     // add the components necessary to create a program
     {
-        uint16_t hcp           = 10; // half clock period
-        DCSEngine::clockPeriod = hcp;
+        PROFILE_WITH_CUSTOM_NAME("Ram programming")
+        uint16_t hcp           = DCSEngine::clockPeriod;
 
-        DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
-        DCSComponentArray<DCSOutput> outArray0("Out", 5);
+        DCSComponentArray<DCSInput> inArray0("In-tmp", memory->getNumOfInPins());
+        DCSComponentArray<DCSOutput> outArray0("Out-tmp", 5);
 
-        DCSDisplayNBits dispAddr("ADDR", 4);
-        DCSDisplayNBits dispData("DATA", 8);
+        DCSDisplayNBits dispAddr("ADDR-tmp", 4);
+        DCSDisplayNBits dispData("DATA-tmp", 8);
         // DCSDisplayNBits dispCtrl("CTRL", 5);
-        DCSDisplayNBits dispOut("OUT", 8);
+        DCSDisplayNBits dispOut("OUT-tmp", 8);
 
         inArray0.connect(memory);
         inArray0.connect(&dispAddr, {13, 16}, {0, 3});
@@ -211,6 +211,8 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
         inArray0[15]->makeSignal({2, 1, 1}, 0, true);
     // program memory
         DCSEngine::run(15 * hcp, false);
+
+        memory->disconnect();
     }
 
     // restore the initial state
@@ -231,4 +233,5 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
     std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
     std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
     std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
+
 }
