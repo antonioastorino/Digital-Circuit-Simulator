@@ -27,7 +27,7 @@ class DCSNode;
  *|!Q:    |         _____
  *|                  ^ ready
  * @end_diagram
- * PINOUT:
+ * @pinout
  * Input 0: Output Enable
  * Input 1: Clock
  * Input 2: Clear
@@ -35,6 +35,7 @@ class DCSNode;
  * Input 4: Load
  * Input 5: Data in
  * Out   0: Data out
+ * @end_pinout
  */
 class DCSRegister1Bit : public DCSComponent {
 private:
