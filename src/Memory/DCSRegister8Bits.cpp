@@ -5,7 +5,12 @@
 DCSRegister8Bits::DCSRegister8Bits(std::string name)
     : DCSComponent(name, false),
       registerArray(name + "-reg", 8),
-      nodeArray({"OutEnable", "Clock", "Clear", "Preset", "Load"}, 5) {
+      nodeArray({
+          name + "-OE",
+          name + "-Clock",
+          name + "-Clear",
+          name + "-Preset",
+          name + "-Load"}, 5) {
     // connect control signals
     for (uint16_t i = 0; i < 8; i++) {
         nodeArray.connect(registerArray[i], 0, 0);

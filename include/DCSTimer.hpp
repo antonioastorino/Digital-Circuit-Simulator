@@ -9,6 +9,7 @@
 #define PROFILE_WITH_CUSTOM_NAME(name) DCSTimer timer = DCSTimer(name)
 #else
 #define PROFILE()
+#define PROFILE_WITH_CUSTOM_NAME(name)
 #endif
 
 struct TimingResult {
