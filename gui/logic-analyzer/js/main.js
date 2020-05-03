@@ -13,7 +13,7 @@ function main() {
     var firstStep = 0;
     var signals = {};
     var stepNumbers = [];
-    var binaryHexadecimal = true; // means binary
+    var hexadecimal = false; // means binary
     var result = "";
 
     const input = document.querySelector("input[type=file]");
@@ -34,19 +34,19 @@ function main() {
         drawGrid();
         drawSignals();
     }
-    
+
     function resizeCanvas() {
         canvas.width = window.innerWidth - offsetRight;
         var rect = canvas.getBoundingClientRect();
         canvas.height = canvasHeight;
         divCanvas.style.maxHeight = (window.innerHeight - rect.top - marginBottom) + "px";
     }
-    
+
     window.onresize = function () {
         resizeCanvas();
         refreshCanvas();
     }
-    
+
     let canvasHeight = window.innerHeight - marginBottom;
     resizeCanvas();
     refreshCanvas();
@@ -57,6 +57,37 @@ function main() {
     select.appendChild(dummyOption);
     let files = [];
 
+
+
+    function binaryToHex(s) {
+        let lookUpTable = {
+            "0000": '0',
+            "1000": '1',
+            "0100": '2',
+            "1100": '3',
+            "0010": '4',
+            "1010": '5',
+            "0110": '6',
+            "1110": '7',
+            "0001": '8',
+            "1001": '9',
+            "0101": 'A',
+            "1101": 'B',
+            "0011": 'C',
+            "1011": 'D',
+            "0111": 'E',
+            "1111": 'F',
+        }
+        if (s.length % 4) return "number of bits not a multiple of 4"
+        let hex = "";
+        let splitS = s.match(/.{1,4}/g);
+        for (let j = 0; j < splitS.length; j++) {
+            hex += lookUpTable[splitS[j]];
+        }
+        return hex;
+    }
+
+   
     let drawLine = (baseline, stepNumber, currValue, prevValue) => {
         let locationY = (baseline - currValue) * stepHeight + offsetTop;
         if (currValue != prevValue) {
@@ -64,10 +95,12 @@ function main() {
         }
         ctx.lineTo(offsetLeft + stepNumber * stepLength - 2, locationY);
     }
+
     let printLabel = (baseline, stepNumber, text) => {
-        let locationY = (baseline - 1/2) * stepHeight + offsetTop;
-            ctx.font = "14px Verdana";
-            ctx.fillText(text, offsetLeft + stepNumber * stepLength + 2, locationY+5);
+        let locationY = (baseline - 1 / 2) * stepHeight + offsetTop;
+        ctx.font = "14px Verdana";
+        ctx.fillStyle = "#0505f0";
+        ctx.fillText(binaryToHex(text), offsetLeft + stepNumber * stepLength + 2, locationY + 5);
     }
 
     let drawSignals = () => {
@@ -88,7 +121,7 @@ function main() {
                     ctx.moveTo(offsetLeft, (baseline - (level ? 1 : 0)) * stepHeight + offsetTop);
                     for (let k = 0; k < values.length - firstStep; k++) {
                         if (values[k + firstStep] != prevVal) {
-                            level =! level;
+                            level = !level;
                             printLabel(baseline, k - 1, values[k + firstStep]);
                         }
                         drawLine(baseline, k, level ? 1 : 0, prevLevel ? 1 : 0);
@@ -135,7 +168,8 @@ function main() {
             ctx.stroke();
             ctx.closePath();
             ctx.font = "14px Verdana";
-            ctx.fillText(keys[lineNum], 10, (baseline - 1/2) * stepHeight + offsetTop + 1);
+            ctx.fillStyle = "#333333";
+            ctx.fillText(keys[lineNum], 10, (baseline - 1 / 2) * stepHeight + offsetTop + 1);
             baseline += baselineOffset;
         }
         baseline -= baselineOffset;
@@ -160,7 +194,7 @@ function main() {
             let binary = kv[1].split("b") // check if the value is binary and convert accordingly
             if (binary.length > 1) {
 
-                if (binaryHexadecimal) {  // binary representation (one line per bit)
+                if (!hexadecimal) {  // binary representation (one line per bit)
                     let bits = binary[1].split("");
                     for (let i = 0; i < bits.length; i++) {
                         if (signals[kv[0] + i] == undefined) {
@@ -169,8 +203,8 @@ function main() {
                         signals[kv[0] + i].push(parseInt(bits[bits.length - i - 1]));
                     }
                 }
-                else {
-                    if (signals[kv[0]] == undefined) { // hexadecimal representation
+                else { // store as it is for later hexadecimal conversion
+                    if (signals[kv[0]] == undefined) { 
                         signals[kv[0]] = [];
                     }
                     signals[kv[0]].push(binary[1]);
@@ -220,20 +254,20 @@ function main() {
     }
 
 
-    let readFile = async (filePath)  => {
+    let readFile = async (filePath) => {
         let xhttp = new XMLHttpRequest();
-		return new Promise((resolve) => {
-			xhttp.onreadystatechange = function () {
-				if (xhttp.readyState != 4) return;
-				if (xhttp.status >= 200 && xhttp.status < 300) {
-					let text = xhttp.response;
-					resolve(text);
-				}
-			};
-			xhttp.open("GET", filePath, true);
-			xhttp.responseType = "text";
-			xhttp.send();
-		});
+        return new Promise((resolve) => {
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState != 4) return;
+                if (xhttp.status >= 200 && xhttp.status < 300) {
+                    let text = xhttp.response;
+                    resolve(text);
+                }
+            };
+            xhttp.open("GET", filePath, true);
+            xhttp.responseType = "text";
+            xhttp.send();
+        });
     }
 
     let updateData = async () => {
@@ -294,8 +328,8 @@ function main() {
     }
 
     binaryHexadecimalButton.onclick = () => {
-        binaryHexadecimal = !binaryHexadecimal;
-        binaryHexadecimalButton.value = binaryHexadecimal ? "Binary" : "Hexadecimal";
+        hexadecimal = !hexadecimal;
+        binaryHexadecimalButton.value = hexadecimal ? "Go binary" : "Go hexadecimal";
         parseText();
         refreshCanvas();
     }
