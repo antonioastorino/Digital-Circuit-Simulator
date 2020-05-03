@@ -60,24 +60,22 @@ function main() {
 
 
     function binaryToHex(s) {
-        // Numbers are read from left to and the LSB is on the left.
-        // Therefore, the bit order in the lookUp table is inverted.
         let lookUpTable = {
             "0000": '0',
-            "1000": '1',
-            "0100": '2',
-            "1100": '3',
-            "0010": '4',
-            "1010": '5',
+            "0001": '1',
+            "0010": '2',
+            "0011": '3',
+            "0100": '4',
+            "0101": '5',
             "0110": '6',
-            "1110": '7',
-            "0001": '8',
+            "0111": '7',
+            "1000": '8',
             "1001": '9',
-            "0101": 'A',
-            "1101": 'B',
-            "0011": 'C',
-            "1011": 'D',
-            "0111": 'E',
+            "1010": 'A',
+            "1011": 'B',
+            "1100": 'C',
+            "1101": 'D',
+            "1110": 'E',
             "1111": 'F',
         }
         if (s.length % 4) return "number of bits not a multiple of 4"
@@ -198,7 +196,7 @@ function main() {
             let binary = kv[1].split("b") // check if the value is binary and convert accordingly
             if (binary.length > 1) {
 
-                if (!hexadecimal) {  // binary representation (one line per bit)
+                if (!hexadecimal || binary[1].length % 4 != 0) {  // binary representation (one line per bit)
                     let bits = binary[1].split("");
                     for (let i = 0; i < bits.length; i++) {
                         if (signals[kv[0] + i] == undefined) {
