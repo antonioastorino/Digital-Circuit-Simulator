@@ -225,7 +225,7 @@ function main() {
         measurements = {};
         legendTable.innerHTML = "<tr>" +
             "<td>Thread ID</td>" +
-            "<td>Function name</td>" +
+            "<td>Label/td>" +
             "<td># of calls</td>" +
             "<td>Average execution time</td>" +
             "<td>Total execution time</td>" +

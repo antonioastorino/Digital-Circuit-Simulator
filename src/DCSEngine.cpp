@@ -5,9 +5,8 @@
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRam16x8.hpp"
-#include "DCSTimer.hpp"
-#include "DCSWire.hpp"
 #include "DCSUnitDelay.hpp"
+#include "DCSWire.hpp"
 
 std::vector<DCSComponent*> DCSEngine::componentVector  = {};
 std::vector<DCSComponent*> DCSEngine::inputVector      = {};
@@ -33,40 +32,30 @@ void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
 void DCSEngine::run(uint64_t steps, bool sampling) {
+    DCSEngine::sampling   = sampling;
+    DCSEngine::stepNumber = 0;
 
-    DCSTimer::initialize();
-    {
-        PROFILE_WITH_CUSTOM_NAME("initialize");
+    // Check if all components are connected
+    checkConnections();
 
-        DCSEngine::sampling   = sampling;
-        DCSEngine::stepNumber = 0;
+    // Put the circuit in a plausible initial state
+    initCircuit();
+    // Check that all the components are initialized
+    checkInitialization();
+    // Print the initial state -- step -1
+    printLogicLevels();
 
-        // Check if all components are connected
-        checkConnections();
-
-        // Put the circuit in a plausible initial state
-        initCircuit();
-        // Check that all the components are initialized
-        checkInitialization();
-        // Print the initial state -- step -1
-        printLogicLevels();
-    }
-
-    {
-        PROFILE_WITH_CUSTOM_NAME("run loop");
-        for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
-            updateInputs();
-            updateComponents();
-            propagateValues();
+    for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+        updateInputs();
+        updateComponents();
+        propagateValues();
 #if LOG_LEVEL > 0
-            printLogicLevels();
+        printLogicLevels();
 #endif
-        }
     }
 }
 
 void DCSEngine::checkConnections() {
-    PROFILE();
     for (auto component : componentVector) {
         if (!(component->isFullyConnected())) {
             DCSLog::error(component->getName(), 1);
@@ -183,10 +172,8 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
 
     // ask the component to save its state too (wires and right component vector)
 
-    // add the components necessary to create a program
     {
-        PROFILE_WITH_CUSTOM_NAME("Ram programming");
-        uint16_t hcp           = DCSEngine::clockPeriod;
+        uint16_t hcp = DCSEngine::clockPeriod / 2;
 
         DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
         DCSComponentArray<DCSOutput> outArray0("Out", 5);
@@ -201,31 +188,30 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
         inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
         memory->connect(&dispOut);
 
-        inArray0[0]->makeSignal(1); // Enable
-        inArray0[1]->makeSquareWave(hcp / 2);
+        inArray0[0]->makeSignal(0); // Enable
+        inArray0[1]->makeSquareWave(hcp);
         inArray0[2]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
-        inArray0[3]->makeSignal(0);        // Preset
-        inArray0[4]->makeSignal(1); // Write
-        inArray0[13]->makeSquareWave(2 *hcp, false); // Addr 0
-        inArray0[14]->makeSquareWave(4 * hcp, false); //  Addr 1
-        inArray0[15]->makeSquareWave(8 * hcp, false); //  Addr 2
-        inArray0[16]->makeSquareWave(16 * hcp, false); //  Addr 3
+        inArray0[3]->makeSignal(0);                         // Preset
+        inArray0[4]->makeSignal(1);                         // Write
+        inArray0[13]->makeSquareWave(2 * hcp);       // Addr 0
+        inArray0[14]->makeSquareWave(4 * hcp);       //  Addr 1
+        inArray0[15]->makeSquareWave(8 * hcp);       //  Addr 2
+        inArray0[16]->makeSquareWave(16 * hcp);      //  Addr 3
 
         std::stringstream s[8];
-        for (int i =0; i < 16; i ++) {
-            for (int j = 0; j < 4; j ++) { // 
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 4; j++) { //
                 s[j] << (program[i][0] >> j & 1);
             }
-            for (int j = 0; j < 4; j ++) {
+            for (int j = 0; j < 4; j++) {
                 s[j + 4] << (program[i][1] >> j & 1);
             }
         }
-        for (int i = 0; i < 8; i ++) {
+        for (int i = 0; i < 8; i++) {
             inArray0[5 + i]->makeSignal(s[i].str(), true);
         }
-    // program memory
-        DCSEngine::run(15 * hcp, true);
-
+        // program memory
+        DCSEngine::run(10 * hcp, true);
         memory->disconnect();
     }
 
@@ -241,11 +227,10 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
     DCSEngine::inputVector.resize(inputVector_tmp.size());
     DCSEngine::wireVector.resize(wireVector_tmp.size());
     DCSEngine::displayVector.resize(displayVector_tmp.size());
-    
+
     // restore values (the ram is safe)
     std::copy(componentVector_tmp.begin(), componentVector_tmp.end(), componentVector.begin());
     std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
     std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
     std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
-
 }
