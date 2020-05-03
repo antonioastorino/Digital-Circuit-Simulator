@@ -19,8 +19,8 @@ class DCSAnd;
  *|       |  ^ start
  *|       |   ____
  *| WRITE:| XX    XXXXXX
- *|       |     ___
- *| DATA: | XXXX   XXXXX
+ *|       |    ___
+ *| DATA: | XXX   XXXXX
  *|       | ______  ____
  *| CLK:  |       __
  *|       |         ^ ready
@@ -54,6 +54,7 @@ private:
     DCSComponentArray<DCSNode> ctrlNodeArray;
     DCSComponentArray<DCSNode> dataNodeArray;
     DCSComponentArray<DCSNode> outNodeArray;
+    DCSComponentArray<DCSUnitDelay> delArray;
     DCSAddressDecoder4Bits dec0;
 
 public:

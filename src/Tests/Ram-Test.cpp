@@ -27,7 +27,7 @@ void ramTest() {
     ram0.connect(&dispOut);
 
     inArray0[0]->makeSignal(1); // Enable
-    inArray0[1]->makeSignal(std::string("1111111001"));
+    inArray0[1]->makeSignal(std::string("11111111001"));
     inArray0[2]->makeSignal(std::string("1111000000")); // Clear
     inArray0[3]->makeSignal({5, 1, 1}, 0, true);       // Preset
     inArray0[4]->makeSignal(1); // Write

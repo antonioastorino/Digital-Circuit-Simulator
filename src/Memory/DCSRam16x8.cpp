@@ -16,7 +16,11 @@ DCSRam16x8::DCSRam16x8(std::string name)
                     5),
       dataNodeArray(name + "-dataNodeArr0_", 8),
       outNodeArray(name + "-outNodeArr0_", 8),
+      delArray(name + "-inDelArray_", 8),
       dec0(name + "-dec0") {
+
+    delArray.connect(&dataNodeArray);
+
     for (uint16_t regNum = 0; regNum < 16; regNum++) {
         // connect each decoder output pin to and gates at input 0
         // either for anding the Enable signal or the Write signal
@@ -59,7 +63,7 @@ DCSComponent* DCSRam16x8::getInComponent(uint16_t& inPinNum) {
         return ctrlNodeArray.getInComponent(inPinNum);
     } else if (inPinNum < 13) {
         inPinNum -= 5;
-        return dataNodeArray.getInComponent(inPinNum);
+        return delArray.getInComponent(inPinNum);
     } else if (inPinNum < 17) {
         inPinNum -= 13;
         return dec0.getInComponent(inPinNum);

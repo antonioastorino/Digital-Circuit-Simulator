@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Sun May  3 10:15:32 CEST 2020
+## Documentation automatically generated on Sun May  3 21:14:34 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -280,11 +280,11 @@ taus before the Load of each address.
 |       |  ^ start
 |       |   ____
 | WRITE:| XX    XXXXXX
-|       |     ___
-| DATA: | XXXX   XXXXX
+|       |    ___
+| DATA: | XXX   XXXXX
 |       | ______  ____
 | CLK:  |       __
-|       |         ^ start
+|       |         ^ ready
 ```
 
 #### Pinout

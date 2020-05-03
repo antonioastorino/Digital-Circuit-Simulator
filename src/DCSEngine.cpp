@@ -185,24 +185,19 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
 
     // add the components necessary to create a program
     {
-        PROFILE_WITH_CUSTOM_NAME("Ram programming")
+        PROFILE_WITH_CUSTOM_NAME("Ram programming");
         uint16_t hcp           = DCSEngine::clockPeriod;
 
-        DCSComponentArray<DCSInput> inArray0("In-tmp", memory->getNumOfInPins());
-        DCSComponentArray<DCSOutput> outArray0("Out-tmp", 5);
-        DCSComponentArray<DCSUnitDelay> delArray0("Del-tmp", 8);
+        DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
+        DCSComponentArray<DCSOutput> outArray0("Out", 5);
 
-        DCSDisplayNBits dispAddr("ADDR-tmp", 4);
-        DCSDisplayNBits dispData("DATA-tmp", 8);
-        // DCSDisplayNBits dispCtrl("CTRL", 5);
-        DCSDisplayNBits dispOut("OUT-tmp", 8);
+        DCSDisplayNBits dispAddr("ADDR", 4);
+        DCSDisplayNBits dispData("DATA", 8);
+        DCSDisplayNBits dispOut("OUT", 8);
 
-        inArray0.connect(memory, {0, 4}, {0, 4}); // control bits
-        inArray0.connect(&delArray0, {5, 12}, {0, 7}); // data
-        delArray0.connect(memory, {0, 7}, {5, 12}); // data (delayed by 1 tau)
-        inArray0.connect(memory, {13, 16}, {13, 16}); // addresses
+        inArray0.connect(memory); // control bits
         inArray0.connect(&dispAddr, {13, 16}, {0, 3});
-        delArray0.connect(&dispData);
+        inArray0.connect(&dispData, {5, 12}, {0, 7});
         inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
         memory->connect(&dispOut);
 
@@ -229,7 +224,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
             inArray0[5 + i]->makeSignal(s[i].str(), true);
         }
     // program memory
-        DCSEngine::run(15 * hcp, false);
+        DCSEngine::run(15 * hcp, true);
 
         memory->disconnect();
     }
