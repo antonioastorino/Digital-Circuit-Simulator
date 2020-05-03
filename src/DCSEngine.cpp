@@ -1,7 +1,10 @@
 #include "DCSEngine.hpp"
 #include "DCSArbitrarySignal.hpp"
+#include "DCSComponentArray.hpp"
 #include "DCSInput.hpp"
 #include "DCSLog.hpp"
+#include "DCSOutput.hpp"
+#include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
 #include "DCSWire.hpp"
 
@@ -163,3 +166,69 @@ void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
 void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
     clockPeriod = 2 * numberOfTimeSteps;
 };
+
+void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16]) {
+
+    // store the engine state
+    static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
+    static std::vector<DCSComponent*> inputVector_tmp(DCSEngine::inputVector.size());
+    static std::vector<DCSWire*> wireVector_tmp(DCSEngine::wireVector.size());
+    static std::vector<DCSDisplayNBits*> displayVector_tmp(DCSEngine::displayVector.size());
+
+    std::copy(componentVector.begin(), componentVector.end(), componentVector_tmp.begin());
+    std::copy(inputVector.begin(), inputVector.end(), inputVector_tmp.begin());
+    std::copy(wireVector.begin(), wireVector.end(), wireVector_tmp.begin());
+    std::copy(displayVector.begin(), displayVector.end(), displayVector_tmp.begin());
+
+    // ask the component to save its state too (wires and right component vector)
+
+    // add the components necessary to create a program
+    {
+        uint16_t hcp           = 10; // half clock period
+        DCSEngine::clockPeriod = hcp;
+
+        DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
+        DCSComponentArray<DCSOutput> outArray0("Out", 5);
+
+        DCSDisplayNBits dispAddr("ADDR", 4);
+        DCSDisplayNBits dispData("DATA", 8);
+        // DCSDisplayNBits dispCtrl("CTRL", 5);
+        DCSDisplayNBits dispOut("OUT", 8);
+
+        inArray0.connect(memory);
+        inArray0.connect(&dispAddr, {13, 16}, {0, 3});
+        inArray0.connect(&dispData, {5, 12}, {0, 7});
+        inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
+        memory->connect(&dispOut);
+
+        inArray0[0]->makeSignal(transitions{100}, 1, true); // Enable
+        inArray0[1]->makeSignal(std::string("1111111001"));
+        inArray0[2]->makeSignal(std::string("1111000000")); // Clear
+        inArray0[3]->makeSignal({5, 1, 1}, 0, true);        // Preset
+        inArray0[4]->makeSignal(std::string("0001111000")); // Write
+        inArray0[5]->makeSignal(std::string("0000011100"));
+        inArray0[7]->makeSignal(std::string("0000011100"));
+        inArray0[15]->makeSignal({2, 1, 1}, 0, true);
+    // program memory
+        DCSEngine::run(15 * hcp, false);
+    }
+
+    // restore the initial state
+    // clear vectors
+    componentVector.clear();
+    inputVector.clear();
+    wireVector.clear();
+    displayVector.clear();
+
+    // resize
+    DCSEngine::componentVector.resize(componentVector_tmp.size());
+    DCSEngine::inputVector.resize(inputVector_tmp.size());
+    DCSEngine::wireVector.resize(wireVector_tmp.size());
+    DCSEngine::displayVector.resize(displayVector_tmp.size());
+    
+    // restore values (the ram is safe)
+    std::copy(componentVector_tmp.begin(), componentVector_tmp.end(), componentVector.begin());
+    std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
+    std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
+    std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
+}

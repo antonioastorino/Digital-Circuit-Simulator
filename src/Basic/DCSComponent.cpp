@@ -26,6 +26,7 @@ DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool node
 DCSComponent::~DCSComponent() {
     for (auto wire : this->wireVector) {
         delete wire;
+        wire = nullptr;
     }
 }
 

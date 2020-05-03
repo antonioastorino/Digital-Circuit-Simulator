@@ -58,6 +58,7 @@ public:
     void makeSignal(std::string signal, bool synch = false);
     void makeSquareWave(uint16_t halfPeriod, bool initVal = 0);
     void updateOut() override;
+    void restart();
 };
 
 #endif /* DCSInput_hpp */

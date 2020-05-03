@@ -6,6 +6,7 @@
 class DCSComponent;
 class DCSInput;
 class DCSWire;
+class DCSRam16x8;
 
 /**
  * @class DCSEngine
@@ -30,13 +31,11 @@ private:
 	static void updateComponents();
 	static void updateInputs();
 	static void propagateValues();
-	
 	static void printProbes();
 	static void printLogicLevels();
 	
-	friend class DCSMemoryProgrammer;
 public:
-	static void initialize(uint16_t clockHalfPeriod=5);
+	static void initialize(uint16_t clockHalfPeriod);
 	static void addComponent(DCSComponent* component);
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
@@ -46,6 +45,8 @@ public:
 	static int getStepNumber();
 	static void setSampling(bool sampling);
 	static void setHalfClockPeriod(uint16_t numberOfTimeSteps);
+	static void restart();
+	static void programMemory(DCSRam16x8 * memory, uint16_t program[16]);
 };
 
 #endif /* DCSEngine_hpp */

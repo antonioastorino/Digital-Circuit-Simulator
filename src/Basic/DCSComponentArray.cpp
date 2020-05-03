@@ -65,6 +65,7 @@ template <class T> void DCSComponentArray<T>::initialize() {
 template <class T> DCSComponentArray<T>::~DCSComponentArray() {
     for (int i = 0; i < numOfElements; i++) {
         delete componentArray[i];
+        componentArray[i] = nullptr;
     }
 }
 

@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Fri May  1 20:36:38 CEST 2020
+## Documentation automatically generated on Sun May  3 10:15:32 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -397,7 +397,8 @@ Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with 
 |                  ^ ready
 ```
 
-PINOUT:
+#### Pinout
+```
 Input 0: Output Enable
 Input 1: Clock
 Input 2: Clear
@@ -405,6 +406,8 @@ Input 3: Preset
 Input 4: Load
 Input 5: Data in
 Out   0: Data out
+```
+
 
 
 ## Class DCSComponent
@@ -420,7 +423,8 @@ functionalities, e.g:
 #### How to connect two components
 Supposing we have two components, `compA` and `compB`, and we want to connect the output of the
 first to the second. If `compA.getNumOfOutPins()` returns the same value as
-`compB.getNumOfInPins()`, say `N`, the easiest way to perform the connection is by using the method
+`compB.getNumOfInPins()`, say `N`, the easiest way to perform the connection is by using the
+method
 
 ```
 void connect(DCSComponent* const to, const std::vector<std::string>& probeNames = {});
@@ -438,16 +442,19 @@ compA.connect(&compB, {"<probe_name1>", "<probe_name2>", ..., "<probe_nameN>"});
 NOTE: Specifying the lables entails the probes to be prompted at run time.
 
 This will connect the output pins of `compA` to the corresponding (same pin number) input pins of
-`compB`. If this is not the desired order or the pin numbers do not match it is possible to connect one pin at a time using
+`compB`. If this is not the desired order or the pin numbers do not match it is possible to
+connect one pin at a time using
 
 ```
-void connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum, const std::string& probeName = "");
+void connect(DCSComponent* const to, uint16_t outPinNum, uint16_t inPinNum, const std::string&
+probeName = "");
 ```
 
 In addition, one can select a range of output pins to connect to a range of input pins using
 
 ```
-void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange inPinNumRange, const std::vector<std::string>& probeNames = {});
+void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange
+inPinNumRange, const std::vector<std::string>& probeNames = {});
 ```
 
 

@@ -20,7 +20,10 @@ void DCSInput::initialize() {
     DCSEngine::addInput(this);
 }
 
-DCSInput::~DCSInput() { delete signal; }
+DCSInput::~DCSInput() {
+    delete signal;
+    signal = nullptr;
+}
 
 void DCSInput::makeSignal(bool constValue) { this->constValue = constValue; };
 
@@ -41,7 +44,9 @@ void DCSInput::makeSquareWave(uint16_t halfPeriod, bool initVal) {
 
 void DCSInput::updateOut() {
     if (hasSignal)
-        out = signal->getVal(DCSEngine::getStepNumber());
+        out = this->signal->getVal(DCSEngine::getStepNumber());
     else
-        out = constValue;
+        out = this->constValue;
 }
+
+void DCSInput::restart() { this->signal->resetCounter(); }

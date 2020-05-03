@@ -7,7 +7,8 @@
 
 void ramProgrammerTest() {
     DCSLog::printTestName("Ram programmer");
-    DCSEngine::initialize(10);
+    uint16_t hc = 18;
+    DCSEngine::initialize(hc);
 
     DCSRam16x8 ram0("Ram0");
 
@@ -29,14 +30,14 @@ void ramProgrammerTest() {
     count0.connect(&dispAddr, {0, 3}, {0, 3});
 
     ramCtrlIn[0]->makeSignal(1);
-    ramCtrlIn[1]->makeSquareWave(1);
+    ramCtrlIn[1]->makeSquareWave(hc);
 
     countIn[0]->makeSignal(1);
-    countIn[2]->makeSquareWave(1);
+    countIn[2]->makeSquareWave(hc);
 
     DCSMemoryProgrammer programmer(&ram0);
     for (uint16_t i = 0; i < 16; i++) {
-        programmer.program(i, 3 * i + 1);
+        programmer.program((i + 1) % 16, 3 * i + 1);
     }
 
     DCSEngine::run(320, true);
