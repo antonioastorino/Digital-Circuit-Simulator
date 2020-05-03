@@ -60,6 +60,8 @@ function main() {
 
 
     function binaryToHex(s) {
+        // Numbers are read from left to and the LSB is on the left.
+        // Therefore, the bit order in the lookUp table is inverted.
         let lookUpTable = {
             "0000": '0',
             "1000": '1',
@@ -87,7 +89,7 @@ function main() {
         return hex;
     }
 
-   
+
     let drawLine = (baseline, stepNumber, currValue, prevValue) => {
         let locationY = (baseline - currValue) * stepHeight + offsetTop;
         if (currValue != prevValue) {
@@ -100,7 +102,7 @@ function main() {
         let locationY = (baseline - 1 / 2) * stepHeight + offsetTop;
         ctx.font = "14px Verdana";
         ctx.fillStyle = "#0505f0";
-        ctx.fillText(binaryToHex(text), offsetLeft + stepNumber * stepLength + 2, locationY + 5);
+        ctx.fillText("0x" + binaryToHex(text), offsetLeft + stepNumber * stepLength + 2, locationY + 5);
     }
 
     let drawSignals = () => {
@@ -156,20 +158,20 @@ function main() {
         let numOfVerticalLines = signals[keys[0]].length;
         canvasHeight = baseline * baselineOffset * stepHeight * numOfHorizontalLines + offsetTop;
         resizeCanvas();
-        ctx.setLineDash([5, 7]);
+        ctx.setLineDash([2, 10]);
 
         // draw horizontal lines and labels
         for (let lineNum = 0; lineNum < numOfHorizontalLines; lineNum++) {
-            let positionY = baseline * stepHeight + offsetTop + 1;
+            let positionY = baseline * stepHeight + offsetTop;
             ctx.beginPath();
             ctx.strokeStyle = '#a0a0ff';
             ctx.moveTo(offsetLeft, positionY);
             ctx.lineTo(offsetLeft + (stepLength * (numOfVerticalLines - firstStep - 1)), positionY);
             ctx.stroke();
             ctx.closePath();
-            ctx.font = "14px Verdana";
+            ctx.font = "12px Verdana";
             ctx.fillStyle = "#333333";
-            ctx.fillText(keys[lineNum], 10, (baseline - 1 / 2) * stepHeight + offsetTop + 1);
+            ctx.fillText(keys[lineNum], 10, (baseline - 1 / 2) * stepHeight + offsetTop + 6);
             baseline += baselineOffset;
         }
         baseline -= baselineOffset;
@@ -178,9 +180,11 @@ function main() {
             let positionX = offsetLeft + stepLength * lineNum;
             ctx.beginPath();
             ctx.moveTo(positionX, offsetTop);
-            ctx.lineTo(positionX, baseline * stepHeight + offsetTop + 1);
+            ctx.lineTo(positionX, baseline * stepHeight + offsetTop);
             ctx.stroke();
             ctx.closePath();
+            ctx.font = "12px Verdana";
+            ctx.fillStyle = "#000000";
             ctx.fillText(stepNumbers[lineNum + firstStep], stepLength * lineNum + offsetLeft, 30);
         }
     }
@@ -204,7 +208,7 @@ function main() {
                     }
                 }
                 else { // store as it is for later hexadecimal conversion
-                    if (signals[kv[0]] == undefined) { 
+                    if (signals[kv[0]] == undefined) {
                         signals[kv[0]] = [];
                     }
                     signals[kv[0]].push(binary[1]);
