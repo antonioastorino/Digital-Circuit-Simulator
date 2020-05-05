@@ -40,6 +40,8 @@ public:
             return "I don't have a name";
         case 14:
             return "Conflict on the bus among tristate buffers";
+        case 15:
+            return "Timer already initialized";
         default:
             return "Uncategorized exception";
         }

@@ -34,10 +34,11 @@ void addressDecoderTest();
 
 int main(int argc, const char* argv[]) {
     // TODO: create proper unit tests
-    int testNum = -1;
+    int testNum = 0;
 	if (argc == 2) {
     	sscanf(argv[1], "%d", &testNum);
 	}
+    DCSTimer::initialize(testNum);
     switch (testNum) {
     case (0):
         bitStreamSignalTest();

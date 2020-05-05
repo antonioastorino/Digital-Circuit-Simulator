@@ -8,7 +8,6 @@
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 void firstProgramTest() {
-    DCSTimer::initialize();
     DCSLog::printTestName("First program");
     PROFILE_WITH_CUSTOM_NAME("App");
     // Instruction set
@@ -22,12 +21,12 @@ void firstProgramTest() {
     uint16_t HLT = 0b1111; // Halt
 
     // the instruction is the MSHB and the data is the LSHB
-    uint16_t program[16][2] = {{LDI, 3},  // instruction 0
-                               {STA, 15}, // instruction 1
-                               {LDI, 0},  // instruction 2
-                               {ADD, 15}, // instruction 3
-                               {OUT, 0},  // instruction 4
-                               {JMP, 3},  // instruction 5
+    uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0
+                               {STA, 15}, // instruction and operand 1
+                               {LDI, 0},  // instruction and operand 2
+                               {ADD, 15}, // instruction and operand 3
+                               {OUT, 0},  // instruction and operand 4
+                               {JMP, 3},  // instruction and operand 5
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0},
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
@@ -38,7 +37,7 @@ void firstProgramTest() {
     }
 
     /*
-    IMPORTANT: itialize() and DCSEngine::programMemory()
+    IMPORTANT: initialize() and DCSEngine::programMemory()
     */
     DCSRam16x8 ram("r");
 

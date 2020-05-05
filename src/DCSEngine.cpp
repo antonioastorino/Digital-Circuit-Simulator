@@ -5,6 +5,7 @@
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRam16x8.hpp"
+#include "DCSTimer.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSWire.hpp"
 
@@ -34,24 +35,29 @@ void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back
 void DCSEngine::run(uint64_t steps, bool sampling) {
     DCSEngine::sampling   = sampling;
     DCSEngine::stepNumber = 0;
+    {
+        PROFILE_WITH_CUSTOM_NAME("Init circuit");
 
-    // Check if all components are connected
-    checkConnections();
+        // Check if all components are connected
+        checkConnections();
 
-    // Put the circuit in a plausible initial state
-    initCircuit();
-    // Check that all the components are initialized
-    checkInitialization();
-    // Print the initial state -- step -1
-    printLogicLevels();
-
-    for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
-        updateInputs();
-        updateComponents();
-        propagateValues();
-#if LOG_LEVEL > 0
+        // Put the circuit in a plausible initial state
+        initCircuit();
+        // Check that all the components are initialized
+        checkInitialization();
+        // Print the initial state -- step -1
         printLogicLevels();
+    }
+    {
+        PROFILE_WITH_CUSTOM_NAME("Run loop");
+        for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+            updateInputs();
+            updateComponents();
+            propagateValues();
+#if LOG_LEVEL > 0
+            printLogicLevels();
 #endif
+        }
     }
 }
 
@@ -193,10 +199,10 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
         inArray0[2]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
         inArray0[3]->makeSignal(0);                         // Preset
         inArray0[4]->makeSignal(1);                         // Write
-        inArray0[13]->makeSquareWave(2 * hcp);       // Addr 0
-        inArray0[14]->makeSquareWave(4 * hcp);       //  Addr 1
-        inArray0[15]->makeSquareWave(8 * hcp);       //  Addr 2
-        inArray0[16]->makeSquareWave(16 * hcp);      //  Addr 3
+        inArray0[13]->makeSquareWave(2 * hcp);              // Addr 0
+        inArray0[14]->makeSquareWave(4 * hcp);              //  Addr 1
+        inArray0[15]->makeSquareWave(8 * hcp);              //  Addr 2
+        inArray0[16]->makeSquareWave(16 * hcp);             //  Addr 3
 
         std::stringstream s[8];
         for (int i = 0; i < 16; i++) {
@@ -210,8 +216,12 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
         for (int i = 0; i < 8; i++) {
             inArray0[5 + i]->makeSignal(s[i].str(), true);
         }
+
+        
         // program memory
         DCSEngine::run(16 * hcp, true);
+
+
         memory->disconnect();
     }
 
