@@ -17,8 +17,8 @@ function main() {
     let minimumLineWidth = 4;
     let totalDuration = 0;
     let lastDuration = 0;
-    let minStep = 50;
-    let maxStep = 300;
+    let minStep = 100;
+    let maxStep = 500;
     let step = minStep;
 
     const input = document.querySelector("input[type=file]");
@@ -127,10 +127,10 @@ function main() {
         ctx.strokeStyle = '#a0a0ff';
         ctx.fillStyle = "black";
         while ((step * normalizationFactor * scaleX) < minStep) {
-            step *= 5;
+            step *= 10;
         }
         while ((step * normalizationFactor * scaleX) > maxStep && step > 5) {
-            step /= 5;
+            step /= 10;
         }
         // get the first drawable element
         for (var pos = 0; pos < totalDuration; pos += step) {
@@ -225,7 +225,7 @@ function main() {
         measurements = {};
         legendTable.innerHTML = "<tr>" +
             "<td>Thread ID</td>" +
-            "<td>Label/td>" +
+            "<td>Label</td>" +
             "<td># of calls</td>" +
             "<td>Average execution time</td>" +
             "<td>Total execution time</td>" +

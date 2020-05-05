@@ -9,7 +9,7 @@ function main() {
     const offsetRight = 40
     const baselineOffset = 1.5;
     var stepLength = 50;
-    var stepHeight = 40;
+    var stepHeight = 50;
     var firstStep = 0;
     var signals = {};
     var stepNumbers = [];
@@ -156,7 +156,7 @@ function main() {
         let numOfVerticalLines = signals[keys[0]].length;
         canvasHeight = baseline * baselineOffset * stepHeight * numOfHorizontalLines + offsetTop;
         resizeCanvas();
-        ctx.setLineDash([2, 10]);
+        ctx.setLineDash([5, 7]);
 
         // draw horizontal lines and labels
         for (let lineNum = 0; lineNum < numOfHorizontalLines; lineNum++) {
@@ -176,15 +176,15 @@ function main() {
         // draw vertical lines and line number
         for (let lineNum = 0; lineNum < numOfVerticalLines - firstStep; lineNum++) {
             let positionX = offsetLeft + stepLength * lineNum;
-            ctx.beginPath();
-            ctx.moveTo(positionX, offsetTop);
-            ctx.lineTo(positionX, baseline * stepHeight + offsetTop);
-            ctx.stroke();
-            ctx.closePath();
             if (stepLength > 20 || (lineNum % 2) == 0) {
                 if (stepLength > 10 || (lineNum % 4) == 0) {
                     if (stepLength > 5 || (lineNum % 8) == 0) {
                         if (stepLength > 2 || (lineNum % 24) == 0) {
+                            ctx.beginPath();
+                            ctx.moveTo(positionX, offsetTop);
+                            ctx.lineTo(positionX, baseline * stepHeight + offsetTop);
+                            ctx.stroke();
+                            ctx.closePath();
                             ctx.font = "12px Verdana";
                             ctx.fillStyle = "#000000";
                             ctx.fillText(stepNumbers[lineNum + firstStep], stepLength * lineNum + offsetLeft, 30);
