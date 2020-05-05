@@ -43,10 +43,9 @@ In addition, you can choose to build and run using
 ```
 bin/build-run.sh [<TEST_NUMBER>]              # build and run <TEST_NUMBER>
 bin/build-run-save.sh [<TEST_NUMBER>]         # build and run and save the output of <TEST_NUMBER>
-bin/clean-build-run-save.sh [<TEST_NUMBER>]   # clean build, run, and save the output of <TEST_NUMBER>
 ```
 
-If <TEST_NUMBER> (=0, 1, ... N) is specified, the corresponding test will be run righ after compilation. Chech `src/main.cpp` to see the list of tests available. If N is not specified, the default test is run.
+If `<TEST_NUMBER>` (=0, 1, ... N) is specified, the corresponding test will be run righ after compilation. Chech `src/main.cpp` to see the list of tests available. If N is not specified, the default test is run.
 
 The output is saved in `./gui/assets`. 
 
@@ -67,8 +66,9 @@ make OUT=name OPT=0 # will override ./build/name-0 without recompiling the objec
 
 ## How to display the data
 A small web application can be found in the `./gui/` folder. At the time of writing, the interface looks as shown in the following figure
-<!--[![web-gui-image](https://github.com/antonioastorino/DCS/blob/master/gui/images/web-app-0.png)]-->
-![web-gui-image](images/web-gui-0.png)
+
+![web-gui-image](https://github.com/antonioastorino/DCS/blob/master/doc/images/web-gui-0.png)
+
 To load one or more file, open the `./gui/assets/` folder and select one or more files from there. Those files are generated when running the script `build-run-save.sh` or `clean-build-run-save.sh`, located in the `./bin/` folder. If you don't have any, you can find some samples in `./gui/assets/samples/`.
 
 The gui allows to
@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Sun May  3 21:14:34 CEST 2020
+## Documentation automatically generated on Tue May  5 18:58:54 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
