@@ -9,16 +9,29 @@
  * This clock divider (by 2) is mainly meant to be used as a building block for counters.
  * The minimum clock period is 10 (5 high + 5 low) taus.
  *
- * Inputs 0 (Data) and 1 (Load) must be stable for at least 4 taus before and 1 tau after the clock
- * rising edge. The resulting output is displayed 5 taus after the rising edge.
- * Inputs 3 (Clear) and 4 (Preset) are directly connected to the internal JK master-slave. They must
- * be stable for at least 3 taus and their effect is visible 3 taus after they are set.
- * Input 5 (Count in) asserts both J and K in the internal latch with a delay of 2 taus. Therefore,
- * it has to remain stable from 3 taus to 1 taus before the clock rising edge while Load is low.
+ * `Data in` and `Load` must be stable for at least `4 tau` before and `1 tau` after `Clock`'s
+ * rising edge. The resulting output is displayed `5 tau` after that rising edge.
+ * `Clear` and `Preset` are directly connected to the internal JK master-slave. They must
+ * be stable for at least `3 tau` and their effect is visible `3 tau` after they are set.
+ * `Count in` asserts both `J` and `K` in the internal latch with a delay of `2 tau`. Therefore,
+ * it has to remain stable from `3 tau` to `1 tau` before `Clock`'s rising edge while `Load` is low.
  * 
- * Output 2 (Count out) is high when input 5 and out 0 are high, with a delay of 1 tau. When
+ * `Count out` is high when `Count in` and `Data out` are high, with a delay of `1 tau`. When
  * connecting several dividers in cascade, this delay is multiplied by the number of dividers. This
  * has to be taken into account when choosing the clock speed.
+ * 
+ * @pinout
+ * In 0  - Data in
+ * In 1  - Load
+ * In 2  - Clock
+ * In 3  - Clear
+ * In 4  - Preset
+ * In 5  - Count in
+ * 
+ * Out 0 - Data out
+ * Out 1 - !Data out
+ * Out 2 - Count out
+ * @end_pinout
  */
 class DCSClockDivider : public DCSComponent {
 private:
