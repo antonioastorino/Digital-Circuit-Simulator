@@ -3,7 +3,7 @@
 #include "DCSComponent.hpp"
 /**
  * @class DCSOr
- * Implements the OR gate
+ * OR gate
  */
 class DCSOr: public DCSComponent {
 public:

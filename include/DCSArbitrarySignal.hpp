@@ -5,33 +5,35 @@ typedef std::vector<uint64_t> transitions;
 
 /**
  * @class DCSArbitrarySignal
- * Generates a binary signal for use as input signal
- * @param levelDurationVector	contains a vector of values corresponding to duration of each
- * logical level.
- * @param synch					selects the units for each logic level duration
- * The units for the levels are:
- * - tau            if synch = 0
- * - clockPeriods   if synch = 1
+ * Generates a binary signal for use as input signal. Instances of this class are created by
+ * DCSClockSignal and DCSInput classes. The user should not use this class directly.
  */
 class DCSArbitrarySignal {
 private:
     uint64_t leveNumber;
     size_t totalDuration;
     std::vector<uint64_t> flipBitAtSteps; // stores the time at witch the level needs to change
+protected:
+    uint64_t m_counter;
+
+private:
     void fromLevelsToFlipBitAtSteps(std::vector<uint64_t> levelDurationVector, bool synch);
 
 protected:
-    uint64_t m_counter;
+    DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool initVal = 0,
+                       bool synch = false);
+    DCSArbitrarySignal(std::string zerosAndOnes, bool synch = false);
+
     bool currVal;
 
 public:
     DCSArbitrarySignal() = delete;
-    DCSArbitrarySignal(std::vector<uint64_t> levelDurationVector, bool initVal = 0,
-                       bool synch = false);
-    DCSArbitrarySignal(std::string zerosAndOnes, bool synch = false);
+
     virtual bool getVal(uint32_t step);
     void resetCounter();
     virtual ~DCSArbitrarySignal();
+
+    friend class DCSInput;
 };
 
 #endif /* DCSArbitrarySignal_hpp */

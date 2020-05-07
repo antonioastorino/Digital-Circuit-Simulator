@@ -4,7 +4,7 @@
 
 /**
  * @class DCSAnd
- * Implements the AND gate
+ * AND gate
  */
 class DCSAnd : public DCSComponent {
 public:

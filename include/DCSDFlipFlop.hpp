@@ -6,9 +6,6 @@ class DCSNode;
 /**
  * @class DCSDFlipFlop
  * 
- * Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
- * Input 1 and 0 must be stable at least 2 tau.
- * The output is stable after 4 tau from the change in the input
  * @diagram
  *|       |
  *| DATA: | X___XXXXXXXX
@@ -22,6 +19,10 @@ class DCSNode;
  *| !Q:   | XXXXX
  *|       |      ^ ready
  * @end_diagram
+ * 
+ * `Data` needs to be ready not later than the time of `Clock`'s assertion.
+ * `Data` and `Clock` must be stable at least `2 tau`.
+ * The output is stable after `4 tau` from the change in the input
  */
 class DCSDFlipFlop : public DCSComponent {
 private:

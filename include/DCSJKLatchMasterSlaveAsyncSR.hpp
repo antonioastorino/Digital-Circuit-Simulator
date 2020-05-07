@@ -8,7 +8,7 @@
 
 /**
  * @class DCSJKLatchMasterSlaveAsyncSR
- * Implements the JK Latch Master Slave with asynchronous reset.
+ * J-K Latch Master-Slave with asynchronous reset.
  * IMPORTANT: the input value is read when the clock is low.
  * Inputs 0 (J) and 1 (K) must be stable for at least 1 tau before and 1 tau after the clock rising
  * edge.

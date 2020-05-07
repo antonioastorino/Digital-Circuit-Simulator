@@ -4,7 +4,7 @@
 
 /**
  * @class DCSNor3
- * Implements the NOR gate with 3 inputs
+ * NOR gate with 3 inputs
  */
 class DCSNor3: public DCSComponent {
 public:

@@ -9,16 +9,22 @@
 
 /**
  * @class DCSDLatchAsyncSR
- * Implements a D Latch with asynchronous Set and Reset
- * Pinout:
- * 0 -> In Data
- * 1 -> In Enable
- * 2 -> In Asynchronous Reset (Clear)
- * 3 -> In Asynchronous Set (Preset)
- *
+ * D Latch with asynchronous Set and Reset
+ * 
+ * @pinout
+ * In 0    - Data
+ * In 1    - Enable
+ * In 2    - Asynchronous Reset (Clear)
+ * In 3    - Asynchronous Set (Preset)
+ * 
+ * Out 0   - Q
+ * Out 1   - !Q
+ * @end_pinout
+ * 
  * The time diagram is a merge of D-Latch and SR-Latch: when S and R are both low, this component
- * behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch. NOTE: do
- * now use Enable when S or R are high.
+ * behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch.
+ *
+ * IMPORTANT: do not assert `Enable` when `S` or `R` are high.
  */
 class DCSDLatchAsyncSR : public DCSComponent {
 private:

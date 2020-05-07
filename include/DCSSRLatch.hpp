@@ -1,16 +1,18 @@
-/*
- SR latch whose input pin 0 resets and 1 sets
-
- PINOUT:
- IN  0 - Reset
- IN  1 - Set
- OUT 0 - Q
- OUT 1 - !Q
-*/
 #ifndef DCSSRLatch_hpp
 #define DCSSRLatch_hpp
 #include "DCSNor.hpp"
 
+/**
+ * @class DCSSRLatch
+ * SR latch.
+ *
+ * @pinout
+ * In  0 - Reset
+ * In  1 - Set
+ * Out 0 - Q
+ * Out 1 - !Q
+ * @end_pinout
+ */
 class DCSSRLatch : public DCSComponent {
 private:
     DCSNor nor0;

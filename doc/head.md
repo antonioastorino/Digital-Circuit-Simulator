@@ -22,7 +22,7 @@ make [OPT=<x>] [OUT=<executable_file_name>]
 
 `<x> = 0, 1, 2, or 3` is the optimization level. ```OPT``` not specified is equivalent to ```OPT=0```
 
-`executable_file_name` is the name of the executable file, which will be placed in the `./build` folder and saved with the suffix `-<x>`. The default name is `out`.
+`<executable_file_name>` is the name of the executable file, which will be placed in the `./build` folder and saved with the suffix `-<x>`. The default name is `out`.
 
 The compiled object files will be located in `./build/objects`.
 

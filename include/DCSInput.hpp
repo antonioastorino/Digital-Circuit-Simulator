@@ -11,8 +11,12 @@ typedef std::vector<uint64_t> transitions;
  * This class is needed to provide controlled inputs to the circuit from the external world.
  * In the initialization procedure, the Engine will start by propagating the values
  * coming from this component first.
- * Initialization 1
- * DCSInput I0("I0");
+ * ### Initialization for arbitrary signal
+ *
+ * ```
+ * DCSInput(std::string name);
+ * ```
+ *
  * The signal can be attached afterwards using one of the following methods:
  *
  * - assign a constant value
@@ -21,25 +25,35 @@ typedef std::vector<uint64_t> transitions;
  * void makeSignal(bool constValue);
  *
  * ```
- * - assign a signal that changes at given time intervals, defined in 'transitions'
- * 
- * ```
- * 		void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
- * ```
- * For example, a signal that starts at 0 and changes after 3 clock cycles and then
- * again after 2 clock cycles can be obtained as follows:
+ * - assign a signal that changes at given time intervals, defined in 'signal'
  *
  * ```
- * makeSignal({2, 3}, 0, true);
+ * void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
  * ```
+ *
  * - assign a signal expressed as a string of bits
  * 		void makeSignal(std::string signal, bool synch = false);
  * 		To generate the same signal as in the previous example, you can use
+ *
  * 		```makeSignal("001110");```
+ *
  * - assign a square wave
- *      void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
- * Initialization 2
- * DCSInput I0("I0", 1); // initialized with constant value 1
+ *
+ * ```
+ * void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
+ * ```
+ *
+ * For example, a signal that starts at 0 and changes after 3 clock cycles and then
+ * again after 2 clock cycles can be obtained as follows:
+ *
+ * ```makeSignal({2, 3}, 0, true);```
+ *
+ * ### Initialization with constant signal
+ *
+ * ```
+ * DCSInput(std::string name, bool initValue);
+ * ```
+ *
  */
 class DCSInput : public DCSComponent {
 private:

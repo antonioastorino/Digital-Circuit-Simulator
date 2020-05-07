@@ -2,16 +2,7 @@
 #include "DCSLog.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 
-/**
- * @class DCSMux2to1
- * Implements a 2 to 1 multiplexer
- * PINOUT:
- * Input 0 - Data in 0
- * Input 1 - Data in 1
- * Input 2 - Selector
- *
- * Out 0 - Data out 0
- */
+
 DCSMux2to1::DCSMux2to1(std::string name)
     : DCSComponent(name, false),
       and0(name + "-And0"),

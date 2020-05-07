@@ -8,10 +8,15 @@
 
 /**
  * @class DCSDLatch
- * Implements a D Latch
- * Input 0 (data) needs to be ready at least 1 tau before input 1 (enable) is asserted.
- * Input 1 and 0 must be stable at least 2 tau.
- * The output is stable after 4 tau from the change in the input
+ * D Latch
+ * 
+ * @pinout
+ * In 0  - Data in
+ * In 1  - Enable
+ * Out 0 - Q
+ * Out 1 - !Q
+ * @end_pinout
+ * 
  * @diagram
  *|       |  ___
  *| DATA: | X___XXXXXXXX
@@ -25,6 +30,10 @@
  *| !Q:   | XXXXX_______
  *|       |      ^ ready
  * @end_diagram
+ * 
+ * `Data in` needs to be ready at least `1 tau` before `Enable` is asserted.
+ * `Data` and `Enable` must be stable for at least 2 tau.
+ * The output is stable after 4 tau from the change in the input.
  */
 class DCSDLatch : public DCSComponent {
 private:

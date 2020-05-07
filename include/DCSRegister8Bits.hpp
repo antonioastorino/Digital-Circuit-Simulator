@@ -1,6 +1,6 @@
 /**
  * @class DCSRegister8Bits
- * Implements an 8-bit register made up of 8 1-bit registers sharing the same control signals
+ * 8-bit register made up of 8 1-bit registers sharing the same control signals
  * 
  * @pinout
  * In 0    - Output Enable

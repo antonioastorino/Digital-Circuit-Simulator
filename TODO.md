@@ -21,18 +21,3 @@ std::string message;
 uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
 ```
 
-
-measurements = {
-    thread1 = {
-        function1: []
-        function2:
-        ...
-    }
-    thread2 = {
-        function1
-        function2
-        ...
-    }
-    ...
-}
-

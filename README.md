@@ -22,7 +22,7 @@ make [OPT=<x>] [OUT=<executable_file_name>]
 
 `<x> = 0, 1, 2, or 3` is the optimization level. ```OPT``` not specified is equivalent to ```OPT=0```
 
-`executable_file_name` is the name of the executable file, which will be placed in the `./build` folder and saved with the suffix `-<x>`. The default name is `out`.
+`<executable_file_name>` is the name of the executable file, which will be placed in the `./build` folder and saved with the suffix `-<x>`. The default name is `out`.
 
 The compiled object files will be located in `./build/objects`.
 
@@ -78,15 +78,22 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Tue May  5 18:58:54 CEST 2020
+## Documentation automatically generated on Thu May  7 23:28:30 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
 
-Implements a D Latch
-Input 0 (data) needs to be ready at least 1 tau before input 1 (enable) is asserted.
-Input 1 and 0 must be stable at least 2 tau.
-The output is stable after 4 tau from the change in the input
+D Latch
+
+#### Pinout
+```
+In 0  - Data in
+In 1  - Enable
+Out 0 - Q
+Out 1 - !Q
+```
+
+
 #### Time diagram
 ```
 |       |  ___
@@ -103,10 +110,14 @@ The output is stable after 4 tau from the change in the input
 ```
 
 
+`Data in` needs to be ready at least `1 tau` before `Enable` is asserted.
+`Data` and `Enable` must be stable for at least 2 tau.
+The output is stable after 4 tau from the change in the input.
+
 
 ## Class DCSAnd6
 
-Implements the AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
+AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
 
 
 ## Class DCSDisplayNBits
@@ -117,17 +128,33 @@ Implements the AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together
 
 ## Class DCSOr
 
-Implements the OR gate
+OR gate
 
 
 ## Class DCSAnd
 
-Implements the AND gate
+AND gate
 
 
 ## Class DCSAnd4
 
-Implements the AND gate with 4 inputs
+AND gate with 4 inputs
+
+
+## Class DCSFullAdder
+
+Full adder.
+
+#### Pinout
+```
+In  0 - A
+In  1 - B
+In  2 - Carry in
+
+Out 0 - Sum
+Out 1 - Carry out
+```
+
 
 
 ## Class DCSInput
@@ -135,8 +162,12 @@ Implements the AND gate with 4 inputs
 This class is needed to provide controlled inputs to the circuit from the external world.
 In the initialization procedure, the Engine will start by propagating the values
 coming from this component first.
-Initialization 1
-DCSInput I0("I0");
+### Initialization for arbitrary signal
+
+```
+DCSInput(std::string name);
+```
+
 The signal can be attached afterwards using one of the following methods:
 
 - assign a constant value
@@ -145,40 +176,82 @@ The signal can be attached afterwards using one of the following methods:
 void makeSignal(bool constValue);
 
 ```
-- assign a signal that changes at given time intervals, defined in 'transitions'
+- assign a signal that changes at given time intervals, defined in 'signal'
 
 ```
 void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
 ```
-For example, a signal that starts at 0 and changes after 3 clock cycles and then
-again after 2 clock cycles can be obtained as follows:
 
-```
-makeSignal({2, 3}, 0, true);
-```
 - assign a signal expressed as a string of bits
 void makeSignal(std::string signal, bool synch = false);
 To generate the same signal as in the previous example, you can use
+
 ```makeSignal("001110");```
+
 - assign a square wave
+
+```
 void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
-Initialization 2
-DCSInput I0("I0", 1); // initialized with constant value 1
+```
+
+For example, a signal that starts at 0 and changes after 3 clock cycles and then
+again after 2 clock cycles can be obtained as follows:
+
+```makeSignal({2, 3}, 0, true);```
+
+### Initialization with constant signal
+
+```
+DCSInput(std::string name, bool initValue);
+```
+
 
 
 ## Class DCSNor3
 
-Implements the NOR gate with 3 inputs
+NOR gate with 3 inputs
 
 
 ## Class DCSAnd3
 
-Implements the AND gate with 3 inputs
+AND gate with 3 inputs
+
+
+## Class DCSRegister8Bits
+
+8-bit register made up of 8 1-bit registers sharing the same control signals
+
+#### Pinout
+```
+In 0    - Output Enable
+In 1    - Clock
+In 2    - Clear
+In 3    - Preset
+In 4    - Load
+In 5    - Data in 0
+In 6    - Data in 1
+In 7    - Data in 2
+In 8    - Data in 3
+In 9    - Data in 4
+In 10   - Data in 5
+In 11   - Data in 6
+In 12   - Data in 7
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+Out 2   - Data out 2
+Out 3   - Data out 3
+Out 4   - Data out 4
+Out 5   - Data out 5
+Out 6   - Data out 6
+Out 7   - Data out 7
+```
+
 
 
 ## Class DCSJKLatchMasterSlaveAsyncSR
 
-Implements the JK Latch Master Slave with asynchronous reset.
+J-K Latch Master-Slave with asynchronous reset.
 IMPORTANT: the input value is read when the clock is low.
 Inputs 0 (J) and 1 (K) must be stable for at least 1 tau before and 1 tau after the clock rising
 edge.
@@ -218,21 +291,23 @@ Output N (array Count out) corresponds to output 2 (Count out) of the last divid
 
 #### Pinout
 ```
-IN  0         - Count in (corresponding to input 5 in the internal divider)
-IN  1         - Load  - node arrray with index 0
-IN  2         - Clock - node arrray with index 1
-IN  3         - Clear - node arrray with index 2
-IN  4         - Preset - node arrray with index 3
-IN  5         - Bit 0
-IN  6         - Bit 1
-IN  ...
-IN  5 + N-1   - Bit N-1;
-OUT 0         - Bit 0
-OUT 1         - Bit 1
+In 0         - Count in (corresponding to input 5 in the internal divider)
+In 1         - Load  - node arrray with index 0
+In 2         - Clock - node arrray with index 1
+In 3         - Clear - node arrray with index 2
+In 4         - Preset - node arrray with index 3
+In 5         - Bit 0
+In 6         - Bit 1
 ...
-OUT N-1 - Bit N-1
-OUT N - Count out
+In 5 + N-1   - Bit N-1;
+
+Out 0         - Bit 0
+Out 1         - Bit 1
+...
+Out N-1       - Bit N-1
+Out N         - Count out
 ```
+
 
 #### Table
 
@@ -243,35 +318,70 @@ OUT N - Count out
 |  1 |   X  |  X  |  Load
 
 
-Input 0 (Cout in) follows the rule of input 5 of the first divider. Therefore, it hast to be set
-from 3 to 1 tau before the clock rising edge. However, every Count in in the subsequent dividers
-is delayed by 1 tau. In addition, the output byte of the counter is ready 5 tau after the clock
-rising edge. As a consequence, supposing that the expected output is all 1's, the last Count in
-will be ready 5+N-1 tau after the clock rising edge and, as usual, has to be ready 3 tau before
-the next clock rising edge. Therefore, the clock period has to be at least 5+N-1+3 = 7+N tau.
+
+`Cout in` follows the rule of input 5 of the first divider. Therefore, it hast to be set
+from `3` to `1 tau` before the clock rising edge. However, every `Count in` in the subsequent dividers
+is delayed by `1 tau`. In addition, the output byte of the counter is ready `5 tau` after the clock
+rising edge. As a consequence, supposing that the expected output is all 1's, the last `Count in`
+will be ready `5+N-1 tau` after the clock rising edge and has to be ready `3 tau` before
+the next clock rising edge. Therefore, the clock period has to be at least `5+N-1+3 = 7+N tau`.
 
 
 ## Class DCSDLatchAsyncSR
 
-Implements a D Latch with asynchronous Set and Reset
-Pinout:
-0 -> In Data
-1 -> In Enable
-2 -> In Asynchronous Reset (Clear)
-3 -> In Asynchronous Set (Preset)
+D Latch with asynchronous Set and Reset
+
+#### Pinout
+```
+In 0    - Data
+In 1    - Enable
+In 2    - Asynchronous Reset (Clear)
+In 3    - Asynchronous Set (Preset)
+
+Out 0   - Q
+Out 1   - !Q
+```
+
 
 The time diagram is a merge of D-Latch and SR-Latch: when S and R are both low, this component
-behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch. NOTE: do
-now use Enable when S or R are high.
+behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an SR-Latch.
+
+IMPORTANT: do not assert `Enable` when `S` or `R` are high.
 
 
 ## Class DCSRam16x8
 
-Implements a Ram module of 16 bytes.
-When inputs 13 to 16 (address) change, the output changes after 3 tau, independently of the
-clock. Since the Load signal of each individual register (here called Write - input 4) is AND'ed
-with the address decoder, compared to a single register, the RAM needs the address to be ready 3
-taus before the Load of each address.
+Ram module of 16 bytes.
+
+#### Pinout
+```
+In 0    - Output enable
+In 1    - Clock
+In 2    - Clear
+In 3    - Preset
+In 4    - Write
+In 6    - Data in 1
+In 7    - Data in 2
+In 8    - Data in 3
+In 9    - Data in 4
+In 10   - Data in 5
+In 11   - Data in 6
+In 12   - Data in 7
+In 13   - Address 0
+In 14   - Address 1
+In 15   - Address 2
+In 16   - Address 3
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+Out 2   - Data out 2
+Out 3   - Data out 3
+Out 4   - Data out 4
+Out 5   - Data out 5
+Out 6   - Data out 6
+Out 7   - Data out 7
+```
+
 
 #### Time diagram
 ```
@@ -287,28 +397,11 @@ taus before the Load of each address.
 |       |         ^ ready
 ```
 
-#### Pinout
-```
-Input 0: Output enable
-Input 1: Clock
-Input 2: Clear
-Input 3: Preset
-Input 4: Write
-Input 5: Data in bit 0
-Input 6: Data in bit 1
-...
-Input 12: Data in bit 7
 
-Input 13: Address bit 0
-Input 14: Address bit 1
-Input 15: Address bit 2
-Input 16: Address bit 3
-
-Out   0: Data out bit 0
-Out   1: Data out bit 1
-...
-```
-
+When inputs 13 to 16 (address) change, the output changes after 3 tau, independently of the
+clock. Since the Load signal of each individual register (here called Write - input 4) is AND'ed
+with the address decoder, compared to a single register, the RAM needs the address to be ready 3
+taus before the Load of each address.
 
 
 ## Class DCSComponentArray
@@ -321,29 +414,41 @@ Generates an array of identical components.
 This clock divider (by 2) is mainly meant to be used as a building block for counters.
 The minimum clock period is 10 (5 high + 5 low) taus.
 
-Inputs 0 (Data) and 1 (Load) must be stable for at least 4 taus before and 1 tau after the clock
-rising edge. The resulting output is displayed 5 taus after the rising edge.
-Inputs 3 (Clear) and 4 (Preset) are directly connected to the internal JK master-slave. They must
-be stable for at least 3 taus and their effect is visible 3 taus after they are set.
-Input 5 (Count in) asserts both J and K in the internal latch with a delay of 2 taus. Therefore,
-it has to remain stable from 3 taus to 1 taus before the clock rising edge while Load is low.
+`Data in` and `Load` must be stable for at least `4 tau` before and `1 tau` after `Clock`'s
+rising edge. The resulting output is displayed `5 tau` after that rising edge.
+`Clear` and `Preset` are directly connected to the internal JK master-slave. They must
+be stable for at least `3 tau` and their effect is visible `3 tau` after they are set.
+`Count in` asserts both `J` and `K` in the internal latch with a delay of `2 tau`. Therefore,
+it has to remain stable from `3 tau` to `1 tau` before `Clock`'s rising edge while `Load` is low.
 
-Output 2 (Count out) is high when input 5 and out 0 are high, with a delay of 1 tau. When
+`Count out` is high when `Count in` and `Data out` are high, with a delay of `1 tau`. When
 connecting several dividers in cascade, this delay is multiplied by the number of dividers. This
 has to be taken into account when choosing the clock speed.
+
+#### Pinout
+```
+In 0  - Data in
+In 1  - Load
+In 2  - Clock
+In 3  - Clear
+In 4  - Preset
+In 5  - Count in
+
+Out 0 - Data out
+Out 1 - !Data out
+Out 2 - Count out
+```
+
 
 
 ## Class DCSNand
 
-Implements the NAND gate
+NAND gate
 
 
 ## Class DCSDFlipFlop
 
 
-Input 0 (data) needs to be ready not later than the time of input 1 (clock) assertion.
-Input 1 and 0 must be stable at least 2 tau.
-The output is stable after 4 tau from the change in the input
 #### Time diagram
 ```
 |       |
@@ -360,6 +465,10 @@ The output is stable after 4 tau from the change in the input
 ```
 
 
+`Data` needs to be ready not later than the time of `Clock`'s assertion.
+`Data` and `Clock` must be stable at least `2 tau`.
+The output is stable after `4 tau` from the change in the input
+
 
 ## Class DCSOutput
 
@@ -369,17 +478,55 @@ Also, by naming the used instance of this class, the connected input is probed a
 be displayed.
 
 
+## Class DCSSRLatch
+
+SR latch.
+
+#### Pinout
+```
+In  0 - Reset
+In  1 - Set
+Out 0 - Q
+Out 1 - !Q
+```
+
+
+
+## Class DCSMux2to1
+
+2 to 1 multiplexer
+
+#### Pinout
+```
+In 0  - Data in 0
+In 1  - Data in 1
+In 2  - Selector
+
+Out 0 - Data out 0
+```
+
+
+
 ## Class DCSNor
 
-Implements the NOR gate
+NOR gate
 
 
 ## Class DCSRegister1Bit
 
-Input 4 (load) must be asserted at least 3 tau before the clock falling edge.
-Input 0 (Data) must be stable at least 2 tau before the clock falling edge.
-Both have to be stable for at least 1 tau after the clock falling edge.
-Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with input 4 low.
+
+#### Pinout
+```
+In 0 - Enable
+In 1 - Clock
+In 2 - Clear
+In 3 - Preset
+In 4 - Load
+In 5 - Data in
+
+Out 0 - Data out
+```
+
 
 #### Time diagram
 ```
@@ -397,17 +544,11 @@ Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with 
 |                  ^ ready
 ```
 
-#### Pinout
-```
-Input 0: Output Enable
-Input 1: Clock
-Input 2: Clear
-Input 3: Preset
-Input 4: Load
-Input 5: Data in
-Out   0: Data out
-```
 
+`Load` must be asserted at least `3 tau` before `Clock`'s falling edge.
+`Data` must be stable at least `2 tau` before `Clock`'s falling edge.
+`Data` and `Load` have to both be stable for at least `1 tau` after `Clock`'s falling edge.
+`Clear` and `Preset` work the same as in the SR latch. Use them with `Enable` low.
 
 
 ## Class DCSComponent
@@ -460,7 +601,7 @@ inPinNumRange, const std::vector<std::string>& probeNames = {});
 
 ## Class DCSNot
 
-Implements the NOT gate
+NOT gate
 
 
 ## Class DCSDFlipFlopAsyncSR
@@ -480,18 +621,13 @@ Generates a square wave with period 2 * `halfPeriod`
 
 ## Class DCSNand3
 
-Implements the NAND gate with 3 inputs
+NAND gate with 3 inputs
 
 
 ## Class DCSArbitrarySignal
 
-Generates a binary signal for use as input signal
-@param levelDurationVector	contains a vector of values corresponding to duration of each
-logical level.
-@param synch					selects the units for each logic level duration
-The units for the levels are:
-- tau            if synch = 0
-- clockPeriods   if synch = 1
+Generates a binary signal for use as input signal. Instances of this class are created by
+DCSClockSignal and DCSInput classes. The user should not use this class directly.
 
 
 ## Class DCSMemoryProgrammer

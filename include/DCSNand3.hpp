@@ -3,7 +3,7 @@
 #include "DCSComponent.hpp"
 /**
  * @class DCSNand3
- * Implements the NAND gate with 3 inputs
+ * NAND gate with 3 inputs
  */
 class DCSNand3: public DCSComponent {
 public:

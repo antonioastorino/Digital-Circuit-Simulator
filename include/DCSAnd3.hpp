@@ -4,7 +4,7 @@
 
 /**
  * @class DCSAnd3
- * Implements the AND gate with 3 inputs
+ * AND gate with 3 inputs
  */
 class DCSAnd3: public DCSComponent {
 public:

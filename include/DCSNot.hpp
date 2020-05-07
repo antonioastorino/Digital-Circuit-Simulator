@@ -4,7 +4,7 @@
 
 /**
  * @class DCSNot
- * Implements the NOT gate
+ * NOT gate
  */
 class DCSNot: public DCSComponent {
 public:

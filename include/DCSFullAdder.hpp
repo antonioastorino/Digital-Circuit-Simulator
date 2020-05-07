@@ -1,12 +1,3 @@
-/*
- PINOUT
- IN  0 - A
- IN  1 - B
- IN  2 - Carry in
-
- OUT 0 - Sum
- OUT 1 - Carry out
- */
 
 #ifndef DCSFullAdder_hpp
 #define DCSFullAdder_hpp
@@ -15,6 +6,19 @@
 #include "DCSOr.hpp"
 #include "DCSXor.hpp"
 
+/**
+ * @class DCSFullAdder
+ * Full adder.
+ * 
+ *@pinout
+ * In  0 - A
+ * In  1 - B
+ * In  2 - Carry in
+ *
+ * Out 0 - Sum
+ * Out 1 - Carry out
+ * @end_pinout
+ */
 class DCSFullAdder : public DCSComponent {
 private:
     DCSNode node0;

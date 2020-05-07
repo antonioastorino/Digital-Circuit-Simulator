@@ -4,7 +4,7 @@
 
 /**
  * @class DCSNand
- * Implements the NAND gate
+ * NAND gate
  */
 class DCSNand: public DCSComponent {
 public:

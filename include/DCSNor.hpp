@@ -4,7 +4,7 @@
 
 /**
  * @class DCSNor
- * Implements the NOR gate
+ * NOR gate
  */
 class DCSNor: public DCSComponent {
 public:

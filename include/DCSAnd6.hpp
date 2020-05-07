@@ -6,7 +6,7 @@ class DCSAnd3;
 
 /**
  * @class DCSAnd6
- * Implements the AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
+ * AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
  */
 class DCSAnd6 : public DCSComponent {
 private:

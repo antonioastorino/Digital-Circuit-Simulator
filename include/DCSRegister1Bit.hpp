@@ -8,10 +8,17 @@ class DCSNode;
 
 /**
  * @class DCSRegister1Bit
- * Input 4 (load) must be asserted at least 3 tau before the clock falling edge.
- * Input 0 (Data) must be stable at least 2 tau before the clock falling edge.
- * Both have to be stable for at least 1 tau after the clock falling edge.
- * Inputs 2 (clear) and 3 (preset) work the same as in the SR latch. Use them with input 4 low.
+ * 
+ * @pinout
+ * In 0 - Enable
+ * In 1 - Clock
+ * In 2 - Clear
+ * In 3 - Preset
+ * In 4 - Load
+ * In 5 - Data in
+ *
+ * Out 0 - Data out
+ * @end_pinout
  * 
  * @diagram
  *|       |  ____
@@ -27,15 +34,11 @@ class DCSNode;
  *|!Q:    |         _____
  *|                  ^ ready
  * @end_diagram
- * @pinout
- * Input 0: Output Enable
- * Input 1: Clock
- * Input 2: Clear
- * Input 3: Preset
- * Input 4: Load
- * Input 5: Data in
- * Out   0: Data out
- * @end_pinout
+ * 
+ * `Load` must be asserted at least `3 tau` before `Clock`'s falling edge.
+ * `Data` must be stable at least `2 tau` before `Clock`'s falling edge.
+ * `Data` and `Load` have to both be stable for at least `1 tau` after `Clock`'s falling edge.
+ * `Clear` and `Preset` work the same as in the SR latch. Use them with `Enable` low.
  */
 class DCSRegister1Bit : public DCSComponent {
 private:
