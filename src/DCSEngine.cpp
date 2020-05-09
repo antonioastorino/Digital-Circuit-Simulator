@@ -1,5 +1,4 @@
 #include "DCSEngine.hpp"
-#include "DCSArbitrarySignal.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSInput.hpp"
 #include "DCSLog.hpp"
@@ -74,7 +73,7 @@ void DCSEngine::checkConnections() {
         if (!(display->isFullyConnected())) {
             DCSLog::error(display->getName(), 1);
         }
-        // initialize updateByVector with nullptr
+        // initialize updatedByVector with nullptr
         for (uint16_t i = 0; i < display->getNumOfInPins(); i++)
             display->updatedByVector.push_back(nullptr);
     }
@@ -125,6 +124,10 @@ void DCSEngine::updateComponents() {
         if (!component->isNode())
             component->updateOut();
         component->resetUpdatedByVector();
+    }
+
+    for (auto display : DCSEngine::displayVector) {
+        display->resetUpdatedByVector();
     }
 }
 

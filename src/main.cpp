@@ -25,11 +25,11 @@ void rippleAdderTest();
 void singleNotLoopTest();
 void firstProgramTest();
 void ramTest();
-void demoTest();
 void upCounter4BitsTest();
 void addressDecoderTest();
 void register1BitTest();
 void register8BitsTest();
+void Computer();
 
 #include <iostream>
 #include "DCSTimer.hpp"
@@ -135,9 +135,12 @@ int main(int argc, const char* argv[]) {
     case (30):
         register8BitsTest();
         break;
-    default:
-		demoTest();
+    case (31):
+		Computer();
         break;
+    default:
+        return 0;
+
     }
     DCSTimer::printResults();
     return 0;
