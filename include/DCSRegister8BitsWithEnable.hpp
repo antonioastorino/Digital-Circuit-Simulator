@@ -1,11 +1,5 @@
-
-#ifndef DCSRegister8Bits_hpp
-#define DCSRegister8Bits_hpp
-#include "DCSComponentArray.hpp"
-class DCSRegister1Bit;
-class DCSNode;
 /**
- * @class DCSRegister8Bits
+ * @class DCSRegister8BitsWithEnable
  * 8-bit register made up of 8 1-bit registers sharing the same control signals
  * 
  * @pinout
@@ -21,6 +15,7 @@ class DCSNode;
  * In 9    - Clear
  * In 10   - Preset
  * In 11   - Load
+ * In 12   - Output Enable
  *
  * Out 0   - Data out 0
  * Out 1   - Data out 1
@@ -33,17 +28,23 @@ class DCSNode;
  * @end_pinout
  */
 
-class DCSRegister8Bits : public DCSComponent {
+#ifndef DCSRegister8BitsWithEnable_hpp
+#define DCSRegister8BitsWithEnable_hpp
+#include "DCSComponentArray.hpp"
+class DCSRegister1BitWithEnable;
+class DCSNode;
+
+class DCSRegister8BitsWithEnable : public DCSComponent {
 private:
-    DCSComponentArray<DCSRegister1Bit> registerArray;
+    DCSComponentArray<DCSRegister1BitWithEnable> registerArray;
     DCSComponentArray<DCSNode> nodeArray;
 
 public:
-    DCSRegister8Bits(std::string name);
+    DCSRegister8BitsWithEnable(std::string name);
 
     DCSComponent* getOutComponent(uint16_t outPinNum) override;
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
 
-#endif /* DCSRegister8Bits_hpp */
+#endif /* DCSRegister8BitsWithEnable_hpp */

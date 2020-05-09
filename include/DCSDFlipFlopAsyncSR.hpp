@@ -7,6 +7,16 @@
 /**
  * @class DCSDFlipFlopAsyncSR
  * D Flip-flop with asynchronous Set and Reset
+ * 
+ * @pinout
+ * In 0   - Data
+ * In 1   - Clock
+ * In 2   - Reset
+ * In 3   - Preset
+ * 
+ * Out 0  - Q
+ * Out 1  - !Q
+ * @end_pinout
  */
 class DCSDFlipFlopAsyncSR : public DCSComponent {
 private:

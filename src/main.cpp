@@ -12,10 +12,10 @@ void and6Test();
 void dLatchTest();
 void dLatchAsyncSRTest();
 void jkLatchMasterSlaveAsyncSRTest();
-void register1BitTest();
+void register1BitWithEnableTest();
 void dividerTest();
 void upCounterTest();
-void register8BitsTest();
+void register8BitsWithEnableTest();
 void countAndStoreTest();
 void mux2To1Test();
 void fullAdderTest();
@@ -28,6 +28,8 @@ void ramTest();
 void demoTest();
 void upCounter4BitsTest();
 void addressDecoderTest();
+void register1BitTest();
+void register8BitsTest();
 
 #include <iostream>
 #include "DCSTimer.hpp"
@@ -80,10 +82,10 @@ int main(int argc, const char* argv[]) {
         dFlipFlopTest();
         break;
     case (13):
-        register1BitTest();
+        register1BitWithEnableTest();
         break;
     case (14):
-        register8BitsTest();
+        register8BitsWithEnableTest();
         break;
     case (15):
         jkLatchMasterSlaveAsyncSRTest();
@@ -126,6 +128,12 @@ int main(int argc, const char* argv[]) {
         break;
     case (28):
         addressDecoderTest();
+        break;
+    case (29):
+        register1BitTest();
+        break;
+    case (30):
+        register8BitsTest();
         break;
     default:
 		demoTest();

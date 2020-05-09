@@ -2,7 +2,7 @@
 #include "DCSInput.hpp"
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
-#include "DCSRegister8Bits.hpp"
+#include "DCSRegister8BitsWithEnable.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 void countAndStoreTest() {
@@ -11,7 +11,7 @@ void countAndStoreTest() {
     DCSEngine::initialize(hp);
 
     DCSUpCounterWithLoadAndAsyncSR count0("count0", 8);
-    DCSRegister8Bits reg8_0("reg8_0");
+    DCSRegister8BitsWithEnable reg8_0("reg8_0");
     DCSDisplayNBits disp0("DATA", 8);
     DCSDisplayNBits disp1("OUT", 8);
     DCSDisplayNBits disp2("COUT", 9);

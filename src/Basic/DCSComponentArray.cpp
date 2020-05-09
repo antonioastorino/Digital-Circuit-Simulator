@@ -22,7 +22,9 @@
 #include "DCSOr.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRegister1Bit.hpp"
+#include "DCSRegister1BitWithEnable.hpp"
 #include "DCSRegister8Bits.hpp"
+#include "DCSRegister8BitsWithEnable.hpp"
 #include "DCSSRLatch.hpp"
 #include "DCSTriStateBuffer.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
@@ -116,7 +118,9 @@ template class DCSComponentArray<DCSDFlipFlop>;
 template class DCSComponentArray<DCSDLatchAsyncSR>;
 template class DCSComponentArray<DCSDFlipFlopAsyncSR>;
 template class DCSComponentArray<DCSRegister1Bit>;
+template class DCSComponentArray<DCSRegister1BitWithEnable>;
 template class DCSComponentArray<DCSRegister8Bits>;
+template class DCSComponentArray<DCSRegister8BitsWithEnable>;
 template class DCSComponentArray<DCSJKLatchMasterSlaveAsyncSR>;
 template class DCSComponentArray<DCSClockDivider>;
 template class DCSComponentArray<DCSFullAdder>;

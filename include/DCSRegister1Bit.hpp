@@ -10,12 +10,11 @@ class DCSNode;
  * @class DCSRegister1Bit
  * 
  * @pinout
- * In 0 - Enable
+ * In 0 - Data in
  * In 1 - Clock
  * In 2 - Clear
  * In 3 - Preset
  * In 4 - Load
- * In 5 - Data in
  *
  * Out 0 - Data out
  * @end_pinout
@@ -38,7 +37,7 @@ class DCSNode;
  * `Load` must be asserted at least `3 tau` before `Clock`'s falling edge.
  * `Data` must be stable at least `2 tau` before `Clock`'s falling edge.
  * `Data` and `Load` have to both be stable for at least `1 tau` after `Clock`'s falling edge.
- * `Clear` and `Preset` work the same as in the SR latch. Use them with `Enable` low.
+ * `Clear` and `Preset` work the same as in the SR latch.
  */
 class DCSRegister1Bit : public DCSComponent {
 private:
@@ -47,7 +46,6 @@ private:
     DCSAnd and0;
     DCSAnd and1;
     DCSOr or0;
-    DCSTriStateBuffer tris0;
     DCSDFlipFlopAsyncSR dffsr0;
 
 public:

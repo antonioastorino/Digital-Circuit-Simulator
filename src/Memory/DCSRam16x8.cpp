@@ -1,47 +1,53 @@
 #include "DCSRam16x8.hpp"
 #include "DCSLog.hpp"
-#include "DCSRegister1Bit.hpp"
-#include "DCSRegister8Bits.hpp"
+#include "DCSRegister1BitWithEnable.hpp"
+#include "DCSRegister8BitsWithEnable.hpp"
 
 DCSRam16x8::DCSRam16x8(std::string name)
     : DCSComponent(name, false),
       regArray(name + "-Reg8Arr0_", 16),
       andArray0(name + "-ENAndArr0_", 16),
       andArray1(name + "-WRAndArr1_", 16),
-      ctrlNodeArray({name + "-Enable", // 0
-                     name + "-Clock",  // 1
-                     name + "-Clear",  // 2
-                     name + "-Preset", // 3
-                     name + "-Write"}, // 4
+      ctrlNodeArray({name + "-Clock",   // 13
+                     name + "-Clear",   // 14
+                     name + "-Preset",  // 15
+                     name + "-Write",   // 16
+                     name + "-Enable"}, // 12
                     5),
       dataNodeArray(name + "-dataNodeArr0_", 8),
       outNodeArray(name + "-outNodeArr0_", 8),
       delArray(name + "-inDelArray_", 8),
       dec0(name + "-dec0") {
 
+    // add a unit delay to data for synchronization with clock
     delArray.connect(&dataNodeArray);
 
     for (uint16_t regNum = 0; regNum < 16; regNum++) {
-        // connect each decoder output pin to and gates at input 0
-        // either for anding the Enable signal or the Write signal
-        /* Enable */
-        dec0.connect(andArray0[regNum], regNum, 0);
-        ctrlNodeArray.connect(andArray0[regNum], 0, 1);
-        andArray0.connect(regArray[regNum], regNum, 0);
-        /* Write */
-        dec0.connect(andArray1[regNum], regNum, 0);
-        ctrlNodeArray.connect(andArray1[regNum], 4, 1);
-        andArray1.connect(regArray[regNum], regNum, 4);
         // connect to register control pins
+        ctrlNodeArray.connect(regArray[regNum], 0, 8); // Clock
+        ctrlNodeArray.connect(regArray[regNum], 1, 9); // Clear
+        ctrlNodeArray.connect(regArray[regNum], 2, 10); // Preset
 
-        ctrlNodeArray.connect(regArray[regNum], 1, 1); // Clock
-        ctrlNodeArray.connect(regArray[regNum], 2, 2); // Clear
-        ctrlNodeArray.connect(regArray[regNum], 3, 3); // Preset
+        // connect each decoder output pin to and gates at input 0
+        // either for AND'ing the Enable signal or the Write signal
+
+        /* Write */
+        dec0.connect(andArray1[regNum], regNum, 0); // connect decoder outputs to each And at in 0
+        ctrlNodeArray.connect(andArray1[regNum], 3, 1); // connect Write to each And at 1
+        andArray1.connect(regArray[regNum], regNum,
+                          11); // connect the AND'ed result to Load of each register
+
+        /* Enable */
+        dec0.connect(andArray0[regNum], regNum, 0); // connect decoder outputs to each And at in 0
+        ctrlNodeArray.connect(andArray0[regNum], 4, 1); // connect Enable to each And at 1
+        andArray0.connect(regArray[regNum], regNum,
+                          12); // connect the AND'ed result to Enable of each register
 
         for (uint16_t j = 0; j < 8; j++) {
-            // connect data in to all register data ins
-            dataNodeArray.connect(regArray[regNum], j, 5 + j); // Data
+            // connect Data in to all registers' Data in's
+            dataNodeArray.connect(regArray[regNum], j, j); // Data
         }
+        // connect all Out's of individual registers to common output
         regArray[regNum]->connect(&outNodeArray);
     }
 
@@ -59,14 +65,14 @@ DCSComponent* DCSRam16x8::getOutComponent(uint16_t outPinNum) {
 }
 
 DCSComponent* DCSRam16x8::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum < 5) {
-        return ctrlNodeArray.getInComponent(inPinNum);
-    } else if (inPinNum < 13) {
-        inPinNum -= 5;
+    if (inPinNum < 8) { // Data in
         return delArray.getInComponent(inPinNum);
-    } else if (inPinNum < 17) {
-        inPinNum -= 13;
+    } else if (inPinNum < 12) { // Address
+        inPinNum -= 8;
         return dec0.getInComponent(inPinNum);
+    } else if (inPinNum < 17) { // Control signals
+        inPinNum -= 12;
+        return ctrlNodeArray.getInComponent(inPinNum);
     }
     DCSLog::error(this->name, 11);
     return nullptr;

@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Thu May  7 23:28:30 CEST 2020
+## Documentation automatically generated on Sat May  9 12:47:53 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -223,19 +223,18 @@ AND gate with 3 inputs
 
 #### Pinout
 ```
-In 0    - Output Enable
-In 1    - Clock
-In 2    - Clear
-In 3    - Preset
-In 4    - Load
-In 5    - Data in 0
-In 6    - Data in 1
-In 7    - Data in 2
-In 8    - Data in 3
-In 9    - Data in 4
-In 10   - Data in 5
-In 11   - Data in 6
-In 12   - Data in 7
+In 0    - Data in 0
+In 1    - Data in 1
+In 2    - Data in 2
+In 3    - Data in 3
+In 4    - Data in 4
+In 5    - Data in 5
+In 6    - Data in 6
+In 7    - Data in 7
+In 8    - Clock
+In 9    - Clear
+In 10   - Preset
+In 11   - Load
 
 Out 0   - Data out 0
 Out 1   - Data out 1
@@ -355,22 +354,23 @@ Ram module of 16 bytes.
 
 #### Pinout
 ```
-In 0    - Output enable
-In 1    - Clock
-In 2    - Clear
-In 3    - Preset
-In 4    - Write
-In 6    - Data in 1
-In 7    - Data in 2
-In 8    - Data in 3
-In 9    - Data in 4
-In 10   - Data in 5
-In 11   - Data in 6
-In 12   - Data in 7
-In 13   - Address 0
-In 14   - Address 1
-In 15   - Address 2
-In 16   - Address 3
+In 0    - Data in 0
+In 1    - Data in 1
+In 2    - Data in 2
+In 3    - Data in 3
+In 4    - Data in 4
+In 5    - Data in 5
+In 6    - Data in 6
+In 7    - Data in 7
+In 8    - Address 0
+In 9    - Address 1
+In 10   - Address 2
+In 11   - Address 3
+In 12   - Clock
+In 13   - Clear
+In 14   - Preset
+In 15   - Write
+In 16   - Output enable
 
 Out 0   - Data out 0
 Out 1   - Data out 1
@@ -398,15 +398,53 @@ Out 7   - Data out 7
 ```
 
 
-When inputs 13 to 16 (address) change, the output changes after 3 tau, independently of the
-clock. Since the Load signal of each individual register (here called Write - input 4) is AND'ed
-with the address decoder, compared to a single register, the RAM needs the address to be ready 3
-taus before the Load of each address.
+`Address` changes, the output changes after `3 tau`, independently of the `Clock`. Since `Load`
+of each individual register (here called `Write`) is AND'ed with the address decoder, compared to
+a single register, the RAM needs `Address` to be ready `3 tau` before `Load` is asserted.
 
 
 ## Class DCSComponentArray
 
 Generates an array of identical components.
+
+
+## Class DCSRegister1BitWithEnable
+
+
+#### Pinout
+```
+In 0 - Data in
+In 1 - Clock
+In 2 - Clear
+In 3 - Preset
+In 4 - Load
+In 5 - Enable
+
+Out 0 - Data out
+```
+
+
+#### Time diagram
+```
+|       |  ____
+| LOAD: | X    XXXXXXXX
+|       |  ^ start
+|       |   ___
+| DATA: | XX   XXXXXXXX
+|       | ____  _______
+| CLK:  |     __
+|       |          ____
+| Q:    | _________
+|       | ________
+|!Q:    |         _____
+|                  ^ ready
+```
+
+
+`Load` must be asserted at least `3 tau` before `Clock`'s falling edge. Data` must be stable at
+least `2 tau` before `Clock`'s falling edge. `Data` and `Load` have to both be stable for at least
+`1 tau` after `Clock`'s falling edge. `Clear` and `Preset` work the same as in the SR latch. Use
+them with `Enable` low.
 
 
 ## Class DCSClockDivider
@@ -517,12 +555,11 @@ NOR gate
 
 #### Pinout
 ```
-In 0 - Enable
+In 0 - Data in
 In 1 - Clock
 In 2 - Clear
 In 3 - Preset
 In 4 - Load
-In 5 - Data in
 
 Out 0 - Data out
 ```
@@ -548,7 +585,7 @@ Out 0 - Data out
 `Load` must be asserted at least `3 tau` before `Clock`'s falling edge.
 `Data` must be stable at least `2 tau` before `Clock`'s falling edge.
 `Data` and `Load` have to both be stable for at least `1 tau` after `Clock`'s falling edge.
-`Clear` and `Preset` work the same as in the SR latch. Use them with `Enable` low.
+`Clear` and `Preset` work the same as in the SR latch.
 
 
 ## Class DCSComponent
@@ -608,6 +645,18 @@ NOT gate
 
 D Flip-flop with asynchronous Set and Reset
 
+#### Pinout
+```
+In 0   - Data
+In 1   - Clock
+In 2   - Reset
+In 3   - Preset
+
+Out 0  - Q
+Out 1  - !Q
+```
+
+
 
 ## Class DCSEngine
 
@@ -617,6 +666,38 @@ Static class providing
 ## Class DCSClockSignal
 
 Generates a square wave with period 2 * `halfPeriod`
+
+
+## Class DCSRegister8BitsWithEnable
+
+8-bit register made up of 8 1-bit registers sharing the same control signals
+
+#### Pinout
+```
+In 0    - Data in 0
+In 1    - Data in 1
+In 2    - Data in 2
+In 3    - Data in 3
+In 4    - Data in 4
+In 5    - Data in 5
+In 6    - Data in 6
+In 7    - Data in 7
+In 8    - Clock
+In 9    - Clear
+In 10   - Preset
+In 11   - Load
+In 12   - Output Enable
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+Out 2   - Data out 2
+Out 3   - Data out 3
+Out 4   - Data out 4
+Out 5   - Data out 5
+Out 6   - Data out 6
+Out 7   - Data out 7
+```
+
 
 
 ## Class DCSNand3
