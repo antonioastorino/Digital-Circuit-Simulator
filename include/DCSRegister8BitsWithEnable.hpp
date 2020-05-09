@@ -1,3 +1,10 @@
+
+#ifndef DCSRegister8BitsWithEnable_hpp
+#define DCSRegister8BitsWithEnable_hpp
+#include "DCSComponentArray.hpp"
+class DCSRegister1BitWithEnable;
+class DCSNode;
+
 /**
  * @class DCSRegister8BitsWithEnable
  * 8-bit register made up of 8 1-bit registers sharing the same control signals
@@ -27,13 +34,6 @@
  * Out 7   - Data out 7
  * @end_pinout
  */
-
-#ifndef DCSRegister8BitsWithEnable_hpp
-#define DCSRegister8BitsWithEnable_hpp
-#include "DCSComponentArray.hpp"
-class DCSRegister1BitWithEnable;
-class DCSNode;
-
 class DCSRegister8BitsWithEnable : public DCSComponent {
 private:
     DCSComponentArray<DCSRegister1BitWithEnable> registerArray;

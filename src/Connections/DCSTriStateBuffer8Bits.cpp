@@ -13,13 +13,14 @@ DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name)
 }
 
 DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum == 0) {
-        return &node0;
-    } else if (inPinNum < 9) {
-        uint16_t elementNumber = inPinNum - 1;
+    if (inPinNum < 8) {
+        uint16_t elementNumber = inPinNum;
         inPinNum               = 0;
         // TODO: check if the buffer element can be directly returned
         return bufferArray[elementNumber]->getInComponent(inPinNum);
+    } else if (inPinNum == 8) {
+        inPinNum = 0;
+        return &node0;
     }
     DCSLog::error(this->name, 11);
     return nullptr;

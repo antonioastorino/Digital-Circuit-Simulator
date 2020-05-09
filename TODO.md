@@ -1,6 +1,9 @@
+[ ] BUG: makeSignal("0XXXX") starts with 1
 [X] make V-zoom longer
 [X] make Component->initialized private
 [ ] check if it is necessary to know who has updated a component whose input is connected to a tristate component
+[ ] replace forward declarations in Register1Bit with include 
+[ ] create a master clock
 [X] nothing loaded does not erase the loaded file list
 [X] change `</h1>` into `</h2>` in logic analyzer
 [X] change this:
