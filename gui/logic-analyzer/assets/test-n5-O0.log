@@ -1,0 +1,13 @@
+-----------
+Nand 3 test
+-----------
+ In0:0 In1:0 In2:0 Out:1 STEP:-1
+ In0:0 In1:0 In2:0 Out:1 STEP:0
+ In0:1 In1:0 In2:0 Out:1 STEP:1
+ In0:0 In1:1 In2:0 Out:1 STEP:2
+ In0:1 In1:1 In2:0 Out:1 STEP:3
+ In0:0 In1:0 In2:1 Out:1 STEP:4
+ In0:1 In1:0 In2:1 Out:1 STEP:5
+ In0:0 In1:1 In2:1 Out:1 STEP:6
+ In0:1 In1:1 In2:1 Out:1 STEP:7
+ In0:0 In1:0 In2:0 Out:0 STEP:8

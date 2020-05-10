@@ -1,0 +1,15 @@
+-------------
+Not loop test
+-------------
+ N0:0 N1:0 N2:1 STEP:-1
+ N0:0 N1:1 N2:1 STEP:0
+ N0:0 N1:1 N2:0 STEP:1
+ N0:1 N1:1 N2:0 STEP:2
+ N0:1 N1:0 N2:0 STEP:3
+ N0:1 N1:0 N2:1 STEP:4
+ N0:0 N1:0 N2:1 STEP:5
+ N0:0 N1:1 N2:1 STEP:6
+ N0:0 N1:1 N2:0 STEP:7
+ N0:1 N1:1 N2:0 STEP:8
+ N0:1 N1:0 N2:0 STEP:9
+ N0:1 N1:0 N2:1 STEP:10

@@ -3,7 +3,7 @@
 #include <chrono>
 #include <mutex>
 #include <vector>
-
+#define PROFILING 1
 #if PROFILING
 #define PROFILE_INIT(testNum) DCSTimer::initialize(testNum)
 #define PROFILE() DCSTimer timer = DCSTimer(__FUNCTION__)

@@ -167,7 +167,7 @@ void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
 };
 
 void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut) {
-
+    PROFILE();
     // store the engine state
     static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
     static std::vector<DCSComponent*> inputVector_tmp(DCSEngine::inputVector.size());

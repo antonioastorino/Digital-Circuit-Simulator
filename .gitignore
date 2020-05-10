@@ -1,6 +1,4 @@
 build/objects
 makedoc.sh
-gui/logic-analyzer/assets/*.log
-gui/performance-analyzer/assets/*.log
 .DS_Store
 .vscode

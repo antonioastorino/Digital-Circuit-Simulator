@@ -1,0 +1,29 @@
+---------------------------------
+D-Latch with asynchronous SR test
+---------------------------------
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:-1
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:0
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:1
+ DATA:0 EN:1 R:0 S:0  Q:0 !Q:1 STEP:2
+ DATA:0 EN:1 R:0 S:0  Q:0 !Q:1 STEP:3
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:4
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:5
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:6
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:7
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:8
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:1 STEP:9
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:10
+ DATA:1 EN:1 R:0 S:0  Q:0 !Q:1 STEP:11
+ DATA:1 EN:1 R:0 S:0  Q:0 !Q:1 STEP:12
+ DATA:0 EN:0 R:0 S:0  Q:0 !Q:0 STEP:13
+ DATA:0 EN:0 R:0 S:0  Q:1 !Q:0 STEP:14
+ DATA:0 EN:0 R:0 S:0  Q:1 !Q:0 STEP:15
+ DATA:1 EN:0 R:0 S:0  Q:1 !Q:0 STEP:16
+ DATA:1 EN:0 R:0 S:0  Q:1 !Q:0 STEP:17
+ DATA:1 EN:0 R:1 S:0  Q:1 !Q:0 STEP:18
+ DATA:1 EN:0 R:1 S:0  Q:0 !Q:0 STEP:19
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:20
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:21
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:22
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:23
+ DATA:1 EN:0 R:0 S:0  Q:0 !Q:1 STEP:24

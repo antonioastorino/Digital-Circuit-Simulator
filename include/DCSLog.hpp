@@ -1,7 +1,6 @@
 #ifndef DCSLog_hpp
 #define DCSLog_hpp
 #define LOG_LEVEL 1
-#define PROFILING 1
 #include <iostream>
 
 class DCSLog {

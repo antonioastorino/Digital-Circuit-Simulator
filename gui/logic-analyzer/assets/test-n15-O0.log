@@ -1,0 +1,20 @@
+-----------------------------------------------
+JK-Latch Master-Slave with asynchronous SR test
+-----------------------------------------------
+ J:0 K:0 CLK:0 Q:0 !Q:1 STEP:0
+ J:0 K:0 CLK:1 Q:0 !Q:1 STEP:28
+ J:1 K:0 CLK:0 Q:0 !Q:1 STEP:56
+ J:1 K:0 CLK:1 Q:0 !Q:1 STEP:84
+ J:0 K:1 CLK:0 Q:1 !Q:0 STEP:112
+ J:0 K:1 CLK:1 Q:1 !Q:0 STEP:140
+ J:1 K:1 CLK:0 Q:0 !Q:1 STEP:168
+ J:1 K:1 CLK:1 Q:0 !Q:1 STEP:196
+ J:0 K:0 CLK:0 Q:1 !Q:0 STEP:224
+ J:0 K:0 CLK:1 Q:1 !Q:0 STEP:252
+ J:1 K:0 CLK:0 Q:1 !Q:0 STEP:280
+ J:1 K:0 CLK:1 Q:1 !Q:0 STEP:308
+ J:0 K:1 CLK:0 Q:1 !Q:0 STEP:336
+ J:0 K:1 CLK:1 Q:1 !Q:0 STEP:364
+ J:1 K:1 CLK:0 Q:0 !Q:1 STEP:392
+ J:1 K:1 CLK:1 Q:0 !Q:1 STEP:420
+ J:0 K:0 CLK:0 Q:1 !Q:0 STEP:448

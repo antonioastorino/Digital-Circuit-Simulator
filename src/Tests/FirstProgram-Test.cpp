@@ -3,13 +3,11 @@
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRam16x8.hpp"
-#include "DCSTimer.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 void firstProgramTest() {
     DCSLog::printTestName("First program");
-    PROFILE_WITH_CUSTOM_NAME("App");
     // Instruction set
     uint16_t LDA = 0b0000; // Load in reg A
     uint16_t STA = 0b0000; // Store A in RAM
@@ -31,20 +29,14 @@ void firstProgramTest() {
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
     uint16_t hcp = 15;
-    {
-        PROFILE_WITH_CUSTOM_NAME("Init engine");
-        DCSEngine::initialize(hcp);
-    }
+    DCSEngine::initialize(hcp);
 
     /*
     IMPORTANT: initialize() and DCSEngine::programMemory()
     */
     DCSRam16x8 ram("r");
 
-    {
-        PROFILE_WITH_CUSTOM_NAME("Load memory");
-        DCSEngine::programMemory(&ram, program);
-    }
+    DCSEngine::programMemory(&ram, program);
 
     DCSComponentArray<DCSInput> inArray0("In", ram.getNumOfInPins());
     DCSComponentArray<DCSOutput> outArray0("Out", 5);
@@ -70,8 +62,5 @@ void firstProgramTest() {
     inArray0[14]->makeSignal(0); // Preset
     inArray0[15]->makeSignal(0); // Write
     inArray0[16]->makeSignal(1); // Enable
-    {
-        PROFILE_WITH_CUSTOM_NAME("Run loop");
-        DCSEngine::run(16 * hcp, true);
-    }
+    DCSEngine::run(16 * hcp, true);
 }
