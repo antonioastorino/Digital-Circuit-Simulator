@@ -192,20 +192,20 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
         DCSDisplayNBits dispOut("OUT", 8);
 
         inArray0.connect(memory); // control bits
-        inArray0.connect(&dispAddr, {13, 16}, {0, 3});
-        inArray0.connect(&dispData, {5, 12}, {0, 7});
-        inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
+        inArray0.connect(&dispData, {0, 7}, {0, 7});
+        inArray0.connect(&dispAddr, {8, 11}, {0, 3});
+        inArray0.connect(&outArray0, {12, 16}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
         memory->connect(&dispOut);
 
-        inArray0[0]->makeSignal(0); // Enable
-        inArray0[1]->makeSquareWave(hcp);
-        inArray0[2]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
-        inArray0[3]->makeSignal(0);                         // Preset
-        inArray0[4]->makeSignal(1);                         // Write
-        inArray0[13]->makeSquareWave(2 * hcp);              // Addr 0
-        inArray0[14]->makeSquareWave(4 * hcp);              //  Addr 1
-        inArray0[15]->makeSquareWave(8 * hcp);              //  Addr 2
-        inArray0[16]->makeSquareWave(16 * hcp);             //  Addr 3
+        inArray0[8]->makeSquareWave(2 * hcp);              // Addr 0
+        inArray0[9]->makeSquareWave(4 * hcp);              //  Addr 1
+        inArray0[10]->makeSquareWave(8 * hcp);              //  Addr 2
+        inArray0[11]->makeSquareWave(16 * hcp);             //  Addr 3
+        inArray0[12]->makeSquareWave(hcp);
+        inArray0[13]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
+        inArray0[14]->makeSignal(0);                         // Preset
+        inArray0[15]->makeSignal(1);                         // Write
+        inArray0[16]->makeSignal(0); // Enable
 
         std::stringstream s[8];
         for (int i = 0; i < 16; i++) {
@@ -217,7 +217,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
             }
         }
         for (int i = 0; i < 8; i++) {
-            inArray0[5 + i]->makeSignal(s[i].str(), true);
+            inArray0[i]->makeSignal(s[i].str(), true);
         }
 
         

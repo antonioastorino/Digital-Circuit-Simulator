@@ -54,22 +54,22 @@ void firstProgramTest() {
     DCSDisplayNBits dispOut("OUT", 8);
 
     inArray0.connect(&ram);
-    inArray0.connect(&dispAddr, {13, 16}, {0, 3});
-    inArray0.connect(&dispData, {5, 12}, {0, 7});
-    inArray0.connect(&outArray0, {0, 4}, {0, 4}, {"OE", "CLK", "R", "S", "WR"});
+    inArray0.connect(&dispData, {0, 7}, {0, 7});
+    inArray0.connect(&dispAddr, {8, 11}, {0, 3});
+    inArray0.connect(&outArray0, {12, 16}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
     ram.connect(&dispOut);
 
-    inArray0[0]->makeSignal(1); // Enable
-    inArray0[1]->makeSignal(1); // CLK
-    inArray0[2]->makeSignal(0); // Clear
-    inArray0[3]->makeSignal(0); // Preset
-    inArray0[4]->makeSignal(0); // Write
     inArray0[5]->makeSignal(std::string("0000011100"));
     inArray0[7]->makeSignal(std::string("0000011100"));
-    inArray0[13]->makeSquareWave(1 * hcp);
-    inArray0[14]->makeSquareWave(2 * hcp);
-    inArray0[15]->makeSquareWave(4 * hcp);
-    inArray0[16]->makeSquareWave(8 * hcp);
+    inArray0[8]->makeSquareWave(1 * hcp);
+    inArray0[9]->makeSquareWave(2 * hcp);
+    inArray0[10]->makeSquareWave(4 * hcp);
+    inArray0[11]->makeSquareWave(8 * hcp);
+    inArray0[12]->makeSignal(1); // CLK
+    inArray0[13]->makeSignal(0); // Clear
+    inArray0[14]->makeSignal(0); // Preset
+    inArray0[15]->makeSignal(0); // Write
+    inArray0[16]->makeSignal(1); // Enable
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
         DCSEngine::run(16 * hcp, true);
