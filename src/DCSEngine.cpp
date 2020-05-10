@@ -209,11 +209,17 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
 
         std::stringstream s[8];
         for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 4; j++) { // store instruction in MSB
-                s[j + 4] << (program[i][0] >> j & 1);
-            }
-            for (int j = 0; j < 4; j++) { // store data in LSB
-                s[j] << (program[i][1] >> j & 1);
+            if (program[i][0] == 0) {         // store pure data
+                for (int j = 0; j < 8; j++) {
+                    s[j] << (program[i][1] >> j & 1);
+                }
+            } else {                          // store instruction-data pair
+                for (int j = 0; j < 4; j++) { // store instruction in MSB
+                    s[j + 4] << (program[i][0] >> j & 1);
+                }
+                for (int j = 0; j < 4; j++) { // store data in LSB
+                    s[j] << (program[i][1] >> j & 1);
+                }
             }
         }
         for (int i = 0; i < 8; i++) {
@@ -221,7 +227,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
         }
 
         // program memory
-        DCSEngine::run(16 * hcp, true, printOut);
+        DCSEngine::run(34 * hcp, true, printOut);
 
         memory->disconnect();
     }
