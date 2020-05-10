@@ -15,14 +15,36 @@
 
 void Computer() {
     DCSLog::printTestName("Computer");
-    uint16_t masterClockHP = 13;
-    DCSEngine::initialize(masterClockHP);
+    uint16_t masterClockHP = 20;
+
+            // Instruction set
+    uint16_t LDA = 0b0001; // Load in reg A
+    uint16_t STA = 0b0000; // Store A in RAM
+    uint16_t LDI = 0b0101; // Load immediate to A reg
+    uint16_t ADD = 0b0010; // Add value from location in RAM to reg A and store in B
+    uint16_t SUB = 0b0011; // Subtract value from location in RAM to reg A and store in B
+    uint16_t JMP = 0b0110; // Jump
+    uint16_t OUT = 0b1110; // Output
+    uint16_t HLT = 0b1111; // Halt
+
+    // the instruction is the MSHB and the data is the LSHB
+    uint16_t program[16][2] = {{LDA, 14},  // instruction and operand 0
+                               {ADD, 15}, // instruction and operand 1
+                               {OUT, 0},  // instruction and operand 2
+                               {0, 0}, // instruction and operand 3
+                               {0, 0},  // instruction and operand 4
+                               {0, 0},  // instruction and operand 5
+                               {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0},
+                               {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
     // RAM
+    DCSEngine::initialize(masterClockHP);
     DCSRam16x8 ram("ram");
-    
+    DCSEngine::programMemory(&ram, program, false);
+
     // ALU
     DCSALU alu("alu");
+
 
     // Program counter
     DCSUpCounterWithLoadAndAsyncSR pc("pc", 4);
@@ -188,13 +210,15 @@ void Computer() {
     zero4[3]->makeSignal(0);
 
     // test signals
-    inAO.makeSignal("11000", true);
-    inBO.makeSignal("00100", true);
-    inIO.makeSignal("000110", true);
-    inEO.makeSignal("000001", true);
-    inSU.makeSignal("0001110", true);
-    inAI.makeSignal("1000000", true);
-    inBI.makeSignal("0100001", true);
+    inResMAR.makeSignal("10", true); // reset MAR
+    inRO.makeSignal(1);
+    // inAO.makeSignal("11000", true);
+    // inBO.makeSignal("00100", true);
+    // inIO.makeSignal("000110", true);
+    // inEO.makeSignal("000001", true);
+    // inSU.makeSignal("0001110", true);
+    // inAI.makeSignal("1000000", true);
+    // inBI.makeSignal("0100001", true);
 
     inA[0]->makeSignal(0);
     inA[1]->makeSignal(1);
@@ -205,5 +229,5 @@ void Computer() {
     inA[6]->makeSignal(0);
     inA[7]->makeSignal(0);
 
-    DCSEngine::run(20 * masterClockHP, true); //*/
+    DCSEngine::run(20 * masterClockHP, false); //*/
 }
