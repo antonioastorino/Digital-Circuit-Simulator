@@ -4,6 +4,7 @@
 [ ] check if it is necessary to know who has updated a component whose input is connected to a tristate component
 [ ] replace forward declarations in Register1Bit with include 
 [ ] create a master clock
+[ ] add pin-in-range check in connect()
 [X] nothing loaded does not erase the loaded file list
 [X] change `</h1>` into `</h2>` in logic analyzer
 [X] change this:
