@@ -40,13 +40,13 @@ public:
 	static void addInput(DCSInput* input);
 	static void addWire(DCSWire* p_wire);
 	static void addDisplay(DCSDisplayNBits* p_display);
-	static void run(uint64_t steps=10, bool sampling=false);
+	static void run(uint64_t steps=10, bool sampling=false, bool printOut=true);
 	static int getClockPeriod();
 	static int getStepNumber();
 	static void setSampling(bool sampling);
 	static void setHalfClockPeriod(uint16_t numberOfTimeSteps);
 	static void restart();
-	static void programMemory(DCSRam16x8 * memory, uint16_t program[16][2]);
+	static void programMemory(DCSRam16x8 * memory, uint16_t program[16][2], bool printOut=true);
 };
 
 #endif /* DCSEngine_hpp */

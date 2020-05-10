@@ -31,7 +31,7 @@ void DCSEngine::addInput(DCSInput* input) { inputVector.push_back(input); }
 void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
-void DCSEngine::run(uint64_t steps, bool sampling) {
+void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
     DCSEngine::sampling   = sampling;
     DCSEngine::stepNumber = 0;
     {
@@ -45,7 +45,8 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
         // Check that all the components are initialized
         checkInitialization();
         // Print the initial state -- step -1
-        printLogicLevels();
+        if (printOut)
+            printLogicLevels();
     }
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
@@ -53,9 +54,8 @@ void DCSEngine::run(uint64_t steps, bool sampling) {
             updateInputs();
             updateComponents();
             propagateValues();
-#if LOG_LEVEL > 0
-            printLogicLevels();
-#endif
+            if (printOut)
+                printLogicLevels();
         }
     }
 }
@@ -166,7 +166,7 @@ void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
     clockPeriod = 2 * numberOfTimeSteps;
 };
 
-void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
+void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut) {
 
     // store the engine state
     static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
@@ -197,33 +197,31 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2]) {
         inArray0.connect(&outArray0, {12, 16}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
         memory->connect(&dispOut);
 
-        inArray0[8]->makeSquareWave(2 * hcp);              // Addr 0
-        inArray0[9]->makeSquareWave(4 * hcp);              //  Addr 1
-        inArray0[10]->makeSquareWave(8 * hcp);              //  Addr 2
-        inArray0[11]->makeSquareWave(16 * hcp);             //  Addr 3
+        inArray0[8]->makeSquareWave(2 * hcp);   // Addr 0
+        inArray0[9]->makeSquareWave(4 * hcp);   //  Addr 1
+        inArray0[10]->makeSquareWave(8 * hcp);  //  Addr 2
+        inArray0[11]->makeSquareWave(16 * hcp); //  Addr 3
         inArray0[12]->makeSquareWave(hcp);
         inArray0[13]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
         inArray0[14]->makeSignal(0);                         // Preset
         inArray0[15]->makeSignal(1);                         // Write
-        inArray0[16]->makeSignal(0); // Enable
+        inArray0[16]->makeSignal(0);                         // Enable
 
         std::stringstream s[8];
         for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 4; j++) { //
-                s[j] << (program[i][0] >> j & 1);
+            for (int j = 0; j < 4; j++) { // store instruction in MSB
+                s[j + 4] << (program[i][0] >> j & 1);
             }
-            for (int j = 0; j < 4; j++) {
-                s[j + 4] << (program[i][1] >> j & 1);
+            for (int j = 0; j < 4; j++) { // store data in LSB
+                s[j] << (program[i][1] >> j & 1);
             }
         }
         for (int i = 0; i < 8; i++) {
             inArray0[i]->makeSignal(s[i].str(), true);
         }
 
-        
         // program memory
-        DCSEngine::run(16 * hcp, true);
-
+        DCSEngine::run(16 * hcp, true, printOut);
 
         memory->disconnect();
     }
