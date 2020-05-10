@@ -1,4 +1,5 @@
 build/objects
+doc/head.md
 makedoc.sh
 .DS_Store
 .vscode
