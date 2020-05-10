@@ -38,5 +38,5 @@ void register8BitsTest() {
     inArray[10]->makeSignal(transitions{6, 1}, 0, true);
     inArray[11]->makeSignal(transitions{1, 3, 1}, 0, true); // LD
 
-    DCSEngine::run(hcp * 15, false);
+    DCSEngine::run(hcp * 15, true);
 }

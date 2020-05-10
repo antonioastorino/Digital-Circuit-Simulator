@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Sun May 10 15:45:35 CEST 2020
+## Documentation automatically generated on Sun May 10 22:33:18 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -718,7 +718,8 @@ Out 1  - !Q
 
 ## Class DCSEngine
 
-Static class providing
+Static class providing all the functionalities needed to manage the system initialization and evolution.
+
 
 
 ## Class DCSClockSignal

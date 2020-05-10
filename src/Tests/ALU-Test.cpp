@@ -30,17 +30,15 @@ void aluTest() {
 		alu.connect(&sum);
 		alu.connect(&dispE);
 
-		// inA[0]->makeSignal(1);
+		inA[3]->makeSignal(1);
+		inA[4]->makeSignal(1);
+		inA[5]->makeSignal(1);
+		inA[6]->makeSignal(1);
 		inB[0]->makeSignal(1);
-		inB[1]->makeSignal(0);
-		inB[2]->makeSignal(0);
-		inB[3]->makeSignal(0);
-		inB[4]->makeSignal(0);
 		inB[5]->makeSignal(1);
-		inB[6]->makeSignal(0);
-		inB[7]->makeSignal(0);
+
 		su.makeSignal(1);
 
-		DCSEngine::run(4 * masterClockHP, false);
+		DCSEngine::run(1 * masterClockHP, false);
 	}
 }

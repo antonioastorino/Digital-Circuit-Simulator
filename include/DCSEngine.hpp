@@ -10,7 +10,8 @@ class DCSRam16x8;
 
 /**
  * @class DCSEngine
- * Static class providing 
+ * Static class providing all the functionalities needed to manage the system initialization and evolution.
+ * 
  */
 class DCSEngine {
 private:

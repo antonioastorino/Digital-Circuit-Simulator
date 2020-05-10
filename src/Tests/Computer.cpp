@@ -29,15 +29,22 @@ void Computer() {
 
     // the instruction is the MSHB and the data is the LSHB
     uint16_t program[16][2] = {
-        {LDA, 14}, // instruction and operand 0
-        {ADD, 15}, // instruction and operand 1
-        {OUT, 0},  // instruction and operand 2
-        {0, 0},    // instruction and operand 3
-        {0, 0},    // instruction and operand 4
-        {0, 0},    // instruction and operand 5
-        {0, 0},    {0, 0}, {0, 0}, {0, 0},  {0, 0},
-        {0, 0},    {0, 0}, {0, 0}, {0, 28}, // store 28 at location 14
-        {0, 14}                             // store 14 at location 15
+        {LDA, 14}, // store LDA and 14 at location 0
+        {ADD, 15}, // store ADD and 15 at location1
+        {OUT, 0},  // store OUT and 0 at location2
+        {0, 0},    // store 0 at location 3
+        {0, 0},    // store 0 at location 4
+        {0, 0},    // store 0 at location 5
+        {0, 0},    // store 0 at location 6
+        {0, 0},    // store 0 at location 7
+        {0, 0},    // store 0 at location 8
+        {0, 0},    // store 0 at location 9
+        {0, 0},    // store 0 at location 10
+        {0, 0},    // store 0 at location 11
+        {0, 0},    // store 0 at location 12
+        {0, 0},    // store 0 at location 13
+        {0, 28},   // store 28 at location 14
+        {0, 14}    // store 14 at location 15
     };
 
     // RAM
@@ -61,11 +68,11 @@ void Computer() {
     clockSignal.makeSquareWave(masterClockHP, true);
 
     // registers
-    DCSRegister8Bits regA("regA"); // A register
-    DCSRegister8Bits regB("regB"); // B register
-    DCSRegister8Bits regI("regI"); // Instruction register
+    DCSRegister8Bits regA("regA");     // A register
+    DCSRegister8Bits regB("regB");     // B register
+    DCSRegister8Bits regI("regI");     // Instruction register
     DCSRegister8Bits regOut("regOut"); // Output register
-    DCSRegister4Bits mar("mar"); // Memory address register
+    DCSRegister4Bits mar("mar");       // Memory address register
 
     // displays
     DCSDisplayNBits dispA("outA", 8);      // A register output display
@@ -124,12 +131,12 @@ void Computer() {
     DCSTriStateBuffer8Bits trisPC("trisPC");
 
     // connect to registers' and RAM's data input
-    bus.connect(&regA, {0, 7}, {0, 7}); // Data input from the bus
-    bus.connect(&regB, {0, 7}, {0, 7}); // Data input from the bus
-    bus.connect(&ram, {0, 7}, {0, 7});  // Data input from the bus
-    ram.connect(&regI, {0, 7}, {0, 7}); // Data from RAM to I register
-    bus.connect(&pc, {0, 3}, {5, 8});   // PC Address from bus
-    bus.connect(&mar, {0, 3}, {0, 3});  // PC Address from bus
+    bus.connect(&regA, {0, 7}, {0, 7});   // Data input from the bus
+    bus.connect(&regB, {0, 7}, {0, 7});   // Data input from the bus
+    bus.connect(&ram, {0, 7}, {0, 7});    // Data input from the bus
+    ram.connect(&regI, {0, 7}, {0, 7});   // Data from RAM to I register
+    bus.connect(&pc, {0, 3}, {5, 8});     // PC Address from bus
+    bus.connect(&mar, {0, 3}, {0, 3});    // PC Address from bus
     bus.connect(&regOut, {0, 7}, {0, 7}); // bus to output register
 
     // connect component data out to displays
@@ -227,27 +234,28 @@ void Computer() {
     zero4[3]->makeSignal(0);
 
     // test signals
-    std::string dn("00"); // do nothing (while resetting the registers)
-    /*  */ inResA.makeSignal("10", true); // initialize by resetting the registers
-    /*  */ inResB.makeSignal("10", true); // initialize by resetting the registers
-    /*  */ inResI.makeSignal("10", true); // initialize by resetting the registers
-    /**/ inResMAR.makeSignal("10", true); // initialize by resetting the registers
-    /* */ inResPC.makeSignal("10", true); // initialize by resetting the registers
-    /*  */ inResO.makeSignal("10", true); // initialize by resetting the registers
+    std::string dn("00");            // do nothing (while resetting the registers)
+    inResA.makeSignal("10", true);   // initialize by resetting the registers
+    inResB.makeSignal("10", true);   // initialize by resetting the registers
+    inResI.makeSignal("10", true);   // initialize by resetting the registers
+    inResMAR.makeSignal("10", true); // initialize by resetting the registers
+    inResPC.makeSignal("10", true);  // initialize by resetting the registers
+    inResO.makeSignal("10", true);   // initialize by resetting the registers
 
-    inSU.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000"+ "00" +"000", true);
-    inAI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "010" + "00" + "001"+ "00" +"000", true);
-    inBI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "010"+ "00" +"000", true);
-    inII.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "000" + "01" + "000"+ "01" +"000", true);
-    inRO.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "010" + "01" + "010"+ "01" +"000", true);
-    inMI.makeSignal(dn + /*fetch*/ "10" + /*dec*/ "100" + "10" + "100"+ "10" +"000", true);
-    inAO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000"+ "00" +"100", true);
-    inBO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000"+ "00" +"000", true);
-    inIO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "100" + "00" + "100"+ "00" +"000", true);
-    inEO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "001"+ "00" +"000", true);
-    inCO.makeSignal(dn + /*fetch*/ "10" + /*dec*/ "000" + "10" + "000"+ "10" +"000", true);
-    inCE.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "000" + "01" + "010"+ "01" +"000", true);
-    inOI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000"+ "00" +"100", true);
+    // manual execution of microcode
+    inSU.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000" + "00" + "000", true);
+    inAI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "010" + "00" + "001" + "00" + "000", true);
+    inBI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "010" + "00" + "000", true);
+    inII.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "000" + "01" + "000" + "01" + "000", true);
+    inRO.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "010" + "01" + "010" + "01" + "000", true);
+    inMI.makeSignal(dn + /*fetch*/ "10" + /*dec*/ "100" + "10" + "100" + "10" + "000", true);
+    inAO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000" + "00" + "100", true);
+    inBO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000" + "00" + "000", true);
+    inIO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "100" + "00" + "100" + "00" + "000", true);
+    inEO.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "001" + "00" + "000", true);
+    inCO.makeSignal(dn + /*fetch*/ "10" + /*dec*/ "000" + "10" + "000" + "10" + "000", true);
+    inCE.makeSignal(dn + /*fetch*/ "01" + /*dec*/ "000" + "01" + "010" + "01" + "000", true);
+    inOI.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000" + "00" + "100", true);
 
     DCSEngine::run(40 * masterClockHP, true); //*/
 }
