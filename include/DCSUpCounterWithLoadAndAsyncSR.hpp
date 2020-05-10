@@ -5,18 +5,11 @@
 
 /**
  * @class DCSUpCounterWithLoadAndAsyncSR
- * This component is an up-counter with syncrhonous load and asynchronous clear and reset.
- * Internally, there are N clock dividers which share most of the control inputs,
- * hence converging to nodes.
- * Input 0 (Count in) of the counter is connected to the first divider only.
- * Inputs 1 to 4 are connected to the node array with indices 0 to 3, respectively.
- * The other N remaining inputs (Data 0 to N-1) are numbered from 5 to 5 + N.
- * Each of them is connected to input 0 (Data) of the corresponding divider.
- * The outputs from 0 to N-1 (Q) correspond to output 0 (array Q) of a divider.
- * Output N (array Count out) corresponds to output 2 (Count out) of the last divider.
+ * N-bit up-counter (N definded upon instantiation) with syncrhonous load and asynchronous clear and reset.
+ * Internally, there are N clock dividers in cascade.
  * 
  * @pinout
- * In 0         - Count in (corresponding to input 5 in the internal divider)
+ * In 0         - Count enable
  * In 1         - Load  - node arrray with index 0
  * In 2         - Clock - node arrray with index 1
  * In 3         - Clear - node arrray with index 2
@@ -37,8 +30,8 @@
  *| LD | C_IN | CLK | Function
  *|----|:-----|:----|:--------
  *|  0 |   0  |  X  |  Pause
- *|  0 |   1  |  X  |  Count
- *|  1 |   X  |  X  |  Load
+ *|  0 |   1  | _|  |  Count
+ *|  1 |   X  | _|  |  Load
  * @end_table
  * 
  * `Cout in` follows the rule of input 5 of the first divider. Therefore, it hast to be set
