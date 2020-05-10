@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Sun May 10 11:12:48 CEST 2020
+## Documentation automatically generated on Sun May 10 15:45:35 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -343,19 +343,12 @@ Out 7  - Data out 7
 
 ## Class DCSUpCounterWithLoadAndAsyncSR
 
-This component is an up-counter with syncrhonous load and asynchronous clear and reset.
-Internally, there are N clock dividers which share most of the control inputs,
-hence converging to nodes.
-Input 0 (Count in) of the counter is connected to the first divider only.
-Inputs 1 to 4 are connected to the node array with indices 0 to 3, respectively.
-The other N remaining inputs (Data 0 to N-1) are numbered from 5 to 5 + N.
-Each of them is connected to input 0 (Data) of the corresponding divider.
-The outputs from 0 to N-1 (Q) correspond to output 0 (array Q) of a divider.
-Output N (array Count out) corresponds to output 2 (Count out) of the last divider.
+N-bit up-counter (N definded upon instantiation) with syncrhonous load and asynchronous clear and reset.
+Internally, there are N clock dividers in cascade.
 
 #### Pinout
 ```
-In 0         - Count in (corresponding to input 5 in the internal divider)
+In 0         - Count enable
 In 1         - Load  - node arrray with index 0
 In 2         - Clock - node arrray with index 1
 In 3         - Clear - node arrray with index 2
@@ -378,8 +371,8 @@ Out N         - Count out
 | LD | C_IN | CLK | Function
 |----|:-----|:----|:--------
 |  0 |   0  |  X  |  Pause
-|  0 |   1  |  X  |  Count
-|  1 |   X  |  X  |  Load
+|  0 |   1  | _|  |  Count
+|  1 |   X  | _|  |  Load
 
 
 
@@ -738,13 +731,36 @@ Generates a square wave with period 2 * `halfPeriod`
 
 This component provides a single access point to several connections with zero latency. It has
 one input and one output. Using this component is essential when building composite components.
-For example, assuming to have component `A` composed of 2 basic componets, `A0` and `A1`. Suppose also
-that `A0` and `A1` should receive the same input `I`. There is no way for `A` to provide a single
-connection to both `A0` and `A1` to the external logic. However, by defining a node `N0`, `A` can connect
-`I` to the input of `N0` and connect the output of `N0` to both `A0` and `A1`.
+For example, assuming to have component `A` composed of 2 basic componets, `A0` and `A1`. Suppose
+also that `A0` and `A1` should receive the same input `I`. There is no way for `A` to provide a
+single connection to both `A0` and `A1` to the external logic. However, by defining a node `N0`,
+`A` can connect `I` to the input of `N0` and connect the output of `N0` to both `A0` and `A1`.
 
 Node are also used to create busses and avoid to connect components to each other directly.
 Instead, one can connect a node to all commponets' inputs and all components' outputs to a node.
+
+
+## Class DCSRegister4Bits
+
+4-bit register made up of 4 1-bit registers sharing the same control signals
+
+#### Pinout
+```
+In 0    - Data in 0
+In 1    - Data in 1
+In 2    - Data in 2
+In 3    - Data in 3
+In 4    - Clock
+In 5    - Clear
+In 6    - Preset
+In 7    - Load
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+Out 2   - Data out 2
+Out 3   - Data out 3
+```
+
 
 
 ## Class DCSRegister8BitsWithEnable
