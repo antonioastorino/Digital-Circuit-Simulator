@@ -29,6 +29,8 @@ void upCounter4BitsTest();
 void addressDecoderTest();
 void register1BitTest();
 void register8BitsTest();
+void aluTest();
+void xorTest();
 void Computer();
 
 #include <iostream>
@@ -136,6 +138,12 @@ int main(int argc, const char* argv[]) {
         register8BitsTest();
         break;
     case (31):
+		aluTest();
+        break;
+    case (32):
+		xorTest();
+        break;
+    case (33):
 		Computer();
         break;
     default:

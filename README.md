@@ -78,7 +78,7 @@ The gui allows to
 - scroll left-right by using the `Start` slider (swiping left right is disabled to avoid undesired page swiping)
 - scroll up-down by using the regular mouse wheel or trackpad
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-## Documentation automatically generated on Sat May  9 12:47:53 CEST 2020
+## Documentation automatically generated on Sun May 10 11:12:48 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -118,6 +118,43 @@ The output is stable after 4 tau from the change in the input.
 ## Class DCSAnd6
 
 AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
+
+
+## Class DCSRippleAdder8Bits
+
+
+8-bit ripple adder
+
+#### Pinout
+```
+In 0   - A 0
+In 1   - A 1
+In 2   - A 2
+In 3   - A 3
+In 4   - A 4
+In 5   - A 5
+In 6   - A 6
+In 7   - A 7
+In 8   - B 0
+In 9   - B 1
+In 10  - B 2
+In 11  - B 3
+In 12  - B 4
+In 13  - B 5
+In 14  - B 6
+In 15  - B 7
+In 16  - Carry in
+
+Out 0  - Sum 0
+Out 1  - Sum 1
+Out 2  - Sum 2
+Out 3  - Sum 3
+Out 4  - Sum 4
+Out 5  - Sum 5
+Out 6  - Sum 6
+Out 7  - Sum 7
+```
+
 
 
 ## Class DCSDisplayNBits
@@ -272,6 +309,34 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |      | ______
 |!Q:   |       ______
 |      |        ^ ready
+```
+
+
+
+## Class DCSTristateBuffer8Bits
+
+Consists of an array of tri-state buffers sharing `Enable`
+
+#### Pinout
+```
+In 0   - Data in 0
+In 1   - Data in 1
+In 2   - Data in 2
+In 3   - Data in 3
+In 4   - Data in 4
+In 5   - Data in 5
+In 6   - Data in 6
+In 7   - Data in 7
+In 8   - Enable
+
+Out 0  - Data out 0
+Out 1  - Data out 1
+Out 2  - Data out 2
+Out 3  - Data out 3
+Out 4  - Data out 4
+Out 5  - Data out 5
+Out 6  - Data out 6
+Out 7  - Data out 7
 ```
 
 
@@ -668,6 +733,20 @@ Static class providing
 Generates a square wave with period 2 * `halfPeriod`
 
 
+## Class DCSNode
+
+
+This component provides a single access point to several connections with zero latency. It has
+one input and one output. Using this component is essential when building composite components.
+For example, assuming to have component `A` composed of 2 basic componets, `A0` and `A1`. Suppose also
+that `A0` and `A1` should receive the same input `I`. There is no way for `A` to provide a single
+connection to both `A0` and `A1` to the external logic. However, by defining a node `N0`, `A` can connect
+`I` to the input of `N0` and connect the output of `N0` to both `A0` and `A1`.
+
+Node are also used to create busses and avoid to connect components to each other directly.
+Instead, one can connect a node to all commponets' inputs and all components' outputs to a node.
+
+
 ## Class DCSRegister8BitsWithEnable
 
 8-bit register made up of 8 1-bit registers sharing the same control signals
@@ -709,6 +788,43 @@ NAND gate with 3 inputs
 
 Generates a binary signal for use as input signal. Instances of this class are created by
 DCSClockSignal and DCSInput classes. The user should not use this class directly.
+
+
+## Class DCSALU
+
+
+ALU capable of adding (A+B) or subtracting (A-B) 8-bit numbers.
+
+#### Pinout
+```
+In 0   - A 0
+In 1   - A 1
+In 2   - A 2
+In 3   - A 3
+In 4   - A 4
+In 5   - A 5
+In 6   - A 6
+In 7   - A 7
+In 8   - B 0
+In 9   - B 1
+In 10  - B 2
+In 11  - B 3
+In 12  - B 4
+In 13  - B 5
+In 14  - B 6
+In 15  - B 7
+In 16  - SU (subtract)
+
+Out 0  - E 0
+Out 1  - E 1
+Out 2  - E 2
+Out 3  - E 3
+Out 4  - E 4
+Out 5  - E 5
+Out 6  - E 6
+Out 7  - E 7
+```
+
 
 
 ## Class DCSMemoryProgrammer
