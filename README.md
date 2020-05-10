@@ -89,7 +89,7 @@ When active, the profiling results are stored in `./gui/performance-analyzer/ass
 ![web-gui-image](https://github.com/antonioastorino/DCS/blob/master/doc/images/web-gui-1.png)
 
 > NOTE: It is recommended not to use this profiling tool inside a recursive function as it generates misleading results.
-## Documentation automatically generated on Mon May 11 00:09:50 CEST 2020
+## Documentation automatically generated on Mon May 11 00:21:28 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -379,11 +379,11 @@ Out N         - Count out
 
 #### Table
 
-| LD | C_IN | CLK | Function
+| LD | CE | CLK | Function
 |----|:-----|:----|:--------
-|  0 |   0  |  X  |  Pause
-|  0 |   1  | _|  |  Count
-|  1 |   X  | _|  |  Load
+|  `0` |   `0`  |  `X`  |  Pause
+|  `0` |   `1`  | `_|`  |  Count
+|  `1` |   `X`  | `_|`  |  Load
 
 
 
