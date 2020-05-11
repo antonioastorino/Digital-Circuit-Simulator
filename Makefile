@@ -275,4 +275,6 @@ build/objects/DCSJKLatchMasterSlaveAsyncSR.o: .//src/Latches-async-SR/DCSJKLatch
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -rf build/objects
+	rm -rf build/*
+cleanall:
+	rm -rf build/* gui/performance-analyzer/assets/* gui/logic-analyzer/assets/*

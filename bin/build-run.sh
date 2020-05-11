@@ -1,11 +1,12 @@
 #!/bin/bash
 curr_dir="`pwd`/`dirname $0`"
 cd $curr_dir/../
-make OPT="$2" 1>/dev/null
+n="0"
+o="0"
+[ "$1" != "" ] && n="$1"
+[ "$2" != "" ] && o="$2"
+
+make OPT="$o" 1>/dev/null
 if [ "$?" -eq "0" ]; then
-	if [ "$2" == "" ]; then
-		build/out-0 "$1"
-	else
-		build/out-"$2" "$1"
-	fi
+	build/out-"$o" "$n"
 fi

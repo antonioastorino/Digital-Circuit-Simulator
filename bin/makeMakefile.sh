@@ -1,6 +1,8 @@
 base_dir="`pwd`/`dirname $0`/../"
 make_file="$base_dir/Makefile"
 build_folder="build/objects"
+profile_folder="gui/performance-analyzer/assets"
+output_folder="gui/logic-analyzer/assets"
 executable_folder="build"
 pushd $base_dir
 
@@ -75,12 +77,12 @@ while read -r cpp_full_path; do
 	cpp_dir_name="`dirname $cpp_full_path`"
 	pf "\n$build_folder/$cpp_file_name.o: $cpp_dir_name/$cpp_file_name.cpp "
 
-	#find all the included libraries in the cpp file
+	# find all the included libraries in the cpp file
 	includes=`grep "^#include" "$cpp_full_path" | grep -v "<" | awk -F '"' '{print $2}'`
 	for hpp_file in ${includes[@]}; do
 		pf "`find ./ -name $hpp_file` "
 	done
-	#find all the included libraries in the hpp file
+	# find all the included libraries in the hpp file
 	hpp_full_path="`find ./ -name "$cpp_file_name.hpp"`"
 	# if the hpp file exists, look for dependencies in the hpp file as well
 	if [ "$hpp_full_path" != "" ]; then
@@ -97,7 +99,9 @@ while read -r cpp_full_path; do
 	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
 done < cpp-full.list
 
-pf "\nclean:\n\trm -rf $build_folder"
+pf "\nclean:\n\trm -rf $executable_folder/*"
+
+pf "\ncleanall:\n\trm -rf $executable_folder/* $profile_folder/* $output_folder/*"
 
 rm *.list
 
