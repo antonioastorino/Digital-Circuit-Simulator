@@ -8,11 +8,11 @@ function main() {
     const baselineOffset = 0.3;
     var frameHeight = 1;
     var translateX = 0;
-    var maxTranslateX = 10;
+    // var maxTranslateX = 10;
     var measurements = {}
     let scaleX = 1;
     let normalizationFactor;
-    let expandThread = false;
+    let expandThread = true;
     let maxNumOfFunctions = 0;
     let minimumLineWidth = 4;
     let totalDuration = 0;
@@ -90,7 +90,7 @@ function main() {
 
     function adjustTranslateX() {
         normalizationFactor = (window.innerWidth - offsetRight) / totalDuration;
-        maxTranslateX = lastDuration * normalizationFactor;
+        // maxTranslateX = lastDuration * normalizationFactor;
         translateX = Math.min(translateX, (canvas.width) / 2 * (1 / scaleX + 1) - 10 / scaleX);
         translateX = Math.max(translateX, - (canvas.width) / 2 * (1 / scaleX + 1) + 10 / scaleX);
     }
@@ -112,7 +112,7 @@ function main() {
         for (var i = 0; i < 4; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
-        color += "F7"
+        color += "F76F"
         return color;
     }
 

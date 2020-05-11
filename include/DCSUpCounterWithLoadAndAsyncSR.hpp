@@ -29,9 +29,9 @@
  * @table
  *| LD | CE | CLK | Function
  *|----|:-----|:----|:--------
- *|  `0` |   `0`  |  `X`  |  Pause
- *|  `0` |   `1`  | `_|`  |  Count
- *|  `1` |   `X`  | `_|`  |  Load
+ *|  0 |   0  | X   |  Pause
+ *|  0 |   1  | _/  |  Count
+ *|  1 |   X  | _/  |  Load
  * @end_table
  * 
  * `Cout in` follows the rule of input 5 of the first divider. Therefore, it hast to be set

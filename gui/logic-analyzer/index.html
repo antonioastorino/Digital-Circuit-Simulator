@@ -21,14 +21,27 @@
 		}
 
 		td {
-			margin: 2%;
+			margin: 0px;
 			background-color: azure;
+		}
+
+		input {
+			margin: 1%;
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 
 		table {
 			width: 100%;
 			margin-left: 10;
 			margin-right: 10;
+		}
+		
+		#select-file {
+			width: 98%;
+			margin: 1%;
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 	</style>
 </head>
@@ -51,24 +64,25 @@
 			<body>
 				<tr>
 					<td>
-						<input type="file" multiple id="open-files" style="display: none;">
-						<input type="button" value="Open files..." style="width: 98%" onclick="document.getElementById('open-files').click();" />
+						<input type="file" multiple id="open-files" style="display: none;"><!-- do not put this separator on a new line
+						--><input type="button" value="Open files..." style="width: 98%"
+							onclick="document.getElementById('open-files').click();" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<select id="select-file" style="width: 98%"></select>
+						<select id="select-file"></select>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="button" value="Refresh" id="refresh" style="width: 48%;">
-						<input type="button" value="Go hexadecimal" id="bin-hex-button" style="width: 48%;">
+						<input type="button" value="Refresh" id="refresh" style="width: 48%;"><!-- do not put this separator on a new line
+						--><input type="button" value="Go hexadecimal" id="bin-hex-button" style="width: 48%;">
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<b style="text-align: center;" id="test-title">no test loaded</b>
+					<td style="text-align: center;">
+						<b id="test-title">no test loaded</b>
 					</td>
 				</tr>
 			</body>

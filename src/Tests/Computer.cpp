@@ -13,6 +13,7 @@
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
+// based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
 void Computer() {
     DCSLog::printTestName("Computer");
     uint16_t masterClockHP = 20;
@@ -30,8 +31,8 @@ void Computer() {
     // the instruction is the MSHB and the data is the LSHB
     uint16_t program[16][2] = {
         {LDA, 14}, // store LDA and 14 at location 0
-        {ADD, 15}, // store ADD and 15 at location1
-        {OUT, 0},  // store OUT and 0 at location2
+        {ADD, 15}, // store ADD and 15 at location 1
+        {OUT, 0},  // store OUT and 0 at location 2
         {0, 0},    // store 0 at location 3
         {0, 0},    // store 0 at location 4
         {0, 0},    // store 0 at location 5
@@ -137,7 +138,7 @@ void Computer() {
     ram.connect(&regI, {0, 7}, {0, 7});   // Data from RAM to I register
     bus.connect(&pc, {0, 3}, {5, 8});     // PC Address from bus
     bus.connect(&mar, {0, 3}, {0, 3});    // PC Address from bus
-    bus.connect(&regOut, {0, 7}, {0, 7}); // bus to output register
+    bus.connect(&regOut, {0, 7}, {0, 7}); // bus to OUT register
 
     // connect component data out to displays
     regA.connect(&dispA);
@@ -220,7 +221,7 @@ void Computer() {
     inJ.connect(&pc, 0, 1);  // Jump
     inCE.connect(&pc, 0, 0); // Count enable
     // Output register
-    masterClock.connect(&regOut, 0, 8); // connect master clock to I
+    masterClock.connect(&regOut, 0, 8); // connect master clock to OUT
     inResO.connect(&regOut, 0, 9, "");
     inPresO.connect(&regOut, 0, 10, "");
     inOI.connect(&regOut, 0, 11, "OI");
@@ -235,12 +236,12 @@ void Computer() {
 
     // test signals
     std::string dn("00");            // do nothing (while resetting the registers)
-    inResA.makeSignal("10", true);   // initialize by resetting the registers
-    inResB.makeSignal("10", true);   // initialize by resetting the registers
-    inResI.makeSignal("10", true);   // initialize by resetting the registers
-    inResMAR.makeSignal("10", true); // initialize by resetting the registers
-    inResPC.makeSignal("10", true);  // initialize by resetting the registers
-    inResO.makeSignal("10", true);   // initialize by resetting the registers
+    inResA.makeSignal("10", true);   // initialize by resetting the register
+    inResB.makeSignal("10", true);   // initialize by resetting the register
+    inResI.makeSignal("10", true);   // initialize by resetting the register
+    inResMAR.makeSignal("10", true); // initialize by resetting the register
+    inResPC.makeSignal("10", true);  // initialize by resetting the register
+    inResO.makeSignal("10", true);   // initialize by resetting the register
 
     // manual execution of microcode
     inSU.makeSignal(dn + /*fetch*/ "00" + /*dec*/ "000" + "00" + "000" + "00" + "000", true);

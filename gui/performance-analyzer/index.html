@@ -27,6 +27,15 @@
 		}
 		input {
 			width: 98%;
+			margin: 1%;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		#select-file {
+			width: 98%;
+			margin: 1%;
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 	</style>
 </head>
@@ -50,7 +59,7 @@
 				</tr>
 				<tr>
 					<td>
-						<select id="select-file" style="width: 98%;"></select>
+						<select id="select-file"></select>
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +70,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="button" value="Expand" id="expand-collapse-button">
+						<input type="button" value="Collapse" id="expand-collapse-button">
 					</td>
 				</tr>
 				<tr>
@@ -73,7 +82,7 @@
 		</table>
 	</div>
 	<div>
-		<input type="range" min="1" max="200" value="100" id="v-zoom" style="width: 100%;">
+		<input type="range" min="1" max="200" value="100" id="v-zoom" style="width: 98%;">
 	</div>
 	<div id="div-canvas" style="width: 100%; height: 100%; overflow-y:scroll; overflow-x: hidden;">
 		<canvas id="canvas" style="border:1px solid #000000;"></canvas>

@@ -54,13 +54,13 @@ If `<TEST_NUMBER> (=0, 1, ..., N)` is specified, the corresponding test will be 
 
 The output is saved in `./gui/assets`. 
 
-To specify the desired optimization level (by default equal to 0), the above instructions can be executed while <u>adding a second parameter between 0 and 3</u>. For instance
+To specify the desired optimization level (by default equal to `0`), the above instructions can be executed while <u>adding a second parameter between `0` and `3`</u>. For instance
 
 ```
 bin/build-run-save.sh 3 2
 
 ```
-will build and run test number 3 with optimization level 2.
+will build and run test number `3` with compiler optimization level `2`.
 #### Known issue
 ```
 make OUT=name OPT=0 # ok
@@ -93,8 +93,8 @@ To visualize the data,
 The GUI allows to
 
 - set the horizontal and vertical scaling factors using the `H-zoom` and `V-zoom` sliders, respectively
-- scroll left-right by using the `H-Scroll` slider
-- scroll up-down by using the regular mouse wheel
+- scroll left/right by using the `H-Scroll` slider
+- scroll up/down by using the regular mouse wheel
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
 - where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation. To switch from one visualization to the other, click on `Go binarly/Go hexadecimal` toggle.
 
@@ -115,7 +115,7 @@ In order to display the produced data,
 The GUI allows to
 
 - set the horizontal scaling factor using the slider above the figure
-- pan left-right by dragging the diagram with the mouse
+- pan left/right by dragging the diagram with the mouse
 - zoom in/out the center of the graph by using the mouse wheel
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
 - visualize the data on separate lines or a single line (the former for overlapping measurements as in the example below). To switch from one visualization to the other, click on `Expand/Collapse` toggle.
@@ -124,8 +124,7 @@ The GUI allows to
 
 #### Known issue
 If the the window size clips the bottom of the canvas, the scroll bar appears but scrolling up/down using the mouse wheel conflicts with the zoom functionality.
-##### Workaround
-Zoom first and scroll by dragging the scroll bar or scale down vertically the graph (using the slider) to fit the window.
+##### Workaround: Zoom first and scroll by dragging the scroll bar or scale down vertically the graph (using the slider) to fit the window.
 
 ---
 
@@ -136,7 +135,7 @@ Zoom first and scroll by dragging the scroll bar or scale down vertically the gr
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Mon May 11 21:51:07 CEST 2020
+## Documentation automatically generated on Mon May 11 23:27:31 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -428,9 +427,9 @@ Out N         - Count out
 
 | LD | CE | CLK | Function
 |----|:-----|:----|:--------
-|  `0` |   `0`  |  `X`  |  Pause
-|  `0` |   `1`  | `_|`  |  Count
-|  `1` |   `X`  | `_|`  |  Load
+|  0 |   0  | X   |  Pause
+|  0 |   1  | _/  |  Count
+|  1 |   X  | _/  |  Load
 
 
 
