@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Wed May 13 23:58:52 CEST 2020
+## Documentation automatically generated on Thu May 14 00:26:19 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -975,9 +975,5 @@ Out 5  - E 5
 Out 6  - E 6
 Out 7  - E 7
 ```
-
-
-
-## Class DCSMemoryProgrammer
 
 
