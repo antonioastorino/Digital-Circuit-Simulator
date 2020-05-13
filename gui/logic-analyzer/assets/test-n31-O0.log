@@ -1,24 +1,24 @@
 --------
 ALU test
 --------
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b00000000   0d STEP:-1
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01011000  88d STEP:0
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b11100111 231d STEP:1
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b11100111 231d STEP:2
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b00010111  23d STEP:3
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b00010111  23d STEP:4
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:5
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:6
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:7
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:8
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:9
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:10
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:11
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:12
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:13
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:14
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:15
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:16
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:17
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:18
- SU:1 dispA:0b01111000 120d dispB:0b00100001  33d dispE:0b01010111  87d STEP:19
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b00000000          0d STEP:-1
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01011000         88d STEP:0
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b11100111        231d STEP:1
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b11100111        231d STEP:2
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b00010111         23d STEP:3
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b00010111         23d STEP:4
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:5
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:6
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:7
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:8
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:9
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:10
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:11
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:12
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:13
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:14
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:15
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:16
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:17
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:18
+ SU:1 dispA:0b01111000        120d dispB:0b00100001         33d dispE:0b01010111         87d STEP:19
