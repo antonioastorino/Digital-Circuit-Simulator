@@ -132,6 +132,7 @@ public:
     bool isEnabled();
 
     friend class DCSRam16x8;
+    friend class DCSRam256x16;
 };
 
 #endif /* DCSComponent_hpp */

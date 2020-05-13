@@ -51,7 +51,7 @@ class DCSAnd;
  *|       |         ^ ready
  * @end_diagram
  *
- * `Address` changes, the output changes after `3 tau`, independently of the `Clock`. Since `Load`
+ * If `Address` changes, the output changes after `3 tau`, independently of the `Clock`. Since `Load`
  *of each individual register (here called `Write`) is AND'ed with the address decoder, compared to
  *a single register, the RAM needs `Address` to be ready `3 tau` before `Load` is asserted.
  */

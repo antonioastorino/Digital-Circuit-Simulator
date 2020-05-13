@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Mon May 11 23:27:31 CEST 2020
+## Documentation automatically generated on Wed May 13 23:58:52 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -174,7 +174,7 @@ The output is stable after 4 tau from the change in the input.
 
 ## Class DCSAnd6
 
-AND gate with 3 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
+AND gate with 6 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
 
 
 ## Class DCSRippleAdder8Bits
@@ -210,6 +210,30 @@ Out 4  - Sum 4
 Out 5  - Sum 5
 Out 6  - Sum 6
 Out 7  - Sum 7
+```
+
+
+
+## Class DCSRegister16BitsWithEnable
+
+16-bit register consisting an array of 16 1-bit registers sharing the same control signals
+
+#### Pinout
+```
+In 0    - Data in 0
+In 1    - Data in 1
+...
+In 15   - Data in 15
+In 16   - Clock
+In 17   - Clear
+In 18   - Preset
+In 19   - Load
+In 20   - Output Enable
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+...
+Out 15  - Data out 15
 ```
 
 
@@ -513,7 +537,7 @@ Out 7   - Data out 7
 ```
 
 
-`Address` changes, the output changes after `3 tau`, independently of the `Clock`. Since `Load`
+If `Address` changes, the output changes after `3 tau`, independently of the `Clock`. Since `Load`
 of each individual register (here called `Write`) is AND'ed with the address decoder, compared to
 a single register, the RAM needs `Address` to be ready `3 tau` before `Load` is asserted.
 
@@ -629,6 +653,54 @@ This component has no logical functions but is used to connect any floating outp
 Unconnected outputs generate errors!
 Also, by naming the used instance of this class, the connected input is probed and hence it can
 be displayed.
+
+
+## Class DCSRam256x16
+
+Ram module of 16 bytes.
+
+#### Pinout
+```
+In 0    - Data in 0
+In 1    - Data in 1
+...
+In 15   - Data in 15
+In 16   - Address 0
+In 17   - Address 1
+...
+In 23   - Address 8
+In 24   - Clock
+In 25   - Clear
+In 26   - Preset
+In 27   - Write
+In 28   - Output enable
+
+Out 0   - Data out 0
+Out 1   - Data out 1
+...
+Out 15  - Data out 15
+```
+
+
+#### Time diagram
+```
+|       |  ____
+| ADDR: | X____XXXXXXXX
+|       |  ^ start
+|       |    ____
+| WRITE:| XXX    XXXXXX
+|       |     ___
+| DATA: | XXXX   XXXXX
+|       | _______  ____
+| CLK:  |        __
+|       |          ^ ready
+```
+
+
+The time diagram is similar to that of Ram16x8. The only difference is in the that `Address`
+needs to be prepared `1 tau` earlier because the internal address decoder introduces an extra
+`1-tau` delay due to the presence of 8-bit AND gates. The smaller ram's address decoder was using
+4-bit AND gates, instead.
 
 
 ## Class DCSSRLatch
@@ -823,7 +895,7 @@ Out 3   - Data out 3
 
 ## Class DCSRegister8BitsWithEnable
 
-8-bit register made up of 8 1-bit registers sharing the same control signals
+8-bit register consisting of an array of 8 1-bit registers sharing the same control signals
 
 #### Pinout
 ```
@@ -862,6 +934,11 @@ NAND gate with 3 inputs
 
 Generates a binary signal for use as input signal. Instances of this class are created by
 DCSClockSignal and DCSInput classes. The user should not use this class directly.
+
+
+## Class DCSAnd8
+
+AND gate with 8 inputs as an array of two DCSAnd4 AND'ed together by an AND gate
 
 
 ## Class DCSALU

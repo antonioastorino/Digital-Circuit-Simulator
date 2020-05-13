@@ -35,6 +35,7 @@ void controlUnitTest();
 void Computer();
 void addressDecoder32BitsTest();
 void register16BitsWithEnableTest();
+void ram256x16Test();
 
 #include "DCSTimer.hpp"
 #include <iostream>
@@ -159,6 +160,9 @@ int main(int argc, const char* argv[]) {
             break;
         case (36):
             register16BitsWithEnableTest();
+            break;
+        case (37):
+            ram256x16Test();
             break;
         default:
             return 0;
