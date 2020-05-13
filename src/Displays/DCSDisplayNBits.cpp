@@ -1,13 +1,16 @@
 #include "DCSDisplayNBits.hpp"
 #include "DCSEngine.hpp"
 
-
 DCSDisplayNBits::DCSDisplayNBits(std::string name, uint16_t numOfBits)
     : DCSComponent(name, false), numOfBits(numOfBits), numOfDecimalDigits(1) {
+    
+    if (numOfBits > 32) // 32 bits should not be exceeded not to cause visualization issues
+        DCSLog::error(this->name, 16);
+    
     DCSEngine::addDisplay(this);
     initialized     = true; // Ensures no signal propagation from the output
-    uint64_t maxNum = (1 << numOfBits) - 1;
- 
+    uint64_t maxNum = (uint64_t(1) << 32) - 1;
+
     while (maxNum > 9) {
         maxNum /= 10;
         numOfDecimalDigits++;

@@ -61,9 +61,6 @@ struct DCSPinNumRange {
  * ```
  */
 class DCSComponent {
-private:
-    DCSComponent();
-
 protected:
     uint64_t in;
     bool out;
@@ -75,17 +72,19 @@ protected:
     uint16_t timeDelay;
     uint16_t numOfInPins;
     uint16_t numOfOutPins;
-
-    std::vector<DCSWire*> wireVector = {};
-
-    bool initialized;
     bool node;     // true for DCSNode child only
     bool tristate; // true for DCSTristate child only
+    bool initialized;
+
+    std::vector<DCSWire*> wireVector = {};
 
 public:
     std::vector<DCSComponent*>
         updatedByVector; // stores the component who updated a given pin each clock cycle
     std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
+
+private:
+    DCSComponent();
 
 protected:
     virtual ~DCSComponent();

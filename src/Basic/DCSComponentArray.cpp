@@ -3,6 +3,7 @@
 #include "DCSAnd3.hpp"
 #include "DCSAnd4.hpp"
 #include "DCSAnd6.hpp"
+#include "DCSAnd8.hpp"
 #include "DCSClockDivider.hpp"
 #include "DCSDFlipFlop.hpp"
 #include "DCSDFlipFlopAsyncSR.hpp"
@@ -103,6 +104,7 @@ template class DCSComponentArray<DCSAnd>;
 template class DCSComponentArray<DCSAnd3>;
 template class DCSComponentArray<DCSAnd4>;
 template class DCSComponentArray<DCSAnd6>;
+template class DCSComponentArray<DCSAnd8>;
 template class DCSComponentArray<DCSNand>;
 template class DCSComponentArray<DCSOr>;
 template class DCSComponentArray<DCSXor>;

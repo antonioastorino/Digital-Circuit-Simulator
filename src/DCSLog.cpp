@@ -42,6 +42,8 @@ public:
             return "Conflict on the bus among tristate buffers";
         case 15:
             return "Timer already initialized";
+        case 16:
+            return "Exceeded maximum number of bits (32)";
         default:
             return "Uncategorized exception";
         }
