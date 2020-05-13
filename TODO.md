@@ -6,6 +6,7 @@
 [ ] create a master clock
 [ ] add pin-in-range check in connect()
 [ ] add transparency to colors in performance analyzer
+[ ] add prefix m_ to member variables
 [X] nothing loaded does not erase the loaded file list
 [X] change `</h1>` into `</h2>` in logic analyzer
 [X] change this:

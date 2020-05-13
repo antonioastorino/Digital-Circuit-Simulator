@@ -34,6 +34,7 @@ void xorTest();
 void controlUnitTest();
 void Computer();
 void addressDecoder32BitsTest();
+void register16BitsWithEnableTest();
 
 #include "DCSTimer.hpp"
 #include <iostream>
@@ -155,6 +156,9 @@ int main(int argc, const char* argv[]) {
             break;
         case (35):
             addressDecoder32BitsTest();
+            break;
+        case (36):
+            register16BitsWithEnableTest();
             break;
         default:
             return 0;
