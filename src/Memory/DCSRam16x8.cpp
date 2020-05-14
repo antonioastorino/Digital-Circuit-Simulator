@@ -89,7 +89,7 @@ void DCSRam16x8::disconnect() {
         c->fromTristateIn = 0;
         c->initialized    = false;
         c->reachableIn    = 0;
-        for (int j = 0; j < c->getNumOfInPins(); c++) {
+        for (int j = 0; j < c->getNumOfInPins(); j++) {
             c->updatedByVector[j] = nullptr;
         }
     }
