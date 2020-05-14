@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Thu May 14 00:26:19 CEST 2020
+## Documentation automatically generated on Thu May 14 23:48:32 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -847,7 +847,8 @@ Out 1  - !Q
 
 ## Class DCSEngine
 
-Static class providing all the functionalities needed to manage the system initialization and evolution.
+Static class providing all the functionalities needed to manage the system initialization and
+evolution.
 
 
 

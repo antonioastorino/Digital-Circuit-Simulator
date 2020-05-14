@@ -10,8 +10,6 @@ void addressDecoder32BitsTest() {
 	uint16_t hp = 1;
 	DCSEngine::initialize(hp);
 
-	std::cout << (uint64_t(1) << 50) << "\n";
-
 	DCSComponentArray<DCSInput> inArray("In", 8);
 	DCSAddressDecoder8Bits dec8("dec8");
 	DCSDisplayNBits dispIn("in", 8);

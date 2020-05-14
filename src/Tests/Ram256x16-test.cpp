@@ -10,8 +10,6 @@ void ram256x16Test() {
     uint32_t hp = 12;
     DCSEngine::initialize(hp);
 
-    std::cout << (uint64_t(1) << 50) << "\n";
-
     DCSComponentArray<DCSInput> inData("inData", 16);
     DCSComponentArray<DCSInput> inAddress("inAddress", 8);
     DCSComponentArray<DCSInput> inCtrl("inCtrl", 5);
@@ -39,5 +37,5 @@ void ram256x16Test() {
     inCtrl[3]->makeSignal(transitions({16, 1}), true, true);
     inCtrl[4]->makeSignal(1);
 
-    DCSEngine::run(120 * hp + 3, true);
+    DCSEngine::run(20 * hp + 3, true);
 }

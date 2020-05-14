@@ -5,18 +5,10 @@
 #include "DCSRam16x8.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSInstructionSet.hpp"
 
 void firstProgramTest() {
     DCSLog::printTestName("First program");
-    // Instruction set
-    uint16_t LDA = 0b0000; // Load in reg A
-    uint16_t STA = 0b0000; // Store A in RAM
-    uint16_t LDI = 0b0101; // Load immediate to A reg
-    uint16_t ADD = 0b0010; // Add value from location in RAM to reg A and store in B
-    uint16_t SUB = 0b0011; // Subtract value from location in RAM to reg A and store in B
-    uint16_t JMP = 0b0110; // Jump
-    uint16_t OUT = 0b1110; // Output
-    uint16_t HLT = 0b1111; // Halt
 
     // the instruction is the MSHB and the data is the LSHB
     uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0

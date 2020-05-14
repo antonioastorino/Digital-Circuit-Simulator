@@ -1,9 +1,11 @@
 #include "DCSEngine.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSInput.hpp"
+#include "DCSInstructionSet.hpp"
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRam16x8.hpp"
+#include "DCSRam256x16.hpp"
 #include "DCSTimer.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSWire.hpp"
@@ -209,7 +211,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
 
         std::stringstream s[8];
         for (int i = 0; i < 16; i++) {
-            if (program[i][0] == 0) {         // store pure data
+            if (program[i][0] == 0) { // store pure data
                 for (int j = 0; j < 8; j++) {
                     s[j] << (program[i][1] >> j & 1);
                 }
@@ -250,4 +252,124 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
     std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
     std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
     std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
+}
+
+void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
+    PROFILE();
+    const uint16_t HLT = 0b1000000000000000;
+    const uint16_t MI  = 0b0100000000000000;
+    const uint16_t RI  = 0b0010000000000000;
+    const uint16_t RO  = 0b0001000000000000;
+    const uint16_t IO  = 0b0000100000000000;
+    const uint16_t II  = 0b0000010000000000;
+    const uint16_t AI  = 0b0000001000000000;
+    const uint16_t AO  = 0b0000000100000000;
+    const uint16_t EO  = 0b0000000010000000;
+    const uint16_t SU  = 0b0000000001000000;
+    const uint16_t BI  = 0b0000000000100000;
+    const uint16_t OI  = 0b0000000000010000;
+    const uint16_t CE  = 0b0000000000001000;
+    const uint16_t CO  = 0b0000000000000100;
+    const uint16_t J   = 0b0000000000000010;
+    // const uint16_t ??  = 0b0000000000000001;
+
+    const uint16_t data[16][8] = {
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0000 NOP
+        {MI | CO, RO | II | CE, IO | MI, RO | AI, 0, 0, 0, 0},       // 0001 LDA
+        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI, 0, 0, 0}, // 0010 ADD
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0011
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0100
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0101
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0110
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0111
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1000
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1001
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1010
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1011
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1100
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1101
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1110 OUT
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0}                    // 1111 HLT
+    };
+    //*
+    // store the engine state
+    static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
+    static std::vector<DCSComponent*> inputVector_tmp(DCSEngine::inputVector.size());
+    static std::vector<DCSWire*> wireVector_tmp(DCSEngine::wireVector.size());
+    static std::vector<DCSDisplayNBits*> displayVector_tmp(DCSEngine::displayVector.size());
+
+    std::copy(componentVector.begin(), componentVector.end(), componentVector_tmp.begin());
+    std::copy(inputVector.begin(), inputVector.end(), inputVector_tmp.begin());
+    std::copy(wireVector.begin(), wireVector.end(), wireVector_tmp.begin());
+    std::copy(displayVector.begin(), displayVector.end(), displayVector_tmp.begin());
+
+    // ask the component to save its state too (wires and right component vector)
+
+    {
+        uint16_t hcp = DCSEngine::clockPeriod / 2;
+
+        DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
+        DCSComponentArray<DCSOutput> outArray0("Out", 5);
+
+        DCSDisplayNBits dispAddr("ADDR", 8);
+        DCSDisplayNBits dispData("DATA", 16);
+        DCSDisplayNBits dispOut("OUT", 16);
+
+        inArray0.connect(memory); // control bits
+        inArray0.connect(&dispData, {0, 15}, {0, 15});
+        inArray0.connect(&dispAddr, {16, 23}, {0, 7});
+        inArray0.connect(&outArray0, {24, 28}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
+        memory->connect(&dispOut);
+
+        inArray0[16]->makeSquareWave(2 * hcp);   // Addr 0
+        inArray0[17]->makeSquareWave(4 * hcp);   //  Addr 1
+        inArray0[18]->makeSquareWave(8 * hcp);   //  Addr 2
+        inArray0[19]->makeSquareWave(16 * hcp);  //  Addr 3
+        inArray0[20]->makeSquareWave(32 * hcp);  //  Addr 4
+        inArray0[21]->makeSquareWave(64 * hcp);  //  Addr 5
+        inArray0[22]->makeSquareWave(128 * hcp); //  Addr 6
+        inArray0[23]->makeSignal(0);             //  Addr 7
+        inArray0[24]->makeSquareWave(hcp);
+        inArray0[25]->makeSignal(std::string("11110")); // Clear - reset the ram before loading
+        inArray0[26]->makeSignal(0);                    // Preset
+        inArray0[27]->makeSignal(1);                    // Write
+        inArray0[28]->makeSignal(0);                    // Enable
+
+        std::stringstream s[16];
+        for (int instr = 0; instr < 16; instr++) {
+            for (int ucode = 0; ucode < 8; ucode++) {
+                for (int bit = 0; bit < 16; bit++) {
+                    s[bit] << (data[instr][ucode] >> bit & 1);
+                }
+            }
+        }
+        for (int i = 0; i < 16; i++) {
+            inArray0[i]->makeSignal(s[i].str(), true);
+        }
+
+        // program memory
+        DCSEngine::run((16 * 8 * 2) * hcp, true, printOut);
+
+        memory->disconnect();
+    }
+
+    // restore the initial state
+    // clear vectors
+    componentVector.clear();
+    inputVector.clear();
+    wireVector.clear();
+    displayVector.clear();
+
+    // resize
+    DCSEngine::componentVector.resize(componentVector_tmp.size());
+    DCSEngine::inputVector.resize(inputVector_tmp.size());
+    DCSEngine::wireVector.resize(wireVector_tmp.size());
+    DCSEngine::displayVector.resize(displayVector_tmp.size());
+
+    // restore values (the ram is safe)
+    std::copy(componentVector_tmp.begin(), componentVector_tmp.end(), componentVector.begin());
+    std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
+    std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
+    std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
+    //*/
 }

@@ -34,6 +34,6 @@ void DCSDisplayNBits::updateOut() {
             message << ' ';
         n *= 10;
     }
-    message << in << "d";
+    message << ' ' << in << "d";
     DCSLog::output(name, message.str());
 }
