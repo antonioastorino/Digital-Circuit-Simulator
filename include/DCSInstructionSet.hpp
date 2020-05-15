@@ -6,8 +6,8 @@
 const uint16_t NOP = 0b0000; // No operation
 const uint16_t LDA = 0b0001; // Load in reg A
 const uint16_t ADD = 0b0010; // Add value from location in RAM to reg A and store in B
-const uint16_t STA = 0b0000; // Store A in RAM
 const uint16_t SUB = 0b0011; // Subtract value from location in RAM to reg A and store in B
+const uint16_t STA = 0b0100; // Store A in RAM
 const uint16_t LDI = 0b0101; // Load immediate to A reg
 const uint16_t JMP = 0b0110; // Jump
 const uint16_t OUT = 0b1110; // Output

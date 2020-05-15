@@ -13,6 +13,7 @@ void controlUnitTest() {
 	DCSRam256x16 cu0("cu");
 
 	DCSEngine::programControlUnit(&cu0);
+    DCSEngine::useRamElements();
 
     DCSComponentArray<DCSInput> inData("inData", 16);
     DCSComponentArray<DCSInput> inAddress("inAddress", 8);
@@ -32,7 +33,6 @@ void controlUnitTest() {
         inAddress[i]->makeSquareWave(hp << (i+1), 0);
     }
     inCtrl[0]->makeSquareWave(hp);
-    inCtrl[3]->makeSignal(transitions({16, 1}), true, true);
     inCtrl[4]->makeSignal(1);
 
     DCSEngine::run(20 * hp + 3, true);

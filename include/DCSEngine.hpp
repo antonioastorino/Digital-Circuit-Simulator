@@ -17,6 +17,8 @@ class DCSRam256x16;
  */
 class DCSEngine {
 private:
+    static std::vector<DCSComponent*> ramComponentVector; // temporarily stores components of a RAM
+    static std::vector<DCSWire*> ramWireVector;           // temporarily stores wires of a RAM
     static std::vector<DCSComponent*> componentVector;
     static std::vector<DCSComponent*> inputVector;
     static std::vector<DCSWire*> wireVector;
@@ -25,6 +27,10 @@ private:
     static uint16_t clockPeriod;
     static uint16_t stepNumber;
     static bool sampling;
+    static bool ramReady;// makes sure ram are activated after being programmed and before being connected to the circuit
+
+    static void storeRamElements();
+    static void resetAndKeepRamElements();
 
     static void initCircuit(std::vector<DCSComponent*> cVec = inputVector);
 
@@ -51,6 +57,7 @@ public:
     static void restart();
     static void programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut = true);
     static void programControlUnit(DCSRam256x16* memory, bool printOut = true);
+    static void useRamElements();
 };
 
 #endif /* DCSEngine_hpp */

@@ -3,13 +3,12 @@
 #include "DCSLog.hpp"
 #include "DCSOutput.hpp"
 #include "DCSRam16x8.hpp"
-#include "DCSRam256x16.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSInstructionSet.hpp"
 
-void firstProgramTest() {
-    DCSLog::printTestName("First program");
+void memoryProgrammerTest() {
+    DCSLog::printTestName("Memory programmer");
 
     // the instruction is the MSHB and the data is the LSHB
     uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0
@@ -27,12 +26,9 @@ void firstProgramTest() {
     /*
     IMPORTANT: initialize() and DCSEngine::programMemory()
     */
-    DCSRam16x8 ram("ram");
-    DCSEngine::programMemory(&ram, program, false);
+    DCSRam16x8 ram("r");
 
-    DCSRam256x16 cu("cu");
-    DCSEngine::programControlUnit(&cu, false);
-
+    DCSEngine::programMemory(&ram, program);
     DCSEngine::useRamElements();
 
     DCSComponentArray<DCSInput> inArray0("In", ram.getNumOfInPins());
@@ -47,9 +43,6 @@ void firstProgramTest() {
     inArray0.connect(&dispAddr, {8, 11}, {0, 3});
     inArray0.connect(&outArray0, {12, 16}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
     ram.connect(&dispOut);
-
-    // connect cu
-    // find a way to program the CU without connecting the ram
 
     inArray0[5]->makeSignal(std::string("0000011100"));
     inArray0[7]->makeSignal(std::string("0000011100"));

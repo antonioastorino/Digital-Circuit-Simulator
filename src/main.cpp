@@ -23,7 +23,7 @@ void bitStreamSignalTest();
 void displayTest();
 void rippleAdderTest();
 void singleNotLoopTest();
-void firstProgramTest();
+void memoryProgrammerTest();
 void ramTest();
 void upCounter4BitsTest();
 void addressDecoderTest();
@@ -36,6 +36,7 @@ void Computer();
 void addressDecoder32BitsTest();
 void register16BitsWithEnableTest();
 void ram256x16Test();
+void firstProgramTest();
 
 #include "DCSTimer.hpp"
 #include <iostream>
@@ -123,7 +124,7 @@ int main(int argc, const char* argv[]) {
             ramTest();
             break;
         case (24):
-            firstProgramTest();
+            memoryProgrammerTest();
             break;
         case (25):
             singleNotLoopTest();
@@ -163,6 +164,9 @@ int main(int argc, const char* argv[]) {
             break;
         case (37):
             ram256x16Test();
+            break;
+        case (38):
+            firstProgramTest();
             break;
         default:
             return 0;

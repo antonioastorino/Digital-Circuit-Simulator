@@ -10,22 +10,28 @@
 #include "DCSUnitDelay.hpp"
 #include "DCSWire.hpp"
 
-std::vector<DCSComponent*> DCSEngine::componentVector  = {};
-std::vector<DCSComponent*> DCSEngine::inputVector      = {};
-std::vector<DCSWire*> DCSEngine::wireVector            = {};
-std::vector<DCSDisplayNBits*> DCSEngine::displayVector = {};
+std::vector<DCSComponent*> DCSEngine::ramComponentVector = {};
+std::vector<DCSWire*> DCSEngine::ramWireVector           = {};
+std::vector<DCSComponent*> DCSEngine::componentVector    = {};
+std::vector<DCSComponent*> DCSEngine::inputVector        = {};
+std::vector<DCSWire*> DCSEngine::wireVector              = {};
+std::vector<DCSDisplayNBits*> DCSEngine::displayVector   = {};
 
 uint16_t DCSEngine::clockPeriod;
 uint16_t DCSEngine::stepNumber;
 bool DCSEngine::sampling;
+bool DCSEngine::ramReady;
 
 void DCSEngine::initialize(uint16_t clockHalfPeriod) {
-    componentVector = {};
-    inputVector     = {};
-    wireVector      = {};
-    displayVector   = {};
-    clockPeriod     = 2 * clockHalfPeriod;
-    stepNumber      = 0;
+    ramComponentVector = {};
+    ramWireVector      = {};
+    componentVector    = {};
+    inputVector        = {};
+    wireVector         = {};
+    displayVector      = {};
+    clockPeriod        = 2 * clockHalfPeriod;
+    stepNumber         = 0;
+    ramReady           = true;
 }
 
 void DCSEngine::addComponent(DCSComponent* component) { componentVector.push_back(component); }
@@ -33,7 +39,53 @@ void DCSEngine::addInput(DCSInput* input) { inputVector.push_back(input); }
 void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
+void DCSEngine::storeRamElements() {
+    // set ramReady to false to ensure useRamElements() is called
+    ramReady = false;
+    // extend the vector size
+    size_t cSize  = componentVector.size();
+    size_t wSize  = wireVector.size();
+    size_t rCSize = ramComponentVector.size();
+    size_t rWSize = ramWireVector.size();
+
+    ramComponentVector.resize(rCSize + cSize);
+    ramWireVector.resize(rWSize + wSize);
+    // append the new elements
+    std::copy(componentVector.begin(), componentVector.end(), ramComponentVector.begin() + rCSize);
+    std::copy(wireVector.begin(), wireVector.end(), ramWireVector.begin() + rWSize);
+}
+
+void DCSEngine::resetAndKeepRamElements() {
+    // clear vectors (restore the initial state)
+    componentVector = {};
+    inputVector     = {};
+    wireVector      = {};
+    displayVector   = {};
+}
+
+void DCSEngine::useRamElements() {
+    ramReady = true;
+    // extend the vector size
+    size_t cSize  = componentVector.size();
+    size_t wSize  = wireVector.size();
+    size_t rCSize = ramComponentVector.size();
+    size_t rWSize = ramWireVector.size();
+
+    componentVector.resize(rCSize + cSize);
+    wireVector.resize(rWSize + wSize);
+    // append the new elements
+    std::copy(ramComponentVector.begin(), ramComponentVector.end(),
+              componentVector.begin() + cSize);
+    std::copy(ramWireVector.begin(), ramWireVector.end(), wireVector.begin() + wSize);
+
+    ramComponentVector = {};
+    ramWireVector      = {};
+}
+
 void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
+    if (!ramReady)
+        DCSLog::error("Engine", 17);
+
     DCSEngine::sampling   = sampling;
     DCSEngine::stepNumber = 0;
     {
@@ -170,18 +222,13 @@ void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
 
 void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut) {
     PROFILE();
-    // store the engine state
-    static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
-    static std::vector<DCSComponent*> inputVector_tmp(DCSEngine::inputVector.size());
-    static std::vector<DCSWire*> wireVector_tmp(DCSEngine::wireVector.size());
-    static std::vector<DCSDisplayNBits*> displayVector_tmp(DCSEngine::displayVector.size());
+    // Assuming that the ram we are going to program is the only component in the system, we want to
+    // save it in a special vector so that, at the end of the procedure, when all the component are
+    // erased, the ram is erased too but not lost. By doing so, more rams can be programmed and
+    // stored. When all the needed rams are programmed, they can be moved to the componentVector and
+    // used in the rest of the circuit.
 
-    std::copy(componentVector.begin(), componentVector.end(), componentVector_tmp.begin());
-    std::copy(inputVector.begin(), inputVector.end(), inputVector_tmp.begin());
-    std::copy(wireVector.begin(), wireVector.end(), wireVector_tmp.begin());
-    std::copy(displayVector.begin(), displayVector.end(), displayVector_tmp.begin());
-
-    // ask the component to save its state too (wires and right component vector)
+    DCSEngine::storeRamElements();
 
     {
         uint16_t hcp = DCSEngine::clockPeriod / 2;
@@ -229,29 +276,13 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
         }
 
         // program memory
+        ramReady = true;
         DCSEngine::run(34 * hcp, true, printOut);
-
+        ramReady = false;
         memory->disconnect();
     }
 
-    // restore the initial state
-    // clear vectors
-    componentVector.clear();
-    inputVector.clear();
-    wireVector.clear();
-    displayVector.clear();
-
-    // resize
-    DCSEngine::componentVector.resize(componentVector_tmp.size());
-    DCSEngine::inputVector.resize(inputVector_tmp.size());
-    DCSEngine::wireVector.resize(wireVector_tmp.size());
-    DCSEngine::displayVector.resize(displayVector_tmp.size());
-
-    // restore values (the ram is safe)
-    std::copy(componentVector_tmp.begin(), componentVector_tmp.end(), componentVector.begin());
-    std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
-    std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
-    std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
+    DCSEngine::resetAndKeepRamElements();
 }
 
 void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
@@ -274,36 +305,25 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
     // const uint16_t ??  = 0b0000000000000001;
 
     const uint16_t data[16][8] = {
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0000 NOP
-        {MI | CO, RO | II | CE, IO | MI, RO | AI, 0, 0, 0, 0},       // 0001 LDA
-        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI, 0, 0, 0}, // 0010 ADD
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0011
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0100
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0101
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0110
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 0111
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1000
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1001
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1010
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1011
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1100
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1101
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                   // 1110 OUT
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0}                    // 1111 HLT
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0000 NOP
+        {MI | CO, RO | II | CE, IO | MI, RO | AI, 0, 0, 0, 0},            // 0001 LDA
+        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI, 0, 0, 0},      // 0010 ADD
+        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI | SU, 0, 0, 0}, // 0011 SUB
+        {MI | CO, RO | II | CE, IO | MI, AO | RI, 0, 0, 0, 0},            // 0100 STA
+        {MI | CO, RO | II | CE, IO | RI, 0, 0, 0, 0, 0},                  // 0101 LDI
+        {MI | CO, RO | II | CE, IO | J, 0, 0, 0, 0, 0},                   // 0110
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0111
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1000
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1001
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1010
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1011
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1100
+        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1101
+        {MI | CO, RO | II | CE, AO | OI, 0, 0, 0, 0, 0},                  // 1110 OUT
+        {MI | CO, RO | II | CE, HLT, 0, 0, 0, 0, 0}                       // 1111 HLT
     };
-    //*
-    // store the engine state
-    static std::vector<DCSComponent*> componentVector_tmp(DCSEngine::componentVector.size());
-    static std::vector<DCSComponent*> inputVector_tmp(DCSEngine::inputVector.size());
-    static std::vector<DCSWire*> wireVector_tmp(DCSEngine::wireVector.size());
-    static std::vector<DCSDisplayNBits*> displayVector_tmp(DCSEngine::displayVector.size());
 
-    std::copy(componentVector.begin(), componentVector.end(), componentVector_tmp.begin());
-    std::copy(inputVector.begin(), inputVector.end(), inputVector_tmp.begin());
-    std::copy(wireVector.begin(), wireVector.end(), wireVector_tmp.begin());
-    std::copy(displayVector.begin(), displayVector.end(), displayVector_tmp.begin());
-
-    // ask the component to save its state too (wires and right component vector)
+    DCSEngine::storeRamElements();
 
     {
         uint16_t hcp = DCSEngine::clockPeriod / 2;
@@ -348,28 +368,12 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
         }
 
         // program memory
+        ramReady = true;
         DCSEngine::run((16 * 8 * 2) * hcp, true, printOut);
-
+        ramReady = false;
         memory->disconnect();
     }
 
     // restore the initial state
-    // clear vectors
-    componentVector.clear();
-    inputVector.clear();
-    wireVector.clear();
-    displayVector.clear();
-
-    // resize
-    DCSEngine::componentVector.resize(componentVector_tmp.size());
-    DCSEngine::inputVector.resize(inputVector_tmp.size());
-    DCSEngine::wireVector.resize(wireVector_tmp.size());
-    DCSEngine::displayVector.resize(displayVector_tmp.size());
-
-    // restore values (the ram is safe)
-    std::copy(componentVector_tmp.begin(), componentVector_tmp.end(), componentVector.begin());
-    std::copy(inputVector_tmp.begin(), inputVector_tmp.end(), inputVector.begin());
-    std::copy(wireVector_tmp.begin(), wireVector_tmp.end(), wireVector.begin());
-    std::copy(displayVector_tmp.begin(), displayVector_tmp.end(), displayVector.begin());
-    //*/
+    DCSEngine::resetAndKeepRamElements();
 }

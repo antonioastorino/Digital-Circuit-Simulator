@@ -43,6 +43,7 @@ void Computer() {
     DCSEngine::initialize(masterClockHP);
     DCSRam16x8 ram("ram");
     DCSEngine::programMemory(&ram, program, false);
+    DCSEngine::useRamElements();
 
     // ALU
     DCSALU alu("alu");
@@ -218,7 +219,7 @@ void Computer() {
     inOI.connect(&regOut, 0, 11, "OI");
 
     // constant signals
-    inOeRAM.makeSignal(1); // The RAM is always enable to always talk to the IR. A 3-state buffer is
+    inOeRAM.makeSignal("01", true); // The RAM is always enable to always talk to the IR. A 3-state buffer is
                            // placed between RAM and bus
     zero4[0]->makeSignal(0);
     zero4[1]->makeSignal(0);

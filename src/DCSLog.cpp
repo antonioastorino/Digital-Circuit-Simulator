@@ -44,6 +44,8 @@ public:
             return "Timer already initialized";
         case 16:
             return "Exceeded maximum number of bits (32)";
+        case 17:
+            return "RAM not ready. Have you called useRamElements() after programming the RAM?";
         default:
             return "Uncategorized exception";
         }
@@ -88,4 +90,3 @@ void DCSLog::printTestName(std::string testName) {
     std::cout << "\n";
 #endif
 }
-
