@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Thu May 14 23:48:32 CEST 2020
+## Documentation automatically generated on Sat May 16 23:22:01 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -234,6 +234,26 @@ Out 0   - Data out 0
 Out 1   - Data out 1
 ...
 Out 15  - Data out 15
+```
+
+
+
+## Class DCSControlUnit4Bits
+
+
+#### Pinout
+```
+In 0    - Clock
+In 1    - Reset
+In 2    - Address 0
+In 3    - Address 1
+In 4    - Address 2
+In 5    - Address 3
+
+Out 0   - Ctrl 0
+Out 1   - Ctrl 1
+...
+Out 15  - Ctrl 15
 ```
 
 
