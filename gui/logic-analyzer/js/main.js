@@ -78,7 +78,10 @@ function main() {
             "1110": 'E',
             "1111": 'F',
         }
-        if (s.length % 4) return "number of bits not a multiple of 4"
+        let missingBits = (4 - (s.length % 4)) % 4; // calculate how many bits are missing to complete a 4-bit string
+        for (let i = 0; i < missingBits; i ++) {
+            s = "0" + s;
+        }
         let hex = "";
         let splitS = s.match(/.{1,4}/g);
         for (let j = 0; j < splitS.length; j++) {
@@ -204,7 +207,7 @@ function main() {
             let binary = kv[1].split("b") // check if the value is binary and convert accordingly
             if (binary.length > 1) {
 
-                if (!hexadecimal || binary[1].length % 4 != 0) {  // binary representation (one line per bit)
+                if (!hexadecimal) {  // binary representation (one line per bit)
                     let bits = binary[1].split("");
                     for (let i = 0; i < bits.length; i++) {
                         if (signals[kv[0] + i] == undefined) {
