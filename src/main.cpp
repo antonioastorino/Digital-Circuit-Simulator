@@ -32,7 +32,7 @@ void register8BitsTest();
 void aluTest();
 void xorTest();
 void controlUnitTest();
-void Computer();
+void noCUComputerTest();
 void addressDecoder32BitsTest();
 void register16BitsWithEnableTest();
 void ram256x16Test();
@@ -118,7 +118,7 @@ int main(int argc, const char* argv[]) {
             rippleAdderTest();
             break;
         case (22):
-            countAndStoreTest();
+            xorTest();
             break;
         case (23):
             ramTest();
@@ -148,24 +148,21 @@ int main(int argc, const char* argv[]) {
             aluTest();
             break;
         case (32):
-            xorTest();
-            break;
-        case (33):
             controlUnitTest();
             break;
-        case (34):
-            Computer();
-            break;
-        case (35):
+        case (33):
             addressDecoder32BitsTest();
             break;
-        case (36):
-            register16BitsWithEnableTest();
-            break;
-        case (37):
+        case (34):
             ram256x16Test();
             break;
-        case (38):
+        case (35):
+            register16BitsWithEnableTest();
+            break;
+        case (36):
+            noCUComputerTest();
+            break;
+        case (37):
             firstProgramTest();
             break;
         default:

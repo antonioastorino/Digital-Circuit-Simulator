@@ -9,7 +9,7 @@ DCSDisplayNBits::DCSDisplayNBits(std::string name, uint16_t numOfBits)
     
     DCSEngine::addDisplay(this);
     initialized     = true; // Ensures no signal propagation from the output
-    uint64_t maxNum = (uint64_t(1) << 32) - 1;
+    uint64_t maxNum = (uint64_t(1) << numOfBits) - 1;
 
     while (maxNum > 9) {
         maxNum /= 10;

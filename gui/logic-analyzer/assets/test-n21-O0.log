@@ -1,20 +1,20 @@
 -----------------------
 8-bit ripple adder test
 -----------------------
- A:0b00000001           1d B:0b11111111         255d SUM:0b00000000           0d Cout:0b0           0d STEP:-1
- A:0b00000001           1d B:0b11111111         255d SUM:0b11111110         254d Cout:0b0           0d STEP:0
- A:0b00000001           1d B:0b11111111         255d SUM:0b11111100         252d Cout:0b0           0d STEP:1
- A:0b00000001           1d B:0b11111111         255d SUM:0b11111100         252d Cout:0b0           0d STEP:2
- A:0b00000001           1d B:0b11111111         255d SUM:0b11111000         248d Cout:0b0           0d STEP:3
- A:0b00000001           1d B:0b11111111         255d SUM:0b11111000         248d Cout:0b0           0d STEP:4
- A:0b00000001           1d B:0b11111111         255d SUM:0b11110000         240d Cout:0b0           0d STEP:5
- A:0b00000001           1d B:0b11111111         255d SUM:0b11110000         240d Cout:0b0           0d STEP:6
- A:0b00000001           1d B:0b11111111         255d SUM:0b11100000         224d Cout:0b0           0d STEP:7
- A:0b00000001           1d B:0b11111111         255d SUM:0b11100000         224d Cout:0b0           0d STEP:8
- A:0b00000001           1d B:0b11111111         255d SUM:0b11000000         192d Cout:0b0           0d STEP:9
- A:0b00000001           1d B:0b11111111         255d SUM:0b11000000         192d Cout:0b0           0d STEP:10
- A:0b00000001           1d B:0b11111111         255d SUM:0b10000000         128d Cout:0b0           0d STEP:11
- A:0b00000001           1d B:0b11111111         255d SUM:0b10000000         128d Cout:0b0           0d STEP:12
- A:0b00000001           1d B:0b11111111         255d SUM:0b00000000           0d Cout:0b0           0d STEP:13
- A:0b00000001           1d B:0b11111111         255d SUM:0b00000000           0d Cout:0b1           1d STEP:14
- A:0b00000001           1d B:0b11111111         255d SUM:0b00000000           0d Cout:0b1           1d STEP:15
+ A:0b00000001    1d B:0b11111111  255d SUM:0b00000000    0d Cout:0b0  0d STEP:-1
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11111110  254d Cout:0b0  0d STEP:0
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11111100  252d Cout:0b0  0d STEP:1
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11111100  252d Cout:0b0  0d STEP:2
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11111000  248d Cout:0b0  0d STEP:3
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11111000  248d Cout:0b0  0d STEP:4
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11110000  240d Cout:0b0  0d STEP:5
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11110000  240d Cout:0b0  0d STEP:6
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11100000  224d Cout:0b0  0d STEP:7
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11100000  224d Cout:0b0  0d STEP:8
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11000000  192d Cout:0b0  0d STEP:9
+ A:0b00000001    1d B:0b11111111  255d SUM:0b11000000  192d Cout:0b0  0d STEP:10
+ A:0b00000001    1d B:0b11111111  255d SUM:0b10000000  128d Cout:0b0  0d STEP:11
+ A:0b00000001    1d B:0b11111111  255d SUM:0b10000000  128d Cout:0b0  0d STEP:12
+ A:0b00000001    1d B:0b11111111  255d SUM:0b00000000    0d Cout:0b0  0d STEP:13
+ A:0b00000001    1d B:0b11111111  255d SUM:0b00000000    0d Cout:0b1  1d STEP:14
+ A:0b00000001    1d B:0b11111111  255d SUM:0b00000000    0d Cout:0b1  1d STEP:15

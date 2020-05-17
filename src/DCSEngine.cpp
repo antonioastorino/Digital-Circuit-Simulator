@@ -17,20 +17,20 @@ std::vector<DCSComponent*> DCSEngine::inputVector        = {};
 std::vector<DCSWire*> DCSEngine::wireVector              = {};
 std::vector<DCSDisplayNBits*> DCSEngine::displayVector   = {};
 
-uint16_t DCSEngine::clockPeriod;
-uint16_t DCSEngine::stepNumber;
+uint64_t DCSEngine::clockPeriod;
+uint64_t DCSEngine::s_stepNumber;
 bool DCSEngine::sampling;
 bool DCSEngine::ramReady;
 
-void DCSEngine::initialize(uint16_t clockHalfPeriod) {
+void DCSEngine::initialize(uint64_t clockHalfPeriod) {
     ramComponentVector = {};
     ramWireVector      = {};
     componentVector    = {};
     inputVector        = {};
     wireVector         = {};
     displayVector      = {};
-    clockPeriod        = 2 * clockHalfPeriod;
-    stepNumber         = 0;
+    clockPeriod        = static_cast<uint64_t>(2 * clockHalfPeriod);
+    s_stepNumber         = static_cast<uint64_t>(0);
     ramReady           = true;
 }
 
@@ -87,7 +87,7 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
         DCSLog::error("Engine", 17);
 
     DCSEngine::sampling   = sampling;
-    DCSEngine::stepNumber = 0;
+    DCSEngine::s_stepNumber = 0;
     {
         PROFILE_WITH_CUSTOM_NAME("Init circuit");
 
@@ -104,7 +104,7 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
     }
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
-        for (stepNumber = 1; stepNumber <= steps; stepNumber++) {
+        for (s_stepNumber = 1; s_stepNumber <= steps; s_stepNumber++) {
             updateInputs();
             updateComponents();
             propagateValues();
@@ -194,7 +194,7 @@ void DCSEngine::propagateValues() {
 }
 
 void DCSEngine::printLogicLevels() {
-    if (!sampling || DCSEngine::stepNumber % (clockPeriod / 2) == 1) {
+    if (!sampling || DCSEngine::s_stepNumber % (clockPeriod / 2) == 1) {
         for (auto wire : wireVector) {
             if (wire->getProbeName().length() > 0) {
                 std::string message;
@@ -208,13 +208,14 @@ void DCSEngine::printLogicLevels() {
             display->updateOut();
         }
         std::stringstream n;
-        n << stepNumber - 1 << '\n';
+        if (s_stepNumber == 0) n << "-1\n";
+        else n << s_stepNumber - 1 << '\n';
         DCSLog::output("STEP", n.str());
     }
 }
 
-int DCSEngine::getClockPeriod() { return clockPeriod; };
-int DCSEngine::getStepNumber() { return stepNumber; }
+uint64_t DCSEngine::getClockPeriod() { return clockPeriod; };
+uint64_t DCSEngine::getStepNumber() { return s_stepNumber; }
 void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
 void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
     clockPeriod = 2 * numberOfTimeSteps;
@@ -231,7 +232,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
     DCSEngine::storeRamElements();
 
     {
-        uint16_t hcp = DCSEngine::clockPeriod / 2;
+        uint64_t hcp = DCSEngine::clockPeriod / 2;
 
         DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
         DCSComponentArray<DCSOutput> outArray0("Out", 5);
@@ -287,21 +288,21 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
 
 void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
     PROFILE();
-    const uint16_t HLT = 0b1000000000000000;
-    const uint16_t MI  = 0b0100000000000000;
-    const uint16_t RI  = 0b0010000000000000;
-    const uint16_t RO  = 0b0001000000000000;
-    const uint16_t IO  = 0b0000100000000000;
-    const uint16_t II  = 0b0000010000000000;
-    const uint16_t AI  = 0b0000001000000000;
-    const uint16_t AO  = 0b0000000100000000;
-    const uint16_t EO  = 0b0000000010000000;
-    const uint16_t SU  = 0b0000000001000000;
-    const uint16_t BI  = 0b0000000000100000;
-    const uint16_t OI  = 0b0000000000010000;
-    const uint16_t CE  = 0b0000000000001000;
-    const uint16_t CO  = 0b0000000000000100;
-    const uint16_t J   = 0b0000000000000010;
+    const uint16_t HLT = 0b1000000000000000; // bit 15
+    const uint16_t MI  = 0b0100000000000000; // bit 14
+    const uint16_t RI  = 0b0010000000000000; // bit 13
+    const uint16_t RO  = 0b0001000000000000; // bit 12
+    const uint16_t IO  = 0b0000100000000000; // bit 11
+    const uint16_t II  = 0b0000010000000000; // bit 10
+    const uint16_t AI  = 0b0000001000000000; // bit 9
+    const uint16_t AO  = 0b0000000100000000; // bit 8
+    const uint16_t EO  = 0b0000000010000000; // bit 7
+    const uint16_t SU  = 0b0000000001000000; // bit 6
+    const uint16_t BI  = 0b0000000000100000; // bit 5
+    const uint16_t OI  = 0b0000000000010000; // bit 4
+    const uint16_t CE  = 0b0000000000001000; // bit 3
+    const uint16_t CO  = 0b0000000000000100; // bit 2
+    const uint16_t J   = 0b0000000000000010; // bit 1
     // const uint16_t ??  = 0b0000000000000001;
 
     const uint16_t data[16][8] = {
@@ -310,7 +311,7 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
         {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI, 0, 0, 0},      // 0010 ADD
         {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI | SU, 0, 0, 0}, // 0011 SUB
         {MI | CO, RO | II | CE, IO | MI, AO | RI, 0, 0, 0, 0},            // 0100 STA
-        {MI | CO, RO | II | CE, IO | RI, 0, 0, 0, 0, 0},                  // 0101 LDI
+        {MI | CO, RO | II | CE, IO | AI, 0, 0, 0, 0, 0},                  // 0101 LDI
         {MI | CO, RO | II | CE, IO | J, 0, 0, 0, 0, 0},                   // 0110
         {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0111
         {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1000
@@ -326,7 +327,7 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
     DCSEngine::storeRamElements();
 
     {
-        uint16_t hcp = DCSEngine::clockPeriod / 2;
+        uint64_t hcp = DCSEngine::clockPeriod / 2;
 
         DCSComponentArray<DCSInput> inArray0("In", memory->getNumOfInPins());
         DCSComponentArray<DCSOutput> outArray0("Out", 5);

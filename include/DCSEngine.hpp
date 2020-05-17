@@ -24,8 +24,8 @@ private:
     static std::vector<DCSWire*> wireVector;
     static std::vector<DCSDisplayNBits*> displayVector;
 
-    static uint16_t clockPeriod;
-    static uint16_t stepNumber;
+    static uint64_t clockPeriod;
+    static uint64_t s_stepNumber;
     static bool sampling;
     static bool ramReady;// makes sure ram are activated after being programmed and before being connected to the circuit
 
@@ -44,14 +44,14 @@ private:
     static void printLogicLevels();
 
 public:
-    static void initialize(uint16_t clockHalfPeriod);
+    static void initialize(uint64_t clockHalfPeriod);
     static void addComponent(DCSComponent* component);
     static void addInput(DCSInput* input);
     static void addWire(DCSWire* p_wire);
     static void addDisplay(DCSDisplayNBits* p_display);
     static void run(uint64_t steps = 10, bool sampling = false, bool printOut = true);
-    static int getClockPeriod();
-    static int getStepNumber();
+    static uint64_t getClockPeriod();
+    static uint64_t getStepNumber();
     static void setSampling(bool sampling);
     static void setHalfClockPeriod(uint16_t numberOfTimeSteps);
     static void restart();

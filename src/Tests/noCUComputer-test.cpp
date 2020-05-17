@@ -15,8 +15,8 @@
 #include "DCSInstructionSet.hpp"
 
 // based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
-void Computer() {
-    DCSLog::printTestName("Computer");
+void noCUComputerTest() {
+    DCSLog::printTestName("Computer without CU");
     uint16_t masterClockHP = 20;
 
     // the instruction is the MSHB and the data is the LSHB
@@ -83,7 +83,6 @@ void Computer() {
     // as the instruction.
     DCSComponentArray<DCSInput> zero4("zero4", 4);
 
-    // Control signals (to be replaced with CU signals)
     DCSInput inResA("inResA");
     DCSInput inResB("inResB");
     DCSInput inResI("inResI");
@@ -98,6 +97,8 @@ void Computer() {
     DCSInput inPresMAR("inPresMAR");
     DCSInput inPresPC("inPresPC");
     DCSInput inPresO("inPresO");
+
+    // Control signals (to be replaced with CU signals)
     DCSInput inAI("inAI");
     DCSInput inBI("inBI");
     DCSInput inII("inII");
