@@ -75,6 +75,7 @@ protected:
     bool node;     // true for DCSNode child only
     bool tristate; // true for DCSTristate child only
     bool initialized;
+    bool outChanged;
 
     std::vector<DCSWire*> wireVector = {};
 
@@ -89,6 +90,7 @@ private:
 protected:
     virtual ~DCSComponent();
     DCSComponent(const std::string& name, bool shouldUpdate = true, bool isNode = false);
+    void checkOutputChanged(bool newOutValue);
 
 public:
     void resetUpdatedByVector();
@@ -114,6 +116,7 @@ public:
     bool isInitialized();
     bool isNode();
     bool isTristate();
+    bool needsPropagation();
 
     void setConnectedIn(uint16_t inPinNum);
     void setFromTristateIn(uint16_t inPinNum);
@@ -133,6 +136,7 @@ public:
 
     friend class DCSRam16x8;
     friend class DCSRam256x16;
+    friend class DCSEngine;
 };
 
 #endif /* DCSComponent_hpp */

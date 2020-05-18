@@ -30,7 +30,7 @@ void DCSEngine::initialize(uint64_t clockHalfPeriod) {
     wireVector         = {};
     displayVector      = {};
     clockPeriod        = static_cast<uint64_t>(2 * clockHalfPeriod);
-    s_stepNumber         = static_cast<uint64_t>(0);
+    s_stepNumber       = static_cast<uint64_t>(0);
     ramReady           = true;
 }
 
@@ -86,7 +86,7 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
     if (!ramReady)
         DCSLog::error("Engine", 17);
 
-    DCSEngine::sampling   = sampling;
+    DCSEngine::sampling     = sampling;
     DCSEngine::s_stepNumber = 0;
     {
         PROFILE_WITH_CUSTOM_NAME("Init circuit");
@@ -101,13 +101,26 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
         // Print the initial state -- step -1
         if (printOut)
             printLogicLevels();
+
+
+        ++s_stepNumber;
+        updateInputs();
+        updateComponents();
+        propagateValues();
+        if (printOut)
+            printLogicLevels();
+
     }
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
-        for (s_stepNumber = 1; s_stepNumber <= steps; s_stepNumber++) {
+        for (++s_stepNumber; s_stepNumber <= steps; s_stepNumber++) {
+
             updateInputs();
+
             updateComponents();
-            propagateValues();
+
+            propagateValuesOnChangeOnly();
+
             if (printOut)
                 printLogicLevels();
         }
@@ -146,6 +159,7 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     // Array of components from which to propagate at the next iteration
     std::vector<DCSComponent*> newComponentVector = {};
     for (auto component : cVec) {
+        component->outChanged = true;
         if (component->isNode() || (!(component->isInitialized()) && component->isEnabled())) {
             component->updateOut();
             if (component->isNode()) {
@@ -169,11 +183,13 @@ void DCSEngine::checkInitialization() {
 }
 
 void DCSEngine::updateInputs() {
+    PROFILE();
     for (auto input : inputVector)
         input->updateOut();
 }
 
 void DCSEngine::updateComponents() {
+    PROFILE();
     for (auto component : DCSEngine::componentVector) {
         if (!component->isNode())
             component->updateOut();
@@ -186,10 +202,22 @@ void DCSEngine::updateComponents() {
 }
 
 void DCSEngine::propagateValues() {
+    PROFILE();
     // assing the output value of a given pin to the connected input pin
     for (auto wire : wireVector) {
         if (!wire->fromNode()) // Nodes propagate themselves when updated
             wire->propagateValue();
+    }
+}
+
+void DCSEngine::propagateValuesOnChangeOnly() {
+    PROFILE();
+    // assing the output value of a given pin to the connected input pin
+    for (auto wire : wireVector) {
+        if (!wire->fromNode())                  // Nodes propagate themselves when updated
+            if (wire->from->needsPropagation()) // true if the output has changed during from the
+                                                // previous time step
+                wire->propagateValue();
     }
 }
 
@@ -208,8 +236,10 @@ void DCSEngine::printLogicLevels() {
             display->updateOut();
         }
         std::stringstream n;
-        if (s_stepNumber == 0) n << "-1\n";
-        else n << s_stepNumber - 1 << '\n';
+        if (s_stepNumber == 0)
+            n << "-1\n";
+        else
+            n << s_stepNumber - 1 << '\n';
         DCSLog::output("STEP", n.str());
     }
 }

@@ -5,16 +5,19 @@ n="0"
 o="0"
 [ "$1" != "" ] && n="$1"
 [ "$2" != "" ] && o="$2"
+out_file=../debug/test"-n$n-O$o".log
 
-./build-run.sh "$n" "$o" | tee ../debug/new"-n$n-O$o".log
+./build-run.sh "$n" "$o" > $out_file
 if [ "$?" -eq 0 ]; then
-	echo "Checking..."
-	DIFF=`diff ../debug/new"-n$n-O$o".log ../gui/logic-analyzer/assets/test"-n$n-O$o".log`
+	DIFF=`diff $out_file ../gui/logic-analyzer/assets/test"-n$n-O0".log` &&
+	echo "Checking..." &&
 	if [ "$DIFF" != "" ]; then
-		echo "Error: test not passed"
+		echo "Error: test $n not passed"
+		cat $out_file
 		print "$DIFF"
 	else
-		echo "Test passed"
+		echo "Test $n passed"
+		rm $out_file
 	fi
 fi
 

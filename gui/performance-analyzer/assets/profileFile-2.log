@@ -1,3 +1,36 @@
-1648102679:Init circuit:88734:6773
-1648102679:Run loop:108240:37922
-1648102679:main:1032:147686
+390826893:updateInputs:38953:67
+390826893:updateComponents:50810:178
+390826893:propagateValues:51306:92
+390826893:Init circuit:34807:18923
+390826893:updateInputs:53857:45
+390826893:updateComponents:54166:52
+390826893:propagateValuesOnChangeOnly:54288:99
+390826893:updateInputs:55569:38
+390826893:updateComponents:55673:42
+390826893:propagateValuesOnChangeOnly:55972:73
+390826893:updateInputs:57080:32
+390826893:updateComponents:57179:43
+390826893:propagateValuesOnChangeOnly:57284:61
+390826893:updateInputs:58368:33
+390826893:updateComponents:58459:44
+390826893:propagateValuesOnChangeOnly:58565:61
+390826893:updateInputs:59612:32
+390826893:updateComponents:61214:48
+390826893:propagateValuesOnChangeOnly:61328:61
+390826893:updateInputs:62474:33
+390826893:updateComponents:62568:43
+390826893:propagateValuesOnChangeOnly:62668:54
+390826893:updateInputs:63748:33
+390826893:updateComponents:63837:44
+390826893:propagateValuesOnChangeOnly:63938:54
+390826893:updateInputs:65028:33
+390826893:updateComponents:65117:43
+390826893:propagateValuesOnChangeOnly:65218:55
+390826893:updateInputs:66253:32
+390826893:updateComponents:66342:43
+390826893:propagateValuesOnChangeOnly:66441:54
+390826893:updateInputs:67521:32
+390826893:updateComponents:67610:43
+390826893:propagateValuesOnChangeOnly:69191:55
+390826893:Run loop:53820:16588
+390826893:main:135:71022

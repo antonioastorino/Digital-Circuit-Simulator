@@ -40,6 +40,7 @@ private:
     static void updateComponents();
     static void updateInputs();
     static void propagateValues();
+    static void propagateValuesOnChangeOnly();
     static void printProbes();
     static void printLogicLevels();
 

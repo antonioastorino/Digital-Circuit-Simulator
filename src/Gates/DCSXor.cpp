@@ -9,5 +9,7 @@ DCSComponent(name) {
 }
 
 void DCSXor::updateOut(){
-	out = (in ^ (in >> 1)) & 1;
+	uint64_t newOutValue = (in ^ (in >> 1)) & 1;
+    DCSComponent::checkOutputChanged(newOutValue);
+    out = newOutValue;
 }

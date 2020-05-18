@@ -1,6 +1,6 @@
 # Makefile auto generated using custom generator
 
-CFLAGS=-c -Wextra -std=c++11 -O$(OPT) -g
+CFLAGS=-c -Wextra -std=c++17 -O$(OPT) -g
 CC=g++
 INC= -I.//include\
 

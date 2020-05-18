@@ -1,3 +1,36 @@
-3615625618:Init circuit:44713:15327
-3615625618:Run loop:70945:21023
-3615625618:main:1190:92842
+2318648399:updateInputs:42797:82
+2318648399:updateComponents:58704:127
+2318648399:propagateValues:59227:110
+2318648399:Init circuit:26944:39054
+2318648399:updateInputs:66153:65
+2318648399:updateComponents:66577:75
+2318648399:propagateValuesOnChangeOnly:66766:93
+2318648399:updateInputs:68440:46
+2318648399:updateComponents:68578:51
+2318648399:propagateValuesOnChangeOnly:68955:58
+2318648399:updateInputs:70184:45
+2318648399:updateComponents:70311:50
+2318648399:propagateValuesOnChangeOnly:70449:58
+2318648399:updateInputs:71600:46
+2318648399:updateComponents:71724:51
+2318648399:propagateValuesOnChangeOnly:71862:58
+2318648399:updateInputs:73012:45
+2318648399:updateComponents:75259:52
+2318648399:propagateValuesOnChangeOnly:75392:56
+2318648399:updateInputs:76640:46
+2318648399:updateComponents:76767:52
+2318648399:propagateValuesOnChangeOnly:76898:57
+2318648399:updateInputs:78073:46
+2318648399:updateComponents:78197:52
+2318648399:propagateValuesOnChangeOnly:78328:59
+2318648399:updateInputs:79546:45
+2318648399:updateComponents:79670:52
+2318648399:propagateValuesOnChangeOnly:79800:59
+2318648399:updateInputs:80949:45
+2318648399:updateComponents:81073:53
+2318648399:propagateValuesOnChangeOnly:81223:58
+2318648399:updateInputs:82411:45
+2318648399:updateComponents:82535:52
+2318648399:propagateValuesOnChangeOnly:84731:58
+2318648399:Run loop:66101:20024
+2318648399:main:131:86637

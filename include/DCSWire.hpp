@@ -24,6 +24,8 @@ public:
 	bool fromNode();
 	bool propagateValue();
 	bool getOutVal();
+
+	friend class DCSEngine;
 };
 
 
