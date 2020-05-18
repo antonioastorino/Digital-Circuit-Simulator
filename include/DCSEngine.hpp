@@ -28,6 +28,7 @@ private:
     static uint64_t s_stepNumber;
     static bool sampling;
     static bool ramReady;// makes sure ram are activated after being programmed and before being connected to the circuit
+    static bool initialized;
 
     static void storeRamElements();
     static void resetAndKeepRamElements();

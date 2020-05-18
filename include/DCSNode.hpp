@@ -12,8 +12,9 @@
  * single connection to both `A0` and `A1` to the external logic. However, by defining a node `N0`,
  * `A` can connect `I` to the input of `N0` and connect the output of `N0` to both `A0` and `A1`.
  *
- * Node are also used to create busses and avoid to connect components to each other directly.
- * Instead, one can connect a node to all commponets' inputs and all components' outputs to a node.
+ * Nodes are also used to create busses and avoid to connect components to each other directly.
+ * Instead, one can connect a node to all commponets' inputs and all (tri-state'd) components'
+ * outputs to a node.
  */
 class DCSNode : public DCSComponent {
 public:

@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Sat May 16 23:22:01 CEST 2020
+## Documentation automatically generated on Tue May 19 00:24:12 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSDLatch
@@ -403,7 +403,7 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |      |   __
 | K:   | XX  XXXXXXXX
 |      |    __
-| CLK: | X__  \\\  go down any time 2 tau after rising edge
+| CLK: | X__  \\\\\\  go down any time 2 tau after rising edge
 |      |    ^ stored
 |      |        _____
 | Q:   | _______
@@ -887,8 +887,9 @@ also that `A0` and `A1` should receive the same input `I`. There is no way for `
 single connection to both `A0` and `A1` to the external logic. However, by defining a node `N0`,
 `A` can connect `I` to the input of `N0` and connect the output of `N0` to both `A0` and `A1`.
 
-Node are also used to create busses and avoid to connect components to each other directly.
-Instead, one can connect a node to all commponets' inputs and all components' outputs to a node.
+Nodes are also used to create busses and avoid to connect components to each other directly.
+Instead, one can connect a node to all commponets' inputs and all (tri-state'd) components'
+outputs to a node.
 
 
 ## Class DCSRegister4Bits

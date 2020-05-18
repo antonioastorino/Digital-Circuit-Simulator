@@ -39,6 +39,7 @@ void ram256x16Test();
 void firstProgramTest();
 
 #include "DCSTimer.hpp"
+#include "DCSLog.hpp"
 #include <iostream>
 
 int main(int argc, const char* argv[]) {
@@ -170,5 +171,6 @@ int main(int argc, const char* argv[]) {
         }
     }
     DCSTimer::printResults();
+    DCSLog::printResults();
     return 0;
 }
