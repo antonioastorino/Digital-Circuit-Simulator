@@ -37,6 +37,7 @@ void addressDecoder32BitsTest();
 void register16BitsWithEnableTest();
 void ram256x16Test();
 void firstProgramTest();
+void zeroFlagProgramTest();
 
 #include "DCSTimer.hpp"
 #include <iostream>
@@ -164,6 +165,9 @@ int main(int argc, const char* argv[]) {
             break;
         case (37):
             firstProgramTest();
+            break;
+        case (38):
+            zeroFlagProgramTest();
             break;
         default:
             return 0;

@@ -138,7 +138,7 @@ void noCUComputerTest() {
     regB.connect(&dispB);
     regI.connect(&dispI0, {4, 7}, {0, 3}); // display operand
     regI.connect(&dispI1, {0, 3}, {0, 3}); // display instruction
-    alu.connect(&dispALU);
+    alu.connect(&dispALU, {0, 7}, {0, 7});
     mar.connect(&dispMAR);
     ram.connect(&dispRAM);
     regOut.connect(&dispOut);

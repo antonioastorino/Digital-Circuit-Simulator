@@ -7,7 +7,7 @@
 
 void aluTest() {
 	DCSLog::printTestName("ALU"); {
-		uint16_t masterClockHP = 20;
+		uint16_t masterClockHP = 1;
 		DCSEngine::initialize(masterClockHP);
 
 		DCSDisplayNBits dispA("dispA", 8);
@@ -18,7 +18,7 @@ void aluTest() {
 		DCSComponentArray<DCSInput> inA("A", 8);
 		DCSComponentArray<DCSInput> inB("B", 8);
 		DCSInput su("SU");
-		DCSComponentArray<DCSOutput> sum("E", 8);
+		DCSOutput outZero("OZ");
 
 		inA.connect(&alu, {0, 7}, {0, 7});
 		inA.connect(&dispA, {0, 7}, {0, 7});
@@ -27,18 +27,18 @@ void aluTest() {
 		inB.connect(&dispB, {0, 7}, {0, 7});
 		
 		su.connect(&alu, 0, 16, "SU");
-		alu.connect(&sum);
-		alu.connect(&dispE);
+		alu.connect(&dispE,  {0, 7}, {0, 7});
+		alu.connect(&outZero, 9, 0, "OZ");
 
-		inA[3]->makeSignal(1);
-		inA[4]->makeSignal(1);
+		inA[0]->makeSignal(1);
+		// inA[4]->makeSignal(1);
 		inA[5]->makeSignal(1);
-		inA[6]->makeSignal(1);
+		// inA[6]->makeSignal(1);
 		inB[0]->makeSignal(1);
 		inB[5]->makeSignal(1);
 
 		su.makeSignal(1);
 
-		DCSEngine::run(1 * masterClockHP, false);
+		DCSEngine::run(30 * masterClockHP, false);
 	}
 }

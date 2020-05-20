@@ -1,0 +1,54 @@
+
+#ifndef DCSControlUnit5Bits_hpp
+#define DCSControlUnit5Bits_hpp
+#include "DCSComponent.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSInput.hpp"
+#include "DCSDisplayNBits.hpp"
+class DCSRam256x16;
+class DCSAnd3;
+class DCSNot;
+class DCSOr;
+
+/**
+ * @class DCSControlUnit5Bits
+ *
+ * @pinout
+ * In 0    - Clock
+ * In 1    - Reset
+ * In 2    - Address 0
+ * In 3    - Address 1
+ * In 4    - Address 2
+ * In 5    - Address 3
+ * In 6    - Address 4
+ *
+ * Out 0   - Ctrl 0
+ * Out 1   - Ctrl 1
+ * ...
+ * Out 15  - Ctrl 15
+ * @end_pinout
+ */
+class DCSControlUnit5Bits : public DCSComponent {
+private:
+    DCSRam256x16* p_ram0;
+    DCSUpCounterWithLoadAndAsyncSR count0;
+    // Reset logic
+    DCSAnd3 and3_0;
+    DCSNot not0;
+    DCSUnitDelay del0;
+    DCSUnitDelay del1;
+    DCSOr or0;
+    DCSInput inGND;
+    DCSInput inVcc;
+	DCSDisplayNBits dispStep;
+
+public:
+    DCSControlUnit5Bits(std::string name, DCSRam256x16* ram);
+    DCSComponent* getInComponent(uint16_t& inPinNum) override;
+    DCSComponent* getOutComponent(uint16_t outPinNum) override;
+
+    void updateOut() override;
+};
+
+#endif /* DCSControlUnit5Bits_hpp */
