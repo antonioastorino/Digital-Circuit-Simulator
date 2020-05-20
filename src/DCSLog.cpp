@@ -9,7 +9,6 @@ public:
     custom_exception(int code) : code(code) {}
 
     virtual const char* what() const throw() {
-        DCSLog::printResults(); // Print what you have before throwing an error
         switch (this->code) {
         case 0:
             return "This function should never be called";
@@ -84,6 +83,7 @@ void DCSLog::error(std::string callerName, int code) {
         throw custom_exception(code);
     } catch (custom_exception& e) {
         DCSLog::outStream << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
+        DCSLog::printResults(); // Print what you have before throwing an error
         exit(e.code);
     }
 }

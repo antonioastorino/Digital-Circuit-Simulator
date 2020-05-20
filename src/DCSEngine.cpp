@@ -20,7 +20,7 @@ std::vector<DCSDisplayNBits*> DCSEngine::displayVector   = {};
 uint64_t DCSEngine::clockPeriod;
 uint64_t DCSEngine::s_stepNumber;
 bool DCSEngine::sampling;
-bool DCSEngine::ramReady;
+bool DCSEngine::ramReady = true;
 bool DCSEngine::initialized = false;
 
 void DCSEngine::initialize(uint64_t clockHalfPeriod) {
@@ -35,7 +35,6 @@ void DCSEngine::initialize(uint64_t clockHalfPeriod) {
     displayVector      = {};
     clockPeriod        = static_cast<uint64_t>(2 * clockHalfPeriod);
     s_stepNumber       = static_cast<uint64_t>(0);
-    ramReady           = true;
 }
 
 void DCSEngine::addComponent(DCSComponent* component) { componentVector.push_back(component); }
