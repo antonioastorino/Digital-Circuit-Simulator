@@ -9,9 +9,9 @@ DCSALU::DCSALU(std::string name)
 
     for (uint16_t i = 0; i < 8; i++) {
         xorArr0.connect(&adder0, i, i + 8); // connect controlled inverters to input B of full adder
-		nodeSU.connect(xorArr0[i], 0, 1); // connect SU to second input of all XOR's in the array
-	}
-	nodeSU.connect(&adder0, 0, 16);  // connect to Carry in of ripple adder for 2-complement
+        nodeSU.connect(xorArr0[i], 0, 1);   // connect SU to second input of all XOR's in the array
+    }
+    nodeSU.connect(&adder0, 0, 16); // connect to Carry in of ripple adder for 2-complement
 
     timeDelay    = 15;
     numOfInPins  = 17;
@@ -21,17 +21,15 @@ DCSALU::DCSALU(std::string name)
 DCSComponent* DCSALU::getInComponent(uint16_t& inPinNum) {
     if (inPinNum < 8) { // return input A of full adder
         return adder0.getInComponent(inPinNum);
-    } 
-	else if (inPinNum < 16) { // return the input 0 of the corresponding XOR in the array
+    } else if (inPinNum < 16) { // return the input 0 of the corresponding XOR in the array
         inPinNum = 2 * (inPinNum - 8);
-		return xorArr0.getInComponent(inPinNum);
-    }
-	else if (inPinNum == 16) {
-		inPinNum = 0;
+        return xorArr0.getInComponent(inPinNum);
+    } else if (inPinNum == 16) {
+        inPinNum = 0;
         return &nodeSU;
-	}
-	DCSLog::error(this->name, 11);
-	return nullptr;
+    }
+    DCSLog::error(this->name, 11);
+    return nullptr;
 }
 
 DCSComponent* DCSALU::getOutComponent(uint16_t outPinNum) {
@@ -39,7 +37,7 @@ DCSComponent* DCSALU::getOutComponent(uint16_t outPinNum) {
         return adder0.getOutComponent(outPinNum);
     }
     DCSLog::error(this->name, 10);
-	return nullptr;
+    return nullptr;
 }
 
-void DCSALU::updateOut() { DCSLog::error(this->name, 0);}
+void DCSALU::updateOut() { DCSLog::error(this->name, 0); }

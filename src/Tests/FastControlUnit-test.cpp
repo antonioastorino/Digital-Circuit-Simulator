@@ -1,11 +1,8 @@
-#include "DCSAddressDecoder8Bits.hpp"
-#include "DCSComponentArray.hpp"
-#include "DCSEngine.hpp"
-#include "DCSInput.hpp"
-#include "DCSInstructionSet.hpp"
-#include "DCSLog.hpp"
-#include "DCSOr.hpp"
+#include "DCSPLD8In16Out.hpp"
 #include "DCSDisplayNBits.hpp"
+#include "DCSInstructionSet.hpp"
+#include "DCSEngine.hpp"
+#include "DCSLog.hpp"
 
 void fastControlUnitTest() {
     DCSLog::printTestName("Fast control unit");
@@ -64,64 +61,20 @@ void fastControlUnitTest() {
         {MI | CO, RO | II | CE, HLT, 0, 0, 0, 0, 0}                       // 1111 HLT
     };
 
-	//PLD 
-    DCSAddressDecoder8Bits dec0("dec0");
+	
     DCSComponentArray<DCSInput> inArr0("inArr", 8);
-    DCSInput inGND("inGND");
     DCSDisplayNBits dispIn("in", 8);
     DCSDisplayNBits dispOut("out", 16);
-    DCSComponentArray<DCSOr>* orArr0[16];
-	DCSComponentArray<DCSOr>* orArr1[16];
-	DCSComponentArray<DCSOr>* orArr2[16];
-	DCSComponentArray<DCSOr>* orArr3[16];
-	DCSComponentArray<DCSOr>* orArr4[16];
-	DCSComponentArray<DCSOr>* orArr5[16];
-	DCSComponentArray<DCSOr>* orArr6[16];
-	DCSOr *or7[16];
-    for (int i = 0; i < 16; i++) {
-		// instantiation
-        orArr0[i] = new DCSComponentArray<DCSOr>("orArr0", 128);
-		orArr1[i] = new DCSComponentArray<DCSOr>("orArr1", 64);
-		orArr2[i] = new DCSComponentArray<DCSOr>("orArr1", 32);
-		orArr3[i] = new DCSComponentArray<DCSOr>("orArr1", 16);
-		orArr4[i] = new DCSComponentArray<DCSOr>("orArr1", 8);
-		orArr5[i] = new DCSComponentArray<DCSOr>("orArr1", 4);
-		orArr6[i] = new DCSComponentArray<DCSOr>("orArr1", 2);
-		or7[i] = new DCSOr("or7");
-		// connection
-		orArr0[i]->connect(orArr1[i]);
-		orArr1[i]->connect(orArr2[i]);
-		orArr2[i]->connect(orArr3[i]);
-		orArr3[i]->connect(orArr4[i]);
-		orArr4[i]->connect(orArr5[i]);
-		orArr5[i]->connect(orArr6[i]);
-		orArr6[i]->connect(or7[i]);
-		or7[i]->connect(&dispOut, 0, i);
-	}
-
+    DCSPLD8In16Out cu0("cu0", data);
 
 
     for (uint8_t i = 0; i < 8; i++) {
         inArr0[i]->makeSquareWave((hcp) << i);
     }
 
-    size_t decPinNum = 0;
-    for (size_t instr = 0; instr < 32; instr++) {
-        for (size_t uCode = 0; uCode < 8; uCode++) {
-            for (uint16_t bit = 0; bit < 16; bit++) {
-                bool val = (data[instr][uCode] >> bit) & 1;
-                if (val) {
-                    dec0.connect(orArr0[bit], decPinNum, decPinNum);
-                } else {
-                    inGND.connect(orArr0[bit], 0, decPinNum);
-                }
-            }
-            decPinNum++;
-        }
-    }
-
-    inArr0.connect(&dec0);
+    inArr0.connect(&cu0);
     inArr0.connect(&dispIn);
+    cu0.connect(&dispOut);
 
     DCSEngine::run(256 * hcp, true);
 }
