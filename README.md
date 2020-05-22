@@ -135,7 +135,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
-## Documentation automatically generated on Fri May 22 19:07:02 CEST 2020
+## Documentation automatically generated on Fri May 22 23:11:53 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU
@@ -171,6 +171,8 @@ Out 4  - E 4
 Out 5  - E 5
 Out 6  - E 6
 Out 7  - E 7
+Out 8  - Overflow
+Out 9  - Zero
 ```
 
 
@@ -307,6 +309,31 @@ In 2    - Address 0
 In 3    - Address 1
 In 4    - Address 2
 In 5    - Address 3
+
+Out 0   - Ctrl 0
+Out 1   - Ctrl 1
+...
+Out 15  - Ctrl 15
+```
+
+
+
+## Class DCSControlUnit5Bits
+
+The core of this component is a combinatorial logic, represented by the internal PLD. A counter
+drives the first 3 bits of the PLD address while the remaining 5 bits are available to the user.
+The counter is incremented upon clock rising edge. A register is placed at the output to
+synchronize all the output pins. The register is updated upon clock falling edge.
+
+#### Pinout
+```
+In 0    - Clock
+In 1    - Reset
+In 2    - Address 0
+In 3    - Address 1
+In 4    - Address 2
+In 5    - Address 3
+In 6    - Address 4
 
 Out 0   - Ctrl 0
 Out 1   - Ctrl 1
@@ -590,12 +617,12 @@ be displayed.
 
 ## Class DCSPLD8In16Out
 
-This class implements a Programmable Logic Device (PLD) equivalent to DCSRam256x16 but, once programmed, it becomes read-only.
-Programming a DCSPLD8In16Out is done by the class its initializer, which requires the data to be passed as an argument.
-The advantage of using this class in place of a RAM is that it much faster (the number of
-logic gates in a RAM is about 75 times that of this PLD). Therefore, the computation time is
-substantially reduced when using this PLD. Also, there is no control logic involved, which makes
-its use much simpler than a RAM.
+This class implements a Programmable Logic Device (PLD) equivalent to `DCSRam256x16` but, once
+programmed, it becomes read-only. Programming a `DCSPLD8In16Out` is done by its initializer,
+which requires the configuration data to be passed as an argument. The advantage of using this
+class in place of a RAM is that it much faster (the number of logic gates in a RAM is about 75
+times that of this PLD). Therefore, the computation time is substantially reduced when using this
+PLD. Also, there is no control logic involved, which makes its use much simpler than a RAM.
 
 #### Pinout
 ```
@@ -608,6 +635,8 @@ Out 0 - Data out 0
 Out 1 - Data out 1
 ...
 Out 15 - Data out 15
+```
+
 
 
 ## Class DCSRam16x8

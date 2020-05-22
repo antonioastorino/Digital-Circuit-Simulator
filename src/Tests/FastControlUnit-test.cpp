@@ -15,24 +15,6 @@ void fastControlUnitTest() {
 
     DCSEngine::useRamElements();
 
-
-    const uint16_t HLT = 0b1000000000000000; // bit 15
-    const uint16_t MI  = 0b0100000000000000; // bit 14
-    const uint16_t RI  = 0b0010000000000000; // bit 13
-    const uint16_t RO  = 0b0001000000000000; // bit 12
-    const uint16_t IO  = 0b0000100000000000; // bit 11
-    const uint16_t II  = 0b0000010000000000; // bit 10
-    const uint16_t AI  = 0b0000001000000000; // bit 9
-    const uint16_t AO  = 0b0000000100000000; // bit 8
-    const uint16_t EO  = 0b0000000010000000; // bit 7
-    const uint16_t SU  = 0b0000000001000000; // bit 6
-    const uint16_t BI  = 0b0000000000100000; // bit 5
-    const uint16_t OI  = 0b0000000000010000; // bit 4
-    const uint16_t CE  = 0b0000000000001000; // bit 3
-    const uint16_t CO  = 0b0000000000000100; // bit 2
-    const uint16_t J   = 0b0000000000000010; // bit 1
-    // const uint16_t ??  = 0b0000000000000001;
-
     const uint16_t data[32][8] = {
         {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0000 NOP
         {MI | CO, RO | II | CE, IO | MI, RO | AI, 0, 0, 0, 0},            // 0001 LDA

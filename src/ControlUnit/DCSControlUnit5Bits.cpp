@@ -2,11 +2,17 @@
 #include "DCSAnd3.hpp"
 #include "DCSLog.hpp"
 #include "DCSRam256x16.hpp"
+#include "DCSPLD8In16Out.hpp"
 
-DCSControlUnit5Bits::DCSControlUnit5Bits(std::string name, DCSRam256x16* ram)
+DCSControlUnit5Bits::DCSControlUnit5Bits(std::string name, DCSPLD8In16Out* pld)
     : DCSComponent(name, false),
-      p_ram0(ram),
-      count0(name + "_count0", 3),
+      p_pld0(pld),
+      count0(name + "_count0_", 3),
+      regMSB(name + "_regMSB_"),
+      regLSB(name + "_regLSB_"),
+      notClk(name + "_notClk_"),
+      nodeClk(name + "_nodeClk_"),
+      nodeRst(name + "_nodeRst_"),
       and3_0(name + "_resetLogicAnd3_0"),
       not0(name + "resetLogicNot0"),
       del0(name + "_resetLogicDel0"),
@@ -25,6 +31,7 @@ DCSControlUnit5Bits::DCSControlUnit5Bits(std::string name, DCSRam256x16* ram)
     // connect reset logic to OR gate @ in 1. In 0 will be available externally for manually
     // resetting the counter
     and3_0.connect(&or0, 0, 1);
+    nodeRst.connect(&or0, 0, 0); // Manual reset
     // connect OR output to counter reset pin
     or0.connect(&count0, 0, 3);
     // connect Count Enable to Vcc
@@ -33,49 +40,62 @@ DCSControlUnit5Bits::DCSControlUnit5Bits(std::string name, DCSRam256x16* ram)
     inGND.connect(&count0, 0, 1);
     inGND.connect(&count0, 0, 4);
 
+    p_pld0->connect(&regLSB, {0,7}, {0,7});
+    p_pld0->connect(&regMSB, {8,15}, {0,7});
+
+
     // connect counter data in to ground
     for (uint16_t i = 5; i < 8; i++)
         inGND.connect(&count0, 0, i);
 
-    // connect counter output to ram address 0, 1, and 2
-    count0.connect(p_ram0, {0, 2}, {16, 18});
-    // connect ram data in to ground
-    for (uint16_t i = 0; i < 16; i++)
-        inGND.connect(p_ram0, 0, i);
-    // connect ram Clock, Clear, Preset and Write to ground
-    for (uint16_t i = 24; i < 28; i++)
-        inGND.connect(p_ram0, 0, i);
-    // connect ram output enable to Vcc
-    inVcc.connect(p_ram0, 0, 28);
+    // connect counter output to PLD address 0, 1, and 2
+    count0.connect(p_pld0, {0, 2}, {0, 2});
 
     inVcc.makeSignal(1);
 
     // connect counter to display
     count0.connect(&dispStep, {0, 2}, {0, 2});
 
-    timeDelay    = count0.getTimeDelay() + p_ram0->getTimeDelay();
+
+    nodeClk.connect(&count0, 0, 2); // counter clock
+
+    nodeClk.connect(&notClk); // invert clock
+
+    notClk.connect(&regMSB, 0, 8);  // clock
+    notClk.connect(&regLSB, 0, 8);  // clock
+    nodeRst.connect(&regMSB, 0, 9); // Reset
+    nodeRst.connect(&regLSB, 0, 9); // Reset
+    inGND.connect(&regMSB, 0, 10);  // Preset to GND
+    inGND.connect(&regLSB, 0, 10);  // Preset to GND
+    inVcc.connect(&regMSB, 0, 11);  // Load always enabled
+    inVcc.connect(&regLSB, 0, 11);  // Load always enabled
+
+    timeDelay    = count0.getTimeDelay() + p_pld0->getTimeDelay();
     numOfInPins  = 7;
     numOfOutPins = 16;
 }
 
 DCSComponent* DCSControlUnit5Bits::getInComponent(uint16_t& inPinNum) {
     if (inPinNum == 0) {
-        inPinNum = 2;
-        return count0.getInComponent(inPinNum); // counter clock
+        return &nodeClk;
     } else if (inPinNum == 1) {
         inPinNum = 0;
-        return &or0; // counter reset (OR'ed with automatic reset)
+        return &nodeRst; // counter reset (OR'ed with automatic reset)
     } else if (inPinNum < 7) {
-        inPinNum += 17;
-        return p_ram0->getInComponent(inPinNum); // ram addresses from 3 to 6 (pins 19 to 23)
+        inPinNum += 1;
+        return p_pld0->getInComponent(inPinNum); // PLD addresses from 3 to 7
     }
     DCSLog::error(this->name, 11);
     return nullptr;
 }
 
 DCSComponent* DCSControlUnit5Bits::getOutComponent(uint16_t outPinNum) {
+    if (outPinNum < 8) {
+        return regLSB.getOutComponent(outPinNum);
+    }
     if (outPinNum < 16) {
-        return p_ram0->getOutComponent(outPinNum);
+        outPinNum -= 8;
+        return regMSB.getOutComponent(outPinNum);
     }
     DCSLog::error(this->name, 10);
     return nullptr;

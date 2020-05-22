@@ -2,17 +2,24 @@
 #ifndef DCSControlUnit5Bits_hpp
 #define DCSControlUnit5Bits_hpp
 #include "DCSComponent.hpp"
-#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
-#include "DCSUnitDelay.hpp"
-#include "DCSInput.hpp"
 #include "DCSDisplayNBits.hpp"
-class DCSRam256x16;
+#include "DCSInput.hpp"
+#include "DCSNode.hpp"
+#include "DCSNot.hpp"
+#include "DCSRegister8Bits.hpp"
+#include "DCSUnitDelay.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+class DCSPLD8In16Out;
 class DCSAnd3;
 class DCSNot;
 class DCSOr;
 
 /**
  * @class DCSControlUnit5Bits
+ * The core of this component is a combinatorial logic, represented by the internal PLD. A counter
+ * drives the first 3 bits of the PLD address while the remaining 5 bits are available to the user.
+ * The counter is incremented upon clock rising edge. A register is placed at the output to
+ * synchronize all the output pins. The register is updated upon clock falling edge.
  *
  * @pinout
  * In 0    - Clock
@@ -31,8 +38,13 @@ class DCSOr;
  */
 class DCSControlUnit5Bits : public DCSComponent {
 private:
-    DCSRam256x16* p_ram0;
+    DCSPLD8In16Out* p_pld0;
     DCSUpCounterWithLoadAndAsyncSR count0;
+    DCSRegister8Bits regMSB;
+    DCSRegister8Bits regLSB;
+    DCSNot notClk;
+    DCSNode nodeClk;
+    DCSNode nodeRst;
     // Reset logic
     DCSAnd3 and3_0;
     DCSNot not0;
@@ -41,10 +53,10 @@ private:
     DCSOr or0;
     DCSInput inGND;
     DCSInput inVcc;
-	DCSDisplayNBits dispStep;
+    DCSDisplayNBits dispStep;
 
 public:
-    DCSControlUnit5Bits(std::string name, DCSRam256x16* ram);
+    DCSControlUnit5Bits(std::string name, DCSPLD8In16Out* pld);
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     DCSComponent* getOutComponent(uint16_t outPinNum) override;
 
