@@ -15,7 +15,8 @@ DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool node
       numOfOutPins(-1),
       node(node),
       tristate(false),
-      initialized(false) {
+      initialized(false),
+      outChanged(true) {
     if (name == "")
         DCSLog::error("Component", 13); // I don't have a name
 
@@ -158,6 +159,11 @@ bool DCSComponent::isEnabled() { return this->enabled; }
 bool DCSComponent::isInitialized() { return this->initialized; }
 bool DCSComponent::isNode() { return this->node; }
 bool DCSComponent::isTristate() { return this->tristate; }
+bool DCSComponent::needsPropagation() { return this->outChanged; }
+
+void DCSComponent::checkOutputChanged(bool newOutValue) {
+    this->outChanged = newOutValue != this->out;
+}
 
 bool DCSComponent::isFullyConnected() {
     return (this->connectedIn ^ this->fromTristateIn) == this->getAllReachedQWord();

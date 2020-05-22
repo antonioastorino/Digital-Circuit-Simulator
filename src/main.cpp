@@ -37,9 +37,11 @@ void addressDecoder32BitsTest();
 void register16BitsWithEnableTest();
 void ram256x16Test();
 void firstProgramTest();
+void fastControlUnitTest();
 void zeroFlagProgramTest();
 
 #include "DCSTimer.hpp"
+#include "DCSLog.hpp"
 #include <iostream>
 
 int main(int argc, const char* argv[]) {
@@ -169,10 +171,14 @@ int main(int argc, const char* argv[]) {
         case (38):
             zeroFlagProgramTest();
             break;
+        case(39):
+            fastControlUnitTest();
+            break;
         default:
             return 0;
         }
     }
     DCSTimer::printResults();
+    DCSLog::printResults();
     return 0;
 }

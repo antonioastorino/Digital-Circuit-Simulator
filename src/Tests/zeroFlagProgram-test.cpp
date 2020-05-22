@@ -196,5 +196,5 @@ void zeroFlagProgramTest() {
     std::string dn("00");           // do nothing (while resetting the registers)
     inReset.makeSignal("10", true); // initialize by resetting the register
 
-    DCSEngine::run(150 * masterClockHP, true); //*/
+    DCSEngine::run(80 * masterClockHP, true); //*/
 }

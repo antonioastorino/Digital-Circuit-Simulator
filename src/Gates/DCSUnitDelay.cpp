@@ -7,4 +7,8 @@ DCSComponent(name) {
 	numOfOutPins = 1;
 }
 
-void DCSUnitDelay::updateOut() { out = in; }
+void DCSUnitDelay::updateOut() { 
+	uint64_t newOutValue = in;
+    DCSComponent::checkOutputChanged(newOutValue);
+    out = newOutValue;
+}

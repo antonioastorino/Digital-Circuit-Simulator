@@ -16,5 +16,3 @@ void DCSNode::setIn(bool inVal, uint16_t inPinNum) {
     this->out = this->in;
     this->propagateValues();
 }
-
-// uint64_t DCSNode::getAllReachedQWord() { return -1; };

@@ -1,6 +1,8 @@
 #include "DCSLog.hpp"
 #include <exception>
 
+std::stringstream DCSLog::outStream;
+
 class custom_exception : public std::exception {
 public:
     int code;
@@ -46,6 +48,12 @@ public:
             return "Exceeded maximum number of bits (32)";
         case 17:
             return "RAM not ready. Have you called useRamElements() after programming the RAM?";
+        case 18:
+            return "Engine not initialized";
+        case 19:
+            return "Engine already initialized";
+        case 20:
+            return "Timer already initialized";
         default:
             return "Uncategorized exception";
         }
@@ -54,19 +62,19 @@ public:
 
 void DCSLog::output(std::string label, std::string message) {
 #if LOG_LEVEL > 0
-    std::cout << " " << label << ":" << message;
+    DCSLog::outStream << " " << label << ":" << message;
 #endif
 }
 
 void DCSLog::info(std::string callerName, std::string message) {
 #if LOG_LEVEL > 1
-    std::cout << "INFO: " << callerName << " says: \"" << message << "\"\n";
+    DCSLog::outStream << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
 void DCSLog::debug(std::string callerName, std::string message) {
 #if LOG_LEVEL > 2
-    std::cout << "INFO: " << callerName << " says: \"" << message << "\"\n";
+    DCSLog::outStream << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
@@ -74,19 +82,26 @@ void DCSLog::error(std::string callerName, int code) {
     try {
         throw custom_exception(code);
     } catch (custom_exception& e) {
-        std::cout << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
+        DCSLog::outStream << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
+        DCSLog::printResults(); // Print what you have before throwing an error
         exit(e.code);
     }
 }
 
 void DCSLog::printTestName(std::string testName) {
 #if LOG_LEVEL > 0
-    std::cout << "-----";
+    DCSLog::outStream << "-----";
     for (size_t i = 0; i < testName.size(); i++)
-        std::cout << "-";
-    std::cout << "\n" << testName << " test\n";
+        DCSLog::outStream << "-";
+    DCSLog::outStream << "\n" << testName << " test\n";
     for (size_t i = 0; i < testName.size() + 5; i++)
-        std::cout << "-";
-    std::cout << "\n";
+        DCSLog::outStream << "-";
+    DCSLog::outStream << "\n";
+#endif
+}
+
+void DCSLog::printResults() {
+#if LOG_LEVEL > 0
+    std::cout << DCSLog::outStream.str();
 #endif
 }

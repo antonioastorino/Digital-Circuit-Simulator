@@ -1,6 +1,6 @@
 # Makefile auto generated using custom generator
 
-CFLAGS=-c -Wextra -std=c++11 -O$(OPT) -g
+CFLAGS=-c -Wextra -std=c++17 -O$(OPT) -g
 CC=g++
 INC= -I.//include\
 
@@ -28,7 +28,7 @@ make-opt:
 	fi
 	make build/$(OUT)-$(OPT) OUT=$(OUT) OPT=$(OPT);
 
-build/$(OUT)-$(OPT): build/objects/DCSControlUnit4Bits.o build/objects/DCSControlUnit5Bits.o build/objects/DCSEngine.o build/objects/DCSNand3.o build/objects/DCSAnd8.o build/objects/DCSNor.o build/objects/DCSNot.o build/objects/DCSUnitDelay.o build/objects/DCSNand.o build/objects/DCSAnd6.o build/objects/DCSAnd.o build/objects/DCSOr.o build/objects/DCSAnd4.o build/objects/DCSNor3.o build/objects/DCSAnd3.o build/objects/DCSXor.o build/objects/DCSMux2to1.o build/objects/DCSRegister8BitsWithEnable.o build/objects/DCSRegister4Bits.o build/objects/DCSRam256x16.o build/objects/DCSRegister1Bit.o build/objects/DCSRam16x8.o build/objects/DCSRegister1BitWithEnable.o build/objects/DCSRegister16BitsWithEnable.o build/objects/DCSRegister8Bits.o build/objects/DCSSRLatch.o build/objects/DCSDFlipFlop.o build/objects/DCSDLatch.o build/objects/DCSClockSignal.o build/objects/DCSArbitrarySignal.o build/objects/DCSDisplayNBits.o build/objects/DCSLog.o build/objects/Register8Bits-Test.o build/objects/UpCounter-Test.o build/objects/Display-Test.o build/objects/FirstProgram-Test.o build/objects/Nor3-Test.o build/objects/DLatch-Test.o build/objects/TriStateBuffer-Test.o build/objects/Register16BitsWithEnable-test.o build/objects/BitStreamSignal-Test.o build/objects/Divider-Test.o build/objects/RippleAdder-Test.o build/objects/Nand3-Test.o build/objects/UpCounter4Bits-Test.o build/objects/NotLoop-Test.o build/objects/Or-Test.o build/objects/DFlipFlop-Test.o build/objects/Xor-test.o build/objects/zeroFlagProgram-test.o build/objects/UnitDelay-Test.o build/objects/Mux2To1-Test.o build/objects/SRLatch-Test.o build/objects/ALU-Test.o build/objects/JKMasterSlave-Test.o build/objects/Register1BitWithEnable-Test.o build/objects/AndArray-Test.o build/objects/AddressDecoder32Bits-test.o build/objects/SingleNotLoop-test.o build/objects/MemoryProgrammer-test.o build/objects/AddressDecoder-test.o build/objects/ControlUnit-test.o build/objects/Register8BitsWithEnable-Test.o build/objects/noCUComputer-test.o build/objects/Ram-Test.o build/objects/RisingEdgeDetector-Test.o build/objects/Ram256x16-test.o build/objects/FullAdder-Test.o build/objects/DLatchAsyncSR-Test.o build/objects/And6-Test.o build/objects/Register1Bit-Test.o build/objects/DCSComponent.o build/objects/DCSComponentArray.o build/objects/DCSNode.o build/objects/DCSWire.o build/objects/DCSTriStateBuffer.o build/objects/DCSOutput.o build/objects/DCSInput.o build/objects/DCSTriStateBuffer8Bits.o build/objects/DCSAddressDecoder8Bits.o build/objects/DCSAddressDecoder4Bits.o build/objects/DCSALU.o build/objects/DCSRippleAdder8Bits.o build/objects/DCSFullAdder.o build/objects/DCSTimer.o build/objects/DCSClockDivider.o build/objects/DCSUpCounterWithLoadAndAsyncSR.o build/objects/main.o build/objects/DCSDFlipFlopAsyncSR.o build/objects/DCSDLatchAsyncSR.o build/objects/DCSJKLatchMasterSlaveAsyncSR.o
+build/$(OUT)-$(OPT): build/objects/DCSControlUnit4Bits.o build/objects/DCSControlUnit5Bits.o build/objects/DCSEngine.o build/objects/DCSNand3.o build/objects/DCSAnd8.o build/objects/DCSNor.o build/objects/DCSNot.o build/objects/DCSUnitDelay.o build/objects/DCSNand.o build/objects/DCSAnd6.o build/objects/DCSAnd.o build/objects/DCSOr.o build/objects/DCSAnd4.o build/objects/DCSNor3.o build/objects/DCSAnd3.o build/objects/DCSXor.o build/objects/DCSMux2to1.o build/objects/DCSRegister8BitsWithEnable.o build/objects/DCSRegister4Bits.o build/objects/DCSRam256x16.o build/objects/DCSRegister1Bit.o build/objects/DCSRam16x8.o build/objects/DCSRegister1BitWithEnable.o build/objects/DCSRegister16BitsWithEnable.o build/objects/DCSRegister8Bits.o build/objects/DCSSRLatch.o build/objects/DCSDFlipFlop.o build/objects/DCSDLatch.o build/objects/DCSClockSignal.o build/objects/DCSArbitrarySignal.o build/objects/DCSDisplayNBits.o build/objects/DCSLog.o build/objects/Register8Bits-Test.o build/objects/UpCounter-Test.o build/objects/Display-Test.o build/objects/FirstProgram-Test.o build/objects/Nor3-Test.o build/objects/DLatch-Test.o build/objects/TriStateBuffer-Test.o build/objects/Register16BitsWithEnable-test.o build/objects/BitStreamSignal-Test.o build/objects/Divider-Test.o build/objects/RippleAdder-Test.o build/objects/Nand3-Test.o build/objects/UpCounter4Bits-Test.o build/objects/NotLoop-Test.o build/objects/Or-Test.o build/objects/DFlipFlop-Test.o build/objects/Xor-test.o build/objects/zeroFlagProgram-test.o build/objects/UnitDelay-Test.o build/objects/Mux2To1-Test.o build/objects/SRLatch-Test.o build/objects/ALU-Test.o build/objects/JKMasterSlave-Test.o build/objects/Register1BitWithEnable-Test.o build/objects/AndArray-Test.o build/objects/AddressDecoder32Bits-test.o build/objects/SingleNotLoop-test.o build/objects/MemoryProgrammer-test.o build/objects/AddressDecoder-test.o build/objects/ControlUnit-test.o build/objects/FastControlUnit-test.o build/objects/Register8BitsWithEnable-Test.o build/objects/noCUComputer-test.o build/objects/Ram-Test.o build/objects/RisingEdgeDetector-Test.o build/objects/Ram256x16-test.o build/objects/FullAdder-Test.o build/objects/DLatchAsyncSR-Test.o build/objects/And6-Test.o build/objects/Register1Bit-Test.o build/objects/DCSComponent.o build/objects/DCSComponentArray.o build/objects/DCSNode.o build/objects/DCSWire.o build/objects/DCSTriStateBuffer.o build/objects/DCSOutput.o build/objects/DCSInput.o build/objects/DCSTriStateBuffer8Bits.o build/objects/DCSPLD8In16Out.o build/objects/DCSAddressDecoder8Bits.o build/objects/DCSAddressDecoder4Bits.o build/objects/DCSALU.o build/objects/DCSRippleAdder8Bits.o build/objects/DCSFullAdder.o build/objects/DCSTimer.o build/objects/DCSClockDivider.o build/objects/DCSUpCounterWithLoadAndAsyncSR.o build/objects/main.o build/objects/DCSDFlipFlopAsyncSR.o build/objects/DCSDLatchAsyncSR.o build/objects/DCSJKLatchMasterSlaveAsyncSR.o
 	$(CC) $(INC) -o $@ $^
 
 build/objects/DCSControlUnit4Bits.o: .//src/ControlUnit/DCSControlUnit4Bits.cpp .//include/DCSControlUnit4Bits.hpp .//include/DCSAnd3.hpp .//include/DCSLog.hpp .//include/DCSRam256x16.hpp build/objects/DCSComponent.o build/objects/DCSUpCounterWithLoadAndAsyncSR.o build/objects/DCSUnitDelay.o build/objects/DCSInput.o build/objects/DCSDisplayNBits.o 
@@ -136,7 +136,7 @@ build/objects/UpCounter-Test.o: .//src/Tests/UpCounter-Test.cpp .//include/DCSEn
 build/objects/Display-Test.o: .//src/Tests/Display-Test.cpp .//include/DCSComponentArray.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/FirstProgram-Test.o: .//src/Tests/FirstProgram-Test.cpp .//include/DCSALU.hpp .//include/DCSControlUnit4Bits.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSInstructionSet.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRam16x8.hpp .//include/DCSRam256x16.hpp .//include/DCSRegister4Bits.hpp .//include/DCSRegister8Bits.hpp .//include/DCSTriStateBuffer8Bits.hpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp 
+build/objects/FirstProgram-Test.o: .//src/Tests/FirstProgram-Test.cpp .//include/DCSALU.hpp .//include/DCSControlUnit4Bits.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSInstructionSet.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRam16x8.hpp .//include/DCSRam256x16.hpp .//include/DCSRegister4Bits.hpp .//include/DCSRegister8Bits.hpp .//include/DCSTriStateBuffer8Bits.hpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp .//include/DCSNot.hpp .//include/DCSAnd.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/Nor3-Test.o: .//src/Tests/Nor3-Test.cpp .//include/DCSLog.hpp .//include/DCSInput.hpp .//include/DCSOutput.hpp .//include/DCSEngine.hpp .//include/DCSNor3.hpp .//include/DCSComponentArray.hpp 
@@ -217,6 +217,9 @@ build/objects/AddressDecoder-test.o: .//src/Tests/AddressDecoder-test.cpp .//inc
 build/objects/ControlUnit-test.o: .//src/Tests/ControlUnit-test.cpp .//include/DCSComponentArray.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRam256x16.hpp .//include/DCSControlUnit4Bits.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
+build/objects/FastControlUnit-test.o: .//src/Tests/FastControlUnit-test.cpp .//include/DCSPLD8In16Out.hpp .//include/DCSDisplayNBits.hpp .//include/DCSInstructionSet.hpp .//include/DCSEngine.hpp .//include/DCSLog.hpp .//include/DCSRam256x16.hpp 
+	$(CC) $(INC) $(CFLAGS) $< -o $@
+
 build/objects/Register8BitsWithEnable-Test.o: .//src/Tests/Register8BitsWithEnable-Test.cpp .//include/DCSDisplayNBits.hpp .//include/DCSEngine.hpp .//include/DCSInput.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRegister8BitsWithEnable.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
@@ -247,7 +250,7 @@ build/objects/Register1Bit-Test.o: .//src/Tests/Register1Bit-Test.cpp .//include
 build/objects/DCSComponent.o: .//src/Basic/DCSComponent.cpp .//include/DCSComponent.hpp .//include/DCSEngine.hpp .//include/DCSWire.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/DCSComponentArray.o: .//src/Basic/DCSComponentArray.cpp .//include/DCSComponentArray.hpp .//include/DCSAnd.hpp .//include/DCSAnd3.hpp .//include/DCSAnd4.hpp .//include/DCSAnd6.hpp .//include/DCSAnd8.hpp .//include/DCSClockDivider.hpp .//include/DCSDFlipFlop.hpp .//include/DCSDFlipFlopAsyncSR.hpp .//include/DCSDLatch.hpp .//include/DCSDLatchAsyncSR.hpp .//include/DCSFullAdder.hpp .//include/DCSInput.hpp .//include/DCSJKLatchMasterSlaveAsyncSR.hpp .//include/DCSLog.hpp .//include/DCSNand.hpp .//include/DCSNand3.hpp .//include/DCSNode.hpp .//include/DCSNor.hpp .//include/DCSNor3.hpp .//include/DCSNot.hpp .//include/DCSOr.hpp .//include/DCSOutput.hpp .//include/DCSRegister1Bit.hpp .//include/DCSRegister1BitWithEnable.hpp .//include/DCSRegister8Bits.hpp .//include/DCSRegister8BitsWithEnable.hpp .//include/DCSRegister16BitsWithEnable.hpp .//include/DCSSRLatch.hpp .//include/DCSTriStateBuffer.hpp .//include/DCSTriStateBuffer8Bits.hpp .//include/DCSUnitDelay.hpp .//include/DCSXor.hpp build/objects/DCSComponent.o 
+build/objects/DCSComponentArray.o: .//src/Basic/DCSComponentArray.cpp .//include/DCSComponentArray.hpp .//include/DCSAnd.hpp .//include/DCSAnd3.hpp .//include/DCSAnd4.hpp .//include/DCSAnd6.hpp .//include/DCSAnd8.hpp .//include/DCSClockDivider.hpp .//include/DCSDFlipFlop.hpp .//include/DCSDFlipFlopAsyncSR.hpp .//include/DCSDLatch.hpp .//include/DCSDLatchAsyncSR.hpp .//include/DCSFullAdder.hpp .//include/DCSInput.hpp .//include/DCSJKLatchMasterSlaveAsyncSR.hpp .//include/DCSLog.hpp .//include/DCSNand.hpp .//include/DCSNand3.hpp .//include/DCSNode.hpp .//include/DCSNor.hpp .//include/DCSNor3.hpp .//include/DCSNot.hpp .//include/DCSOr.hpp .//include/DCSOutput.hpp .//include/DCSRegister16BitsWithEnable.hpp .//include/DCSRegister1Bit.hpp .//include/DCSRegister1BitWithEnable.hpp .//include/DCSRegister8Bits.hpp .//include/DCSRegister8BitsWithEnable.hpp .//include/DCSSRLatch.hpp .//include/DCSTriStateBuffer.hpp .//include/DCSTriStateBuffer8Bits.hpp .//include/DCSUnitDelay.hpp .//include/DCSXor.hpp build/objects/DCSComponent.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSNode.o: .//src/Connections/DCSNode.cpp .//include/DCSNode.hpp .//include/DCSWire.hpp build/objects/DCSComponent.o 
@@ -268,13 +271,16 @@ build/objects/DCSInput.o: .//src/Connections/DCSInput.cpp .//include/DCSInput.hp
 build/objects/DCSTriStateBuffer8Bits.o: .//src/Connections/DCSTriStateBuffer8Bits.cpp .//include/DCSTriStateBuffer8Bits.hpp .//include/DCSLog.hpp build/objects/DCSComponentArray.o build/objects/DCSNode.o build/objects/DCSTriStateBuffer.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
+build/objects/DCSPLD8In16Out.o: .//src/Decoders/DCSPLD8In16Out.cpp .//include/DCSPLD8In16Out.hpp .//include/DCSLog.hpp build/objects/DCSAddressDecoder8Bits.o build/objects/DCSComponent.o build/objects/DCSComponentArray.o build/objects/DCSOr.o build/objects/DCSInput.o 
+	$(CC) $(INC) $(CFLAGS) $< -o $@
+
 build/objects/DCSAddressDecoder8Bits.o: .//src/Decoders/DCSAddressDecoder8Bits.cpp .//include/DCSAddressDecoder8Bits.hpp .//include/DCSAnd8.hpp .//include/DCSLog.hpp build/objects/DCSComponentArray.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSAddressDecoder4Bits.o: .//src/Decoders/DCSAddressDecoder4Bits.cpp .//include/DCSAddressDecoder4Bits.hpp .//include/DCSAnd4.hpp .//include/DCSLog.hpp build/objects/DCSComponentArray.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/DCSALU.o: .//src/Arithmetic/DCSALU.cpp .//include/DCSALU.hpp .//include/DCSLog.hpp build/objects/DCSRippleAdder8Bits.o build/objects/DCSComponent.o build/objects/DCSXor.o build/objects/DCSXor.o build/objects/DCSComponentArray.o build/objects/DCSNode.o 
+build/objects/DCSALU.o: .//src/Arithmetic/DCSALU.cpp .//include/DCSALU.hpp .//include/DCSLog.hpp build/objects/DCSRippleAdder8Bits.o build/objects/DCSComponent.o build/objects/DCSXor.o build/objects/DCSXor.o build/objects/DCSNor3.o build/objects/DCSAnd3.o build/objects/DCSNot.o build/objects/DCSComponentArray.o build/objects/DCSNode.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSRippleAdder8Bits.o: .//src/Arithmetic/DCSRippleAdder8Bits.cpp .//include/DCSRippleAdder8Bits.hpp .//include/DCSFullAdder.hpp .//include/DCSLog.hpp build/objects/DCSComponentArray.o 
@@ -292,7 +298,7 @@ build/objects/DCSClockDivider.o: .//src/Counters/DCSClockDivider.cpp .//include/
 build/objects/DCSUpCounterWithLoadAndAsyncSR.o: .//src/Counters/DCSUpCounterWithLoadAndAsyncSR.cpp .//include/DCSUpCounterWithLoadAndAsyncSR.hpp .//include/DCSLog.hpp build/objects/DCSClockDivider.o build/objects/DCSComponentArray.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/main.o: .//src/main.cpp .//include/DCSTimer.hpp 
+build/objects/main.o: .//src/main.cpp .//include/DCSTimer.hpp .//include/DCSLog.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSDFlipFlopAsyncSR.o: .//src/Latches-async-SR/DCSDFlipFlopAsyncSR.cpp .//include/DCSDFlipFlopAsyncSR.hpp .//include/DCSLog.hpp build/objects/DCSAnd.o build/objects/DCSDLatchAsyncSR.o build/objects/DCSNot.o 

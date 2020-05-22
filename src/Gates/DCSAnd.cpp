@@ -6,4 +6,8 @@ DCSAnd::DCSAnd(std::string name) : DCSComponent(name) {
     this->numOfOutPins = 1;
 }
 
-void DCSAnd::updateOut() { out = (in & (in >> 1)) & 1; }
+void DCSAnd::updateOut() { 
+    uint64_t newOutValue = (in & (in >> 1)) & 1;
+    DCSComponent::checkOutputChanged(newOutValue);
+    out = newOutValue;
+}
