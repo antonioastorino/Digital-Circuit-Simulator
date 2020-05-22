@@ -6,6 +6,7 @@ Language: Cpp
 DerivePointerAlignment: false
 PointerAlignment: Left
 AlignConsecutiveAssignments: true
+AllowAllParametersOfDeclarationOnNextLine: true
 ColumnLimit: 100
 AccessModifierOffset: -4
 ConstructorInitializerAllOnOneLineOrOnePerLine: true

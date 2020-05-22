@@ -5,6 +5,9 @@
 #include "DCSComponent.hpp" 
 #include "DCSXor.hpp"
 #include "DCSXor.hpp"
+#include "DCSNor3.hpp"
+#include "DCSAnd3.hpp"
+#include "DCSNot.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSNode.hpp"
 
@@ -40,6 +43,8 @@
  * Out 5  - E 5
  * Out 6  - E 6
  * Out 7  - E 7
+ * Out 8  - Overflow
+ * Out 9  - Zero
  * @end_pinout
  */
 
@@ -47,6 +52,9 @@ class DCSALU: public DCSComponent {
 private:
 	DCSRippleAdder8Bits adder0;
 	DCSComponentArray<DCSXor> xorArr0;
+	DCSComponentArray<DCSNor3> nor3Array0;
+	DCSAnd3 and3_0;
+	DCSNot not0;
 	DCSNode nodeSU;
 
 public:

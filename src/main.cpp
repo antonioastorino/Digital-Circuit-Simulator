@@ -38,6 +38,7 @@ void register16BitsWithEnableTest();
 void ram256x16Test();
 void firstProgramTest();
 void fastControlUnitTest();
+void zeroFlagProgramTest();
 
 #include "DCSTimer.hpp"
 #include "DCSLog.hpp"
@@ -166,6 +167,9 @@ int main(int argc, const char* argv[]) {
             break;
         case (37):
             firstProgramTest();
+            break;
+        case (38):
+            zeroFlagProgramTest();
             break;
         case(39):
             fastControlUnitTest();

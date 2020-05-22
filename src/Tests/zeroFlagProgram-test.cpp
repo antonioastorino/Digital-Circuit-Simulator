@@ -1,5 +1,5 @@
 #include "DCSALU.hpp"
-#include "DCSControlUnit4Bits.hpp"
+#include "DCSControlUnit5Bits.hpp"
 #include "DCSEngine.hpp"
 #include "DCSInput.hpp"
 #include "DCSInstructionSet.hpp"
@@ -11,21 +11,20 @@
 #include "DCSRegister8Bits.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
-#include "DCSNot.hpp"
-#include "DCSAnd.hpp"
-void firstProgramTest() {
-    DCSLog::printTestName("First program");
+
+void zeroFlagProgramTest() {
+    DCSLog::printTestName("Zero flag program");
     uint64_t masterClockHP = 16;
 
     // the instruction is the MSHB and the data is the LSHB
-    uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0
-                               {STA, 15}, // instruction and operand 1
-                               {LDI, 0},  // instruction and operand 2
+    uint16_t program[16][2] = {{LDA, 15}, // instruction and operand 0
+                               {LDB, 14}, // instruction and operand 1
+                               {JEQ, 4},  // instruction and operand 2
                                {ADD, 15}, // instruction and operand 3
-                               {OUT, 0},  // instruction and operand 4
-                               {JMP, 3},  // instruction and operand 5
+                               {HLT, 0},  // instruction and operand 4
+                               {JMP, 0},  // instruction and operand 5
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0},
-                               {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+                               {0, 0},    {0, 0}, {0, 4}, {0, 3}, {0, 3}};
 
     // RAM
     DCSEngine::initialize(masterClockHP);
@@ -38,7 +37,7 @@ void firstProgramTest() {
     DCSEngine::useRamElements();
 
     // CU
-    DCSControlUnit4Bits cu0("CU", &cuRam);
+    DCSControlUnit5Bits cu0("CU", &cuRam);
 
     // ALU
     DCSALU alu("alu");
@@ -48,14 +47,13 @@ void firstProgramTest() {
 
     // bus
     DCSComponentArray<DCSNode> bus("bus", 8);
-
     // // master clock
-    DCSInput clockSignal("clkSignal");
-    clockSignal.makeSquareWave(masterClockHP, true);
-    DCSNot notClockSignal("!CLK");
-    DCSAnd andClockSignal("andCLK");
-    clockSignal.connect(&andClockSignal, 0, 0);
-    notClockSignal.connect(&andClockSignal, 0, 1);
+    DCSInput clk("clkSignal");
+    clk.makeSquareWave(masterClockHP, true);
+    DCSNot notClk("!CLK");
+    DCSAnd clockSignal("andCLK");
+    clk.connect(&clockSignal, 0, 0);
+    notClk.connect(&clockSignal, 0, 1);
 
     // registers
     DCSRegister8Bits regA("regA");     // A register
@@ -174,6 +172,7 @@ void firstProgramTest() {
     clockSignal.connect(&cu0, 0, 0);
     inReset.connect(&cu0, 0, 1);
     regI.connect(&cu0, {4, 7}, {2, 5}); // connect Instruction Register MSHB to Control Unit
+    alu.connect(&cu0, 9, 6, "Z");    // Flag in
     cu0.connect(&pc, 1, 1, "J");        // Jump
     cu0.connect(&trisPC, 2, 8, "CO");   // Connect output enable
     cu0.connect(&pc, 3, 0, "CE");       // Count enable
@@ -188,7 +187,7 @@ void firstProgramTest() {
     cu0.connect(&trisRAM, 12, 8, "RO"); // Connect output enable
     cu0.connect(&ram, 13, 15, "RI");
     cu0.connect(&mar, 14, 7, "MI");
-    cu0.connect(&notClockSignal, 15, 0, "HLT"); // the negated HLT signal will stop the clock
+    cu0.connect(&notClk, 15, 0, "HLT"); // the negated HLT signal will stop the clock
 
     // constant signals
     inVCC.makeSignal("01", true); // The RAM is always enable to always talk to the IR. A 3-state
@@ -197,5 +196,5 @@ void firstProgramTest() {
     std::string dn("00");           // do nothing (while resetting the registers)
     inReset.makeSignal("10", true); // initialize by resetting the register
 
-    DCSEngine::run(150 * masterClockHP, true); //*/
+    DCSEngine::run(80 * masterClockHP, true); //*/
 }

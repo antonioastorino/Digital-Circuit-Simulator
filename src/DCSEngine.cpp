@@ -35,6 +35,7 @@ void DCSEngine::initialize(uint64_t clockHalfPeriod) {
     displayVector      = {};
     clockPeriod        = static_cast<uint64_t>(2 * clockHalfPeriod);
     s_stepNumber       = static_cast<uint64_t>(0);
+    ramReady           = true;
 }
 
 void DCSEngine::addComponent(DCSComponent* component) { componentVector.push_back(component); }
@@ -336,27 +337,45 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
     const uint16_t CE  = 0b0000000000001000; // bit 3
     const uint16_t CO  = 0b0000000000000100; // bit 2
     const uint16_t J   = 0b0000000000000010; // bit 1
-    // const uint16_t ??  = 0b0000000000000001;
+    // const uint16_t ??  = 0b0000000000000001; // bit 0
 
-    const uint16_t data[16][8] = {
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0000 NOP
-        {MI | CO, RO | II | CE, IO | MI, RO | AI, 0, 0, 0, 0},            // 0001 LDA
-        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI, 0, 0, 0},      // 0010 ADD
-        {MI | CO, RO | II | CE, IO | MI, RO | BI, EO | AI | SU, 0, 0, 0}, // 0011 SUB
-        {MI | CO, RO | II | CE, IO | MI, AO | RI, 0, 0, 0, 0},            // 0100 STA
-        {MI | CO, RO | II | CE, IO | AI, 0, 0, 0, 0, 0},                  // 0101 LDI
-        {MI | CO, RO | II | CE, IO | J, 0, 0, 0, 0, 0},                   // 0110
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 0111
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1000
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1001
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1010
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1011
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1100
-        {MI | CO, RO | II | CE, 0, 0, 0, 0, 0, 0},                        // 1101
-        {MI | CO, RO | II | CE, AO | OI, 0, 0, 0, 0, 0},                  // 1110 OUT
-        {MI | CO, RO | II | CE, HLT, 0, 0, 0, 0, 0}                       // 1111 HLT
+    // clang-format off
+    const uint16_t data[32][8] = {
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 0000 NOP
+        { MI|CO, RO|II|CE, IO|MI, RO|AI, 0,        0, 0, 0 }, // 0001 LDA
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI,    0, 0, 0 }, // 0010 ADD
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI|SU, 0, 0, 0 }, // 0011 SUB
+        { MI|CO, RO|II|CE, IO|MI, AO|RI, 0,        0, 0, 0 }, // 0100 STA
+        { MI|CO, RO|II|CE, IO|AI, 0,     0,        0, 0, 0 }, // 0101 LDI
+        { MI|CO, RO|II|CE, IO|J,  0,     0,        0, 0, 0 }, // 0110 JMP
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, 0,        0, 0, 0 }, // 0111 LDB
+        { MI|CO, RO|II|CE, SU,    0,     0,        0, 0, 0 }, // 1000
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1001
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1010
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1011
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1100
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1101
+        { MI|CO, RO|II|CE, AO|OI, 0,     0,        0, 0, 0 }, // 1110 OUT
+        { MI|CO, RO|II|CE, HLT,   0,     0,        0, 0, 0 }, // 1111 HLT
+        // only if A == B
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 0000 NOP
+        { MI|CO, RO|II|CE, IO|MI, RO|AI, 0,        0, 0, 0 }, // 0001 LDA
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI,    0, 0, 0 }, // 0010 ADD
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI|SU, 0, 0, 0 }, // 0011 SUB
+        { MI|CO, RO|II|CE, IO|MI, AO|RI, 0,        0, 0, 0 }, // 0100 STA
+        { MI|CO, RO|II|CE, IO|AI, 0,     0,        0, 0, 0 }, // 0101 LDI
+        { MI|CO, RO|II|CE, IO|J,  0,     0,        0, 0, 0 }, // 0110 JMP
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, 0,        0, 0, 0 }, // 0111 LDB
+        { MI|CO, RO|II|CE, SU,    IO|J,  0,        0, 0, 0 }, // 1000 JEQ
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1001
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1010
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1011
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1100
+        { MI|CO, RO|II|CE, 0,     0,     0,        0, 0, 0 }, // 1101
+        { MI|CO, RO|II|CE, AO|OI, 0,     0,        0, 0, 0 }, // 1110 OUT
+        { MI|CO, RO|II|CE, HLT,   0,     0,        0, 0, 0 }  // 1111 HLT
     };
-
+    // clang-format on
     DCSEngine::storeRamElements();
 
     {
@@ -375,22 +394,22 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
         inArray0.connect(&outArray0, {24, 28}, {0, 4}, {"CLK", "R", "S", "WR", "OE"});
         memory->connect(&dispOut);
 
-        inArray0[16]->makeSquareWave(2 * hcp);   // Addr 0
-        inArray0[17]->makeSquareWave(4 * hcp);   //  Addr 1
-        inArray0[18]->makeSquareWave(8 * hcp);   //  Addr 2
-        inArray0[19]->makeSquareWave(16 * hcp);  //  Addr 3
-        inArray0[20]->makeSquareWave(32 * hcp);  //  Addr 4
-        inArray0[21]->makeSquareWave(64 * hcp);  //  Addr 5
-        inArray0[22]->makeSquareWave(128 * hcp); //  Addr 6
-        inArray0[23]->makeSignal(0);             //  Addr 7
-        inArray0[24]->makeSquareWave(hcp);
+        inArray0[16]->makeSquareWave(2 * hcp);          // Addr 0
+        inArray0[17]->makeSquareWave(4 * hcp);          //  Addr 1
+        inArray0[18]->makeSquareWave(8 * hcp);          //  Addr 2
+        inArray0[19]->makeSquareWave(16 * hcp);         //  Addr 3
+        inArray0[20]->makeSquareWave(32 * hcp);         //  Addr 4
+        inArray0[21]->makeSquareWave(64 * hcp);         //  Addr 5
+        inArray0[22]->makeSquareWave(128 * hcp);        //  Addr 6
+        inArray0[23]->makeSquareWave(256 * hcp);        //  Addr 7
+        inArray0[24]->makeSquareWave(hcp);              // Clock
         inArray0[25]->makeSignal(std::string("11110")); // Clear - reset the ram before loading
         inArray0[26]->makeSignal(0);                    // Preset
         inArray0[27]->makeSignal(1);                    // Write
         inArray0[28]->makeSignal(0);                    // Enable
 
         std::stringstream s[16];
-        for (int instr = 0; instr < 16; instr++) {
+        for (int instr = 0; instr < 32; instr++) {
             for (int ucode = 0; ucode < 8; ucode++) {
                 for (int bit = 0; bit < 16; bit++) {
                     s[bit] << (data[instr][ucode] >> bit & 1);
@@ -403,7 +422,7 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
 
         // program memory
         ramReady = true;
-        DCSEngine::run((16 * 8 * 2) * hcp, true, printOut);
+        DCSEngine::run((32 * 8 * 2) * hcp, true, printOut);
         ramReady = false;
         memory->disconnect();
     }
