@@ -3,11 +3,18 @@
 #include "DCSInstructionSet.hpp"
 #include "DCSEngine.hpp"
 #include "DCSLog.hpp"
+#include "DCSRam256x16.hpp"
 
 void fastControlUnitTest() {
     DCSLog::printTestName("Fast control unit");
-	uint64_t hcp = 10;
+	uint64_t hcp = 14;
     DCSEngine::initialize(hcp);
+    
+    DCSRam256x16 cuRam("cuRam");
+    DCSEngine::programControlUnit(&cuRam, false);
+
+    DCSEngine::useRamElements();
+
 
     const uint16_t HLT = 0b1000000000000000; // bit 15
     const uint16_t MI  = 0b0100000000000000; // bit 14
@@ -65,16 +72,34 @@ void fastControlUnitTest() {
     DCSComponentArray<DCSInput> inArr0("inArr", 8);
     DCSDisplayNBits dispIn("in", 8);
     DCSDisplayNBits dispOut("out", 16);
+    DCSDisplayNBits dispROut("Rout", 16);
     DCSPLD8In16Out cu0("cu0", data);
-
-
-    for (uint8_t i = 0; i < 8; i++) {
-        inArr0[i]->makeSquareWave((hcp) << i);
+    DCSInput inGND("inGND");
+    DCSInput inVCC("inVCC");
+    // DCSInput clk("clk");
+    // connect RAM data in to GND
+    for (int i = 0; i < 16; i++) {
+        inGND.connect(&cuRam, 0, i);
     }
+    // connect address line to RAM
+    inArr0.connect(&cuRam, {0, 7}, {16, 23});
+
+    // connect RAM ctrl signals
+    for (int i = 24; i <= 27; i++) {
+        inGND.connect(&cuRam, 0, i);
+    }
+    inVCC.connect(&cuRam, 0, 28); // Output enable
 
     inArr0.connect(&cu0);
     inArr0.connect(&dispIn);
     cu0.connect(&dispOut);
+    cuRam.connect(&dispROut);
+    // make signals
+    for (uint8_t i = 0; i < 8; i++) {
+        inArr0[i]->makeSquareWave((hcp) << i);
+    }
+    inVCC.makeSignal(1);
+
 
     DCSEngine::run(256 * hcp, true);
 }

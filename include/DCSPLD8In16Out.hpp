@@ -7,6 +7,27 @@
 #include "DCSOr.hpp"
 #include "DCSInput.hpp"
 
+/**
+ * @class DCSPLD8In16Out
+ * This class implements a Programmable Logic Device (PLD) equivalent to DCSRam256x16 but, once programmed, it becomes read-only.
+ * Programming a DCSPLD8In16Out is done by the class its initializer, which requires the data to be passed as an argument.
+ * The advantage of using this class in place of a RAM is that it much faster (the number of
+ * logic gates in a RAM is about 75 times that of this PLD). Therefore, the computation time is
+ * substantially reduced when using this PLD. Also, there is no control logic involved, which makes
+ * its use much simpler than a RAM.
+ *
+ * @pinout
+ * In 0  - Address 0
+ * In 1  - Address 1
+ * ...
+ * In 7  - Address 7
+ * 
+ * Out 0 - Data out 0
+ * Out 1 - Data out 1
+ * ...
+ * Out 15 - Data out 15
+ */
+
 class DCSPLD8In16Out : public DCSComponent {
 private:
     // PLD
