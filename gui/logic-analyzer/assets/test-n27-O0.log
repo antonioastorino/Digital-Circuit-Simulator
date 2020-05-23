@@ -1,103 +1,54 @@
----------------
-Up counter test
----------------
- C_in:0 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:0
- C_in:0 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:6
- C_in:0 LD:1 CLK:0 Cout:0 In:0b1100  12d Count:0b0000   0d STEP:12
- C_in:0 LD:1 CLK:1 Cout:0 In:0b1100  12d Count:0b0000   0d STEP:18
- C_in:0 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:24
- C_in:0 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:30
- C_in:0 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:36
- C_in:0 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:42
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:48
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:54
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:60
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:66
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:72
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:78
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1111  15d STEP:84
- C_in:1 LD:0 CLK:1 Cout:1 In:0b0000   0d Count:0b1111  15d STEP:90
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:96
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:102
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:108
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:114
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:120
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:126
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:132
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:138
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:144
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:150
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:156
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:162
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:168
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:174
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:180
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:186
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:192
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:198
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:204
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:210
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1010  10d STEP:216
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1010  10d STEP:222
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1011  11d STEP:228
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1011  11d STEP:234
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:240
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:246
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:252
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:258
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:264
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:270
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1111  15d STEP:276
- C_in:1 LD:0 CLK:1 Cout:1 In:0b0000   0d Count:0b1111  15d STEP:282
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:288
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:294
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:300
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:306
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:312
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:318
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:324
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:330
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:336
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:342
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:348
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:354
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:360
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:366
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:372
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:378
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:384
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:390
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:396
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:402
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1010  10d STEP:408
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1010  10d STEP:414
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1011  11d STEP:420
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1011  11d STEP:426
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:432
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1100  12d STEP:438
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:444
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1101  13d STEP:450
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:456
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1110  14d STEP:462
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1111  15d STEP:468
- C_in:1 LD:0 CLK:1 Cout:1 In:0b0000   0d Count:0b1111  15d STEP:474
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:480
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0000   0d STEP:486
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:492
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0001   1d STEP:498
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:504
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0010   2d STEP:510
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:516
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0011   3d STEP:522
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:528
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0100   4d STEP:534
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:540
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0101   5d STEP:546
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:552
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0110   6d STEP:558
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:564
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b0111   7d STEP:570
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:576
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1000   8d STEP:582
- C_in:1 LD:0 CLK:0 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:588
- C_in:1 LD:0 CLK:1 Cout:0 In:0b0000   0d Count:0b1001   9d STEP:594
+--------------------------
+4-bit address decoder test
+--------------------------
+ in:0b0000   0d out:0b0000000000000001      1d STEP:-1
+ in:0b0000   0d out:0b0000000000000001      1d STEP:0
+ in:0b0000   0d out:0b0000000000000001      1d STEP:1
+ in:0b0000   0d out:0b0000000000000001      1d STEP:2
+ in:0b0001   1d out:0b0000000000000001      1d STEP:3
+ in:0b0001   1d out:0b0000000000000001      1d STEP:4
+ in:0b0001   1d out:0b0000000000000010      2d STEP:5
+ in:0b0010   2d out:0b0000000000000010      2d STEP:6
+ in:0b0010   2d out:0b0000000000000010      2d STEP:7
+ in:0b0010   2d out:0b0000000000000100      4d STEP:8
+ in:0b0011   3d out:0b0000000000000100      4d STEP:9
+ in:0b0011   3d out:0b0000000000000100      4d STEP:10
+ in:0b0011   3d out:0b0000000000001000      8d STEP:11
+ in:0b0100   4d out:0b0000000000001000      8d STEP:12
+ in:0b0100   4d out:0b0000000000001000      8d STEP:13
+ in:0b0100   4d out:0b0000000000010000     16d STEP:14
+ in:0b0101   5d out:0b0000000000010000     16d STEP:15
+ in:0b0101   5d out:0b0000000000010000     16d STEP:16
+ in:0b0101   5d out:0b0000000000100000     32d STEP:17
+ in:0b0110   6d out:0b0000000000100000     32d STEP:18
+ in:0b0110   6d out:0b0000000000100000     32d STEP:19
+ in:0b0110   6d out:0b0000000001000000     64d STEP:20
+ in:0b0111   7d out:0b0000000001000000     64d STEP:21
+ in:0b0111   7d out:0b0000000001000000     64d STEP:22
+ in:0b0111   7d out:0b0000000010000000    128d STEP:23
+ in:0b1000   8d out:0b0000000010000000    128d STEP:24
+ in:0b1000   8d out:0b0000000010000000    128d STEP:25
+ in:0b1000   8d out:0b0000000100000000    256d STEP:26
+ in:0b1001   9d out:0b0000000100000000    256d STEP:27
+ in:0b1001   9d out:0b0000000100000000    256d STEP:28
+ in:0b1001   9d out:0b0000001000000000    512d STEP:29
+ in:0b1010  10d out:0b0000001000000000    512d STEP:30
+ in:0b1010  10d out:0b0000001000000000    512d STEP:31
+ in:0b1010  10d out:0b0000010000000000   1024d STEP:32
+ in:0b1011  11d out:0b0000010000000000   1024d STEP:33
+ in:0b1011  11d out:0b0000010000000000   1024d STEP:34
+ in:0b1011  11d out:0b0000100000000000   2048d STEP:35
+ in:0b1100  12d out:0b0000100000000000   2048d STEP:36
+ in:0b1100  12d out:0b0000100000000000   2048d STEP:37
+ in:0b1100  12d out:0b0001000000000000   4096d STEP:38
+ in:0b1101  13d out:0b0001000000000000   4096d STEP:39
+ in:0b1101  13d out:0b0001000000000000   4096d STEP:40
+ in:0b1101  13d out:0b0010000000000000   8192d STEP:41
+ in:0b1110  14d out:0b0010000000000000   8192d STEP:42
+ in:0b1110  14d out:0b0010000000000000   8192d STEP:43
+ in:0b1110  14d out:0b0100000000000000  16384d STEP:44
+ in:0b1111  15d out:0b0100000000000000  16384d STEP:45
+ in:0b1111  15d out:0b0100000000000000  16384d STEP:46
+ in:0b1111  15d out:0b1000000000000000  32768d STEP:47
+ in:0b0000   0d out:0b1000000000000000  32768d STEP:48
+ in:0b0000   0d out:0b1000000000000000  32768d STEP:49
