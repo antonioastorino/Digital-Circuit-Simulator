@@ -1,4 +1,5 @@
 #include "DCSLog.hpp"
+#include "DCSTimer.hpp"
 #include <exception>
 
 std::stringstream DCSLog::outStream;
@@ -84,6 +85,7 @@ void DCSLog::error(std::string callerName, int code) {
     } catch (custom_exception& e) {
         DCSLog::outStream << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
         DCSLog::printResults(); // Print what you have before throwing an error
+        DCSTimer::printResults();
         exit(e.code);
     }
 }

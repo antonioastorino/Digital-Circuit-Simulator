@@ -7,24 +7,24 @@
 
 int main(int argc, const char* argv[]) {
     // TODO: create proper unit tests
-    int testNum = 0;
+    uint16_t prjNum = 0;
     if (argc == 2) {
-        sscanf(argv[1], "%d", &testNum);
+        sscanf(argv[1], "%hd", &prjNum);
     }
-    DCSTimer::initialize(testNum);
+    DCSTimer::initialize("prj", prjNum);
     {
         uint16_t N = 0;
         PROFILE();
-        if (testNum == N++) firstProgramTest();
-        else if (testNum == N++) fastControlUnitTest();
-        else if (testNum == N++) fastZeroFlagProgramTest();
-        else if (testNum == N++) noCUComputerTest();
+        if (prjNum == N++) firstProgramTest();
+        else if (prjNum == N++) fastControlUnitTest();
+        else if (prjNum == N++) fastZeroFlagProgramTest();
+        else if (prjNum == N++) noCUComputerTest();
         else {
             std::cerr << "Project number exceeding number of last available project (" << N-1 << ")\n";
             return EXIT_FAILURE;
         }
     }
-    DCSTimer::printResults();
     DCSLog::printResults();
+    DCSTimer::printResults();
     return 0;
 }

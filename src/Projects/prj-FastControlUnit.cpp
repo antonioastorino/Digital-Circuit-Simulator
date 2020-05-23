@@ -46,7 +46,6 @@ void fastControlUnitTest() {
     DCSComponentArray<DCSInput> inArr0("inArr", 8);
     DCSDisplayNBits dispIn("in", 8);
     DCSDisplayNBits dispOut("out", 16);
-    DCSDisplayNBits dispROut("Rout", 16);
     DCSPLD8In16Out cu0("cu0", data);
 
     inArr0.connect(&cu0);

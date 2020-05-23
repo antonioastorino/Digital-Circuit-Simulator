@@ -1,13 +1,14 @@
 #include "DCSTimer.hpp"
 #include "DCSLog.hpp"
 #include <fstream>
-#include <thread>
 #include <sstream>
+#include <thread>
 
 std::vector<TimingResult> DCSTimer::results = {};
 std::mutex DCSTimer::m;
 int64_t DCSTimer::timeZero;
-int DCSTimer::testNum;
+std::string DCSTimer::fileName;
+uint16_t DCSTimer::fileId;
 bool DCSTimer::initialized = false;
 
 DCSTimer::DCSTimer(const char* title)
@@ -33,9 +34,10 @@ DCSTimer::~DCSTimer() {
 void DCSTimer::printResults() {
     if (DCSTimer::results.size()) {
         std::ofstream profilingFile;
-        std::stringstream fileName;
-        fileName << "gui/performance-analyzer/assets/profileFile-" << testNum << ".log";
-        profilingFile.open(fileName.str());
+        std::stringstream file;
+        file << "gui/performance-analyzer/assets/profile-" << DCSTimer::fileName << "-"
+             << DCSTimer::fileId << ".log";
+        profilingFile.open(file.str());
 
         for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
             profilingFile << it->threadID << ":" << it->functionName << ":" << it->startTimepoint
@@ -45,10 +47,12 @@ void DCSTimer::printResults() {
     }
 }
 
-void DCSTimer::initialize(int testNum) {
-    if (initialized) DCSLog::error("DCSTimer", 20);
+void DCSTimer::initialize(const std::string& fileName, uint16_t fileId) {
+    if (initialized)
+        DCSLog::error("DCSTimer", 20);
+    DCSTimer::fileName = fileName;
+    DCSTimer::fileId = fileId;
     DCSTimer::initialized = true;
-    DCSTimer::testNum = testNum;
     DCSTimer::timeZero =
         std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now())
             .time_since_epoch()

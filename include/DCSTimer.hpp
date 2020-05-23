@@ -29,8 +29,10 @@ private:
     static std::vector<TimingResult> results;
     static void storeResult(std::string title, int64_t elapsedTime);
     static std::mutex m;
+
+    static std::string fileName;
+    static uint16_t fileId;
     static int64_t timeZero;
-    static int testNum;
     static bool initialized;
 
 public:
@@ -38,7 +40,7 @@ public:
     ~DCSTimer();
 
     static void printResults();
-    static void initialize(int);
+    static void initialize(const std::string&, uint16_t);
 };
 
 #endif /* DCSTimer_hpp */

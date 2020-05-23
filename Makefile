@@ -84,7 +84,7 @@ build/objects/DCSMux2to1.o: .//src/Muxes-Demuxes/DCSMux2to1.cpp .//include/DCSMu
 build/objects/DCSEngine.o: .//src/Core/DCSEngine.cpp .//include/DCSEngine.hpp .//include/DCSComponentArray.hpp .//include/DCSInput.hpp .//include/DCSInstructionSet.hpp .//include/DCSLog.hpp .//include/DCSOutput.hpp .//include/DCSRam16x8.hpp .//include/DCSRam256x16.hpp .//include/DCSTimer.hpp .//include/DCSUnitDelay.hpp .//include/DCSWire.hpp build/objects/DCSDisplayNBits.o build/objects/DCSLog.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/DCSLog.o: .//src/Core/DCSLog.cpp .//include/DCSLog.hpp 
+build/objects/DCSLog.o: .//src/Core/DCSLog.cpp .//include/DCSLog.hpp .//include/DCSTimer.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/DCSTimer.o: .//src/Core/DCSTimer.cpp .//include/DCSTimer.hpp .//include/DCSLog.hpp 
@@ -313,7 +313,7 @@ build/objects/DCSJKLatchMasterSlaveAsyncSR.o: .//src/Latches-async-SR/DCSJKLatch
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -rf build/*
+	rm -rf build
 
 cleanall:
-	rm -rf build/* gui/performance-analyzer/assets/* gui/logic-analyzer/assets/*
+	rm -rf build gui/performance-analyzer/assets/* gui/logic-analyzer/assets/*

@@ -106,9 +106,9 @@ while read -r cpp_full_path; do
 	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
 done < cpp-full.list
 
-pf "\nclean:\n\trm -rf $executable_folder/*\n"
+pf "\nclean:\n\trm -rf $executable_folder\n"
 
-pf "\ncleanall:\n\trm -rf $executable_folder/* $profile_folder/* $output_folder/*"
+pf "\ncleanall:\n\trm -rf $executable_folder $profile_folder/* $output_folder/*"
 
 rm *.list
 

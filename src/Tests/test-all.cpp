@@ -39,11 +39,11 @@
 
 int main(int argc, const char* argv[]) {
     // TODO: create proper unit tests
-    int testNum = 0;
+    uint16_t testNum = 0;
     if (argc == 2) {
-        sscanf(argv[1], "%d", &testNum);
+        sscanf(argv[1], "%hd", &testNum);
     }
-    DCSTimer::initialize(testNum);
+    DCSTimer::initialize("test", testNum);
     {
         uint16_t N = 0;
         PROFILE();
@@ -86,7 +86,7 @@ int main(int argc, const char* argv[]) {
             return EXIT_FAILURE;
         }
     }
-    DCSTimer::printResults();
     DCSLog::printResults();
+    DCSTimer::printResults();
     return 0;
 }
