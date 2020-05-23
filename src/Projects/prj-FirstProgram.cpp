@@ -1,8 +1,8 @@
 #include "prj-FirstProgram.hpp"
 
 void firstProgramTest() {
-    DCSLog::printTestName("First program");
-    uint64_t masterClockHP = 16;
+    DCSLog::printProjectName("First program");
+    uint64_t masterClockHP = 28;
 
     // the instruction is the MSHB and the data is the LSHB
     uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0
@@ -14,18 +14,52 @@ void firstProgramTest() {
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0},
                                {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
+       // clang-format off
+    const uint16_t data[32][8] = {
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 0000 NOP
+        { MI|CO, RO|II|CE, IO|MI, RO|AI, 0,              0, 0, 0 }, // 0001 LDA
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI,          0, 0, 0 }, // 0010 ADD
+        { MI|CO, RO|II|CE, IO|MI, RO|BI|SU, EO|AI|SU|FI, 0, 0, 0 }, // 0011 SUB
+        { MI|CO, RO|II|CE, IO|MI, AO|RI, 0,              0, 0, 0 }, // 0100 STA
+        { MI|CO, RO|II|CE, IO|AI, 0,     0,              0, 0, 0 }, // 0101 LDI
+        { MI|CO, RO|II|CE, IO|J,  0,     0,              0, 0, 0 }, // 0110 JMP
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, 0,              0, 0, 0 }, // 0111 LDB
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1000 JZ
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1001
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1010
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1011
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1100
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1101
+        { MI|CO, RO|II|CE, AO|OI, 0,     0,              0, 0, 0 }, // 1110 OUT
+        { MI|CO, RO|II|CE, HT,    0,     0,              0, 0, 0 }, // 1111 HLT
+        // only if A == B
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 0000 NOP
+        { MI|CO, RO|II|CE, IO|MI, RO|AI, 0,              0, 0, 0 }, // 0001 LDA
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, EO|AI,          0, 0, 0 }, // 0010 ADD
+        { MI|CO, RO|II|CE, IO|MI, RO|BI|SU, EO|AI|SU|FI, 0, 0, 0 }, // 0011 SUB
+        { MI|CO, RO|II|CE, IO|MI, AO|RI, 0,              0, 0, 0 }, // 0100 STA
+        { MI|CO, RO|II|CE, IO|AI, 0,     0,              0, 0, 0 }, // 0101 LDI
+        { MI|CO, RO|II|CE, IO|J,  0,     0,              0, 0, 0 }, // 0110 JMP
+        { MI|CO, RO|II|CE, IO|MI, RO|BI, 0,              0, 0, 0 }, // 0111 LDB
+        { MI|CO, RO|II|CE, IO|J,  0,     0,              0, 0, 0 }, // 1000 JZ
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1001
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1010
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1011
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1100
+        { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 1101
+        { MI|CO, RO|II|CE, AO|OI, 0,     0,              0, 0, 0 }, // 1110 OUT
+        { MI|CO, RO|II|CE, HT,    0,     0,              0, 0, 0 }  // 1111 HLT
+    };
+    // clang-format on
     // RAM
     DCSEngine::initialize(masterClockHP);
     DCSRam16x8 ram("ram");
     DCSEngine::programMemory(&ram, program, false);
-
-    DCSRam256x16 cuRam("cuRam");
-    DCSEngine::programControlUnit(&cuRam, false);
-
     DCSEngine::useRamElements();
 
     // CU
-    DCSControlUnit4Bits cu0("CU", &cuRam);
+    DCSPLD8In16Out cuPLD("cuPLD", data);
+    DCSControlUnit5Bits cu0("CU", &cuPLD);
 
     // ALU
     DCSALU alu("alu");
@@ -33,16 +67,17 @@ void firstProgramTest() {
     // Program counter
     DCSUpCounterWithLoadAndAsyncSR pc("pc", 4);
 
+    // Zero-flag register
+    DCSRegister1Bit regFZ("regFZ");
+
     // bus
     DCSComponentArray<DCSNode> bus("bus", 8);
-
     // // master clock
-    DCSInput clockSignal("clkSignal");
-    clockSignal.makeSquareWave(masterClockHP, true);
-    DCSNot notClockSignal("!CLK");
-    DCSAnd andClockSignal("andCLK");
-    clockSignal.connect(&andClockSignal, 0, 0);
-    notClockSignal.connect(&andClockSignal, 0, 1);
+    DCSInput clk("clkSignal");
+    DCSNot notClk("!CLK");
+    DCSAnd clockSignal("andCLK");
+    clk.connect(&clockSignal, 0, 0, "CLK");
+    notClk.connect(&clockSignal, 0, 1);
 
     // registers
     DCSRegister8Bits regA("regA");     // A register
@@ -118,11 +153,11 @@ void firstProgramTest() {
 
     // connect tri-state buffers to bus
     trisA.connect(&bus);
-    trisB.connect(&bus);                 // Data output to the bus
-    trisI.connect(&bus, {0, 3}, {0, 3}); // Operand output to the bus
-    trisALU.connect(&bus);               // ALU output to the bus
-    trisRAM.connect(&bus);               // RAM output to the bus
-    trisPC.connect(&bus);                // PC output to the bus
+    trisB.connect(&bus);   // Data output to the bus
+    trisI.connect(&bus);   // Operand output to the bus
+    trisALU.connect(&bus); // ALU output to the bus
+    trisRAM.connect(&bus); // RAM output to the bus
+    trisPC.connect(&bus);  // PC output to the bus
 
     // connect tri-state buffer control signals to buffers
     inGND.connect(&trisB, 0, 8, "BO"); // Connect output enable
@@ -130,37 +165,45 @@ void firstProgramTest() {
     // connect control signals to memories
     // AR
     clockSignal.connect(&regA, 0, 8); // connect master clock to A
-    inReset.connect(&regA, 0, 9, "");
-    inGND.connect(&regA, 0, 10, "");
+    inReset.connect(&regA, 0, 9);
+    inGND.connect(&regA, 0, 10);
     // BR
     clockSignal.connect(&regB, 0, 8); // connect master clock to B
-    inReset.connect(&regB, 0, 9, "");
-    inGND.connect(&regB, 0, 10, "");
+    inReset.connect(&regB, 0, 9);
+    inGND.connect(&regB, 0, 10);
     // IR
     clockSignal.connect(&regI, 0, 8); // connect master clock to I
-    inReset.connect(&regI, 0, 9, "");
-    inGND.connect(&regI, 0, 10, "");
+    inReset.connect(&regI, 0, 9);
+    inGND.connect(&regI, 0, 10);
     // RAM
     clockSignal.connect(&ram, 0, 12); // connect master clock to RAM
-    inGND.connect(&ram, 0, 13, "");   // Clear
-    inGND.connect(&ram, 0, 14, "");   // Preset
+    inGND.connect(&ram, 0, 13);       // Clear
+    inGND.connect(&ram, 0, 14);       // Preset
     inVCC.connect(&ram, 0, 16);       // Output Enable
     // MAR
     clockSignal.connect(&mar, 0, 4); // connect master clock to MAR
-    inReset.connect(&mar, 0, 5, "");
-    inGND.connect(&mar, 0, 6, "");
+    inReset.connect(&mar, 0, 5);
+    inGND.connect(&mar, 0, 6);
     // PC
     clockSignal.connect(&pc, 0, 2); // connect master clock to PC
-    inReset.connect(&pc, 0, 3, "");
-    inGND.connect(&pc, 0, 4, "");
+    inReset.connect(&pc, 0, 3);
+    inGND.connect(&pc, 0, 4);
     // Output register
     clockSignal.connect(&regOut, 0, 8); // connect master clock to OUT
-    inReset.connect(&regOut, 0, 9, "");
-    inGND.connect(&regOut, 0, 10, "");
+    inReset.connect(&regOut, 0, 9);
+    inGND.connect(&regOut, 0, 10);
+
+    // Zero-flag register
+    alu.connect(&regFZ, 9, 0, "ZI");   // Flag in to FZ register
+    clockSignal.connect(&regFZ, 0, 1); // Clk
+    inReset.connect(&regFZ, 0, 2);     // Reset
+    inGND.connect(&regFZ, 0, 3);       // Preset
+    regFZ.connect(&cu0, 0, 6, "ZO");   // Out
 
     clockSignal.connect(&cu0, 0, 0);
     inReset.connect(&cu0, 0, 1);
     regI.connect(&cu0, {4, 7}, {2, 5}); // connect Instruction Register MSHB to Control Unit
+    cu0.connect(&regFZ, 0, 4, "FI");    // Flag in
     cu0.connect(&pc, 1, 1, "J");        // Jump
     cu0.connect(&trisPC, 2, 8, "CO");   // Connect output enable
     cu0.connect(&pc, 3, 0, "CE");       // Count enable
@@ -175,14 +218,15 @@ void firstProgramTest() {
     cu0.connect(&trisRAM, 12, 8, "RO"); // Connect output enable
     cu0.connect(&ram, 13, 15, "RI");
     cu0.connect(&mar, 14, 7, "MI");
-    cu0.connect(&notClockSignal, 15, 0, "HLT"); // the negated HLT signal will stop the clock
+    cu0.connect(&notClk, 15, 0, "HLT"); // the negated HLT signal will stop the clock
 
     // constant signals
     inVCC.makeSignal("01", true); // The RAM is always enable to always talk to the IR. A 3-state
                                   // buffer is placed between RAM and bus
     inGND.makeSignal(0);
+    clk.makeSquareWave(masterClockHP, true);
     std::string dn("00");           // do nothing (while resetting the registers)
-    inReset.makeSignal("10", true); // initialize by resetting the register
+    inReset.makeSignal("110", true); // initialize by resetting the register
 
-    DCSEngine::run(150 * masterClockHP, true); //*/
+    DCSEngine::run(600 * masterClockHP, true);
 }

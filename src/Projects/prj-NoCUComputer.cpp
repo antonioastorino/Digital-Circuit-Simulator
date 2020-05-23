@@ -2,7 +2,7 @@
 
 // based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
 void noCUComputerTest() {
-    DCSLog::printTestName("Computer without CU");
+    DCSLog::printProjectName("Computer without CU");
     uint16_t masterClockHP = 20;
 
     // the instruction is the MSHB and the data is the LSHB

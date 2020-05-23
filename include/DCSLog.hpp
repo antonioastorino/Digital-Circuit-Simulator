@@ -13,6 +13,7 @@ public:
     static void error(std::string callerName, int code);
     
     static void printTestName(std::string testName);
+    static void printProjectName(std::string testName);
     static void printResults();
 };
 #endif /* DCSLog_hpp */

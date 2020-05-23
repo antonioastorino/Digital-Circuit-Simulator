@@ -18,11 +18,11 @@ public:
         case 2:
             return "Number probe names does not match the number of connections";
         case 3:
-            return "Trying to connect output to already connected input\nMultiple connections must "
-                   "be tristate";
+            return "Trying to connect output to already connected input\n"
+                   "Multiple connections must be tristate";
         case 4:
-            return "Trying to connect tristate output to connected input.\nMultiple connections "
-                   "must be tristate";
+            return "Trying to connect tristate output to connected input.\n"
+                   "Multiple connections must be tristate";
         case 5:
             return "Only 3-state buffers can access this function";
         case 6:
@@ -96,6 +96,18 @@ void DCSLog::printTestName(std::string testName) {
     for (size_t i = 0; i < testName.size(); i++)
         DCSLog::outStream << "-";
     DCSLog::outStream << "\n" << testName << " test\n";
+    for (size_t i = 0; i < testName.size() + 5; i++)
+        DCSLog::outStream << "-";
+    DCSLog::outStream << "\n";
+#endif
+}
+
+void DCSLog::printProjectName(std::string testName) {
+#if LOG_LEVEL > 0
+    DCSLog::outStream << "-------";
+    for (size_t i = 0; i < testName.size(); i++)
+        DCSLog::outStream << "-";
+    DCSLog::outStream << "\n" << testName << " project\n";
     for (size_t i = 0; i < testName.size() + 5; i++)
         DCSLog::outStream << "-";
     DCSLog::outStream << "\n";

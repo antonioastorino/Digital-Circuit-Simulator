@@ -1,7 +1,7 @@
 #include "prj-fastZeroFlagProgram.hpp"
 
 void fastZeroFlagProgramTest() {
-    DCSLog::printTestName("Zero flag program");
+    DCSLog::printProjectName("Zero flag program");
     uint64_t masterClockHP = 22;
 
     // the instruction is the MSHB and the data is the LSHB
@@ -152,11 +152,11 @@ void fastZeroFlagProgramTest() {
 
     // connect tri-state buffers to bus
     trisA.connect(&bus);
-    trisB.connect(&bus);                 // Data output to the bus
-    trisI.connect(&bus, {0, 3}, {0, 3}); // Operand output to the bus
-    trisALU.connect(&bus);               // ALU output to the bus
-    trisRAM.connect(&bus);               // RAM output to the bus
-    trisPC.connect(&bus);                // PC output to the bus
+    trisB.connect(&bus);   // Data output to the bus
+    trisI.connect(&bus);   // Operand output to the bus
+    trisALU.connect(&bus); // ALU output to the bus
+    trisRAM.connect(&bus); // RAM output to the bus
+    trisPC.connect(&bus);  // PC output to the bus
 
     // connect tri-state buffer control signals to buffers
     inGND.connect(&trisB, 0, 8, "BO"); // Connect output enable
@@ -227,5 +227,5 @@ void fastZeroFlagProgramTest() {
     std::string dn("00");           // do nothing (while resetting the registers)
     inReset.makeSignal("10", true); // initialize by resetting the register
 
-    DCSEngine::run(80 * masterClockHP, false); //*/
+    DCSEngine::run(80 * masterClockHP, true);
 }
