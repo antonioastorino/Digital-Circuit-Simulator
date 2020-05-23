@@ -8,5 +8,5 @@ o="0"
 
 make OPT="$o" 1>/dev/null
 if [ "$?" -eq "0" ]; then
-	build/out-"$o" "$n"
+	build/prj-out-"$o" "$n"
 fi

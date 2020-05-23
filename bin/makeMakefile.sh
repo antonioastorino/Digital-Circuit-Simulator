@@ -36,37 +36,44 @@ while read -r folder; do
 	pf " -I$folder\\"
 	pf "\n"
 done < hpp-sorted-dir.list
-pf "\n.PHONY: all clean check-out-value make-opt check-opt-value"
+pf "\n.PHONY: all clean cleanall check-directory make-opt check-opt-value"
 pf "\n"
-pf "\nall: check-out-value"
+pf "\nall: check-directory"
 pf "\n"
 
-pf "\ncheck-out-value:"
+pf "\ncheck-directory:"
 pf "\n\t@[ -d \"$build_folder\" ] || mkdir -p $build_folder"
 pf "\n\t@[ -d \"$executable_folder\" ] || mkdir -p $executable_folder"
-pf "\n\t@if [ \"\$(OUT)\" == \"\" ]; then\\"
-pf "\n\t\tmake check-opt-value OUT=out OPT=\$(OPT) ;\\"
-pf "\n\telse\\"
-pf "\n\t\tmake check-opt-value OUT=\$(OUT) OPT=\$(OPT) ;\\"
-pf "\n\tfi\n"
+pf "\n\t@make check-opt-value OPT=\$(OPT)"
+pf "\n"
 
 pf "\ncheck-opt-value:"
-pf "\n\t@[ \"\$(OPT)\" == \"\" ] && make make-opt OUT=\$(OUT) OPT=0 || make make-opt OUT=\$(OUT) OPT=\$(OPT)\n"
+pf "\n\t@[ \"\$(OPT)\" == \"\" ] && make make-opt OPT=0 || make make-opt OPT=\$(OPT)\n"
 
 pf "\nmake-opt:"
-pf "\n\t@if [ ! -f \"$executable_folder/.\$(OUT)-\$(OPT)\" ] || [ ! -f \"$executable_folder/\$(OUT)-\$(OPT)\" ]; then \\"
-pf "\n\t\trm -rf $build_folder/*; \\"
+pf "\n\t@if [ ! -f \"$executable_folder/.out-\$(OPT)\" ]; then \\"
+pf "\n\t\trm -rf $executable_folder/*; \\"
 pf "\n\t\tmkdir -p $build_folder; \\"
-pf "\n\t\ttouch $executable_folder/.\$(OUT)-\$(OPT); \\"
+pf "\n\t\ttouch $executable_folder/.out-\$(OPT); \\"
 pf "\n\tfi"
-pf "\n\tmake $executable_folder/\$(OUT)-\$(OPT) OUT=\$(OUT) OPT=\$(OPT);"
+pf "\n\t@make $executable_folder/test-out-\$(OPT) OPT=\$(OPT)"
+pf "\n\t@make $executable_folder/prj-out-\$(OPT) OPT=\$(OPT)"
 pf "\n"
-pf "\n$executable_folder/\$(OUT)-\$(OPT):"
+
+# test executable
+pf "\n$executable_folder/test-out-\$(OPT):"
 while read -r file_name; do
-	pf " $build_folder/$file_name.o"
+	[[ "$file_name" != "prj-"* ]] && pf " $build_folder/$file_name.o"
 done < cpp-file.list
 pf "\n\t\$(CC) \$(INC) -o \$@ \$^"
+pf "\n"
 
+# project executable
+pf "\n$executable_folder/prj-out-\$(OPT):"
+while read -r file_name; do
+	[[ "$file_name" != "test-"* ]] && pf " $build_folder/$file_name.o"
+done < cpp-file.list
+pf "\n\t\$(CC) \$(INC) -o \$@ \$^"
 pf "\n"
 
 echo "Adding headers to dependency list"
@@ -99,7 +106,7 @@ while read -r cpp_full_path; do
 	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
 done < cpp-full.list
 
-pf "\nclean:\n\trm -rf $executable_folder/*"
+pf "\nclean:\n\trm -rf $executable_folder/*\n"
 
 pf "\ncleanall:\n\trm -rf $executable_folder/* $profile_folder/* $output_folder/*"
 

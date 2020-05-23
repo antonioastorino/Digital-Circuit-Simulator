@@ -1,0 +1,17 @@
+#include "DCSALU.hpp"
+#include "DCSControlUnit4Bits.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSInstructionSet.hpp"
+#include "DCSLog.hpp"
+#include "DCSOutput.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSRam256x16.hpp"
+#include "DCSRegister4Bits.hpp"
+#include "DCSRegister8Bits.hpp"
+#include "DCSTriStateBuffer8Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+#include "DCSNot.hpp"
+#include "DCSAnd.hpp"
+
+void firstProgramTest();

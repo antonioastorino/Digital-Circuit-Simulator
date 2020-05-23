@@ -6,9 +6,9 @@ o="0"
 [ "$1" != "" ] && n="$1"
 [ "$2" != "" ] && o="$2"
 
-filename="../gui/logic-analyzer/assets/test"-n$n-O$o".log"
+filename="../gui/logic-analyzer/assets/prj-"-n$n-O$o".log"
 
-./build-run.sh "$n" "$o" | tee $filename
+./prj-build-run.sh "$n" "$o" | tee $filename
 if ! [ -s $filename ]; then
 	rm $filename
 fi
