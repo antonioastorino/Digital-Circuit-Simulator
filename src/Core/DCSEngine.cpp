@@ -311,7 +311,7 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
 
         // program memory
         ramReady = true;
-        DCSEngine::run(34 * hcp, true, printOut);
+        DCSEngine::run(33 * hcp, true, printOut);
         ramReady = false;
         memory->disconnect();
     }
