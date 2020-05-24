@@ -13,10 +13,10 @@ all: check-directory
 check-directory:
 	@[ -d "build/objects" ] || mkdir -p build/objects
 	@[ -d "build" ] || mkdir -p build
-	@make check-opt-value OPT=$(OPT)
+	@make SHELL=/bin/bash check-opt-value OPT=$(OPT)
 
 check-opt-value:
-	@[ "$(OPT)" == "" ] && make make-opt OPT=0 || make make-opt OPT=$(OPT)
+	@[ "$(OPT)" == "" ] && make SHELL=/bin/bash make-opt OPT=0 || make SHELL=/bin/bash make-opt OPT=$(OPT)
 
 make-opt:
 	@if [ ! -f "build/.out-$(OPT)" ]; then \
@@ -24,8 +24,8 @@ make-opt:
 		mkdir -p build/objects; \
 		touch build/.out-$(OPT); \
 	fi
-	@make build/test-out-$(OPT) OPT=$(OPT)
-	@make build/prj-out-$(OPT) OPT=$(OPT)
+	@make SHELL=/bin/bash build/test-out-$(OPT) OPT=$(OPT)
+	@make SHELL=/bin/bash build/prj-out-$(OPT) OPT=$(OPT)
 
 build/test-out-$(OPT): build/objects/DCSControlUnit4Bits.o build/objects/DCSControlUnit5Bits.o build/objects/DCSNand3.o build/objects/DCSAnd8.o build/objects/DCSNor.o build/objects/DCSNot.o build/objects/DCSUnitDelay.o build/objects/DCSNand.o build/objects/DCSAnd6.o build/objects/DCSAnd.o build/objects/DCSOr.o build/objects/DCSAnd4.o build/objects/DCSNor3.o build/objects/DCSAnd3.o build/objects/DCSXor.o build/objects/DCSMux2to1.o build/objects/DCSEngine.o build/objects/DCSLog.o build/objects/DCSTimer.o build/objects/DCSRegister8BitsWithEnable.o build/objects/DCSRegister4Bits.o build/objects/DCSRam256x16.o build/objects/DCSRegister1Bit.o build/objects/DCSRam16x8.o build/objects/DCSRegister1BitWithEnable.o build/objects/DCSRegister16BitsWithEnable.o build/objects/DCSRegister8Bits.o build/objects/DCSSRLatch.o build/objects/DCSDFlipFlop.o build/objects/DCSDLatch.o build/objects/DCSClockSignal.o build/objects/DCSArbitrarySignal.o build/objects/DCSDisplayNBits.o build/objects/test-Register1BitWithEnable.o build/objects/test-BitStreamSignal.o build/objects/test-FullAdder.o build/objects/test-ControlUnit.o build/objects/test-TriStateBuffer.o build/objects/test-ALU.o build/objects/test-DLatch.o build/objects/test-Ram.o build/objects/test-DLatchAsyncSR.o build/objects/test-Divider.o build/objects/test-AddressDecoder4Bits.o build/objects/test-Register8Bits.o build/objects/test-Nand3.o build/objects/test-UnitDelay.o build/objects/test-Register8BitsWithEnable.o build/objects/test-NotLoop.o build/objects/test-DFlipFlop.o build/objects/test-And6.o build/objects/test-Ram256x16.o build/objects/test-AddressDecoder8Bits.o build/objects/test-MemoryProgrammer.o build/objects/test-SRLatch.o build/objects/test-AndArray.o build/objects/test-Nor3.o build/objects/test-Register16BitsWithEnable.o build/objects/test-Mux2To1.o build/objects/test-UpCounter4Bits.o build/objects/test-UpCounter.o build/objects/test-all.o build/objects/test-Display.o build/objects/test-Xor.o build/objects/test-Register1Bit.o build/objects/test-RippleAdder.o build/objects/test-Or.o build/objects/test-RisingEdgeDetector.o build/objects/test-JKMasterSlave.o build/objects/DCSComponent.o build/objects/DCSComponentArray.o build/objects/DCSNode.o build/objects/DCSWire.o build/objects/DCSTriStateBuffer.o build/objects/DCSOutput.o build/objects/DCSInput.o build/objects/DCSTriStateBuffer8Bits.o build/objects/DCSPLD8In16Out.o build/objects/DCSAddressDecoder8Bits.o build/objects/DCSAddressDecoder4Bits.o build/objects/DCSALU.o build/objects/DCSRippleAdder8Bits.o build/objects/DCSFullAdder.o build/objects/DCSClockDivider.o build/objects/DCSUpCounterWithLoadAndAsyncSR.o build/objects/DCSDFlipFlopAsyncSR.o build/objects/DCSDLatchAsyncSR.o build/objects/DCSJKLatchMasterSlaveAsyncSR.o
 	$(CC) $(INC) -o $@ $^

@@ -28,7 +28,7 @@ For all projects, the source code is located in `./src/Projects/`. Projects are 
 Compiling and running a project is done by executing
 
 ```
-make [OPT=<OPT_LEVEL>]                     # build with optimization level <OPT_LEVEL>, 0 by default
+make SHELL=/bin/bash [OPT=<OPT_LEVEL>]     # build with optimization level <OPT_LEVEL>, 0 by default
 build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>, 0 by default   
 
 ```
@@ -66,7 +66,7 @@ For all tests, the source code is located in `./src/Tests/`. Tests are numbered 
 Compiling and running a test is done by executing
 
 ```
-make [OPT=<OPT_LEVEL>]                        # build with optimization level <OPT_LEVEL>, 0 by default
+make SHELL=/bin/bash [OPT=<OPT_LEVEL>]        # build with optimization level <OPT_LEVEL>, 0 by default
 build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>, 0 if omitted   
 
 ```
