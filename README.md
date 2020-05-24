@@ -22,6 +22,14 @@ from the project directory.
 > IMPORTANT: This script must be run every time you add, move, or remove a `.cpp` or `.hpp` project file, or change the headers included in any file.
 
 ### 2. Build and run
+
+Make sure you have installed `make` and `g++`. Run
+
+```
+sudo apt update
+sudo apt install make g++
+```
+
 #### 2.1. Projects
 For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available, i. e. listed in `./src/Projects/prj-all.cpp`.
 
@@ -200,7 +208,7 @@ bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
 done
 ```
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
-## Documentation automatically generated on Sun May 24 23:14:20 CEST 2020
+## Documentation automatically generated on Sun May 24 23:44:45 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU
