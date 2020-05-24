@@ -38,9 +38,13 @@ function main() {
     refreshCanvas();
 
     let makeReadableTimeLabel = (time) => {
-        if (time >= 1000000) {
+        if (time >= 1000000000) {
+            return Math.round(time / 1000000) / 1000 + " s";
+        }
+        else if (time >= 1000000) {
             return Math.round(time / 1000) / 1000 + " ms";
-        } else if (time >= 1000) {
+        }
+        else if (time >= 1000) {
             return (time / 1000) + " us";
         }
         else {
