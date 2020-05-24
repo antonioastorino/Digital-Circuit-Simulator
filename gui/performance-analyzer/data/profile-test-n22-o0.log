@@ -1,27 +1,27 @@
 Title:Xor test
-768680126:updateInputs:68089:159
-768680126:updateComponents:79448:263
-768680126:Init circuit:53425:33285
-768680126:updateInputs:87580:166
-768680126:updateComponents:87975:159
-768680126:propagateValuesOnChangeOnly:88957:208
-768680126:updateInputs:91681:156
-768680126:updateComponents:92037:137
-768680126:propagateValuesOnChangeOnly:92377:173
-768680126:updateInputs:96886:136
-768680126:updateComponents:97226:112
-768680126:propagateValuesOnChangeOnly:97509:221
-768680126:updateInputs:99704:153
-768680126:updateComponents:100050:121
-768680126:propagateValuesOnChangeOnly:100350:148
-768680126:updateInputs:102422:131
-768680126:updateComponents:102743:111
-768680126:propagateValuesOnChangeOnly:104307:143
-768680126:updateInputs:106921:158
-768680126:updateComponents:107263:120
-768680126:propagateValuesOnChangeOnly:107549:128
-768680126:updateInputs:109611:106
-768680126:updateComponents:109888:119
-768680126:propagateValuesOnChangeOnly:110188:171
-768680126:Run loop:87528:24724
-768680126:main:780:115757
+2551912188:updateInputs:67739:172
+2551912188:updateComponents:79527:247
+2551912188:Init circuit:53061:33493
+2551912188:updateInputs:87407:155
+2551912188:updateComponents:87793:173
+2551912188:propagateValuesOnChangeOnly:88847:231
+2551912188:updateInputs:91597:126
+2551912188:updateComponents:91927:140
+2551912188:propagateValuesOnChangeOnly:92237:186
+2551912188:updateInputs:96696:115
+2551912188:updateComponents:97007:155
+2551912188:propagateValuesOnChangeOnly:97329:199
+2551912188:updateInputs:99550:133
+2551912188:updateComponents:99898:141
+2551912188:propagateValuesOnChangeOnly:100206:138
+2551912188:updateInputs:102302:110
+2551912188:updateComponents:102591:129
+2551912188:propagateValuesOnChangeOnly:104247:129
+2551912188:updateInputs:106810:143
+2551912188:updateComponents:107140:141
+2551912188:propagateValuesOnChangeOnly:107457:128
+2551912188:updateInputs:109449:125
+2551912188:updateComponents:109767:129
+2551912188:propagateValuesOnChangeOnly:110069:170
+2551912188:Run loop:87367:24774
+2551912188:main:677:115978

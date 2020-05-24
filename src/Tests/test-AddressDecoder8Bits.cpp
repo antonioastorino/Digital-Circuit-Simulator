@@ -1,7 +1,7 @@
-#include "test-AddressDecoder32Bits.hpp"
+#include "test-AddressDecoder8Bits.hpp"
 
-void addressDecoder32BitsTest() {
-	DCSLog::printTestName("32-bit address decoder");
+void addressDecoder8BitsTest() {
+	DCSLog::printTestName("8-bit address decoder");
 	uint16_t hp = 1;
 	DCSEngine::initialize(hp);
 

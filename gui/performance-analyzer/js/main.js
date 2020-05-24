@@ -112,7 +112,7 @@ function main() {
     let files = [];
 
     function getRandomColor() {
-        var letters = "0123456789ABCD";
+        var letters = "0123456789ABCDE";
         var color = "#";
         for (var i = 0; i < 4; i++) {
             color += letters[Math.floor(Math.random() * letters.length)];

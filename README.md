@@ -200,7 +200,7 @@ bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
 done
 ```
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
-## Documentation automatically generated on Sun May 24 20:23:43 CEST 2020
+## Documentation automatically generated on Sun May 24 21:01:50 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU
@@ -238,6 +238,44 @@ Out 6  - E 6
 Out 7  - E 7
 Out 8  - Overflow
 Out 9  - Zero
+```
+
+
+
+## Class DCSAddressDecoder4Bits
+
+Address decoder with a 4-bit input and 256-bit output.
+
+#### Pinout
+```
+In 0    - Address 0
+In 1    - Address 1
+In 2    - Address 2
+In 3    - Address 3
+
+Out 0   - Decoded in 0 (asserted only when the input is 0000)
+Out 1   - Decoded in 1 (asserted only when the input is 0001)
+...
+Out 16  - Decoded in 16 (asserted only when the input is 1111)
+```
+
+
+
+## Class DCSAddressDecoder8Bits
+
+Address decoder with an 8-bit input and 256-bit output.
+
+#### Pinout
+```
+In 0    - Address 0
+In 1    - Address 1
+...
+In 7    - Address 7
+
+Out 0   - Decoded in 0 (asserted only when the input is 00000000)
+Out 1   - Decoded in 1 (asserted only when the input is 00000001)
+...
+Out 255 - Decoded in 255 (asserted only when the input is 11111111)
 ```
 
 

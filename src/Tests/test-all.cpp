@@ -3,8 +3,8 @@
 #include "DCSLog.hpp"
 #include "DCSTimer.hpp"
 #include "test-ALU.hpp"
-#include "test-AddressDecoder.hpp"
-#include "test-AddressDecoder32Bits.hpp"
+#include "test-AddressDecoder4Bits.hpp"
+#include "test-AddressDecoder8Bits.hpp"
 #include "test-And6.hpp"
 #include "test-AndArray.hpp"
 #include "test-BitStreamSignal.hpp"
@@ -80,11 +80,11 @@ int main(int argc, const char* argv[]) {
         if (testNum == N++) memoryProgrammerTest();
         if (testNum == N++) risingEdgeDetectorTest();
         if (testNum == N++) upCounter4BitsTest();
-        if (testNum == N++) addressDecoderTest();
+        if (testNum == N++) addressDecoderTest4Bits();
         if (testNum == N++) register8BitsTest();
         if (testNum == N++) aluTest();
         if (testNum == N++) controlUnitTest();
-        if (testNum == N++) addressDecoder32BitsTest();
+        if (testNum == N++) addressDecoder8BitsTest();
         if (testNum == N++) ram256x16Test();
         if (testNum == N++) register16BitsWithEnableTest();
         if (testNum >= N) {

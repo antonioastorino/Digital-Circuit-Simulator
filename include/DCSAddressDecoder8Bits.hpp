@@ -6,6 +6,22 @@ class DCSUnitDelay;
 class DCSNot;
 class DCSAnd8;
 
+/**
+ * @class DCSAddressDecoder8Bits
+ * Address decoder with an 8-bit input and 256-bit output.
+ * 
+ * @pinout
+ * In 0    - Address 0
+ * In 1    - Address 1
+ * ...
+ * In 7    - Address 7
+ * 
+ * Out 0   - Decoded in 0 (asserted only when the input is 00000000)
+ * Out 1   - Decoded in 1 (asserted only when the input is 00000001)
+ * ...
+ * Out 255 - Decoded in 255 (asserted only when the input is 11111111)
+ * @end_pinout
+ */
 class DCSAddressDecoder8Bits : public DCSComponent {
 private:
     DCSComponentArray<DCSNode> m_nodeArray;

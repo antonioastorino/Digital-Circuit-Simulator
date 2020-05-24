@@ -1,6 +1,6 @@
-#include "test-AddressDecoder.hpp"
+#include "test-AddressDecoder4Bits.hpp"
 
-void addressDecoderTest() {
+void addressDecoderTest4Bits() {
 	DCSLog::printTestName("4-bit address decoder");
 	uint16_t hcp = 3;
 	DCSEngine::initialize(hcp);
