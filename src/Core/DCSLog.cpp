@@ -104,11 +104,11 @@ void DCSLog::printTestName(std::string testName) {
 
 void DCSLog::printProjectName(std::string testName) {
 #if LOG_LEVEL > 0
-    DCSLog::outStream << "-------";
+    DCSLog::outStream << "--------";
     for (size_t i = 0; i < testName.size(); i++)
         DCSLog::outStream << "-";
     DCSLog::outStream << "\n" << testName << " project\n";
-    for (size_t i = 0; i < testName.size() + 5; i++)
+    for (size_t i = 0; i < testName.size() + 8; i++)
         DCSLog::outStream << "-";
     DCSLog::outStream << "\n";
 #endif
