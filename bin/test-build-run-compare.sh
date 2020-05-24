@@ -9,6 +9,7 @@ else
 	n="$1"
 fi
 [ "$2" != "" ] && o="$2"
+[ ! -d ../debug ] && mkdir ../debug
 out_file=../debug/test"-n$n".log
 
 ./test-build-run.sh "$n" "$o" > $out_file
