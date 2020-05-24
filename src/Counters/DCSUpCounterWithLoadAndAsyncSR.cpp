@@ -34,7 +34,7 @@ DCSUpCounterWithLoadAndAsyncSR::DCSUpCounterWithLoadAndAsyncSR(std::string name,
     numOfOutPins = 1 + numOfBits;
 }
 DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum >= 0 & outPinNum < numOfBits) {
+    if (outPinNum < numOfBits) {
         uint16_t arrayElement = outPinNum;
         outPinNum             = 0;
         return dividerArray[arrayElement]->getOutComponent(outPinNum);

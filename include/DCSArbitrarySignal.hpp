@@ -1,6 +1,7 @@
 #ifndef DCSArbitrarySignal_hpp
 #define DCSArbitrarySignal_hpp
 #include <vector>
+#include <string>
 typedef std::vector<uint64_t> transitions;
 
 /**

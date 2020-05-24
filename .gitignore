@@ -1,4 +1,4 @@
-build/objects
+build
 doc/head.md
 makedoc.sh
 .DS_Store
