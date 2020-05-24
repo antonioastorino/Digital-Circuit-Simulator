@@ -1,0 +1,36 @@
+Title:Unit delay test
+3555480701:updateInputs:58959:104
+3555480701:updateComponents:70394:274
+3555480701:Init circuit:51162:23319
+3555480701:updateInputs:75345:48
+3555480701:updateComponents:75623:159
+3555480701:propagateValuesOnChangeOnly:76615:175
+3555480701:updateInputs:79013:59
+3555480701:updateComponents:79279:113
+3555480701:propagateValuesOnChangeOnly:79558:138
+3555480701:updateInputs:82142:50
+3555480701:updateComponents:82393:123
+3555480701:propagateValuesOnChangeOnly:82699:127
+3555480701:updateInputs:84451:49
+3555480701:updateComponents:84684:121
+3555480701:propagateValuesOnChangeOnly:84971:115
+3555480701:updateInputs:86672:59
+3555480701:updateComponents:88276:117
+3555480701:propagateValuesOnChangeOnly:89804:110
+3555480701:updateInputs:91668:59
+3555480701:updateComponents:91920:109
+3555480701:propagateValuesOnChangeOnly:92193:111
+3555480701:updateInputs:94408:49
+3555480701:updateComponents:94631:109
+3555480701:propagateValuesOnChangeOnly:94910:107
+3555480701:updateInputs:96658:49
+3555480701:updateComponents:96892:118
+3555480701:propagateValuesOnChangeOnly:97188:99
+3555480701:updateInputs:98843:48
+3555480701:updateComponents:99065:106
+3555480701:propagateValuesOnChangeOnly:99339:124
+3555480701:updateInputs:101011:59
+3555480701:updateComponents:101243:141
+3555480701:propagateValuesOnChangeOnly:101565:99
+3555480701:Run loop:75304:31104
+3555480701:main:739:107711

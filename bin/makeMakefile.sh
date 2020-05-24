@@ -1,8 +1,8 @@
 base_dir="`pwd`/`dirname $0`/../"
 make_file="$base_dir/Makefile"
 build_folder="build/objects"
-profile_folder="gui/performance-analyzer/assets"
-output_folder="gui/logic-analyzer/assets"
+profile_folder="gui/performance-analyzer/data"
+output_folder="gui/logic-analyzer/data"
 executable_folder="build"
 pushd $base_dir
 

@@ -1,0 +1,27 @@
+Title:Xor test
+768680126:updateInputs:68089:159
+768680126:updateComponents:79448:263
+768680126:Init circuit:53425:33285
+768680126:updateInputs:87580:166
+768680126:updateComponents:87975:159
+768680126:propagateValuesOnChangeOnly:88957:208
+768680126:updateInputs:91681:156
+768680126:updateComponents:92037:137
+768680126:propagateValuesOnChangeOnly:92377:173
+768680126:updateInputs:96886:136
+768680126:updateComponents:97226:112
+768680126:propagateValuesOnChangeOnly:97509:221
+768680126:updateInputs:99704:153
+768680126:updateComponents:100050:121
+768680126:propagateValuesOnChangeOnly:100350:148
+768680126:updateInputs:102422:131
+768680126:updateComponents:102743:111
+768680126:propagateValuesOnChangeOnly:104307:143
+768680126:updateInputs:106921:158
+768680126:updateComponents:107263:120
+768680126:propagateValuesOnChangeOnly:107549:128
+768680126:updateInputs:109611:106
+768680126:updateComponents:109888:119
+768680126:propagateValuesOnChangeOnly:110188:171
+768680126:Run loop:87528:24724
+768680126:main:780:115757

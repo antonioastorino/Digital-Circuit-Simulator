@@ -1,0 +1,45 @@
+Title:Bit-stream signal test
+2870745817:updateInputs:58166:129
+2870745817:updateComponents:69166:207
+2870745817:Init circuit:48582:27475
+2870745817:updateInputs:76829:99
+2870745817:updateComponents:77125:114
+2870745817:propagateValuesOnChangeOnly:78094:167
+2870745817:updateInputs:79868:73
+2870745817:updateComponents:80144:86
+2870745817:propagateValuesOnChangeOnly:80409:110
+2870745817:updateInputs:82708:89
+2870745817:updateComponents:82985:99
+2870745817:propagateValuesOnChangeOnly:84565:90
+2870745817:updateInputs:86112:86
+2870745817:updateComponents:86395:86
+2870745817:propagateValuesOnChangeOnly:86645:89
+2870745817:updateInputs:88088:75
+2870745817:updateComponents:88332:99
+2870745817:propagateValuesOnChangeOnly:89837:100
+2870745817:updateInputs:91255:95
+2870745817:updateComponents:91520:82
+2870745817:propagateValuesOnChangeOnly:91767:80
+2870745817:updateInputs:93151:84
+2870745817:updateComponents:93406:80
+2870745817:propagateValuesOnChangeOnly:93665:80
+2870745817:updateInputs:95502:73
+2870745817:updateComponents:95758:82
+2870745817:propagateValuesOnChangeOnly:96011:81
+2870745817:updateInputs:97433:86
+2870745817:updateComponents:97688:92
+2870745817:propagateValuesOnChangeOnly:97957:81
+2870745817:updateInputs:99348:85
+2870745817:updateComponents:99602:81
+2870745817:propagateValuesOnChangeOnly:99850:95
+2870745817:updateInputs:104687:74
+2870745817:updateComponents:104954:85
+2870745817:propagateValuesOnChangeOnly:105220:90
+2870745817:updateInputs:106603:85
+2870745817:updateComponents:106856:83
+2870745817:propagateValuesOnChangeOnly:107104:81
+2870745817:updateInputs:108475:82
+2870745817:updateComponents:108726:82
+2870745817:propagateValuesOnChangeOnly:108970:95
+2870745817:Run loop:76791:33601
+2870745817:main:745:112001

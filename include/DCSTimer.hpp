@@ -37,6 +37,8 @@ private:
     static bool initialized;
 
 public:
+    static std::string title;
+
     DCSTimer(const char*);
     ~DCSTimer();
 

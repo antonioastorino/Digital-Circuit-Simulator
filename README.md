@@ -36,7 +36,7 @@ build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>, 0
 or, in one command
 
 ```
-bin/prj-build-run.sh [<PRJ_NUM>] [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with opitimization level [<OPT_LEVEL>]
+bin/prj-build-run.sh [<PRJ_NUM>] [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
@@ -44,7 +44,7 @@ The output is displayed in the console, as in the example below.
 
 
 ```
-antonio@Antonios-MacBook-Pro DCS % bin/prj-build-run.sh 1 0                 
+antonio@Antonios-MacBook-Pro DCS % bin/prj-build-run.sh 1 0   # build and run project 1 with optimization level 0              
 -------------------------
 Fast control unit project
 -------------------------
@@ -73,7 +73,7 @@ build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>, 
 or, in one command
 
 ```
-bin/test-build-run.sh [<TEST_NUM>] [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with opitimization level [<OPT_LEVEL>]
+bin/test-build-run.sh [<TEST_NUM>] [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
@@ -81,7 +81,7 @@ The output is displayed in the console, as in the example below.
 
 
 ```
-antonio@Antonios-MacBook-Pro DCS % bin/test-build-run.sh 2 2 
+antonio@Antonios-MacBook-Pro DCS % bin/test-build-run.sh 2 2    # build and run test 2 with optimization level 2
 ---------------
 Unit delay test
 ---------------
@@ -123,7 +123,7 @@ Creating a project or a test file requires that the header file has `.hpp` exten
 Please, refer to the existing examples for more details.
 
 ## How to display the data
-Two small web applications are provided to display the produced data in a more readable form. Two kinds of data are produced, as described in this section along with their corresponding data viewer.
+Two small web applications are provided to display the produced data in a more readable form. Two kinds of data are produced, as described in this section, along with their corresponding viewer.
 
 ### Logic analyzer
 The application outputs to the standard out. By running
@@ -131,15 +131,15 @@ The application outputs to the standard out. By running
 ```
 bin/prj-build-run-save.sh <TEST_NUM> <OPT_LEVEL>
 ```
-the output is `tee`'d to a file entitled `prj-n<PRJ_NUM>.log`, stored in `./gui/logic-analyzer/assets/`. In the same folder, the output of all the test files are also present under the name `test-n<TEST_NUM>.log`.
+the output is `tee`'d to a file entitled `prj-n<PRJ_NUM>.log`, stored in `./gui/logic-analyzer/data/`. In the same folder, the output of all the test files are also present under the name `test-n<TEST_NUM>.log`.
 
-> IMPORTANT: for now, you should not remove or change the test output files located in `./gui/logic-analyzer/assets/` as they are used by the unit-test environment, described later on.
+> IMPORTANT: for now, you should not remove or change the test output files located in `./gui/logic-analyzer/data/` as they are used by the unit-test environment, described later on.
 
 To visualize the data,
 
 - open `./gui/logic-analyzer/index.html` or run `./bin/run-la.sh` from the project directory
 - click on `Open files...` in the web GUI
-- select one or more files from `./gui/logic-analyzer/assets/` to load them
+- select one or more files from `./gui/logic-analyzer/data/` to load them
 - use the dropdown menu to select the file output you want to display
 
  At the time of writing, the interface looks as in the following figure
@@ -155,13 +155,13 @@ The GUI allows to
 - where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation -click on the `Go binarly/Go hexadecimal` toggle to switch from one visualization to the other.
 
 ### Performance analyzer
-When running any test or project, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `profile-test-n<TEST_NUM>-o<OPT_LEVEL>` or `profile-prj-n<PRJ_NUM><OPT_LEVEL>` `./gui/performance-analyzer/assets/` or . The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
+When running any test or project, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `profile-test-n<TEST_NUM>-o<OPT_LEVEL>` or `profile-prj-n<PRJ_NUM><OPT_LEVEL>` `./gui/performance-analyzer/data/` or . The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
 
 In order to display the produced data,
 
 - open `./gui/performance-analyzer/index.html` or run `./bin/run-pa.sh` from the project directory
 - click on `Open files...` in the web GUI
-- select one or more files from `./gui/performance-analyzer/assets/` to load them
+- select one or more files from `./gui/performance-analyzer/data/` to load them
 - use the dropdown menu to select the file output you want to display
 
  At the time of writing, the interface looks as in the following figure
@@ -192,7 +192,7 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 
 ---
 ## How to use the unit test utility
-Several unit tests are already defined and exist in `./src/Tests/`. Their output as `test-n<TEST_NUM>.log` files in `/gui/logic-analyzer/assets/` for their use in the "Logic analyzer." If you make some changes in the Engine or any component used by these test files, you can check if their behavior is unchanged by running
+Several unit tests are already defined and exist in `./src/Tests/`. Their output as `test-n<TEST_NUM>.log` files in `/gui/logic-analyzer/data/` for their use in the "Logic analyzer." If you make some changes in the Engine or any component used by these test files, you can check if their behavior is unchanged by running
 
 ```
 for t in {0..<M-1>}; do
@@ -200,7 +200,7 @@ bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
 done
 ```
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
-## Documentation automatically generated on Sun May 24 19:38:51 CEST 2020
+## Documentation automatically generated on Sun May 24 20:23:43 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU

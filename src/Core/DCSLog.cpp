@@ -93,24 +93,22 @@ void DCSLog::error(std::string callerName, int code) {
 void DCSLog::printTestName(std::string testName) {
 #if LOG_LEVEL > 0
     DCSLog::outStream << "-----";
-    for (size_t i = 0; i < testName.size(); i++)
-        DCSLog::outStream << "-";
+    for (size_t i = 0; i < testName.size(); i++) DCSLog::outStream << "-";
     DCSLog::outStream << "\n" << testName << " test\n";
-    for (size_t i = 0; i < testName.size() + 5; i++)
-        DCSLog::outStream << "-";
+    for (size_t i = 0; i < testName.size() + 5; i++) DCSLog::outStream << "-";
+    DCSTimer::title = testName + " test";
     DCSLog::outStream << "\n";
 #endif
 }
 
-void DCSLog::printProjectName(std::string testName) {
+void DCSLog::printProjectName(std::string prjName) {
 #if LOG_LEVEL > 0
     DCSLog::outStream << "--------";
-    for (size_t i = 0; i < testName.size(); i++)
-        DCSLog::outStream << "-";
-    DCSLog::outStream << "\n" << testName << " project\n";
-    for (size_t i = 0; i < testName.size() + 8; i++)
-        DCSLog::outStream << "-";
+    for (size_t i = 0; i < prjName.size(); i++) DCSLog::outStream << "-";
+    DCSLog::outStream << "\n" << prjName << " project\n";
+    for (size_t i = 0; i < prjName.size() + 8; i++) DCSLog::outStream << "-";
     DCSLog::outStream << "\n";
+    DCSTimer::title = prjName + " project";
 #endif
 }
 

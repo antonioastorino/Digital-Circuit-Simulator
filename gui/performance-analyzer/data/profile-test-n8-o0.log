@@ -1,0 +1,36 @@
+Title:SR-Latch test
+21560753:updateInputs:77994:194
+21560753:updateComponents:89062:383
+21560753:Init circuit:61025:35542
+21560753:updateInputs:97393:158
+21560753:updateComponents:97772:242
+21560753:propagateValuesOnChangeOnly:98816:287
+21560753:updateInputs:101951:137
+21560753:updateComponents:102285:198
+21560753:propagateValuesOnChangeOnly:102671:224
+21560753:updateInputs:107331:137
+21560753:updateComponents:107658:199
+21560753:propagateValuesOnChangeOnly:108020:283
+21560753:updateInputs:110504:113
+21560753:updateComponents:110806:197
+21560753:propagateValuesOnChangeOnly:111182:266
+21560753:updateInputs:114084:128
+21560753:updateComponents:114389:178
+21560753:propagateValuesOnChangeOnly:116020:194
+21560753:updateInputs:118412:152
+21560753:updateComponents:118773:180
+21560753:propagateValuesOnChangeOnly:119135:177
+21560753:updateInputs:121521:109
+21560753:updateComponents:121827:182
+21560753:propagateValuesOnChangeOnly:122176:263
+21560753:updateInputs:124620:114
+21560753:updateComponents:124909:184
+21560753:propagateValuesOnChangeOnly:125273:235
+21560753:updateInputs:127684:128
+21560753:updateComponents:127987:188
+21560753:propagateValuesOnChangeOnly:128342:189
+21560753:updateInputs:130723:131
+21560753:updateComponents:131047:159
+21560753:propagateValuesOnChangeOnly:131389:176
+21560753:Run loop:97352:39744
+21560753:main:743:142589

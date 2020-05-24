@@ -123,7 +123,7 @@ build/objects/DCSDFlipFlop.o: .//src/Latches/DCSDFlipFlop.cpp .//include/DCSDFli
 build/objects/DCSDLatch.o: .//src/Latches/DCSDLatch.cpp .//include/DCSDLatch.hpp .//include/DCSLog.hpp build/objects/DCSAnd.o build/objects/DCSNode.o build/objects/DCSNot.o build/objects/DCSSRLatch.o build/objects/DCSUnitDelay.o 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
-build/objects/prj-all.o: .//src/Projects/prj-all.cpp .//src/Projects/prj-FastControlUnit.hpp .//src/Projects/prj-fastZeroFlagProgram.hpp .//src/Projects/prj-FirstProgram.hpp .//src/Projects/prj-NoCUComputer.hpp 
+build/objects/prj-all.o: .//src/Projects/prj-all.cpp .//src/Projects/prj-FastControlUnit.hpp .//src/Projects/prj-FirstProgram.hpp .//src/Projects/prj-NoCUComputer.hpp .//src/Projects/prj-fastZeroFlagProgram.hpp 
 	$(CC) $(INC) $(CFLAGS) $< -o $@
 
 build/objects/prj-FirstProgram.o: .//src/Projects/prj-FirstProgram.cpp .//src/Projects/prj-FirstProgram.hpp build/objects/DCSALU.o build/objects/DCSControlUnit5Bits.o build/objects/DCSEngine.o build/objects/DCSInput.o build/objects/DCSLog.o build/objects/DCSOutput.o build/objects/DCSRam16x8.o build/objects/DCSRegister1Bit.o build/objects/DCSRegister4Bits.o build/objects/DCSRegister8Bits.o build/objects/DCSTriStateBuffer8Bits.o build/objects/DCSUpCounterWithLoadAndAsyncSR.o build/objects/DCSPLD8In16Out.o 
@@ -316,4 +316,4 @@ clean:
 	rm -rf build
 
 cleanall:
-	rm -rf build gui/performance-analyzer/assets/* gui/logic-analyzer/assets/prj-*
+	rm -rf build gui/performance-analyzer/data/* gui/logic-analyzer/data/prj-*

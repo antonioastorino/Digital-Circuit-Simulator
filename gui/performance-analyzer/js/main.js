@@ -29,6 +29,7 @@ function main() {
     const legendTable = document.getElementById("table-legend");
     const expandCollapseButton = document.getElementById("expand-collapse-button");
     const resetButton = document.getElementById("reset-button");
+    const headerProjectTitle = document.getElementById("project-title");
 
     let ctx = canvas.getContext("2d");
     let canvasHeight = 20;
@@ -234,6 +235,9 @@ function main() {
         let threadID, functionName, startTimepoint, elapsedTime;
         maxNumOfFunctions = 0;
         for (let i = 0; i < lines.length; i++) {
+            if (lines[i].includes("Title:")) {
+                parseTitle(lines[i]);
+            }
             if (lines[i].split(":").length != 4) continue; // rough check if the line format is correct
 
             [threadID, functionName, startTimepoint, elapsedTime] = lines[i].split(":");
@@ -279,8 +283,12 @@ function main() {
         });
     }
 
+    let parseTitle = (str) => {
+        headerProjectTitle.innerHTML = str.split("Title:")[1];
+    }
+
     let updateData = async () => {
-        let result = await readFile("./assets/" + files[select.selectedIndex].name);
+        let result = await readFile("./data/" + files[select.selectedIndex].name);
         parseText(result);
     }
 

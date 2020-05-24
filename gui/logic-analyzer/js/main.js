@@ -284,7 +284,7 @@ function main() {
     }
 
     let updateData = async () => {
-        result = await readFile("./assets/" + files[select.selectedIndex].name);
+        result = await readFile("./data/" + files[select.selectedIndex].name);
         parseText();
         try {
             let signalLength = Object.values(signals)[0].length;

@@ -13,7 +13,7 @@ out_file=../debug/test"-n$n".log
 
 ./test-build-run.sh "$n" "$o" > $out_file
 if [ "$?" -eq 0 ]; then
-	DIFF=`diff $out_file ../gui/logic-analyzer/assets/test-n$n.log` &&
+	DIFF=`diff $out_file ../gui/logic-analyzer/data/test-n$n.log` &&
 	echo "Checking..." &&
 	if [ "$DIFF" != "" ]; then
 		echo "Error: test $n not passed"
