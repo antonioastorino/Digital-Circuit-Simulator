@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "DCSLog.hpp"
 #include "DCSTimer.hpp"
 #include "test-ALU.hpp"
@@ -35,57 +37,62 @@
 #include "test-UpCounter.hpp"
 #include "test-UpCounter4Bits.hpp"
 #include "test-Xor.hpp"
-#include <iostream>
 
 int main(int argc, const char* argv[]) {
-    // TODO: create proper unit tests
+    // Retrieve optimization level from the file name
+    int i = 0;
+    while (argv[0][i] != '\0') i++;                          // count chars in file name
+    int optLev = static_cast<uint16_t>(argv[0][i - 1]) - 48; // convert the last char into an int
+    if (optLev < 0 && optLev > 3) DCSLog::error("main", 40); // check it's between 0 and 3
+
     uint16_t testNum = 0;
-    if (argc == 2) {
-        sscanf(argv[1], "%hd", &testNum);
-    }
-    DCSTimer::initialize("test", testNum);
+    if (argc >= 2) sscanf(argv[1], "%hd", &testNum);
+
+    DCSTimer::initialize("test", testNum, optLev);
+    // start profiled scope
     {
         uint16_t N = 0;
         PROFILE();
         if (testNum == N++) bitStreamSignalTest();
-        else if (testNum == N++) orTest();
-        else if (testNum == N++) unitDelayTest();
-        else if (testNum == N++) nor3Test();
-        else if (testNum == N++) notLoopTest();
-        else if (testNum == N++) nand3Test();
-        else if (testNum == N++) andArrayTest();
-        else if (testNum == N++) and6Test();
-        else if (testNum == N++) srLatchTest();
-        else if (testNum == N++) triStateBufferTest();
-        else if (testNum == N++) dLatchTest();
-        else if (testNum == N++) dLatchAsyncSRTest();
-        else if (testNum == N++) dFlipFlopTest();
-        else if (testNum == N++) register1BitWithEnableTest();
-        else if (testNum == N++) register8BitsWithEnableTest();
-        else if (testNum == N++) jkLatchMasterSlaveAsyncSRTest();
-        else if (testNum == N++) dividerTest();
-        else if (testNum == N++) upCounterTest();
-        else if (testNum == N++) mux2To1Test();
-        else if (testNum == N++) fullAdderTest();
-        else if (testNum == N++) displayTest();
-        else if (testNum == N++) rippleAdderTest();
-        else if (testNum == N++) xorTest();
-        else if (testNum == N++) ramTest();
-        else if (testNum == N++) memoryProgrammerTest();
-        else if (testNum == N++) risingEdgeDetectorTest();
-        else if (testNum == N++) upCounter4BitsTest();
-        else if (testNum == N++) addressDecoderTest();
-        else if (testNum == N++) register8BitsTest();
-        else if (testNum == N++) aluTest();
-        else if (testNum == N++) controlUnitTest();
-        else if (testNum == N++) addressDecoder32BitsTest();
-        else if (testNum == N++) ram256x16Test();
-        else if (testNum == N++) register16BitsWithEnableTest();
-        else {
-            std::cerr << "Test number exceeding number of last available test (" << N-1 << ")\n";
+        if (testNum == N++) orTest();
+        if (testNum == N++) unitDelayTest();
+        if (testNum == N++) nor3Test();
+        if (testNum == N++) notLoopTest();
+        if (testNum == N++) nand3Test();
+        if (testNum == N++) andArrayTest();
+        if (testNum == N++) and6Test();
+        if (testNum == N++) srLatchTest();
+        if (testNum == N++) triStateBufferTest();
+        if (testNum == N++) dLatchTest();
+        if (testNum == N++) dLatchAsyncSRTest();
+        if (testNum == N++) dFlipFlopTest();
+        if (testNum == N++) register1BitWithEnableTest();
+        if (testNum == N++) register8BitsWithEnableTest();
+        if (testNum == N++) jkLatchMasterSlaveAsyncSRTest();
+        if (testNum == N++) dividerTest();
+        if (testNum == N++) upCounterTest();
+        if (testNum == N++) mux2To1Test();
+        if (testNum == N++) fullAdderTest();
+        if (testNum == N++) displayTest();
+        if (testNum == N++) rippleAdderTest();
+        if (testNum == N++) xorTest();
+        if (testNum == N++) ramTest();
+        if (testNum == N++) memoryProgrammerTest();
+        if (testNum == N++) risingEdgeDetectorTest();
+        if (testNum == N++) upCounter4BitsTest();
+        if (testNum == N++) addressDecoderTest();
+        if (testNum == N++) register8BitsTest();
+        if (testNum == N++) aluTest();
+        if (testNum == N++) controlUnitTest();
+        if (testNum == N++) addressDecoder32BitsTest();
+        if (testNum == N++) ram256x16Test();
+        if (testNum == N++) register16BitsWithEnableTest();
+        if (testNum >= N) {
+            std::cerr << "Test number exceeding number of last available test (" << N - 1 << ")\n";
             return EXIT_FAILURE;
         }
     }
+
     DCSLog::printResults();
     DCSTimer::printResults();
     return 0;

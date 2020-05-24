@@ -9,6 +9,7 @@ std::mutex DCSTimer::m;
 int64_t DCSTimer::timeZero;
 std::string DCSTimer::fileName;
 uint16_t DCSTimer::fileId;
+int DCSTimer::optLev;
 bool DCSTimer::initialized = false;
 
 DCSTimer::DCSTimer(const char* title)
@@ -35,8 +36,8 @@ void DCSTimer::printResults() {
     if (DCSTimer::results.size()) {
         std::ofstream profilingFile;
         std::stringstream file;
-        file << "gui/performance-analyzer/assets/profile-" << DCSTimer::fileName << "-"
-             << DCSTimer::fileId << ".log";
+        file << "gui/performance-analyzer/assets/profile-" << DCSTimer::fileName << "-n"
+             << DCSTimer::fileId << "-o" << DCSTimer::optLev << ".log";
         profilingFile.open(file.str());
 
         for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
@@ -47,11 +48,12 @@ void DCSTimer::printResults() {
     }
 }
 
-void DCSTimer::initialize(const std::string& fileName, uint16_t fileId) {
+void DCSTimer::initialize(const std::string& fileName, uint16_t fileId, int optLev) {
     if (initialized)
         DCSLog::error("DCSTimer", 20);
     DCSTimer::fileName = fileName;
     DCSTimer::fileId = fileId;
+    DCSTimer::optLev = optLev;
     DCSTimer::initialized = true;
     DCSTimer::timeZero =
         std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now())

@@ -32,6 +32,7 @@ private:
 
     static std::string fileName;
     static uint16_t fileId;
+    static int optLev;
     static int64_t timeZero;
     static bool initialized;
 
@@ -40,7 +41,7 @@ public:
     ~DCSTimer();
 
     static void printResults();
-    static void initialize(const std::string&, uint16_t);
+    static void initialize(const std::string&, uint16_t, int);
 };
 
 #endif /* DCSTimer_hpp */
