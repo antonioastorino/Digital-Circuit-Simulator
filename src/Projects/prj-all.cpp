@@ -15,10 +15,10 @@ int main(int argc, const char* argv[]) {
     {
         uint16_t N = 0;
         PROFILE();
-        if (prjNum == N++) firstProgramTest();
-        else if (prjNum == N++) fastControlUnitTest();
-        else if (prjNum == N++) fastZeroFlagProgramTest();
-        else if (prjNum == N++) noCUComputerTest();
+        if (prjNum == N++) firstProgramPrj();
+        else if (prjNum == N++) fastControlUnitPrj();
+        else if (prjNum == N++) fastZeroFlagProgramPrj();
+        else if (prjNum == N++) noCUComputerPrj();
         else {
             std::cerr << "Project number exceeding number of last available project (" << N-1 << ")\n";
             return EXIT_FAILURE;

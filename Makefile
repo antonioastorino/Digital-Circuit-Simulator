@@ -316,4 +316,4 @@ clean:
 	rm -rf build
 
 cleanall:
-	rm -rf build gui/performance-analyzer/assets/* gui/logic-analyzer/assets/*
+	rm -rf build gui/performance-analyzer/assets/* gui/logic-analyzer/assets/prj-*

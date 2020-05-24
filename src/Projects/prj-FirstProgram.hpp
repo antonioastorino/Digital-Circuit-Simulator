@@ -13,4 +13,4 @@
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSPLD8In16Out.hpp"
 
-void firstProgramTest();
+void firstProgramPrj();

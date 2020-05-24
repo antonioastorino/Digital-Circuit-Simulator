@@ -18,4 +18,4 @@
 #include <iostream>
 
 // based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
-void noCUComputerTest();
+void noCUComputerPrj();

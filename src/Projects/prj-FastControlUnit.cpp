@@ -1,6 +1,6 @@
 #include "prj-FastControlUnit.hpp"
 
-void fastControlUnitTest() {
+void fastControlUnitPrj() {
     DCSLog::printProjectName("Fast control unit");
     uint64_t hcp = 14;
     DCSEngine::initialize(hcp);

@@ -1,6 +1,6 @@
 #include "prj-FirstProgram.hpp"
 
-void firstProgramTest() {
+void firstProgramPrj() {
     DCSLog::printProjectName("First program");
     uint64_t masterClockHP = 28;
 

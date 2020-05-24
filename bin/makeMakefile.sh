@@ -108,7 +108,7 @@ done < cpp-full.list
 
 pf "\nclean:\n\trm -rf $executable_folder\n"
 
-pf "\ncleanall:\n\trm -rf $executable_folder $profile_folder/* $output_folder/*"
+pf "\ncleanall:\n\trm -rf $executable_folder $profile_folder/* $output_folder/prj-*"
 
 rm *.list
 

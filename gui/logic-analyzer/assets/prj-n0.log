@@ -1,6 +1,6 @@
---------------------
+---------------------
 First program project
-------------------
+---------------------
  CLK:1 BO:0 ZI:0 ZO:0 FI:0 J:0 CO:0 CE:0 OI:0 BI:0 SU:0 EO:0 AO:0 AI:0 II:0 IO:0 RO:0 RI:0 MI:0 HLT:0 CU_step:0b000  0d outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:0
  CLK:0 BO:0 ZI:0 ZO:0 FI:0 J:0 CO:0 CE:0 OI:0 BI:0 SU:0 EO:0 AO:0 AI:0 II:0 IO:0 RO:0 RI:0 MI:0 HLT:0 CU_step:0b000  0d outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:28
  CLK:1 BO:0 ZI:0 ZO:0 FI:0 J:0 CO:0 CE:0 OI:0 BI:0 SU:0 EO:0 AO:0 AI:0 II:0 IO:0 RO:0 RI:0 MI:0 HLT:0 CU_step:0b000  0d outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:56

@@ -5,4 +5,4 @@
 #include "DCSLog.hpp"
 #include "DCSRam256x16.hpp"
 
-void fastControlUnitTest();
+void fastControlUnitPrj();

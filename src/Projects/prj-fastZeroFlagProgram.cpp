@@ -1,6 +1,6 @@
 #include "prj-fastZeroFlagProgram.hpp"
 
-void fastZeroFlagProgramTest() {
+void fastZeroFlagProgramPrj() {
     DCSLog::printProjectName("Zero flag program");
     uint64_t masterClockHP = 22;
 

@@ -1,7 +1,7 @@
 #include "prj-NoCUComputer.hpp"
 
 // based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
-void noCUComputerTest() {
+void noCUComputerPrj() {
     DCSLog::printProjectName("Computer without CU");
     uint16_t masterClockHP = 20;
 

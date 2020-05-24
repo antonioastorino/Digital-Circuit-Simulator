@@ -1,6 +1,6 @@
-------------------------
-Computer without CU test
-------------------------
+---------------------------
+Computer without CU project
+---------------------------
  MCLK0:1 SU:0 AO:0 BO:0 IO:0 EO:0 RO:0 CO:0 AI:0 BI:0 II:0 RI:0 MI:0 OI:0 outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:0
  MCLK0:0 SU:0 AO:0 BO:0 IO:0 EO:0 RO:0 CO:0 AI:0 BI:0 II:0 RI:0 MI:0 OI:0 outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:20
  MCLK0:1 SU:0 AO:0 BO:0 IO:0 EO:0 RO:0 CO:0 AI:0 BI:0 II:0 RI:0 MI:0 OI:0 outA:0b00000000    0d outB:0b00000000    0d instr:0b0000   0d operand:0b0000   0d alu:0b00000000    0d dispOut:0b00000000    0d dispMAR:0b0000   0d dispRAM:0b00000000    0d dispPC:0b0000   0d STEP:40
