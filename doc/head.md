@@ -5,69 +5,122 @@ Inspired by the work of [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&
 
 In this project, the time dependency of the system evolution is considered. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, the unit delay `tau` is defined as the maximum propagation delay that any of the elementary logic gates (`AND`, `OR`, `NOT`, `NAND`, `NOR`, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which can be seen as a free parameter whose value cannot be established a priori. <u>Time itself is therefore discretized in steps of length `tau`.</u>
 
-Examples of how to use the component library are located in `./scr/Tests` folder.
+Examples of how to use the component library are located in `./scr/Tests` and `./src/Project` folders.
 
 ---
 
 ## How to build (Mac and Linux)
 You are welcome to build the project the way you prefer. However, you can also use the tool provided here.
-### Generate a Makefile file
-To generate the `Makefile`, from the project directory, run
+### 1. Generate a Makefile file
+If `./Makefile` is outdated or not present, generate it by running
 
 ```
 bin/makeMakefile.sh
 ```
-> This script must be run every time you add, move, or remove a `.cpp` or `.hpp` project file.
-### Build and run
+from the project directory.
+
+> IMPORTANT: This script must be run every time you add, move, or remove a `.cpp` or `.hpp` project file, or change the headers included in any file.
+
+### 2. Build and run
+#### 2.1. Projects
+For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available, i. e. listed in `./src/Projects/prj-all.cpp`.
+
+Compiling and running a project is done by executing
 
 ```
-make [OPT=<x>] [OUT=<executable_file_name>]
+make [OPT=<OPT_LEVEL>]                     # build with optimization level <OPT_LEVEL>, 0 by default
+build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>, 0 by default   
+
 ```
 
-`<x> = 0, 1, 2, or 3` is the optimization level. ```OPT``` not specified is equivalent to ```OPT=0```
+or, in one command
 
-`<executable_file_name>` is the name of the executable file, which will be placed in the `./build` folder and saved with the suffix `-<x>`. The default name is `out`.
+```
+bin/prj-build-run.sh [<PRJ_NUM>] [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with opitimization level [<OPT_LEVEL>]
+```
+`<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-The compiled object files will be located in `./build/objects`.
+The output is displayed in the console, as in the example below.
 
-To erase the `./build` folder, run
+
+```
+antonio@Antonios-MacBook-Pro DCS % bin/prj-build-run.sh 1 0                 
+-------------------------
+Fast control unit project
+-------------------------
+ in:0b00000000    0d out:0b0000000000000000      0d STEP:0
+ in:0b00000001    1d out:0b0100000000000100  16388d STEP:14
+ in:0b00000010    2d out:0b0001010000001000   5128d STEP:28
+ in:0b00000011    3d out:0b0000000000000000      0d STEP:42
+ in:0b00000100    4d out:0b0000000000000000      0d STEP:56
+ in:0b00000101    5d out:0b0000000000000000      0d STEP:70
+ in:0b00000110    6d out:0b0000000000000000      0d STEP:84
+ in:0b00000111    7d out:0b0000000000000000      0d STEP:98
+ in:0b00001000    8d out:0b0000000000000000      0d STEP:112
+ in:0b00001001    9d out:0b0100000000000100  16388d STEP:126
+ ...
+```
+#### 2.2. Tests
+For all tests, the source code is located in `./src/Tests/`. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available, i. e. those listed in `./src/Tests/test-all.cpp`.
+
+Compiling and running a test is done by executing
+
+```
+make [OPT=<OPT_LEVEL>]                        # build with optimization level <OPT_LEVEL>, 0 by default
+build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>, 0 if omitted   
+
+```
+or, in one command
+
+```
+bin/test-build-run.sh [<TEST_NUM>] [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with opitimization level [<OPT_LEVEL>]
+```
+`<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
+
+The output is displayed in the console, as in the example below.
+
+
+```
+antonio@Antonios-MacBook-Pro DCS % bin/test-build-run.sh 2 2 
+---------------
+Unit delay test
+---------------
+ N00:0 D00:1 STEP:-1
+ N00:0 D00:0 STEP:0
+ N00:1 D00:0 STEP:1
+ N00:1 D00:1 STEP:2
+ N00:0 D00:1 STEP:3
+ N00:0 D00:0 STEP:4
+ N00:1 D00:0 STEP:5
+ N00:1 D00:1 STEP:6
+ N00:0 D00:1 STEP:7
+ N00:0 D00:0 STEP:8
+ N00:1 D00:0 STEP:9
+ N00:1 D00:1 STEP:10
+```
+
+### 2.4. Cleaning up
+
+When `make` is executed, the executable files are placed in the `./build/` folder and the object files are placed in the `./build/objects/` folder. By running
 
 ```
 make clean
 ```
+the `./build/` folder is deleted.
 
-#### Example:
-There exist several ways to build. The simplest are as follows
+## How to create a project or a test file
+Creating a project or a test file requires that the header file has `.hpp` extension and the implementation file has `.cpp` extension. In addition,
 
-```
-make                  # produces ./build/out-0
-make OPT=2 OUT=test   # produces ./build/test-2 with optimization level 2
-```
-In addition, you can choose to build and run using
+- project files must have a name starting with `prj-`
+- project files must be located in located in `./src/Projects/`
+- the header file must be included in `./src/Projects/prj-all.cpp`
+- the function that represents the entry point to the project must be listed in `main()` of `./src/Projects/prj-all.cpp`
+- test files must have a name starting with `test-`
+- test files must be located in located in `./test/Projects/`
+- the header file must be included in `./src/Tests/test-all.cpp`
+- the function that represents the entry point to the test must be listed in `main()` of `./src/Tests/test-all.cpp`
 
-```
-bin/build-run.sh [<TEST_NUMBER>]              # build and run <TEST_NUMBER>
-bin/build-run-save.sh [<TEST_NUMBER>]         # build and run and save the output of <TEST_NUMBER>
-```
-
-If `<TEST_NUMBER> (=0, 1, ..., N)` is specified, the corresponding test will be run right after compilation. Check `src/main.cpp` to see the list of tests available. If N is not specified, the default test is run.
-
-The output is saved in `./gui/assets`. 
-
-To specify the desired optimization level (by default equal to `0`), the above instructions can be executed while <u>adding a second parameter between `0` and `3`</u>. For instance
-
-```
-bin/build-run-save.sh 3 2
-
-```
-will build and run test number `3` with compiler optimization level `2`.
-#### Known issue
-```
-make OUT=name OPT=0 # ok
-make OUT=name OPT=1 # ok
-make OUT=name OPT=0 # will override ./build/name-0 without recompiling the object files
-```
-##### Workaround: don't do that! (or run `make clean` first)
+Please, refer to the existing examples for more details.
 
 ## How to display the data
 Two small web applications are provided to display the produced data in a more readable form. Two kinds of data are produced, as described in this section along with their corresponding data viewer.
@@ -76,9 +129,12 @@ Two small web applications are provided to display the produced data in a more r
 The application outputs to the standard out. By running
 
 ```
-bin/build-run-save.sh <TEST_NUMBER> <OPTIMIZATION_LEVEL>
+bin/prj-build-run-save.sh <TEST_NUM> <OPT_LEVEL>
 ```
-the output is `tee`'d to a file entitled `test-n<TEST_NUMBER>-O<OPTIMIZATION_LEVEL>.log`, stored in `./gui/logic-analyzer/assets/`. 
+the output is `tee`'d to a file entitled `prj-n<PRJ_NUM>.log`, stored in `./gui/logic-analyzer/assets/`. In the same folder, the output of all the test files are also present under the name `test-n<TEST_NUM>.log`.
+
+> IMPORTANT: for now, you should not remove or change the test output files located in `./gui/logic-analyzer/assets/` as they are used by the unit-test environment, described later on.
+
 To visualize the data,
 
 - open `./gui/logic-analyzer/index.html` or run `./bin/run-la.sh` from the project directory
@@ -92,14 +148,14 @@ To visualize the data,
 
 The GUI allows to
 
-- set the horizontal and vertical scaling factors using the `H-zoom` and `V-zoom` sliders, respectively
-- scroll left/right by using the `H-Scroll` slider
-- scroll up/down by using the regular mouse wheel
-- refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-- where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation. To switch from one visualization to the other, click on `Go binarly/Go hexadecimal` toggle.
+- set the horizontal and vertical scaling factors using the `H-zoom` and `V-zoom` sliders, respectively;
+- scroll left/right by using the `H-Scroll` slider;
+- scroll up/down by using the regular mouse wheel;
+- refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file;
+- where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation -click on the `Go binarly/Go hexadecimal` toggle to switch from one visualization to the other.
 
 ### Performance analyzer
-When running any test, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `./gui/performance-analyzer/assets/profileFile-<TEST_NUMBER>`. The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
+When running any test or project, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `profile-test-n<TEST_NUM>-o<OPT_LEVEL>` or `profile-prj-n<PRJ_NUM><OPT_LEVEL>` `./gui/performance-analyzer/assets/` or . The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
 
 In order to display the produced data,
 
@@ -118,7 +174,7 @@ The GUI allows to
 - pan left/right by dragging the diagram with the mouse
 - zoom in/out the center of the graph by using the mouse wheel
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file.
-- visualize the data on separate lines or a single line (the former for overlapping measurements as in the example below). To switch from one visualization to the other, click on `Expand/Collapse` toggle.
+- visualize the data on separate lines or a single line (the former, for overlapping measurements as in the example below). To switch from one visualization to the other, click on `Expand/Collapse` toggle.
 
 ---
 
@@ -135,3 +191,12 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 > IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
 
 ---
+## How to use the unit test utility
+Several unit tests are already defined and exist in `./src/Tests/`. Their output as `test-n<TEST_NUM>.log` files in `/gui/logic-analyzer/assets/` for their use in the "Logic analyzer." If you make some changes in the Engine or any component used by these test files, you can check if their behavior is unchanged by running
+
+```
+for t in {0..<M-1>}; do
+bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
+done
+```
+If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
