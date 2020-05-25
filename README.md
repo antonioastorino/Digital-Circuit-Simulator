@@ -10,7 +10,8 @@ Examples of how to use the component library are located in `./scr/Tests` and `.
 ---
 
 ## How to build (Mac and Linux)
-You are welcome to build the project the way you prefer. However, you can also use the tool provided here.
+You are welcome to build the project the way you prefer. However, it is recommended that you use the tool provided in this repository, based upon [this project](https://github.com/antonioastorino/MMF).
+
 ### 1. Generate a Makefile file
 If `./Makefile` is outdated or not present, generate it by running
 
@@ -208,7 +209,9 @@ bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
 done
 ```
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
-## Documentation automatically generated on Sun May 24 23:44:45 CEST 2020
+
+
+## Documentation automatically generated on Mon May 25 23:24:03 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU
