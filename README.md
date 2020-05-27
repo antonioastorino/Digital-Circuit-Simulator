@@ -32,25 +32,48 @@ sudo apt install make g++
 ```
 
 #### 2.1. Projects
-For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available, i. e. listed in `./src/Projects/prj-all.cpp`.
+For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available.
 
 Compiling and running a project is done by executing
 
 ```
 make SHELL=/bin/bash [OPT=<OPT_LEVEL>]     # build with optimization level <OPT_LEVEL>, 0 by default
-build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>, 0 by default   
+build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>  
 
 ```
 
-or, in one command
+or, in one command (notice that <PRJ_NUM> is mandatory below)
 
 ```
-bin/prj-build-run.sh [<PRJ_NUM>] [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>
+bin/prj-build-run.sh <PRJ_NUM> [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-The output is displayed in the console, as in the example below.
+If the project number is omitted or not valid, the list of available projects is prompted. For example, executing
 
+```
+make SHELL=/bin/bash
+build/prj-out-0
+```
+or 
+
+```
+bin/prj-build-run.sh
+```
+
+produces something like
+
+```
+Please add a valid project or test number as a parameter.
+Choose one of the following:
+#       Title
+0       firstProgramPrj
+1       fastControlUnitPrj
+2       fastZeroFlagProgramPrj
+3       noCUComputerPrj
+antonio@Antonios-MacBook-Pro DCS % 
+```
+If a valid project number is specified, the corresponding project output is displayed, as in the example that follows.
 
 ```
 antonio@Antonios-MacBook-Pro DCS % bin/prj-build-run.sh 1 0   # build and run project 1 with optimization level 0              
@@ -70,45 +93,25 @@ Fast control unit project
  ...
 ```
 #### 2.2. Tests
-For all tests, the source code is located in `./src/Tests/`. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available, i. e. those listed in `./src/Tests/test-all.cpp`.
+For all tests, the source code is located in `./src/Tests/`. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available.
 
-Compiling and running a test is done by executing
+Compiling and running a test is done in the same as for a project, but replacing "prj" with "test":
 
 ```
 make SHELL=/bin/bash [OPT=<OPT_LEVEL>]        # build with optimization level <OPT_LEVEL>, 0 by default
-build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>, 0 if omitted   
+build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>
 
 ```
 or, in one command
 
 ```
-bin/test-build-run.sh [<TEST_NUM>] [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>
+bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-The output is displayed in the console, as in the example below.
+Once again, if the test number is not valid or not specified, the ouput is be a list of available tests, otherwise the chosen test is build and run.
 
-
-```
-antonio@Antonios-MacBook-Pro DCS % bin/test-build-run.sh 2 2    # build and run test 2 with optimization level 2
----------------
-Unit delay test
----------------
- N00:0 D00:1 STEP:-1
- N00:0 D00:0 STEP:0
- N00:1 D00:0 STEP:1
- N00:1 D00:1 STEP:2
- N00:0 D00:1 STEP:3
- N00:0 D00:0 STEP:4
- N00:1 D00:0 STEP:5
- N00:1 D00:1 STEP:6
- N00:0 D00:1 STEP:7
- N00:0 D00:0 STEP:8
- N00:1 D00:0 STEP:9
- N00:1 D00:1 STEP:10
-```
-
-### 2.4. Cleaning up
+### 2.3. Cleaning up
 
 When `make` is executed, the executable files are placed in the `./build/` folder and the object files are placed in the `./build/objects/` folder. By running
 
@@ -121,11 +124,11 @@ the `./build/` folder is deleted.
 Creating a project or a test file requires that the header file has `.hpp` extension and the implementation file has `.cpp` extension. In addition,
 
 - project files must have a name starting with `prj-`
-- project files must be located in located in `./src/Projects/`
+- project files must be located in `./src/Projects/`
 - the header file must be included in `./src/Projects/prj-all.cpp`
 - the function that represents the entry point to the project must be listed in `main()` of `./src/Projects/prj-all.cpp`
 - test files must have a name starting with `test-`
-- test files must be located in located in `./test/Projects/`
+- test files must be located in `./test/Projects/`
 - the header file must be included in `./src/Tests/test-all.cpp`
 - the function that represents the entry point to the test must be listed in `main()` of `./src/Tests/test-all.cpp`
 
@@ -211,7 +214,7 @@ done
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
 
 
-## Documentation automatically generated on Mon May 25 23:24:03 CEST 2020
+## Documentation automatically generated on Wed May 27 23:09:46 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU

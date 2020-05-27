@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "DCSLog.hpp"
 #include "DCSTimer.hpp"
 #include "test-ALU.hpp"
@@ -37,62 +35,59 @@
 #include "test-UpCounter.hpp"
 #include "test-UpCounter4Bits.hpp"
 #include "test-Xor.hpp"
+#include <iostream>
+#include <vector>
 
 int main(int argc, const char* argv[]) {
-    // Retrieve optimization level from the file name
-    int i = 0;
-    while (argv[0][i] != '\0') i++;                          // count chars in file name
-    int optLev = static_cast<uint16_t>(argv[0][i - 1]) - 48; // convert the last char into an int
-    if (optLev < 0 && optLev > 3) DCSLog::error("main", 40); // check it's between 0 and 3
 
-    uint16_t testNum = 0;
-    if (argc >= 2) sscanf(argv[1], "%hd", &testNum);
+    std::vector<func_descriptor> tests = {
+        FUNC_CONSTRUCTOR(bitStreamSignalTest),
+        FUNC_CONSTRUCTOR(orTest),
+        FUNC_CONSTRUCTOR(unitDelayTest),
+        FUNC_CONSTRUCTOR(nor3Test),
+        FUNC_CONSTRUCTOR(notLoopTest),
+        FUNC_CONSTRUCTOR(nand3Test),
+        FUNC_CONSTRUCTOR(andArrayTest),
+        FUNC_CONSTRUCTOR(and6Test),
+        FUNC_CONSTRUCTOR(srLatchTest),
+        FUNC_CONSTRUCTOR(triStateBufferTest),
+        FUNC_CONSTRUCTOR(dLatchTest),
+        FUNC_CONSTRUCTOR(dLatchAsyncSRTest),
+        FUNC_CONSTRUCTOR(dFlipFlopTest),
+        FUNC_CONSTRUCTOR(register1BitWithEnableTest),
+        FUNC_CONSTRUCTOR(register8BitsWithEnableTest),
+        FUNC_CONSTRUCTOR(jkLatchMasterSlaveAsyncSRTest),
+        FUNC_CONSTRUCTOR(dividerTest),
+        FUNC_CONSTRUCTOR(upCounterTest),
+        FUNC_CONSTRUCTOR(mux2To1Test),
+        FUNC_CONSTRUCTOR(fullAdderTest),
+        FUNC_CONSTRUCTOR(displayTest),
+        FUNC_CONSTRUCTOR(rippleAdderTest),
+        FUNC_CONSTRUCTOR(xorTest),
+        FUNC_CONSTRUCTOR(ramTest),
+        FUNC_CONSTRUCTOR(memoryProgrammerTest),
+        FUNC_CONSTRUCTOR(risingEdgeDetectorTest),
+        FUNC_CONSTRUCTOR(upCounter4BitsTest),
+        FUNC_CONSTRUCTOR(addressDecoderTest4Bits),
+        FUNC_CONSTRUCTOR(register8BitsTest),
+        FUNC_CONSTRUCTOR(aluTest),
+        FUNC_CONSTRUCTOR(controlUnitTest),
+        FUNC_CONSTRUCTOR(addressDecoder8BitsTest),
+        FUNC_CONSTRUCTOR(ram256x16Test),
+        FUNC_CONSTRUCTOR(register16BitsWithEnableTest),
+    };
 
-    DCSTimer::initialize("test", testNum, optLev);
+    uint16_t testNum;
+    int optLev;
+
+    if (!DCSLog::checkInputNumber(tests, argc, argv, testNum, optLev)) return EXIT_FAILURE;
+
+    DCSTimer::initialize("prj", testNum, optLev);
     // start profiled scope
     {
-        uint16_t N = 0;
         PROFILE();
-        if (testNum == N++) bitStreamSignalTest();
-        if (testNum == N++) orTest();
-        if (testNum == N++) unitDelayTest();
-        if (testNum == N++) nor3Test();
-        if (testNum == N++) notLoopTest();
-        if (testNum == N++) nand3Test();
-        if (testNum == N++) andArrayTest();
-        if (testNum == N++) and6Test();
-        if (testNum == N++) srLatchTest();
-        if (testNum == N++) triStateBufferTest();
-        if (testNum == N++) dLatchTest();
-        if (testNum == N++) dLatchAsyncSRTest();
-        if (testNum == N++) dFlipFlopTest();
-        if (testNum == N++) register1BitWithEnableTest();
-        if (testNum == N++) register8BitsWithEnableTest();
-        if (testNum == N++) jkLatchMasterSlaveAsyncSRTest();
-        if (testNum == N++) dividerTest();
-        if (testNum == N++) upCounterTest();
-        if (testNum == N++) mux2To1Test();
-        if (testNum == N++) fullAdderTest();
-        if (testNum == N++) displayTest();
-        if (testNum == N++) rippleAdderTest();
-        if (testNum == N++) xorTest();
-        if (testNum == N++) ramTest();
-        if (testNum == N++) memoryProgrammerTest();
-        if (testNum == N++) risingEdgeDetectorTest();
-        if (testNum == N++) upCounter4BitsTest();
-        if (testNum == N++) addressDecoderTest4Bits();
-        if (testNum == N++) register8BitsTest();
-        if (testNum == N++) aluTest();
-        if (testNum == N++) controlUnitTest();
-        if (testNum == N++) addressDecoder8BitsTest();
-        if (testNum == N++) ram256x16Test();
-        if (testNum == N++) register16BitsWithEnableTest();
-        if (testNum >= N) {
-            std::cerr << "Test number exceeding number of last available test (" << N - 1 << ")\n";
-            return EXIT_FAILURE;
-        }
+        tests[testNum].func();
     }
-
     DCSLog::printResults();
     DCSTimer::printResults();
     return 0;

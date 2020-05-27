@@ -3,8 +3,7 @@ curr_dir="`pwd`/`dirname $0`"
 cd "$curr_dir"/
 o="0"
 if [ "$1" -eq "" ]; then
-	echo "ERROR: please specify the test number"
-	exit 1
+	./test-build-run.sh "$n"
 else 
 	n="$1"
 fi

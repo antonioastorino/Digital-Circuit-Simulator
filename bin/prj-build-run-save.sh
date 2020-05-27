@@ -1,7 +1,7 @@
 #!/bin/bash
 curr_dir="`pwd`/`dirname $0`"
 cd "$curr_dir"/
-n="0"
+n=""
 o="0"
 [ "$1" != "" ] && n="$1"
 [ "$2" != "" ] && o="$2"
