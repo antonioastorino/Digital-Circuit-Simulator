@@ -1,11 +1,23 @@
 # DCS
 ## Digital circuit simulator - from logic gates up
 
-Inspired by the work of [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtXNTBypGqImE405J2565dvjafglHU) and not having the possibility to follow his work with hardware, I have decided to write a circuit simulator and build on top of it a processor.
+Inspired by [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtXNTBypGqImE405J2565dvjafglHU)'s work, I have decided to write a circuit simulator and build on top of it Ben's 8-bit computer.
 
 In this project, the time dependency of the system evolution is considered. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, the unit delay `tau` is defined as the maximum propagation delay that any of the elementary logic gates (`AND`, `OR`, `NOT`, `NAND`, `NOR`, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which can be seen as a free parameter whose value cannot be established a priori. <u>Time itself is therefore discretized in steps of length `tau`.</u>
 
 Examples of how to use the component library are located in `./scr/Tests` and `./src/Project` folders.
+
+A working program that counts by threes (project number `0`) is loaded and run by my software version of Ben's computer. Here is the assembly code:
+
+```
+0: LDI 3   // load 3 in Reg A
+1: STA 15  // store 3 in RAM at address 15
+2: LDI 0   // load 0 in Reg A
+3: ADD 15  // load 3 from RAM (at address 15) in Reg B and store the sum in Reg A
+4: OUT 0   // display the output
+5: JMP 3   // jump to instruction 3
+```
+I hope this just ignited your curiosity :)
 
 ---
 
@@ -214,7 +226,7 @@ done
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
 
 
-## Documentation automatically generated on Wed May 27 23:09:46 CEST 2020
+## Documentation automatically generated on Thu May 28 00:03:45 CEST 2020
 NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU

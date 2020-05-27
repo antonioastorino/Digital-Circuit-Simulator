@@ -1,7 +1,7 @@
-#include "prj-FirstProgram.hpp"
+#include "prj-countByThrees.hpp"
 
-void firstProgramPrj() {
-    DCSLog::printProjectName("First program");
+void countByThrees() {
+    DCSLog::printProjectName("Ben's computer counts by threes");
     uint64_t masterClockHP = 28;
 
     // the instruction is the MSHB and the data is the LSHB

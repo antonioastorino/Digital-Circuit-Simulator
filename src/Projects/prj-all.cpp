@@ -4,14 +4,14 @@
 #include "DCSLog.hpp"
 
 #include "prj-FastControlUnit.hpp"
-#include "prj-FirstProgram.hpp"
+#include "prj-countByThrees.hpp"
 #include "prj-NoCUComputer.hpp"
 #include "prj-fastZeroFlagProgram.hpp"
 
 int main(int argc, const char* argv[]) {
 
     std::vector<func_descriptor> projects = {
-        FUNC_CONSTRUCTOR(firstProgramPrj),
+        FUNC_CONSTRUCTOR(countByThrees),
         FUNC_CONSTRUCTOR(fastControlUnitPrj),
         FUNC_CONSTRUCTOR(fastZeroFlagProgramPrj),
         FUNC_CONSTRUCTOR(noCUComputerPrj),

@@ -12,4 +12,3 @@ filename="../gui/logic-analyzer/data/prj-n$n.log"
 if ! [ -s $filename ]; then
 	rm $filename
 fi
-
