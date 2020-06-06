@@ -10,7 +10,7 @@
  * @class DCSFullAdder
  * Full adder.
  * 
- *@pinout
+ * @pinout
  * In  0 - A
  * In  1 - B
  * In  2 - Carry in

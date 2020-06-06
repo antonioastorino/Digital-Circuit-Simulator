@@ -5,7 +5,7 @@
 
 /**
  * @class DCSUpCounterWithLoadAndAsyncSR
- * N-bit up-counter (N definded upon instantiation) with syncrhonous load and asynchronous clear and reset.
+ * N-bit up-counter (N defined upon instantiation) with synchronous load and asynchronous clear and reset.
  * Internally, there are N clock dividers in cascade.
  * 
  * @pinout

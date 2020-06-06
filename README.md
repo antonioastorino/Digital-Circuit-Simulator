@@ -121,7 +121,7 @@ bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test numbe
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-Once again, if the test number is not valid or not specified, the ouput is be a list of available tests, otherwise the chosen test is build and run.
+Once again, if the test number is not valid or not specified, the output is be a list of available tests, otherwise the chosen test is build and run.
 
 ### 2.3. Cleaning up
 
@@ -176,7 +176,7 @@ The GUI allows to
 - scroll left/right by using the `H-Scroll` slider;
 - scroll up/down by using the regular mouse wheel;
 - refresh the image without refreshing the page by clicking on `Refresh` - very useful if you re-build and want to see the updated result from the same file;
-- where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation -click on the `Go binarly/Go hexadecimal` toggle to switch from one visualization to the other.
+- where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation -click on the `Go binary/Go hexadecimal` toggle to switch from one visualization to the other.
 
 ### Performance analyzer
 When running any test or project, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `profile-test-n<TEST_NUM>-o<OPT_LEVEL>` or `profile-prj-n<PRJ_NUM><OPT_LEVEL>` `./gui/performance-analyzer/data/` or . The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
@@ -224,10 +224,9 @@ bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
 done
 ```
 If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
+---
+# Component description
 
-
-## Documentation automatically generated on Thu May 28 00:03:45 CEST 2020
-NOTE: Generator under construction - be patient :)
 
 ## Class DCSALU
 
@@ -268,6 +267,7 @@ Out 9  - Zero
 
 
 
+
 ## Class DCSAddressDecoder4Bits
 
 Address decoder with a 4-bit input and 256-bit output.
@@ -284,6 +284,7 @@ Out 1   - Decoded in 1 (asserted only when the input is 0001)
 ...
 Out 16  - Decoded in 16 (asserted only when the input is 1111)
 ```
+
 
 
 
@@ -306,9 +307,11 @@ Out 255 - Decoded in 255 (asserted only when the input is 11111111)
 
 
 
+
 ## Class DCSAnd
 
 AND gate
+
 
 
 ## Class DCSAnd3
@@ -316,9 +319,11 @@ AND gate
 AND gate with 3 inputs
 
 
+
 ## Class DCSAnd4
 
 AND gate with 4 inputs
+
 
 
 ## Class DCSAnd6
@@ -326,15 +331,18 @@ AND gate with 4 inputs
 AND gate with 6 inputs as an array of two DCSAnd3 AND'ed together by an AND gate
 
 
+
 ## Class DCSAnd8
 
 AND gate with 8 inputs as an array of two DCSAnd4 AND'ed together by an AND gate
+
 
 
 ## Class DCSArbitrarySignal
 
 Generates a binary signal for use as input signal. Instances of this class are created by
 DCSClockSignal and DCSInput classes. The user should not use this class directly.
+
 
 
 ## Class DCSClockDivider
@@ -369,9 +377,11 @@ Out 2 - Count out
 
 
 
+
 ## Class DCSClockSignal
 
 Generates a square wave with period 2 * `halfPeriod`
+
 
 
 ## Class DCSComponent
@@ -417,14 +427,16 @@ probeName = "");
 In addition, one can select a range of output pins to connect to a range of input pins using
 
 ```
-void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange
+ void connect(DCSComponent* const to, DCSPinNumRange outPinNumRange, DCSPinNumRange
 inPinNumRange, const std::vector<std::string>& probeNames = {});
 ```
+
 
 
 ## Class DCSComponentArray
 
 Generates an array of identical components.
+
 
 
 ## Class DCSControlUnit4Bits
@@ -444,6 +456,7 @@ Out 1   - Ctrl 1
 ...
 Out 15  - Ctrl 15
 ```
+
 
 
 
@@ -472,6 +485,7 @@ Out 15  - Ctrl 15
 
 
 
+
 ## Class DCSDFlipFlop
 
 
@@ -496,6 +510,7 @@ Out 15  - Ctrl 15
 The output is stable after `4 tau` from the change in the input
 
 
+
 ## Class DCSDFlipFlopAsyncSR
 
 D Flip-flop with asynchronous Set and Reset
@@ -510,6 +525,7 @@ In 3   - Preset
 Out 0  - Q
 Out 1  - !Q
 ```
+
 
 
 
@@ -547,6 +563,7 @@ Out 1 - !Q
 The output is stable after 4 tau from the change in the input.
 
 
+
 ## Class DCSDLatchAsyncSR
 
 D Latch with asynchronous Set and Reset
@@ -569,7 +586,9 @@ behaves exactly like a D-Latch. When Enable is low, it behaves exactly like an S
 IMPORTANT: do not assert `Enable` when `S` or `R` are high.
 
 
+
 ## Class DCSDisplayNBits
+
 
 
 
@@ -579,6 +598,7 @@ IMPORTANT: do not assert `Enable` when `S` or `R` are high.
 
 Static class providing all the functionalities needed to manage the system initialization and
 evolution.
+
 
 
 
@@ -598,6 +618,7 @@ Out 1 - Carry out
 
 
 
+
 ## Class DCSInput
 
 This class is needed to provide controlled inputs to the circuit from the external world.
@@ -613,38 +634,41 @@ The signal can be attached afterwards using one of the following methods:
 
 - assign a constant value
 
-```
-void makeSignal(bool constValue);
+ ```
+ void makeSignal(bool constValue);
 
-```
+ ```
 - assign a signal that changes at given time intervals, defined in 'signal'
 
-```
-void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
-```
+ ```
+ void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
+ ```
+ For example, a signal that starts at 0 and changes after 2 clock cycles and then again after 3
+clock cycles can be obtained as follows:
+
+ ```makeSignal({2, 3}, 0, true);```
 
 - assign a signal expressed as a string of bits
-void makeSignal(std::string signal, bool synch = false);
-To generate the same signal as in the previous example, you can use
 
-```makeSignal("001110");```
+ ```
+	void makeSignal(std::string signal, bool synch = false);
+ ```
+	To generate the same signal as in the previous example, you can use
+
+ ```makeSignal("001110"); // without the last zero the signal would stay high```
 
 - assign a square wave
 
-```
-void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
-```
-
-For example, a signal that starts at 0 and changes after 3 clock cycles and then
-again after 2 clock cycles can be obtained as follows:
-
-```makeSignal({2, 3}, 0, true);```
+ ```
+ void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
+ ```
 
 ### Initialization with constant signal
 
 ```
 DCSInput(std::string name, bool initValue);
 ```
+
 
 
 
@@ -665,7 +689,7 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |      |   __
 | K:   | XX  XXXXXXXX
 |      |    __
-| CLK: | X__  \\\\\\  go down any time 2 tau after rising edge
+| CLK: | X__  \\  go down any time 2 tau after rising edge
 |      |    ^ stored
 |      |        _____
 | Q:   | _______
@@ -673,6 +697,7 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 |!Q:   |       ______
 |      |        ^ ready
 ```
+
 
 
 
@@ -691,14 +716,17 @@ Out 0 - Data out 0
 
 
 
+
 ## Class DCSNand
 
 NAND gate
 
 
+
 ## Class DCSNand3
 
 NAND gate with 3 inputs
+
 
 
 ## Class DCSNode
@@ -716,9 +744,11 @@ Instead, one can connect a node to all commponets' inputs and all (tri-state'd) 
 outputs to a node.
 
 
+
 ## Class DCSNor
 
 NOR gate
+
 
 
 ## Class DCSNor3
@@ -726,14 +756,17 @@ NOR gate
 NOR gate with 3 inputs
 
 
+
 ## Class DCSNot
 
 NOT gate
 
 
+
 ## Class DCSOr
 
 OR gate
+
 
 
 ## Class DCSOutput
@@ -742,6 +775,7 @@ This component has no logical functions but is used to connect any floating outp
 Unconnected outputs generate errors!
 Also, by naming the used instance of this class, the connected input is probed and hence it can
 be displayed.
+
 
 
 ## Class DCSPLD8In16Out
@@ -765,6 +799,7 @@ Out 1 - Data out 1
 ...
 Out 15 - Data out 15
 ```
+
 
 
 
@@ -823,6 +858,7 @@ of each individual register (here called `Write`) is AND'ed with the address dec
 a single register, the RAM needs `Address` to be ready `3 tau` before `Load` is asserted.
 
 
+
 ## Class DCSRam256x16
 
 Ram module of 16 bytes.
@@ -871,6 +907,7 @@ needs to be prepared `1 tau` earlier because the internal address decoder introd
 4-bit AND gates, instead.
 
 
+
 ## Class DCSRegister16BitsWithEnable
 
 16-bit register consisting an array of 16 1-bit registers sharing the same control signals
@@ -892,6 +929,7 @@ Out 1   - Data out 1
 ...
 Out 15  - Data out 15
 ```
+
 
 
 
@@ -933,6 +971,7 @@ Out 0 - Data out
 `Clear` and `Preset` work the same as in the SR latch.
 
 
+
 ## Class DCSRegister1BitWithEnable
 
 
@@ -972,6 +1011,7 @@ least `2 tau` before `Clock`'s falling edge. `Data` and `Load` have to both be s
 them with `Enable` low.
 
 
+
 ## Class DCSRegister4Bits
 
 4-bit register made up of 4 1-bit registers sharing the same control signals
@@ -992,6 +1032,7 @@ Out 1   - Data out 1
 Out 2   - Data out 2
 Out 3   - Data out 3
 ```
+
 
 
 
@@ -1026,6 +1067,7 @@ Out 7   - Data out 7
 
 
 
+
 ## Class DCSRegister8BitsWithEnable
 
 8-bit register consisting of an array of 8 1-bit registers sharing the same control signals
@@ -1055,6 +1097,7 @@ Out 5   - Data out 5
 Out 6   - Data out 6
 Out 7   - Data out 7
 ```
+
 
 
 
@@ -1095,6 +1138,7 @@ Out 7  - Sum 7
 
 
 
+
 ## Class DCSSRLatch
 
 SR latch.
@@ -1106,6 +1150,7 @@ In  1 - Set
 Out 0 - Q
 Out 1 - !Q
 ```
+
 
 
 
@@ -1137,9 +1182,10 @@ Out 7  - Data out 7
 
 
 
+
 ## Class DCSUpCounterWithLoadAndAsyncSR
 
-N-bit up-counter (N definded upon instantiation) with syncrhonous load and asynchronous clear and reset.
+N-bit up-counter (N defined upon instantiation) with synchronous load and asynchronous clear and reset.
 Internally, there are N clock dividers in cascade.
 
 #### Pinout
@@ -1171,11 +1217,11 @@ Out N         - Count out
 |  1 |   X  | _/  |  Load
 
 
-
 `Cout in` follows the rule of input 5 of the first divider. Therefore, it hast to be set
 from `3` to `1 tau` before the clock rising edge. However, every `Count in` in the subsequent dividers
 is delayed by `1 tau`. In addition, the output byte of the counter is ready `5 tau` after the clock
 rising edge. As a consequence, supposing that the expected output is all 1's, the last `Count in`
 will be ready `5+N-1 tau` after the clock rising edge and has to be ready `3 tau` before
 the next clock rising edge. Therefore, the clock period has to be at least `5+N-1+3 = 7+N tau`.
+
 

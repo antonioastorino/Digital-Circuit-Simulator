@@ -21,32 +21,34 @@ typedef std::vector<uint64_t> transitions;
  *
  * - assign a constant value
  *
- * ```
- * void makeSignal(bool constValue);
+ *  ```
+ *  void makeSignal(bool constValue);
  *
- * ```
+ *  ```
  * - assign a signal that changes at given time intervals, defined in 'signal'
  *
- * ```
- * void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
- * ```
+ *  ```
+ *  void makeSignal(transitions signal, bool initVal = 0, bool synch = false);
+ *  ```
+ *  For example, a signal that starts at 0 and changes after 2 clock cycles and then again after 3
+ * clock cycles can be obtained as follows:
+ *
+ *  ```makeSignal({2, 3}, 0, true);```
  *
  * - assign a signal expressed as a string of bits
- * 		void makeSignal(std::string signal, bool synch = false);
- * 		To generate the same signal as in the previous example, you can use
  *
- * 		```makeSignal("001110");```
+ *  ```
+ * 	void makeSignal(std::string signal, bool synch = false);
+ *  ```
+ * 	To generate the same signal as in the previous example, you can use
+ *
+ *  ```makeSignal("001110"); // without the last zero the signal would stay high```
  *
  * - assign a square wave
  *
- * ```
- * void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
- * ```
- *
- * For example, a signal that starts at 0 and changes after 3 clock cycles and then
- * again after 2 clock cycles can be obtained as follows:
- *
- * ```makeSignal({2, 3}, 0, true);```
+ *  ```
+ *  void makeSquareWave(uint16_t halfPeriod = 0, bool initVal = 0);
+ *  ```
  *
  * ### Initialization with constant signal
  *
