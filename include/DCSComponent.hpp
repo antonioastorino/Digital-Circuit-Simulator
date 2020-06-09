@@ -61,6 +61,9 @@ struct DCSPinNumRange {
  * ```
  */
 class DCSComponent {
+private:
+    std::vector<DCSComponent*> rightComponentVector; // components connected to the output
+
 protected:
     uint64_t in;
     bool out;
@@ -82,7 +85,6 @@ protected:
 public:
     std::vector<DCSComponent*>
         updatedByVector; // stores the component who updated a given pin each clock cycle
-    std::vector<DCSComponent*> rightComponentVector = {}; // components connected to the output
 
 private:
     DCSComponent();
@@ -108,31 +110,31 @@ public:
     // Connect all the outputs to all the inputs of another component
     void connect(DCSComponent* const to, const std::vector<std::string>& probeNames = {});
 
-    std::string getName();
+    std::string getName() const;
     uint16_t getTimeDelay(); // Return the latency between input and output
     bool getOutput();        // single-bit output value
     bool isInConnected(uint16_t inPinNum);
-    bool isFromTristateIn(uint16_t inPinNum);
-    bool isInitialized();
-    bool isNode();
-    bool isTristate();
-    bool needsPropagation();
+    bool isFromTristateIn(uint16_t inPinNum) const;
+    bool isInitialized() const;
+    bool isNode() const;
+    bool isTristate() const;
+    bool needsPropagation() const;
 
     void setConnectedIn(uint16_t inPinNum);
     void setFromTristateIn(uint16_t inPinNum);
 
-    bool isFullyConnected();
-    bool isReachableAtIn(uint16_t inPinNum);
+    bool isFullyConnected() const;
+    bool isReachableAtIn(uint16_t inPinNum) const;
 
     bool propagateValues();
 
-    uint16_t getNumOfInPins();
-    uint16_t getNumOfOutPins();
-    uint64_t getAllReachedQWord();
+    uint16_t getNumOfInPins() const;
+    uint16_t getNumOfOutPins() const;
+    uint64_t getAllReachedQWord() const;
 
     virtual void enable();
     virtual void disable();
-    bool isEnabled();
+    bool isEnabled() const;
 
     friend class DCSRam16x8;
     friend class DCSRam256x16;

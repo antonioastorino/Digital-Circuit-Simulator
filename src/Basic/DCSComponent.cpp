@@ -3,7 +3,8 @@
 #include "DCSWire.hpp"
 
 DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool node)
-    : in(0),
+    : rightComponentVector({}),
+      in(0),
       out(0),
       name({name}),
       reachableIn(0),
@@ -17,11 +18,9 @@ DCSComponent::DCSComponent(const std::string& name, bool shouldUpdate, bool node
       tristate(false),
       initialized(false),
       outChanged(true) {
-    if (name == "")
-        DCSLog::error("Component", 13); // I don't have a name
+    if (name == "") DCSLog::error("Component", 13); // I don't have a name
 
-    if (shouldUpdate)
-        DCSEngine::addComponent(this);
+    if (shouldUpdate) DCSEngine::addComponent(this);
 }
 
 DCSComponent::~DCSComponent() {
@@ -33,8 +32,7 @@ DCSComponent::~DCSComponent() {
 
 // set single input
 void DCSComponent::setIn(bool inVal, uint16_t inPinNum) {
-    if (inPinNum >= getNumOfInPins())
-        DCSLog::error(this->name, 11);
+    if (inPinNum >= getNumOfInPins()) DCSLog::error(this->name, 11);
     this->reachableIn |= static_cast<uint64_t>(1) << inPinNum;
     in &= (~(static_cast<uint64_t>(1) << inPinNum));  // reset inPinNum-th bit
     in |= (static_cast<uint64_t>(inVal) << inPinNum); // set the same bit to inVal
@@ -42,8 +40,7 @@ void DCSComponent::setIn(bool inVal, uint16_t inPinNum) {
 
 // get single output
 bool DCSComponent::getOutput() {
-    if (reachableIn == getAllReachedQWord())
-        this->initialized = true;
+    if (reachableIn == getAllReachedQWord()) this->initialized = true;
     return out;
 }
 
@@ -65,8 +62,7 @@ void DCSComponent::connect(DCSComponent* const to, uint16_t outPinNum, uint16_t 
             break;
         }
     }
-    if (addToTheRight)
-        leftComponent->rightComponentVector.push_back(rightComponent);
+    if (addToTheRight) leftComponent->rightComponentVector.push_back(rightComponent);
 
     DCSWire* wire = new DCSWire(leftComponent, rightComponent, inPinNum, probeName);
     leftComponent->wireVector.push_back(wire);
@@ -78,9 +74,7 @@ void DCSComponent::connect(DCSComponent* const to, DCSPinNumRange outPinNumRange
                            const std::vector<std::string>& probeNames) {
     uint16_t nI = inPinNumRange.endPinNum - inPinNumRange.startPinNum + 1;
     uint16_t nO = outPinNumRange.endPinNum - outPinNumRange.startPinNum + 1;
-    if (nI != nO) {
-        DCSLog::error(name, 9);
-    }
+    if (nI != nO) { DCSLog::error(name, 9); }
     if (probeNames.size() == 0) {
         for (uint16_t i = 0; i < nI; i++) {
             this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i);
@@ -93,9 +87,7 @@ void DCSComponent::connect(DCSComponent* const to, DCSPinNumRange outPinNumRange
                           pinName.str());
         }
     } else {
-        if (probeNames.size() != nI) {
-            DCSLog::error(name, 2);
-        }
+        if (probeNames.size() != nI) { DCSLog::error(name, 2); }
         for (uint16_t i = 0; i < nI; i++) {
             this->connect(to, outPinNumRange.startPinNum + i, inPinNumRange.startPinNum + i,
                           probeNames[i]);
@@ -110,7 +102,7 @@ void DCSComponent::connect(DCSComponent* const to, const std::vector<std::string
                   probeNames);
 }
 
-std::string DCSComponent::getName() { return name; }
+std::string DCSComponent::getName() const { return name; }
 
 DCSComponent* DCSComponent::getInComponent(uint16_t& inPinNum) { return this; }
 DCSComponent* DCSComponent::getOutComponent(uint16_t outPinNum) { return this; }
@@ -119,76 +111,66 @@ bool DCSComponent::isInConnected(uint16_t inPinNum) {
     return connectedIn & (static_cast<uint64_t>(1) << inPinNum);
 }
 
-bool DCSComponent::isFromTristateIn(uint16_t inPinNum) {
+bool DCSComponent::isFromTristateIn(uint16_t inPinNum) const {
     return fromTristateIn & (static_cast<uint64_t>(1) << inPinNum);
 }
 
 void DCSComponent::setConnectedIn(uint16_t inPinNum) {
-    if (isInConnected(inPinNum) || isFromTristateIn(inPinNum)) {
-        DCSLog::error(this->name, 3);
-    }
+    if (isInConnected(inPinNum) || isFromTristateIn(inPinNum)) { DCSLog::error(this->name, 3); }
     this->connectedIn |= (static_cast<uint64_t>(1) << inPinNum);
 }
 
 void DCSComponent::setFromTristateIn(uint16_t inPinNum) {
-    if (isInConnected(inPinNum)) {
-        DCSLog::error(this->name, 4);
-    }
+    if (isInConnected(inPinNum)) { DCSLog::error(this->name, 4); }
     this->fromTristateIn |= (static_cast<uint64_t>(1) << inPinNum);
 }
 
 bool DCSComponent::propagateValues() {
     for (auto wire : wireVector) {
-        if (!wire->propagateValue())
-            return false;
+        if (!wire->propagateValue()) return false;
     }
     return true;
 }
 
 void DCSComponent::resetUpdatedByVector() {
-    for (int i = 0; i < this->numOfInPins; i++)
-        this->updatedByVector[i] = nullptr;
+    for (int i = 0; i < this->numOfInPins; i++) this->updatedByVector[i] = nullptr;
 }
 
-bool DCSComponent::isReachableAtIn(uint16_t inPinNum) {
+bool DCSComponent::isReachableAtIn(uint16_t inPinNum) const {
     return reachableIn & (static_cast<uint64_t>(1) << inPinNum);
 }
 void DCSComponent::enable() { DCSLog::error(this->name, 5); }
 void DCSComponent::disable() { DCSLog::error(this->name, 5); }
-bool DCSComponent::isEnabled() { return this->enabled; }
-bool DCSComponent::isInitialized() { return this->initialized; }
-bool DCSComponent::isNode() { return this->node; }
-bool DCSComponent::isTristate() { return this->tristate; }
-bool DCSComponent::needsPropagation() { return this->outChanged; }
+bool DCSComponent::isEnabled() const { return this->enabled; }
+bool DCSComponent::isInitialized() const { return this->initialized; }
+bool DCSComponent::isNode() const { return this->node; }
+bool DCSComponent::isTristate() const { return this->tristate; }
+bool DCSComponent::needsPropagation() const { return this->outChanged; }
 
 void DCSComponent::checkOutputChanged(bool newOutValue) {
     this->outChanged = newOutValue != this->out;
 }
 
-bool DCSComponent::isFullyConnected() {
+bool DCSComponent::isFullyConnected() const {
     return (this->connectedIn ^ this->fromTristateIn) == this->getAllReachedQWord();
 }
 
-uint64_t DCSComponent::getAllReachedQWord() {
-    if (this->numOfInPins == 64)
-        return static_cast<uint64_t>(-1);
+uint64_t DCSComponent::getAllReachedQWord() const {
+    if (this->numOfInPins == 64) return static_cast<uint64_t>(-1);
     return (static_cast<uint64_t>(1) << this->numOfInPins) - 1;
 }
 
-uint16_t DCSComponent::getNumOfInPins() {
-    if (this->numOfInPins == (uint16_t)(-1))
-        DCSLog::error(name, 6);
+uint16_t DCSComponent::getNumOfInPins() const {
+    if (this->numOfInPins == (uint16_t)(-1)) DCSLog::error(name, 6);
     return this->numOfInPins;
 }
 
-uint16_t DCSComponent::getNumOfOutPins() {
-    if (this->numOfOutPins == (uint16_t)(-1))
-        DCSLog::error(name, 7);
+uint16_t DCSComponent::getNumOfOutPins() const {
+    if (this->numOfOutPins == (uint16_t)(-1)) DCSLog::error(name, 7);
     return this->numOfOutPins;
 }
 
 uint16_t DCSComponent::getTimeDelay() {
-    if (this->timeDelay == (uint16_t)(-1))
-        DCSLog::error(name, 8);
+    if (this->timeDelay == (uint16_t)(-1)) DCSLog::error(name, 8);
     return this->timeDelay;
 }
