@@ -121,7 +121,7 @@ bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test numbe
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-Once again, if the test number is not valid or not specified, the output is be a list of available tests, otherwise the chosen test is build and run.
+Once again, if the test number is not valid or not specified, the output is be a list of available tests, otherwise the chosen test is built and run.
 
 ### 2.3. Cleaning up
 
