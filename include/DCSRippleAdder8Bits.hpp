@@ -1,13 +1,15 @@
 #ifndef DCSRippleAdder8Bits_hpp
 #define DCSRippleAdder8Bits_hpp
+#include "DCSCommon.hpp"
 #include "DCSComponentArray.hpp"
+
 class DCSFullAdder;
 
 /**
  * @class DCSRippleAdder8Bits
- * 
+ *
  * 8-bit ripple adder
- * 
+ *
  * @pinout
  * In 0   - A 0
  * In 1   - A 1
@@ -26,7 +28,7 @@ class DCSFullAdder;
  * In 14  - B 6
  * In 15  - B 7
  * In 16  - Carry in
- * 
+ *
  * Out 0  - Sum 0
  * Out 1  - Sum 1
  * Out 2  - Sum 2
@@ -38,7 +40,8 @@ class DCSFullAdder;
  * @end_pinout
  */
 
-class DCSRippleAdder8Bits : public DCSComponent {
+class DCSRippleAdder8Bits : public DCSComponent
+{
 private:
     DCSComponentArray<DCSFullAdder> faArray;
 
@@ -50,5 +53,9 @@ public:
 
     void updateOut() override;
 };
+
+#if TEST == 1
+void rippleAdderTest();
+#endif
 
 #endif /* DCSRippleAdder8Bits_hpp */

@@ -77,7 +77,6 @@ build/dcs:\
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
-	build/test-RippleAdder.o \
 	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
@@ -144,7 +143,6 @@ build/dcs-test:\
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
-	build/test-RippleAdder.o \
 	build/main-test.o \
 	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
@@ -538,11 +536,6 @@ build/test-Xor.o: src/Tests/test-Xor.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-RippleAdder.o: src/Tests/test-RippleAdder.cpp \
-	src/Tests/test-RippleAdder.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSALU.hpp \
 	include/DCSAddressDecoder4Bits.hpp \
@@ -567,12 +560,12 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSTimer.hpp \
 	include/DCSOr.hpp \
 	include/DCSRam256x16.hpp \
-	 \
+	include/DCSRegister16BitsWithEnable.hpp \
 	include/DCSRegister1Bit.hpp \
 	include/DCSRegister1BitWithEnable.hpp \
 	include/DCSRegister8Bits.hpp \
 	include/DCSRegister8BitsWithEnable.hpp \
-	src/Tests/test-RippleAdder.hpp \
+	include/DCSRippleAdder8Bits.hpp \
 	src/Tests/test-RisingEdgeDetector.hpp \
 	src/Tests/test-SRLatch.hpp \
 	src/Tests/test-TriStateBuffer.hpp \
@@ -723,6 +716,10 @@ build/DCSALU.o: src/Arithmetic/DCSALU.cpp \
 build/DCSRippleAdder8Bits.o: src/Arithmetic/DCSRippleAdder8Bits.cpp \
 	include/DCSRippleAdder8Bits.hpp \
 	include/DCSFullAdder.hpp \
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
 	include/DCSLog.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
