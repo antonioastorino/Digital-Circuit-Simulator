@@ -1,15 +1,17 @@
 #include "DCSRegister16BitsWithEnable.hpp"
+#include "DCSCommon.hpp"
 #include "DCSLog.hpp"
 #include "DCSRegister1BitWithEnable.hpp"
-#include "DCSCommon.hpp"
 
 DCSRegister16BitsWithEnable::DCSRegister16BitsWithEnable(std::string name)
     : DCSComponent(name, false),
       registerArray(name + "-reg1Arr_", 16),
       nodeArray({name + "-Clock", name + "-Clear", name + "-Preset", name + "-Load", name + "-OE"},
-                5) {
+                5)
+{
     // connect control signals
-    for (uint16_t i = 0; i < 16; i++) {
+    for (uint16_t i = 0; i < 16; i++)
+    {
         nodeArray.connect(registerArray[i], 0, 1);
         nodeArray.connect(registerArray[i], 1, 2);
         nodeArray.connect(registerArray[i], 2, 3);
@@ -22,20 +24,26 @@ DCSRegister16BitsWithEnable::DCSRegister16BitsWithEnable(std::string name)
     numOfOutPins = 16;
 }
 
-DCSComponent* DCSRegister16BitsWithEnable::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum < 16) {
+DCSComponent* DCSRegister16BitsWithEnable::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum < 16)
+    {
         return registerArray.getOutComponent(outPinNum);
     }
     DCSLog::error(this->name, 10);
     return nullptr;
 }
 
-DCSComponent* DCSRegister16BitsWithEnable::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum < 16) { // Data 0 to 15
+DCSComponent* DCSRegister16BitsWithEnable::getInComponent(uint16_t& inPinNum)
+{
+    if (inPinNum < 16)
+    { // Data 0 to 15
         uint16_t elementNumber = inPinNum;
-        inPinNum = 0;
+        inPinNum               = 0;
         return registerArray[elementNumber]->getInComponent(inPinNum);
-    } else if (inPinNum < 21) { // control signals
+    }
+    else if (inPinNum < 21)
+    { // control signals
         inPinNum -= 16;
         return nodeArray.getInComponent(inPinNum);
     }

@@ -2,7 +2,8 @@
 #include "DCSLog.hpp"
 
 DCSWire::DCSWire(DCSComponent* from, DCSComponent* to, uint16_t inPinNum, std::string probeName)
-    : from(from), to(to), inPinNum(inPinNum), probeName(probeName) {
+    : from(from), to(to), inPinNum(inPinNum), probeName(probeName)
+{
 #if LOG_LEVEL > 1
     std::stringstream s;
     s << from->getName() << " --> " << to->getName() << " in " << inPinNum;
@@ -14,12 +15,16 @@ std::string DCSWire::getProbeName() { return probeName; };
 
 bool DCSWire::fromNode() { return from->isNode(); }
 
-bool DCSWire::propagateValue() {
+bool DCSWire::propagateValue()
+{
     bool propagated = true;
-    if (from->isEnabled()) { // Check if a component is in high-Z state
+    if (from->isEnabled())
+    { // Check if a component is in high-Z state
         bool outVal = from->getOutput();
-        if (to->updatedByVector[inPinNum] != nullptr) { // If already reached
-            if (to->updatedByVector[inPinNum] != from) {
+        if (to->updatedByVector[inPinNum] != nullptr)
+        { // If already reached
+            if (to->updatedByVector[inPinNum] != from)
+            {
                 DCSLog::error(to->getName(), 14); // Conflict on the bus among tristate buffers
             }
             propagated = false;

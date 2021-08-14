@@ -19,8 +19,9 @@ std::string message;
  DCSLog::output(wire->getProbeName(), message);
 ```
 [ ] Add MODE to Makefile for release
-[ ] Fix makefile that generates `.out-` file
 [X] Retrieve thread ID using
+[ ] Update README
+[ ] Test logic analyzer
 
 ```
 uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());

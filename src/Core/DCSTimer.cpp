@@ -14,9 +14,12 @@ int DCSTimer::optLev;
 bool DCSTimer::initialized = false;
 
 DCSTimer::DCSTimer(const char* title)
-    : m_title(title), m_startTimepoint(std::chrono::steady_clock::now()) {}
+    : m_title(title), m_startTimepoint(std::chrono::steady_clock::now())
+{
+}
 
-DCSTimer::~DCSTimer() {
+DCSTimer::~DCSTimer()
+{
     auto endTimepoint = std::chrono::steady_clock::now();
 
     int64_t start = std::chrono::time_point_cast<std::chrono::nanoseconds>(m_startTimepoint)
@@ -33,15 +36,18 @@ DCSTimer::~DCSTimer() {
     m.unlock();
 }
 
-void DCSTimer::printResults() {
-    if (DCSTimer::results.size()) {
+void DCSTimer::printResults()
+{
+    if (DCSTimer::results.size())
+    {
         std::ofstream profilingFile;
         std::stringstream file;
         file << "gui/performance-analyzer/data/profile-" << DCSTimer::fileName << "-n"
              << DCSTimer::fileId << "-o" << DCSTimer::optLev << ".log";
         profilingFile.open(file.str());
-        profilingFile << "Title:" << DCSTimer::title << "\n";
-        for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it) {
+        profilingFile << "Title: " << DCSTimer::title << "\n";
+        for (auto it = DCSTimer::results.begin(); it != DCSTimer::results.end(); ++it)
+        {
             profilingFile << it->threadID << ":" << it->functionName << ":" << it->startTimepoint
                           << ":" << it->duration << "\n";
         }
@@ -49,14 +55,16 @@ void DCSTimer::printResults() {
     }
 }
 
-void DCSTimer::initialize(const std::string& fileName, uint16_t fileId, int optLev) {
-    if (initialized) DCSLog::error("DCSTimer", 20);
+void DCSTimer::initialize(const std::string& fileName, uint16_t fileId, int optLev)
+{
+    if (initialized)
+        DCSLog::error("DCSTimer", 20);
     DCSTimer::fileName    = fileName;
     DCSTimer::fileId      = fileId;
     DCSTimer::optLev      = optLev;
     DCSTimer::initialized = true;
-    DCSTimer::timeZero =
-        std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now())
-            .time_since_epoch()
-            .count();
+    DCSTimer::timeZero
+        = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now())
+              .time_since_epoch()
+              .count();
 }

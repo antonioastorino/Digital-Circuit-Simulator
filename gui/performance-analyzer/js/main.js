@@ -239,7 +239,7 @@ function main() {
         let threadID, functionName, startTimepoint, elapsedTime;
         maxNumOfFunctions = 0;
         for (let i = 0; i < lines.length; i++) {
-            if (lines[i].includes("Title:")) {
+            if (lines[i].includes("Title: ")) {
                 parseTitle(lines[i]);
             }
             if (lines[i].split(":").length != 4) continue; // rough check if the line format is correct
@@ -288,7 +288,7 @@ function main() {
     }
 
     let parseTitle = (str) => {
-        headerProjectTitle.innerHTML = str.split("Title:")[1];
+        headerProjectTitle.innerHTML = str.split("Title: ")[1];
     }
 
     let updateData = async () => {

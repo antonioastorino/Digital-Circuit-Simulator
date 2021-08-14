@@ -1,6 +1,6 @@
 #include "DCSFullAdder.hpp"
-#include "DCSLog.hpp"
 #include "DCSCommon.hpp"
+#include "DCSLog.hpp"
 
 DCSFullAdder::~DCSFullAdder() {}
 
@@ -13,7 +13,8 @@ DCSFullAdder::DCSFullAdder(std::string name)
       xor1(name + "-SumXor1"),
       and0(name + "-And0"),
       and1(name + "-And1"),
-      or0(name + "-CoutOr0") {
+      or0(name + "-CoutOr0")
+{
     node0.connect(&xor0, 0, 0);
     node0.connect(&and1, 0, 0);
     node1.connect(&xor0, 0, 1);
@@ -30,15 +31,19 @@ DCSFullAdder::DCSFullAdder(std::string name)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSFullAdder::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum == 0) {
+DCSComponent* DCSFullAdder::getInComponent(uint16_t& inPinNum)
+{
+    if (inPinNum == 0)
+    {
         return &node0;
     }
-    if (inPinNum == 1) {
+    if (inPinNum == 1)
+    {
         inPinNum = 0;
         return &node1;
     }
-    if (inPinNum == 2) {
+    if (inPinNum == 2)
+    {
         inPinNum = 0;
         return &node2;
     }
@@ -46,11 +51,14 @@ DCSComponent* DCSFullAdder::getInComponent(uint16_t& inPinNum) {
     return nullptr;
 }
 
-DCSComponent* DCSFullAdder::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum == 0) {
+DCSComponent* DCSFullAdder::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum == 0)
+    {
         return &xor1;
     }
-    if (outPinNum == 1) {
+    if (outPinNum == 1)
+    {
         outPinNum = 0;
         return &or0;
     }

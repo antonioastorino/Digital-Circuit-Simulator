@@ -1,4 +1,5 @@
 #include "DCSEngine.hpp"
+#include "DCSCommon.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSInput.hpp"
 #include "DCSInstructionSet.hpp"
@@ -9,7 +10,6 @@
 #include "DCSTimer.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSWire.hpp"
-#include "DCSCommon.hpp"
 
 std::vector<DCSComponent*> DCSEngine::ramComponentVector = {};
 std::vector<DCSWire*> DCSEngine::ramWireVector           = {};
@@ -21,10 +21,11 @@ std::vector<DCSDisplayNBits*> DCSEngine::displayVector   = {};
 uint64_t DCSEngine::clockPeriod;
 uint64_t DCSEngine::s_stepNumber;
 bool DCSEngine::sampling;
-bool DCSEngine::ramReady = true;
+bool DCSEngine::ramReady    = true;
 bool DCSEngine::initialized = false;
 
-void DCSEngine::initialize(uint64_t clockHalfPeriod) {
+void DCSEngine::initialize(uint64_t clockHalfPeriod)
+{
     if (initialized)
         DCSLog::error("Engine", 19);
     initialized        = true;
@@ -44,7 +45,8 @@ void DCSEngine::addInput(DCSInput* input) { inputVector.push_back(input); }
 void DCSEngine::addWire(DCSWire* p_wire) { wireVector.push_back(p_wire); }
 void DCSEngine::addDisplay(DCSDisplayNBits* p_display) { displayVector.push_back(p_display); }
 
-void DCSEngine::storeRamElements() {
+void DCSEngine::storeRamElements()
+{
     // set ramReady to false to ensure useRamElements() is called
     ramReady = false;
     // extend the vector size
@@ -60,7 +62,8 @@ void DCSEngine::storeRamElements() {
     std::copy(wireVector.begin(), wireVector.end(), ramWireVector.begin() + rWSize);
 }
 
-void DCSEngine::resetAndKeepRamElements() {
+void DCSEngine::resetAndKeepRamElements()
+{
     // clear vectors (restore the initial state)
     componentVector = {};
     inputVector     = {};
@@ -68,7 +71,8 @@ void DCSEngine::resetAndKeepRamElements() {
     displayVector   = {};
 }
 
-void DCSEngine::useRamElements() {
+void DCSEngine::useRamElements()
+{
     ramReady = true;
     // extend the vector size
     size_t cSize  = componentVector.size();
@@ -87,7 +91,8 @@ void DCSEngine::useRamElements() {
     ramWireVector      = {};
 }
 
-void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
+void DCSEngine::run(uint64_t steps, bool sampling, bool printOut)
+{
     if (!ramReady)
         DCSLog::error("Engine", 17);
 
@@ -119,7 +124,8 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
     }
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
-        for (++s_stepNumber; s_stepNumber <= steps; s_stepNumber++) {
+        for (++s_stepNumber; s_stepNumber <= steps; s_stepNumber++)
+        {
 
             updateInputs();
 
@@ -133,17 +139,22 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut) {
     }
 }
 
-void DCSEngine::checkConnections() {
-    for (auto component : componentVector) {
-        if (!(component->isFullyConnected())) {
+void DCSEngine::checkConnections()
+{
+    for (auto component : componentVector)
+    {
+        if (!(component->isFullyConnected()))
+        {
             DCSLog::error(component->getName(), 1);
         }
         // initialize updateByVector with nullptr
         for (uint16_t i = 0; i < component->getNumOfInPins(); i++)
             component->updatedByVector.push_back(nullptr);
     }
-    for (auto display : displayVector) {
-        if (!(display->isFullyConnected())) {
+    for (auto display : displayVector)
+    {
+        if (!(display->isFullyConnected()))
+        {
             DCSLog::error(display->getName(), 1);
         }
         // initialize updatedByVector with nullptr
@@ -152,26 +163,33 @@ void DCSEngine::checkConnections() {
     }
 }
 
-void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
+void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec)
+{
     /*
      This procedure propagates the first input value though the network.
      If there are no inputs connected (in case of free-running FSM)
      then `cVec` is empty. In this case, the algorithm uses all the components
      as starting propagation point using DSF.
      */
-    if (cVec.size() == 0) {
+    if (cVec.size() == 0)
+    {
         cVec = componentVector;
     }
     // Array of components from which to propagate at the next iteration
     std::vector<DCSComponent*> newComponentVector = {};
-    for (auto component : cVec) {
+    for (auto component : cVec)
+    {
         component->outChanged = true;
-        if (component->isNode() || (!(component->isInitialized()) && component->isEnabled())) {
+        if (component->isNode() || (!(component->isInitialized()) && component->isEnabled()))
+        {
             component->updateOut();
-            if (component->isNode()) {
+            if (component->isNode())
+            {
                 newComponentVector = component->rightComponentVector;
                 initCircuit(newComponentVector);
-            } else if (component->propagateValues()) {
+            }
+            else if (component->propagateValues())
+            {
                 newComponentVector = component->rightComponentVector;
                 if (newComponentVector.size()) //
                     initCircuit(newComponentVector);
@@ -180,45 +198,56 @@ void DCSEngine::initCircuit(std::vector<DCSComponent*> cVec) {
     }
 }
 
-void DCSEngine::checkInitialization() {
-    for (auto component : DCSEngine::componentVector) {
-        if (!(component->isInitialized())) {
+void DCSEngine::checkInitialization()
+{
+    for (auto component : DCSEngine::componentVector)
+    {
+        if (!(component->isInitialized()))
+        {
             DCSLog::debug(component->getName(), "I'm not initialized");
         }
     }
 }
 
-void DCSEngine::updateInputs() {
+void DCSEngine::updateInputs()
+{
     PROFILE();
     for (auto input : inputVector)
         input->updateOut();
 }
 
-void DCSEngine::updateComponents() {
+void DCSEngine::updateComponents()
+{
     PROFILE();
-    for (auto component : DCSEngine::componentVector) {
+    for (auto component : DCSEngine::componentVector)
+    {
         if (!component->isNode())
             component->updateOut();
         component->resetUpdatedByVector();
     }
 
-    for (auto display : DCSEngine::displayVector) {
+    for (auto display : DCSEngine::displayVector)
+    {
         display->resetUpdatedByVector();
     }
 }
 
-void DCSEngine::propagateValues() {
+void DCSEngine::propagateValues()
+{
     // assing the output value of a given pin to the connected input pin
-    for (auto wire : wireVector) {
+    for (auto wire : wireVector)
+    {
         if (!wire->fromNode()) // Nodes propagate themselves when updated
             wire->propagateValue();
     }
 }
 
-void DCSEngine::propagateValuesOnChangeOnly() {
+void DCSEngine::propagateValuesOnChangeOnly()
+{
     PROFILE();
     // assing the output value of a given pin to the connected input pin
-    for (auto wire : wireVector) {
+    for (auto wire : wireVector)
+    {
         if (!wire->fromNode())                  // Nodes propagate themselves when updated
             if (wire->from->needsPropagation()) // true if the output has changed during from the
                                                 // previous time step
@@ -226,17 +255,22 @@ void DCSEngine::propagateValuesOnChangeOnly() {
     }
 }
 
-void DCSEngine::printLogicLevels() {
-    if (!sampling || DCSEngine::s_stepNumber % (clockPeriod / 2) == 1) {
-        for (auto wire : wireVector) {
-            if (wire->getProbeName().length() > 0) {
+void DCSEngine::printLogicLevels()
+{
+    if (!sampling || DCSEngine::s_stepNumber % (clockPeriod / 2) == 1)
+    {
+        for (auto wire : wireVector)
+        {
+            if (wire->getProbeName().length() > 0)
+            {
                 if (wire->getOutVal())
                     DCSLog::output(wire->getProbeName(), "1");
                 else
                     DCSLog::output(wire->getProbeName(), "0");
             }
         }
-        for (auto display : displayVector) {
+        for (auto display : displayVector)
+        {
             display->updateOut();
         }
         std::stringstream n;
@@ -251,11 +285,13 @@ void DCSEngine::printLogicLevels() {
 uint64_t DCSEngine::getClockPeriod() { return clockPeriod; };
 uint64_t DCSEngine::getStepNumber() { return s_stepNumber; }
 void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
-void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps) {
+void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps)
+{
     clockPeriod = 2 * numberOfTimeSteps;
 };
 
-void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut) {
+void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut)
+{
     PROFILE();
     // Assuming that the ram we are going to program is the only component in the system, we want to
     // save it in a special vector so that, at the end of the procedure, when all the component are
@@ -292,21 +328,29 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
         inArray0[16]->makeSignal(0);                         // Enable
 
         std::stringstream s[8];
-        for (int i = 0; i < 16; i++) {
-            if (program[i][0] == 0) { // store pure data
-                for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < 16; i++)
+        {
+            if (program[i][0] == 0)
+            { // store pure data
+                for (int j = 0; j < 8; j++)
+                {
                     s[j] << (program[i][1] >> j & 1);
                 }
-            } else {                          // store instruction-data pair
-                for (int j = 0; j < 4; j++) { // store instruction in MSB
+            }
+            else
+            { // store instruction-data pair
+                for (int j = 0; j < 4; j++)
+                { // store instruction in MSB
                     s[j + 4] << (program[i][0] >> j & 1);
                 }
-                for (int j = 0; j < 4; j++) { // store data in LSB
+                for (int j = 0; j < 4; j++)
+                { // store data in LSB
                     s[j] << (program[i][1] >> j & 1);
                 }
             }
         }
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
             inArray0[i]->makeSignal(s[i].str(), true);
         }
 
@@ -320,7 +364,8 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
     DCSEngine::resetAndKeepRamElements();
 }
 
-void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
+void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut)
+{
     PROFILE();
 
     // clang-format off
@@ -393,14 +438,18 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut) {
         inArray0[28]->makeSignal(0);                    // Enable
 
         std::stringstream s[16];
-        for (int instr = 0; instr < 32; instr++) {
-            for (int ucode = 0; ucode < 8; ucode++) {
-                for (int bit = 0; bit < 16; bit++) {
+        for (int instr = 0; instr < 32; instr++)
+        {
+            for (int ucode = 0; ucode < 8; ucode++)
+            {
+                for (int bit = 0; bit < 16; bit++)
+                {
                     s[bit] << (data[instr][ucode] >> bit & 1);
                 }
             }
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 16; i++)
+        {
             inArray0[i]->makeSignal(s[i].str(), true);
         }
 

@@ -2,8 +2,10 @@
 #include "DCSLog.hpp"
 
 DCSPLD8In16Out::DCSPLD8In16Out(std::string name, const uint16_t data[32][8])
-    : DCSComponent(name, false), dec0(this->name + "dec0"), inGND(this->name + "_inGND") {
-    for (int i = 0; i < 16; i++) {
+    : DCSComponent(name, false), dec0(this->name + "dec0"), inGND(this->name + "_inGND")
+{
+    for (int i = 0; i < 16; i++)
+    {
         // instantiation
         orArr0[i] = new DCSComponentArray<DCSOr>("orArr0", 128);
         orArr1[i] = new DCSComponentArray<DCSOr>("orArr1", 64);
@@ -24,13 +26,19 @@ DCSPLD8In16Out::DCSPLD8In16Out(std::string name, const uint16_t data[32][8])
     }
 
     size_t decPinNum = 0;
-    for (size_t instr = 0; instr < 32; instr++) {
-        for (size_t uCode = 0; uCode < 8; uCode++) {
-            for (uint16_t bit = 0; bit < 16; bit++) {
+    for (size_t instr = 0; instr < 32; instr++)
+    {
+        for (size_t uCode = 0; uCode < 8; uCode++)
+        {
+            for (uint16_t bit = 0; bit < 16; bit++)
+            {
                 bool val = (data[instr][uCode] >> bit) & 1;
-                if (val) {
+                if (val)
+                {
                     dec0.connect(orArr0[bit], decPinNum, decPinNum);
-                } else {
+                }
+                else
+                {
                     inGND.connect(orArr0[bit], 0, decPinNum);
                 }
             }
@@ -43,8 +51,10 @@ DCSPLD8In16Out::DCSPLD8In16Out(std::string name, const uint16_t data[32][8])
     this->numOfOutPins = 16;
 }
 
-DCSPLD8In16Out::~DCSPLD8In16Out() {
-    for (int i = 0; i < 16; i++) {
+DCSPLD8In16Out::~DCSPLD8In16Out()
+{
+    for (int i = 0; i < 16; i++)
+    {
         // instantiation
         delete orArr0[i];
         orArr0[i] = nullptr;
@@ -65,15 +75,19 @@ DCSPLD8In16Out::~DCSPLD8In16Out() {
     }
 }
 
-DCSComponent* DCSPLD8In16Out::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum < 8) { // return decoder input
+DCSComponent* DCSPLD8In16Out::getInComponent(uint16_t& inPinNum)
+{
+    if (inPinNum < 8)
+    { // return decoder input
         return dec0.getInComponent(inPinNum);
     }
     DCSLog::error(this->name, 11);
     return nullptr;
 }
-DCSComponent* DCSPLD8In16Out::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum < 16) {
+DCSComponent* DCSPLD8In16Out::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum < 16)
+    {
         return or7[outPinNum];
     }
     DCSLog::error(this->name, 10);

@@ -1,6 +1,7 @@
 #include "prj-countByThrees.hpp"
 
-void fastControlUnitPrj() {
+void fastControlUnitPrj()
+{
     DCSLog::printProjectName("Fast control unit");
     uint64_t hcp = 14;
     DCSEngine::initialize(hcp);
@@ -52,7 +53,8 @@ void fastControlUnitPrj() {
     inArr0.connect(&dispIn);
     cu0.connect(&dispOut);
     // make signals
-    for (uint8_t i = 0; i < 8; i++) {
+    for (uint8_t i = 0; i < 8; i++)
+    {
         inArr0[i]->makeSquareWave((hcp) << i);
     }
 

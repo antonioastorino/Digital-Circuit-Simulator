@@ -1,20 +1,21 @@
 #include "prj-countByThrees.hpp"
 
-void countByThrees() {
+void countByThrees()
+{
     DCSLog::printProjectName("Ben's computer counts by threes");
     uint64_t masterClockHP = 28;
 
     // the instruction is the MSHB and the data is the LSHB
-    uint16_t program[16][2] = {{LDI, 3},  // instruction and operand 0
-                               {STA, 15}, // instruction and operand 1
-                               {LDI, 0},  // instruction and operand 2
-                               {ADD, 15}, // instruction and operand 3
-                               {OUT, 0},  // instruction and operand 4
-                               {JMP, 3},  // instruction and operand 5
-                               {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0},
-                               {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+    uint16_t program[16][2]
+        = {{LDI, 3},  // instruction and operand 0
+           {STA, 15}, // instruction and operand 1
+           {LDI, 0},  // instruction and operand 2
+           {ADD, 15}, // instruction and operand 3
+           {OUT, 0},  // instruction and operand 4
+           {JMP, 3},  // instruction and operand 5
+           {0, 0},    {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
-       // clang-format off
+    // clang-format off
     const uint16_t data[32][8] = {
         { MI|CO, RO|II|CE, 0,     0,     0,              0, 0, 0 }, // 0000 NOP
         { MI|CO, RO|II|CE, IO|MI, RO|AI, 0,              0, 0, 0 }, // 0001 LDA
@@ -136,7 +137,8 @@ void countByThrees() {
     alu.connect(&trisALU, {0, 7}, {0, 7});
     ram.connect(&trisRAM, {0, 7}, {0, 7});
     pc.connect(&trisPC, {0, 3}, {0, 3}); // Address from PC to trisPC
-    for (uint16_t i = 4; i < 8; i++) {
+    for (uint16_t i = 4; i < 8; i++)
+    {
         // signal meant to be constant at 0 and feed the MSb's of trisI. In this way, when trisI is
         // active and the LSb's are ouput to the bus, the MSb's are set to 0 instead of being the
         // same as the instruction.
@@ -225,7 +227,7 @@ void countByThrees() {
                                   // buffer is placed between RAM and bus
     inGND.makeSignal(0);
     clk.makeSquareWave(masterClockHP, true);
-    std::string dn("00");           // do nothing (while resetting the registers)
+    std::string dn("00");            // do nothing (while resetting the registers)
     inReset.makeSignal("110", true); // initialize by resetting the register
 
     DCSEngine::run(600 * masterClockHP, true);

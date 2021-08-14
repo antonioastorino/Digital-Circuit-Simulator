@@ -1,0 +1,36 @@
+Title: Not loop test
+3230396020:updateInputs:22750:42
+3230396020:updateComponents:29250:250
+3230396020:Init circuit:15208:17125
+3230396020:updateInputs:32542:0
+3230396020:updateComponents:32583:125
+3230396020:propagateValuesOnChangeOnly:32875:125
+3230396020:updateInputs:34375:42
+3230396020:updateComponents:34458:125
+3230396020:propagateValuesOnChangeOnly:34583:125
+3230396020:updateInputs:35833:42
+3230396020:updateComponents:35875:125
+3230396020:propagateValuesOnChangeOnly:36042:83
+3230396020:updateInputs:37167:41
+3230396020:updateComponents:37250:42
+3230396020:propagateValuesOnChangeOnly:37333:84
+3230396020:updateInputs:38458:0
+3230396020:updateComponents:38500:83
+3230396020:propagateValuesOnChangeOnly:38792:83
+3230396020:updateInputs:40167:0
+3230396020:updateComponents:40208:84
+3230396020:propagateValuesOnChangeOnly:40292:83
+3230396020:updateInputs:41417:0
+3230396020:updateComponents:41458:84
+3230396020:propagateValuesOnChangeOnly:41542:83
+3230396020:updateInputs:42583:42
+3230396020:updateComponents:42625:83
+3230396020:propagateValuesOnChangeOnly:42750:83
+3230396020:updateInputs:43792:41
+3230396020:updateComponents:43875:42
+3230396020:propagateValuesOnChangeOnly:43958:84
+3230396020:updateInputs:45000:42
+3230396020:updateComponents:45083:84
+3230396020:propagateValuesOnChangeOnly:45167:83
+3230396020:Run loop:32500:13958
+3230396020:main:500:46750

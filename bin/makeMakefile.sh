@@ -1,6 +1,6 @@
 BD="$(pwd)/$(dirname $0)/.."
 source "${BD}/bin/variables.sh"
-if [ -z $APP_NAME ]; then exit 1; fi
+if [ -z ${APP_NAME} ]; then exit 1; fi
 
 set -e
 
@@ -92,7 +92,7 @@ pf "\n\tsed -i.bak 's/^#define TEST 0/#define TEST 1/g' \"\$(BD)\"/${COMMON_HEAD
 # Set MEM_ANALYSIS to 1 in case MODE==TEST
 pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 0' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
 pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 0/#define MEM_ANALYSIS 1/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
-pf "\n\tmake -C \"\$(BD)\" ${BUILD_DIR}/${APP_NAME}-test; \\"
+pf "\n\tmake -C \"\$(BD)\" OPT=\$(OPT) ${BUILD_DIR}/${APP_NAME}-test-o\$(OPT); \\"
 pf "\n\telse \\"
 
 # Reset TEST and MEM_ANALYSIS in case as default behavior.
@@ -100,11 +100,11 @@ pf "\n\t[ \`grep -c '^#define TEST 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \
 pf "\n\tsed -i.bak 's/^#define TEST 1/#define TEST 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
 pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
 pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 1/#define MEM_ANALYSIS 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
-pf "\n\tmake -C \"\$(BD)\" ${BUILD_DIR}/${APP_NAME}; \\"
+pf "\n\tmake -C \"\$(BD)\" OPT=\$(OPT) ${BUILD_DIR}/${APP_NAME}-o\$(OPT); \\"
 pf "\n\tfi"
 pf "\n"
 
-pf "\n${BUILD_DIR}/${APP_NAME}:"
+pf "\n${BUILD_DIR}/${APP_NAME}-o\$(OPT):"
 while read -r FILE_NAME; do
 	if [ "${FILE_NAME}" == "${MAIN_TEST}" ]; then continue; fi
 	pf "\\"
@@ -114,7 +114,7 @@ pf "\n\t${GLOBAL_COMPILER} \$(LIB) \$(MAINFLAGS) -O\$(OPT) \$(INC) \$(FRAMEWORKS
 pf "\n"
 
 # Test
-pf "\n${BUILD_DIR}/${APP_NAME}-test:"
+pf "\n${BUILD_DIR}/${APP_NAME}-test-o\$(OPT):"
 while read -r FILE_NAME; do
 	if [ "${FILE_NAME}" == "${MAIN}" ]; then continue; fi
 	pf "\\"
@@ -145,13 +145,13 @@ while read -r FILE_FULL_PATH; do
 
 	case $FILE_EXT in
 	c)
-		pf "\n\tgcc \$(INC) \$(CFLAGS) -c \$< -o \$@\n"
+		pf "\n\tgcc \$(INC) \$(CFLAGS) -O\$(OPT) -c \$< -o \$@\n"
 		;;
 	cpp)
-		pf "\n\tg++ \$(INC) \$(CPPFLAGS) -c \$< -o \$@\n"
+		pf "\n\tg++ \$(INC) \$(CPPFLAGS) -O\$(OPT) -c \$< -o \$@\n"
 		;;
 	mm)
-		pf "\n\tclang \$(INC) \$(OBJCFLAGS) -c \$< -o \$@\n"
+		pf "\n\tclang \$(INC) \$(OBJCFLAGS) -O\$(OPT) -c \$< -o \$@\n"
 		;;
 	esac
 	pf "\n"

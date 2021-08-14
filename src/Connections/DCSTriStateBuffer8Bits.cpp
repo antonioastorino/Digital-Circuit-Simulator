@@ -2,9 +2,11 @@
 #include "DCSLog.hpp"
 
 DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name)
-    : DCSComponent(name, false), bufferArray(name, 8), node0(name + "-Enable") {
+    : DCSComponent(name, false), bufferArray(name, 8), node0(name + "-Enable")
+{
     // Connect global enable to that of all buffers
-    for (uint16_t i = 0; i < 8; i++) {
+    for (uint16_t i = 0; i < 8; i++)
+    {
         node0.connect(bufferArray[i], 0, 1);
     }
     this->timeDelay    = 1;
@@ -12,13 +14,17 @@ DCSTriStateBuffer8Bits::DCSTriStateBuffer8Bits(std::string name)
     this->numOfOutPins = 8;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum < 8) {
+DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum)
+{
+    if (inPinNum < 8)
+    {
         uint16_t elementNumber = inPinNum;
         inPinNum               = 0;
         // TODO: check if the buffer element can be directly returned
         return bufferArray[elementNumber]->getInComponent(inPinNum);
-    } else if (inPinNum == 8) {
+    }
+    else if (inPinNum == 8)
+    {
         inPinNum = 0;
         return &node0;
     }
@@ -26,7 +32,8 @@ DCSComponent* DCSTriStateBuffer8Bits::getInComponent(uint16_t& inPinNum) {
     return nullptr;
 }
 
-DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t outPinNum) {
+DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t outPinNum)
+{
     if (outPinNum >= 8)
         DCSLog::error(name, 10);
     uint16_t elementNumber = outPinNum;
@@ -34,14 +41,18 @@ DCSComponent* DCSTriStateBuffer8Bits::getOutComponent(uint16_t outPinNum) {
     return bufferArray[elementNumber]->getOutComponent(outPinNum);
 }
 
-void DCSTriStateBuffer8Bits::enable() {
-    for (uint16_t i = 0; i < 8; i++) {
+void DCSTriStateBuffer8Bits::enable()
+{
+    for (uint16_t i = 0; i < 8; i++)
+    {
         bufferArray[i]->enable();
     }
 }
 
-void DCSTriStateBuffer8Bits::disable() {
-    for (uint16_t i = 0; i < 8; i++) {
+void DCSTriStateBuffer8Bits::disable()
+{
+    for (uint16_t i = 0; i < 8; i++)
+    {
         bufferArray[i]->disable();
     }
 }

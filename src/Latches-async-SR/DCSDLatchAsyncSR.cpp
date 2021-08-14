@@ -1,8 +1,9 @@
 #include "DCSDLatchAsyncSR.hpp"
-#include "DCSLog.hpp"
 #include "DCSCommon.hpp"
+#include "DCSLog.hpp"
 
-DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) : DCSComponent(name, false) {
+DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) : DCSComponent(name, false)
+{
     node0.connect(&del0, 0, 0);
     node0.connect(&not0, 0, 0);
     node1.connect(&and0, 0, 1);
@@ -19,10 +20,12 @@ DCSDLatchAsyncSR::DCSDLatchAsyncSR(std::string name) : DCSComponent(name, false)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDLatchAsyncSR::getOutComponent(uint16_t outPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getOutComponent(uint16_t outPinNum)
+{
     if (outPinNum == 0)
         return &nor3_0;
-    else if (outPinNum == 1) {
+    else if (outPinNum == 1)
+    {
         outPinNum = 0;
         return &nor3_1;
     }
@@ -30,8 +33,10 @@ DCSComponent* DCSDLatchAsyncSR::getOutComponent(uint16_t outPinNum) {
     return nullptr;
 }
 
-DCSComponent* DCSDLatchAsyncSR::getInComponent(uint16_t& inPinNum) {
-    switch (inPinNum) {
+DCSComponent* DCSDLatchAsyncSR::getInComponent(uint16_t& inPinNum)
+{
+    switch (inPinNum)
+    {
     case 0:
         return &node0;
     case 1:

@@ -1,0 +1,16 @@
+#include "DCSALU.hpp"
+#include "DCSControlUnit5Bits.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSInstructionSet.hpp"
+#include "DCSLog.hpp"
+#include "DCSOutput.hpp"
+#include "DCSPLD8In16Out.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSRegister1Bit.hpp"
+#include "DCSRegister4Bits.hpp"
+#include "DCSRegister8Bits.hpp"
+#include "DCSTriStateBuffer8Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
+
+void countByThrees();

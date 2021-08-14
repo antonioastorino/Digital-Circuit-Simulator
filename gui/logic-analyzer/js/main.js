@@ -245,7 +245,7 @@ function main() {
 
         let lines = result.split("\n");
         for (let i = 0; i < lines.length; i++) {
-            if (lines[i].includes("test")) {
+            if (lines[i].includes("test") || lines[i].includes("project")) {
                 parseTitle(lines[i]);
             }
             if (lines[i].includes("ERROR:")) {

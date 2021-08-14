@@ -1,8 +1,9 @@
 #include "DCSDLatch.hpp"
-#include "DCSLog.hpp"
 #include "DCSCommon.hpp"
+#include "DCSLog.hpp"
 
-DCSDLatch::DCSDLatch(std::string name) : DCSComponent(name, false) {
+DCSDLatch::DCSDLatch(std::string name) : DCSComponent(name, false)
+{
     node0.connect(&del0, 0, 0);
     node0.connect(&not0, 0, 0);
     node1.connect(&and0, 0, 1);
@@ -17,14 +18,17 @@ DCSDLatch::DCSDLatch(std::string name) : DCSComponent(name, false) {
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSDLatch::getOutComponent(uint16_t outPinNum) {
+DCSComponent* DCSDLatch::getOutComponent(uint16_t outPinNum)
+{
     return srLatch0.getOutComponent(outPinNum);
 }
 
-DCSComponent* DCSDLatch::getInComponent(uint16_t& inPinNum) {
+DCSComponent* DCSDLatch::getInComponent(uint16_t& inPinNum)
+{
     if (inPinNum == 0)
         return &node0;
-    else if (inPinNum == 1) {
+    else if (inPinNum == 1)
+    {
         inPinNum = 0; // pin 1 in D latch is EN pin 0
         return &node1;
     }

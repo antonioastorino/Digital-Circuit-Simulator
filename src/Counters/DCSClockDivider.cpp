@@ -1,8 +1,9 @@
 #include "DCSClockDivider.hpp"
-#include "DCSLog.hpp"
 #include "DCSCommon.hpp"
+#include "DCSLog.hpp"
 
-DCSClockDivider::DCSClockDivider(std::string name) : DCSComponent(name, false) {
+DCSClockDivider::DCSClockDivider(std::string name) : DCSComponent(name, false)
+{
     // D
     node0.connect(&not0, 0, 0);
     node0.connect(&and0, 0, 1);
@@ -29,18 +30,24 @@ DCSClockDivider::DCSClockDivider(std::string name) : DCSComponent(name, false) {
     numOfOutPins = 3;
 }
 
-DCSComponent* DCSClockDivider::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum == 0 || outPinNum == 1) {
+DCSComponent* DCSClockDivider::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum == 0 || outPinNum == 1)
+    {
         return jk0.getOutComponent(outPinNum);
-    } else if (outPinNum == 2) {
+    }
+    else if (outPinNum == 2)
+    {
         outPinNum = 0;
         return &and3;
     }
     DCSLog::error(this->name, 10);
     return nullptr;
 }
-DCSComponent* DCSClockDivider::getInComponent(uint16_t& inPinNum) {
-    switch (inPinNum) {
+DCSComponent* DCSClockDivider::getInComponent(uint16_t& inPinNum)
+{
+    switch (inPinNum)
+    {
     case 0: // Data
         return &node0;
     case 1: // Load

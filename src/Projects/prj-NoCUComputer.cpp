@@ -1,7 +1,9 @@
 #include "prj-NoCUComputer.hpp"
 
-// based on https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
-void noCUComputerPrj() {
+// based on
+// https://www.youtube.com/watch?v=dXdoim96v5A&list=PLowKtXNTBypGqImE405J2565dvjafglHU&index=36
+void noCUComputerPrj()
+{
     DCSLog::printProjectName("Computer without CU");
     uint16_t masterClockHP = 20;
 
@@ -206,8 +208,8 @@ void noCUComputerPrj() {
     inOI.connect(&regOut, 0, 11, "OI");
 
     // constant signals
-    inOeRAM.makeSignal("01", true); // The RAM is always enable to always talk to the IR. A 3-state buffer is
-                           // placed between RAM and bus
+    inOeRAM.makeSignal("01", true); // The RAM is always enable to always talk to the IR. A 3-state
+                                    // buffer is placed between RAM and bus
     zero4[0]->makeSignal(0);
     zero4[1]->makeSignal(0);
     zero4[2]->makeSignal(0);

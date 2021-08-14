@@ -2,13 +2,15 @@
 #include "DCSOr.hpp"
 #include "DCSCommon.hpp"
 
-DCSOr::DCSOr(std::string name) : DCSComponent(name) {
+DCSOr::DCSOr(std::string name) : DCSComponent(name)
+{
     timeDelay    = 1;
     numOfInPins  = 2;
     numOfOutPins = 1;
 }
 
-void DCSOr::updateOut() {
+void DCSOr::updateOut()
+{
     uint64_t newOutValue = (in | (in >> 1)) & 1;
     DCSComponent::checkOutputChanged(newOutValue);
     out = newOutValue;

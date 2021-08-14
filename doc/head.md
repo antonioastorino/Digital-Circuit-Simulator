@@ -5,7 +5,7 @@ Inspired by [Ben Eater](https://www.youtube.com/watch?v=HyznrdDSSGM&list=PLowKtX
 
 In this project, the time dependency of the system evolution is considered. However, in real hardware, the state change of every component depends on many factors such as the technology in use, noise, imperfections, and so on. It would be out of the scope of this project trying to simulate all these factors. As a good compromise, the unit delay `tau` is defined as the maximum propagation delay that any of the elementary logic gates (`AND`, `OR`, `NOT`, `NAND`, `NOR`, etc.) can exhibit. Time diagrams and constraints are based on the value of `tau` which can be seen as a free parameter whose value cannot be established a priori. <u>Time itself is therefore discretized in steps of length `tau`.</u>
 
-Examples of how to use the component library are located in `./scr/Tests` and `./src/Project` folders.
+Examples of how to use the component library are located in unit tests and project files.
 
 A working program that counts by threes (project number `0`) is loaded and run by my software version of Ben's computer. Here is the assembly code:
 
@@ -21,36 +21,25 @@ I hope this just ignited your curiosity :)
 
 ---
 
-## How to build (Mac and Linux)
+## How to build (Mac only, at the moment)
 You are welcome to build the project the way you prefer. However, it is recommended that you use the tool provided in this repository, based upon [this project](https://github.com/antonioastorino/MMF).
 
 ### 1. Generate a Makefile file
-If `./Makefile` is outdated or not present, generate it by running
+Generate `Makefile` by running
 
 ```
 bin/makeMakefile.sh
 ```
 from the project directory.
 
-> IMPORTANT: This script must be run every time you add, move, or remove a `.cpp` or `.hpp` project file, or change the headers included in any file.
-
 ### 2. Build and run
 
-I assume `make` and `g++` are already installed on your machine.
-
+I assume `make` and `clang` are already installed on your machine.
 
 #### 2.1. Projects
 For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available.
 
 Compiling and running a project is done by executing
-
-```
-make SHELL=/bin/bash [OPT=<OPT_LEVEL>]     # build with optimization level <OPT_LEVEL>, 0 by default
-build/prj-out-<OPT_LEVEL> [<PRJ_NUM>]      # run the project number <PRJ_NUM>  
-
-```
-
-or, in one command (notice that <PRJ_NUM> is mandatory below)
 
 ```
 bin/prj-build-run.sh <PRJ_NUM> [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>

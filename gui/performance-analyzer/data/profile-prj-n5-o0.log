@@ -1,0 +1,30 @@
+Title: Nand 3 test
+1262911948:updateInputs:33958:83
+1262911948:updateComponents:40583:125
+1262911948:Init circuit:25666:17584
+1262911948:updateInputs:43458:83
+1262911948:updateComponents:43583:125
+1262911948:propagateValuesOnChangeOnly:43833:167
+1262911948:updateInputs:45333:83
+1262911948:updateComponents:45458:83
+1262911948:propagateValuesOnChangeOnly:45583:83
+1262911948:updateInputs:47000:83
+1262911948:updateComponents:47125:41
+1262911948:propagateValuesOnChangeOnly:47208:83
+1262911948:updateInputs:48583:125
+1262911948:updateComponents:48750:41
+1262911948:propagateValuesOnChangeOnly:48833:42
+1262911948:updateInputs:50000:125
+1262911948:updateComponents:50125:41
+1262911948:propagateValuesOnChangeOnly:50375:41
+1262911948:updateInputs:51541:125
+1262911948:updateComponents:51708:42
+1262911948:propagateValuesOnChangeOnly:51791:84
+1262911948:updateInputs:52958:83
+1262911948:updateComponents:53041:84
+1262911948:propagateValuesOnChangeOnly:53125:83
+1262911948:updateInputs:54291:125
+1262911948:updateComponents:54458:42
+1262911948:propagateValuesOnChangeOnly:54541:84
+1262911948:Run loop:43458:12333
+1262911948:main:541:57000
