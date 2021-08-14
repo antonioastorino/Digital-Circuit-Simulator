@@ -63,7 +63,7 @@ void DCSAddressDecoder8Bits::updateOut() { DCSLog::error(name, 0); }
 #include "DCSOutput.hpp"
 void addressDecoder8BitsTest()
 {
-    DCSLog::printTestName("8-bit address decoder");
+    DCSLog::printTestName("32-bit address decoder");
     uint16_t hp = 1;
     DCSEngine::initialize(hp);
 

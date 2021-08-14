@@ -1,30 +1,30 @@
 Title: Nand 3 test
-1262911948:updateInputs:33958:83
-1262911948:updateComponents:40583:125
-1262911948:Init circuit:25666:17584
-1262911948:updateInputs:43458:83
-1262911948:updateComponents:43583:125
-1262911948:propagateValuesOnChangeOnly:43833:167
-1262911948:updateInputs:45333:83
-1262911948:updateComponents:45458:83
-1262911948:propagateValuesOnChangeOnly:45583:83
-1262911948:updateInputs:47000:83
-1262911948:updateComponents:47125:41
-1262911948:propagateValuesOnChangeOnly:47208:83
-1262911948:updateInputs:48583:125
-1262911948:updateComponents:48750:41
-1262911948:propagateValuesOnChangeOnly:48833:42
-1262911948:updateInputs:50000:125
-1262911948:updateComponents:50125:41
-1262911948:propagateValuesOnChangeOnly:50375:41
-1262911948:updateInputs:51541:125
-1262911948:updateComponents:51708:42
-1262911948:propagateValuesOnChangeOnly:51791:84
-1262911948:updateInputs:52958:83
-1262911948:updateComponents:53041:84
-1262911948:propagateValuesOnChangeOnly:53125:83
-1262911948:updateInputs:54291:125
-1262911948:updateComponents:54458:42
-1262911948:propagateValuesOnChangeOnly:54541:84
-1262911948:Run loop:43458:12333
-1262911948:main:541:57000
+2289863919:updateInputs:33875:125
+2289863919:updateComponents:40125:167
+2289863919:Init circuit:26000:16917
+2289863919:updateInputs:43125:125
+2289863919:updateComponents:43292:83
+2289863919:propagateValuesOnChangeOnly:43542:125
+2289863919:updateInputs:44959:83
+2289863919:updateComponents:45084:83
+2289863919:propagateValuesOnChangeOnly:45167:125
+2289863919:updateInputs:46542:83
+2289863919:updateComponents:46625:84
+2289863919:propagateValuesOnChangeOnly:46709:83
+2289863919:updateInputs:48167:83
+2289863919:updateComponents:48292:83
+2289863919:propagateValuesOnChangeOnly:48375:84
+2289863919:updateInputs:49584:125
+2289863919:updateComponents:49750:42
+2289863919:propagateValuesOnChangeOnly:49959:125
+2289863919:updateInputs:51209:83
+2289863919:updateComponents:51334:41
+2289863919:propagateValuesOnChangeOnly:51417:83
+2289863919:updateInputs:52584:83
+2289863919:updateComponents:52709:41
+2289863919:propagateValuesOnChangeOnly:52792:42
+2289863919:updateInputs:53959:83
+2289863919:updateComponents:54084:41
+2289863919:propagateValuesOnChangeOnly:54167:83
+2289863919:Run loop:43084:12333
+2289863919:main:584:56583

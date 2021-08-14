@@ -1,30 +1,30 @@
 Title: Nor 3 test
-1835011358:updateInputs:34542:125
-1835011358:updateComponents:43834:291
-1835011358:Init circuit:26417:19958
-1835011358:updateInputs:46542:125
-1835011358:updateComponents:46709:125
-1835011358:propagateValuesOnChangeOnly:46917:167
-1835011358:updateInputs:48625:84
-1835011358:updateComponents:48750:42
-1835011358:propagateValuesOnChangeOnly:48834:125
-1835011358:updateInputs:50292:42
-1835011358:updateComponents:50375:84
-1835011358:propagateValuesOnChangeOnly:50459:125
-1835011358:updateInputs:51750:84
-1835011358:updateComponents:51875:42
-1835011358:propagateValuesOnChangeOnly:51959:125
-1835011358:updateInputs:53209:125
-1835011358:updateComponents:53334:83
-1835011358:propagateValuesOnChangeOnly:53584:83
-1835011358:updateInputs:55042:125
-1835011358:updateComponents:55209:41
-1835011358:propagateValuesOnChangeOnly:55292:83
-1835011358:updateInputs:56542:42
-1835011358:updateComponents:56625:84
-1835011358:propagateValuesOnChangeOnly:56709:83
-1835011358:updateInputs:57959:83
-1835011358:updateComponents:58084:41
-1835011358:propagateValuesOnChangeOnly:58167:83
-1835011358:Run loop:46500:12834
-1835011358:main:459:60958
+1360830752:updateInputs:34709:125
+1360830752:updateComponents:41292:167
+1360830752:Init circuit:26917:16917
+1360830752:updateInputs:44000:125
+1360830752:updateComponents:44167:125
+1360830752:propagateValuesOnChangeOnly:44417:208
+1360830752:updateInputs:46125:125
+1360830752:updateComponents:46292:42
+1360830752:propagateValuesOnChangeOnly:46375:125
+1360830752:updateInputs:47834:83
+1360830752:updateComponents:47959:83
+1360830752:propagateValuesOnChangeOnly:48084:83
+1360830752:updateInputs:49334:125
+1360830752:updateComponents:49459:83
+1360830752:propagateValuesOnChangeOnly:49542:83
+1360830752:updateInputs:50792:83
+1360830752:updateComponents:50917:83
+1360830752:propagateValuesOnChangeOnly:51209:41
+1360830752:updateInputs:52709:83
+1360830752:updateComponents:52834:83
+1360830752:propagateValuesOnChangeOnly:52917:83
+1360830752:updateInputs:54167:83
+1360830752:updateComponents:54292:42
+1360830752:propagateValuesOnChangeOnly:54375:42
+1360830752:updateInputs:55584:83
+1360830752:updateComponents:55709:41
+1360830752:propagateValuesOnChangeOnly:55792:83
+1360830752:Run loop:43959:13083
+1360830752:main:542:58542
