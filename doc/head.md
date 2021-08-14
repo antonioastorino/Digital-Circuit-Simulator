@@ -36,12 +36,8 @@ from the project directory.
 
 ### 2. Build and run
 
-Make sure you have installed `make` and `g++`. Run
+I assume `make` and `g++` are already installed on your machine.
 
-```
-sudo apt update
-sudo apt install make g++
-```
 
 #### 2.1. Projects
 For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available.

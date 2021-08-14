@@ -1,7 +1,8 @@
 #include "DCSLog.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSAddressDecoder4Bits.hpp"
 #include "DCSTimer.hpp"
 #include "test-ALU.hpp"
-#include "test-AddressDecoder4Bits.hpp"
 #include "test-AddressDecoder8Bits.hpp"
 #include "test-And6.hpp"
 #include "test-AndArray.hpp"
@@ -20,7 +21,6 @@
 #include "test-Nor3.hpp"
 #include "test-NotLoop.hpp"
 #include "test-Or.hpp"
-#include "test-Ram.hpp"
 #include "test-Ram256x16.hpp"
 #include "test-Register16BitsWithEnable.hpp"
 #include "test-Register1Bit.hpp"
@@ -38,7 +38,8 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, const char* argv[]) {
+int main(int argc, const char* argv[])
+{
 
     std::vector<func_descriptor> tests = {
         FUNC_CONSTRUCTOR(bitStreamSignalTest),
@@ -80,7 +81,8 @@ int main(int argc, const char* argv[]) {
     uint16_t testNum;
     int optLev;
 
-    if (!DCSLog::checkInputNumber(tests, argc, argv, testNum, optLev)) return EXIT_FAILURE;
+    if (!DCSLog::checkInputNumber(tests, argc, argv, testNum, optLev))
+        return EXIT_FAILURE;
 
     DCSTimer::initialize("prj", testNum, optLev);
     // start profiled scope

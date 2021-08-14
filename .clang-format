@@ -1,0 +1,16 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+DerivePointerAlignment: false
+PointerAlignment: Left
+AlignConsecutiveAssignments: true
+BinPackParameters: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortIfStatementsOnASingleLine: false
+AllowShortBlocksOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+ColumnLimit: 100
+AccessModifierOffset: -4
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Allman
+UseTab: Never

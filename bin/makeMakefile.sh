@@ -1,114 +1,161 @@
-base_dir="`pwd`/`dirname $0`/../"
-make_file="$base_dir/Makefile"
-build_folder="build/objects"
-profile_folder="gui/performance-analyzer/data"
-output_folder="gui/logic-analyzer/data"
-executable_folder="build"
-pushd $base_dir
+BD="$(pwd)/$(dirname $0)/.."
+source "${BD}/bin/variables.sh"
+if [ -z $APP_NAME ]; then exit 1; fi
 
-function pf () { printf "$1" >> Makefile; }
+set -e
 
-echo "# Makefile auto generated using custom generator" > "$make_file" # Initialize Makefile
+pushd "$BD"
+bin/cleanup.sh
 
+function pf() { printf "$1" >>"$MAKE_FILE"; }
+
+pf "# Makefile auto generated using custom generator"
 # Find all the directories containing header files
-cat /dev/null > hpp-dir.list       # dir only
-cat /dev/null > hpp-file.list      # file name only
-cat /dev/null > hpp-full.list      # full path
-for f in `find ./ -name "*hpp"`; do
-	echo "$f" >> hpp-full.list
-	echo "`basename $f | awk -F '.' '{print $1}'`" >> hpp-file.list
-	echo `dirname $f` >> hpp-dir.list
-done
-# Remove duplicates from directory list
-sort hpp-dir.list | uniq > hpp-sorted-dir.list
 
-cat /dev/null > cpp-file.list      # file name only
-cat /dev/null > cpp-full.list      # full path
-for f in `find ./ -name "*cpp"`; do
-	echo "$f" >> cpp-full.list
-	echo "`basename $f | awk -F '.' '{print $1}'`" >> cpp-file.list
-done
+cat /dev/null >header-dir.list # dir only
+cat /dev/null >src-full.list   # full path
+cat /dev/null >src-name.list   # filename no extension
 
-pf "\nCFLAGS=-c -Wextra -std=c++17 -O\$(OPT) -g"
-pf "\nCC=g++"
-pf "\nINC="
-while read -r folder; do
-	pf " -I$folder\\"
-	pf "\n"
-done < hpp-sorted-dir.list
-pf "\n.PHONY: all clean cleanall check-directory make-opt check-opt-value"
-pf "\n"
-pf "\nall: check-directory"
-pf "\n"
-
-pf "\ncheck-directory:"
-pf "\n\t@[ -d \"$build_folder\" ] || mkdir -p $build_folder"
-pf "\n\t@[ -d \"$executable_folder\" ] || mkdir -p $executable_folder"
-pf "\n\t@make SHELL=/bin/bash check-opt-value OPT=\$(OPT)"
-pf "\n"
-
-pf "\ncheck-opt-value:"
-pf "\n\t@[ \"\$(OPT)\" == \"\" ] && make SHELL=/bin/bash make-opt OPT=0 || make SHELL=/bin/bash make-opt OPT=\$(OPT)\n"
-
-pf "\nmake-opt:"
-pf "\n\t@if [ ! -f \"$executable_folder/.out-\$(OPT)\" ]; then \\"
-pf "\n\t\trm -rf $executable_folder/*; \\"
-pf "\n\t\tmkdir -p $build_folder; \\"
-pf "\n\t\ttouch $executable_folder/.out-\$(OPT); \\"
-pf "\n\tfi"
-pf "\n\t@make SHELL=/bin/bash $executable_folder/test-out-\$(OPT) OPT=\$(OPT)"
-pf "\n\t@make SHELL=/bin/bash $executable_folder/prj-out-\$(OPT) OPT=\$(OPT)"
-pf "\n"
-
-# test executable
-pf "\n$executable_folder/test-out-\$(OPT):"
-while read -r file_name; do
-	[[ "$file_name" != "prj-"* ]] && pf " $build_folder/$file_name.o"
-done < cpp-file.list
-pf "\n\t\$(CC) \$(INC) -o \$@ \$^"
-pf "\n"
-
-# project executable
-pf "\n$executable_folder/prj-out-\$(OPT):"
-while read -r file_name; do
-	[[ "$file_name" != "test-"* ]] && pf " $build_folder/$file_name.o"
-done < cpp-file.list
-pf "\n\t\$(CC) \$(INC) -o \$@ \$^"
-pf "\n"
-
-echo "Adding headers to dependency list"
-while read -r cpp_full_path; do
-	echo "Parsing $cpp_full_path"
-
-	cpp_file_name="`echo $(basename $cpp_full_path) | awk -F '.' '{print $1}'`"
-	cpp_dir_name="`dirname $cpp_full_path`"
-	pf "\n$build_folder/$cpp_file_name.o: $cpp_dir_name/$cpp_file_name.cpp "
-
-	# find all the included libraries in the cpp file
-	includes=`grep "^#include" "$cpp_full_path" | grep -v "<" | awk -F '"' '{print $2}'`
-	for hpp_file in ${includes[@]}; do
-		pf "`find ./ -name $hpp_file` "
+for EXTENSION in ${SRC_EXTENSIONS[@]}; do
+	for f in $(find $SRC_PATHS -name "*.${EXTENSION}"); do
+		FILE_NAME=$(basename $f)
+		echo "$f" >>src-full.list
+		FILE_NO_EXT=${FILE_NAME%.*}
+		echo "${FILE_NO_EXT}" >>src-name.list
 	done
-	# find all the included libraries in the hpp file
-	hpp_full_path="`find ./ -name "$cpp_file_name.hpp"`"
-	# if the hpp file exists, look for dependencies in the hpp file as well
-	if [ "$hpp_full_path" != "" ]; then
-		hpp_dep=`grep "^#include" "$hpp_full_path" | grep -v "<" | awk -F '"' '{print $2}' | awk -F '.hpp' '{print $1}'`
-		for hpp_file in ${hpp_dep[@]}; do
-			# echo $hpp_file); exit
-			cpp_dep=`find ./ -name "$(basename $hpp_file).cpp"`
-			[ "$cpp_dep" != "" ] && echo $build_folder/$hpp_file.o && pf "$build_folder/$hpp_file.o "
-		done
-	else
-		echo "No headers in $cpp_file_name.hpp"
-	fi
+done
 
-	pf "\n\t\$(CC) \$(INC) \$(CFLAGS) \$< -o \$@\n"
-done < cpp-full.list
+for EXTENSION in ${INC_EXTENSIONS[@]}; do
+	for f in $(find $HEADER_PATHS -name "*.${EXTENSION}"); do
+		echo $(dirname $f) >>header-dir.list
+	done
+done
 
-pf "\nclean:\n\trm -rf $executable_folder\n"
+# Remove duplicates from directory list
+sort header-dir.list | uniq >header-sorted-dir.list
 
-pf "\ncleanall:\n\trm -rf $executable_folder $profile_folder/* $output_folder/prj-*"
+# find system libs which may need to be linked
+ALL_LIBS=$(egrep -rh "^#include|^#import" $(echo "$SRC_PATHS" "$HEADER_PATHS") 2>/dev/null | grep -o "<.*>" | sed 's/<//' | sed 's/>//' | sort | uniq)
+
+# select those who actually need to be linked and create LIB list
+for LIB_FOUND in ${ALL_LIBS[@]}; do
+	case $LIB_FOUND in
+	thread)
+		LIB="$LIB -pthread"
+		;;
+	curl/curl.h)
+		LIB="$LIB -lcurl"
+		;;
+	zlib.h)
+		LIB="$LIB -lz"
+		;;
+	Cocoa/Cocoa.h)
+		FRAMEWORKS="Cocoa ${FRAMEWORKS}"
+		;;
+	esac
+done
+
+pf "\nOBJCFLAGS=${OBJCFLAGS}"
+pf "\nCPPFLAGS=${CPPFLAGS}"
+pf "\nCFLAGS=${CFLAGS}"
+pf "\nMAINFLAGS=${MAINFLAGS}"
+pf "\nBD=${BD}"
+pf "\nOPT ?= 0"
+
+[ "$LIB" != "" ] && pf "\nLIB=$LIB"                                 # LIB added if not empty
+[ "$FRAMEWORKS" != "" ] && pf "\nFRAMEWORKS=-framework $FRAMEWORKS" # LIB added if not empty
+pf "\nINC="
+while read -r folder; do # created -I list
+	pf " -I$folder \\"
+	pf "\n"
+done <header-sorted-dir.list
+
+# Phony recipies
+pf "\n.PHONY: all setup"
+pf "\n"
+
+# All
+pf "\nall: setup"
+pf "\n"
+
+pf "\nsetup:"
+pf "\n\t@/bin/rm -rf ${APP_NAME}.app"
+pf "\n\t@mkdir -p \\"
+pf "\n\t${DIST_ASSETS_DIR} \\"
+pf "\n\t${ARTIFACT_FOLDER} \\"
+pf "\n\t${BUILD_DIR}"
+
+# Set TEST to 1 in case MODE==TEST and run unit tests
+pf "\n\t@if [ \"\$(MODE)\" = \"TEST\" ]; then \\"
+pf "\n\t[ \`grep -c '^#define TEST 0' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
+pf "\n\tsed -i.bak 's/^#define TEST 0/#define TEST 1/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
+# Set MEM_ANALYSIS to 1 in case MODE==TEST
+pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 0' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
+pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 0/#define MEM_ANALYSIS 1/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
+pf "\n\tmake -C \"\$(BD)\" ${BUILD_DIR}/${APP_NAME}-test; \\"
+pf "\n\telse \\"
+
+# Reset TEST and MEM_ANALYSIS in case as default behavior.
+pf "\n\t[ \`grep -c '^#define TEST 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
+pf "\n\tsed -i.bak 's/^#define TEST 1/#define TEST 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
+pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
+pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 1/#define MEM_ANALYSIS 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
+pf "\n\tmake -C \"\$(BD)\" ${BUILD_DIR}/${APP_NAME}; \\"
+pf "\n\tfi"
+pf "\n"
+
+pf "\n${BUILD_DIR}/${APP_NAME}:"
+while read -r FILE_NAME; do
+	if [ "${FILE_NAME}" == "${MAIN_TEST}" ]; then continue; fi
+	pf "\\"
+	pf "\n\t${BUILD_DIR}/$FILE_NAME.o "
+done <src-name.list
+pf "\n\t${GLOBAL_COMPILER} \$(LIB) \$(MAINFLAGS) -O\$(OPT) \$(INC) \$(FRAMEWORKS) \$^ -o \$@"
+pf "\n"
+
+# Test
+pf "\n${BUILD_DIR}/${APP_NAME}-test:"
+while read -r FILE_NAME; do
+	if [ "${FILE_NAME}" == "${MAIN}" ]; then continue; fi
+	pf "\\"
+	pf "\n\t${BUILD_DIR}/$FILE_NAME.o "
+done <src-name.list
+pf "\n\t${GLOBAL_COMPILER} \$(LIB) \$(MAINFLAGS) -O\$(OPT) \$(INC) \$(FRAMEWORKS) \$^ -o \$@"
+pf "\n"
+
+echo "Adding dependency list"
+while read -r FILE_FULL_PATH; do
+	FILE_NAME=$(basename "${FILE_FULL_PATH}")
+	DIR_NAME=$(dirname "${FILE_FULL_PATH}")
+	FILE_NO_EXT=${FILE_NAME%.*}
+	FILE_EXT=${FILE_NAME##*.}
+
+	pf "\n${BUILD_DIR}/$FILE_NO_EXT.o: ${FILE_FULL_PATH} "
+
+	HEADER_FILES=$(egrep "^#include|^#import" "${FILE_FULL_PATH}" | grep -v "<" | awk -F '"' '{print $2}')
+
+	for HEADER_FILE in ${HEADER_FILES[@]}; do
+		# Some headers are imported with the path
+		HEADER_NAME=$(basename "${HEADER_FILE}")
+		HEADER_PATH=$(find "${BD}" -name "${HEADER_NAME}")
+		HEADER_PATH_FROM_BD=${HEADER_PATH#"${BD}/"}
+		pf "\\"
+		pf "\n\t${HEADER_PATH_FROM_BD} "
+	done
+
+	case $FILE_EXT in
+	c)
+		pf "\n\tgcc \$(INC) \$(CFLAGS) -c \$< -o \$@\n"
+		;;
+	cpp)
+		pf "\n\tg++ \$(INC) \$(CPPFLAGS) -c \$< -o \$@\n"
+		;;
+	mm)
+		pf "\n\tclang \$(INC) \$(OBJCFLAGS) -c \$< -o \$@\n"
+		;;
+	esac
+	pf "\n"
+done <src-full.list
 
 rm *.list
 

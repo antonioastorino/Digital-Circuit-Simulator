@@ -1,6 +1,7 @@
 #ifndef DCSRam16x8_hpp
 #define DCSRam16x8_hpp
 #include "DCSAddressDecoder4Bits.hpp"
+#include "DCSCommon.hpp"
 
 class DCSNode;
 class DCSRegister8BitsWithEnable;
@@ -75,5 +76,10 @@ public:
     void updateOut() override;
     void disconnect();
 };
+
+
+#if TEST == 1
+void ramTest();
+#endif
 
 #endif /* DCSRam16x8_hpp */

@@ -1,6 +1,7 @@
 #include "DCSAddressDecoder4Bits.hpp"
 #include "DCSAnd4.hpp"
 #include "DCSLog.hpp"
+#include "DCSCommon.hpp"
 
 DCSAddressDecoder4Bits::DCSAddressDecoder4Bits(std::string name)
     : DCSComponent(name, false),
@@ -42,3 +43,38 @@ DCSComponent* DCSAddressDecoder4Bits::getInComponent(uint16_t& inPinNum) {
 }
 
 void DCSAddressDecoder4Bits::updateOut() { DCSLog::error(name, 0); }
+
+#if TEST == 1
+#include "DCSAddressDecoder4Bits.hpp"
+#include "DCSComponentArray.hpp"
+#include "DCSDisplayNBits.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSLog.hpp"
+#include "DCSOutput.hpp"
+
+void addressDecoderTest4Bits()
+{
+    DCSLog::printTestName("4-bit address decoder");
+    uint16_t hcp = 3;
+    DCSEngine::initialize(hcp);
+    DCSComponentArray<DCSInput> inArray0("IN", 4);
+    // DCSComponentArray<DCSOutput> outArray0("OUT", 16);
+    DCSDisplayNBits inDisp0("in", 4);
+    DCSDisplayNBits outDisp0("out", 16);
+
+    DCSAddressDecoder4Bits dec0("dec0");
+
+    inArray0.connect(&dec0);
+    inArray0.connect(&inDisp0);
+    // dec0.connect(&outArray0);
+    dec0.connect(&outDisp0);
+
+    inArray0[0]->makeSquareWave(hcp);
+    inArray0[1]->makeSquareWave(2 * hcp);
+    inArray0[2]->makeSquareWave(4 * hcp);
+    inArray0[3]->makeSquareWave(8 * hcp);
+
+    DCSEngine::run(50, false);
+}
+#endif
