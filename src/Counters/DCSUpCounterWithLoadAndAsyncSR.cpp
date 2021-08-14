@@ -1,5 +1,6 @@
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "DCSLog.hpp"
+#include "DCSCommon.hpp"
 
 DCSUpCounterWithLoadAndAsyncSR::DCSUpCounterWithLoadAndAsyncSR(std::string name, uint16_t numOfBits)
     : DCSComponent(name, false),
@@ -63,3 +64,86 @@ DCSComponent* DCSUpCounterWithLoadAndAsyncSR::getInComponent(uint16_t& inPinNum)
 }
 
 void DCSUpCounterWithLoadAndAsyncSR::updateOut() { DCSLog::error(name, 0); }
+
+#if TEST == 1
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSLog.hpp"
+#include "DCSOutput.hpp"
+
+
+void upCounter4BitsTest()
+{
+    DCSLog::printTestName("Up counter");
+    DCSEngine::initialize(5);
+
+    DCSUpCounterWithLoadAndAsyncSR count0("count", 4);
+    DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
+    DCSComponentArray<DCSOutput> outArray("Out", count0.getNumOfOutPins());
+    DCSDisplayNBits disp0("In", 4);
+    DCSDisplayNBits disp1("Count", 4);
+
+    // connect control signals
+    inArray.connect(&count0, {0, 4}, {0, 4}, {"C_in", "LD", "CLK", "", ""});
+
+    // connect data-in signals
+    inArray.connect(&count0, {5, 8}, {5, 8});
+
+    // connect data-in to display (for enhanced visualization purposes)
+    inArray.connect(&disp0, {5, 8}, {0, 3});
+
+    // connect counter output to output object
+    count0.connect(&outArray, {0, 3}, {0, 3});
+    count0.connect(&outArray, 4, 4, {"Cout"});
+
+    count0.connect(&disp1, {0, 3}, {0, 3});
+
+    uint16_t hp = count0.getTimeDelay() / 2 + 1;
+
+    DCSEngine::setHalfClockPeriod(hp);
+
+    inArray[0]->makeSignal(transitions{4, 1}, 0, true);    // Carry in
+    inArray[1]->makeSignal(transitions{1, 1, 1}, 0, true); // Load
+    inArray[2]->makeSquareWave(hp);                        // Clock
+
+    inArray[7]->makeSignal(transitions{1, 1, 1}, 0, true);
+    inArray[8]->makeSignal(transitions{1, 1, 1}, 0, true);
+
+    DCSEngine::run(50 * hp * 2, true);
+}
+
+void upCounter8BitsTest()
+{
+    DCSLog::printTestName("Up counter");
+    DCSEngine::initialize(5);
+
+    DCSUpCounterWithLoadAndAsyncSR count0("count", 8);
+    DCSComponentArray<DCSInput> inArray("In", count0.getNumOfInPins());
+    DCSComponentArray<DCSOutput> outArray("Out", count0.getNumOfOutPins());
+    DCSDisplayNBits disp0("In", 8);
+    DCSDisplayNBits disp1("Count", 8);
+
+    inArray.connect(&count0, {"C_in", "LD", "CLK", "", "", "", "", "", "", "", "", "", ""});
+
+    count0.connect(&outArray, {"", "", "", "", "", "", "", "", "Cout"});
+
+    inArray.connect(&disp0, {5, 12}, {0, 7});
+    count0.connect(&disp1, {0, 7}, {0, 7});
+
+    uint16_t hp = count0.getTimeDelay() / 2 + 1;
+    DCSEngine::setHalfClockPeriod(hp);
+    inArray[0]->makeSignal(transitions{4, 1}, 0, true);
+    inArray[1]->makeSignal(transitions{1, 1, 1}, 0, true);
+    inArray[2]->makeSquareWave(hp);
+
+    inArray[7]->makeSignal(transitions{1, 1, 1, 1}, 0, true);
+    inArray[8]->makeSignal(transitions{1, 1, 1, 1}, 0, true);
+    inArray[9]->makeSignal(transitions{1, 1, 1, 1}, 0, true);
+    inArray[10]->makeSignal(transitions{1, 1, 1, 1}, 0, true);
+    inArray[11]->makeSignal(transitions{1, 1, 1, 1}, 0, true);
+    inArray[12]->makeSignal(transitions{1, 1, 1}, 0, true);
+
+    DCSEngine::run(100 * hp * 2, true);
+}
+
+#endif

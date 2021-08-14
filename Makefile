@@ -71,8 +71,6 @@ build/dcs:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-UpCounter4Bits.o \
-	build/test-UpCounter.o \
 	build/test-Xor.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
@@ -133,8 +131,6 @@ build/dcs-test:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-UpCounter4Bits.o \
-	build/test-UpCounter.o \
 	build/test-Xor.o \
 	build/main-test.o \
 	build/DCSComponent.o \
@@ -507,16 +503,6 @@ build/DCSDisplayNBits.o: src/Displays/DCSDisplayNBits.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-UpCounter4Bits.o: src/Tests/test-UpCounter4Bits.cpp \
-	src/Tests/test-UpCounter4Bits.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
-build/test-UpCounter.o: src/Tests/test-UpCounter.cpp \
-	src/Tests/test-UpCounter.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Xor.o: src/Tests/test-Xor.cpp \
 	src/Tests/test-Xor.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -542,9 +528,8 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSNand3.hpp \
 	include/DCSNor3.hpp \
 	include/DCSNot.hpp \
-	include/DCSRam16x8.hpp \
-	include/DCSTimer.hpp \
 	include/DCSOr.hpp \
+	include/DCSRam16x8.hpp \
 	include/DCSRam256x16.hpp \
 	include/DCSRegister16BitsWithEnable.hpp \
 	include/DCSRegister1Bit.hpp \
@@ -553,10 +538,10 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRegister8BitsWithEnable.hpp \
 	include/DCSRippleAdder8Bits.hpp \
 	include/DCSSRLatch.hpp \
+	include/DCSTimer.hpp \
 	include/DCSTriStateBuffer.hpp \
 	include/DCSUnitDelay.hpp \
-	src/Tests/test-UpCounter.hpp \
-	src/Tests/test-UpCounter4Bits.hpp \
+	include/DCSUpCounterWithLoadAndAsyncSR.hpp \
 	src/Tests/test-Xor.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
@@ -733,7 +718,12 @@ build/DCSClockDivider.o: src/Counters/DCSClockDivider.cpp \
 
 build/DCSUpCounterWithLoadAndAsyncSR.o: src/Counters/DCSUpCounterWithLoadAndAsyncSR.cpp \
 	include/DCSUpCounterWithLoadAndAsyncSR.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

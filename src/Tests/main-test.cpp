@@ -17,9 +17,8 @@
 #include "DCSNand3.hpp"
 #include "DCSNor3.hpp"
 #include "DCSNot.hpp"
-#include "DCSRam16x8.hpp"
-#include "DCSTimer.hpp"
 #include "DCSOr.hpp"
+#include "DCSRam16x8.hpp"
 #include "DCSRam256x16.hpp"
 #include "DCSRegister16BitsWithEnable.hpp"
 #include "DCSRegister1Bit.hpp"
@@ -28,10 +27,10 @@
 #include "DCSRegister8BitsWithEnable.hpp"
 #include "DCSRippleAdder8Bits.hpp"
 #include "DCSSRLatch.hpp"
+#include "DCSTimer.hpp"
 #include "DCSTriStateBuffer.hpp"
 #include "DCSUnitDelay.hpp"
-#include "test-UpCounter.hpp"
-#include "test-UpCounter4Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 #include "test-Xor.hpp"
 #include <iostream>
 #include <vector>
@@ -56,7 +55,6 @@ int main(int argc, const char* argv[])
         FUNC_CONSTRUCTOR(register8BitsWithEnableTest),
         FUNC_CONSTRUCTOR(jkLatchMasterSlaveAsyncSRTest),
         FUNC_CONSTRUCTOR(dividerTest),
-        FUNC_CONSTRUCTOR(upCounterTest),
         FUNC_CONSTRUCTOR(mux2To1Test),
         FUNC_CONSTRUCTOR(fullAdderTest),
         FUNC_CONSTRUCTOR(displayTest),
@@ -65,9 +63,10 @@ int main(int argc, const char* argv[])
         FUNC_CONSTRUCTOR(ramTest),
         FUNC_CONSTRUCTOR(memoryProgrammerTest),
         FUNC_CONSTRUCTOR(risingEdgeDetectorTest),
-        FUNC_CONSTRUCTOR(upCounter4BitsTest),
         FUNC_CONSTRUCTOR(addressDecoderTest4Bits),
         FUNC_CONSTRUCTOR(register8BitsTest),
+        FUNC_CONSTRUCTOR(upCounter4BitsTest),
+        FUNC_CONSTRUCTOR(upCounter8BitsTest),
         FUNC_CONSTRUCTOR(aluTest),
         FUNC_CONSTRUCTOR(controlUnitTest),
         FUNC_CONSTRUCTOR(addressDecoder8BitsTest),
