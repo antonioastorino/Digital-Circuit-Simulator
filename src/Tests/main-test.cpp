@@ -5,7 +5,7 @@
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
 #include "DCSAnd6.hpp"
-#include "test-AndArray.hpp"
+#include "DCSComponentArray.hpp"
 #include "test-BitStreamSignal.hpp"
 #include "test-ControlUnit.hpp"
 #include "test-DFlipFlop.hpp"

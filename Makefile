@@ -88,7 +88,6 @@ build/dcs:\
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
-	build/test-AndArray.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-Mux2To1.o \
@@ -177,7 +176,6 @@ build/dcs-test:\
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
-	build/test-AndArray.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-Mux2To1.o \
@@ -552,11 +550,6 @@ build/test-SRLatch.o: src/Tests/test-SRLatch.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-AndArray.o: src/Tests/test-AndArray.cpp \
-	src/Tests/test-AndArray.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Nor3.o: src/Tests/test-Nor3.cpp \
 	src/Tests/test-Nor3.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -610,7 +603,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
 	include/DCSAnd6.hpp \
-	src/Tests/test-AndArray.hpp \
+	include/DCSComponentArray.hpp \
 	src/Tests/test-BitStreamSignal.hpp \
 	src/Tests/test-ControlUnit.hpp \
 	src/Tests/test-DFlipFlop.hpp \
@@ -698,7 +691,12 @@ build/DCSComponentArray.o: src/Basic/DCSComponentArray.cpp \
 	include/DCSTriStateBuffer.hpp \
 	include/DCSTriStateBuffer8Bits.hpp \
 	include/DCSUnitDelay.hpp \
-	include/DCSXor.hpp 
+	include/DCSXor.hpp \
+	include/DCSCommon.hpp \
+	include/DCSAnd.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

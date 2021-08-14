@@ -1,6 +1,7 @@
 #ifndef DCSComponentArray_hpp
 #define DCSComponentArray_hpp
 #include "DCSComponent.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSComponentArray
@@ -26,5 +27,10 @@ public:
     T* operator[](uint16_t elemNum);
     uint16_t getNumOfElements();
 };
+
+#if TEST == 1
+
+void andArrayTest();
+#endif
 
 #endif /* DCSComponentArray_hpp */
