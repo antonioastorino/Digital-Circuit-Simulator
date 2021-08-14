@@ -1,8 +1,8 @@
 #ifndef DCSEngine_hpp
 #define DCSEngine_hpp
+#include "DCSCommon.hpp"
 #include "DCSDisplayNBits.hpp"
 #include "DCSLog.hpp"
-#include "DCSCommon.hpp"
 
 class DCSComponent;
 class DCSInput;
@@ -16,7 +16,8 @@ class DCSRam256x16;
  * evolution.
  *
  */
-class DCSEngine {
+class DCSEngine
+{
 private:
     static std::vector<DCSComponent*> ramComponentVector; // temporarily stores components of a RAM
     static std::vector<DCSWire*> ramWireVector;           // temporarily stores wires of a RAM
@@ -28,7 +29,8 @@ private:
     static uint64_t clockPeriod;
     static uint64_t s_stepNumber;
     static bool sampling;
-    static bool ramReady;// makes sure ram are activated after being programmed and before being connected to the circuit
+    static bool ramReady; // makes sure ram are activated after being programmed and before being
+                          // connected to the circuit
     static bool initialized;
 
     static void storeRamElements();
@@ -63,10 +65,9 @@ public:
     static void useRamElements();
 };
 
-
-
 #if TEST == 1
 void bitStreamSignalTest();
+void memoryProgrammerTest();
 #endif
 
 #endif /* DCSEngine_hpp */

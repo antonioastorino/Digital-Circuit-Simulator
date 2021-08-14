@@ -79,7 +79,6 @@ build/dcs:\
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
-	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
@@ -158,7 +157,6 @@ build/dcs-test:\
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
-	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
@@ -308,7 +306,13 @@ build/DCSEngine.o: src/Core/DCSEngine.cpp \
 	include/DCSTimer.hpp \
 	include/DCSUnitDelay.hpp \
 	include/DCSWire.hpp \
-	include/DCSCommon.hpp 
+	include/DCSCommon.hpp \
+	include/DCSInstructionSet.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp \
+	include/DCSRam16x8.hpp \
+	include/DCSTriStateBuffer8Bits.hpp \
+	include/DCSUpCounterWithLoadAndAsyncSR.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -506,11 +510,6 @@ build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-MemoryProgrammer.o: src/Tests/test-MemoryProgrammer.cpp \
-	src/Tests/test-MemoryProgrammer.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-SRLatch.o: src/Tests/test-SRLatch.cpp \
 	src/Tests/test-SRLatch.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -573,8 +572,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSDLatchAsyncSR.hpp \
 	include/DCSClockDivider.hpp \
 	include/DCSFullAdder.hpp \
-	 \
-	src/Tests/test-MemoryProgrammer.hpp \
+	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
 	src/Tests/test-Mux2To1.hpp \
 	src/Tests/test-Nand3.hpp \
 	src/Tests/test-Nor3.hpp \
