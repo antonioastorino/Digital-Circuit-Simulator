@@ -76,7 +76,6 @@ build/dcs:\
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
-	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
 	build/test-Register16BitsWithEnable.o \
@@ -151,7 +150,6 @@ build/dcs-test:\
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
-	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
 	build/test-Register16BitsWithEnable.o \
@@ -230,7 +228,10 @@ build/DCSNor.o: src/Gates/DCSNor.cpp \
 
 
 build/DCSNot.o: src/Gates/DCSNot.cpp \
-	include/DCSNot.hpp 
+	include/DCSNot.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSLog.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -506,11 +507,6 @@ build/test-Register8BitsWithEnable.o: src/Tests/test-Register8BitsWithEnable.cpp
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-NotLoop.o: src/Tests/test-NotLoop.cpp \
-	src/Tests/test-NotLoop.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
 	src/Tests/test-Ram256x16.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -556,23 +552,23 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSAddressDecoder4Bits.hpp \
 	include/DCSAddressDecoder8Bits.hpp \
 	include/DCSAnd6.hpp \
+	include/DCSClockDivider.hpp \
 	include/DCSComponentArray.hpp \
 	include/DCSControlUnit4Bits.hpp \
 	include/DCSDFlipFlop.hpp \
-	include/DCSDisplayNBits.hpp \
-	include/DCSEngine.hpp \
-	include/DCSLog.hpp \
-	include/DCSRam16x8.hpp \
-	include/DCSTimer.hpp \
 	include/DCSDLatch.hpp \
 	include/DCSDLatchAsyncSR.hpp \
-	include/DCSClockDivider.hpp \
+	include/DCSDisplayNBits.hpp \
+	include/DCSEngine.hpp \
 	include/DCSFullAdder.hpp \
 	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
+	include/DCSLog.hpp \
 	include/DCSMux2To1.hpp \
 	include/DCSNand3.hpp \
 	include/DCSNor3.hpp \
-	src/Tests/test-NotLoop.hpp \
+	include/DCSNot.hpp \
+	include/DCSRam16x8.hpp \
+	include/DCSTimer.hpp \
 	src/Tests/test-Or.hpp \
 	src/Tests/test-Ram256x16.hpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
