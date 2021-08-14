@@ -1,6 +1,7 @@
 #ifndef DCSNand3_hpp
 #define DCSNand3_hpp
 #include "DCSComponent.hpp"
+#include "DCSCommon.hpp"
 /**
  * @class DCSNand3
  * NAND gate with 3 inputs
@@ -11,5 +12,8 @@ public:
 	
 	void updateOut() override;
 };
+#if TEST == 1
+void nand3Test();
+#endif
 
 #endif /* DCSNand3_hpp */

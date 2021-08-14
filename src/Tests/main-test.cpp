@@ -16,7 +16,7 @@
 #include "DCSFullAdder.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSMux2To1.hpp"
-#include "test-Nand3.hpp"
+#include "DCSNand3.hpp"
 #include "test-Nor3.hpp"
 #include "test-NotLoop.hpp"
 #include "test-Or.hpp"

@@ -74,7 +74,6 @@ build/dcs:\
 	build/test-Register1BitWithEnable.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
-	build/test-Nand3.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
@@ -151,7 +150,6 @@ build/dcs-test:\
 	build/test-Register1BitWithEnable.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
-	build/test-Nand3.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
@@ -211,7 +209,13 @@ build/DCSControlUnit5Bits.o: src/ControlUnit/DCSControlUnit5Bits.cpp \
 
 
 build/DCSNand3.o: src/Gates/DCSNand3.cpp \
-	include/DCSNand3.hpp 
+	include/DCSNand3.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -487,11 +491,6 @@ build/test-Register8Bits.o: src/Tests/test-Register8Bits.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Nand3.o: src/Tests/test-Nand3.cpp \
-	src/Tests/test-Nand3.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-UnitDelay.o: src/Tests/test-UnitDelay.cpp \
 	src/Tests/test-UnitDelay.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -571,7 +570,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSFullAdder.hpp \
 	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
 	 \
-	src/Tests/test-Nand3.hpp \
+	include/DCSNand3.hpp \
 	src/Tests/test-Nor3.hpp \
 	src/Tests/test-NotLoop.hpp \
 	src/Tests/test-Or.hpp \
