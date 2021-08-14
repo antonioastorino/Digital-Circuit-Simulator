@@ -74,7 +74,6 @@ build/dcs:\
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
-	build/test-DLatchAsyncSR.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
 	build/test-UnitDelay.o \
@@ -156,7 +155,6 @@ build/dcs-test:\
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
-	build/test-DLatchAsyncSR.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
 	build/test-UnitDelay.o \
@@ -487,11 +485,6 @@ build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-DLatchAsyncSR.o: src/Tests/test-DLatchAsyncSR.cpp \
-	src/Tests/test-DLatchAsyncSR.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Register8Bits.o: src/Tests/test-Register8Bits.cpp \
 	src/Tests/test-Register8Bits.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -586,7 +579,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
 	include/DCSDLatch.hpp \
-	src/Tests/test-DLatchAsyncSR.hpp \
+	include/DCSDLatchAsyncSR.hpp \
 	include/DCSClockDivider.hpp \
 	src/Tests/test-FullAdder.hpp \
 	src/Tests/test-JKMasterSlave.hpp \
@@ -798,7 +791,14 @@ build/DCSDFlipFlopAsyncSR.o: src/Latches-async-SR/DCSDFlipFlopAsyncSR.cpp \
 
 build/DCSDLatchAsyncSR.o: src/Latches-async-SR/DCSDLatchAsyncSR.cpp \
 	include/DCSDLatchAsyncSR.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSDLatchAsyncSR.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

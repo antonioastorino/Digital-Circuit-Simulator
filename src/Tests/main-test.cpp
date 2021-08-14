@@ -11,7 +11,7 @@
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
 #include "DCSDLatch.hpp"
-#include "test-DLatchAsyncSR.hpp"
+#include "DCSDLatchAsyncSR.hpp"
 #include "DCSClockDivider.hpp"
 #include "test-FullAdder.hpp"
 #include "test-JKMasterSlave.hpp"
