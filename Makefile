@@ -84,7 +84,6 @@ build/dcs:\
 	build/test-Xor.o \
 	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
-	build/test-Or.o \
 	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
@@ -159,7 +158,6 @@ build/dcs-test:\
 	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
 	build/main-test.o \
-	build/test-Or.o \
 	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
@@ -265,7 +263,13 @@ build/DCSAnd.o: src/Gates/DCSAnd.cpp \
 
 
 build/DCSOr.o: src/Gates/DCSOr.cpp \
-	include/DCSOr.hpp 
+	include/DCSOr.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -569,7 +573,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSNot.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	src/Tests/test-Or.hpp \
+	include/DCSOr.hpp \
 	src/Tests/test-Ram256x16.hpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
 	src/Tests/test-Register1Bit.hpp \
@@ -584,11 +588,6 @@ build/main-test.o: src/Tests/main-test.cpp \
 	src/Tests/test-UpCounter.hpp \
 	src/Tests/test-UpCounter4Bits.hpp \
 	src/Tests/test-Xor.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
-build/test-Or.o: src/Tests/test-Or.cpp \
-	src/Tests/test-Or.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
