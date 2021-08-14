@@ -72,7 +72,6 @@ build/dcs:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-TriStateBuffer.o \
-	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-SRLatch.o \
@@ -142,7 +141,6 @@ build/dcs-test:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-TriStateBuffer.o \
-	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-SRLatch.o \
@@ -413,7 +411,13 @@ build/DCSRegister16BitsWithEnable.o: src/Memory/DCSRegister16BitsWithEnable.cpp 
 build/DCSRegister8Bits.o: src/Memory/DCSRegister8Bits.cpp \
 	include/DCSRegister8Bits.hpp \
 	include/DCSLog.hpp \
-	include/DCSRegister1Bit.hpp 
+	include/DCSRegister1Bit.hpp \
+	include/DCSCommon.hpp \
+	include/DCSDisplayNBits.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -501,11 +505,6 @@ build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Register8Bits.o: src/Tests/test-Register8Bits.cpp \
-	src/Tests/test-Register8Bits.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-UnitDelay.o: src/Tests/test-UnitDelay.cpp \
 	src/Tests/test-UnitDelay.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -573,7 +572,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
 	include/DCSRegister1Bit.hpp \
 	include/DCSRegister1BitWithEnable.hpp \
-	src/Tests/test-Register8Bits.hpp \
+	include/DCSRegister8Bits.hpp \
 	src/Tests/test-Register8BitsWithEnable.hpp \
 	src/Tests/test-RippleAdder.hpp \
 	src/Tests/test-RisingEdgeDetector.hpp \

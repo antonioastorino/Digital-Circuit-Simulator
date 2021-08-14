@@ -2,6 +2,7 @@
 #ifndef DCSRegister8Bits_hpp
 #define DCSRegister8Bits_hpp
 #include "DCSComponentArray.hpp"
+#include "DCSCommon.hpp"
 class DCSRegister1Bit;
 class DCSNode;
 /**
@@ -45,5 +46,9 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
+
+#if TEST == 1
+void register8BitsTest();
+#endif
 
 #endif /* DCSRegister8Bits_hpp */

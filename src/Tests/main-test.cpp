@@ -24,7 +24,7 @@
 #include "test-Register16BitsWithEnable.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSRegister1BitWithEnable.hpp"
-#include "test-Register8Bits.hpp"
+#include "DCSRegister8Bits.hpp"
 #include "test-Register8BitsWithEnable.hpp"
 #include "test-RippleAdder.hpp"
 #include "test-RisingEdgeDetector.hpp"
