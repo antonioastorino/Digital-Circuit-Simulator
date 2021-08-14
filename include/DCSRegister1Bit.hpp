@@ -3,6 +3,7 @@
 #include "DCSDFlipFlopAsyncSR.hpp"
 #include "DCSOr.hpp"
 #include "DCSTriStateBuffer.hpp"
+#include "DCSCommon.hpp"
 
 class DCSNode;
 
@@ -55,4 +56,9 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
+
+#if TEST == 1
+void register1BitTest();
+#endif
+
 #endif /* DCSRegister1Bit_hpp */

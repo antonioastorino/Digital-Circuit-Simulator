@@ -81,7 +81,6 @@ build/dcs:\
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
-	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
 	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
@@ -153,7 +152,6 @@ build/dcs-test:\
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
-	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
 	build/main-test.o \
 	build/test-RisingEdgeDetector.o \
@@ -371,7 +369,12 @@ build/DCSRam256x16.o: src/Memory/DCSRam256x16.cpp \
 
 build/DCSRegister1Bit.o: src/Memory/DCSRegister1Bit.cpp \
 	include/DCSRegister1Bit.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -539,11 +542,6 @@ build/test-Xor.o: src/Tests/test-Xor.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Register1Bit.o: src/Tests/test-Register1Bit.cpp \
-	src/Tests/test-Register1Bit.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-RippleAdder.o: src/Tests/test-RippleAdder.cpp \
 	src/Tests/test-RippleAdder.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -574,7 +572,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSOr.hpp \
 	include/DCSRam256x16.hpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
-	src/Tests/test-Register1Bit.hpp \
+	 \
 	src/Tests/test-Register1BitWithEnable.hpp \
 	src/Tests/test-Register8Bits.hpp \
 	src/Tests/test-Register8BitsWithEnable.hpp \
