@@ -31,8 +31,7 @@
 #include "DCSTriStateBuffer.hpp"
 #include "DCSUnitDelay.hpp"
 #include "DCSUpCounterWithLoadAndAsyncSR.hpp"
-#include "test-Xor.hpp"
-#include <iostream>
+#include "DCSXor.hpp"
 #include <vector>
 
 int main(int argc, const char* argv[])

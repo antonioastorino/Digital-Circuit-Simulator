@@ -71,7 +71,6 @@ build/dcs:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-Xor.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
 	build/DCSNode.o \
@@ -131,7 +130,6 @@ build/dcs-test:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-Xor.o \
 	build/main-test.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
@@ -273,7 +271,12 @@ build/DCSAnd3.o: src/Gates/DCSAnd3.cpp \
 
 
 build/DCSXor.o: src/Gates/DCSXor.cpp \
-	include/DCSXor.hpp 
+	include/DCSXor.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -503,11 +506,6 @@ build/DCSDisplayNBits.o: src/Displays/DCSDisplayNBits.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Xor.o: src/Tests/test-Xor.cpp \
-	src/Tests/test-Xor.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSALU.hpp \
 	include/DCSAddressDecoder4Bits.hpp \
@@ -542,7 +540,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSTriStateBuffer.hpp \
 	include/DCSUnitDelay.hpp \
 	include/DCSUpCounterWithLoadAndAsyncSR.hpp \
-	src/Tests/test-Xor.hpp 
+	include/DCSXor.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
