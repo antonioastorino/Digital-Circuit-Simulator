@@ -1,6 +1,7 @@
 #ifndef DCSDisplayNBits_hpp
 #define DCSDisplayNBits_hpp
 #include "DCSComponent.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSDisplayNBits
@@ -16,5 +17,9 @@ public:
     DCSDisplayNBits(std::string name, uint16_t numOfBits);
     void updateOut() override;
 };
+
+#if TEST == 1
+void displayTest();
+#endif
 
 #endif /* DCSDisplayNBits_hpp */

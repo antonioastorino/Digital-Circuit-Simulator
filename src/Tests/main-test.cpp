@@ -4,14 +4,14 @@
 #include "DCSAnd6.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSControlUnit4Bits.hpp"
+#include "DCSDFlipFlop.hpp"
+#include "DCSDisplayNBits.hpp"
 #include "DCSEngine.hpp"
 #include "DCSLog.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
-#include "DCSDFlipFlop.hpp"
 #include "test-DLatch.hpp"
 #include "test-DLatchAsyncSR.hpp"
-#include "test-Display.hpp"
 #include "test-Divider.hpp"
 #include "test-FullAdder.hpp"
 #include "test-JKMasterSlave.hpp"
@@ -40,7 +40,6 @@
 
 int main(int argc, const char* argv[])
 {
-
     std::vector<func_descriptor> tests = {
         FUNC_CONSTRUCTOR(bitStreamSignalTest),
         FUNC_CONSTRUCTOR(orTest),

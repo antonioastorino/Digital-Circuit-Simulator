@@ -90,7 +90,6 @@ build/dcs:\
 	build/test-Mux2To1.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
-	build/test-Display.o \
 	build/test-Xor.o \
 	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
@@ -175,7 +174,6 @@ build/dcs-test:\
 	build/test-Mux2To1.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
-	build/test-Display.o \
 	build/test-Xor.o \
 	build/test-Register1Bit.o \
 	build/test-RippleAdder.o \
@@ -465,7 +463,12 @@ build/DCSArbitrarySignal.o: src/Signals/DCSArbitrarySignal.cpp \
 
 build/DCSDisplayNBits.o: src/Displays/DCSDisplayNBits.cpp \
 	include/DCSDisplayNBits.hpp \
-	include/DCSEngine.hpp 
+	include/DCSEngine.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -564,11 +567,6 @@ build/test-UpCounter.o: src/Tests/test-UpCounter.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Display.o: src/Tests/test-Display.cpp \
-	src/Tests/test-Display.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Xor.o: src/Tests/test-Xor.cpp \
 	src/Tests/test-Xor.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -591,14 +589,14 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSAnd6.hpp \
 	include/DCSComponentArray.hpp \
 	include/DCSControlUnit4Bits.hpp \
+	include/DCSDFlipFlop.hpp \
+	include/DCSDisplayNBits.hpp \
 	include/DCSEngine.hpp \
 	include/DCSLog.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	include/DCSDFlipFlop.hpp \
 	src/Tests/test-DLatch.hpp \
 	src/Tests/test-DLatchAsyncSR.hpp \
-	src/Tests/test-Display.hpp \
 	src/Tests/test-Divider.hpp \
 	src/Tests/test-FullAdder.hpp \
 	src/Tests/test-JKMasterSlave.hpp \
