@@ -2,6 +2,7 @@
 #define DCSEngine_hpp
 #include "DCSDisplayNBits.hpp"
 #include "DCSLog.hpp"
+#include "DCSCommon.hpp"
 
 class DCSComponent;
 class DCSInput;
@@ -61,5 +62,11 @@ public:
     static void programControlUnit(DCSRam256x16* memory, bool printOut = true);
     static void useRamElements();
 };
+
+
+
+#if TEST == 1
+void bitStreamSignalTest();
+#endif
 
 #endif /* DCSEngine_hpp */

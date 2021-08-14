@@ -6,7 +6,7 @@
 #include "DCSTimer.hpp"
 #include "DCSAnd6.hpp"
 #include "DCSComponentArray.hpp"
-#include "test-BitStreamSignal.hpp"
+#include "DCSEngine.hpp"
 #include "test-ControlUnit.hpp"
 #include "test-DFlipFlop.hpp"
 #include "test-DLatch.hpp"

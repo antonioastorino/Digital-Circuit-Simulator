@@ -72,7 +72,6 @@ build/dcs:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
-	build/test-BitStreamSignal.o \
 	build/test-FullAdder.o \
 	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
@@ -160,7 +159,6 @@ build/dcs-test:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
-	build/test-BitStreamSignal.o \
 	build/test-FullAdder.o \
 	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
@@ -320,7 +318,8 @@ build/DCSEngine.o: src/Core/DCSEngine.cpp \
 	include/DCSRam256x16.hpp \
 	include/DCSTimer.hpp \
 	include/DCSUnitDelay.hpp \
-	include/DCSWire.hpp 
+	include/DCSWire.hpp \
+	include/DCSCommon.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -470,11 +469,6 @@ build/test-Register1BitWithEnable.o: src/Tests/test-Register1BitWithEnable.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-BitStreamSignal.o: src/Tests/test-BitStreamSignal.cpp \
-	src/Tests/test-BitStreamSignal.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-FullAdder.o: src/Tests/test-FullAdder.cpp \
 	src/Tests/test-FullAdder.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -604,7 +598,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSTimer.hpp \
 	include/DCSAnd6.hpp \
 	include/DCSComponentArray.hpp \
-	src/Tests/test-BitStreamSignal.hpp \
+	include/DCSEngine.hpp \
 	src/Tests/test-ControlUnit.hpp \
 	src/Tests/test-DFlipFlop.hpp \
 	src/Tests/test-DLatch.hpp \
