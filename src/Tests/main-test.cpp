@@ -13,7 +13,7 @@
 #include "DCSDLatch.hpp"
 #include "DCSDLatchAsyncSR.hpp"
 #include "DCSClockDivider.hpp"
-#include "test-FullAdder.hpp"
+#include "DCSFullAdder.hpp"
 #include "test-JKMasterSlave.hpp"
 #include "test-MemoryProgrammer.hpp"
 #include "test-Mux2To1.hpp"

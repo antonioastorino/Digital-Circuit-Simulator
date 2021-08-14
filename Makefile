@@ -72,7 +72,6 @@ build/dcs:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
-	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
@@ -153,7 +152,6 @@ build/dcs-test:\
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
-	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
@@ -475,11 +473,6 @@ build/test-Register1BitWithEnable.o: src/Tests/test-Register1BitWithEnable.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-FullAdder.o: src/Tests/test-FullAdder.cpp \
-	src/Tests/test-FullAdder.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	src/Tests/test-TriStateBuffer.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -581,7 +574,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSDLatch.hpp \
 	include/DCSDLatchAsyncSR.hpp \
 	include/DCSClockDivider.hpp \
-	src/Tests/test-FullAdder.hpp \
+	include/DCSFullAdder.hpp \
 	src/Tests/test-JKMasterSlave.hpp \
 	src/Tests/test-MemoryProgrammer.hpp \
 	src/Tests/test-Mux2To1.hpp \
@@ -762,7 +755,11 @@ build/DCSRippleAdder8Bits.o: src/Arithmetic/DCSRippleAdder8Bits.cpp \
 
 build/DCSFullAdder.o: src/Arithmetic/DCSFullAdder.cpp \
 	include/DCSFullAdder.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

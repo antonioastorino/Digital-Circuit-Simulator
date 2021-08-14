@@ -5,6 +5,7 @@
 #include "DCSNode.hpp"
 #include "DCSOr.hpp"
 #include "DCSXor.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSFullAdder
@@ -38,5 +39,9 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     virtual void updateOut() override;
 };
+
+#if TEST == 1
+void fullAdderTest();
+#endif
 
 #endif /* DCSFullAdder_hpp */
