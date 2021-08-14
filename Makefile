@@ -73,7 +73,6 @@ build/dcs:\
 	build/DCSDisplayNBits.o \
 	build/test-TriStateBuffer.o \
 	build/test-UnitDelay.o \
-	build/test-SRLatch.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -138,7 +137,6 @@ build/dcs-test:\
 	build/DCSDisplayNBits.o \
 	build/test-TriStateBuffer.o \
 	build/test-UnitDelay.o \
-	build/test-SRLatch.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -427,7 +425,12 @@ build/DCSRegister8Bits.o: src/Memory/DCSRegister8Bits.cpp \
 
 build/DCSSRLatch.o: src/Latches/DCSSRLatch.cpp \
 	include/DCSSRLatch.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -514,11 +517,6 @@ build/test-UnitDelay.o: src/Tests/test-UnitDelay.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-SRLatch.o: src/Tests/test-SRLatch.cpp \
-	src/Tests/test-SRLatch.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-UpCounter4Bits.o: src/Tests/test-UpCounter4Bits.cpp \
 	src/Tests/test-UpCounter4Bits.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -564,7 +562,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRegister8Bits.hpp \
 	include/DCSRegister8BitsWithEnable.hpp \
 	include/DCSRippleAdder8Bits.hpp \
-	src/Tests/test-SRLatch.hpp \
+	include/DCSSRLatch.hpp \
 	src/Tests/test-TriStateBuffer.hpp \
 	src/Tests/test-UnitDelay.hpp \
 	src/Tests/test-UpCounter.hpp \

@@ -1,5 +1,6 @@
 #ifndef DCSSRLatch_hpp
 #define DCSSRLatch_hpp
+#include "DCSCommon.hpp"
 #include "DCSNor.hpp"
 
 /**
@@ -13,7 +14,8 @@
  * Out 1 - !Q
  * @end_pinout
  */
-class DCSSRLatch : public DCSComponent {
+class DCSSRLatch : public DCSComponent
+{
 private:
     DCSNor nor0;
     DCSNor nor1;
@@ -26,5 +28,8 @@ public:
 
     void updateOut() override;
 };
+#if TEST == 1
+void srLatchTest();
+#endif
 
 #endif /* DCSSRLatch_hpp */

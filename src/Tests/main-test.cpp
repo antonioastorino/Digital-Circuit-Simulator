@@ -27,7 +27,7 @@
 #include "DCSRegister8Bits.hpp"
 #include "DCSRegister8BitsWithEnable.hpp"
 #include "DCSRippleAdder8Bits.hpp"
-#include "test-SRLatch.hpp"
+#include "DCSSRLatch.hpp"
 #include "test-TriStateBuffer.hpp"
 #include "test-UnitDelay.hpp"
 #include "test-UpCounter.hpp"
