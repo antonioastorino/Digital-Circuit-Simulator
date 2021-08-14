@@ -1,9 +1,9 @@
-#include "DCSMux2to1.hpp"
+#include "DCSMux2To1.hpp"
 #include "DCSCommon.hpp"
 #include "DCSLog.hpp"
 #include "DCSTriStateBuffer8Bits.hpp"
 
-DCSMux2to1::DCSMux2to1(std::string name)
+DCSMux2To1::DCSMux2To1(std::string name)
     : DCSComponent(name, false),
       and0(name + "-And0"),
       and1(name + "-And1"),
@@ -25,7 +25,7 @@ DCSMux2to1::DCSMux2to1(std::string name)
     numOfOutPins = 1;
 }
 
-DCSComponent* DCSMux2to1::getOutComponent(uint16_t outPinNum)
+DCSComponent* DCSMux2To1::getOutComponent(uint16_t outPinNum)
 {
     if (outPinNum == 0)
         return &or0;
@@ -33,7 +33,7 @@ DCSComponent* DCSMux2to1::getOutComponent(uint16_t outPinNum)
     return nullptr;
 }
 
-DCSComponent* DCSMux2to1::getInComponent(uint16_t& inPinNum)
+DCSComponent* DCSMux2To1::getInComponent(uint16_t& inPinNum)
 {
     if (inPinNum == 0)
         return &and0;
@@ -51,7 +51,7 @@ DCSComponent* DCSMux2to1::getInComponent(uint16_t& inPinNum)
     return nullptr;
 }
 
-void DCSMux2to1::updateOut() { DCSLog::error(name, 0); }
+void DCSMux2To1::updateOut() { DCSLog::error(name, 0); }
 
 #if TEST == 1
 #include "DCSEngine.hpp"
@@ -64,7 +64,7 @@ void mux2To1Test()
     uint16_t hp = 3;
     DCSEngine::initialize(hp);
 
-    DCSMux2to1 mux0("Mux0");
+    DCSMux2To1 mux0("Mux0");
 
     DCSInput in0("In0");
     DCSInput in1("In1");

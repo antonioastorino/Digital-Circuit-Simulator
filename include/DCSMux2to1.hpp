@@ -1,5 +1,5 @@
-#ifndef DCSMux2to1_hpp
-#define DCSMux2to1_hpp
+#ifndef DCSMux2To1_hpp
+#define DCSMux2To1_hpp
 #include "DCSAnd.hpp"
 #include "DCSCommon.hpp"
 #include "DCSNode.hpp"
@@ -8,7 +8,7 @@
 #include "DCSUnitDelay.hpp"
 
 /**
- * @class DCSMux2to1
+ * @class DCSMux2To1
  * 2 to 1 multiplexer
  *
  * @pinout
@@ -19,7 +19,7 @@
  * Out 0 - Data out 0
  * @end_pinout
  */
-class DCSMux2to1 : public DCSComponent
+class DCSMux2To1 : public DCSComponent
 {
 private:
     DCSAnd and0;
@@ -30,7 +30,7 @@ private:
     DCSNode node0;
 
 public:
-    DCSMux2to1(std::string name);
+    DCSMux2To1(std::string name);
 
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     DCSComponent* getOutComponent(uint16_t outPinNum) override;
@@ -38,7 +38,7 @@ public:
     void updateOut() override;
 };
 
-#endif /* DCSMux2to1_hpp */
+#endif /* DCSMux2To1_hpp */
 
 #if TEST == 1
 void mux2To1Test();

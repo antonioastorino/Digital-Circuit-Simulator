@@ -48,7 +48,7 @@ build/dcs:\
 	build/DCSNor3.o \
 	build/DCSAnd3.o \
 	build/DCSXor.o \
-	build/DCSMux2to1.o \
+	build/DCSMux2To1.o \
 	build/DCSEngine.o \
 	build/DCSLog.o \
 	build/DCSTimer.o \
@@ -79,7 +79,6 @@ build/dcs:\
 	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
-	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
@@ -125,7 +124,7 @@ build/dcs-test:\
 	build/DCSNor3.o \
 	build/DCSAnd3.o \
 	build/DCSXor.o \
-	build/DCSMux2to1.o \
+	build/DCSMux2To1.o \
 	build/DCSEngine.o \
 	build/DCSLog.o \
 	build/DCSTimer.o \
@@ -155,7 +154,6 @@ build/dcs-test:\
 	build/test-NotLoop.o \
 	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
-	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
@@ -226,7 +224,8 @@ build/DCSAnd8.o: src/Gates/DCSAnd8.cpp \
 
 
 build/DCSNor.o: src/Gates/DCSNor.cpp \
-	include/DCSNor.hpp 
+	include/DCSNor.hpp \
+	include/DCSCommon.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -275,7 +274,13 @@ build/DCSAnd4.o: src/Gates/DCSAnd4.cpp \
 
 
 build/DCSNor3.o: src/Gates/DCSNor3.cpp \
-	include/DCSNor3.hpp 
+	include/DCSNor3.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -289,8 +294,8 @@ build/DCSXor.o: src/Gates/DCSXor.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/DCSMux2to1.o: src/Muxes-Demuxes/DCSMux2to1.cpp \
-	include/DCSMux2to1.hpp \
+build/DCSMux2To1.o: src/Muxes-Demuxes/DCSMux2To1.cpp \
+	include/DCSMux2To1.hpp \
 	include/DCSCommon.hpp \
 	include/DCSLog.hpp \
 	include/DCSTriStateBuffer8Bits.hpp \
@@ -516,11 +521,6 @@ build/test-SRLatch.o: src/Tests/test-SRLatch.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Nor3.o: src/Tests/test-Nor3.cpp \
-	src/Tests/test-Nor3.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Register16BitsWithEnable.o: src/Tests/test-Register16BitsWithEnable.cpp \
 	src/Tests/test-Register16BitsWithEnable.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -569,9 +569,9 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSClockDivider.hpp \
 	include/DCSFullAdder.hpp \
 	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
-	 \
+	include/DCSMux2To1.hpp \
 	include/DCSNand3.hpp \
-	src/Tests/test-Nor3.hpp \
+	include/DCSNor3.hpp \
 	src/Tests/test-NotLoop.hpp \
 	src/Tests/test-Or.hpp \
 	src/Tests/test-Ram256x16.hpp \

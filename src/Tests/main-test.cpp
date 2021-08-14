@@ -17,7 +17,7 @@
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSMux2To1.hpp"
 #include "DCSNand3.hpp"
-#include "test-Nor3.hpp"
+#include "DCSNor3.hpp"
 #include "test-NotLoop.hpp"
 #include "test-Or.hpp"
 #include "test-Ram256x16.hpp"

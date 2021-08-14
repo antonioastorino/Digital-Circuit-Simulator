@@ -701,7 +701,7 @@ be stable at least 3 tau for the reset to have effect (after 3 tau)
 
 
 
-## Class DCSMux2to1
+## Class DCSMux2To1
 
 2 to 1 multiplexer
 

@@ -1,6 +1,7 @@
 #ifndef DCSNor3_hpp
 #define DCSNor3_hpp
 #include "DCSComponent.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSNor3
@@ -12,5 +13,8 @@ public:
 	
 	void updateOut() override;
 };
+#if TEST == 1
+void nor3Test();
+#endif
 
 #endif /* DCSNor3_hpp */
