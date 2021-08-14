@@ -71,7 +71,6 @@ build/dcs:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-UnitDelay.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -134,7 +133,6 @@ build/dcs-test:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-UnitDelay.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -214,7 +212,11 @@ build/DCSNot.o: src/Gates/DCSNot.cpp \
 
 
 build/DCSUnitDelay.o: src/Gates/DCSUnitDelay.cpp \
-	include/DCSUnitDelay.hpp 
+	include/DCSUnitDelay.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSLog.hpp \
+	include/DCSNot.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -505,11 +507,6 @@ build/DCSDisplayNBits.o: src/Displays/DCSDisplayNBits.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-UnitDelay.o: src/Tests/test-UnitDelay.cpp \
-	src/Tests/test-UnitDelay.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-UpCounter4Bits.o: src/Tests/test-UpCounter4Bits.cpp \
 	src/Tests/test-UpCounter4Bits.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -557,7 +554,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRippleAdder8Bits.hpp \
 	include/DCSSRLatch.hpp \
 	include/DCSTriStateBuffer.hpp \
-	src/Tests/test-UnitDelay.hpp \
+	include/DCSUnitDelay.hpp \
 	src/Tests/test-UpCounter.hpp \
 	src/Tests/test-UpCounter4Bits.hpp \
 	src/Tests/test-Xor.hpp 

@@ -29,7 +29,7 @@
 #include "DCSRippleAdder8Bits.hpp"
 #include "DCSSRLatch.hpp"
 #include "DCSTriStateBuffer.hpp"
-#include "test-UnitDelay.hpp"
+#include "DCSUnitDelay.hpp"
 #include "test-UpCounter.hpp"
 #include "test-UpCounter4Bits.hpp"
 #include "test-Xor.hpp"
