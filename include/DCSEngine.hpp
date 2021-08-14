@@ -68,6 +68,7 @@ public:
 #if TEST == 1
 void bitStreamSignalTest();
 void memoryProgrammerTest();
+void risingEdgeDetectorTest();
 #endif
 
 #endif /* DCSEngine_hpp */

@@ -77,7 +77,6 @@ build/dcs:\
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
-	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
 	build/DCSNode.o \
@@ -144,7 +143,6 @@ build/dcs-test:\
 	build/test-UpCounter.o \
 	build/test-Xor.o \
 	build/main-test.o \
-	build/test-RisingEdgeDetector.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
 	build/DCSNode.o \
@@ -566,18 +564,12 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRegister8Bits.hpp \
 	include/DCSRegister8BitsWithEnable.hpp \
 	include/DCSRippleAdder8Bits.hpp \
-	src/Tests/test-RisingEdgeDetector.hpp \
 	src/Tests/test-SRLatch.hpp \
 	src/Tests/test-TriStateBuffer.hpp \
 	src/Tests/test-UnitDelay.hpp \
 	src/Tests/test-UpCounter.hpp \
 	src/Tests/test-UpCounter4Bits.hpp \
 	src/Tests/test-Xor.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
-build/test-RisingEdgeDetector.o: src/Tests/test-RisingEdgeDetector.cpp \
-	src/Tests/test-RisingEdgeDetector.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
