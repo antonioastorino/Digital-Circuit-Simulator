@@ -1,6 +1,7 @@
 #ifndef DCSAnd6_hpp
 #define DCSAnd6_hpp
 #include "DCSAnd.hpp"
+#include "DCSCommon.hpp"
 #include "DCSComponentArray.hpp"
 class DCSAnd3;
 
@@ -21,5 +22,7 @@ public:
 
     void updateOut() override;
 };
-
+#if TEST == 1
+void and6Test();
+#endif
 #endif /* DCSAnd6_hpp */

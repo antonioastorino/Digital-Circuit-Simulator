@@ -4,7 +4,7 @@
 #include "DCSLog.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
-#include "test-And6.hpp"
+#include "DCSAnd6.hpp"
 #include "test-AndArray.hpp"
 #include "test-BitStreamSignal.hpp"
 #include "test-ControlUnit.hpp"

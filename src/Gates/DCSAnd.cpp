@@ -1,4 +1,5 @@
 #include "DCSAnd.hpp"
+#include "DCSCommon.hpp"
 
 DCSAnd::DCSAnd(std::string name) : DCSComponent(name) {
     this->timeDelay    = 1;

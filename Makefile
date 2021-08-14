@@ -85,7 +85,6 @@ build/dcs:\
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
 	build/test-DFlipFlop.o \
-	build/test-And6.o \
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
@@ -175,7 +174,6 @@ build/dcs-test:\
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
 	build/test-DFlipFlop.o \
-	build/test-And6.o \
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
@@ -264,12 +262,20 @@ build/DCSNand.o: src/Gates/DCSNand.cpp \
 
 build/DCSAnd6.o: src/Gates/DCSAnd6.cpp \
 	include/DCSAnd6.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSAnd6.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
 build/DCSAnd.o: src/Gates/DCSAnd.cpp \
-	include/DCSAnd.hpp 
+	include/DCSAnd.hpp \
+	include/DCSCommon.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -531,11 +537,6 @@ build/test-DFlipFlop.o: src/Tests/test-DFlipFlop.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-And6.o: src/Tests/test-And6.cpp \
-	src/Tests/test-And6.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
 	src/Tests/test-Ram256x16.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -608,7 +609,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSLog.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	src/Tests/test-And6.hpp \
+	include/DCSAnd6.hpp \
 	src/Tests/test-AndArray.hpp \
 	src/Tests/test-BitStreamSignal.hpp \
 	src/Tests/test-ControlUnit.hpp \
