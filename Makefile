@@ -76,7 +76,6 @@ build/dcs:\
 	build/test-FullAdder.o \
 	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
-	build/test-ALU.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
 	build/test-Divider.o \
@@ -167,7 +166,6 @@ build/dcs-test:\
 	build/test-FullAdder.o \
 	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
-	build/test-ALU.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
 	build/test-Divider.o \
@@ -488,11 +486,6 @@ build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-ALU.o: src/Tests/test-ALU.cpp \
-	src/Tests/test-ALU.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-DLatch.o: src/Tests/test-DLatch.cpp \
 	src/Tests/test-DLatch.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -609,12 +602,12 @@ build/test-RippleAdder.o: src/Tests/test-RippleAdder.cpp \
 
 
 build/main-test.o: src/Tests/main-test.cpp \
-	include/DCSLog.hpp \
-	include/DCSRam16x8.hpp \
+	include/DCSALU.hpp \
 	include/DCSAddressDecoder4Bits.hpp \
 	include/DCSAddressDecoder8Bits.hpp \
+	include/DCSLog.hpp \
+	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	src/Tests/test-ALU.hpp \
 	src/Tests/test-And6.hpp \
 	src/Tests/test-AndArray.hpp \
 	src/Tests/test-BitStreamSignal.hpp \
@@ -780,7 +773,14 @@ build/DCSAddressDecoder4Bits.o: src/Decoders/DCSAddressDecoder4Bits.cpp \
 
 build/DCSALU.o: src/Arithmetic/DCSALU.cpp \
 	include/DCSALU.hpp \
-	include/DCSLog.hpp 
+	include/DCSCommon.hpp \
+	include/DCSLog.hpp \
+	include/DCSALU.hpp \
+	include/DCSDisplayNBits.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
