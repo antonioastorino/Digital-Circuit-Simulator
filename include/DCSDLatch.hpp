@@ -5,6 +5,7 @@
 #include "DCSNot.hpp"
 #include "DCSSRLatch.hpp"
 #include "DCSUnitDelay.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSDLatch
@@ -53,5 +54,9 @@ public:
 
     void updateOut() override;
 };
+
+#if TEST == 1
+void dLatchTest();
+#endif
 
 #endif /* DCSDLatch_hpp */

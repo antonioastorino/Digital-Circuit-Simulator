@@ -4,13 +4,16 @@
 
 std::stringstream DCSLog::outStream;
 
-class custom_exception : public std::exception {
+class custom_exception : public std::exception
+{
 public:
     int code;
     custom_exception(int code) : code(code) {}
 
-    virtual const char* what() const throw() {
-        switch (this->code) {
+    virtual const char* what() const throw()
+    {
+        switch (this->code)
+        {
         case 0:
             return "This function should never be called";
         case 1:
@@ -63,28 +66,35 @@ public:
     }
 };
 
-void DCSLog::output(std::string label, std::string message) {
+void DCSLog::output(std::string label, std::string message)
+{
 #if LOG_LEVEL > 0
     DCSLog::outStream << " " << label << ":" << message;
 #endif
 }
 
-void DCSLog::info(std::string callerName, std::string message) {
+void DCSLog::info(std::string callerName, std::string message)
+{
 #if LOG_LEVEL > 1
     DCSLog::outStream << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
-void DCSLog::debug(std::string callerName, std::string message) {
+void DCSLog::debug(std::string callerName, std::string message)
+{
 #if LOG_LEVEL > 2
     DCSLog::outStream << "INFO: " << callerName << " says: \"" << message << "\"\n";
 #endif
 }
 
-void DCSLog::error(std::string callerName, int code) {
-    try {
+void DCSLog::error(std::string callerName, int code)
+{
+    try
+    {
         throw custom_exception(code);
-    } catch (custom_exception& e) {
+    }
+    catch (custom_exception& e)
+    {
         DCSLog::outStream << "ERROR: " << callerName << " says: \"" << e.what() << "!\"\n";
         DCSLog::printResults(); // Print what you have before throwing an error
         DCSTimer::printResults();
@@ -93,57 +103,65 @@ void DCSLog::error(std::string callerName, int code) {
 }
 
 bool DCSLog::checkInputNumber(std::vector<func_descriptor> funcs, int argc, const char** argv,
-                              uint16_t& num, int& optLev) {
+                              uint16_t& num, int& optLev)
+{
     // check that a test or project number is passed as parameter
-    if (argc < 2) {
-        std::cerr << "\nPlease add a valid project or test number as a parameter.\nChoose one of the following:\n#\tTitle\n";
-        for (size_t i = 0; i < funcs.size(); i++) {
+    if (argc < 2)
+    {
+        std::cerr << "\nPlease add a valid project or test number as a parameter.\nChoose one of "
+                     "the following:\n#\tTitle\n";
+        for (size_t i = 0; i < funcs.size(); i++)
+        {
             std::cerr << i << "\t" << funcs[i].func_name << "\n";
         }
         return false;
     }
     // check that there are no paramters in excess
-    if (argc > 2) return false;
+    if (argc > 2)
+        return false;
 
     // get the paramter value
     sscanf(argv[1], "%hd", &num);
     // check that it is a valid value
-    if (num >= funcs.size()) {
+    if (num >= funcs.size())
+    {
         std::cerr << "Project or test number too high (max " << funcs.size() - 1 << ")\n";
         return false;
     }
-    // Retrieve optimization level from the file name
-    int i = 0;
-    while (argv[0][i] != '\0') i++;                          // count chars in file name
-    optLev = static_cast<uint16_t>(argv[0][i - 1]) - 48;     // convert the last char into an int
-    if (optLev < 0 && optLev > 3) DCSLog::error("main", 20); // check it's between 0 and 3
 
     return true;
 }
 
-void DCSLog::printTestName(std::string testName) {
+void DCSLog::printTestName(std::string testName)
+{
 #if LOG_LEVEL > 0
     DCSLog::outStream << "-----";
-    for (size_t i = 0; i < testName.size(); i++) DCSLog::outStream << "-";
+    for (size_t i = 0; i < testName.size(); i++)
+        DCSLog::outStream << "-";
     DCSLog::outStream << "\n" << testName << " test\n";
-    for (size_t i = 0; i < testName.size() + 5; i++) DCSLog::outStream << "-";
+    for (size_t i = 0; i < testName.size() + 5; i++)
+        DCSLog::outStream << "-";
     DCSTimer::title = testName + " test";
     DCSLog::outStream << "\n";
 #endif
 }
 
-void DCSLog::printProjectName(std::string prjName) {
+void DCSLog::printProjectName(std::string prjName)
+{
 #if LOG_LEVEL > 0
     DCSLog::outStream << "--------";
-    for (size_t i = 0; i < prjName.size(); i++) DCSLog::outStream << "-";
+    for (size_t i = 0; i < prjName.size(); i++)
+        DCSLog::outStream << "-";
     DCSLog::outStream << "\n" << prjName << " project\n";
-    for (size_t i = 0; i < prjName.size() + 8; i++) DCSLog::outStream << "-";
+    for (size_t i = 0; i < prjName.size() + 8; i++)
+        DCSLog::outStream << "-";
     DCSLog::outStream << "\n";
     DCSTimer::title = prjName + " project";
 #endif
 }
 
-void DCSLog::printResults() {
+void DCSLog::printResults()
+{
 #if LOG_LEVEL > 0
     std::cout << DCSLog::outStream.str();
 #endif

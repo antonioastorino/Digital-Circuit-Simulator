@@ -74,7 +74,6 @@ build/dcs:\
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
-	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
@@ -157,7 +156,6 @@ build/dcs-test:\
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
 	build/test-TriStateBuffer.o \
-	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
@@ -413,7 +411,11 @@ build/DCSDFlipFlop.o: src/Latches/DCSDFlipFlop.cpp \
 
 build/DCSDLatch.o: src/Latches/DCSDLatch.cpp \
 	include/DCSDLatch.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -482,11 +484,6 @@ build/test-FullAdder.o: src/Tests/test-FullAdder.cpp \
 
 build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	src/Tests/test-TriStateBuffer.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
-build/test-DLatch.o: src/Tests/test-DLatch.cpp \
-	src/Tests/test-DLatch.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -588,7 +585,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSLog.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	src/Tests/test-DLatch.hpp \
+	include/DCSDLatch.hpp \
 	src/Tests/test-DLatchAsyncSR.hpp \
 	include/DCSClockDivider.hpp \
 	src/Tests/test-FullAdder.hpp \

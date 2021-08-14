@@ -10,7 +10,7 @@
 #include "DCSLog.hpp"
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
-#include "test-DLatch.hpp"
+#include "DCSDLatch.hpp"
 #include "test-DLatchAsyncSR.hpp"
 #include "DCSClockDivider.hpp"
 #include "test-FullAdder.hpp"
