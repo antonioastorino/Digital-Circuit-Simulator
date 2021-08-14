@@ -71,7 +71,6 @@ void addressDecoder8BitsTest()
 
     inArray.connect(&dec8);
     inArray.connect(&dispIn);
-    uint16_t startPin = 0;
     dec8.connect(&dispOutA, {0, 31}, {0, 31});
     dec8.connect(&dispOutB, {32, 63}, {0, 31});
     dec8.connect(&dispOutC, {64, 95}, {0, 31});

@@ -23,7 +23,7 @@
 #include "DCSRam256x16.hpp"
 #include "test-Register16BitsWithEnable.hpp"
 #include "DCSRegister1Bit.hpp"
-#include "test-Register1BitWithEnable.hpp"
+#include "DCSRegister1BitWithEnable.hpp"
 #include "test-Register8Bits.hpp"
 #include "test-Register8BitsWithEnable.hpp"
 #include "test-RippleAdder.hpp"

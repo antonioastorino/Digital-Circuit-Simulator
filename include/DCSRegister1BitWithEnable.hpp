@@ -1,5 +1,6 @@
 #ifndef DCSRegister1BitWithEnable_hpp
 #define DCSRegister1BitWithEnable_hpp
+#include "DCSCommon.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSTriStateBuffer.hpp"
 
@@ -39,7 +40,8 @@ class DCSNode;
  *`1 tau` after `Clock`'s falling edge. `Clear` and `Preset` work the same as in the SR latch. Use
  *them with `Enable` low.
  */
-class DCSRegister1BitWithEnable : public DCSComponent {
+class DCSRegister1BitWithEnable : public DCSComponent
+{
 private:
     DCSRegister1Bit reg0;
     DCSTriStateBuffer tris0;
@@ -51,4 +53,8 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
+
+#if TEST == 1
+void register1BitWithEnableTest();
+#endif
 #endif /* DCSRegister1BitWithEnable_hpp */

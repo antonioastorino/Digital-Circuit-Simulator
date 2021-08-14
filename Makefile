@@ -71,7 +71,6 @@ build/dcs:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-Register1BitWithEnable.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
@@ -142,7 +141,6 @@ build/dcs-test:\
 	build/DCSClockSignal.o \
 	build/DCSArbitrarySignal.o \
 	build/DCSDisplayNBits.o \
-	build/test-Register1BitWithEnable.o \
 	build/test-TriStateBuffer.o \
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
@@ -395,7 +393,13 @@ build/DCSRam16x8.o: src/Memory/DCSRam16x8.cpp \
 
 build/DCSRegister1BitWithEnable.o: src/Memory/DCSRegister1BitWithEnable.cpp \
 	include/DCSRegister1BitWithEnable.hpp \
-	include/DCSLog.hpp 
+	include/DCSCommon.hpp \
+	include/DCSLog.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -492,11 +496,6 @@ build/DCSDisplayNBits.o: src/Displays/DCSDisplayNBits.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Register1BitWithEnable.o: src/Tests/test-Register1BitWithEnable.cpp \
-	src/Tests/test-Register1BitWithEnable.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	src/Tests/test-TriStateBuffer.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -572,8 +571,8 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSOr.hpp \
 	include/DCSRam256x16.hpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
-	 \
-	src/Tests/test-Register1BitWithEnable.hpp \
+	include/DCSRegister1Bit.hpp \
+	include/DCSRegister1BitWithEnable.hpp \
 	src/Tests/test-Register8Bits.hpp \
 	src/Tests/test-Register8BitsWithEnable.hpp \
 	src/Tests/test-RippleAdder.hpp \
