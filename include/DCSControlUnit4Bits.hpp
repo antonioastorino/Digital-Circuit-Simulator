@@ -6,6 +6,7 @@
 #include "DCSUnitDelay.hpp"
 #include "DCSInput.hpp"
 #include "DCSDisplayNBits.hpp"
+#include "DCSCommon.hpp"
 class DCSRam256x16;
 class DCSAnd3;
 class DCSNot;
@@ -49,5 +50,10 @@ public:
 
     void updateOut() override;
 };
+
+#if TEST == 1
+void controlUnitTest();
+
+#endif
 
 #endif /* DCSControlUnit4Bits_hpp */

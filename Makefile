@@ -73,7 +73,6 @@ build/dcs:\
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
-	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
@@ -160,7 +159,6 @@ build/dcs-test:\
 	build/DCSDisplayNBits.o \
 	build/test-Register1BitWithEnable.o \
 	build/test-FullAdder.o \
-	build/test-ControlUnit.o \
 	build/test-TriStateBuffer.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
@@ -212,7 +210,12 @@ build/DCSControlUnit4Bits.o: src/ControlUnit/DCSControlUnit4Bits.cpp \
 	include/DCSControlUnit4Bits.hpp \
 	include/DCSAnd3.hpp \
 	include/DCSLog.hpp \
-	include/DCSRam256x16.hpp 
+	include/DCSRam256x16.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -474,11 +477,6 @@ build/test-FullAdder.o: src/Tests/test-FullAdder.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-ControlUnit.o: src/Tests/test-ControlUnit.cpp \
-	src/Tests/test-ControlUnit.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-TriStateBuffer.o: src/Tests/test-TriStateBuffer.cpp \
 	src/Tests/test-TriStateBuffer.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -599,7 +597,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSAnd6.hpp \
 	include/DCSComponentArray.hpp \
 	include/DCSEngine.hpp \
-	src/Tests/test-ControlUnit.hpp \
+	include/DCSControlUnit4Bits.hpp \
 	src/Tests/test-DFlipFlop.hpp \
 	src/Tests/test-DLatch.hpp \
 	src/Tests/test-DLatchAsyncSR.hpp \

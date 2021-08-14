@@ -7,7 +7,7 @@
 #include "DCSAnd6.hpp"
 #include "DCSComponentArray.hpp"
 #include "DCSEngine.hpp"
-#include "test-ControlUnit.hpp"
+#include "DCSControlUnit4Bits.hpp"
 #include "test-DFlipFlop.hpp"
 #include "test-DLatch.hpp"
 #include "test-DLatchAsyncSR.hpp"

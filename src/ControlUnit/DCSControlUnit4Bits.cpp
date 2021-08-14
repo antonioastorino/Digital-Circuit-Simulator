@@ -1,8 +1,8 @@
 #include "DCSControlUnit4Bits.hpp"
 #include "DCSAnd3.hpp"
+#include "DCSCommon.hpp"
 #include "DCSLog.hpp"
 #include "DCSRam256x16.hpp"
-
 
 DCSControlUnit4Bits::DCSControlUnit4Bits(std::string name, DCSRam256x16* ram)
     : DCSComponent(name, false),
@@ -15,7 +15,8 @@ DCSControlUnit4Bits::DCSControlUnit4Bits(std::string name, DCSRam256x16* ram)
       or0(name + "_resetLogicOr0"),
       inGND(name + "_inGND"),
       inVcc(name + "_inVcc"),
-	  dispStep(name + "_step", 3) {
+      dispStep(name + "_step", 3)
+{
     // connect counter output to reset logic to reset when 0b110 is output
     count0.connect(&not0, 0, 0);
     count0.connect(&del0, 1, 0);
@@ -53,22 +54,28 @@ DCSControlUnit4Bits::DCSControlUnit4Bits(std::string name, DCSRam256x16* ram)
 
     inVcc.makeSignal(1);
 
-	// connect counter to display
-	count0.connect(&dispStep, {0, 2}, {0, 2});
+    // connect counter to display
+    count0.connect(&dispStep, {0, 2}, {0, 2});
 
     timeDelay    = count0.getTimeDelay() + p_ram0->getTimeDelay();
     numOfInPins  = 6;
     numOfOutPins = 16;
 }
 
-DCSComponent* DCSControlUnit4Bits::getInComponent(uint16_t& inPinNum) {
-    if (inPinNum == 0) {
+DCSComponent* DCSControlUnit4Bits::getInComponent(uint16_t& inPinNum)
+{
+    if (inPinNum == 0)
+    {
         inPinNum = 2;
         return count0.getInComponent(inPinNum); // counter clock
-    } else if (inPinNum == 1) {
+    }
+    else if (inPinNum == 1)
+    {
         inPinNum = 0;
         return &or0; // counter reset (OR'ed with automatic reset)
-    } else if (inPinNum < 6) {
+    }
+    else if (inPinNum < 6)
+    {
         inPinNum += 17;
         return p_ram0->getInComponent(inPinNum); // ram addresses from 3 to 6 (pins 19 to 22)
     }
@@ -76,8 +83,10 @@ DCSComponent* DCSControlUnit4Bits::getInComponent(uint16_t& inPinNum) {
     return nullptr;
 }
 
-DCSComponent* DCSControlUnit4Bits::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum < 16) {
+DCSComponent* DCSControlUnit4Bits::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum < 16)
+    {
         return p_ram0->getOutComponent(outPinNum);
     }
     DCSLog::error(this->name, 10);
@@ -85,3 +94,45 @@ DCSComponent* DCSControlUnit4Bits::getOutComponent(uint16_t outPinNum) {
 }
 
 void DCSControlUnit4Bits::updateOut() { DCSLog::error(name, 0); }
+
+#if TEST == 1
+#include "DCSComponentArray.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSOutput.hpp"
+
+void controlUnitTest()
+{
+    DCSLog::printTestName("Control Unit");
+    uint32_t hcp = 12;
+    DCSEngine::initialize(hcp);
+
+    DCSRam256x16 cuRam("cuRam");
+
+    DCSEngine::programControlUnit(&cuRam, false);
+    DCSEngine::useRamElements();
+
+    DCSControlUnit4Bits cu0("CU", &cuRam);
+    DCSComponentArray<DCSInput> inAddress("inAddress", 4);
+    DCSInput inClock("inClock");
+    DCSInput inReset("inReset");
+
+    DCSDisplayNBits dispOut("out", 16);
+    DCSDisplayNBits dispAddr("addr", 4);
+
+    inClock.connect(&cu0, 0, 0, "CLK");
+    inReset.connect(&cu0, 0, 1);
+    inAddress.connect(&dispAddr);
+    cu0.connect(&dispOut);
+
+    inAddress.connect(&cu0, {0, 3}, {2, 5});
+    inAddress[0]->makeSquareWave(6 * (hcp << 1));
+    inAddress[1]->makeSquareWave(6 * (hcp << 2));
+    inAddress[2]->makeSquareWave(6 * (hcp << 3));
+    inAddress[3]->makeSquareWave(6 * (hcp << 4));
+
+    inClock.makeSquareWave(hcp);
+
+    DCSEngine::run(6 * (hcp << 4) + 3, true);
+}
+#endif
