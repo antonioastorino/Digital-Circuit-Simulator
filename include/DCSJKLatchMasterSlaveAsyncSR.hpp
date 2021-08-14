@@ -5,6 +5,7 @@
 #include "DCSNode.hpp"
 #include "DCSNor3.hpp"
 #include "DCSNot.hpp"
+#include "DCSCommon.hpp"
 
 /**
  * @class DCSJKLatchMasterSlaveAsyncSR
@@ -54,5 +55,9 @@ public:
 
     void updateOut() override;
 };
+
+#if TEST == 1
+void jkLatchMasterSlaveAsyncSRTest();
+#endif
 
 #endif /* DCSJKLatchMasterSlaveAsyncSR_hpp */

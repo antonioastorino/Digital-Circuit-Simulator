@@ -91,7 +91,6 @@ build/dcs:\
 	build/test-RippleAdder.o \
 	build/test-Or.o \
 	build/test-RisingEdgeDetector.o \
-	build/test-JKMasterSlave.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
 	build/DCSNode.o \
@@ -172,7 +171,6 @@ build/dcs-test:\
 	build/main-test.o \
 	build/test-Or.o \
 	build/test-RisingEdgeDetector.o \
-	build/test-JKMasterSlave.o \
 	build/DCSComponent.o \
 	build/DCSComponentArray.o \
 	build/DCSNode.o \
@@ -575,7 +573,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSDLatchAsyncSR.hpp \
 	include/DCSClockDivider.hpp \
 	include/DCSFullAdder.hpp \
-	src/Tests/test-JKMasterSlave.hpp \
+	 \
 	src/Tests/test-MemoryProgrammer.hpp \
 	src/Tests/test-Mux2To1.hpp \
 	src/Tests/test-Nand3.hpp \
@@ -606,11 +604,6 @@ build/test-Or.o: src/Tests/test-Or.cpp \
 
 build/test-RisingEdgeDetector.o: src/Tests/test-RisingEdgeDetector.cpp \
 	src/Tests/test-RisingEdgeDetector.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
-build/test-JKMasterSlave.o: src/Tests/test-JKMasterSlave.cpp \
-	src/Tests/test-JKMasterSlave.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -801,6 +794,11 @@ build/DCSDLatchAsyncSR.o: src/Latches-async-SR/DCSDLatchAsyncSR.cpp \
 
 build/DCSJKLatchMasterSlaveAsyncSR.o: src/Latches-async-SR/DCSJKLatchMasterSlaveAsyncSR.cpp \
 	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
-	include/DCSLog.hpp 
+	include/DCSCommon.hpp \
+	include/DCSLog.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 

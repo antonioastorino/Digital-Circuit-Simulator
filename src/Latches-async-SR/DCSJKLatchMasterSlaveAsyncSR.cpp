@@ -1,8 +1,10 @@
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
+#include "DCSCommon.hpp"
 #include "DCSLog.hpp"
 
 DCSJKLatchMasterSlaveAsyncSR::DCSJKLatchMasterSlaveAsyncSR(std::string name)
-    : DCSComponent(name, false) {
+    : DCSComponent(name, false)
+{
     // Clock to SR master
     not0.connect(&and3_0, 0, 2);
     not0.connect(&and3_1, 0, 0);
@@ -38,18 +40,24 @@ DCSJKLatchMasterSlaveAsyncSR::DCSJKLatchMasterSlaveAsyncSR(std::string name)
     numOfOutPins = 2;
 }
 
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(uint16_t outPinNum) {
-    if (outPinNum == 0) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getOutComponent(uint16_t outPinNum)
+{
+    if (outPinNum == 0)
+    {
         return &nor3_2;
-    } else if (outPinNum == 1) {
+    }
+    else if (outPinNum == 1)
+    {
         outPinNum = 0;
         return &nor3_3;
     }
     DCSLog::error(this->name, 10);
     return nullptr;
 }
-DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(uint16_t& inPinNum) {
-    switch (inPinNum) {
+DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(uint16_t& inPinNum)
+{
+    switch (inPinNum)
+    {
     case 0: // J
         inPinNum = 1;
         return &and3_0;
@@ -77,3 +85,35 @@ DCSComponent* DCSJKLatchMasterSlaveAsyncSR::getInComponent(uint16_t& inPinNum) {
 }
 
 void DCSJKLatchMasterSlaveAsyncSR::updateOut() { DCSLog::error(name, 0); }
+
+#if TEST == 1
+#include "DCSComponentArray.hpp"
+#include "DCSEngine.hpp"
+#include "DCSInput.hpp"
+#include "DCSOutput.hpp"
+
+void jkLatchMasterSlaveAsyncSRTest()
+{
+    DCSLog::printTestName("JK-Latch Master-Slave with asynchronous SR");
+    uint16_t hp = 28;
+    DCSEngine::initialize(hp);
+
+    DCSJKLatchMasterSlaveAsyncSR jk0("jk0");
+    DCSComponentArray<DCSInput> inArray("In", 5);
+    DCSOutput O0("Out0");
+    DCSOutput O1("Out1");
+
+    inArray.connect(&jk0, {"J", "K", "CLK", "", ""});
+    jk0.connect(&O0, 0, 0, "Q");
+    jk0.connect(&O1, 1, 0, "!Q");
+
+    inArray[0]->makeSquareWave(hp * 2, 0);
+    inArray[1]->makeSquareWave(hp * 4, 0);
+    inArray[2]->makeSquareWave(hp, 0);
+    inArray[3]->makeSignal(0);
+    inArray[4]->makeSignal(0);
+
+    DCSEngine::run(17 * hp, true);
+}
+
+#endif

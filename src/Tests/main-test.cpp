@@ -14,7 +14,7 @@
 #include "DCSDLatchAsyncSR.hpp"
 #include "DCSClockDivider.hpp"
 #include "DCSFullAdder.hpp"
-#include "test-JKMasterSlave.hpp"
+#include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "test-MemoryProgrammer.hpp"
 #include "test-Mux2To1.hpp"
 #include "test-Nand3.hpp"
