@@ -88,7 +88,6 @@ build/dcs:\
 	build/test-DFlipFlop.o \
 	build/test-And6.o \
 	build/test-Ram256x16.o \
-	build/test-AddressDecoder8Bits.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
 	build/test-AndArray.o \
@@ -180,7 +179,6 @@ build/dcs-test:\
 	build/test-DFlipFlop.o \
 	build/test-And6.o \
 	build/test-Ram256x16.o \
-	build/test-AddressDecoder8Bits.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
 	build/test-AndArray.o \
@@ -550,11 +548,6 @@ build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-AddressDecoder8Bits.o: src/Tests/test-AddressDecoder8Bits.cpp \
-	src/Tests/test-AddressDecoder8Bits.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-MemoryProgrammer.o: src/Tests/test-MemoryProgrammer.cpp \
 	src/Tests/test-MemoryProgrammer.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -619,9 +612,9 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSLog.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSAddressDecoder4Bits.hpp \
+	include/DCSAddressDecoder8Bits.hpp \
 	include/DCSTimer.hpp \
 	src/Tests/test-ALU.hpp \
-	src/Tests/test-AddressDecoder8Bits.hpp \
 	src/Tests/test-And6.hpp \
 	src/Tests/test-AndArray.hpp \
 	src/Tests/test-BitStreamSignal.hpp \
@@ -759,7 +752,14 @@ build/DCSPLD8In16Out.o: src/Decoders/DCSPLD8In16Out.cpp \
 build/DCSAddressDecoder8Bits.o: src/Decoders/DCSAddressDecoder8Bits.cpp \
 	include/DCSAddressDecoder8Bits.hpp \
 	include/DCSAnd8.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSAddressDecoder8Bits.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSLog.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

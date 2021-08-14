@@ -1,6 +1,7 @@
 #ifndef DCSAddressDecoder8Bits_hpp
 #define DCSAddressDecoder8Bits_hpp
 #include "DCSComponentArray.hpp"
+#include "DCSCommon.hpp"
 class DCSNode;
 class DCSUnitDelay;
 class DCSNot;
@@ -36,5 +37,9 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
+
+#if TEST == 1
+void addressDecoder8BitsTest();
+#endif
 
 #endif /* DCSAddressDecoder8Bits_hpp */
