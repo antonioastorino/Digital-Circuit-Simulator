@@ -21,7 +21,7 @@
 #include "DCSTimer.hpp"
 #include "DCSOr.hpp"
 #include "DCSRam256x16.hpp"
-#include "test-Register16BitsWithEnable.hpp"
+#include "DCSRegister16BitsWithEnable.hpp"
 #include "DCSRegister1Bit.hpp"
 #include "DCSRegister1BitWithEnable.hpp"
 #include "DCSRegister8Bits.hpp"
