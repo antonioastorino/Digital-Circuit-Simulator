@@ -1,6 +1,7 @@
 #ifndef DCSDFlipFlop_hpp
 #define DCSDFlipFlop_hpp
 #include "DCSDLatch.hpp"
+#include "DCSCommon.hpp"
 class DCSNode;
 
 /**
@@ -39,5 +40,9 @@ public:
     DCSComponent* getInComponent(uint16_t& inPinNum) override;
     void updateOut() override;
 };
+
+#if TEST == 1
+void dFlipFlopTest();
+#endif
 
 #endif /* DCSDFlipFlop_hpp */

@@ -82,7 +82,6 @@ build/dcs:\
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
-	build/test-DFlipFlop.o \
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
@@ -168,7 +167,6 @@ build/dcs-test:\
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
 	build/test-NotLoop.o \
-	build/test-DFlipFlop.o \
 	build/test-Ram256x16.o \
 	build/test-MemoryProgrammer.o \
 	build/test-SRLatch.o \
@@ -209,9 +207,9 @@ build/dcs-test:\
 build/DCSControlUnit4Bits.o: src/ControlUnit/DCSControlUnit4Bits.cpp \
 	include/DCSControlUnit4Bits.hpp \
 	include/DCSAnd3.hpp \
+	include/DCSCommon.hpp \
 	include/DCSLog.hpp \
 	include/DCSRam256x16.hpp \
-	include/DCSCommon.hpp \
 	include/DCSComponentArray.hpp \
 	include/DCSEngine.hpp \
 	include/DCSInput.hpp \
@@ -409,7 +407,11 @@ build/DCSSRLatch.o: src/Latches/DCSSRLatch.cpp \
 
 build/DCSDFlipFlop.o: src/Latches/DCSDFlipFlop.cpp \
 	include/DCSDFlipFlop.hpp \
-	include/DCSLog.hpp 
+	include/DCSCommon.hpp \
+	include/DCSLog.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -522,11 +524,6 @@ build/test-NotLoop.o: src/Tests/test-NotLoop.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-DFlipFlop.o: src/Tests/test-DFlipFlop.cpp \
-	src/Tests/test-DFlipFlop.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
 	src/Tests/test-Ram256x16.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -591,14 +588,14 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSALU.hpp \
 	include/DCSAddressDecoder4Bits.hpp \
 	include/DCSAddressDecoder8Bits.hpp \
+	include/DCSAnd6.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSControlUnit4Bits.hpp \
+	include/DCSEngine.hpp \
 	include/DCSLog.hpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
-	include/DCSAnd6.hpp \
-	include/DCSComponentArray.hpp \
-	include/DCSEngine.hpp \
-	include/DCSControlUnit4Bits.hpp \
-	src/Tests/test-DFlipFlop.hpp \
+	include/DCSDFlipFlop.hpp \
 	src/Tests/test-DLatch.hpp \
 	src/Tests/test-DLatchAsyncSR.hpp \
 	src/Tests/test-Display.hpp \
