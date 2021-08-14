@@ -76,7 +76,6 @@ build/dcs:\
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
-	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-UpCounter4Bits.o \
@@ -149,7 +148,6 @@ build/dcs-test:\
 	build/test-Register8Bits.o \
 	build/test-UnitDelay.o \
 	build/test-Register8BitsWithEnable.o \
-	build/test-Ram256x16.o \
 	build/test-SRLatch.o \
 	build/test-Register16BitsWithEnable.o \
 	build/test-UpCounter4Bits.o \
@@ -360,9 +358,14 @@ build/DCSRegister4Bits.o: src/Memory/DCSRegister4Bits.cpp \
 
 build/DCSRam256x16.o: src/Memory/DCSRam256x16.cpp \
 	include/DCSRam256x16.hpp \
+	include/DCSCommon.hpp \
 	include/DCSLog.hpp \
+	include/DCSRegister16BitsWithEnable.hpp \
 	include/DCSRegister1BitWithEnable.hpp \
-	include/DCSRegister16BitsWithEnable.hpp 
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -511,11 +514,6 @@ build/test-Register8BitsWithEnable.o: src/Tests/test-Register8BitsWithEnable.cpp
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Ram256x16.o: src/Tests/test-Ram256x16.cpp \
-	src/Tests/test-Ram256x16.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-SRLatch.o: src/Tests/test-SRLatch.cpp \
 	src/Tests/test-SRLatch.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -574,7 +572,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSRam16x8.hpp \
 	include/DCSTimer.hpp \
 	include/DCSOr.hpp \
-	src/Tests/test-Ram256x16.hpp \
+	include/DCSRam256x16.hpp \
 	src/Tests/test-Register16BitsWithEnable.hpp \
 	src/Tests/test-Register1Bit.hpp \
 	src/Tests/test-Register1BitWithEnable.hpp \

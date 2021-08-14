@@ -20,7 +20,7 @@
 #include "DCSRam16x8.hpp"
 #include "DCSTimer.hpp"
 #include "DCSOr.hpp"
-#include "test-Ram256x16.hpp"
+#include "DCSRam256x16.hpp"
 #include "test-Register16BitsWithEnable.hpp"
 #include "test-Register1Bit.hpp"
 #include "test-Register1BitWithEnable.hpp"
