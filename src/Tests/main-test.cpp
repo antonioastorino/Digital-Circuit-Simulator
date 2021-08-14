@@ -12,7 +12,7 @@
 #include "DCSTimer.hpp"
 #include "test-DLatch.hpp"
 #include "test-DLatchAsyncSR.hpp"
-#include "test-Divider.hpp"
+#include "DCSClockDivider.hpp"
 #include "test-FullAdder.hpp"
 #include "test-JKMasterSlave.hpp"
 #include "test-MemoryProgrammer.hpp"

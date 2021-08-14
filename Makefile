@@ -76,7 +76,6 @@ build/dcs:\
 	build/test-TriStateBuffer.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
-	build/test-Divider.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
 	build/test-UnitDelay.o \
@@ -160,7 +159,6 @@ build/dcs-test:\
 	build/test-TriStateBuffer.o \
 	build/test-DLatch.o \
 	build/test-DLatchAsyncSR.o \
-	build/test-Divider.o \
 	build/test-Register8Bits.o \
 	build/test-Nand3.o \
 	build/test-UnitDelay.o \
@@ -497,11 +495,6 @@ build/test-DLatchAsyncSR.o: src/Tests/test-DLatchAsyncSR.cpp \
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Divider.o: src/Tests/test-Divider.cpp \
-	src/Tests/test-Divider.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-Register8Bits.o: src/Tests/test-Register8Bits.cpp \
 	src/Tests/test-Register8Bits.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -597,7 +590,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSTimer.hpp \
 	src/Tests/test-DLatch.hpp \
 	src/Tests/test-DLatchAsyncSR.hpp \
-	src/Tests/test-Divider.hpp \
+	include/DCSClockDivider.hpp \
 	src/Tests/test-FullAdder.hpp \
 	src/Tests/test-JKMasterSlave.hpp \
 	src/Tests/test-MemoryProgrammer.hpp \
@@ -785,7 +778,12 @@ build/DCSFullAdder.o: src/Arithmetic/DCSFullAdder.cpp \
 
 build/DCSClockDivider.o: src/Counters/DCSClockDivider.cpp \
 	include/DCSClockDivider.hpp \
-	include/DCSLog.hpp 
+	include/DCSLog.hpp \
+	include/DCSCommon.hpp \
+	include/DCSComponentArray.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 

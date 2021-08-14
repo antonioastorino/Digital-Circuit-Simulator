@@ -1,5 +1,6 @@
 #ifndef DCSClockDivider_hpp
 #define DCSClockDivider_hpp
+#include "DCSCommon.hpp"
 #include "DCSComponent.hpp"
 #include "DCSJKLatchMasterSlaveAsyncSR.hpp"
 #include "DCSNode.hpp"
@@ -15,11 +16,11 @@
  * be stable for at least `3 tau` and their effect is visible `3 tau` after they are set.
  * `Count in` asserts both `J` and `K` in the internal latch with a delay of `2 tau`. Therefore,
  * it has to remain stable from `3 tau` to `1 tau` before `Clock`'s rising edge while `Load` is low.
- * 
+ *
  * `Count out` is high when `Count in` and `Data out` are high, with a delay of `1 tau`. When
  * connecting several dividers in cascade, this delay is multiplied by the number of dividers. This
  * has to be taken into account when choosing the clock speed.
- * 
+ *
  * @pinout
  * In 0  - Data in
  * In 1  - Load
@@ -27,13 +28,15 @@
  * In 3  - Clear
  * In 4  - Preset
  * In 5  - Count in
- * 
+ *
  * Out 0 - Data out
  * Out 1 - !Data out
  * Out 2 - Count out
  * @end_pinout
  */
-class DCSClockDivider : public DCSComponent {
+
+class DCSClockDivider : public DCSComponent
+{
 private:
     DCSNode node0                    = DCSNode(name + "-Data");
     DCSNode node1                    = DCSNode(name + "-Load");
@@ -56,5 +59,9 @@ public:
 
     void updateOut() override;
 };
+
+#if TEST == 1
+void dividerTest();
+#endif
 
 #endif /* DCSClockDivider_hpp */
