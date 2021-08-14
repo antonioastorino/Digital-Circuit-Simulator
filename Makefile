@@ -82,7 +82,6 @@ build/dcs:\
 	build/test-SRLatch.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
-	build/test-Mux2To1.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -160,7 +159,6 @@ build/dcs-test:\
 	build/test-SRLatch.o \
 	build/test-Nor3.o \
 	build/test-Register16BitsWithEnable.o \
-	build/test-Mux2To1.o \
 	build/test-UpCounter4Bits.o \
 	build/test-UpCounter.o \
 	build/test-Xor.o \
@@ -289,8 +287,12 @@ build/DCSXor.o: src/Gates/DCSXor.cpp \
 
 build/DCSMux2to1.o: src/Muxes-Demuxes/DCSMux2to1.cpp \
 	include/DCSMux2to1.hpp \
+	include/DCSCommon.hpp \
 	include/DCSLog.hpp \
-	include/DCSTriStateBuffer8Bits.hpp 
+	include/DCSTriStateBuffer8Bits.hpp \
+	include/DCSEngine.hpp \
+	include/DCSInput.hpp \
+	include/DCSOutput.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
@@ -525,11 +527,6 @@ build/test-Register16BitsWithEnable.o: src/Tests/test-Register16BitsWithEnable.c
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
 
 
-build/test-Mux2To1.o: src/Tests/test-Mux2To1.cpp \
-	src/Tests/test-Mux2To1.hpp 
-	g++ $(INC) $(CPPFLAGS) -c $< -o $@
-
-
 build/test-UpCounter4Bits.o: src/Tests/test-UpCounter4Bits.cpp \
 	src/Tests/test-UpCounter4Bits.hpp 
 	g++ $(INC) $(CPPFLAGS) -c $< -o $@
@@ -573,7 +570,7 @@ build/main-test.o: src/Tests/main-test.cpp \
 	include/DCSClockDivider.hpp \
 	include/DCSFullAdder.hpp \
 	include/DCSJKLatchMasterSlaveAsyncSR.hpp \
-	src/Tests/test-Mux2To1.hpp \
+	 \
 	src/Tests/test-Nand3.hpp \
 	src/Tests/test-Nor3.hpp \
 	src/Tests/test-NotLoop.hpp \

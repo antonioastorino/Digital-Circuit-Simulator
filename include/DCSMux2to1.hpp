@@ -1,6 +1,7 @@
 #ifndef DCSMux2to1_hpp
 #define DCSMux2to1_hpp
 #include "DCSAnd.hpp"
+#include "DCSCommon.hpp"
 #include "DCSNode.hpp"
 #include "DCSNot.hpp"
 #include "DCSOr.hpp"
@@ -9,7 +10,7 @@
 /**
  * @class DCSMux2to1
  * 2 to 1 multiplexer
- * 
+ *
  * @pinout
  * In 0  - Data in 0
  * In 1  - Data in 1
@@ -18,7 +19,8 @@
  * Out 0 - Data out 0
  * @end_pinout
  */
-class DCSMux2to1 : public DCSComponent {
+class DCSMux2to1 : public DCSComponent
+{
 private:
     DCSAnd and0;
     DCSAnd and1;
@@ -37,3 +39,7 @@ public:
 };
 
 #endif /* DCSMux2to1_hpp */
+
+#if TEST == 1
+void mux2To1Test();
+#endif
