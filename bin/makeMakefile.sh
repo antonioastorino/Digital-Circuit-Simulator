@@ -108,7 +108,7 @@ pf "\n${BUILD_DIR}/${APP_NAME}-o\$(OPT):"
 while read -r FILE_NAME; do
 	if [ "${FILE_NAME}" == "${MAIN_TEST}" ]; then continue; fi
 	pf "\\"
-	pf "\n\t${BUILD_DIR}/$FILE_NAME.o "
+	pf "\n\t${BUILD_DIR}/${FILE_NAME}-o\$(OPT).o "
 done <src-name.list
 pf "\n\t${GLOBAL_COMPILER} \$(LIB) \$(MAINFLAGS) -O\$(OPT) \$(INC) \$(FRAMEWORKS) \$^ -o \$@"
 pf "\n"
@@ -118,7 +118,7 @@ pf "\n${BUILD_DIR}/${APP_NAME}-test-o\$(OPT):"
 while read -r FILE_NAME; do
 	if [ "${FILE_NAME}" == "${MAIN}" ]; then continue; fi
 	pf "\\"
-	pf "\n\t${BUILD_DIR}/$FILE_NAME.o "
+	pf "\n\t${BUILD_DIR}/${FILE_NAME}-o\$(OPT).o "
 done <src-name.list
 pf "\n\t${GLOBAL_COMPILER} \$(LIB) \$(MAINFLAGS) -O\$(OPT) \$(INC) \$(FRAMEWORKS) \$^ -o \$@"
 pf "\n"
@@ -130,7 +130,7 @@ while read -r FILE_FULL_PATH; do
 	FILE_NO_EXT=${FILE_NAME%.*}
 	FILE_EXT=${FILE_NAME##*.}
 
-	pf "\n${BUILD_DIR}/$FILE_NO_EXT.o: ${FILE_FULL_PATH} "
+	pf "\n${BUILD_DIR}/${FILE_NO_EXT}-o\$(OPT).o: ${FILE_FULL_PATH} "
 
 	HEADER_FILES=$(egrep "^#include|^#import" "${FILE_FULL_PATH}" | grep -v "<" | awk -F '"' '{print $2}')
 
