@@ -81,25 +81,18 @@ pf "\n"
 pf "\nsetup:"
 pf "\n\t@/bin/rm -rf ${APP_NAME}.app"
 pf "\n\t@mkdir -p \\"
-pf "\n\t${DIST_ASSETS_DIR} \\"
-pf "\n\t${ARTIFACT_FOLDER} \\"
 pf "\n\t${BUILD_DIR}"
 
 # Set TEST to 1 in case MODE==TEST and run unit tests
 pf "\n\t@if [ \"\$(MODE)\" = \"TEST\" ]; then \\"
 pf "\n\t[ \`grep -c '^#define TEST 0' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
 pf "\n\tsed -i.bak 's/^#define TEST 0/#define TEST 1/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
-# Set MEM_ANALYSIS to 1 in case MODE==TEST
-pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 0' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
-pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 0/#define MEM_ANALYSIS 1/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
 pf "\n\tmake -C \"\$(BD)\" OPT=\$(OPT) ${BUILD_DIR}/${APP_NAME}-test-o\$(OPT); \\"
 pf "\n\telse \\"
 
-# Reset TEST and MEM_ANALYSIS in case as default behavior.
+# Reset TEST in case as default behavior.
 pf "\n\t[ \`grep -c '^#define TEST 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
 pf "\n\tsed -i.bak 's/^#define TEST 1/#define TEST 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
-pf "\n\t[ \`grep -c '^#define MEM_ANALYSIS 1' \"\$(BD)\"/${COMMON_HEADER}\` -eq 1 ] && \\"
-pf "\n\tsed -i.bak 's/^#define MEM_ANALYSIS 1/#define MEM_ANALYSIS 0/g' \"\$(BD)\"/${COMMON_HEADER}; \\"
 pf "\n\tmake -C \"\$(BD)\" OPT=\$(OPT) ${BUILD_DIR}/${APP_NAME}-o\$(OPT); \\"
 pf "\n\tfi"
 pf "\n"
