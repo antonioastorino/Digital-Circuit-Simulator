@@ -120,7 +120,9 @@ void DCSEngine::run(uint64_t steps, bool sampling, bool printOut)
         updateComponents();
         propagateValues();
         if (printOut)
+        {
             printLogicLevels();
+        }
     }
     {
         PROFILE_WITH_CUSTOM_NAME("Run loop");
@@ -257,7 +259,7 @@ void DCSEngine::propagateValuesOnChangeOnly()
 
 void DCSEngine::printLogicLevels()
 {
-    if (!sampling || DCSEngine::s_stepNumber % (clockPeriod / 2) == 1)
+    if (!sampling || (clockPeriod == 2) || (DCSEngine::s_stepNumber % (clockPeriod / 2) == 1))
     {
         for (auto wire : wireVector)
         {
@@ -284,11 +286,21 @@ void DCSEngine::printLogicLevels()
 
 uint64_t DCSEngine::getClockPeriod() { return clockPeriod; };
 uint64_t DCSEngine::getStepNumber() { return s_stepNumber; }
-void DCSEngine::setSampling(bool sampling) { DCSEngine::sampling = sampling; }
+void DCSEngine::setSampling(bool sampling)
+{
+    if (DCSEngine::clockPeriod == 2)
+    {
+        sampling = false;
+    }
+    else
+    {
+        DCSEngine::sampling = sampling;
+    }
+}
 void DCSEngine::setHalfClockPeriod(uint16_t numberOfTimeSteps)
 {
     clockPeriod = 2 * numberOfTimeSteps;
-};
+}
 
 void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool printOut)
 {
@@ -318,9 +330,9 @@ void DCSEngine::programMemory(DCSRam16x8* memory, uint16_t program[16][2], bool 
         memory->connect(&dispOut);
 
         inArray0[8]->makeSquareWave(2 * hcp);   // Addr 0
-        inArray0[9]->makeSquareWave(4 * hcp);   //  Addr 1
-        inArray0[10]->makeSquareWave(8 * hcp);  //  Addr 2
-        inArray0[11]->makeSquareWave(16 * hcp); //  Addr 3
+        inArray0[9]->makeSquareWave(4 * hcp);   // Addr 1
+        inArray0[10]->makeSquareWave(8 * hcp);  // Addr 2
+        inArray0[11]->makeSquareWave(16 * hcp); // Addr 3
         inArray0[12]->makeSquareWave(hcp);
         inArray0[13]->makeSignal(std::string("1111000000")); // Clear - reset the ram before loading
         inArray0[14]->makeSignal(0);                         // Preset
@@ -424,13 +436,13 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut)
         memory->connect(&dispOut);
 
         inArray0[16]->makeSquareWave(2 * hcp);          // Addr 0
-        inArray0[17]->makeSquareWave(4 * hcp);          //  Addr 1
-        inArray0[18]->makeSquareWave(8 * hcp);          //  Addr 2
-        inArray0[19]->makeSquareWave(16 * hcp);         //  Addr 3
-        inArray0[20]->makeSquareWave(32 * hcp);         //  Addr 4
-        inArray0[21]->makeSquareWave(64 * hcp);         //  Addr 5
-        inArray0[22]->makeSquareWave(128 * hcp);        //  Addr 6
-        inArray0[23]->makeSquareWave(256 * hcp);        //  Addr 7
+        inArray0[17]->makeSquareWave(4 * hcp);          // Addr 1
+        inArray0[18]->makeSquareWave(8 * hcp);          // Addr 2
+        inArray0[19]->makeSquareWave(16 * hcp);         // Addr 3
+        inArray0[20]->makeSquareWave(32 * hcp);         // Addr 4
+        inArray0[21]->makeSquareWave(64 * hcp);         // Addr 5
+        inArray0[22]->makeSquareWave(128 * hcp);        // Addr 6
+        inArray0[23]->makeSquareWave(256 * hcp);        // Addr 7
         inArray0[24]->makeSquareWave(hcp);              // Clock
         inArray0[25]->makeSignal(std::string("11110")); // Clear - reset the ram before loading
         inArray0[26]->makeSignal(0);                    // Preset
@@ -465,6 +477,11 @@ void DCSEngine::programControlUnit(DCSRam256x16* memory, bool printOut)
 }
 
 #if TEST == 1
+#include "DCSInstructionSet.hpp"
+#include "DCSOutput.hpp"
+#include "DCSRam16x8.hpp"
+#include "DCSTriStateBuffer8Bits.hpp"
+#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 void bitStreamSignalTest()
 {
@@ -474,22 +491,16 @@ void bitStreamSignalTest()
 
     DCSInput in0("A");
 
-    DCSOutput out0("Sum");
+    DCSOutput out0("O");
 
     in0.connect(&out0, 0, 0, "In0");
 
-    in0.makeSignal(std::string{"00111"}, true);
+    in0.makeSignal(std::string("000111000111000"), false);
+    // in0.makeSquareWave(hp, 0);
     // in0.makeSignal(transitions{1, 1, 1, 1, 1}, 1, true);
 
-    DCSEngine::run(7 * hp * 2, true);
+    DCSEngine::run(14, true);
 }
-
-#include "DCSInstructionSet.hpp"
-#include "DCSLog.hpp"
-#include "DCSOutput.hpp"
-#include "DCSRam16x8.hpp"
-#include "DCSTriStateBuffer8Bits.hpp"
-#include "DCSUpCounterWithLoadAndAsyncSR.hpp"
 
 void memoryProgrammerTest()
 {
