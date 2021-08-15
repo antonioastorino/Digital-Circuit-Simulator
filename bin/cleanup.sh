@@ -6,5 +6,6 @@ source "${BD}/bin/variables.sh"
 /bin/rm -rf \
 	"${BUILD_DIR}" \
 	"${MAKE_FILE}" \
-	"${ARTIFACT_FOLDER}" \
+	"${LOGIC_ANALYZER_DATA_FOLDER}"/* \
+	"${PERFORMANCE_ANALYZER_DATA_FOLDER}"/* \
 	*.list

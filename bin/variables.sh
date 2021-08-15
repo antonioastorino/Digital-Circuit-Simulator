@@ -15,6 +15,7 @@ INC_EXTENSIONS=("hpp")
 HEADER_PATHS="include"
 SRC_PATHS="src"
 
-ARTIFACT_FOLDER="test/artifacts"
 EXPECTED_FOLDER="test/expected"
+LOGIC_ANALYZER_DATA_FOLDER="gui/logic-analyzer/data"
+PERFORMANCE_ANALYZER_DATA_FOLDER="gui/performance-analyzer/data"
 
