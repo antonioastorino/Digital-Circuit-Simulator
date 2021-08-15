@@ -12,36 +12,41 @@ for EXTENSION in ${SRC_EXTENSIONS[@]} ${INC_EXTENSIONS[@]}; do
 	done
 done
 
-n=""
-o="0"
-[ "$1" != "" ] && n="$1"
-[ "$2" != "" ] && o="$2"
+TEST_NUMBER=
+OPT_LEVEL=0
+while getopts o:n: flag
+do
+    case "${flag}" in
+        o) OPT_LEVEL=${OPTARG};;
+        n) TEST_NUMBER=${OPTARG};;
+    esac
+done
 
 mkdir -p \
 	${LOGIC_ANALYZER_DATA_FOLDER} \
 	${PERFORMANCE_ANALYZER_DATA_FOLDER}
 
-OUT_FILE="${LOGIC_ANALYZER_DATA_FOLDER}/out-test-n$n.log"
+OUT_FILE="${LOGIC_ANALYZER_DATA_FOLDER}/out-test-n${TEST_NUMBER}.log"
 
-make SHELL=/bin/bash MODE=TEST OPT="$o" 1>/dev/null
+make SHELL=/bin/bash MODE=TEST OPT="${OPT_LEVEL}" 1>/dev/null
 if [ "$?" -eq "0" ]; then
-	if [ "${n}" = "" ]; then
-		build/${APP_NAME}-test-o"$o"
+	if [ "${TEST_NUMBER}" = "" ]; then
+		build/${APP_NAME}-test-o"${OPT_LEVEL}"
 	else
-		build/${APP_NAME}-test-o"$o" $n >${OUT_FILE}
+		build/${APP_NAME}-test-o"${OPT_LEVEL}" ${TEST_NUMBER} >${OUT_FILE}
 	fi
 else
 	exit $?
 fi
 
 if [ $? -eq 0 ]; then
-	DIFF=$(diff $OUT_FILE ${EXPECTED_FOLDER}/test-n$n.log)
+	DIFF=$(diff $OUT_FILE ${EXPECTED_FOLDER}/test-n${TEST_NUMBER}.log)
 	echo "Checking..."
 	if [ "$DIFF" != "" ]; then
-		echo "Error: test $n not passed"
+		echo "Error: test ${TEST_NUMBER} not passed"
 		cat $OUT_FILE
 		echo "$DIFF"
 	else
-		echo "Test $n passed"
+		echo "Test ${TEST_NUMBER} passed"
 	fi
 fi

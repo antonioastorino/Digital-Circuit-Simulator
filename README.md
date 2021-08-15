@@ -37,12 +37,12 @@ from the project directory.
 I assume `make` and `clang` are already installed on your machine.
 
 #### 2.1. Projects
-For all projects, the source code is located in `./src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available.
+For all projects, the source code is located in `src/Projects/`. Projects are numbered from `0` to `N-1`, where `N` is the number of projects available.
 
 Compiling and running a project is done by executing
 
 ```
-bin/prj-build-run.sh <PRJ_NUM> [<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>
+bin/prj-build-run.sh -n<PRJ_NUM> -o[<OPT_LEVEL>]        # build and run project number <PRJ_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
@@ -66,7 +66,7 @@ Choose one of the following:
 If a valid project number is specified, the corresponding project output is displayed, as in the example that follows.
 
 ```
-% bin/prj-build-run.sh 1 0   # build and run project 1 with optimization level 0              
+% bin/prj-build-run.sh -n1 -o0   # build and run project 1 with optimization level 0              
 -------------------------
 Fast control unit project
 -------------------------
@@ -88,7 +88,7 @@ Tests are located at the bottom of `.cpp` files. Tests are numbered from `0` to 
 Compiling and running a test is done in the same as for a project, but replacing "prj" with "test":
 
 ```
-bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>
+bin/test-build-run.sh -n<TEST_NUM> -o[<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
