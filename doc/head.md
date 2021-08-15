@@ -24,7 +24,7 @@ I hope this just ignited your curiosity :)
 ## How to build (Mac only, at the moment)
 You are welcome to build the project the way you prefer. However, it is recommended that you use the tool provided in this repository, based upon [this project](https://github.com/antonioastorino/MMF).
 
-### 1. Generate a Makefile file
+### 1. Generate Makefile
 Generate `Makefile` by running
 
 ```
@@ -83,7 +83,7 @@ Fast control unit project
  ...
 ```
 #### 2.2. Tests
-Tests are located at the bottom of `.cpp` files. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available.
+Tests are located at the bottom of `.cpp` files. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available. The `main-test.cpp` file is the entry point. Depending on the selected test number, `main()` will call the corresponding test.
 
 Compiling and running a test is done in the same as for a project, but replacing "prj" with "test":
 
@@ -92,49 +92,29 @@ bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test numbe
 ```
 `<OPT_LEVEL> = 0, 1, 2, or 3` is the optimization level.
 
-Once again, if the test number is not valid or not specified, the output is be a list of available tests, otherwise the chosen test is build and run.
+Once again, if the test number is not valid or not specified, the output is a list of available tests, otherwise the chosen test is build and run.
+
+The output of tests is saved to `gui/logic-analyzer/data/out-test-n<TEST_NUM>.log`. A permanent version of this file is already present in `test/expected` and used to verify that the test output matches the expected one.
 
 ### 2.3. Cleaning up
 
-When `make` is executed, the executable files are placed in the `./build/` folder and the object files are placed in the `./build/objects/` folder. By running
+To delete all the artifacts run
 
 ```
-make clean
+bin/cleanup.sh
 ```
-the `./build/` folder is deleted.
 
-## How to create a project or a test file
-Creating a project or a test file requires that the header file has `.hpp` extension and the implementation file has `.cpp` extension. In addition,
-
-- project files must have a name starting with `prj-`
-- project files must be located in `./src/Projects/`
-- the header file must be included in `./src/Projects/prj-all.cpp`
-- the function that represents the entry point to the project must be listed in `main()` of `./src/Projects/prj-all.cpp`
-- test files must have a name starting with `test-`
-- test files must be located in `./test/Projects/`
-- the header file must be included in `./src/Tests/test-all.cpp`
-- the function that represents the entry point to the test must be listed in `main()` of `./src/Tests/test-all.cpp`
-
-Please, refer to the existing examples for more details.
+This script is always run when `bin/makeMakefile.sh` is called.
 
 ## How to display the data
 Two small web applications are provided to display the produced data in a more readable form. Two kinds of data are produced, as described in this section, along with their corresponding viewer.
 
 ### Logic analyzer
-The application outputs to the standard out. By running
+When any test or project is run using `bin/prj-build-run.sh` or `bin/test-build-run.sh`, the output data is saved to a file in `gui/logic-analyzer/data/` folder. To visualize such data
 
-```
-bin/prj-build-run-save.sh <TEST_NUM> <OPT_LEVEL>
-```
-the output is `tee`'d to a file entitled `prj-n<PRJ_NUM>.log`, stored in `./gui/logic-analyzer/data/`. In the same folder, the output of all the test files are also present under the name `test-n<TEST_NUM>.log`.
-
-> IMPORTANT: for now, you should not remove or change the test output files located in `./gui/logic-analyzer/data/` as they are used by the unit-test environment, described later on.
-
-To visualize the data,
-
-- open `./gui/logic-analyzer/index.html` or run `./bin/run-la.sh` from the project directory
+- run `bin/run-la.sh` from the project directory
 - click on `Open files...` in the web GUI
-- select one or more files from `./gui/logic-analyzer/data/` to load them
+- select it (or multiple files) from `gui/logic-analyzer/data/`
 - use the dropdown menu to select the file output you want to display
 
  At the time of writing, the interface looks as in the following figure
@@ -150,13 +130,13 @@ The GUI allows to
 - where applicable, visualize the data as separate signals or in single line labeled with the corresponding hexadecimal representation -click on the `Go binary/Go hexadecimal` toggle to switch from one visualization to the other.
 
 ### Performance analyzer
-When running any test or project, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as `profile-test-n<TEST_NUM>-o<OPT_LEVEL>` or `profile-prj-n<PRJ_NUM><OPT_LEVEL>` `./gui/performance-analyzer/data/` or . The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
+When any test or project is run, the program produces some time measurements by means of the `DCSTimer` class. The data is saved as to a file in `gui/performance-analyzer/data/`. The introduced overhead is minimal and therefore this tool is active by default. However, if you prefer to disable it, just set `PROFILING` equal to `0` in `DCSTimer.hpp`.
 
 In order to display the produced data,
 
-- open `./gui/performance-analyzer/index.html` or run `./bin/run-pa.sh` from the project directory
+- open run `bin/run-pa.sh` from the project directory
 - click on `Open files...` in the web GUI
-- select one or more files from `./gui/performance-analyzer/data/` to load them
+- select one or more files from `gui/performance-analyzer/data/` to load them
 - use the dropdown menu to select the file output you want to display
 
  At the time of writing, the interface looks as in the following figure
@@ -183,15 +163,4 @@ If the the window size clips the bottom of the canvas, the scroll bar appears bu
 
 > NOTE 2: The timer class supports multi-threading, although my tests have shown that this project would not benefit for using such a technique. 
 
-> IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results!
-
----
-## How to use the unit test utility
-Several unit tests are already defined and exist in `./src/Tests/`. Their output as `test-n<TEST_NUM>.log` files in `/gui/logic-analyzer/data/` for their use in the "Logic analyzer." If you make some changes in the Engine or any component used by these test files, you can check if their behavior is unchanged by running
-
-```
-for t in {0..<M-1>}; do
-bin/test-build-run-compare.sh $t [<OPT_LEVEL>]
-done
-```
-If you create a new test, you need to place store its output in `test-n<M>.log` for future use as a comparison file.
+> IMPORTANT: do not to use this profiling tool inside a recursive function as it generates misleading results.
