@@ -81,7 +81,7 @@ int main(int argc, const char* argv[])
     if (!DCSLog::checkInputNumber(tests, argc, argv, testNum, optLev))
         return EXIT_FAILURE;
 
-    DCSTimer::initialize("prj", testNum, optLev);
+    DCSTimer::initialize("test", testNum, optLev);
     // start profiled scope
     {
         PROFILE();

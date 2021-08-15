@@ -3,3 +3,4 @@ build
 .vscode
 debug
 *.bak
+test/artifacts

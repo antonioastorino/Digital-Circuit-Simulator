@@ -49,12 +49,6 @@ bin/prj-build-run.sh <PRJ_NUM> [<OPT_LEVEL>]        # build and run project numb
 If the project number is omitted or not valid, the list of available projects is prompted. For example, executing
 
 ```
-make SHELL=/bin/bash
-build/prj-out-0
-```
-or 
-
-```
 bin/prj-build-run.sh
 ```
 
@@ -68,12 +62,11 @@ Choose one of the following:
 1       fastControlUnitPrj
 2       fastZeroFlagProgramPrj
 3       noCUComputerPrj
-antonio@Antonios-MacBook-Pro DCS % 
 ```
 If a valid project number is specified, the corresponding project output is displayed, as in the example that follows.
 
 ```
-antonio@Antonios-MacBook-Pro DCS % bin/prj-build-run.sh 1 0   # build and run project 1 with optimization level 0              
+% bin/prj-build-run.sh 1 0   # build and run project 1 with optimization level 0              
 -------------------------
 Fast control unit project
 -------------------------
@@ -90,16 +83,9 @@ Fast control unit project
  ...
 ```
 #### 2.2. Tests
-For all tests, the source code is located in `./src/Tests/`. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available.
+Tests are located at the bottom of `.cpp` files. Tests are numbered from `0` to `M-1`, where `M` is the number of tests available.
 
 Compiling and running a test is done in the same as for a project, but replacing "prj" with "test":
-
-```
-make SHELL=/bin/bash [OPT=<OPT_LEVEL>]        # build with optimization level <OPT_LEVEL>, 0 by default
-build/test-out-<OPT_LEVEL> [<TEST_NUM>]       # run the test number <TEST_NUM>
-
-```
-or, in one command
 
 ```
 bin/test-build-run.sh <TEST_NUM> [<OPT_LEVEL>]        # build and run test number <TEST_NUM> with optimization level <OPT_LEVEL>

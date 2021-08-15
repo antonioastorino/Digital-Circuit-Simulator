@@ -18,5 +18,5 @@ done
 
 make SHELL=/bin/bash OPT="$o" 1>/dev/null
 if [ "$?" -eq "0" ]; then
-	[ "$n" != "" ] && build/${APP_NAME}-o"$o" "$n" || build/${APP_NAME}-"$o"
+	build/${APP_NAME}-o"$o" "$n"
 fi

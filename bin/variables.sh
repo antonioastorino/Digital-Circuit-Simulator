@@ -16,5 +16,5 @@ HEADER_PATHS="include"
 SRC_PATHS="src"
 
 ARTIFACT_FOLDER="test/artifacts"
+EXPECTED_FOLDER="test/expected"
 
-LOG_FILE_ERR="test/test-err.log"
